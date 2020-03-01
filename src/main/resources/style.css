@@ -1,0 +1,192 @@
+/* Default Style Classes */
+
+.button {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-focus-traversable: false;
+}
+
+.choice-box {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+}
+
+.root {
+    -fx-font-size: 14;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: derive(-fx-base, 5%);
+}
+
+.text-field {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-control-inner-background: white;
+    -fx-text-fill: black;
+}
+
+.tree-view {
+    -fx-control-inner-background: derive(-fx-base, 5%);
+    -fx-focus-traversable: false;
+}
+
+/* Custom Style Classes */
+
+.block-area {
+    -fx-fill-width: false;
+    -fx-padding: 10 10 50 10;
+    -fx-spacing: 10;
+}
+
+.block-pane-label {
+    -fx-font-size: 28;
+}
+
+.block-info-node {
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-padding: 5;
+    -fx-text-fill: black;
+}
+
+.expression-parameter-filled {
+    -fx-alignment: center;
+}
+
+.expression-parameter-empty {
+    -fx-alignment: center;
+    -fx-background-color: gold;
+    -fx-border-color: black;
+}
+
+.parent-block {
+    -fx-background-color: lightblue;
+    -fx-border-color: black;
+    -fx-fill-width: false;
+    -fx-padding: 5 5 50 5;
+    -fx-spacing: 10;
+}
+
+.project-pane {
+    -fx-background-color: derive(-fx-base, 5%);
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.selector-pane {
+    -fx-background-color: derive(-fx-base, 5%);
+    -fx-fill-width: false;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.statement-block {
+    -fx-alignment: center-left;
+    -fx-background-color: lightgreen;
+    -fx-border-color: black;
+    -fx-padding: 3;
+}
+
+.syntax-node {
+    -fx-alignment: center-left;
+    -fx-fill-height: false;
+    -fx-spacing: 5;
+}
+
+.title-label {
+    -fx-font-size: 18;
+    -fx-underline: true;
+}
+
+/*
+MIT License
+
+Copyright (c) 2016 Joffrey Bion
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*
+This is an adjustment of the original modena.css for a consistent dark theme.
+Original modena.css here: https://gist.github.com/maxd/63691840fc372f22f470.
+*/
+
+/* Redefine base colors */
+.root {
+    -fx-base: rgb(50, 50, 50);
+    -fx-background: rgb(50, 50, 50);
+
+    /* make controls (buttons, thumb, etc.) slightly lighter */
+    -fx-color: derive(-fx-base, 10%);
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: rgb(20, 20, 20);
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* text colors depending on background's brightness */
+    -fx-light-text-color: white;
+    -fx-mid-text-color: rgb(100, 100, 100);
+    -fx-dark-text-color: rgb(20, 20, 20);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: rgb(0, 80, 100);
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: rgb(50, 50, 50);
+}
+
+/* Fix derived prompt color for text fields */
+.text-input {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background, +50%);
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: transparent;
+}
+
+/* Fix scroll bar buttons arrows colors */
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(220, 220, 220);
+}
+
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(240, 240, 240);
+}
+
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
+}
