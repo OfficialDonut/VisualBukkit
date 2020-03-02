@@ -1,13 +1,12 @@
 package us.donut.visualbukkit.blocks.syntax;
 
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 import org.bukkit.configuration.ConfigurationSection;
 
 public class InputParameter extends TextField implements BlockParameter {
 
     public InputParameter() {
-        setFont(Font.font("consolas", 12));
+        getStyleClass().add("input-parameter");
         prefColumnCountProperty().bind(textProperty().length().add(1));
     }
 

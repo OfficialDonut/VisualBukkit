@@ -1,3 +1,7 @@
+@font-face {
+    src: url("consola.ttf");
+}
+
 /* Default Style Classes */
 
 .button {
@@ -69,6 +73,11 @@
     -fx-alignment: center;
     -fx-background-color: gold;
     -fx-border-color: black;
+}
+
+.input-parameter {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 12;
 }
 
 .parent-block {
