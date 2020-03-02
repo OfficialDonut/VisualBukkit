@@ -93,7 +93,7 @@ public class PluginBuilder {
             pluginYml.append("author: ").append(author).append('\n');
         }
         if (!desc.isEmpty()) {
-            pluginYml.append("description: ").append(desc).append('\n');
+            pluginYml.append("description: ").append(desc).append(' | Created with VisualBukkit\n');
         }
         pluginYml.append("api-version: 1.13\n");
         pluginYml.append("commands:\n");
