@@ -52,6 +52,12 @@ public class TypeHandler {
         if (to.isAssignableFrom(from) || to == Void.class) {
             return src;
         }
+        if (to == String.class) {
+            if (from.isPrimitive()) {
+                src = convert(from, ClassUtils.primitiveToWrapper(from), src);
+            }
+            return "getString(" + src + ")";
+        }
         if (isPrimitiveNumber(from) && isPrimitiveNumber(to)) {
             return "((" + to.getSimpleName() + ")" + src + ")";
         }

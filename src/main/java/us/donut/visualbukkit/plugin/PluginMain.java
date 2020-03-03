@@ -72,9 +72,6 @@ public class PluginMain extends JavaPlugin implements Listener {
         if (object == null) {
             return "null";
         }
-        if (object instanceof String) {
-            return ChatColor.translateAlternateColorCodes('&', (String) object);
-        }
         if (object instanceof OfflinePlayer) {
             return ((OfflinePlayer) object).getName();
         }
@@ -85,6 +82,10 @@ public class PluginMain extends JavaPlugin implements Listener {
             return ((Entity) object).getType().toString();
         }
         return object.toString();
+    }
+
+    private String color(String string) {
+        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
     private String getVariable(Object... objects) {

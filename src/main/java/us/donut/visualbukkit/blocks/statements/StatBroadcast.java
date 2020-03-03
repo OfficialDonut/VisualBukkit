@@ -9,11 +9,11 @@ public class StatBroadcast extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("broadcast", Object.class);
+        return new SyntaxNode("broadcast", String.class);
     }
 
     @Override
     public String toJava() {
-        return "Bukkit.broadcastMessage(getString(" + arg(0) + "));";
+        return "Bukkit.broadcastMessage(color(" + arg(0) + "));";
     }
 }
