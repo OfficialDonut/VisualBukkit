@@ -24,7 +24,6 @@ public abstract class CodeBlock extends VBox implements Loadable {
         if (this instanceof ExprEmptyParameter) {
             return;
         }
-        getChildren().add(syntaxNode = init());
         DragManager.enableDragging(this);
         contextMenu = new ContextMenu();
         setOnContextMenuRequested(e -> {
@@ -44,6 +43,7 @@ public abstract class CodeBlock extends VBox implements Loadable {
             }
         });
         contextMenu.getItems().addAll(copyItem, deleteItem);
+        getChildren().add(syntaxNode = init());
     }
 
     protected abstract SyntaxNode init();
