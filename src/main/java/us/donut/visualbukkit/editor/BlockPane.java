@@ -105,6 +105,7 @@ public abstract class BlockPane extends Tab implements Loadable {
             MenuItem pasteItem = new MenuItem("Paste");
             pasteItem.setOnAction(e -> CopyPasteManager.paste(this, contextMenuYCoord));
             ContextMenu contextMenu = new ContextMenu(pasteItem);
+            setOnMouseClicked(e -> contextMenu.hide());
             setOnContextMenuRequested(e -> {
                 contextMenu.show(this, e.getScreenX(), e.getScreenY());
                 contextMenuYCoord = e.getY();
