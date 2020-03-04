@@ -1,10 +1,9 @@
 package us.donut.visualbukkit.editor;
 
 import com.google.common.reflect.ClassPath;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.util.StringConverter;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.AnnotationsAttribute;
@@ -20,6 +19,8 @@ import java.util.*;
 
 @SuppressWarnings("UnstableApiUsage")
 public class EventPane extends BlockPane {
+
+    public static Class<?>[] EVENTS;
 
     static {
         try {
@@ -38,7 +39,34 @@ public class EventPane extends BlockPane {
         }
     }
 
-    public static Class<?>[] EVENTS;
+    @SuppressWarnings("unchecked")
+    public static void promptNew(Project project) {
+        ChoiceDialog<Class<?>> dialog = new ChoiceDialog<>();
+        ComboBox<Class<?>> comboBox = (ComboBox<Class<?>>) ((GridPane) dialog.getDialogPane().getContent()).getChildren().get(1);
+        comboBox.setConverter(new StringConverter<Class<?>>() {
+            @Override
+            public String toString(Class<?> clazz) {
+                return clazz != null ? clazz.getSimpleName() : null;
+            }
+            @Override
+            public Class<?> fromString(String string) {
+                return null;
+            }
+        });
+        dialog.setTitle("New Event");
+        dialog.setContentText("Event:");
+        dialog.setHeaderText(null);
+        dialog.setGraphic(null);
+        dialog.getItems().addAll(EventPane.EVENTS);
+        project.getEvents().forEach(event -> dialog.getItems().remove(event.getEvent()));
+        Optional<Class<?>> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            EventPane eventPane = new EventPane(project, result.get());
+            project.add(eventPane);
+            eventPane.open();
+            project.getTabPane().getSelectionModel().select(eventPane);
+        }
+    }
 
     private Class<? extends Event> event;
 

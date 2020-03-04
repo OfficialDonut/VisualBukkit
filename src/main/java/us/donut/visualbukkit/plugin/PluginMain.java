@@ -53,6 +53,12 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
+    public void procedure(String procedure, Object... args) {}
+
+    public Object function(String function, Object... args) {
+        return null;
+    }
+
     private void save(YamlConfiguration config, File file) {
         try {
             config.save(file);

@@ -2,15 +2,13 @@ package us.donut.visualbukkit.editor;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
-import javafx.util.StringConverter;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.DataFile;
 import us.donut.visualbukkit.util.TreeNode;
@@ -22,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Project {
 
@@ -31,8 +28,10 @@ public class Project {
     private DataFile dataFile;
     private Pane projectPane;
     private TabPane tabPane = new TabPane();
-    private List<EventPane> events = new ArrayList<>();
     private List<CommandPane> commands = new ArrayList<>();
+    private List<EventPane> events = new ArrayList<>();
+    private List<ProcedurePane> procedures = new ArrayList<>();
+    private List<FunctionPane> functions = new ArrayList<>();
 
     public Project(String name) throws IOException {
         this.name = name;
@@ -42,9 +41,46 @@ public class Project {
         }
         dataFile = new DataFile(folder.resolve("data.yml"));
         projectPane = new Pane();
+    }
 
-        YamlConfiguration data = dataFile.getConfig();
-        ConfigurationSection commandSection = data.getConfigurationSection("commands");
+    public void load() {
+        ConfigurationSection procedureSection = dataFile.getConfig().getConfigurationSection("procedures");
+        if (procedureSection != null) {
+            for (String procedure : procedureSection.getKeys(false)) {
+                List<String> parameters = procedureSection.getConfigurationSection(procedure).getStringList("parameters");
+                procedures.add(new ProcedurePane(this, procedure, parameters.stream().map(TypeHandler::getType).toArray(Class[]::new)));
+            }
+        }
+
+        ConfigurationSection functionSection = dataFile.getConfig().getConfigurationSection("functions");
+        if (functionSection != null) {
+            for (String function : functionSection.getKeys(false)) {
+                List<String> parameters = functionSection.getConfigurationSection(function).getStringList("parameters");
+                functions.add(new FunctionPane(this, function, parameters.stream().map(TypeHandler::getType).toArray(Class[]::new)));
+            }
+        }
+
+        for (ProcedurePane procedure : procedures) {
+            try {
+                procedure.load(procedureSection.getConfigurationSection(procedure.getProcedure()));
+                projectPane.procedureTree.add(procedure.getProjectStructureLabel());
+            } catch (Exception e) {
+                procedures.remove(procedure);
+                VisualBukkit.displayException("Failed to load procedure", e);
+            }
+        }
+
+        for (FunctionPane function : functions) {
+            try {
+                function.load(functionSection.getConfigurationSection(function.getFunction()));
+                projectPane.functionTree.add(function.getProjectStructureLabel());
+            } catch (Exception e) {
+                functions.remove(function);
+                VisualBukkit.displayException("Failed to load procedure", e);
+            }
+        }
+
+        ConfigurationSection commandSection = getDataFile().getConfig().getConfigurationSection("commands");
         if (commandSection != null) {
             for (String command : commandSection.getKeys(false)) {
                 CommandPane commandPane = new CommandPane(this, command);
@@ -56,7 +92,8 @@ public class Project {
                 }
             }
         }
-        ConfigurationSection eventSection = data.getConfigurationSection("events");
+
+        ConfigurationSection eventSection = getDataFile().getConfig().getConfigurationSection("events");
         if (eventSection != null) {
             for (String eventClass : eventSection.getKeys(false)) {
                 try {
@@ -78,6 +115,12 @@ public class Project {
         } else if (blockPane instanceof EventPane) {
             events.add((EventPane) blockPane);
             projectPane.eventTree.add(blockPane.getProjectStructureLabel());
+        } else if (blockPane instanceof ProcedurePane) {
+            procedures.add((ProcedurePane) blockPane);
+            projectPane.procedureTree.add(blockPane.getProjectStructureLabel());
+        } else if (blockPane instanceof FunctionPane) {
+            functions.add((FunctionPane) blockPane);
+            projectPane.functionTree.add(blockPane.getProjectStructureLabel());
         }
     }
 
@@ -89,6 +132,12 @@ public class Project {
         } else if (blockPane instanceof EventPane) {
             events.remove(blockPane);
             projectPane.eventTree.remove(blockPane.getProjectStructureLabel());
+        } else if (blockPane instanceof ProcedurePane) {
+            procedures.remove(blockPane);
+            projectPane.procedureTree.remove(blockPane.getProjectStructureLabel());
+        } else if (blockPane instanceof FunctionPane) {
+            functions.remove(blockPane);
+            projectPane.functionTree.remove(blockPane.getProjectStructureLabel());
         }
     }
 
@@ -100,7 +149,9 @@ public class Project {
         data.set("plugin.author", getPluginAuthor());
         data.set("plugin.description", getPluginDesc());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
-        commands.forEach(commandPane -> commandPane.unload(data.createSection("commands." + commandPane.getCommand())));
+        commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
+        procedures.forEach(procedure -> procedure.unload(data.createSection("procedures." + procedure.getProcedure())));
+        functions.forEach(function -> function.unload(data.createSection("functions." + function.getFunction())));
         events.forEach(eventPane -> {
             String className = eventPane.getEvent().getCanonicalName().replace('.', '_');
             eventPane.unload(data.createSection("events." + className));
@@ -141,10 +192,20 @@ public class Project {
         return events;
     }
 
+    public List<ProcedurePane> getProcedures() {
+        return procedures;
+    }
+
+    public List<FunctionPane> getFunctions() {
+        return functions;
+    }
+
     public List<? extends BlockPane> getBlockPanes() {
-        List<BlockPane> blockPanes = new ArrayList<>(commands.size() + events.size());
+        List<BlockPane> blockPanes = new ArrayList<>(commands.size() + events.size() + procedures.size() + functions.size());
         blockPanes.addAll(commands);
         blockPanes.addAll(events);
+        blockPanes.addAll(procedures);
+        blockPanes.addAll(functions);
         return blockPanes;
     }
 
@@ -172,13 +233,14 @@ public class Project {
 
         private TreeNode commandTree = new TreeNode("Commands");
         private TreeNode eventTree = new TreeNode("Events");
+        private TreeNode procedureTree = new TreeNode("Procedures");
+        private TreeNode functionTree = new TreeNode("Functions");
         private TextField pluginNameField = new TextField();
         private TextField pluginVerField = new TextField();
         private TextField pluginAuthorField = new TextField();
         private TextField pluginDescField = new TextField();
         private TextField pluginOutputDirField = new TextField();
 
-        @SuppressWarnings("unchecked")
         public Pane() {
             getStyleClass().add("project-pane");
             YamlConfiguration data = dataFile.getConfig();
@@ -199,64 +261,25 @@ public class Project {
             });
 
             Button newCommandButton = new Button("New Command");
-            newCommandButton.setOnAction(e -> {
-                TextInputDialog dialog = new TextInputDialog();
-                dialog.setTitle("New Command");
-                dialog.setContentText("Command:");
-                dialog.setHeaderText(null);
-                dialog.setGraphic(null);
-                String command = dialog.showAndWait().orElse("").replaceAll("\\s", "");
-                if (!command.isEmpty()) {
-                    if (StringUtils.isAlphanumeric(command)) {
-                        for (CommandPane commandPane : commands) {
-                            if (commandPane.getCommand().equalsIgnoreCase(command)) {
-                                VisualBukkit.displayError("Command already exists");
-                                return;
-                            }
-                        }
-                        CommandPane commandPane = new CommandPane(Project.this, command);
-                        add(commandPane);
-                        commandPane.open();
-                        tabPane.getSelectionModel().select(commandPane);
-                    } else {
-                        VisualBukkit.displayError("Invalid command name");
-                    }
-                }
-            });
+            newCommandButton.setOnAction(e -> CommandPane.promptNew(Project.this));
 
             Button newEventButton = new Button("New Event");
-            newEventButton.setOnAction(e -> {
-                ChoiceDialog<Class<?>> dialog = new ChoiceDialog<>();
-                ComboBox<Class<?>> comboBox = (ComboBox<Class<?>>) ((GridPane) dialog.getDialogPane().getContent()).getChildren().get(1);
-                comboBox.setConverter(new StringConverter<Class<?>>() {
-                    @Override
-                    public String toString(Class<?> clazz) {
-                        return clazz != null ? clazz.getSimpleName() : null;
-                    }
-                    @Override
-                    public Class<?> fromString(String string) {
-                        return null;
-                    }
-                });
-                dialog.setTitle("New Event");
-                dialog.setContentText("Event:");
-                dialog.setHeaderText(null);
-                dialog.setGraphic(null);
-                dialog.getItems().addAll(EventPane.EVENTS);
-                events.forEach(event -> dialog.getItems().remove(event.getEvent()));
-                Optional<Class<?>> result = dialog.showAndWait();
-                if (result.isPresent()) {
-                    EventPane eventPane = new EventPane(Project.this, result.get());
-                    add(eventPane);
-                    eventPane.open();
-                    tabPane.getSelectionModel().select(eventPane);
-                }
-            });
+            newEventButton.setOnAction(e -> EventPane.promptNew(Project.this));
+
+            Button newProcedureButton = new Button("New Procedure");
+            newProcedureButton.setOnAction(e -> ProcedurePane.promptNew(Project.this));
+
+            Button newFunctionButton = new Button("New Function");
+            newFunctionButton.setOnAction(e -> FunctionPane.promptNew(Project.this));
 
             Label title = new Label("Project Manager");
             title.getStyleClass().add("title-label");
             newEventButton.prefWidthProperty().bind(newCommandButton.widthProperty());
-            getChildren().addAll(title, new Label("Name: " + name), commandTree, eventTree, newCommandButton, newEventButton);
+            newProcedureButton.prefWidthProperty().bind(newCommandButton.widthProperty());
+            newFunctionButton.prefWidthProperty().bind(newCommandButton.widthProperty());
+            getChildren().addAll(title, new Label("Name: " + name),
+                    commandTree, eventTree, procedureTree, functionTree,
+                    newCommandButton, newEventButton, newProcedureButton, newFunctionButton);
 
             Label pluginInfoTitle = new Label("Plugin Information");
             pluginInfoTitle.getStyleClass().add("title-label");

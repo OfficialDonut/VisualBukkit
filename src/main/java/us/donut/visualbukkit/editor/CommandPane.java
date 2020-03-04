@@ -10,6 +10,31 @@ import java.util.StringJoiner;
 
 public class CommandPane extends BlockPane {
 
+    public static void promptNew(Project project) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("New Command");
+        dialog.setContentText("Command:");
+        dialog.setHeaderText(null);
+        dialog.setGraphic(null);
+        String command = dialog.showAndWait().orElse("").replaceAll("\\s", "");
+        if (!command.isEmpty()) {
+            if (StringUtils.isAlphanumeric(command)) {
+                for (CommandPane commandPane : project.getCommands()) {
+                    if (commandPane.getCommand().equalsIgnoreCase(command)) {
+                        VisualBukkit.displayError("Command already exists");
+                        return;
+                    }
+                }
+                CommandPane commandPane = new CommandPane(project, command);
+                project.add(commandPane);
+                commandPane.open();
+                project.getTabPane().getSelectionModel().select(commandPane);
+            } else {
+                VisualBukkit.displayError("Invalid command name");
+            }
+        }
+    }
+
     private String command;
 
     public CommandPane(Project project, String command) {

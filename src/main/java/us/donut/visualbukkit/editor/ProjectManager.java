@@ -64,6 +64,7 @@ public class ProjectManager {
         splitPane.getItems().set(2, project.getProjectPane());
         splitPane.setDividerPositions(0.2, 0.825);
         currentProject = project;
+        currentProject.load();
     }
 
     public static void promptCreateProject(boolean canCancel) {
