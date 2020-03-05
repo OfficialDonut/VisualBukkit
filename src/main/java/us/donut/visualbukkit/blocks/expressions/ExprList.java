@@ -4,7 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.blocks.ListExpressionBlock;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
@@ -12,7 +12,7 @@ import us.donut.visualbukkit.util.SimpleList;
 import java.util.StringJoiner;
 
 @Description({"A list of objects", "Returns: list"})
-public class ExprList extends ListExpressionBlock {
+public class ExprList extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {

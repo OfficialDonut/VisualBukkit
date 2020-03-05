@@ -31,7 +31,7 @@ public class ExprBlockMaterial extends ExpressionBlock {
 
     @Override
     public String toJava() {
-        return getReturnType().getCanonicalName() + "." + arg(0);
+        return Material.class.getCanonicalName() + "." + arg(0);
     }
 
     @Override
