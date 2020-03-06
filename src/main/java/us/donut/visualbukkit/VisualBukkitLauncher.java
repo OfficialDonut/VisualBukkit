@@ -1,6 +1,6 @@
 package us.donut.visualbukkit;
 
-import javafx.application.Application;
+import com.sun.javafx.application.LauncherImpl;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,7 +15,7 @@ public class VisualBukkitLauncher {
         String javaVersion = System.getProperty("java.version");
 
         if (javaVersion.startsWith("1.8")) {
-            Application.launch(VisualBukkit.class);
+            LauncherImpl.launchApplication(VisualBukkit.class, SplashScreenLoader.class, new String[0]);
             return;
         }
 

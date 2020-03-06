@@ -101,6 +101,11 @@
     -fx-spacing: 10;
 }
 
+.splash-screen {
+    -fx-alignment: center;
+    -fx-font-size: 36;
+}
+
 .statement-block {
     -fx-alignment: center-left;
     -fx-background-color: lightgreen;
