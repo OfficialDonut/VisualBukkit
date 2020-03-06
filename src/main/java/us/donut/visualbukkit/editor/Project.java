@@ -7,6 +7,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.plugin.PluginBuilder;
@@ -27,7 +29,7 @@ public class Project {
     private Path folder;
     private DataFile dataFile;
     private Pane projectPane;
-    private TabPane tabPane = new TabPane();
+    private DndTabPane tabPane;
     private List<CommandPane> commands = new ArrayList<>();
     private List<EventPane> events = new ArrayList<>();
     private List<ProcedurePane> procedures = new ArrayList<>();
@@ -41,6 +43,7 @@ public class Project {
         }
         dataFile = new DataFile(folder.resolve("data.yml"));
         projectPane = new Pane();
+        tabPane = (DndTabPane) DndTabPaneFactory.createDefaultDnDPane(DndTabPaneFactory.FeedbackType.MARKER, null).getChildren().get(0);
     }
 
     public void load() {
