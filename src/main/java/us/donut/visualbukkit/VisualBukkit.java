@@ -2,6 +2,7 @@ package us.donut.visualbukkit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -80,6 +81,7 @@ public class VisualBukkit extends Application {
         setupSaving();
         splitPane.getItems().addAll(selectorPane = new SelectorPane(), new Pane(), new Pane());
         rootPane.setCenter(splitPane);
+        notifyPreloader(new Preloader.ProgressNotification(1));
         primaryStage.show();
         splitPane.setDividerPositions(0.2, 0.825);
         ProjectManager.loadProjects();

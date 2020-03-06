@@ -13,8 +13,11 @@ import java.io.InputStream;
 
 public class SplashScreenLoader extends Preloader {
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
         BorderPane rootPane = new BorderPane();
         rootPane.getStylesheets().add("/style.css");
         try (InputStream inputStream = VisualBukkit.class.getResourceAsStream("/icon.png")) {
@@ -26,6 +29,13 @@ public class SplashScreenLoader extends Preloader {
             primaryStage.setScene(new Scene(rootPane, 600, 500));
             primaryStage.getIcons().add(icon);
             primaryStage.show();
+        }
+    }
+
+    @Override
+    public void handleApplicationNotification(PreloaderNotification info) {
+        if (info instanceof ProgressNotification && ((ProgressNotification) info).getProgress() == 1) {
+            primaryStage.close();
         }
     }
 }
