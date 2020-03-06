@@ -5,6 +5,7 @@ import javafx.scene.control.Tooltip;
 import org.apache.commons.lang.WordUtils;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.annotations.Name;
 
 import java.lang.reflect.Constructor;
@@ -17,6 +18,7 @@ public class BlockInfo<T extends CodeBlock> {
     private String name;
     private String description;
     private String[] categories;
+    private Class<?>[] events;
 
     public BlockInfo(Class<T> type) {
         this.type = type;
@@ -38,17 +40,10 @@ public class BlockInfo<T extends CodeBlock> {
         if (type.isAnnotationPresent(Category.class)) {
             categories = type.getAnnotation(Category.class).value();
         }
-    }
 
-    public boolean inCategory(String category) {
-        if (categories != null) {
-            for (String string : categories) {
-                if (string.equalsIgnoreCase(category)) {
-                    return true;
-                }
-            }
+        if (type.isAnnotationPresent(Event.class)) {
+            events = type.getAnnotation(Event.class).value();
         }
-        return false;
     }
 
     public Node createNode() {
@@ -75,8 +70,16 @@ public class BlockInfo<T extends CodeBlock> {
         return name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String[] getCategories() {
         return categories;
+    }
+
+    public Class<?>[] getEvents() {
+        return events;
     }
 
     public class Node extends Label {

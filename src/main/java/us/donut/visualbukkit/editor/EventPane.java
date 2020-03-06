@@ -57,7 +57,7 @@ public class EventPane extends BlockPane {
         dialog.setContentText("Event:");
         dialog.setHeaderText(null);
         dialog.setGraphic(null);
-        dialog.getItems().addAll(EventPane.EVENTS);
+        dialog.getItems().addAll(EVENTS);
         project.getEvents().forEach(event -> dialog.getItems().remove(event.getEvent()));
         Optional<Class<?>> result = dialog.showAndWait();
         if (result.isPresent()) {
