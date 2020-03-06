@@ -19,7 +19,7 @@ public class ExprVariable extends ExpressionBlock implements ExpressionBlock.Cha
     }
 
     @Override
-    protected void onDragDrop() {
+    public void onDragDrop() {
         if (getParameters().size() == 0) {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();

@@ -141,7 +141,7 @@ public class ProcedurePane extends BlockPane {
     public void insertInto(CtClass mainClass) throws Exception {
         CtMethod procedureMethod = mainClass.getDeclaredMethod("procedure");
         StringJoiner stringJoiner = new StringJoiner("\n");
-        getBlocks().forEach(block -> stringJoiner.add(block.toJava()));
+        getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (procedure.equalsIgnoreCase(\"" + procedure + "\")) {" +
                 "Map tempVariables = new HashMap();" +

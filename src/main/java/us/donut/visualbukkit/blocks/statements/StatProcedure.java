@@ -27,7 +27,7 @@ public class StatProcedure extends StatementBlock {
     }
 
     @Override
-    protected void onDragDrop() {
+    public void onDragDrop() {
         if (procedure == null) {
             List<ProcedurePane> procedures = getBlockPane().getProject().getProcedures();
             if (!procedures.isEmpty()) {

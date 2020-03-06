@@ -35,9 +35,8 @@ public abstract class CodeBlock extends VBox implements Loadable {
         copyItem.setOnAction(e -> CopyPasteManager.copy(this));
         deleteItem.setOnAction(e -> {
             SelectorPane selectorPane = VisualBukkit.getInstance().getSelectorPane();
-            if (DragManager.canMove(this, selectorPane, -1)) {
-                UndoManager.capture();
-                DragManager.move(this, selectorPane, -1);
+            if (selectorPane.canAccept(this, -1)) {
+                selectorPane.accept(this, -1);
             } else {
                 VisualBukkit.displayError("Cannot delete block");
             }
@@ -48,7 +47,7 @@ public abstract class CodeBlock extends VBox implements Loadable {
 
     protected abstract SyntaxNode init();
 
-    protected void onDragDrop() {}
+    public void onDragDrop() {}
 
     public abstract String toJava();
 

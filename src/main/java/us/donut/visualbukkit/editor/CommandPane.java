@@ -88,7 +88,7 @@ public class CommandPane extends BlockPane {
     public void insertInto(CtClass mainClass) throws Exception {
         CtMethod commandMethod = mainClass.getDeclaredMethod("onCommand");
         StringJoiner stringJoiner = new StringJoiner("\n");
-        getBlocks().forEach(block -> stringJoiner.add(block.toJava()));
+        getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (command.getName().equalsIgnoreCase(\"" + command + "\")) {" +
                 "Map tempVariables = new HashMap();" +

@@ -1,13 +1,18 @@
 package us.donut.visualbukkit.blocks.syntax;
 
+import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.expressions.ExprEmptyParameter;
+import us.donut.visualbukkit.plugin.PluginBuilder;
 
-public class ExpressionParameter extends VBox implements BlockParameter {
+import java.util.Collections;
+import java.util.List;
+
+public class ExpressionParameter extends VBox implements BlockParameter, BlockContainer {
 
     private Class<?> returnType;
     private ExpressionBlock expression;
@@ -17,7 +22,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         getStyleClass().add("expression-parameter-empty");
         this.returnType = returnType;
         getChildren().add(expression = emptyExpr = new ExprEmptyParameter(returnType));
-        DragManager.enableDragTarget(this);
+        DragManager.enableBlockContainer(this);
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setOnAction(e -> CopyPasteManager.paste(this, -1));
         ContextMenu contextMenu = new ContextMenu(pasteItem);
@@ -27,6 +32,37 @@ public class ExpressionParameter extends VBox implements BlockParameter {
                 e.consume();
             }
         });
+    }
+
+    @Override
+    public boolean canAccept(CodeBlock block, double yCoord) {
+        boolean valid = false;
+        if (block instanceof ExpressionBlock) {
+            ExpressionParameter parent = (ExpressionParameter) block.getParent();
+            ExpressionBlock newExpression = (ExpressionBlock) block;
+            ExpressionBlock currentExpression = expression;
+            if (parent != null) {
+                parent.setExpression(null);
+            }
+            setExpression(newExpression);
+            valid = PluginBuilder.isCodeValid(block.getBlockPane());
+            setExpression(currentExpression);
+            if (parent != null) {
+                parent.setExpression(newExpression);
+            }
+        }
+        return valid;
+    }
+
+    @Override
+    public void accept(CodeBlock block, double yCoord) {
+        UndoManager.capture();
+        ExpressionParameter parent = (ExpressionParameter) block.getParent();
+        if (parent != null) {
+            parent.setExpression(null);
+        }
+        setExpression((ExpressionBlock) block);
+        Platform.runLater(block::onDragDrop);
     }
 
     public void setExpression(ExpressionBlock expression) {
@@ -64,6 +100,11 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             setExpression(expression);
             break;
         }
+    }
+
+    @Override
+    public List<ExpressionBlock> getBlocks(boolean ignoreDisabled) {
+        return expression == null ? Collections.emptyList() : Collections.singletonList(expression);
     }
 
     public Class<?> getReturnType() {

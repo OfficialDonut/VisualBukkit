@@ -20,7 +20,7 @@ public class ExprList extends ExpressionBlock {
     }
 
     @Override
-    protected void onDragDrop() {
+    public void onDragDrop() {
         if (getParameters().isEmpty()) {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();

@@ -95,7 +95,7 @@ public class EventPane extends BlockPane {
     @Override
     public void insertInto(CtClass mainClass) throws Exception {
         StringJoiner stringJoiner = new StringJoiner("\n");
-        getBlocks().forEach(block -> stringJoiner.add(block.toJava()));
+        getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "public void on" + event.getSimpleName() + "(" + event.getCanonicalName() + " event) {" +
                 "Map tempVariables = new HashMap();" +

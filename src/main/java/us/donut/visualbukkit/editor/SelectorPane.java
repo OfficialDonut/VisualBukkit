@@ -1,20 +1,26 @@
 package us.donut.visualbukkit.editor;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
+import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
+import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class SelectorPane extends VBox {
+public class SelectorPane extends VBox implements BlockContainer {
 
     static {
         try {
@@ -43,7 +49,7 @@ public class SelectorPane extends VBox {
         content.getStyleClass().add("selector-pane");
         content.prefWidthProperty().bind(widthProperty());
         content.prefHeightProperty().bind(heightProperty());
-        DragManager.enableDragTarget(this);
+        DragManager.enableBlockContainer(this);
         Label selectorTitle = new Label("Block Selector");
         Label statementTitle = new Label("Statements");
         Label expressionTitle = new Label("Expressions");
@@ -108,6 +114,44 @@ public class SelectorPane extends VBox {
                     .size();
             vBox.getChildren().add(i, blockInfoNode);
         }
+    }
+
+    @Override
+    public boolean canAccept(CodeBlock block, double yCoord) {
+        boolean valid = false;
+        Pane parent = (Pane) block.getParent();
+        if (parent != null) {
+            BlockPane blockPane = block.getBlockPane();
+            if (parent instanceof ExpressionParameter) {
+                ExpressionParameter expressionParameter = (ExpressionParameter) parent;
+                expressionParameter.setExpression(null);
+                valid = PluginBuilder.isCodeValid(blockPane);
+                expressionParameter.setExpression((ExpressionBlock) block);
+            } else {
+                int currentIndex = parent.getChildren().indexOf(block);
+                parent.getChildren().remove(block);
+                valid = PluginBuilder.isCodeValid(blockPane);
+                parent.getChildren().add(currentIndex, block);
+            }
+        }
+        return valid;
+    }
+
+    @Override
+    public void accept(CodeBlock block, double yCoord) {
+        UndoManager.capture();
+        Parent parent = block.getParent();
+        if (parent instanceof ExpressionParameter) {
+            ((ExpressionParameter) parent).setExpression(null);
+        } else if (parent instanceof Pane) {
+            ((Pane) parent).getChildren().remove(block);
+        }
+        Platform.runLater(block::onDragDrop);
+    }
+
+    @Override
+    public List<? extends CodeBlock> getBlocks(boolean ignoreDisabled) {
+        return Collections.emptyList();
     }
 
     private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {

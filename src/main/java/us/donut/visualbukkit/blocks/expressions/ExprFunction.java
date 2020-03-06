@@ -27,7 +27,7 @@ public class ExprFunction extends ExpressionBlock {
     }
 
     @Override
-    protected void onDragDrop() {
+    public void onDragDrop() {
         if (function == null) {
             List<FunctionPane> functions = getBlockPane().getProject().getFunctions();
             if (!functions.isEmpty()) {

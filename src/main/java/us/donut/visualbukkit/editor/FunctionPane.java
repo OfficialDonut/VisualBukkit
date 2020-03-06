@@ -163,7 +163,7 @@ public class FunctionPane extends BlockPane {
     public void insertInto(CtClass mainClass) throws Exception {
         CtMethod functionMethod = mainClass.getDeclaredMethod("function");
         StringJoiner stringJoiner = new StringJoiner("\n");
-        getBlocks().forEach(block -> stringJoiner.add(block.toJava()));
+        getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (function.equalsIgnoreCase(\"" + function + "\")) {" +
                 "Map tempVariables = new HashMap();" +

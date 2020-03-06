@@ -35,7 +35,8 @@ public abstract class StatementBlock extends CodeBlock {
     public void load(ConfigurationSection section) throws Exception {
         super.load(section);
         if (section.getBoolean("disabled")) {
-            disable();
+            disabled = true;
+            setOpacity(0.5);
         }
     }
 

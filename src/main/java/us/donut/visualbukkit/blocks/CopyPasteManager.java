@@ -1,6 +1,5 @@
 package us.donut.visualbukkit.blocks;
 
-import javafx.scene.layout.Pane;
 import org.bukkit.configuration.file.YamlConfiguration;
 import us.donut.visualbukkit.VisualBukkit;
 
@@ -15,14 +14,13 @@ public class CopyPasteManager {
         block.unload(blockData);
     }
 
-    public static void paste(Pane pane, double yCoord) {
+    public static void paste(BlockContainer container, double yCoord) {
         if (copiedBlock != null && blockData != null) {
             CodeBlock block = copiedBlock.createBlock();
             try {
                 block.load(blockData);
-                if (DragManager.canMove(block, pane, yCoord)) {
-                    UndoManager.capture();
-                    DragManager.move(block, pane, yCoord);
+                if (container.canAccept(block, yCoord)) {
+                    container.accept(block, yCoord);
                 } else {
                     VisualBukkit.displayError("Cannot paste block here");
                 }
