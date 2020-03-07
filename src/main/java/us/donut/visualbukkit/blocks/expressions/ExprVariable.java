@@ -4,14 +4,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.ChangeType;
+import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 import java.util.StringJoiner;
 
 @Description({"A variable", "Returns: object"})
-public class ExprVariable extends ExpressionBlock implements ExpressionBlock.Changeable {
+public class ExprVariable extends ChangeableExpressionBlock {
 
     @Override
     protected SyntaxNode init() {

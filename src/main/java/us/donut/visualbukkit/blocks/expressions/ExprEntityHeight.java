@@ -1,24 +1,27 @@
 package us.donut.visualbukkit.blocks.expressions;
 
+import org.bukkit.entity.Entity;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"Checks if two booleans are both true", "Returns: boolean"})
-public class ExprAnd extends ExpressionBlock {
+@Category("Entity")
+@Description({"The height of an entity", "Returns: number"})
+public class ExprEntityHeight extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode(boolean.class, "and", boolean.class);
+        return new SyntaxNode("height of", Entity.class);
     }
 
     @Override
     public String toJava() {
-        return "(" + arg(0) + "&&" + arg(1) + ")";
+        return arg(0) + ".getHeight()";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return boolean.class;
+        return double.class;
     }
 }

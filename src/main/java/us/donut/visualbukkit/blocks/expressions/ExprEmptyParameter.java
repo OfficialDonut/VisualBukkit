@@ -2,11 +2,12 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.ChangeType;
+import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-public class ExprEmptyParameter extends ExpressionBlock implements ExpressionBlock.Changeable {
+public class ExprEmptyParameter extends ChangeableExpressionBlock {
 
     private Class<?> returnType;
 

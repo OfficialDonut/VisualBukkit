@@ -17,7 +17,7 @@ public class ExprHasPlayedBefore extends ConditionBlock {
     }
 
     @Override
-    public String toJava() {
-        return (isNegated() ? "!" : "") + arg(0) + ".hasPlayedBefore()";
+    protected String toNonNegatedJava() {
+        return arg(0) + ".hasPlayedBefore()";
     }
 }

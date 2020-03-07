@@ -14,7 +14,7 @@ public class ExprIsType extends ConditionBlock {
     }
 
     @Override
-    public String toJava() {
-        return (isNegated() ? "!" : "") + arg(2) + ".isAssignableFrom(" + arg(0) + ".getClass())";
+    protected String toNonNegatedJava() {
+        return arg(2) + ".isAssignableFrom(" + arg(0) + ".getClass())";
     }
 }

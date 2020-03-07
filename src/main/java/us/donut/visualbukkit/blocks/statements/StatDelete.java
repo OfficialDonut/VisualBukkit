@@ -1,6 +1,7 @@
 package us.donut.visualbukkit.blocks.statements;
 
-import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.ChangeType;
+import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Name;
@@ -18,8 +19,8 @@ public class StatDelete extends StatementBlock {
 
     @Override
     public String toJava() {
-        ExpressionBlock.Changeable deleteExpr = (ExpressionBlock.Changeable) ((ExpressionParameter) getParameter(0)).getExpression();
-        String java = deleteExpr.change(ExpressionBlock.ChangeType.DELETE, null);
+        ChangeableExpressionBlock deleteExpr = (ChangeableExpressionBlock) ((ExpressionParameter) getParameter(0)).getExpression();
+        String java = deleteExpr.change(ChangeType.DELETE, null);
         if (java != null) {
             return java;
         }

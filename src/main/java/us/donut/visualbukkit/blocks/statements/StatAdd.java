@@ -1,8 +1,6 @@
 package us.donut.visualbukkit.blocks.statements;
 
-import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.StatementBlock;
-import us.donut.visualbukkit.blocks.TypeHandler;
+import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Name;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
@@ -19,10 +17,10 @@ public class StatAdd extends StatementBlock {
 
     @Override
     public String toJava() {
-        ExpressionBlock addExpr = ((ExpressionParameter) getParameter(1)).getExpression();
+        ChangeableExpressionBlock changeable = (ChangeableExpressionBlock) ((ExpressionParameter) getParameter(1)).getExpression();
         ExpressionBlock deltaExpr = ((ExpressionParameter) getParameter(0)).getExpression();
-        String delta = TypeHandler.convert(deltaExpr.getReturnType(), addExpr.getReturnType(), deltaExpr.toJava());
-        String java = ((ExpressionBlock.Changeable) addExpr).change(ExpressionBlock.ChangeType.ADD, delta);
+        String delta = TypeHandler.convert(deltaExpr.getReturnType(), changeable.getDeltaType(ChangeType.ADD), deltaExpr.toJava());
+        String java = changeable.change(ChangeType.ADD, delta);
         if (java != null) {
             return java;
         }

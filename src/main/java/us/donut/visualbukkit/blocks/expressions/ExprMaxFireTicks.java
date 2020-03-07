@@ -1,30 +1,30 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category("Player")
-@Description({"The fly speed of a player", "Returns: number"})
-public class ExprFlySpeed extends ChangeableExpressionBlock {
+@Category("Entity")
+@Description({"The max fire ticks of an entity", "Returns: number"})
+public class ExprMaxFireTicks extends ChangeableExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("fly speed of", Player.class);
+        return new SyntaxNode("max fire ticks of", Entity.class);
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getFlySpeed()";
+        return arg(0) + ".getMaxFireTicks()";
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
-            case SET: return arg(0) + ".setFlySpeed(" + delta + ");";
+            case SET: return arg(0) + ".setMaxFireTicks(" + delta + ");";
             case ADD: return change(ChangeType.SET, toJava() + "-" + delta);
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
@@ -33,6 +33,6 @@ public class ExprFlySpeed extends ChangeableExpressionBlock {
 
     @Override
     public Class<?> getReturnType() {
-        return float.class;
+        return int.class;
     }
 }

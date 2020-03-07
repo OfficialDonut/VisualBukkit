@@ -5,6 +5,17 @@ import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 
 public abstract class ConditionBlock extends ExpressionBlock {
 
+    protected abstract String toNonNegatedJava();
+
+    protected String toNegatedJava() {
+        return "!" + toNonNegatedJava();
+    }
+
+    @Override
+    public final String toJava() {
+        return isNegated() ? toNegatedJava() : toNonNegatedJava();
+    }
+
     @Override
     public final Class<?> getReturnType() {
         return boolean.class;

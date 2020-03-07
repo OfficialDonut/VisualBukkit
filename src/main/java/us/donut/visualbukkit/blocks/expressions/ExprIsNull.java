@@ -14,7 +14,12 @@ public class ExprIsNull extends ConditionBlock {
     }
 
     @Override
-    public String toJava() {
-        return "(" + arg(0) + (isNegated() ? "!=" : "==") + "null)";
+    protected String toNonNegatedJava() {
+        return "(" + arg(0) + "== null)";
+    }
+
+    @Override
+    protected String toNegatedJava() {
+        return "(" + arg(0) + "!= null)";
     }
 }

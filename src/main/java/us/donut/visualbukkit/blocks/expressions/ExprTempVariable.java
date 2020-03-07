@@ -1,13 +1,14 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.ChangeType;
+import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.InputParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"A temporary variable", "Returns: object"})
-public class ExprTempVariable extends ExpressionBlock implements ExpressionBlock.Changeable {
+public class ExprTempVariable extends ChangeableExpressionBlock {
 
     @Override
     protected SyntaxNode init() {

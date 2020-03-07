@@ -51,13 +51,4 @@ public abstract class ExpressionBlock extends CodeBlock {
     }
 
     public abstract Class<?> getReturnType();
-
-    public interface Changeable {
-
-        String change(ChangeType changeType, String delta);
-    }
-
-    public enum ChangeType {
-        SET, DELETE, ADD, REMOVE
-    }
 }

@@ -1,20 +1,23 @@
 package us.donut.visualbukkit.blocks.expressions;
 
+import org.bukkit.entity.Entity;
 import us.donut.visualbukkit.blocks.ConditionBlock;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"Checks if two objects are equal", "Returns: boolean"})
-public class ExprEquals extends ConditionBlock {
+@Category("Entity")
+@Description({"Checks if an entity is dead", "Returns: boolean"})
+public class ExprIsDead extends ConditionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode(Object.class, new ChoiceParameter("=", "!="), Object.class);
+        return new SyntaxNode(Entity.class, new ChoiceParameter("is", "is not"), "dead");
     }
 
     @Override
     protected String toNonNegatedJava() {
-        return "checkEquals(" + arg(0) + "," + arg(2) + ")";
+        return arg(0) + ".isDead()";
     }
 }

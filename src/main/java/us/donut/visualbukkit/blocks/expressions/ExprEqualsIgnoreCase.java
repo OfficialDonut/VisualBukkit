@@ -16,7 +16,7 @@ public class ExprEqualsIgnoreCase extends ConditionBlock {
     }
 
     @Override
-    public String toJava() {
-        return (isNegated() ? "!" : "") + arg(0) + ".equalsIgnoreCase(" + arg(2) + ")";
+    protected String toNonNegatedJava() {
+        return arg(0) + ".equalsIgnoreCase(" + arg(2) + ")";
     }
 }

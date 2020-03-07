@@ -1,33 +1,34 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category("Player")
-@Description({"The display name of a player", "Returns: string"})
-public class ExprDisplayName extends ChangeableExpressionBlock {
+@Category("Entity")
+@Description({"The velocity of an entity", "Returns: vector"})
+public class ExprVelocity extends ChangeableExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("display name of", Player.class);
+        return new SyntaxNode("velocity of", Entity.class);
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getDisplayName()";
+        return arg(0) + ".getVelocity()";
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setDisplayName(" + delta + ");" : null;
+        return changeType == ChangeType.SET ? arg(0) + ".setVelocity(" + delta + ");" : null;
     }
 
     @Override
     public Class<?> getReturnType() {
-        return String.class;
+        return Vector.class;
     }
 }

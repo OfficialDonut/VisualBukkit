@@ -16,7 +16,7 @@ public class ExprStringContains extends ConditionBlock {
     }
 
     @Override
-    public String toJava() {
-        return (isNegated() ? "!" : "") + arg(0) + ".contains(" + arg(2) + ")";
+    protected String toNonNegatedJava() {
+        return arg(0) + ".contains(" + arg(2) + ")";
     }
 }
