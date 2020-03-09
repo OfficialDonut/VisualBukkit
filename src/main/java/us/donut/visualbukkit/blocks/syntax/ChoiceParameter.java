@@ -1,11 +1,11 @@
 package us.donut.visualbukkit.blocks.syntax;
 
-import javafx.scene.control.ComboBox;
 import org.bukkit.configuration.ConfigurationSection;
+import us.donut.visualbukkit.util.ResizingComboBox;
 
 import java.util.Collection;
 
-public class ChoiceParameter extends ComboBox<String> implements BlockParameter {
+public class ChoiceParameter extends ResizingComboBox<String> implements BlockParameter {
 
     public ChoiceParameter(String... choices) {
         getItems().addAll(choices);

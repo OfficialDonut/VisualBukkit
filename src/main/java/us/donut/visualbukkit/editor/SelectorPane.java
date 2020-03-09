@@ -13,6 +13,7 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.util.ResizingComboBox;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -38,8 +39,8 @@ public class SelectorPane extends VBox implements BlockContainer {
     }
 
     private List<BlockInfo<?>.Node> blockInfoNodes = new ArrayList<>();
-    private ComboBox<String> categoryComboBox = new ComboBox<>();
-    private ComboBox<Class<?>> eventComboBox = new ComboBox<>();
+    private ResizingComboBox<String> categoryComboBox = new ResizingComboBox<>();
+    private ResizingComboBox<Class<?>> eventComboBox = new ResizingComboBox<>();
     private TextField searchField = new TextField();
 
     public SelectorPane() {
@@ -70,21 +71,19 @@ public class SelectorPane extends VBox implements BlockContainer {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
         categoryComboBox.setFocusTraversable(false);
-        categoryComboBox.getItems().add("All");
-        categoryComboBox.setValue("All");
-        categoryComboBox.prefWidthProperty().bind(searchField.widthProperty());
+        categoryComboBox.getItems().add("---");
+        categoryComboBox.setValue("---");
         categoryComboBox.setOnAction(e -> blockInfoNodes.forEach(this::updateVisibility));
 
         eventComboBox.setFocusTraversable(false);
         eventComboBox.getItems().add(Any.class);
         eventComboBox.getItems().addAll(EventPane.EVENTS);
         eventComboBox.setValue(Any.class);
-        eventComboBox.prefWidthProperty().bind(searchField.widthProperty());
         eventComboBox.setOnAction(e -> blockInfoNodes.forEach(this::updateVisibility));
         eventComboBox.setConverter(new StringConverter<Class<?>>() {
             @Override
             public String toString(Class<?> clazz) {
-                return clazz != null ? clazz.getSimpleName() : null;
+                return clazz == Any.class ? "---" : clazz != null ? clazz.getSimpleName() : null;
             }
             @Override
             public Class<?> fromString(String string) {
@@ -160,7 +159,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         Class<?> event = eventComboBox.getValue();
         String search = searchField.getText().toLowerCase();
         boolean state =
-                (category.equalsIgnoreCase("All") || checkCategory(blockInfo, category)) &&
+                (category.equalsIgnoreCase("---") || checkCategory(blockInfo, category)) &&
                 (event == Any.class || checkEvent(blockInfo, event)) &&
                 (search.isEmpty() || blockInfoNode.getText().toLowerCase().contains(search));
         blockInfoNode.setVisible(state);
