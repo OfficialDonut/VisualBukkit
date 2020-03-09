@@ -1,28 +1,28 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category({"Entity", "Location"})
-@Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+@Category("Item Stack")
+@Description({"An item stack", "Returns: item stack"})
+public class ExprItemStack extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("location of", Entity.class);
+        return new SyntaxNode("item stack of", Material.class);
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getLocation()";
+        return "new ItemStack(" + arg(0) + ")";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Location.class;
+        return ItemStack.class;
     }
 }

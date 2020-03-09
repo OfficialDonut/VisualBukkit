@@ -1,28 +1,27 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category({"Entity", "Location"})
-@Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+@Category("Inventory")
+@Description("The size of an inventory")
+public class ExprInventorySize extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("location of", Entity.class);
+        return new SyntaxNode("size of", Inventory.class);
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getLocation()";
+        return arg(0) + ".getSize()";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Location.class;
+        return int.class;
     }
 }

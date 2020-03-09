@@ -1,28 +1,30 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.block.Block;
+import org.bukkit.event.block.BlockEvent;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category({"Entity", "Location"})
-@Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+@Category("Block")
+@Description({"The block involved in an event", "Returns: block"})
+@Event(BlockEvent.class)
+public class ExprEventBlock extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("location of", Entity.class);
+        return new SyntaxNode("event block");
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getLocation()";
+        return "event.getBlock()";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Location.class;
+        return Block.class;
     }
 }

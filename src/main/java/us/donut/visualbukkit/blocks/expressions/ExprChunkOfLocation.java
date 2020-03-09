@@ -1,28 +1,28 @@
 package us.donut.visualbukkit.blocks.expressions;
 
+import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category({"Entity", "Location"})
-@Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+@Category("Location")
+@Description({"The chunk of a location", "Returns: chunk"})
+public class ExprChunkOfLocation extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("location of", Entity.class);
+        return new SyntaxNode("chunk of", Location.class);
     }
 
     @Override
     public String toJava() {
-        return arg(0) + ".getLocation()";
+        return arg(0) + ".getChunk()";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Location.class;
+        return Chunk.class;
     }
 }

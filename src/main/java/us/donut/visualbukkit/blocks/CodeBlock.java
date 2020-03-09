@@ -14,6 +14,7 @@ import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.util.Loadable;
 
 import java.util.List;
+import java.util.UUID;
 
 public abstract class CodeBlock extends VBox implements Loadable {
 
@@ -99,5 +100,9 @@ public abstract class CodeBlock extends VBox implements Loadable {
             parent = parent.getParent();
         }
         return null;
+    }
+
+    protected String randomVar() {
+        return "_" + UUID.randomUUID().toString().replace("-", "");
     }
 }

@@ -1,19 +1,19 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.block.Block;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category({"Entity", "Location"})
-@Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+@Category({"Block", "Location"})
+@Description({"The location of a block", "Returns: location"})
+public class ExprBlockLocation extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("location of", Entity.class);
+        return new SyntaxNode("location of", Block.class);
     }
 
     @Override

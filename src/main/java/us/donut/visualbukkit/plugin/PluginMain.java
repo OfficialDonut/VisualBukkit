@@ -20,9 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("UnstableApiUsage")
 public class PluginMain extends JavaPlugin implements Listener {
@@ -91,7 +89,15 @@ public class PluginMain extends JavaPlugin implements Listener {
     }
 
     private String color(String string) {
-        return ChatColor.translateAlternateColorCodes('&', string);
+        return string != null ? ChatColor.translateAlternateColorCodes('&', string) : null;
+    }
+
+    private List<String> color(List<String> strings) {
+        for (int i = 0; i < strings.size(); i++) {
+            strings.add(i, color(strings.get(i)));
+            strings.remove(i + 1);
+        }
+        return strings;
     }
 
     private String getVariable(Object... objects) {

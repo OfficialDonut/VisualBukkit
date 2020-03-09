@@ -30,6 +30,9 @@ public class PluginBuilder {
     public static void init() {
         classPool.importPackage("java.util");
         classPool.importPackage("org.bukkit");
+        classPool.importPackage("org.bukkit.inventory");
+        classPool.importPackage("org.bukkit.inventory.meta");
+        classPool.importPackage("org.bukkit.util");
         classPool.importPackage("us.donut.visualbukkit.util");
 
         try {
