@@ -259,7 +259,7 @@ public class Project {
                     PluginBuilder.build(Project.this);
                     VisualBukkit.displayMessage("Successfully built plugin");
                 } catch (Exception ex) {
-                    VisualBukkit.displayException("Failed to create project", ex);
+                    VisualBukkit.displayException("Failed to build plugin", ex);
                 }
             });
 
