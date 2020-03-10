@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.InputStream;
 
@@ -28,6 +29,7 @@ public class SplashScreenLoader extends Preloader {
             primaryStage.setTitle("Visual Bukkit v" + SplashScreenLoader.class.getPackage().getSpecificationVersion());
             primaryStage.setScene(new Scene(rootPane, 600, 500));
             primaryStage.getIcons().add(icon);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
         }
     }
