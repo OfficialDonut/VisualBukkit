@@ -7,6 +7,7 @@ import org.apache.commons.lang.ClassUtils;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -109,6 +110,9 @@ public class TypeHandler {
         }
         if (clazz == Class.class) {
             return "type";
+        }
+        if (Configuration.class.isAssignableFrom(clazz)) {
+            return "config";
         }
         name = clazz.getSimpleName();
         if (name.toUpperCase().equals(name)) {
