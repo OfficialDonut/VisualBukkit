@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.*;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -124,6 +125,8 @@ public class PluginMain extends JavaPlugin implements Listener {
             ((SimpleList) variableValue).add(obj);
         } else if (variableValue instanceof Number && obj instanceof Number) {
             variables.put(variable, ((Number) variableValue).doubleValue() + ((Number) obj).doubleValue());
+        } else if (variableValue instanceof Duration && obj instanceof Duration) {
+            variables.put(variable, ((Duration) variableValue).plus((Duration) obj));
         }
     }
 
@@ -133,6 +136,8 @@ public class PluginMain extends JavaPlugin implements Listener {
             ((SimpleList) variableValue).remove(obj);
         } else if (variableValue instanceof Number && obj instanceof Number) {
             variables.put(variable, ((Number) variableValue).doubleValue() - ((Number) obj).doubleValue());
+        } else if (variableValue instanceof Duration && obj instanceof Duration) {
+            variables.put(variable, ((Duration) variableValue).minus((Duration) obj));
         }
     }
 
