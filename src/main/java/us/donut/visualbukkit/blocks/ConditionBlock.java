@@ -24,7 +24,7 @@ public abstract class ConditionBlock extends ExpressionBlock {
     protected boolean isNegated() {
         for (BlockParameter parameter : getSyntaxNode().getParameters()) {
             if (parameter instanceof ChoiceParameter) {
-                return ((ChoiceParameter) parameter).getSelectionModel().getSelectedIndex() != 0;
+                return ((ChoiceParameter) parameter).getComboBox().getSelectionModel().getSelectedIndex() != 0;
             }
         }
         throw new IllegalStateException("No choice parameter found");

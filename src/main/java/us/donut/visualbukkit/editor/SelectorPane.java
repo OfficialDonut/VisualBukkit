@@ -13,7 +13,7 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
-import us.donut.visualbukkit.util.ResizingComboBox;
+import us.donut.visualbukkit.util.ComboBoxView;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -39,8 +39,8 @@ public class SelectorPane extends VBox implements BlockContainer {
     }
 
     private List<BlockInfo<?>.Node> blockInfoNodes = new ArrayList<>();
-    private ResizingComboBox<String> categoryComboBox = new ResizingComboBox<>();
-    private ResizingComboBox<Class<?>> eventComboBox = new ResizingComboBox<>();
+    private ComboBoxView<String> categoryComboBox = new ComboBoxView<>();
+    private ComboBoxView<Class<?>> eventComboBox = new ComboBoxView<>();
     private TextField searchField = new TextField();
 
     public SelectorPane() {
@@ -71,16 +71,11 @@ public class SelectorPane extends VBox implements BlockContainer {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
         categoryComboBox.setFocusTraversable(false);
-        categoryComboBox.getItems().add("---");
-        categoryComboBox.setValue("---");
-        categoryComboBox.setOnAction(e -> blockInfoNodes.forEach(this::updateVisibility));
+        categoryComboBox.getComboBox().getItems().add("---");
+        categoryComboBox.getComboBox().setValue("---");
+        categoryComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
-        eventComboBox.setFocusTraversable(false);
-        eventComboBox.getItems().add(Any.class);
-        eventComboBox.getItems().addAll(EventPane.EVENTS);
-        eventComboBox.setValue(Any.class);
-        eventComboBox.setOnAction(e -> blockInfoNodes.forEach(this::updateVisibility));
-        eventComboBox.setConverter(new StringConverter<Class<?>>() {
+        eventComboBox.getComboBox().setConverter(new StringConverter<Class<?>>() {
             @Override
             public String toString(Class<?> clazz) {
                 return clazz == Any.class ? "---" : clazz != null ? clazz.getSimpleName() : null;
@@ -90,6 +85,11 @@ public class SelectorPane extends VBox implements BlockContainer {
                 return null;
             }
         });
+        eventComboBox.setFocusTraversable(false);
+        eventComboBox.getComboBox().getItems().add(Any.class);
+        eventComboBox.getComboBox().getItems().addAll(EventPane.EVENTS);
+        eventComboBox.getComboBox().setValue(Any.class);
+        eventComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
         content.getChildren().addAll(selectorTitle, categoryHBox, eventHBox, searchHBox, statementBox, expressionBox);
 
@@ -100,9 +100,9 @@ public class SelectorPane extends VBox implements BlockContainer {
             String[] categories = blockInfo.getCategories();
             if (categories != null) {
                 for (String category : blockInfo.getCategories()) {
-                    if (!categoryComboBox.getItems().contains(category)) {
-                        int i = categoryComboBox.getItems().filtered(item -> category.compareTo(item) > 0).size();
-                        categoryComboBox.getItems().add(i, category);
+                    if (!categoryComboBox.getComboBox().getItems().contains(category)) {
+                        int i = categoryComboBox.getComboBox().getItems().filtered(item -> category.compareTo(item) > 0).size();
+                        categoryComboBox.getComboBox().getItems().add(i, category);
                     }
                 }
             }
@@ -155,8 +155,8 @@ public class SelectorPane extends VBox implements BlockContainer {
 
     private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {
         BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
-        String category = categoryComboBox.getValue();
-        Class<?> event = eventComboBox.getValue();
+        String category = categoryComboBox.getComboBox().getValue();
+        Class<?> event = eventComboBox.getComboBox().getValue();
         String search = searchField.getText().toLowerCase();
         boolean state =
                 (category.equalsIgnoreCase("---") || checkCategory(blockInfo, category)) &&

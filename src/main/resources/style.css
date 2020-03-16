@@ -10,9 +10,15 @@
     -fx-focus-traversable: false;
 }
 
-.choice-box {
-    -fx-border-color: black;
-    -fx-border-radius: 2;
+.list-view {
+    -fx-padding: 0;
+}
+
+.menu-item {
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-padding: 0;
 }
 
 .root {
@@ -63,6 +69,13 @@
     -fx-border-color: black;
     -fx-padding: 5;
     -fx-text-fill: black;
+}
+
+.combo-box-view {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-padding: 5;
+    -fx-spacing: 15;
 }
 
 .expression-parameter-filled {
