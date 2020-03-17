@@ -14,13 +14,6 @@
     -fx-padding: 0;
 }
 
-.menu-item {
-    -fx-background-insets: 0;
-    -fx-faint-focus-color: -fx-control-inner-background;
-    -fx-focus-color: -fx-control-inner-background;
-    -fx-padding: 0;
-}
-
 .root {
     -fx-font-size: 14;
 }
@@ -76,6 +69,13 @@
     -fx-border-radius: 2;
     -fx-padding: 5;
     -fx-spacing: 15;
+}
+
+.combo-box-view .menu-item {
+    -fx-background-insets: 0;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-padding: 0;
 }
 
 .expression-parameter-filled {
