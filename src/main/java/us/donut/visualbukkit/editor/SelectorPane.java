@@ -41,6 +41,8 @@ public class SelectorPane extends VBox implements BlockContainer {
     private List<BlockInfo<?>.Node> blockInfoNodes = new ArrayList<>();
     private ComboBoxView<String> categoryComboBox = new ComboBoxView<>();
     private ComboBoxView<Class<?>> eventComboBox = new ComboBoxView<>();
+    private CheckBox statementCheckBox = new CheckBox("Statements");
+    private CheckBox expressionCheckBox = new CheckBox("Expressions");
     private TextField searchField = new TextField();
 
     public SelectorPane() {
@@ -91,7 +93,24 @@ public class SelectorPane extends VBox implements BlockContainer {
         eventComboBox.getComboBox().setValue(Any.class);
         eventComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
-        content.getChildren().addAll(selectorTitle, categoryHBox, eventHBox, searchHBox, statementBox, expressionBox);
+        statementCheckBox.setSelected(true);
+        statementCheckBox.setOnAction(e -> {
+            boolean state = statementCheckBox.isSelected();
+            statementBox.setVisible(state);
+            statementBox.setManaged(state);
+        });
+
+        expressionCheckBox.setSelected(true);
+        expressionCheckBox.setOnAction(e -> {
+            boolean state = expressionCheckBox.isSelected();
+            expressionBox.setVisible(state);
+            expressionBox.setManaged(state);
+        });
+
+        HBox checkBoxes = new HBox(10, new Label("Type:\t"), statementCheckBox, expressionCheckBox);
+        checkBoxes.setAlignment(Pos.CENTER_LEFT);
+
+        content.getChildren().addAll(selectorTitle, categoryHBox, eventHBox, checkBoxes, searchHBox, statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
             BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();

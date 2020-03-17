@@ -10,6 +10,12 @@
     -fx-focus-traversable: false;
 }
 
+.check-box .box {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-padding: 3;
+}
+
 .list-view {
     -fx-padding: 0;
 }
