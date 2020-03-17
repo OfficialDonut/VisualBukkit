@@ -89,6 +89,7 @@ public class ProjectManager {
                 Project project = new Project(name);
                 projects.add(project);
                 open(project);
+                project.getPluginEnablePane().open();
                 VisualBukkit.displayMessage("Successfully created project");
             } catch (IOException e) {
                 VisualBukkit.displayException("Failed to create project", e);

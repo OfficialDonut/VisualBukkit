@@ -30,10 +30,12 @@ public class Project {
     private DataFile dataFile;
     private Pane projectPane;
     private DndTabPane tabPane;
+    private PluginEnablePane pluginEnablePane = new PluginEnablePane(this);
     private List<CommandPane> commands = new ArrayList<>();
     private List<EventPane> events = new ArrayList<>();
     private List<ProcedurePane> procedures = new ArrayList<>();
     private List<FunctionPane> functions = new ArrayList<>();
+    private boolean loaded = false;
 
     public Project(String name) throws IOException {
         this.name = name;
@@ -47,6 +49,11 @@ public class Project {
     }
 
     public void load() {
+        if (loaded) {
+            return;
+        }
+        loaded = true;
+
         ConfigurationSection procedureSection = dataFile.getConfig().getConfigurationSection("procedures");
         if (procedureSection != null) {
             for (String procedure : procedureSection.getKeys(false)) {
@@ -109,6 +116,15 @@ public class Project {
                 }
             }
         }
+
+        ConfigurationSection pluginEnableSection = getDataFile().getConfig().getConfigurationSection("plugin-enable");
+        if (pluginEnableSection != null) {
+            try {
+                pluginEnablePane.load(pluginEnableSection);
+            } catch (Exception e) {
+                VisualBukkit.displayException("Failed to load plugin enable", e);
+            }
+        }
     }
 
     public void add(BlockPane blockPane) {
@@ -152,6 +168,7 @@ public class Project {
         data.set("plugin.author", getPluginAuthor());
         data.set("plugin.description", getPluginDesc());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
+        pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
         procedures.forEach(procedure -> procedure.unload(data.createSection("procedures." + procedure.getProcedure())));
         functions.forEach(function -> function.unload(data.createSection("functions." + function.getFunction())));
@@ -187,6 +204,10 @@ public class Project {
         return tabPane;
     }
 
+    public PluginEnablePane getPluginEnablePane() {
+        return pluginEnablePane;
+    }
+
     public List<CommandPane> getCommands() {
         return commands;
     }
@@ -204,7 +225,8 @@ public class Project {
     }
 
     public List<? extends BlockPane> getBlockPanes() {
-        List<BlockPane> blockPanes = new ArrayList<>(commands.size() + events.size() + procedures.size() + functions.size());
+        List<BlockPane> blockPanes = new ArrayList<>(1 + commands.size() + events.size() + procedures.size() + functions.size());
+        blockPanes.add(pluginEnablePane);
         blockPanes.addAll(commands);
         blockPanes.addAll(events);
         blockPanes.addAll(procedures);
@@ -280,8 +302,10 @@ public class Project {
             newEventButton.prefWidthProperty().bind(newCommandButton.widthProperty());
             newProcedureButton.prefWidthProperty().bind(newCommandButton.widthProperty());
             newFunctionButton.prefWidthProperty().bind(newCommandButton.widthProperty());
-            getChildren().addAll(title, new Label("Name: " + name),
-                    commandTree, eventTree, procedureTree, functionTree,
+            TreeNode structureTree = new TreeNode("Project Structure");
+            structureTree.add(pluginEnablePane.getProjectStructureLabel(), commandTree, eventTree, procedureTree, functionTree);
+            structureTree.toggle();
+            getChildren().addAll(title, new Label("Name: " + name), structureTree,
                     newCommandButton, newEventButton, newProcedureButton, newFunctionButton);
 
             Label pluginInfoTitle = new Label("Plugin Information");
