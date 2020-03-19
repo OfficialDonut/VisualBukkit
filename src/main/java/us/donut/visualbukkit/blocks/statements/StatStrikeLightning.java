@@ -1,25 +1,24 @@
 package us.donut.visualbukkit.blocks.statements;
 
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import us.donut.visualbukkit.blocks.StatementBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category("Entity")
-@Description("Spawns an entity")
-public class StatSpawnEntity extends StatementBlock {
+@Description("Strikes lightning at a location")
+public class StatStrikeLightning extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("spawn", EntityType.class, "at", Location.class);
+        return new SyntaxNode("strike", new ChoiceParameter("real", "fake"), "lightning at", Location.class);
     }
 
     @Override
     public String toJava() {
+        String method = arg(0).equals("real") ? "strikeLightning" : "strikeLightningEffect";
         String locVar = randomVar();
         return "Location " + locVar + "=" + arg(1) + ";" +
-                locVar + ".getWorld().spawnEntity(" + locVar + "," + arg(0) + ");";
+                locVar + ".getWorld()." + method + "(" + locVar + ");";
     }
 }
