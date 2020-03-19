@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputDialog;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.VisualBukkitLauncher;
 import us.donut.visualbukkit.blocks.UndoManager;
 
 import java.io.IOException;
@@ -17,8 +18,7 @@ import java.util.List;
 
 public class ProjectManager {
 
-    private static VisualBukkit visualBukkit = VisualBukkit.getInstance();
-    private static Path projectsFolder = visualBukkit.getDataFolder().resolve("Projects");
+    private static Path projectsFolder = VisualBukkitLauncher.DATA_FOLDER.resolve("Projects");
     private static List<Project> projects = new ArrayList<>();
     private static Project currentProject;
 
@@ -45,7 +45,7 @@ public class ProjectManager {
         if (projects.isEmpty()) {
             promptCreateProject(false);
         } else {
-            Project lastProject = getProject(visualBukkit.getDataFile().getConfig().getString("last-project"));
+            Project lastProject = getProject(VisualBukkitLauncher.DATA_FILE.getConfig().getString("last-project"));
             open(lastProject == null ? projects.get(0) : lastProject);
         }
     }
@@ -59,7 +59,7 @@ public class ProjectManager {
             VisualBukkit.displayException("Failed to save project", e);
         }
         UndoManager.clear();
-        SplitPane splitPane = visualBukkit.getSplitPane();
+        SplitPane splitPane = VisualBukkit.getInstance().getSplitPane();
         splitPane.getItems().set(1, project.getTabPane());
         splitPane.getItems().set(2, project.getProjectPane());
         splitPane.setDividerPositions(0.2, 0.825);

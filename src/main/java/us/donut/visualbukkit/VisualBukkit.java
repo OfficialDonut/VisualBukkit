@@ -20,20 +20,13 @@ import us.donut.visualbukkit.blocks.UndoManager;
 import us.donut.visualbukkit.editor.ProjectManager;
 import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
-import us.donut.visualbukkit.util.DataFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class VisualBukkit extends Application {
 
     private static VisualBukkit instance;
-    private String version = "v" + VisualBukkit.class.getPackage().getSpecificationVersion();
-    private Path dataFolder = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
-    private DataFile dataFile = new DataFile(dataFolder.resolve("data.yml"));
     private BorderPane rootPane = new BorderPane();
     private SplitPane splitPane = new SplitPane();
     private Scene scene = new Scene(rootPane, 500, 500);
@@ -55,7 +48,7 @@ public class VisualBukkit extends Application {
     }
 
     private void load() {
-        primaryStage.setTitle("Visual Bukkit " + version);
+        primaryStage.setTitle("Visual Bukkit " + VisualBukkitLauncher.VERSION);
         primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         rootPane.getStylesheets().add("/style.css");
@@ -64,15 +57,6 @@ public class VisualBukkit extends Application {
             primaryStage.getIcons().add(new Image(inputStream));
         } catch (IOException e) {
             displayException("Failed to load icon", e);
-        }
-
-        try {
-            if (Files.notExists(dataFolder)) {
-                Files.createDirectory(dataFolder);
-            }
-        } catch (IOException e) {
-            displayException("Failed to create data folder", e);
-            Platform.exit();
         }
 
         BlockRegistry.registerAll();
@@ -191,18 +175,6 @@ public class VisualBukkit extends Application {
 
     public static VisualBukkit getInstance() {
         return instance;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public Path getDataFolder() {
-        return dataFolder;
-    }
-
-    public DataFile getDataFile() {
-        return dataFile;
     }
 
     public Stage getPrimaryStage() {

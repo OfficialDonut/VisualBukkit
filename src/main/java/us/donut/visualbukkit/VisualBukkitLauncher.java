@@ -1,47 +1,106 @@
 package us.donut.visualbukkit;
 
 import com.sun.javafx.application.LauncherImpl;
+import us.donut.visualbukkit.util.DataFile;
 
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class VisualBukkitLauncher {
 
+    public static final String VERSION = "v" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
+    public static final Path DATA_FOLDER = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
+    public static final DataFile DATA_FILE = new DataFile(DATA_FOLDER.resolve("data.yml"));
+
     public static void main(String[] args) {
-        String javaVersion = System.getProperty("java.version");
-
-        if (javaVersion.startsWith("1.8")) {
-            LauncherImpl.launchApplication(VisualBukkit.class, SplashScreenLoader.class, new String[0]);
-            return;
+        if (Files.notExists(DATA_FOLDER)) {
+            try {
+                Files.createDirectory(DATA_FOLDER);
+            } catch (IOException e) {
+                e.printStackTrace();
+                displayError("Failed to load data folder");
+                return;
+            }
         }
 
-        Path dir = Paths.get(System.getProperty("java.home"));
-        while (!dir.getFileName().toString().equalsIgnoreCase("Java")) {
-            dir = dir.getParent();
+        if (System.getProperty("java.version").startsWith("1.8")) {
+            try {
+                LauncherImpl.launchApplication(VisualBukkit.class, SplashScreenLoader.class, new String[0]);
+                return;
+            } catch (NoClassDefFoundError ignored) {}
         }
 
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir)) {
-            for (Path path : directoryStream) {
-                if (path.getFileName().toString().contains("1.8")) {
-                    Path bin = path.resolve("bin");
-                    Path javaExe = bin.resolve("java.exe");
-                    if (Files.notExists(javaExe)) {
-                        javaExe = path.resolve("java");
-                    }
-                    String jarPath = VisualBukkitLauncher.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-                    if (jarPath.charAt(0) == '/') {
-                        jarPath = jarPath.replaceFirst("/", "");
-                    }
-                    Runtime.getRuntime().exec("\"" + javaExe.toString() + "\" -jar \"" + jarPath + "\"");
-                    break;
+        String javaPath = DATA_FILE.getConfig().getString("java-path");
+        if (javaPath != null && !javaPath.startsWith(System.getProperty("java.home"))) {
+            try {
+                run(javaPath);
+            } catch (IOException | URISyntaxException ignored) {}
+        }
+
+        int result = JOptionPane.showOptionDialog(
+                null,
+                "Visual Bukkit must be run with Oracle JRE/JDK 8",
+                "Invalid Java Version",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.ERROR_MESSAGE,
+                null,
+                new Object[]{"Select Oracle JRE/JDK 8"},
+                null);
+
+        if (result == 0) {
+            selectJava();
+        }
+    }
+
+    private static void selectJava() {
+        File dir = new File(System.getProperty("java.home"));
+        while (!dir.getName().equalsIgnoreCase("Java")) {
+            dir = dir.getParentFile();
+        }
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setCurrentDirectory(dir);
+        int result = chooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File bin = new File(chooser.getSelectedFile(), "bin");
+            File javaFile = new File(bin, "java.exe");
+            if (!javaFile.exists()) {
+                javaFile = new File(bin, "java");
+                if (!javaFile.exists()) {
+                    displayError("Invalid JRE/JDK directory");
+                    selectJava();
+                    return;
                 }
             }
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            String path = javaFile.toPath().toString();
+            DATA_FILE.getConfig().set("java-path", path);
+            try {
+                DATA_FILE.save();
+                run(path);
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+                displayError("An exception occurred");
+                selectJava();
+            }
         }
+    }
+
+    private static void run(String javaPath) throws IOException, URISyntaxException {
+        String jarPath = VisualBukkitLauncher.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+        if (jarPath.charAt(0) == '/') {
+            jarPath = jarPath.replaceFirst("/", "");
+        }
+        ProcessBuilder builder = new ProcessBuilder(javaPath, "-jar", jarPath);
+        builder.start();
+        System.exit(0);
+    }
+
+    private static void displayError(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
