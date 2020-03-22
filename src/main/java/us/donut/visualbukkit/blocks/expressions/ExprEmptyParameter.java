@@ -28,7 +28,7 @@ public class ExprEmptyParameter extends ChangeableExpressionBlock {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return "";
+        return getReturnType().getCanonicalName() + " " + randomVar() + "=" + delta + ";";
     }
 
     @Override
