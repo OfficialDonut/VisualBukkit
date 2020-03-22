@@ -39,24 +39,21 @@ public class DragManager {
             int cacheIndex = getIndexAt(container, e.getY());
             Map<Integer, Boolean> cache = validationCache.computeIfAbsent(container, c -> new HashMap<>());
             Boolean cachedValue = cache.get(cacheIndex);
-            if (cachedValue != null) {
-                if (cachedValue) {
-                    e.acceptTransferModes(TransferMode.MOVE);
+            if (cachedValue == null) {
+                Object source = e.getGestureSource();
+                CodeBlock block =
+                        source instanceof CodeBlock ? (CodeBlock) source :
+                        source instanceof BlockInfo.Node ? ((BlockInfo<?>.Node) source).getBlockInfo().createBlock() : null;
+                if (block != null && !block.equals(container) && !(isChild(container, block))) {
+                    boolean valid = container.canAccept(block, e.getY());
+                    cache.put(cacheIndex, valid);
+                    if (valid) {
+                        e.acceptTransferModes(TransferMode.MOVE);
+                        blockTransfers.put(e.getDragboard(), block);
+                    }
                 }
-                return;
-            }
-
-            Object source = e.getGestureSource();
-            CodeBlock block =
-                    source instanceof CodeBlock ? (CodeBlock) source :
-                    source instanceof BlockInfo.Node ? ((BlockInfo<?>.Node) source).getBlockInfo().createBlock() : null;
-            if (block != null && !block.equals(container) && !(isChild(container, block))) {
-                boolean valid = container.canAccept(block, e.getY());
-                cache.put(cacheIndex, valid);
-                if (valid) {
-                    e.acceptTransferModes(TransferMode.MOVE);
-                    blockTransfers.put(e.getDragboard(), block);
-                }
+            } else if (cachedValue) {
+                e.acceptTransferModes(TransferMode.MOVE);
             }
             e.consume();
         });
