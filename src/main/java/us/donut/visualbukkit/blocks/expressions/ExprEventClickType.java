@@ -1,28 +1,30 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Inventory")
-@Description({"A new inventory", "Returns: inventory"})
-public class ExprNewInventory extends ExpressionBlock {
+@Description({"The click type in an InventoryClickEvent", "Returns: click type"})
+@Event(InventoryClickEvent.class)
+public class ExprEventClickType extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("new", InventoryType.class, "inventory named", String.class);
+        return new SyntaxNode("event click type");
     }
 
     @Override
     public String toJava() {
-        return "Bukkit.createInventory(null," + arg(0) + ",color(" + arg(1) + "))";
+        return "event.getClick()";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Inventory.class;
+        return ClickType.class;
     }
 }

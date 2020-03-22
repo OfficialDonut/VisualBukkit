@@ -1,28 +1,26 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Category("Inventory")
-@Description({"A new inventory", "Returns: inventory"})
-public class ExprNewInventory extends ExpressionBlock {
+@Category("String")
+@Description({"Colors a string", "Returns: string"})
+public class ExprColoredString extends ExpressionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("new", InventoryType.class, "inventory named", String.class);
+        return new SyntaxNode(String.class, "colored");
     }
 
     @Override
     public String toJava() {
-        return "Bukkit.createInventory(null," + arg(0) + ",color(" + arg(1) + "))";
+        return "color(" + arg(0) + ")";
     }
 
     @Override
     public Class<?> getReturnType() {
-        return Inventory.class;
+        return String.class;
     }
 }
