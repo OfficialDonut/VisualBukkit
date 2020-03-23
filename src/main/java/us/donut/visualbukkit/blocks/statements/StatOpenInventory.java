@@ -3,9 +3,11 @@ package us.donut.visualbukkit.blocks.statements;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
+@Category("Inventory")
 @Description("Opens an inventory to a human entity")
 public class StatOpenInventory extends StatementBlock {
 

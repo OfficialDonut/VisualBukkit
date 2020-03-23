@@ -26,10 +26,12 @@ import java.util.jar.JarOutputStream;
 public class PluginBuilder {
 
     private static ClassPool classPool = ClassPool.getDefault();
+    private static CtClass currentMainClass;
 
     public static void init() {
         classPool.importPackage("java.util");
         classPool.importPackage("org.bukkit");
+        classPool.importPackage("org.bukkit.entity");
         classPool.importPackage("org.bukkit.inventory");
         classPool.importPackage("org.bukkit.inventory.meta");
         classPool.importPackage("org.bukkit.util");
@@ -44,7 +46,7 @@ public class PluginBuilder {
 
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
-            blockPane.insertInto(getMainClass());
+            blockPane.insertInto(currentMainClass = getMainClass());
             return true;
         } catch (Exception e) {
             return false;
@@ -58,10 +60,10 @@ public class PluginBuilder {
             name = "VisualBukkitPlugin";
         }
 
-        CtClass mainClass = getMainClass();
+        currentMainClass = getMainClass();
 
         for (BlockPane blockPane : project.getBlockPanes()) {
-            blockPane.insertInto(mainClass);
+            blockPane.insertInto(currentMainClass);
         }
 
         Path projectDir = project.getPluginOutputDir().resolve(name);
@@ -74,13 +76,22 @@ public class PluginBuilder {
         }
 
         Files.createDirectories(srcDir);
-        addClasses(srcDir, mainClass, classPool.get(SimpleList.class.getCanonicalName()));
-        Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
+        addClasses(srcDir, currentMainClass, classPool.get(SimpleList.class.getCanonicalName()));
+        addClasses(srcDir, currentMainClass.getNestedClasses());
+        Files.write(pluginYml, Arrays.asList(createYml(project, name, currentMainClass.getName()).split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
     }
 
+    public static ClassPool getClassPool() {
+        return classPool;
+    }
+
+    public static CtClass getCurrentMainClass() {
+        return currentMainClass;
+    }
+
     private static CtClass getMainClass() throws NotFoundException {
-        String name = "visualbukkit." + UUID.randomUUID().toString().replace("-", "");
+        String name = "visualbukkit.a" + UUID.randomUUID().toString().replace("-", "");
         return classPool.getAndRename(PluginMain.class.getCanonicalName(), name);
     }
 

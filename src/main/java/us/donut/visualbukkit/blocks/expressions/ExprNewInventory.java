@@ -18,7 +18,7 @@ public class ExprNewInventory extends ExpressionBlock {
 
     @Override
     public String toJava() {
-        return "Bukkit.createInventory(null," + arg(0) + "," + arg(1) + ")";
+        return "Bukkit.createInventory(null," + arg(0) + ",color(" + arg(1) + "))";
     }
 
     @Override

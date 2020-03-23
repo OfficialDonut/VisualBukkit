@@ -1,41 +1,28 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Material;
-import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.EnumBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Description({"An item material", "Returns: material"})
-public class ExprItemMaterial extends ExpressionBlock {
+public class ExprItemMaterial extends EnumBlock {
 
-    private static String[] materials;
-
-    static {
+    @Override
+    protected String[] computeConstants() {
         List<String> materials = new ArrayList<>();
         for (Material value : Material.values()) {
             if (!value.isLegacy() && !value.isBlock()) {
                 materials.add(value.name());
             }
         }
-        ExprItemMaterial.materials = materials.toArray(new String[0]);
+        return materials.toArray(new String[0]);
     }
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(new ChoiceParameter(materials));
-    }
-
-    @Override
-    public String toJava() {
-        return Material.class.getCanonicalName() + "." + arg(0);
-    }
-
-    @Override
-    public Class<?> getReturnType() {
+    public Class<? extends Enum<?>> getEnum() {
         return Material.class;
     }
 }

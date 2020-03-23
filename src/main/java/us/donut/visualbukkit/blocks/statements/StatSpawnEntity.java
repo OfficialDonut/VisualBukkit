@@ -19,7 +19,7 @@ public class StatSpawnEntity extends StatementBlock {
     @Override
     public String toJava() {
         String locVar = randomVar();
-        return "Location " + locVar + "=" + arg(0) + ";" +
+        return "Location " + locVar + "=" + arg(1) + ";" +
                 locVar + ".getWorld().spawnEntity(" + locVar + "," + arg(0) + ");";
     }
 }
