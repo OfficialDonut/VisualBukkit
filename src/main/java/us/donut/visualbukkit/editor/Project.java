@@ -273,7 +273,7 @@ public class Project {
             pluginVerField.setText(data.getString("plugin.version", ""));
             pluginAuthorField.setText(data.getString("plugin.author", ""));
             pluginDescField.setText(data.getString("plugin.description", ""));
-            pluginOutputDirField.setText(data.getString("plugin.output-dir", System.getProperty("user.dir")));
+            pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
 
             Button buildButton = new Button("Build Plugin");
             buildButton.setOnAction(e -> {
