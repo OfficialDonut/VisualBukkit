@@ -66,13 +66,14 @@ public class PluginBuilder {
             blockPane.insertInto(currentMainClass);
         }
 
-        Path projectDir = project.getPluginOutputDir().resolve(name);
-        Path srcDir = projectDir.resolve("src");
-        Path jar = projectDir.resolve(name + ".jar");
+        Path outputDir = project.getPluginOutputDir();
+        Path srcDir = outputDir.resolve("src");
+        Path jar = outputDir.resolve(name + ".jar");
         Path pluginYml = srcDir.resolve("plugin.yml");
 
-        if (Files.exists(projectDir)) {
-            MoreFiles.deleteRecursively(projectDir, RecursiveDeleteOption.ALLOW_INSECURE);
+        Files.deleteIfExists(jar);
+        if (Files.exists(srcDir)) {
+            MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
         }
 
         Files.createDirectories(srcDir);
