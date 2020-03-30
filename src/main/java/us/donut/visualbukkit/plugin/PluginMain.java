@@ -47,8 +47,7 @@ public class PluginMain extends JavaPlugin implements Listener {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        SimpleList commandArgs = new SimpleList(args);
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] commandArgs) {
         return true;
     }
 
