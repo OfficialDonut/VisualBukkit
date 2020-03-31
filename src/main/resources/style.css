@@ -59,15 +59,22 @@
     -fx-spacing: 10;
 }
 
-.block-pane-label {
-    -fx-font-size: 28;
-}
-
 .block-info-node {
     -fx-background-color: lightgray;
     -fx-border-color: black;
     -fx-padding: 5;
     -fx-text-fill: black;
+}
+
+.block-pane-info-area {
+    -fx-alignment: center-left;
+    -fx-border-color: gray;
+    -fx-border-width: 0 0 3 0;
+    -fx-padding: 5 5 15 5;
+}
+
+.block-pane-label {
+    -fx-font-size: 28;
 }
 
 .combo-box-view {

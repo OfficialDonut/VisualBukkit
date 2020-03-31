@@ -1,8 +1,6 @@
 package us.donut.visualbukkit.editor;
 
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -28,12 +26,11 @@ public abstract class BlockPane extends Tab implements Loadable {
         super(tabText);
         this.project = project;
         ScrollPane scrollPane = new ScrollPane(blockArea);
-        VBox content = new VBox(5, infoArea, new Separator(), scrollPane);
+        VBox content = new VBox(infoArea, scrollPane);
         scrollPane.prefHeightProperty().bind(content.heightProperty());
         blockArea.prefWidthProperty().bind(scrollPane.widthProperty());
         blockArea.prefHeightProperty().bind(scrollPane.heightProperty());
-        infoArea.setAlignment(Pos.CENTER_LEFT);
-        infoArea.setPadding(new Insets(5));
+        infoArea.getStyleClass().add("block-pane-info-area");
         projectStructureLabel = new Label(getText());
         projectStructureLabel.setOnMouseEntered(e -> projectStructureLabel.setStyle("-fx-text-fill: gold;"));
         projectStructureLabel.setOnMouseExited(e -> projectStructureLabel.setStyle(null));
