@@ -12,7 +12,7 @@ public class PluginEnablePane extends BlockPane {
         super(project, "Plugin Enable");
         Label label = new Label("Plugin Enable");
         label.getStyleClass().add("block-pane-label");
-        getInfoArea().getChildren().add(label);
+        getInfoArea().getChildren().addAll(label, new Label("(code placed here will run when the plugin enables)"));
     }
 
     @Override
