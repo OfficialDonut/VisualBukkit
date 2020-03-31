@@ -101,6 +101,9 @@ public class PluginBuilder {
         String ver = project.getPluginVer();
         String author = project.getPluginAuthor();
         String desc = project.getPluginDesc();
+        String website = project.getPluginWebsite();
+        String depend = project.getPluginDepend();
+        String softDepend = project.getPluginSoftDepend();
         pluginYml.append("name: ").append(name).append('\n');
         pluginYml.append("version: ").append(ver.isEmpty() ? "1.0" : ver).append('\n');
         pluginYml.append("main: ").append(mainClassName).append('\n');
@@ -109,6 +112,15 @@ public class PluginBuilder {
         }
         if (!desc.isEmpty()) {
             pluginYml.append("description: ").append(desc).append('\n');
+        }
+        if (!website.isEmpty()) {
+            pluginYml.append("website: ").append(website).append('\n');
+        }
+        if (!depend.isEmpty()) {
+            pluginYml.append("depend: [").append(depend).append("]\n");
+        }
+        if (!softDepend.isEmpty()) {
+            pluginYml.append("softdepend: [").append(softDepend).append("]\n");
         }
         pluginYml.append("api-version: 1.13\n");
         pluginYml.append("commands:\n");

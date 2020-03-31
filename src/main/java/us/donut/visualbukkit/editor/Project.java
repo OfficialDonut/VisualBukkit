@@ -167,6 +167,9 @@ public class Project {
         data.set("plugin.version", getPluginVer());
         data.set("plugin.author", getPluginAuthor());
         data.set("plugin.description", getPluginDesc());
+        data.set("plugin.website", getPluginWebsite());
+        data.set("plugin.depend", getPluginDepend());
+        data.set("plugin.soft-depend", getPluginSoftDepend());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
         pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
@@ -250,6 +253,18 @@ public class Project {
         return projectPane.pluginDescField.getText();
     }
 
+    public String getPluginWebsite() {
+        return projectPane.pluginWebsiteField.getText();
+    }
+
+    public String getPluginDepend() {
+        return projectPane.pluginDependField.getText();
+    }
+
+    public String getPluginSoftDepend() {
+        return projectPane.pluginSoftDependField.getText();
+    }
+
     public Path getPluginOutputDir() {
         return Paths.get(projectPane.pluginOutputDirField.getText());
     }
@@ -264,15 +279,21 @@ public class Project {
         private TextField pluginVerField = new TextField();
         private TextField pluginAuthorField = new TextField();
         private TextField pluginDescField = new TextField();
+        private TextField pluginWebsiteField = new TextField();
+        private TextField pluginDependField = new TextField();
+        private TextField pluginSoftDependField = new TextField();
         private TextField pluginOutputDirField = new TextField();
 
         public Pane() {
             getStyleClass().add("project-pane");
             YamlConfiguration data = dataFile.getConfig();
-            pluginNameField.setText(data.getString("plugin.name", ""));
-            pluginVerField.setText(data.getString("plugin.version", ""));
-            pluginAuthorField.setText(data.getString("plugin.author", ""));
-            pluginDescField.setText(data.getString("plugin.description", ""));
+            pluginNameField.setText(data.getString("plugin.name"));
+            pluginVerField.setText(data.getString("plugin.version"));
+            pluginAuthorField.setText(data.getString("plugin.author"));
+            pluginDescField.setText(data.getString("plugin.description"));
+            pluginWebsiteField.setText(data.getString("plugin.website"));
+            pluginDependField.setText(data.getString("plugin.depend"));
+            pluginSoftDependField.setText(data.getString("plugin.soft-depend"));
             pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
 
             Button buildButton = new Button("Build Plugin");
@@ -314,6 +335,9 @@ public class Project {
             HBox verBox = new HBox(5, new Label("Version:\t\t"), pluginVerField);
             HBox authorBox = new HBox(5, new Label("Author:\t\t"), pluginAuthorField);
             HBox descBox = new HBox(5, new Label("Description:\t"), pluginDescField);
+            HBox websiteBox = new HBox(5, new Label("Website:\t\t"), pluginWebsiteField);
+            HBox dependBox = new HBox(5, new Label("Depend:\t\t"), pluginDependField);
+            HBox softDependBox = new HBox(5, new Label("Soft Depend:\t"), pluginSoftDependField);
 
             DirectoryChooser chooser = new DirectoryChooser();
             chooser.setTitle("Output Directory");
@@ -328,7 +352,7 @@ public class Project {
             HBox dirBox = new HBox(5, new Label("Output dir:\t"), pluginOutputDirField);
 
             getChildren().addAll(new Separator(), pluginInfoTitle);
-            for (HBox hBox : new HBox[]{nameBox, verBox, authorBox, descBox, dirBox}) {
+            for (HBox hBox : new HBox[]{nameBox, verBox, authorBox, descBox, websiteBox, dependBox, softDependBox, dirBox}) {
                 hBox.setAlignment(Pos.CENTER_LEFT);
                 getChildren().add(hBox);
             }
