@@ -114,6 +114,21 @@ public class PluginBuilder {
         pluginYml.append("commands:\n");
         for (CommandPane command : project.getCommands()) {
             pluginYml.append("  ").append(command.getCommand()).append(":\n");
+            if (!command.getDescription().isEmpty()) {
+                pluginYml.append("    description: ").append(command.getDescription()).append('\n');
+            }
+            if (!command.getAliases().isEmpty()) {
+                pluginYml.append("    aliases: [").append(command.getAliases()).append("]\n");
+            }
+            if (!command.getPermission().isEmpty()) {
+                pluginYml.append("    permission: ").append(command.getPermission()).append('\n');
+            }
+            if (!command.getPermMessage().isEmpty()) {
+                pluginYml.append("    permission-message: ").append(command.getPermMessage()).append('\n');
+            }
+            if (!command.getUsage().isEmpty()) {
+                pluginYml.append("    usage: ").append(command.getUsage()).append('\n');
+            }
         }
         return pluginYml.toString();
     }

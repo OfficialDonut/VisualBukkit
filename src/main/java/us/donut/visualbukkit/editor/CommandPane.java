@@ -1,9 +1,13 @@
 package us.donut.visualbukkit.editor;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javassist.CtClass;
 import javassist.CtMethod;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
 
 import java.util.StringJoiner;
@@ -36,6 +40,11 @@ public class CommandPane extends BlockPane {
     }
 
     private String command;
+    private TextField descField = new TextField();
+    private TextField aliasesField = new TextField();
+    private TextField permField = new TextField();
+    private TextField permMessageField = new TextField();
+    private TextField usageField = new TextField();
 
     public CommandPane(Project project, String command) {
         super(project, "/" + command);
@@ -81,7 +90,18 @@ public class CommandPane extends BlockPane {
             }
         });
 
-        getInfoArea().getChildren().addAll(label, renameButton, deleteButton);
+        HBox buttonsBox = new HBox(15, label, renameButton, deleteButton);
+        VBox infoVBox = new VBox(5, buttonsBox);
+
+        HBox descBox = new HBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField);
+        HBox aliasesBox = new HBox(new Label("Aliases:\t\t"), aliasesField, new Label("\tPerm Message:\t"), permMessageField);
+        HBox usageBox = new HBox(new Label("Usage:\t\t"), usageField);
+        for (HBox hBox : new HBox[]{descBox, aliasesBox, usageBox}) {
+            hBox.setAlignment(Pos.CENTER_LEFT);
+            infoVBox.getChildren().add(hBox);
+        }
+
+        getInfoArea().getChildren().add(infoVBox);
     }
 
     @Override
@@ -96,7 +116,47 @@ public class CommandPane extends BlockPane {
         commandMethod.insertBefore(src);
     }
 
+    @Override
+    public void unload(ConfigurationSection section) {
+        super.unload(section);
+        section.set("description", descField.getText());
+        section.set("aliases", aliasesField.getText());
+        section.set("permission", permField.getText());
+        section.set("permission-message", permMessageField.getText());
+        section.set("usage", usageField.getText());
+    }
+
+    @Override
+    public void load(ConfigurationSection section) throws Exception {
+        super.load(section);
+        descField.setText(section.getString("description"));
+        aliasesField.setText(section.getString("aliases"));
+        permField.setText(section.getString("permission"));
+        permMessageField.setText(section.getString("permission-message"));
+        usageField.setText(section.getString("usage"));
+    }
+
     public String getCommand() {
         return command;
+    }
+
+    public String getDescription() {
+        return descField.getText();
+    }
+
+    public String getAliases() {
+        return aliasesField.getText();
+    }
+
+    public String getPermission() {
+        return permField.getText();
+    }
+
+    public String getPermMessage() {
+        return permMessageField.getText();
+    }
+
+    public String getUsage() {
+        return usageField.getText();
     }
 }
