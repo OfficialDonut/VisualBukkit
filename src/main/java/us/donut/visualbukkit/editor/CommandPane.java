@@ -93,10 +93,9 @@ public class CommandPane extends BlockPane {
         HBox buttonsBox = new HBox(15, label, renameButton, deleteButton);
         VBox infoVBox = new VBox(5, buttonsBox);
 
-        HBox descBox = new HBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField);
+        HBox descBox = new HBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField, new Label("\tUsage:\t"), usageField);
         HBox aliasesBox = new HBox(new Label("Aliases:\t\t"), aliasesField, new Label("\tPerm Message:\t"), permMessageField);
-        HBox usageBox = new HBox(new Label("Usage:\t\t"), usageField);
-        for (HBox hBox : new HBox[]{descBox, aliasesBox, usageBox}) {
+        for (HBox hBox : new HBox[]{descBox, aliasesBox}) {
             hBox.setAlignment(Pos.CENTER_LEFT);
             infoVBox.getChildren().add(hBox);
         }
