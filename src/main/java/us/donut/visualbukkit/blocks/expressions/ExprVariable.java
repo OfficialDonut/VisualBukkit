@@ -1,13 +1,12 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.util.CenteredHBox;
 
 import java.util.StringJoiner;
 
@@ -25,9 +24,7 @@ public class ExprVariable extends ChangeableExpressionBlock {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();
             spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
-            HBox content = new HBox(new Label("Number of arguments: "), spinner);
-            content.setAlignment(Pos.CENTER_LEFT);
-            dialog.getDialogPane().setContent(content);
+            dialog.getDialogPane().setContent(new CenteredHBox(new Label("Number of arguments: "), spinner));
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
             dialog.setResultConverter(buttonType -> spinner.getValue());
             setNumArgs(dialog.showAndWait().orElse(2));

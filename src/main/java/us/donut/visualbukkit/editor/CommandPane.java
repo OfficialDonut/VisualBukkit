@@ -1,14 +1,13 @@
 package us.donut.visualbukkit.editor;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javassist.CtClass;
 import javassist.CtMethod;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.util.CenteredHBox;
 
 import java.util.StringJoiner;
 
@@ -90,17 +89,10 @@ public class CommandPane extends BlockPane {
             }
         });
 
-        HBox buttonsBox = new HBox(15, label, renameButton, deleteButton);
-        VBox infoVBox = new VBox(5, buttonsBox);
-
-        HBox descBox = new HBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField, new Label("\tUsage:\t"), usageField);
-        HBox aliasesBox = new HBox(new Label("Aliases:\t\t"), aliasesField, new Label("\tPerm Message:\t"), permMessageField);
-        for (HBox hBox : new HBox[]{descBox, aliasesBox}) {
-            hBox.setAlignment(Pos.CENTER_LEFT);
-            infoVBox.getChildren().add(hBox);
-        }
-
-        getInfoArea().getChildren().add(infoVBox);
+        getInfoArea().getChildren().add(new VBox(5,
+                new CenteredHBox(15, label, renameButton, deleteButton),
+                new CenteredHBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField, new Label("\tUsage:\t"), usageField),
+                new CenteredHBox(new Label("Aliases:\t\t"), aliasesField, new Label("\tPerm Message:\t"), permMessageField)));
     }
 
     @Override

@@ -1,10 +1,8 @@
 package us.donut.visualbukkit.editor;
 
 import javafx.application.Platform;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -13,6 +11,7 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.ComboBoxView;
 
 import java.lang.reflect.Constructor;
@@ -63,12 +62,6 @@ public class SelectorPane extends VBox implements BlockContainer {
         VBox expressionBox = new VBox(10, expressionTitle);
         statementBox.setFillWidth(false);
         expressionBox.setFillWidth(false);
-        HBox categoryHBox = new HBox(10, new Label("Category:\t"), categoryComboBox);
-        HBox eventHBox = new HBox(10, new Label("Event:\t"), eventComboBox);
-        HBox searchHBox = new HBox(10, new Label("Search:\t"), searchField);
-        categoryHBox.setAlignment(Pos.CENTER_LEFT);
-        eventHBox.setAlignment(Pos.CENTER_LEFT);
-        searchHBox.setAlignment(Pos.CENTER_LEFT);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
@@ -107,10 +100,12 @@ public class SelectorPane extends VBox implements BlockContainer {
             expressionBox.setManaged(state);
         });
 
-        HBox checkBoxes = new HBox(10, new Label("Type:\t"), statementCheckBox, expressionCheckBox);
-        checkBoxes.setAlignment(Pos.CENTER_LEFT);
-
-        content.getChildren().addAll(selectorTitle, categoryHBox, eventHBox, checkBoxes, searchHBox, statementBox, expressionBox);
+        content.getChildren().addAll(selectorTitle,
+                new CenteredHBox(10, new Label("Category:\t"), categoryComboBox),
+                new CenteredHBox(10, new Label("Event:\t"), eventComboBox),
+                new CenteredHBox(10, new Label("Type:\t"), statementCheckBox, expressionCheckBox),
+                new CenteredHBox(10, new Label("Search:\t"), searchField),
+                statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
             BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();

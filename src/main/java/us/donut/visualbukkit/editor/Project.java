@@ -1,8 +1,6 @@
 package us.donut.visualbukkit.editor;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,6 +10,7 @@ import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.DataFile;
 import us.donut.visualbukkit.util.TreeNode;
 
@@ -326,18 +325,6 @@ public class Project {
             TreeNode structureTree = new TreeNode("Project Structure");
             structureTree.add(pluginEnablePane.getProjectStructureLabel(), commandTree, eventTree, procedureTree, functionTree);
             structureTree.toggle();
-            getChildren().addAll(title, new Label("Name: " + name), structureTree,
-                    newCommandButton, newEventButton, newProcedureButton, newFunctionButton);
-
-            Label pluginInfoTitle = new Label("Plugin Information");
-            pluginInfoTitle.getStyleClass().add("title-label");
-            HBox nameBox = new HBox(5, new Label("Name:\t\t"), pluginNameField);
-            HBox verBox = new HBox(5, new Label("Version:\t\t"), pluginVerField);
-            HBox authorBox = new HBox(5, new Label("Author:\t\t"), pluginAuthorField);
-            HBox descBox = new HBox(5, new Label("Description:\t"), pluginDescField);
-            HBox websiteBox = new HBox(5, new Label("Website:\t\t"), pluginWebsiteField);
-            HBox dependBox = new HBox(5, new Label("Depend:\t\t"), pluginDependField);
-            HBox softDependBox = new HBox(5, new Label("Soft Depend:\t"), pluginSoftDependField);
 
             DirectoryChooser chooser = new DirectoryChooser();
             chooser.setTitle("Output Directory");
@@ -349,14 +336,22 @@ public class Project {
                     pluginOutputDirField.setText(dir.toPath().toString());
                 }
             });
-            HBox dirBox = new HBox(5, new Label("Output dir:\t"), pluginOutputDirField);
 
-            getChildren().addAll(new Separator(), pluginInfoTitle);
-            for (HBox hBox : new HBox[]{nameBox, verBox, authorBox, descBox, websiteBox, dependBox, softDependBox, dirBox}) {
-                hBox.setAlignment(Pos.CENTER_LEFT);
-                getChildren().add(hBox);
-            }
-            getChildren().add(buildButton);
+            Label pluginInfoTitle = new Label("Plugin Information");
+            pluginInfoTitle.getStyleClass().add("title-label");
+
+            getChildren().addAll(title, new Label("Name: " + name),
+                    structureTree, newCommandButton, newEventButton, newProcedureButton, newFunctionButton,
+                    new Separator(), pluginInfoTitle,
+                    new CenteredHBox(5, new Label("Name:\t\t"), pluginNameField),
+                    new CenteredHBox(5, new Label("Version:\t\t"), pluginVerField),
+                    new CenteredHBox(5, new Label("Author:\t\t"), pluginAuthorField),
+                    new CenteredHBox(5, new Label("Description:\t"), pluginDescField),
+                    new CenteredHBox(5, new Label("Website:\t\t"), pluginWebsiteField),
+                    new CenteredHBox(5, new Label("Depend:\t\t"), pluginDependField),
+                    new CenteredHBox(5, new Label("Soft Depend:\t"), pluginSoftDependField),
+                    new CenteredHBox(5, new Label("Output dir:\t"), pluginOutputDirField),
+                    buildButton);
         }
     }
 }
