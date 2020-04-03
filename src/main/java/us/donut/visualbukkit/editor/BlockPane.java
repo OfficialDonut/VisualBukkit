@@ -50,10 +50,12 @@ public abstract class BlockPane extends Tab implements Loadable {
             section.set("open", true);
         }
         List<StatementBlock> blocks = blockArea.getBlocks(false);
+        ConfigurationSection blocksSection = section.createSection("blocks");
         for (int i = 0; i < blocks.size(); i++) {
             CodeBlock block = blocks.get(i);
-            String className = block.getClass().getCanonicalName().replace('.', '_');
-            block.unload(section.createSection("blocks." + i + className));
+            ConfigurationSection blockSection = blocksSection.createSection(String.valueOf(i));
+            blockSection.set("block-type", block.getClass().getCanonicalName());
+            block.unload(blockSection);
         }
     }
 
@@ -63,14 +65,19 @@ public abstract class BlockPane extends Tab implements Loadable {
         if (section.getBoolean("open")) {
             open();
         }
-        ConfigurationSection blockSection = section.getConfigurationSection("blocks");
-        if (blockSection != null) {
-            for (String key : blockSection.getKeys(false)) {
-                String className = key.substring(1).replace('_', '.');
-                Class<? extends CodeBlock> blockClass = (Class<? extends CodeBlock>) Class.forName(className);
-                CodeBlock block = BlockRegistry.getInfo(blockClass).createBlock();
-                block.load(blockSection.getConfigurationSection(key));
-                blockArea.getChildren().add(block);
+        ConfigurationSection blocksSection = section.getConfigurationSection("blocks");
+        if (blocksSection != null) {
+            for (String key : blocksSection.getKeys(false)) {
+                ConfigurationSection blockSection = blocksSection.getConfigurationSection(key);
+                if (blockSection != null) {
+                    String className = blockSection.getString("block-type");
+                    if (className != null) {
+                        Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
+                        CodeBlock block = BlockRegistry.getInfo(blockType).createBlock();
+                        block.load(blockSection);
+                        blockArea.getChildren().add(block);
+                    }
+                }
             }
         }
     }

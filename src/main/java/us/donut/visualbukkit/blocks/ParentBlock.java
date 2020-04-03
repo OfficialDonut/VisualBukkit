@@ -67,10 +67,12 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
     public void unload(ConfigurationSection section) {
         super.unload(section);
         List<StatementBlock> children = getBlocks(false);
+        ConfigurationSection childrenSection = section.createSection("children");
         for (int i = 0; i < children.size(); i++) {
             CodeBlock child = children.get(i);
-            String className = child.getClass().getCanonicalName().replace('.', '_');
-            child.unload(section.createSection("children." + i + className));
+            ConfigurationSection childSection = childrenSection.createSection(String.valueOf(i));
+            childSection.set("block-type", child.getClass().getCanonicalName());
+            child.unload(childSection);
         }
     }
 
@@ -81,11 +83,16 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
         ConfigurationSection childrenSection = section.getConfigurationSection("children");
         if (childrenSection != null) {
             for (String key : childrenSection.getKeys(false)) {
-                String className = key.substring(1).replace('_', '.');
-                Class<? extends CodeBlock> blockClass = (Class<? extends CodeBlock>) Class.forName(className);
-                CodeBlock child = BlockRegistry.getInfo(blockClass).createBlock();
-                child.load(childrenSection.getConfigurationSection(key));
-                getChildren().add(child);
+                ConfigurationSection childSection = childrenSection.getConfigurationSection(key);
+                if (childSection != null) {
+                    String className = childSection.getString("block-type");
+                    if (className != null) {
+                        Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
+                        CodeBlock child = BlockRegistry.getInfo(blockType).createBlock();
+                        child.load(childSection);
+                        getChildren().add(child);
+                    }
+                }
             }
         }
     }
