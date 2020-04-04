@@ -6,7 +6,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
+import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
+import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.util.Collections;
@@ -31,6 +33,14 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         setOnContextMenuRequested(e -> {
             if (isEmpty()) {
                 contextMenu.show(this, e.getScreenX(), e.getScreenY());
+                e.consume();
+            }
+        });
+        String returnTypeAlias = TypeHandler.isNumber(returnType) ? "number" : TypeHandler.getAlias(returnType);
+        setOnMouseClicked(e -> {
+            if (isEmpty()) {
+                SelectorPane selectorPane = VisualBukkit.getInstance().getSelectorPane();
+                selectorPane.getReturnTypeComboBox().getComboBox().setValue(returnTypeAlias != null ? returnTypeAlias : "---");
                 e.consume();
             }
         });

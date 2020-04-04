@@ -175,6 +175,26 @@ public class SelectorPane extends VBox implements BlockContainer {
         return Collections.emptyList();
     }
 
+    public ComboBoxView<String> getCategoryComboBox() {
+        return categoryComboBox;
+    }
+
+    public ComboBoxView<Class<?>> getEventComboBox() {
+        return eventComboBox;
+    }
+
+    public ComboBoxView<String> getReturnTypeComboBox() {
+        return returnTypeComboBox;
+    }
+
+    public CheckBox getStatementCheckBox() {
+        return statementCheckBox;
+    }
+
+    public CheckBox getExpressionCheckBox() {
+        return expressionCheckBox;
+    }
+
     private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {
         BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
         String category = categoryComboBox.getComboBox().getValue();
