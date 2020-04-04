@@ -234,7 +234,10 @@ public class SelectorPane extends VBox implements BlockContainer {
 
     private boolean checkReturnType(BlockInfo<?> blockInfo, Class<?> returnType) {
         Class<?> blockReturn = blockInfo.getReturnType();
-        return blockReturn != null && (returnType.isAssignableFrom(blockReturn) || (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)));
+        return blockReturn != null &&
+                (returnType.isAssignableFrom(blockReturn) ||
+                (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)) ||
+                (blockReturn == boolean.class && returnType == Boolean.class));
     }
 
     private static class Any {}
