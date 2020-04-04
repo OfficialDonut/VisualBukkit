@@ -3,11 +3,11 @@ package us.donut.visualbukkit.blocks;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-public class EmptyExpressionBlock extends ChangeableExpressionBlock {
+public class EmptyExpressionBlock<T> extends ChangeableExpressionBlock<T> {
 
-    private Class<?> returnType;
+    private Class<T> returnType;
 
-    public EmptyExpressionBlock(Class<?> returnType) {
+    public EmptyExpressionBlock(Class<T> returnType) {
         this.returnType = returnType;
     }
 
@@ -27,7 +27,7 @@ public class EmptyExpressionBlock extends ChangeableExpressionBlock {
     }
 
     @Override
-    public Class<?> getReturnType() {
+    public Class<T> getReturnType() {
         return returnType;
     }
 

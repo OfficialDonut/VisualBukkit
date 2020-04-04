@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The amount of experience dropped in an EntityDeathEvent", "Returns: number"})
 @Event(EntityDeathEvent.class)
-public class ExprDroppedExperience extends ChangeableExpressionBlock {
+public class ExprDroppedExperience extends ChangeableExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprDroppedExperience extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

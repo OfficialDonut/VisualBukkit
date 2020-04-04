@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.InputParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"A temporary variable", "Returns: object"})
-public class ExprTempVariable extends ChangeableExpressionBlock {
+public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,11 +29,6 @@ public class ExprTempVariable extends ChangeableExpressionBlock {
             case DELETE: return "tempVariables.remove(" + getVariable() + ");" ;
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 
     private String getVariable() {

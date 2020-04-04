@@ -8,7 +8,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("String")
 @Description({"Splits a string at every occurrence of another string", "Returns: list of strings"})
-public class ExprSplitString extends ExpressionBlock {
+public class ExprSplitString extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprSplitString extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(" + arg(0) + ".split(" + arg(1) + "))";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

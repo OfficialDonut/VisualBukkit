@@ -12,7 +12,7 @@ import java.util.UUID;
 @Name("Entity UUID")
 @Category("Entity")
 @Description({"The UUID of an entity", "Returns: UUID"})
-public class ExprEntityUUID extends ExpressionBlock {
+public class ExprEntityUUID extends ExpressionBlock<UUID> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprEntityUUID extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getUniqueId()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return UUID.class;
     }
 }

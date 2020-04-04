@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The length of a vector", "Returns: number"})
-public class ExprVectorLength extends ExpressionBlock {
+public class ExprVectorLength extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprVectorLength extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".length()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

@@ -10,7 +10,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Entity")
 @Description({"The passengers of an entity", "Returns: list of entities"})
-public class ExprPassengers extends ChangeableExpressionBlock {
+public class ExprPassengers extends ChangeableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -34,10 +34,5 @@ public class ExprPassengers extends ChangeableExpressionBlock {
     @Override
     public Class<?> getDeltaType(ChangeType changeType) {
         return Entity.class;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The fly speed of a player", "Returns: number"})
-public class ExprFlySpeed extends ChangeableExpressionBlock {
+public class ExprFlySpeed extends ChangeableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprFlySpeed extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return float.class;
     }
 }

@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The custom name of an entity", "Returns: string"})
-public class ExprCustomName extends ChangeableExpressionBlock {
+public class ExprCustomName extends ChangeableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprCustomName extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setCustomName(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

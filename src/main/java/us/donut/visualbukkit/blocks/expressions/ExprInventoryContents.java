@@ -11,7 +11,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Inventory")
 @Description({"The contents of an inventory", "Returns: list of item stacks"})
-public class ExprInventoryContents extends ChangeableExpressionBlock {
+public class ExprInventoryContents extends ChangeableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -35,10 +35,5 @@ public class ExprInventoryContents extends ChangeableExpressionBlock {
     @Override
     public Class<?> getDeltaType(ChangeType changeType) {
         return ItemStack.class;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

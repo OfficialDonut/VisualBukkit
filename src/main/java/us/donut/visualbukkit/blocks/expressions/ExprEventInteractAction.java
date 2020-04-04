@@ -10,7 +10,7 @@ import us.donut.visualbukkit.editor.EventPane;
 
 @Description({"The interact action in a PlayerInteractEvent", "Returns: action"})
 @Event(PlayerInteractEvent.class)
-public class ExprEventInteractAction extends ExpressionBlock {
+public class ExprEventInteractAction extends ExpressionBlock<Action> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,10 +23,5 @@ public class ExprEventInteractAction extends ExpressionBlock {
             return "event.getAction()";
         }
         throw new IllegalStateException();
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Action.class;
     }
 }

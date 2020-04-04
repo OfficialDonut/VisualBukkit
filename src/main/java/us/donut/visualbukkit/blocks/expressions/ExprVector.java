@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"A vector", "Returns: vector"})
-public class ExprVector extends ExpressionBlock {
+public class ExprVector extends ExpressionBlock<Vector> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprVector extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new Vector(" + arg(0) + "," + arg(1) + "," + arg(2) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Vector.class;
     }
 }

@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Inventory")
 @Description({"A new inventory", "Returns: inventory"})
-public class ExprNewChestInventory extends ExpressionBlock {
+public class ExprNewChestInventory extends ExpressionBlock<Inventory> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprNewChestInventory extends ExpressionBlock {
     @Override
     public String toJava() {
         return "Bukkit.createInventory(null," + arg(1) + ",color(" + arg(0) + "))";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Inventory.class;
     }
 }

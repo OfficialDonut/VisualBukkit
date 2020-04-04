@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The final damage amount in an EntityDamageEvent", "Returns: number"})
 @Event(EntityDamageEvent.class)
-public class ExprFinalDamage extends ExpressionBlock {
+public class ExprFinalDamage extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprFinalDamage extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getFinalDamage()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

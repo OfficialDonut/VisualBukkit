@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"A substring of a string", "Returns: string"})
-public class ExprSubstring extends ExpressionBlock {
+public class ExprSubstring extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprSubstring extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".substring(" + arg(1) + "," + arg(2) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

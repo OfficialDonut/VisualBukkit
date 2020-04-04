@@ -7,10 +7,5 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 
 @Category("Inventory")
 @Description({"A slot type", "Returns: slot type"})
-public class ExprSlotType extends EnumBlock {
-
-    @Override
-    public Class<? extends Enum<?>> getEnum() {
-        return InventoryType.SlotType.class;
-    }
+public class ExprSlotType extends EnumBlock<InventoryType.SlotType> {
 }

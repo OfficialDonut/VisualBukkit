@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import java.util.regex.Pattern;
 
 @Description({"A number", "Returns: number"})
-public class ExprNumber extends ExpressionBlock {
+public class ExprNumber extends ExpressionBlock<Double> {
 
     private static Pattern numPattern = Pattern.compile("-?\\d*\\.?\\d*");
 
@@ -32,10 +32,5 @@ public class ExprNumber extends ExpressionBlock {
         } catch (NumberFormatException e) {
             return "0d";
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

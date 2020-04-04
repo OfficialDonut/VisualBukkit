@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The height of an entity", "Returns: number"})
-public class ExprEntityHeight extends ExpressionBlock {
+public class ExprEntityHeight extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprEntityHeight extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getHeight()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

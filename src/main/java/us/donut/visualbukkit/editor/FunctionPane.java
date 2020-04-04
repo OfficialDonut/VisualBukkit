@@ -148,7 +148,7 @@ public class FunctionPane extends BlockPane {
         for (BlockParameter parameter : parameters) {
             if (parameter instanceof ExpressionParameter) {
                 ExpressionParameter expressionParameter = (ExpressionParameter) parameter;
-                ExpressionBlock expression = expressionParameter.getExpression();
+                ExpressionBlock<?> expression = expressionParameter.getExpression();
                 if (expression instanceof ExprFunction && equals(((ExprFunction) expression).getFunction())) {
                     expressionParameter.setExpression(null);
                 } else if (expression != null) {

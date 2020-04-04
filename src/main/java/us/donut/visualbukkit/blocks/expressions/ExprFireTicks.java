@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The number of ticks before an entity stops being on fire", "Returns: number"})
-public class ExprFireTicks extends ChangeableExpressionBlock {
+public class ExprFireTicks extends ChangeableExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprFireTicks extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

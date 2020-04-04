@@ -8,7 +8,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("String")
 @Description({"The characters of a string", "Returns: list of strings"})
-public class ExprStringCharacters extends ExpressionBlock {
+public class ExprStringCharacters extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprStringCharacters extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(" + arg(0) + ".split(\"(?!^)\"))";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

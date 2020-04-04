@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Name("Combine Strings")
 @Description({"Combines two strings together", "Returns: string"})
-public class ExprStringConcatenation extends ExpressionBlock {
+public class ExprStringConcatenation extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprStringConcatenation extends ExpressionBlock {
     @Override
     public String toJava() {
         return "(" + arg(0) + "+" + arg(1) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

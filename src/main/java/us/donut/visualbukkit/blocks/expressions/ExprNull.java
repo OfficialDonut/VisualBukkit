@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"An empty value", "Returns: null"})
-public class ExprNull extends ExpressionBlock {
+public class ExprNull extends ExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -15,10 +15,5 @@ public class ExprNull extends ExpressionBlock {
     @Override
     public String toJava() {
         return "((Object) null)";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 }

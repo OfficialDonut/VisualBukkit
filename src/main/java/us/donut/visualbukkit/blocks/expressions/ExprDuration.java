@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import java.time.Duration;
 
 @Description({"A duration of time", "Returns: duration"})
-public class ExprDuration extends ExpressionBlock {
+public class ExprDuration extends ExpressionBlock<Duration> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprDuration extends ExpressionBlock {
         return unit.equals("ticks") ?
                 "java.time.Duration.ofMillis(" + arg(0) + "*50)" :
                 "java.time.Duration.of" + WordUtils.capitalize(unit) + "(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Duration.class;
     }
 }

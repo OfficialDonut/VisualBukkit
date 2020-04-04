@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The gravity state of an entity", "Returns: boolean"})
-public class ExprGravityState extends ChangeableExpressionBlock {
+public class ExprGravityState extends ChangeableExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprGravityState extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setGravity(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

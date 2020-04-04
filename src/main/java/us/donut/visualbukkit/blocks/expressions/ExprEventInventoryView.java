@@ -11,7 +11,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 @Category("Inventory")
 @Description({"The inventory view involved in an event", "Returns: inventory view"})
 @Event(InventoryEvent.class)
-public class ExprEventInventoryView extends ExpressionBlock {
+public class ExprEventInventoryView extends ExpressionBlock<InventoryView> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,10 +21,5 @@ public class ExprEventInventoryView extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getInventoryView()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return InventoryView.class;
     }
 }

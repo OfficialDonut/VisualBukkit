@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The plugin config", "Returns: config"})
-public class ExprPluginConfig extends ExpressionBlock {
+public class ExprPluginConfig extends ExpressionBlock<FileConfiguration> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprPluginConfig extends ExpressionBlock {
     @Override
     public String toJava() {
         return "getConfig()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return FileConfiguration.class;
     }
 }

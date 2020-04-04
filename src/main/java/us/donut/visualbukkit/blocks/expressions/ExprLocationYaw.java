@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Location")
 @Description({"The yaw of a location", "Returns: number"})
-public class ExprLocationYaw extends ChangeableExpressionBlock {
+public class ExprLocationYaw extends ChangeableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprLocationYaw extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return float.class;
     }
 }

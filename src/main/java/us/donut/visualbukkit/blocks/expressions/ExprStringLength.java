@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"The length of a string", "Returns: number"})
-public class ExprStringLength extends ExpressionBlock {
+public class ExprStringLength extends ExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprStringLength extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".length()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

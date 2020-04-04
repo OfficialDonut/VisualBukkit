@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Makes a string all uppercase", "Returns: string"})
-public class ExprUppercaseString extends ExpressionBlock {
+public class ExprUppercaseString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprUppercaseString extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".toUpperCase()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

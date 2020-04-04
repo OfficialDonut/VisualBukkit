@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The item stack in the leggings slot of a player", "Returns: item stack"})
-public class ExprPlayerLeggings extends ChangeableExpressionBlock {
+public class ExprPlayerLeggings extends ChangeableExpressionBlock<ItemStack> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,10 +25,5 @@ public class ExprPlayerLeggings extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".getInventory().setLeggings(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return ItemStack.class;
     }
 }

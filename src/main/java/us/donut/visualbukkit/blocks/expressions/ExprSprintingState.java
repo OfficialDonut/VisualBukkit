@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The sprinting state of a player", "Returns: boolean"})
-public class ExprSprintingState extends ChangeableExpressionBlock {
+public class ExprSprintingState extends ChangeableExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprSprintingState extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setSprinting(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

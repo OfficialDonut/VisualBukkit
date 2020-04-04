@@ -11,7 +11,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"A custom string", "Returns: string"})
-public class ExprString extends ExpressionBlock {
+public class ExprString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -26,10 +26,5 @@ public class ExprString extends ExpressionBlock {
     @Override
     public String toJava() {
         return "\"" + StringEscapeUtils.escapeJava(arg(0)) + "\"";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

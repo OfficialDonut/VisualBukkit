@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"Checks if a player can see another player", "Returns: booleab"})
+@Description({"Checks if a player can see another player", "Returns: boolean"})
 public class ExprCanSee extends ConditionBlock {
 
     @Override

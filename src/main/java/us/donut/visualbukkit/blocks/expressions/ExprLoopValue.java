@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.editor.BlockPane;
 
 @Description({"The current element of a list being looped", "Returns: object"})
-public class ExprLoopValue extends ExpressionBlock {
+public class ExprLoopValue extends ExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -27,11 +27,6 @@ public class ExprLoopValue extends ExpressionBlock {
             return "new Integer(loopIndex" + getNestedLoops() + ")";
         }
         throw new IllegalStateException();
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 
     private int getNestedLoops() {

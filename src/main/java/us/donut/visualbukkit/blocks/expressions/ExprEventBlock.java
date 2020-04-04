@@ -11,7 +11,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 @Category("Block")
 @Description({"The block involved in an event", "Returns: block"})
 @Event(BlockEvent.class)
-public class ExprEventBlock extends ExpressionBlock {
+public class ExprEventBlock extends ExpressionBlock<Block> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,10 +21,5 @@ public class ExprEventBlock extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getBlock()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Block.class;
     }
 }

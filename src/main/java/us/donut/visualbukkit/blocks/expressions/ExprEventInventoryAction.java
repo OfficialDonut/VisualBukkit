@@ -12,7 +12,7 @@ import us.donut.visualbukkit.editor.EventPane;
 @Category("Inventory")
 @Description({"The action in an InventoryClickEvent", "Returns: inventory action"})
 @Event(InventoryClickEvent.class)
-public class ExprEventInventoryAction extends ExpressionBlock {
+public class ExprEventInventoryAction extends ExpressionBlock<InventoryAction> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,10 +25,5 @@ public class ExprEventInventoryAction extends ExpressionBlock {
             return "event.getAction()";
         }
         throw new IllegalStateException();
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return InventoryAction.class;
     }
 }

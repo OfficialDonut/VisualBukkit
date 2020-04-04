@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The glowing state of an entity", "Returns: boolean"})
-public class ExprGlowingState extends ChangeableExpressionBlock {
+public class ExprGlowingState extends ChangeableExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprGlowingState extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setGlowing(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

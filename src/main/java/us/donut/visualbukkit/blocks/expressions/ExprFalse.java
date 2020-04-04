@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"False boolean", "Returns: boolean"})
-public class ExprFalse extends ExpressionBlock {
+public class ExprFalse extends ExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -15,10 +15,5 @@ public class ExprFalse extends ExpressionBlock {
     @Override
     public String toJava() {
         return "false";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

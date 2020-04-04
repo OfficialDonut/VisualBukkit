@@ -11,7 +11,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"The item stacks dropped in an EntityDeathEvent", "Returns: list of item stacks"})
 @Event(EntityDeathEvent.class)
-public class ExprDeathDrops extends ChangeableExpressionBlock {
+public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -35,10 +35,5 @@ public class ExprDeathDrops extends ChangeableExpressionBlock {
     @Override
     public Class<?> getDeltaType(ChangeType changeType) {
         return ItemStack.class;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

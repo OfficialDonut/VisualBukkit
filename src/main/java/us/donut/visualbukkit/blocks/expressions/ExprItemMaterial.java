@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Description({"An item material", "Returns: material"})
-public class ExprItemMaterial extends EnumBlock {
+public class ExprItemMaterial extends EnumBlock<Material> {
 
     @Override
     protected String[] computeConstants() {
@@ -19,10 +19,5 @@ public class ExprItemMaterial extends EnumBlock {
             }
         }
         return materials.toArray(new String[0]);
-    }
-
-    @Override
-    public Class<? extends Enum<?>> getEnum() {
-        return Material.class;
     }
 }

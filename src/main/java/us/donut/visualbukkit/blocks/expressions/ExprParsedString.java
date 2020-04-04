@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"Converts a string to a type", "Returns: object"})
-public class ExprParsedString extends ExpressionBlock {
+public class ExprParsedString extends ExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprParsedString extends ExpressionBlock {
     @Override
     public String toJava() {
         return TypeHandler.getStringParsers().get(arg(1)).apply(arg(0));
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 }

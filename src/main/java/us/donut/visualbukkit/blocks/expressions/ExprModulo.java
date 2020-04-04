@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Math")
 @Description({"The remainder after dividing a number by another", "Returns: number"})
-public class ExprModulo extends ExpressionBlock {
+public class ExprModulo extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprModulo extends ExpressionBlock {
     @Override
     public String toJava() {
         return "(" + arg(0) + "%" + arg(1) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

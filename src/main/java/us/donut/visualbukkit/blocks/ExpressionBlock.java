@@ -5,7 +5,7 @@ import javafx.scene.control.MenuItem;
 import us.donut.visualbukkit.blocks.expressions.ExprStringConcatenation;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 
-public abstract class ExpressionBlock extends CodeBlock {
+public abstract class ExpressionBlock<T> extends CodeBlock {
 
     public ExpressionBlock() {
         setOnMouseMoved(e -> {
@@ -47,5 +47,7 @@ public abstract class ExpressionBlock extends CodeBlock {
         });
     }
 
-    public abstract Class<?> getReturnType();
+    public Class<?> getReturnType() {
+        return BlockRegistry.getInfo(this).getReturnType();
+    }
 }

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The world involved in an event", "Returns: world"})
 @Event(WorldEvent.class)
-public class ExprEventWorld extends ExpressionBlock {
+public class ExprEventWorld extends ExpressionBlock<World> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprEventWorld extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getWorld()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return World.class;
     }
 }

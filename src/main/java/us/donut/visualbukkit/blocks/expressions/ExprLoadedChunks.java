@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"The loaded chunks of a world", "Returns: list of chunks"})
-public class ExprLoadedChunks extends ExpressionBlock {
+public class ExprLoadedChunks extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprLoadedChunks extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(" + arg(0) + ".getLoadedChunks())";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

@@ -11,7 +11,7 @@ import us.donut.visualbukkit.util.SimpleList;
 import java.util.StringJoiner;
 
 @Description({"A list of objects", "Returns: list"})
-public class ExprList extends ExpressionBlock {
+public class ExprList extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -52,11 +52,6 @@ public class ExprList extends ExpressionBlock {
     public void load(ConfigurationSection section) throws Exception {
         setSize(section.getInt("size"));
         super.load(section);
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 
     private void setSize(int size) {

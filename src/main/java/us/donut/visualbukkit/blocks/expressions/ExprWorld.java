@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"A world on the server", "Returns: world"})
-public class ExprWorld extends ExpressionBlock {
+public class ExprWorld extends ExpressionBlock<World> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprWorld extends ExpressionBlock {
     @Override
     public String toJava() {
         return "Bukkit.getWorld(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return World.class;
     }
 }

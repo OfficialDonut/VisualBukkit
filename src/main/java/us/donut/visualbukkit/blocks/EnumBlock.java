@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class EnumBlock extends ExpressionBlock {
+public abstract class EnumBlock<T extends Enum<?>> extends ExpressionBlock<T> {
 
     private static Map<Class<? extends Enum<?>>, String[]> constants = new HashMap<>();
 
@@ -29,10 +29,8 @@ public abstract class EnumBlock extends ExpressionBlock {
         return getEnum().getCanonicalName() + "." + arg(0);
     }
 
-    @Override
-    public final Class<?> getReturnType() {
-        return getEnum();
+    @SuppressWarnings("unchecked")
+    public final Class<? extends Enum<?>> getEnum() {
+        return (Class<? extends Enum<?>>) getReturnType();
     }
-
-    public abstract Class<? extends Enum<?>> getEnum();
 }

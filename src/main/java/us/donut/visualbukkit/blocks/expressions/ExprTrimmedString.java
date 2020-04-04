@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Removes leading and trailing whitespace from a string", "Returns: string"})
-public class ExprTrimmedString extends ExpressionBlock {
+public class ExprTrimmedString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprTrimmedString extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".trim()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

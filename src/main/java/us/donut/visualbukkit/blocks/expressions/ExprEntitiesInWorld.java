@@ -9,7 +9,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Entity")
 @Description({"The entities in a world", "Returns: list of entities"})
-public class ExprEntitiesInWorld extends ExpressionBlock {
+public class ExprEntitiesInWorld extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprEntitiesInWorld extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(" + arg(0) + ".getEntities())";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

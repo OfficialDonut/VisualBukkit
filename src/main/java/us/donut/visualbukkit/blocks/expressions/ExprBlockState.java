@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Block")
 @Description({"The state of a block", "Returns: block state"})
-public class ExprBlockState extends ExpressionBlock {
+public class ExprBlockState extends ExpressionBlock<BlockState> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprBlockState extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getState()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return BlockState.class;
     }
 }

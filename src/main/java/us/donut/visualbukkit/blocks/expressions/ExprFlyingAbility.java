@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The flying ability of a player", "Returns: boolean"})
-public class ExprFlyingAbility extends ChangeableExpressionBlock {
+public class ExprFlyingAbility extends ChangeableExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprFlyingAbility extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setAllowFlight(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

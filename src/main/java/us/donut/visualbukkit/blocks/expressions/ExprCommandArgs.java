@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"The arguments of the command", "Returns: list of strings"})
-public class ExprCommandArgs extends ExpressionBlock {
+public class ExprCommandArgs extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprCommandArgs extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(commandArgs)";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

@@ -121,7 +121,7 @@ public class SelectorPane extends VBox implements BlockContainer {
                 }
             }
 
-            VBox vBox = StatementBlock.class.isAssignableFrom(blockInfo.getType()) ? statementBox : expressionBox;
+            VBox vBox = StatementBlock.class.isAssignableFrom(blockInfo.getBlockType()) ? statementBox : expressionBox;
             int i = 1 + vBox.getChildren()
                     .filtered(node -> node instanceof BlockInfo.Node && blockInfo.getName().compareTo(((BlockInfo<?>.Node) node).getText()) > 0)
                     .size();
@@ -139,7 +139,7 @@ public class SelectorPane extends VBox implements BlockContainer {
                 ExpressionParameter expressionParameter = (ExpressionParameter) parent;
                 expressionParameter.setExpression(null);
                 valid = PluginBuilder.isCodeValid(blockPane);
-                expressionParameter.setExpression((ExpressionBlock) block);
+                expressionParameter.setExpression((ExpressionBlock<?>) block);
             } else {
                 int currentIndex = parent.getChildren().indexOf(block);
                 parent.getChildren().remove(block);

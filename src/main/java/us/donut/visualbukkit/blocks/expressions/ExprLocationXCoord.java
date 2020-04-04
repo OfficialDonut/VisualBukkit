@@ -11,7 +11,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 @Name("Location X-Coord")
 @Category("Location")
 @Description({"The x-coord of a location", "Returns: number"})
-public class ExprLocationXCoord extends ChangeableExpressionBlock {
+public class ExprLocationXCoord extends ChangeableExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -31,10 +31,5 @@ public class ExprLocationXCoord extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

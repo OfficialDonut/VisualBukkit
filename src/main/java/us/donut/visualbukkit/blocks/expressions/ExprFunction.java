@@ -17,7 +17,7 @@ import java.util.StringJoiner;
 
 @Name("Function Value")
 @Description("The return value of a function")
-public class ExprFunction extends ExpressionBlock {
+public class ExprFunction extends ExpressionBlock<Object> {
 
     private FunctionPane function;
 
@@ -77,11 +77,6 @@ public class ExprFunction extends ExpressionBlock {
             }
         }
         super.load(section);
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 
     public FunctionPane getFunction() {

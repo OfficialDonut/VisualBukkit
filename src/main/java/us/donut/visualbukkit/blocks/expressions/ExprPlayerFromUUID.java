@@ -12,7 +12,7 @@ import java.util.UUID;
 @Name("Player From UUID")
 @Category("Player")
 @Description({"The player with the given UUID", "Returns: player"})
-public class ExprPlayerFromUUID extends ExpressionBlock {
+public class ExprPlayerFromUUID extends ExpressionBlock<Player> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprPlayerFromUUID extends ExpressionBlock {
     @Override
     public String toJava() {
         return "Bukkit.getPlayer(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Player.class;
     }
 }

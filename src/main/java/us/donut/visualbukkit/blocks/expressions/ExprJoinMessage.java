@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The join message in a PlayerJoinEvent", "Returns: string"})
 @Event(PlayerJoinEvent.class)
-public class ExprJoinMessage extends ChangeableExpressionBlock {
+public class ExprJoinMessage extends ChangeableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprJoinMessage extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? "event.setJoinMessage(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Location")
 @Description({"The distance between two locations", "Returns: number"})
-public class ExprLocationDistance extends ExpressionBlock {
+public class ExprLocationDistance extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprLocationDistance extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".distance(" + arg(1) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

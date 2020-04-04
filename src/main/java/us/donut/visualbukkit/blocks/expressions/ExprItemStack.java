@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Item Stack")
 @Description({"An item stack", "Returns: item stack"})
-public class ExprItemStack extends ExpressionBlock {
+public class ExprItemStack extends ExpressionBlock<ItemStack> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprItemStack extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new ItemStack(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return ItemStack.class;
     }
 }

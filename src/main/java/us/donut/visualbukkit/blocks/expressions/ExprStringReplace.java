@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Replaces all occurrences of a string in a string with another string", "Returns: string"})
-public class ExprStringReplace extends ExpressionBlock {
+public class ExprStringReplace extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprStringReplace extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(1) + ".replace(" + arg(0) + "," + arg(2) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

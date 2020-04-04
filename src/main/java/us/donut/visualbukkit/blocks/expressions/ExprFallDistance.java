@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The distance an entity has fallen", "Returns: number"})
-public class ExprFallDistance extends ChangeableExpressionBlock {
+public class ExprFallDistance extends ChangeableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprFallDistance extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return float.class;
     }
 }

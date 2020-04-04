@@ -12,7 +12,7 @@ import java.util.UUID;
 @Name("Offline Player From UUID")
 @Category("Player")
 @Description({"The offline player with the given UUID", "Returns: offline player"})
-public class ExprOfflinePlayerFromUUID extends ExpressionBlock {
+public class ExprOfflinePlayerFromUUID extends ExpressionBlock<OfflinePlayer> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprOfflinePlayerFromUUID extends ExpressionBlock {
     @Override
     public String toJava() {
         return "Bukkit.getOfflinePlayer(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return OfflinePlayer.class;
     }
 }

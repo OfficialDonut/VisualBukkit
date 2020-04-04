@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The compass target of a player", "Returns: location"})
-public class ExprCompassTarget extends ChangeableExpressionBlock {
+public class ExprCompassTarget extends ChangeableExpressionBlock<Location> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,10 +25,5 @@ public class ExprCompassTarget extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return arg(0) + ".setCompassTarget(" + delta + ");";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Location.class;
     }
 }

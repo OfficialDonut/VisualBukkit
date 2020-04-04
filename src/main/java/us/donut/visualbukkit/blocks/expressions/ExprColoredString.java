@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Colors a string", "Returns: string"})
-public class ExprColoredString extends ExpressionBlock {
+public class ExprColoredString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprColoredString extends ExpressionBlock {
     @Override
     public String toJava() {
         return "color(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

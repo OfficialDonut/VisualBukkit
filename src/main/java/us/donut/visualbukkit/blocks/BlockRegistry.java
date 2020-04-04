@@ -25,8 +25,8 @@ public class BlockRegistry {
                 if (CodeBlock.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
                     Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
                     BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
-                    blockInfo.createBlock();
                     blockTypes.put(blockType, blockInfo);
+                    blockInfo.createBlock();
                 }
             }
         } catch (IOException e) {

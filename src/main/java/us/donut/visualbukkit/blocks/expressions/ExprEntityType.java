@@ -7,10 +7,5 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 
 @Category("Entity")
 @Description({"An entity type", "Returns: entity type"})
-public class ExprEntityType extends EnumBlock {
-
-    @Override
-    public Class<? extends Enum<?>> getEnum() {
-        return EntityType.class;
-    }
+public class ExprEntityType extends EnumBlock<EntityType> {
 }

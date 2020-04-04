@@ -5,10 +5,5 @@ import us.donut.visualbukkit.blocks.EnumBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 
 @Description({"An equipment slot", "Returns: equipment slot"})
-public class ExprEquipmentSlot extends EnumBlock {
-
-    @Override
-    public Class<? extends Enum<?>> getEnum() {
-        return EquipmentSlot.class;
-    }
+public class ExprEquipmentSlot extends EnumBlock<EquipmentSlot> {
 }

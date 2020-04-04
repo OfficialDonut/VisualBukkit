@@ -19,7 +19,7 @@ public class StatDelete extends StatementBlock {
 
     @Override
     public String toJava() {
-        ChangeableExpressionBlock deleteExpr = (ChangeableExpressionBlock) ((ExpressionParameter) getParameter(0)).getExpression();
+        ChangeableExpressionBlock<?> deleteExpr = (ChangeableExpressionBlock<?>) ((ExpressionParameter) getParameter(0)).getExpression();
         String java = deleteExpr.change(ChangeType.DELETE, null);
         if (java != null) {
             return java;

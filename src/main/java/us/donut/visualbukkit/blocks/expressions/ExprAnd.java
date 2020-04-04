@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"Checks if two booleans are both true", "Returns: boolean"})
-public class ExprAnd extends ExpressionBlock {
+public class ExprAnd extends ExpressionBlock<Boolean> {
 
     @Override
     protected SyntaxNode init() {
@@ -15,10 +15,5 @@ public class ExprAnd extends ExpressionBlock {
     @Override
     public String toJava() {
         return "(" + arg(0) + "&&" + arg(1) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return boolean.class;
     }
 }

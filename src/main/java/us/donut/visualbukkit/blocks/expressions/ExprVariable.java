@@ -11,7 +11,7 @@ import us.donut.visualbukkit.util.CenteredHBox;
 import java.util.StringJoiner;
 
 @Description({"A variable", "Returns: object"})
-public class ExprVariable extends ChangeableExpressionBlock {
+public class ExprVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -57,11 +57,6 @@ public class ExprVariable extends ChangeableExpressionBlock {
     public void load(ConfigurationSection section) throws Exception {
         setNumArgs(section.getInt("num-args"));
         super.load(section);
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 
     private void setNumArgs(int num) {

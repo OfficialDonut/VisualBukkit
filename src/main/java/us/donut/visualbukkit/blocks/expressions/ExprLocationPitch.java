@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Location")
 @Description({"The pitch of a location", "Returns: number"})
-public class ExprLocationPitch extends ChangeableExpressionBlock {
+public class ExprLocationPitch extends ChangeableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprLocationPitch extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return float.class;
     }
 }

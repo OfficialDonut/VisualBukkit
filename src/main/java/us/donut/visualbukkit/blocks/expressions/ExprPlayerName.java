@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The name of a player", "Returns: string"})
-public class ExprPlayerName extends ExpressionBlock {
+public class ExprPlayerName extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprPlayerName extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getName()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

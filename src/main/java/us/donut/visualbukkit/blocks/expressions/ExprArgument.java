@@ -8,7 +8,7 @@ import us.donut.visualbukkit.editor.FunctionPane;
 import us.donut.visualbukkit.editor.ProcedurePane;
 
 @Description("An argument of a procedure or function")
-public class ExprArgument extends ExpressionBlock {
+public class ExprArgument extends ExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprArgument extends ExpressionBlock {
             return "args[" + arg(0) + "]";
         }
         throw new IllegalStateException();
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 }

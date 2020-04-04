@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Converts an object to a string", "Returns: string"})
-public class ExprToString extends ExpressionBlock {
+public class ExprToString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprToString extends ExpressionBlock {
     @Override
     public String toJava() {
         return "getString(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

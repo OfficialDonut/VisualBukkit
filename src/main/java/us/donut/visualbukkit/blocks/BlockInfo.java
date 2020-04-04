@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.blocks;
 
+import com.google.gson.internal.Primitives;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import org.apache.commons.lang.WordUtils;
@@ -10,39 +11,63 @@ import us.donut.visualbukkit.blocks.annotations.Name;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class BlockInfo<T extends CodeBlock> {
 
-    private Class<T> type;
+    private Class<T> blockType;
     private Constructor<T> constructor;
     private String name;
     private String description;
     private String[] categories;
     private Class<?>[] events;
+    private Class<?> returnType;
 
-    public BlockInfo(Class<T> type) {
-        this.type = type;
+    public BlockInfo(Class<T> blockType) {
+        this.blockType = blockType;
 
         try {
-            constructor = type.getDeclaredConstructor();
+            constructor = blockType.getDeclaredConstructor();
         } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("No constructor for " + type.getCanonicalName(), e);
+            throw new IllegalArgumentException("No constructor for " + blockType.getCanonicalName(), e);
         }
 
-        name = type.isAnnotationPresent(Name.class) ?
-                type.getAnnotation(Name.class).value() :
-                WordUtils.capitalize(TypeHandler.getUserFriendlyName(type).replaceFirst(".+? ", ""));
+        name = blockType.isAnnotationPresent(Name.class) ?
+                blockType.getAnnotation(Name.class).value() :
+                WordUtils.capitalize(TypeHandler.getUserFriendlyName(blockType).replaceFirst(".+? ", ""));
 
-        if (type.isAnnotationPresent(Description.class)) {
-            description = String.join("\n", type.getAnnotation(Description.class).value());
+        if (blockType.isAnnotationPresent(Description.class)) {
+            description = String.join("\n", blockType.getAnnotation(Description.class).value());
         }
 
-        if (type.isAnnotationPresent(Category.class)) {
-            categories = type.getAnnotation(Category.class).value();
+        if (blockType.isAnnotationPresent(Category.class)) {
+            categories = blockType.getAnnotation(Category.class).value();
         }
 
-        if (type.isAnnotationPresent(Event.class)) {
-            events = type.getAnnotation(Event.class).value();
+        if (blockType.isAnnotationPresent(Event.class)) {
+            events = blockType.getAnnotation(Event.class).value();
+        }
+
+        if (ExpressionBlock.class.isAssignableFrom(blockType)) {
+            Class<?> clazz = blockType;
+            while (clazz != null && clazz != ExpressionBlock.class) {
+                if (clazz.getGenericSuperclass() instanceof ParameterizedType) {
+                    Type type = ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
+                    if (type instanceof Class) {
+                        returnType = (Class<?>) type;
+                        break;
+                    }
+                }
+                clazz = clazz.getSuperclass();
+            }
+            if (returnType != null) {
+                if (Primitives.isWrapperType(returnType)) {
+                    returnType = Primitives.unwrap(returnType);
+                }
+            } else {
+                throw new IllegalStateException("Missing return type for " + blockType.getCanonicalName());
+            }
         }
     }
 
@@ -58,12 +83,8 @@ public class BlockInfo<T extends CodeBlock> {
         }
     }
 
-    public Class<T> getType() {
-        return type;
-    }
-
-    public Constructor<T> getConstructor() {
-        return constructor;
+    public Class<T> getBlockType() {
+        return blockType;
     }
 
     public String getName() {
@@ -80,6 +101,10 @@ public class BlockInfo<T extends CodeBlock> {
 
     public Class<?>[] getEvents() {
         return events;
+    }
+
+    public Class<?> getReturnType() {
+        return returnType;
     }
 
     public class Node extends Label {

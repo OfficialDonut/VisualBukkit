@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Inventory")
 @Description("The size of an inventory")
-public class ExprInventorySize extends ExpressionBlock {
+public class ExprInventorySize extends ExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprInventorySize extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getSize()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

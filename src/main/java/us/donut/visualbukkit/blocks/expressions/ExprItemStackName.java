@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Item Stack")
 @Description({"The name of an item stack", "Returns: string"})
-public class ExprItemStackName extends ChangeableExpressionBlock {
+public class ExprItemStackName extends ChangeableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -32,10 +32,5 @@ public class ExprItemStackName extends ChangeableExpressionBlock {
                     itemStackVar + ".setItemMeta(" + itemMetaVar + ");";
         }
         return null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

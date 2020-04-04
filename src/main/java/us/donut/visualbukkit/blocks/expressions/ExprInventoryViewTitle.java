@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Inventory")
 @Description({"The title of an inventory view", "Returns: string"})
-public class ExprInventoryViewTitle extends ExpressionBlock {
+public class ExprInventoryViewTitle extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprInventoryViewTitle extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getTitle()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

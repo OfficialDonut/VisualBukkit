@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Block")
 @Description({"The material of a block", "Returns: material"})
-public class ExprMaterialOfBlock extends ChangeableExpressionBlock {
+public class ExprMaterialOfBlock extends ChangeableExpressionBlock<Material> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,10 +25,5 @@ public class ExprMaterialOfBlock extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setType(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Material.class;
     }
 }

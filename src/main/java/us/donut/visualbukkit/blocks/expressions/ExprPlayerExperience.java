@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The experience points of a player", "Returns: number"})
-public class ExprPlayerExperience extends ChangeableExpressionBlock {
+public class ExprPlayerExperience extends ChangeableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprPlayerExperience extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return float.class;
     }
 }

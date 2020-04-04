@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 @Category("Inventory")
 @Description({"The clicked slot in an InventoryClickEvent", "Returns: number"})
 @Event(InventoryClickEvent.class)
-public class ExprClickedSlot extends ExpressionBlock {
+public class ExprClickedSlot extends ExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -20,10 +20,5 @@ public class ExprClickedSlot extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getSlot()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

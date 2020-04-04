@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"The size of a list", "Returns: number"})
-public class ExprListSize extends ExpressionBlock {
+public class ExprListSize extends ExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprListSize extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".size()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

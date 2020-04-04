@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Math")
 @Description({"The quotient of two numbers", "Returns: number"})
-public class ExprDivision extends ExpressionBlock {
+public class ExprDivision extends ExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprDivision extends ExpressionBlock {
     @Override
     public String toJava() {
         return "(" + arg(0) + "/" + arg(1) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

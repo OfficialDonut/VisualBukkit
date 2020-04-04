@@ -5,10 +5,5 @@ import us.donut.visualbukkit.blocks.EnumBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 
 @Description({"A block face", "Returns: block face"})
-public class ExprBlockFace extends EnumBlock {
-
-    @Override
-    public Class<? extends Enum<?>> getEnum() {
-        return BlockFace.class;
-    }
+public class ExprBlockFace extends EnumBlock<BlockFace> {
 }

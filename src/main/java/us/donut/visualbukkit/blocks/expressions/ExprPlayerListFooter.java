@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The displayed player list footer for a player", "Returns: string"})
-public class ExprPlayerListFooter extends ChangeableExpressionBlock {
+public class ExprPlayerListFooter extends ChangeableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprPlayerListFooter extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setPlayerListFooter(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category({"Entity", "Location"})
 @Description({"The location of an entity", "Returns: location"})
-public class ExprEntityLocation extends ExpressionBlock {
+public class ExprEntityLocation extends ExpressionBlock<Location> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprEntityLocation extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getLocation()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Location.class;
     }
 }

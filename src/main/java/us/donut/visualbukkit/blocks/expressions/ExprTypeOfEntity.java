@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The type of an entity", "Returns: entity type"})
-public class ExprTypeOfEntity extends ExpressionBlock {
+public class ExprTypeOfEntity extends ExpressionBlock<EntityType> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprTypeOfEntity extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getType()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return EntityType.class;
     }
 }

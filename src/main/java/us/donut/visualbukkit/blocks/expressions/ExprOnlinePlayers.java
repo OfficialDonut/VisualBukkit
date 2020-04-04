@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"All online players", "Returns: list of players"})
-public class ExprOnlinePlayers extends ExpressionBlock {
+public class ExprOnlinePlayers extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprOnlinePlayers extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(Bukkit.getOnlinePlayers())";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

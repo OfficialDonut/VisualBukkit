@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"A value in a config", "Returns: object"})
-public class ExprConfigValue extends ChangeableExpressionBlock {
+public class ExprConfigValue extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,10 +22,5 @@ public class ExprConfigValue extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(1) + ".set(" + arg(0) + "," + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Object.class;
     }
 }

@@ -11,7 +11,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"The message recipients in an AsyncPlayerChatEvent", "Returns: list of players"})
 @Event(AsyncPlayerChatEvent.class)
-public class ExprMessageRecipients extends ChangeableExpressionBlock {
+public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -35,10 +35,5 @@ public class ExprMessageRecipients extends ChangeableExpressionBlock {
     @Override
     public Class<?> getDeltaType(ChangeType changeType) {
         return Player.class;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

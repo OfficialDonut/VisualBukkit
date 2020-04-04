@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The highest block at a location", "Returns: block"})
-public class ExprHighestBlock extends ExpressionBlock {
+public class ExprHighestBlock extends ExpressionBlock<Block> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprHighestBlock extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getWorld().getHighestBlockAt(" + arg(0) + ")";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Block.class;
     }
 }

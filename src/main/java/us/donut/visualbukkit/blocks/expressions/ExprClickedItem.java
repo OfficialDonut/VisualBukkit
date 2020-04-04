@@ -12,7 +12,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 @Category("Inventory")
 @Description({"The clicked item in an InventoryClickEvent", "Returns: item stack"})
 @Event(InventoryClickEvent.class)
-public class ExprClickedItem extends ChangeableExpressionBlock {
+public class ExprClickedItem extends ChangeableExpressionBlock<Inventory> {
 
     @Override
     protected SyntaxNode init() {
@@ -27,10 +27,5 @@ public class ExprClickedItem extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? "event.setCurrentItem(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Inventory.class;
     }
 }

@@ -15,14 +15,14 @@ import java.util.List;
 public class ExpressionParameter extends VBox implements BlockParameter, BlockContainer {
 
     private Class<?> returnType;
-    private ExpressionBlock expression;
-    private EmptyExpressionBlock emptyExprBlock;
+    private ExpressionBlock<?> expression;
+    private EmptyExpressionBlock<?> emptyExprBlock;
     private Text emptyText;
 
     public ExpressionParameter(Class<?> returnType) {
         getStyleClass().add("expression-parameter-empty");
         this.returnType = returnType;
-        emptyExprBlock = new EmptyExpressionBlock(returnType);
+        emptyExprBlock = new EmptyExpressionBlock<>(returnType);
         getChildren().add(emptyText = new Text("<" + TypeHandler.getUserFriendlyName(returnType) + ">"));
         DragManager.enableBlockContainer(this);
         MenuItem pasteItem = new MenuItem("Paste");
@@ -41,8 +41,8 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         boolean valid = false;
         if (block instanceof ExpressionBlock) {
             ExpressionParameter parent = (ExpressionParameter) block.getParent();
-            ExpressionBlock newExpression = (ExpressionBlock) block;
-            ExpressionBlock currentExpression = getExpression();
+            ExpressionBlock<?> newExpression = (ExpressionBlock<?>) block;
+            ExpressionBlock<?> currentExpression = getExpression();
             if (parent != null) {
                 parent.setExpression(null);
             }
@@ -63,11 +63,11 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         if (parent != null) {
             parent.setExpression(null);
         }
-        setExpression((ExpressionBlock) block);
+        setExpression((ExpressionBlock<?>) block);
         Platform.runLater(block::onDragDrop);
     }
 
-    public void setExpression(ExpressionBlock expression) {
+    public void setExpression(ExpressionBlock<?> expression) {
         getChildren().clear();
         if (expression == null || expression instanceof EmptyExpressionBlock) {
             this.expression = null;
@@ -99,9 +99,10 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     public void load(ConfigurationSection section) throws Exception {
         String className = section.getString("block-type");
         if (className != null) {
-            Class<? extends ExpressionBlock> blockType = (Class<? extends ExpressionBlock>) Class.forName(className);
-            if (blockType != EmptyExpressionBlock.class) {
-                ExpressionBlock expression = BlockRegistry.getInfo(blockType).createBlock();
+            Class<? extends ExpressionBlock<?>> blockType = (Class<? extends ExpressionBlock<?>>) Class.forName(className);
+            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
+            if (blockInfo != null) {
+                ExpressionBlock<?> expression = (ExpressionBlock<?>) blockInfo.createBlock();
                 expression.load(section);
                 setExpression(expression);
             }
@@ -109,7 +110,7 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     }
 
     @Override
-    public List<ExpressionBlock> getBlocks(boolean ignoreDisabled) {
+    public List<ExpressionBlock<?>> getBlocks(boolean ignoreDisabled) {
         return expression == null ? Collections.emptyList() : Collections.singletonList(expression);
     }
 
@@ -117,7 +118,7 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         return returnType;
     }
 
-    public ExpressionBlock getExpression() {
+    public ExpressionBlock<?> getExpression() {
         return expression != null ? expression : emptyExprBlock;
     }
 }

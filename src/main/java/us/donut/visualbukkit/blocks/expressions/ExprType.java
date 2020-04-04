@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"An object type", "Returns: type"})
-public class ExprType extends ExpressionBlock {
+public class ExprType extends ExpressionBlock<Class> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprType extends ExpressionBlock {
     @Override
     public String toJava() {
         return TypeHandler.getType(arg(0)).getCanonicalName() + ".class";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Class.class;
     }
 }

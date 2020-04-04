@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The executor of the command", "Returns: command sender"})
-public class ExprCommandSender extends ExpressionBlock {
+public class ExprCommandSender extends ExpressionBlock<CommandSender> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprCommandSender extends ExpressionBlock {
     @Override
     public String toJava() {
         return "sender";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return CommandSender.class;
     }
 }

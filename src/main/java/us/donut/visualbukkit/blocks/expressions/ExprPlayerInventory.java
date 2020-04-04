@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category({"Player", "Inventory"})
 @Description({"The inventory of a player", "Returns: player inventory"})
-public class ExprPlayerInventory extends ExpressionBlock {
+public class ExprPlayerInventory extends ExpressionBlock<PlayerInventory> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprPlayerInventory extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getInventory()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return PlayerInventory.class;
     }
 }

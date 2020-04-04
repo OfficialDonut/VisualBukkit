@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
 @Description({"The health scale of a player", "Returns: number"})
-public class ExprHealthScale extends ChangeableExpressionBlock {
+public class ExprHealthScale extends ChangeableExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprHealthScale extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return double.class;
     }
 }

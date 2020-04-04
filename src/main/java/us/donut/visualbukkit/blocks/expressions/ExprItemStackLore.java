@@ -10,7 +10,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Item Stack")
 @Description({"The lore of an item stack", "Returns: list of strings"})
-public class ExprItemStackLore extends ChangeableExpressionBlock {
+public class ExprItemStackLore extends ChangeableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -33,10 +33,5 @@ public class ExprItemStackLore extends ChangeableExpressionBlock {
                     itemStackVar + ".setItemMeta(" + itemMetaVar + ");";
         }
         return null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

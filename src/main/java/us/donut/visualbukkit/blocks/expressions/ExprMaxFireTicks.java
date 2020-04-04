@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The max fire ticks of an entity", "Returns: number"})
-public class ExprMaxFireTicks extends ChangeableExpressionBlock {
+public class ExprMaxFireTicks extends ChangeableExpressionBlock<Integer> {
 
     @Override
     protected SyntaxNode init() {
@@ -29,10 +29,5 @@ public class ExprMaxFireTicks extends ChangeableExpressionBlock {
             case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
             default: return null;
         }
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return int.class;
     }
 }

@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Description({"All worlds", "Returns: list of worlds"})
-public class ExprWorlds extends ExpressionBlock {
+public class ExprWorlds extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprWorlds extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(Bukkit.getWorlds())";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

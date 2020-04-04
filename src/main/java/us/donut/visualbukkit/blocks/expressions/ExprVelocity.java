@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The velocity of an entity", "Returns: vector"})
-public class ExprVelocity extends ChangeableExpressionBlock {
+public class ExprVelocity extends ChangeableExpressionBlock<Vector> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,10 +25,5 @@ public class ExprVelocity extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? arg(0) + ".setVelocity(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Vector.class;
     }
 }

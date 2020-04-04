@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
 @Description({"The vehicle of an entity", "Returns: entity"})
-public class ExprEntityVehicle extends ExpressionBlock {
+public class ExprEntityVehicle extends ExpressionBlock<Entity> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,10 +18,5 @@ public class ExprEntityVehicle extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".getVehicle()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Entity.class;
     }
 }

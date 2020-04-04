@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("String")
 @Description({"Makes a string all lowercase", "Returns: string"})
-public class ExprLowercaseString extends ExpressionBlock {
+public class ExprLowercaseString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,10 +17,5 @@ public class ExprLowercaseString extends ExpressionBlock {
     @Override
     public String toJava() {
         return arg(0) + ".toLowerCase()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

@@ -17,8 +17,8 @@ public class StatSet extends StatementBlock {
 
     @Override
     public String toJava() {
-        ChangeableExpressionBlock changeable = (ChangeableExpressionBlock) ((ExpressionParameter) getParameter(0)).getExpression();
-        ExpressionBlock deltaExpr = ((ExpressionParameter) getParameter(1)).getExpression();
+        ChangeableExpressionBlock<?> changeable = (ChangeableExpressionBlock<?>) ((ExpressionParameter) getParameter(0)).getExpression();
+        ExpressionBlock<?> deltaExpr = ((ExpressionParameter) getParameter(1)).getExpression();
         String delta = TypeHandler.convert(deltaExpr.getReturnType(), changeable.getDeltaType(ChangeType.SET), deltaExpr.toJava());
         String java = changeable.change(ChangeType.SET, delta);
         if (java != null) {

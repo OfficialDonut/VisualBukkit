@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The message format in an AsyncPlayerChatEvent", "Returns: string"})
 @Event(AsyncPlayerChatEvent.class)
-public class ExprMessageFormat extends ChangeableExpressionBlock {
+public class ExprMessageFormat extends ChangeableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,10 +24,5 @@ public class ExprMessageFormat extends ChangeableExpressionBlock {
     @Override
     public String change(ChangeType changeType, String delta) {
         return changeType == ChangeType.SET ? "event.setFormat(" + delta + ");" : null;
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return String.class;
     }
 }

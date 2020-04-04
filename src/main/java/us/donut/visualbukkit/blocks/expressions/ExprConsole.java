@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The server console", "Returns: console command sender"})
-public class ExprConsole extends ExpressionBlock {
+public class ExprConsole extends ExpressionBlock<ConsoleCommandSender> {
 
     @Override
     protected SyntaxNode init() {
@@ -16,10 +16,5 @@ public class ExprConsole extends ExpressionBlock {
     @Override
     public String toJava() {
         return "Bukkit.getConsoleSender()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return ConsoleCommandSender.class;
     }
 }

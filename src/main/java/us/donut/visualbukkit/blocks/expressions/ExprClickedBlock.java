@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description({"The clicked block in a PlayerInteractEvent", "Returns: block"})
 @Event(PlayerInteractEvent.class)
-public class ExprClickedBlock extends ExpressionBlock {
+public class ExprClickedBlock extends ExpressionBlock<Block> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprClickedBlock extends ExpressionBlock {
     @Override
     public String toJava() {
         return "event.getClickedBlock()";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return Block.class;
     }
 }

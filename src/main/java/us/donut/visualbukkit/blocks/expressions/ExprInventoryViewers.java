@@ -9,7 +9,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Inventory")
 @Description({"The viewers of an inventory", "Returns: list of human entities"})
-public class ExprInventoryViewers extends ExpressionBlock {
+public class ExprInventoryViewers extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,10 +19,5 @@ public class ExprInventoryViewers extends ExpressionBlock {
     @Override
     public String toJava() {
         return "new SimpleList(" + arg(0) + ".getViewers())";
-    }
-
-    @Override
-    public Class<?> getReturnType() {
-        return SimpleList.class;
     }
 }

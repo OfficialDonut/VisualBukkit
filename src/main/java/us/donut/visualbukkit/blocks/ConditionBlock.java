@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 
-public abstract class ConditionBlock extends ExpressionBlock {
+public abstract class ConditionBlock extends ExpressionBlock<Boolean> {
 
     protected abstract String toNonNegatedJava();
 
@@ -14,11 +14,6 @@ public abstract class ConditionBlock extends ExpressionBlock {
     @Override
     public final String toJava() {
         return isNegated() ? toNegatedJava() : toNonNegatedJava();
-    }
-
-    @Override
-    public final Class<?> getReturnType() {
-        return boolean.class;
     }
 
     protected boolean isNegated() {

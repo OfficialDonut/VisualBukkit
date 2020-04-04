@@ -17,8 +17,8 @@ public class StatRemove extends StatementBlock {
 
     @Override
     public String toJava() {
-        ChangeableExpressionBlock changeable = (ChangeableExpressionBlock) ((ExpressionParameter) getParameter(1)).getExpression();
-        ExpressionBlock deltaExpr = ((ExpressionParameter) getParameter(0)).getExpression();
+        ChangeableExpressionBlock<?> changeable = (ChangeableExpressionBlock<?>) ((ExpressionParameter) getParameter(1)).getExpression();
+        ExpressionBlock<?> deltaExpr = ((ExpressionParameter) getParameter(0)).getExpression();
         String delta = TypeHandler.convert(deltaExpr.getReturnType(), changeable.getDeltaType(ChangeType.REMOVE), deltaExpr.toJava());
         String java = changeable.change(ChangeType.REMOVE, delta);
         if (java != null) {
