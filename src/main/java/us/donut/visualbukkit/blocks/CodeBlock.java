@@ -6,7 +6,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.blocks.expressions.ExprEmptyParameter;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.editor.BlockPane;
@@ -22,9 +21,6 @@ public abstract class CodeBlock extends VBox implements Loadable {
     private ContextMenu contextMenu;
 
     public CodeBlock() {
-        if (this instanceof ExprEmptyParameter) {
-            return;
-        }
         DragManager.enableDragging(this);
         contextMenu = new ContextMenu();
         setOnContextMenuRequested(e -> {

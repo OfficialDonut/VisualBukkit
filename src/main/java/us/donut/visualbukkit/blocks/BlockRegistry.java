@@ -3,7 +3,6 @@ package us.donut.visualbukkit.blocks;
 import com.google.common.reflect.ClassPath;
 import javafx.application.Platform;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.blocks.expressions.ExprEmptyParameter;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -23,7 +22,7 @@ public class BlockRegistry {
             String blockPackage = "us.donut.visualbukkit.blocks";
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(blockPackage)) {
                 Class<?> clazz = classInfo.load();
-                if (CodeBlock.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && clazz != ExprEmptyParameter.class) {
+                if (CodeBlock.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
                     Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
                     BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
                     blockInfo.createBlock();

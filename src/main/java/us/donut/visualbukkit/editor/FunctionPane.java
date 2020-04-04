@@ -14,7 +14,6 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ParentBlock;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.TypeHandler;
-import us.donut.visualbukkit.blocks.expressions.ExprEmptyParameter;
 import us.donut.visualbukkit.blocks.expressions.ExprFunction;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
@@ -152,7 +151,7 @@ public class FunctionPane extends BlockPane {
                 ExpressionBlock expression = expressionParameter.getExpression();
                 if (expression instanceof ExprFunction && equals(((ExprFunction) expression).getFunction())) {
                     expressionParameter.setExpression(null);
-                } else if (expression != null && !(expression instanceof ExprEmptyParameter)) {
+                } else if (expression != null) {
                     deleteUsages(expression.getParameters());
                 }
             }

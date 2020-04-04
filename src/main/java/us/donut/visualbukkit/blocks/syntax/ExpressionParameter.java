@@ -4,9 +4,9 @@ import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
-import us.donut.visualbukkit.blocks.expressions.ExprEmptyParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.util.Collections;
@@ -16,12 +16,14 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
 
     private Class<?> returnType;
     private ExpressionBlock expression;
-    private ExprEmptyParameter emptyExpr;
+    private EmptyExpressionBlock emptyExprBlock;
+    private Text emptyText;
 
     public ExpressionParameter(Class<?> returnType) {
         getStyleClass().add("expression-parameter-empty");
         this.returnType = returnType;
-        getChildren().add(expression = emptyExpr = new ExprEmptyParameter(returnType));
+        emptyExprBlock = new EmptyExpressionBlock(returnType);
+        getChildren().add(emptyText = new Text("<" + TypeHandler.getUserFriendlyName(returnType) + ">"));
         DragManager.enableBlockContainer(this);
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setOnAction(e -> CopyPasteManager.paste(this, -1));
@@ -40,7 +42,7 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         if (block instanceof ExpressionBlock) {
             ExpressionParameter parent = (ExpressionParameter) block.getParent();
             ExpressionBlock newExpression = (ExpressionBlock) block;
-            ExpressionBlock currentExpression = expression;
+            ExpressionBlock currentExpression = getExpression();
             if (parent != null) {
                 parent.setExpression(null);
             }
@@ -66,39 +68,43 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     }
 
     public void setExpression(ExpressionBlock expression) {
-        this.expression = expression != null ? expression : emptyExpr;
         getChildren().clear();
-        getChildren().add(this.expression);
-        getStyleClass().set(0, isEmpty() ? "expression-parameter-empty" : "expression-parameter-filled");
+        if (expression == null || expression instanceof EmptyExpressionBlock) {
+            this.expression = null;
+            getChildren().add(emptyText);
+            getStyleClass().set(0, "expression-parameter-empty");
+        } else {
+            getChildren().add(this.expression = expression);
+            getStyleClass().set(0, "expression-parameter-filled");
+        }
     }
 
     public boolean isEmpty() {
-        return expression instanceof ExprEmptyParameter;
+        return expression == null;
     }
 
     @Override
     public String toJava() {
-        return TypeHandler.convert(expression.getReturnType(), returnType, expression.toJava());
+        return TypeHandler.convert(getExpression().getReturnType(), returnType, getExpression().toJava());
     }
 
     @Override
     public void unload(ConfigurationSection section) {
-        if (!isEmpty()) {
-            String className = expression.getClass().getCanonicalName().replace('.', '_');
-            expression.unload(section.createSection(className));
-        }
+        section.set("block-type", getExpression().getClass().getCanonicalName());
+        getExpression().unload(section);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void load(ConfigurationSection section) throws Exception {
-        for (String key : section.getKeys(false)) {
-            String className = key.replace('_', '.');
-            Class<? extends ExpressionBlock> blockClass = (Class<? extends ExpressionBlock>) Class.forName(className);
-            ExpressionBlock expression = BlockRegistry.getInfo(blockClass).createBlock();
-            expression.load(section.getConfigurationSection(key));
-            setExpression(expression);
-            break;
+        String className = section.getString("block-type");
+        if (className != null) {
+            Class<? extends ExpressionBlock> blockType = (Class<? extends ExpressionBlock>) Class.forName(className);
+            if (blockType != EmptyExpressionBlock.class) {
+                ExpressionBlock expression = BlockRegistry.getInfo(blockType).createBlock();
+                expression.load(section);
+                setExpression(expression);
+            }
         }
     }
 
@@ -112,6 +118,6 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     }
 
     public ExpressionBlock getExpression() {
-        return expression;
+        return expression != null ? expression : emptyExprBlock;
     }
 }
