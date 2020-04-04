@@ -29,14 +29,8 @@ public class TypeHandler {
     private static Map<String, Function<String, String>> stringParsers = new HashMap<>();
 
     static {
-        register(Boolean.class, "boolean", s -> "Boolean.valueOf(" + s + ")");
-        register(Number.class, "number", s -> "Double.valueOf(" + s + ")");
-        register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
-        register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
-        register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
-        register(World.class, "world", s -> "Bukkit.getWorld(" + s + ")");
-
         register(Block.class, "block");
+        register(Boolean.class, "boolean", s -> "Boolean.valueOf(" + s + ")");
         register(Duration.class, "duration");
         register(Entity.class, "entity");
         register(File.class, "file");
@@ -45,10 +39,15 @@ public class TypeHandler {
         register(InventoryView.class, "inventory view");
         register(LivingEntity.class, "living entity");
         register(Location.class, "location");
+        register(Number.class, "number", s -> "Double.valueOf(" + s + ")");
         register(Object.class, "object");
+        register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
+        register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
         register(SimpleList.class, "list");
         register(String.class, "string");
+        register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
         register(Vector.class, "vector");
+        register(World.class, "world", s -> "Bukkit.getWorld(" + s + ")");
     }
 
     public static void register(Class<?> clazz, String alias, Function<String, String> stringParser) {
