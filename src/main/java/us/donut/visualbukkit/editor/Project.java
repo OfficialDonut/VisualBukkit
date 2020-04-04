@@ -286,13 +286,13 @@ public class Project {
         public Pane() {
             getStyleClass().add("project-pane");
             YamlConfiguration data = dataFile.getConfig();
-            pluginNameField.setText(data.getString("plugin.name"));
-            pluginVerField.setText(data.getString("plugin.version"));
-            pluginAuthorField.setText(data.getString("plugin.author"));
-            pluginDescField.setText(data.getString("plugin.description"));
-            pluginWebsiteField.setText(data.getString("plugin.website"));
-            pluginDependField.setText(data.getString("plugin.depend"));
-            pluginSoftDependField.setText(data.getString("plugin.soft-depend"));
+            pluginNameField.setText(data.getString("plugin.name", ""));
+            pluginVerField.setText(data.getString("plugin.version", ""));
+            pluginAuthorField.setText(data.getString("plugin.author", ""));
+            pluginDescField.setText(data.getString("plugin.description", ""));
+            pluginWebsiteField.setText(data.getString("plugin.website", ""));
+            pluginDependField.setText(data.getString("plugin.depend", ""));
+            pluginSoftDependField.setText(data.getString("plugin.soft-depend", ""));
             pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
 
             Button buildButton = new Button("Build Plugin");

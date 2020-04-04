@@ -120,11 +120,11 @@ public class CommandPane extends BlockPane {
     @Override
     public void load(ConfigurationSection section) throws Exception {
         super.load(section);
-        descField.setText(section.getString("description"));
-        aliasesField.setText(section.getString("aliases"));
-        permField.setText(section.getString("permission"));
-        permMessageField.setText(section.getString("permission-message"));
-        usageField.setText(section.getString("usage"));
+        descField.setText(section.getString("description", ""));
+        aliasesField.setText(section.getString("aliases", ""));
+        permField.setText(section.getString("permission", ""));
+        permMessageField.setText(section.getString("permission-message", ""));
+        usageField.setText(section.getString("usage", ""));
     }
 
     public String getCommand() {
