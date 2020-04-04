@@ -40,6 +40,7 @@ public class SelectorPane extends VBox implements BlockContainer {
     private List<BlockInfo<?>.Node> blockInfoNodes = new ArrayList<>();
     private ComboBoxView<String> categoryComboBox = new ComboBoxView<>();
     private ComboBoxView<Class<?>> eventComboBox = new ComboBoxView<>();
+    private ComboBoxView<String> returnTypeComboBox = new ComboBoxView<>();
     private CheckBox statementCheckBox = new CheckBox("Statements");
     private CheckBox expressionCheckBox = new CheckBox("Expressions");
     private TextField searchField = new TextField();
@@ -86,6 +87,12 @@ public class SelectorPane extends VBox implements BlockContainer {
         eventComboBox.getComboBox().setValue(Any.class);
         eventComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
+        returnTypeComboBox.setFocusTraversable(false);
+        returnTypeComboBox.getComboBox().getItems().add("---");
+        returnTypeComboBox.getComboBox().getItems().addAll(TypeHandler.getAliases());
+        returnTypeComboBox.getComboBox().setValue("---");
+        returnTypeComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
+
         statementCheckBox.setSelected(true);
         statementCheckBox.setOnAction(e -> {
             boolean state = statementCheckBox.isSelected();
@@ -103,6 +110,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         content.getChildren().addAll(selectorTitle,
                 new CenteredHBox(10, new Label("Category:\t"), categoryComboBox),
                 new CenteredHBox(10, new Label("Event:\t"), eventComboBox),
+                new CenteredHBox(10, new Label("Returns:\t"), returnTypeComboBox),
                 new CenteredHBox(10, new Label("Type:\t"), statementCheckBox, expressionCheckBox),
                 new CenteredHBox(10, new Label("Search:\t"), searchField),
                 statementBox, expressionBox);
@@ -171,10 +179,12 @@ public class SelectorPane extends VBox implements BlockContainer {
         BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
         String category = categoryComboBox.getComboBox().getValue();
         Class<?> event = eventComboBox.getComboBox().getValue();
+        String returnType = returnTypeComboBox.getComboBox().getValue();
         String search = searchField.getText().toLowerCase();
         boolean state =
-                (category.equalsIgnoreCase("---") || checkCategory(blockInfo, category)) &&
+                (category.equals("---") || checkCategory(blockInfo, category)) &&
                 (event == Any.class || checkEvent(blockInfo, event)) &&
+                (returnType.equals("---") || checkReturnType(blockInfo, TypeHandler.getType(returnType))) &&
                 (search.isEmpty() || blockInfoNode.getText().toLowerCase().contains(search));
         blockInfoNode.setVisible(state);
         blockInfoNode.setManaged(state);
@@ -200,6 +210,11 @@ public class SelectorPane extends VBox implements BlockContainer {
             }
         }
         return false;
+    }
+
+    private boolean checkReturnType(BlockInfo<?> blockInfo, Class<?> returnType) {
+        Class<?> blockReturn = blockInfo.getReturnType();
+        return blockReturn != null && (returnType.isAssignableFrom(blockReturn) || (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)));
     }
 
     private static class Any {}
