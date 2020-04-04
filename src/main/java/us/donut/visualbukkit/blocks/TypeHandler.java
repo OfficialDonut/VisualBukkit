@@ -6,15 +6,20 @@ import com.google.common.collect.HashBiMap;
 import org.apache.commons.lang.ClassUtils;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
 
@@ -28,16 +33,22 @@ public class TypeHandler {
         register(Number.class, "number", s -> "Double.valueOf(" + s + ")");
         register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
         register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
+        register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
+        register(World.class, "world", s -> "Bukkit.getWorld(" + s + ")");
 
         register(Block.class, "block");
+        register(Duration.class, "duration");
         register(Entity.class, "entity");
         register(File.class, "file");
-        register(ItemStack.class, "itemstack");
+        register(ItemStack.class, "item stack");
+        register(Inventory.class, "inventory");
+        register(InventoryView.class, "inventory view");
         register(LivingEntity.class, "living entity");
         register(Location.class, "location");
         register(Object.class, "object");
         register(SimpleList.class, "list");
         register(String.class, "string");
+        register(Vector.class, "vector");
     }
 
     public static void register(Class<?> clazz, String alias, Function<String, String> stringParser) {
