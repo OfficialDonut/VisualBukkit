@@ -42,7 +42,7 @@ public class ExprVariable extends ChangeableExpressionBlock<Object> {
             case SET: return "variables.put(" + getVariable() + "," + delta + ");";
             case ADD: return "addToVariable(" + getVariable() + "," + delta + ", variables);";
             case REMOVE: return "removeFromVariable(" + getVariable() + "," + delta + ", variables);";
-            case DELETE: return "variables.remove(" + getVariable() + ");" ;
+            case DELETE: case CLEAR: return "variables.remove(" + getVariable() + ");" ;
             default: return null;
         }
     }

@@ -26,7 +26,7 @@ public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
             case SET: return "tempVariables.put(" + getVariable() + "," + delta + ");";
             case ADD: return "addToVariable(" + getVariable() + "," + delta + ", tempVariables);";
             case REMOVE: return "removeFromVariable(" + getVariable() + "," + delta + ", tempVariables);";
-            case DELETE: return "tempVariables.remove(" + getVariable() + ");" ;
+            case DELETE: case CLEAR: return "tempVariables.remove(" + getVariable() + ");" ;
             default: return null;
         }
     }

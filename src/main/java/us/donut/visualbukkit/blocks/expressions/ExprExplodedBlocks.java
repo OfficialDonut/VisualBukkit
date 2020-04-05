@@ -27,6 +27,7 @@ public class ExprExplodedBlocks extends ChangeableExpressionBlock<SimpleList> {
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
+            case CLEAR: return "event.blockList().clear();";
             case ADD: return "event.blockList().add(" + delta + ");";
             case REMOVE: return "event.blockList().remove(" + delta + ");";
             default: return null;

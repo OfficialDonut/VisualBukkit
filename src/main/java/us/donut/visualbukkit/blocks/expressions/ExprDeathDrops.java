@@ -26,6 +26,7 @@ public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
+            case CLEAR: return "event.getDrops().clear();";
             case ADD: return "event.getDrops().add(" + delta + ");";
             case REMOVE: return "event.getDrops().remove(" + delta + ");";
             default: return null;

@@ -26,6 +26,7 @@ public class ExprInventoryContents extends ChangeableExpressionBlock<SimpleList>
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
+            case CLEAR: return arg(0) + ".clear();";
             case ADD: return arg(0) + ".addItem(new ItemStack[]{" + delta + "});";
             case REMOVE: return arg(0) + ".remove(" + delta + ");";
             default: return null;

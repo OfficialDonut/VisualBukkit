@@ -1,5 +1,5 @@
 package us.donut.visualbukkit.blocks;
 
 public enum ChangeType {
-    SET, DELETE, ADD, REMOVE
+    SET, DELETE, CLEAR, ADD, REMOVE
 }

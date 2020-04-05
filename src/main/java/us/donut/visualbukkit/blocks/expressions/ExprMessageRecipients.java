@@ -26,6 +26,7 @@ public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList>
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
+            case CLEAR: return "event.getRecipients().clear();";
             case ADD: return "event.getRecipients().add(" + delta + ");";
             case REMOVE: return "event.getRecipients().remove(" + delta + ");";
             default: return null;
