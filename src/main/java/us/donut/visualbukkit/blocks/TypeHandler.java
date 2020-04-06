@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import us.donut.visualbukkit.util.SimpleList;
 
@@ -43,6 +44,7 @@ public class TypeHandler {
         register(Object.class, "object");
         register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
         register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
+        register(Scoreboard.class, "scoreboard");
         register(SimpleList.class, "list");
         register(String.class, "string");
         register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
