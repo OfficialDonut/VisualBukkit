@@ -12,7 +12,7 @@ public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("temp variable(", new InputParameter(), ")");
+        return new SyntaxNode("temp variable", new InputParameter());
     }
 
     @Override
