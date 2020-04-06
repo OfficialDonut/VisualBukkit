@@ -1,7 +1,5 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import javafx.event.Event;
-import javafx.scene.input.ContextMenuEvent;
 import org.apache.commons.lang.StringEscapeUtils;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
@@ -15,12 +13,7 @@ public class ExprString extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
-        InputParameter inputParameter = new InputParameter();
-        inputParameter.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, e -> {
-            Event.fireEvent(this, e);
-            e.consume();
-        });
-        return new SyntaxNode(inputParameter);
+        return new SyntaxNode(new InputParameter());
     }
 
     @Override
