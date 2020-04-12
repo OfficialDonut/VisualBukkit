@@ -20,6 +20,6 @@ public class ExprEventInventoryView extends ExpressionBlock<InventoryView> {
 
     @Override
     public String toJava() {
-        return "event.getInventoryView()";
+        return "event.getView()";
     }
 }
