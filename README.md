@@ -5,4 +5,4 @@ Visual Bukkit is a visual programming language for developing Bukkit plugins.
 ### Documentation: https://github.com/OfficialDonut/VisualBukkit/wiki
 ### Discord: https://discord.gg/ugkvGpu
 
-![](https://i.imgur.com/IdSh0TS.png)
+![](https://i.imgur.com/mMh2c2C.png)
