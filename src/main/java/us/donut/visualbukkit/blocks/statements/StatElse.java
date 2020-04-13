@@ -9,7 +9,7 @@ public class StatElse extends ParentBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("else:");
+        return new SyntaxNode("else");
     }
 
     @Override

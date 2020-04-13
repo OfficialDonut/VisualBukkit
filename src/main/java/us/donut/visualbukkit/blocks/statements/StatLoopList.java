@@ -12,7 +12,7 @@ public class StatLoopList extends ParentBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("loop", SimpleList.class, ":");
+        return new SyntaxNode("loop", SimpleList.class);
     }
 
     @Override

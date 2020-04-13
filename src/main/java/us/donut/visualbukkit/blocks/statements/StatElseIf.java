@@ -8,7 +8,7 @@ public class StatElseIf extends StatIf {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("else if", boolean.class, ":");
+        return new SyntaxNode("else if", boolean.class);
     }
 
     @Override

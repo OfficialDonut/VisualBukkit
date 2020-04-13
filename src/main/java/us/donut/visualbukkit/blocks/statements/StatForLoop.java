@@ -11,7 +11,7 @@ public class StatForLoop extends ParentBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("loop", int.class, "times:");
+        return new SyntaxNode("loop", int.class, "times");
     }
 
     @Override

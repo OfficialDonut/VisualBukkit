@@ -11,7 +11,7 @@ public class StatIf extends ParentBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("if", boolean.class, ":");
+        return new SyntaxNode("if", boolean.class);
     }
 
     @Override
