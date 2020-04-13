@@ -80,7 +80,7 @@
 .combo-box-view {
     -fx-border-color: black;
     -fx-border-radius: 2;
-    -fx-padding: 5;
+    -fx-padding: 0 3 0 3;
     -fx-spacing: 15;
 }
 
