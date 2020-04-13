@@ -51,6 +51,10 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
+    public Runnable getRunnable(String procedure, Object... args) {
+        return () -> procedure(procedure, args);
+    }
+
     public void procedure(String procedure, Object... args) {}
 
     public Object function(String function, Object... args) {

@@ -26,7 +26,6 @@ import java.util.jar.JarOutputStream;
 public class PluginBuilder {
 
     private static ClassPool classPool = ClassPool.getDefault();
-    private static CtClass currentMainClass;
 
     public static void init() {
         classPool.importPackage("java.util");
@@ -46,7 +45,7 @@ public class PluginBuilder {
 
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
-            blockPane.insertInto(currentMainClass = getMainClass());
+            blockPane.insertInto(getMainClass());
             return true;
         } catch (Exception e) {
             return false;
@@ -60,10 +59,10 @@ public class PluginBuilder {
             name = "VisualBukkitPlugin";
         }
 
-        currentMainClass = getMainClass();
+        CtClass mainClass = getMainClass();
 
         for (BlockPane blockPane : project.getBlockPanes()) {
-            blockPane.insertInto(currentMainClass);
+            blockPane.insertInto(mainClass);
         }
 
         Path outputDir = project.getPluginOutputDir();
@@ -77,18 +76,9 @@ public class PluginBuilder {
         }
 
         Files.createDirectories(srcDir);
-        addClasses(srcDir, currentMainClass, classPool.get(SimpleList.class.getCanonicalName()));
-        addClasses(srcDir, currentMainClass.getNestedClasses());
-        Files.write(pluginYml, Arrays.asList(createYml(project, name, currentMainClass.getName()).split("\n")), StandardCharsets.UTF_8);
+        addClasses(srcDir, mainClass, classPool.get(SimpleList.class.getCanonicalName()));
+        Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
-    }
-
-    public static ClassPool getClassPool() {
-        return classPool;
-    }
-
-    public static CtClass getCurrentMainClass() {
-        return currentMainClass;
     }
 
     private static CtClass getMainClass() throws NotFoundException {

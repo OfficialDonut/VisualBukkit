@@ -10,9 +10,13 @@ import javassist.CtMethod;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ParentBlock;
+import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.TypeHandler;
-import us.donut.visualbukkit.blocks.statements.StatProcedure;
+import us.donut.visualbukkit.blocks.expressions.ExprProcedureRunnable;
+import us.donut.visualbukkit.blocks.syntax.BlockParameter;
+import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 
 import java.util.*;
 
@@ -127,12 +131,26 @@ public class ProcedurePane extends BlockPane {
     }
 
     private void deleteUsages(Pane pane) {
-        for (int i = pane.getChildren().size() - 1; i >= 0; i--) {
-            Node child = pane.getChildren().get(i);
-            if (child instanceof StatProcedure && equals(((StatProcedure) child).getProcedure())) {
-                pane.getChildren().remove(i);
-            } else if (child instanceof ParentBlock) {
-                deleteUsages((ParentBlock) child);
+        for (Node child : pane.getChildren()) {
+            if (child instanceof StatementBlock) {
+                deleteUsages(((StatementBlock) child).getParameters());
+                if (child instanceof ParentBlock) {
+                    deleteUsages((ParentBlock) child);
+                }
+            }
+        }
+    }
+
+    private void deleteUsages(List<BlockParameter> parameters) {
+        for (BlockParameter parameter : parameters) {
+            if (parameter instanceof ExpressionParameter) {
+                ExpressionParameter expressionParameter = (ExpressionParameter) parameter;
+                ExpressionBlock<?> expression = expressionParameter.getExpression();
+                if (expression instanceof ExprProcedureRunnable && equals(((ExprProcedureRunnable) expression).getProcedure())) {
+                    expressionParameter.setExpression(null);
+                } else if (expression != null) {
+                    deleteUsages(expression.getParameters());
+                }
             }
         }
     }
