@@ -17,6 +17,7 @@ import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.blocks.expressions.ExprFunction;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
+import us.donut.visualbukkit.util.TitleLabel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,8 +112,6 @@ public class FunctionPane extends BlockPane {
         for (Class<?> parameter : parameters) {
             joiner.add(TypeHandler.getAlias(parameter));
         }
-        Label label = new Label("Function: " + function + "(" + joiner.toString() + ")");
-        label.getStyleClass().add("block-pane-label");
 
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> {
@@ -130,7 +129,7 @@ public class FunctionPane extends BlockPane {
             }
         });
 
-        getInfoArea().getChildren().addAll(label, deleteButton);
+        getInfoArea().getChildren().addAll(new TitleLabel("Function: " + function + "(" + joiner.toString() + ")", 2), deleteButton);
     }
 
     private void deleteUsages(Pane pane) {

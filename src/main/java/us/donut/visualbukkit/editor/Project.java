@@ -12,6 +12,7 @@ import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.DataFile;
+import us.donut.visualbukkit.util.TitleLabel;
 import us.donut.visualbukkit.util.TreeNode;
 
 import java.io.File;
@@ -317,8 +318,6 @@ public class Project {
             Button newFunctionButton = new Button("New Function");
             newFunctionButton.setOnAction(e -> FunctionPane.promptNew(Project.this));
 
-            Label title = new Label("Project Manager");
-            title.getStyleClass().add("title-label");
             TreeNode structureTree = new TreeNode("Project Structure");
             structureTree.add(pluginEnablePane.getProjectStructureLabel(), commandTree, eventTree, procedureTree, functionTree);
             structureTree.toggle();
@@ -334,12 +333,11 @@ public class Project {
                 }
             });
 
-            Label pluginInfoTitle = new Label("Plugin Information");
-            pluginInfoTitle.getStyleClass().add("title-label");
-
-            getChildren().addAll(title, new Label("Name: " + name),
+            getChildren().addAll(
+                    new TitleLabel("Project Manager", 1.5, true),
+                    new Label("Name: " + name),
                     structureTree, newCommandButton, newEventButton, newProcedureButton, newFunctionButton,
-                    new Separator(), pluginInfoTitle,
+                    new Separator(), new TitleLabel("Plugin Information", 1.5, true),
                     new CenteredHBox(10, new Label("Name:       "), pluginNameField),
                     new CenteredHBox(10, new Label("Version:    "), pluginVerField),
                     new CenteredHBox(10, new Label("Author:     "), pluginAuthorField),

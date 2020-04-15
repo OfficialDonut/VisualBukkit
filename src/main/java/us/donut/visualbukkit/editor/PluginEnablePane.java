@@ -3,6 +3,7 @@ package us.donut.visualbukkit.editor;
 import javafx.scene.control.Label;
 import javassist.CtClass;
 import javassist.CtMethod;
+import us.donut.visualbukkit.util.TitleLabel;
 
 import java.util.StringJoiner;
 
@@ -10,9 +11,9 @@ public class PluginEnablePane extends BlockPane {
 
     public PluginEnablePane(Project project) {
         super(project, "Plugin Enable");
-        Label label = new Label("Plugin Enable");
-        label.getStyleClass().add("block-pane-label");
-        getInfoArea().getChildren().addAll(label, new Label("(code placed here will run when the plugin enables)"));
+        getInfoArea().getChildren().addAll(
+                new TitleLabel("Plugin Enable", 2),
+                new Label("(code placed here will run when the plugin enables)"));
     }
 
     @Override

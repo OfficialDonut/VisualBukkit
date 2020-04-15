@@ -12,6 +12,7 @@ import javassist.bytecode.annotation.Annotation;
 import org.bukkit.event.Event;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.BlockRegistry;
+import us.donut.visualbukkit.util.TitleLabel;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
@@ -77,8 +78,6 @@ public class EventPane extends BlockPane {
             throw new IllegalArgumentException(event.getCanonicalName() + " is not an event");
         }
         this.event = (Class<? extends Event>) event;
-        Label label = new Label("Event: " + getText());
-        label.getStyleClass().add("block-pane-label");
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this event?");
@@ -89,7 +88,7 @@ public class EventPane extends BlockPane {
                 VisualBukkit.displayMessage("Successfully deleted event");
             }
         });
-        getInfoArea().getChildren().addAll(label, deleteButton);
+        getInfoArea().getChildren().addAll(new TitleLabel("Event: " + getText(), 2), deleteButton);
     }
 
     @Override

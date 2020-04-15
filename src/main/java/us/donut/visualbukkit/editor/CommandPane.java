@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.util.CenteredHBox;
+import us.donut.visualbukkit.util.TitleLabel;
 
 import java.util.StringJoiner;
 
@@ -49,8 +50,7 @@ public class CommandPane extends BlockPane {
         super(project, "/" + command);
         this.command = command;
 
-        Label label = new Label("Command: /" + command);
-        label.getStyleClass().add("block-pane-label");
+        TitleLabel label = new TitleLabel("Command: /" + command, 2);
 
         Button renameButton = new Button("Rename");
         renameButton.setOnAction(e -> {

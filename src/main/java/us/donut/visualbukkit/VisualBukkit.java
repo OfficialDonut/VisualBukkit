@@ -32,6 +32,7 @@ public class VisualBukkit extends Application {
     private Scene scene = new Scene(rootPane, 500, 500);
     private Stage primaryStage;
     private SelectorPane selectorPane;
+    private int fontSize;
 
     public VisualBukkit() {
         if (instance != null) {
@@ -108,19 +109,19 @@ public class VisualBukkit extends Application {
 
         Menu fontSizeMenu = new Menu("Font Size");
         ToggleGroup toggleGroup = new ToggleGroup();
-        int currentSize = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("font-size", 14);
+        fontSize = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("font-size", 14);
         for (int i = 8; i <= 36; i++) {
             RadioMenuItem sizeItem = new RadioMenuItem(String.valueOf(i));
             sizeItem.setOnAction(e -> {
-                int fontSize = Integer.parseInt(sizeItem.getText());
+                fontSize = Integer.parseInt(sizeItem.getText());
                 rootPane.setStyle("-fx-font-size:" + fontSize + ";");
                 VisualBukkitLauncher.DATA_FILE.getConfig().set("font-size", fontSize);
             });
             toggleGroup.getToggles().add(sizeItem);
             fontSizeMenu.getItems().add(sizeItem);
-            if (i == currentSize) {
+            if (i == fontSize) {
                 sizeItem.setSelected(true);
-                rootPane.setStyle("-fx-font-size:" + currentSize + ";");
+                rootPane.setStyle("-fx-font-size:" + fontSize + ";");
             }
         }
         Menu settingsMenu = new Menu("Settings");
@@ -217,5 +218,9 @@ public class VisualBukkit extends Application {
 
     public SelectorPane getSelectorPane() {
         return selectorPane;
+    }
+
+    public int getFontSize() {
+        return fontSize;
     }
 }

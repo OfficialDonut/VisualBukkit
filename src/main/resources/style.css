@@ -74,10 +74,6 @@
     -fx-padding: 5 5 15 5;
 }
 
-.block-pane-label {
-    -fx-font-size: 28;
-}
-
 .combo-box-view {
     -fx-border-color: black;
     -fx-border-radius: 2;
@@ -143,11 +139,6 @@
     -fx-alignment: center-left;
     -fx-fill-height: false;
     -fx-spacing: 5;
-}
-
-.title-label {
-    -fx-font-size: 18;
-    -fx-underline: true;
 }
 
 /*

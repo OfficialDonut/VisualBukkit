@@ -13,6 +13,7 @@ import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.ComboBoxView;
+import us.donut.visualbukkit.util.TitleLabel;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -53,12 +54,9 @@ public class SelectorPane extends VBox implements BlockContainer {
         content.prefWidthProperty().bind(widthProperty());
         content.prefHeightProperty().bind(heightProperty());
         DragManager.enableBlockContainer(this);
-        Label selectorTitle = new Label("Block Selector");
-        Label statementTitle = new Label("Statements");
-        Label expressionTitle = new Label("Expressions");
-        selectorTitle.getStyleClass().add("title-label");
-        statementTitle.getStyleClass().add("title-label");
-        expressionTitle.getStyleClass().add("title-label");
+        TitleLabel selectorTitle = new TitleLabel("Block Selector", 1.5, true);
+        TitleLabel statementTitle = new TitleLabel("Statements", 1.5, true);
+        TitleLabel expressionTitle = new TitleLabel("Expressions", 1.5, true);
         VBox statementBox = new VBox(10, statementTitle);
         VBox expressionBox = new VBox(10, expressionTitle);
         statementBox.setFillWidth(false);
