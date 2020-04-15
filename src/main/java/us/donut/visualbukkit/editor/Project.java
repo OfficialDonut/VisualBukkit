@@ -319,9 +319,6 @@ public class Project {
 
             Label title = new Label("Project Manager");
             title.getStyleClass().add("title-label");
-            newEventButton.prefWidthProperty().bind(newCommandButton.widthProperty());
-            newProcedureButton.prefWidthProperty().bind(newCommandButton.widthProperty());
-            newFunctionButton.prefWidthProperty().bind(newCommandButton.widthProperty());
             TreeNode structureTree = new TreeNode("Project Structure");
             structureTree.add(pluginEnablePane.getProjectStructureLabel(), commandTree, eventTree, procedureTree, functionTree);
             structureTree.toggle();
@@ -343,14 +340,14 @@ public class Project {
             getChildren().addAll(title, new Label("Name: " + name),
                     structureTree, newCommandButton, newEventButton, newProcedureButton, newFunctionButton,
                     new Separator(), pluginInfoTitle,
-                    new CenteredHBox(5, new Label("Name:\t\t"), pluginNameField),
-                    new CenteredHBox(5, new Label("Version:\t\t"), pluginVerField),
-                    new CenteredHBox(5, new Label("Author:\t\t"), pluginAuthorField),
-                    new CenteredHBox(5, new Label("Description:\t"), pluginDescField),
-                    new CenteredHBox(5, new Label("Website:\t\t"), pluginWebsiteField),
-                    new CenteredHBox(5, new Label("Depend:\t\t"), pluginDependField),
-                    new CenteredHBox(5, new Label("Soft Depend:\t"), pluginSoftDependField),
-                    new CenteredHBox(5, new Label("Output dir:\t"), pluginOutputDirField),
+                    new CenteredHBox(10, new Label("Name:       "), pluginNameField),
+                    new CenteredHBox(10, new Label("Version:    "), pluginVerField),
+                    new CenteredHBox(10, new Label("Author:     "), pluginAuthorField),
+                    new CenteredHBox(10, new Label("Description:"), pluginDescField),
+                    new CenteredHBox(10, new Label("Website:    "), pluginWebsiteField),
+                    new CenteredHBox(10, new Label("Depend:     "), pluginDependField),
+                    new CenteredHBox(10, new Label("Soft Depend:"), pluginSoftDependField),
+                    new CenteredHBox(10, new Label("Output dir: "), pluginOutputDirField),
                     buildButton);
         }
     }

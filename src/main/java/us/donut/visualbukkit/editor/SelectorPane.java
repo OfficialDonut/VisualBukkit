@@ -108,11 +108,12 @@ public class SelectorPane extends VBox implements BlockContainer {
         });
 
         content.getChildren().addAll(selectorTitle,
-                new CenteredHBox(10, new Label("Category:\t"), categoryComboBox),
-                new CenteredHBox(10, new Label("Event:\t"), eventComboBox),
-                new CenteredHBox(10, new Label("Returns:\t"), returnTypeComboBox),
-                new CenteredHBox(10, new Label("Type:\t"), statementCheckBox, expressionCheckBox),
-                new CenteredHBox(10, new Label("Search:\t"), searchField),
+                new CenteredHBox(10, new Label("Category:"), categoryComboBox),
+                new CenteredHBox(10, new Label("Event:   "), eventComboBox),
+                new CenteredHBox(10, new Label("Returns: "), returnTypeComboBox),
+                new CenteredHBox(10, new Label("Type:    "), statementCheckBox),
+                new CenteredHBox(10, new Label("         "), expressionCheckBox),
+                new CenteredHBox(10, new Label("Search:  "), searchField),
                 statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {

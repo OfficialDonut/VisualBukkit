@@ -90,9 +90,9 @@ public class CommandPane extends BlockPane {
         });
 
         getInfoArea().getChildren().add(new VBox(5,
-                new CenteredHBox(15, label, renameButton, deleteButton),
-                new CenteredHBox(new Label("Description:\t"), descField, new Label("\tPermission:\t\t"), permField, new Label("\tUsage:\t"), usageField),
-                new CenteredHBox(new Label("Aliases:\t\t"), aliasesField, new Label("\tPerm Message:\t"), permMessageField)));
+                new CenteredHBox(10, label, renameButton, deleteButton),
+                new CenteredHBox(10, new Label("Description:"), descField, new Label("Permission:  "), permField, new Label("Usage:"), usageField),
+                new CenteredHBox(10, new Label("Aliases:    "), aliasesField, new Label("Perm Message:"), permMessageField)));
     }
 
     @Override

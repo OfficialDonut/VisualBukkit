@@ -1,5 +1,5 @@
 @font-face {
-    src: url("consola.ttf");
+    src: url("JetBrainsMono-Regular.ttf");
 }
 
 /* Default Style Classes */
@@ -21,6 +21,7 @@
 }
 
 .root {
+    -fx-font-family: "JetBrains Mono";
     -fx-font-size: 14;
 }
 
@@ -102,8 +103,6 @@
 }
 
 .input-parameter {
-    -fx-font-family: "Consolas";
-    -fx-font-size: 12;
     -fx-padding: 1 1 1 3;
 }
 
