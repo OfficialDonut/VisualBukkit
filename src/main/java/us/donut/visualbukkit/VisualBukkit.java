@@ -106,7 +106,27 @@ public class VisualBukkit extends Application {
         Menu editMenu = new Menu("Edit");
         editMenu.getItems().addAll(undoItem, redoItem);
 
-        rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu));
+        Menu fontSizeMenu = new Menu("Font Size");
+        ToggleGroup toggleGroup = new ToggleGroup();
+        int currentSize = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("font-size", 14);
+        for (int i = 8; i <= 36; i++) {
+            RadioMenuItem sizeItem = new RadioMenuItem(String.valueOf(i));
+            sizeItem.setOnAction(e -> {
+                int fontSize = Integer.parseInt(sizeItem.getText());
+                rootPane.setStyle("-fx-font-size:" + fontSize + ";");
+                VisualBukkitLauncher.DATA_FILE.getConfig().set("font-size", fontSize);
+            });
+            toggleGroup.getToggles().add(sizeItem);
+            fontSizeMenu.getItems().add(sizeItem);
+            if (i == currentSize) {
+                sizeItem.setSelected(true);
+                rootPane.setStyle("-fx-font-size:" + currentSize + ";");
+            }
+        }
+        Menu settingsMenu = new Menu("Settings");
+        settingsMenu.getItems().add(fontSizeMenu);
+
+        rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu, settingsMenu));
     }
 
     private void setupSaving() {
@@ -114,6 +134,7 @@ public class VisualBukkit extends Application {
             if (e.isShortcutDown() && e.getCode() == KeyCode.S && ProjectManager.getCurrentProject() != null) {
                 try {
                     ProjectManager.getCurrentProject().save();
+                    VisualBukkitLauncher.DATA_FILE.save();
                     displayMessage("Successfully saved project");
                 } catch (IOException ex) {
                     displayException("Failed to save project", ex);
@@ -135,6 +156,7 @@ public class VisualBukkit extends Application {
                     if (buttonType.equals(saveButton)) {
                         try {
                             ProjectManager.getCurrentProject().save();
+                            VisualBukkitLauncher.DATA_FILE.save();
                         } catch (IOException ex) {
                             displayException("Failed to save project", ex);
                         }
