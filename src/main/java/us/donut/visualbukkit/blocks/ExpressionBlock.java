@@ -43,6 +43,14 @@ public abstract class ExpressionBlock<T> extends CodeBlock {
             } else {
                 getContextMenu().getItems().remove(addStringItem);
             }
+            Parent parent = getParent();
+            while (parent != null) {
+                if (parent instanceof StatementBlock) {
+                    ((StatementBlock) parent).getContextMenu().hide();
+                    break;
+                }
+                parent = parent.getParent();
+            }
             e.consume();
         });
     }

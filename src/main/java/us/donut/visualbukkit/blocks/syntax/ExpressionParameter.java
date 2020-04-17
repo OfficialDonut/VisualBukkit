@@ -1,6 +1,7 @@
 package us.donut.visualbukkit.blocks.syntax;
 
 import javafx.application.Platform;
+import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
@@ -34,6 +35,14 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
         setOnContextMenuRequested(e -> {
             if (isEmpty()) {
                 contextMenu.show(this, e.getScreenX(), e.getScreenY());
+                Parent parent = getParent();
+                while (parent != null) {
+                    if (parent instanceof StatementBlock) {
+                        ((StatementBlock) parent).getContextMenu().hide();
+                        break;
+                    }
+                    parent = parent.getParent();
+                }
                 e.consume();
             }
         });
