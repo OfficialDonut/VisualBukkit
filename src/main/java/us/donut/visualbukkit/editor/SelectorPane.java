@@ -7,13 +7,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
+import org.bukkit.configuration.file.YamlConfiguration;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.VisualBukkitLauncher;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.ComboBoxView;
 import us.donut.visualbukkit.util.TitleLabel;
+import us.donut.visualbukkit.util.TreeNode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -44,8 +47,10 @@ public class SelectorPane extends VBox implements BlockContainer {
     private ComboBoxView<String> returnTypeComboBox = new ComboBoxView<>();
     private CheckBox statementCheckBox = new CheckBox("Statements");
     private CheckBox expressionCheckBox = new CheckBox("Expressions");
+    private TreeNode pinnedBlocks = new TreeNode("Pinned Blocks");
     private TextField searchField = new TextField();
 
+    @SuppressWarnings("unchecked")
     public SelectorPane() {
         VBox content = new VBox();
         ScrollPane scrollPane = new ScrollPane(content);
@@ -105,6 +110,15 @@ public class SelectorPane extends VBox implements BlockContainer {
             expressionBox.setManaged(state);
         });
 
+        for (String className : VisualBukkitLauncher.DATA_FILE.getConfig().getStringList("pinned-blocks")) {
+            try {
+                Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
+                pin(BlockRegistry.getInfo(blockType));
+            } catch (ClassNotFoundException e) {
+                VisualBukkit.displayException("Failed to load pinned block", e);
+            }
+        }
+
         content.getChildren().addAll(selectorTitle,
                 new CenteredHBox(10, new Label("Category:"), categoryComboBox),
                 new CenteredHBox(10, new Label("Event:   "), eventComboBox),
@@ -112,7 +126,7 @@ public class SelectorPane extends VBox implements BlockContainer {
                 new CenteredHBox(10, new Label("Type:    "), statementCheckBox),
                 new CenteredHBox(10, new Label("         "), expressionCheckBox),
                 new CenteredHBox(10, new Label("Search:  "), searchField),
-                statementBox, expressionBox);
+                pinnedBlocks, statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
             BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();
@@ -133,6 +147,20 @@ public class SelectorPane extends VBox implements BlockContainer {
                     .filtered(node -> node instanceof BlockInfo.Node && blockInfo.getName().compareTo(((BlockInfo<?>.Node) node).getText()) > 0)
                     .size();
             vBox.getChildren().add(i, blockInfoNode);
+
+            MenuItem pinItem = new MenuItem("Pin");
+            pinItem.setOnAction(e -> {
+                pin(blockInfo);
+                YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
+                List<String> pinned = config.getStringList("pinned-blocks");
+                pinned.add(blockInfo.getBlockType().getCanonicalName());
+                config.set("pinned-blocks", pinned);
+            });
+            ContextMenu contextMenu = new ContextMenu(pinItem);
+            blockInfoNode.setOnContextMenuRequested(e -> {
+                contextMenu.show(blockInfoNode, e.getScreenX(), e.getScreenY());
+                e.consume();
+            });
         }
     }
 
@@ -192,6 +220,24 @@ public class SelectorPane extends VBox implements BlockContainer {
 
     public CheckBox getExpressionCheckBox() {
         return expressionCheckBox;
+    }
+
+    private void pin(BlockInfo<?> blockInfo) {
+        BlockInfo<?>.Node node = blockInfo.createNode();
+        pinnedBlocks.add(node);
+        MenuItem unpinItem = new MenuItem("Unpin");
+        unpinItem.setOnAction(e -> {
+            pinnedBlocks.remove(node);
+            YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
+            List<String> pinned = config.getStringList("pinned-blocks");
+            pinned.remove(blockInfo.getBlockType().getCanonicalName());
+            config.set("pinned-blocks", pinned);
+        });
+        ContextMenu contextMenu = new ContextMenu(unpinItem);
+        node.setOnContextMenuRequested(e -> {
+            contextMenu.show(node, e.getScreenX(), e.getScreenY());
+            e.consume();
+        });
     }
 
     private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {
