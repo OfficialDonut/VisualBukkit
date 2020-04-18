@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The damage amount in an EntityDamageEvent", "Returns: number"})
+@Description({"The damage amount in an EntityDamageEvent", "Changers: set, add, remove", "Returns: number"})
 @Event(EntityDamageEvent.class)
 public class ExprDamage extends ChangeableExpressionBlock<Double> {
 

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Inventory")
-@Description("The item stack in a slot of an inventory")
+@Description({"The item stack in a slot of an inventory", "Changers: set", "Returns: item stack"})
 public class ExprInventorySlot extends ChangeableExpressionBlock<ItemStack> {
 
     @Override

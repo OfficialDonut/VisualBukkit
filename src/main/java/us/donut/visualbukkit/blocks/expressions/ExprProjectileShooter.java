@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The shooter of a projectile", "Returns: projectile source"})
+@Description({"The shooter of a projectile", "Changers: set", "Returns: projectile source"})
 public class ExprProjectileShooter extends ChangeableExpressionBlock<ProjectileSource> {
 
     @Override

@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The world type of a world creator", "Returns: WorldType"})
+@Description({"The world type of a world creator", "Changers: set", "Returns: WorldType"})
 public class ExprWorldCreatorType extends ChangeableExpressionBlock<WorldType> {
 
     @Override

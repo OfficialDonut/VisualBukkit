@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The health of a living entity", "Returns: number"})
+@Description({"The health of a living entity", "Changers: set, add, remove", "Returns: number"})
 public class ExprHealth extends ChangeableExpressionBlock<Double> {
 
     @Override

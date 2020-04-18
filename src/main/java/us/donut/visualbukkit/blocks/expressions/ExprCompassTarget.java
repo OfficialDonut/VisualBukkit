@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The compass target of a player", "Returns: location"})
+@Description({"The compass target of a player", "Changers: set", "Returns: location"})
 public class ExprCompassTarget extends ChangeableExpressionBlock<Location> {
 
     @Override
@@ -24,6 +24,6 @@ public class ExprCompassTarget extends ChangeableExpressionBlock<Location> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return arg(0) + ".setCompassTarget(" + delta + ");";
+        return changeType == ChangeType.SET ? arg(0) + ".setCompassTarget(" + delta + ");" : null;
     }
 }

@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The amount of experience dropped in an EntityDeathEvent", "Returns: number"})
+@Description({"The amount of experience dropped in an EntityDeathEvent", "Changers: set, add, remove", "Returns: number"})
 @Event(EntityDeathEvent.class)
 public class ExprDroppedExperience extends ChangeableExpressionBlock<Integer> {
 

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Block")
-@Description({"The material of a block", "Returns: material"})
+@Description({"The material of a block", "Changers: set", "Returns: material"})
 public class ExprMaterialOfBlock extends ChangeableExpressionBlock<Material> {
 
     @Override

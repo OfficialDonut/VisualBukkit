@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The hardcore state of a world creator", "Returns: boolean"})
+@Description({"The hardcore state of a world creator", "Changers: set", "Returns: boolean"})
 public class ExprWorldCreatorHardcore extends ChangeableExpressionBlock<Boolean> {
 
     @Override

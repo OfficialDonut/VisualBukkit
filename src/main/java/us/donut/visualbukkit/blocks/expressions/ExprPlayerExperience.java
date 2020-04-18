@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The experience points of a player", "Returns: number"})
+@Description({"The experience points of a player", "Changers: set, add, remove", "Returns: number"})
 public class ExprPlayerExperience extends ChangeableExpressionBlock<Float> {
 
     @Override

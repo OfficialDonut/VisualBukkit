@@ -10,7 +10,7 @@ import us.donut.visualbukkit.util.CenteredHBox;
 
 import java.util.StringJoiner;
 
-@Description({"A variable", "Returns: object"})
+@Description({"A variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
 public class ExprVariable extends ChangeableExpressionBlock<Object> {
 
     @Override

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The velocity of an entity", "Returns: vector"})
+@Description({"The velocity of an entity", "Changers: set", "Returns: vector"})
 public class ExprVelocity extends ChangeableExpressionBlock<Vector> {
 
     @Override

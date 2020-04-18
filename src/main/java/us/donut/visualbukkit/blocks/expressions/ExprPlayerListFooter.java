@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The displayed player list footer for a player", "Returns: string"})
+@Description({"The displayed player list footer for a player", "Changers: set", "Returns: string"})
 public class ExprPlayerListFooter extends ChangeableExpressionBlock<String> {
 
     @Override

@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Name("Location X-Coord")
 @Category("Location")
-@Description({"The x-coord of a location", "Returns: number"})
+@Description({"The x-coord of a location", "Changers: set, add, remove", "Returns: number"})
 public class ExprLocationXCoord extends ChangeableExpressionBlock<Double> {
 
     @Override

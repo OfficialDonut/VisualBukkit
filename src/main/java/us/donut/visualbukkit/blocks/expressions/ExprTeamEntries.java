@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The entries of a scoreboard team", "Returns: list of strings"})
+@Description({"The entries of a scoreboard team", "Changers: add, remove", "Returns: list of strings"})
 public class ExprTeamEntries extends ChangeableExpressionBlock<SimpleList> {
 
     @Override

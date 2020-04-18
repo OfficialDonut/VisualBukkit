@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The display slot of a scoreboard objective", "Returns: display slot"})
+@Description({"The display slot of a scoreboard objective", "Changers: set", "Returns: display slot"})
 public class ExprObjectiveDisplaySlot extends ChangeableExpressionBlock<DisplaySlot> {
 
     @Override

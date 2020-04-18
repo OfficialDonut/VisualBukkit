@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.InputParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"A temporary variable", "Returns: object"})
+@Description({"A temporary variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
 public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
 
     @Override

@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The flying ability of a player", "Returns: boolean"})
+@Description({"The flying ability of a player", "Changers: set", "Returns: boolean"})
 public class ExprFlyingAbility extends ChangeableExpressionBlock<Boolean> {
 
     @Override

@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The join message in a PlayerJoinEvent", "Returns: string"})
+@Description({"The join message in a PlayerJoinEvent", "Changers: set", "Returns: string"})
 @Event(PlayerJoinEvent.class)
 public class ExprJoinMessage extends ChangeableExpressionBlock<String> {
 

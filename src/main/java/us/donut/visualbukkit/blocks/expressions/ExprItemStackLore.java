@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Item Stack")
-@Description({"The lore of an item stack", "Returns: list of strings"})
+@Description({"The lore of an item stack", "Changers: set", "Returns: list of strings"})
 public class ExprItemStackLore extends ChangeableExpressionBlock<SimpleList> {
 
     @Override

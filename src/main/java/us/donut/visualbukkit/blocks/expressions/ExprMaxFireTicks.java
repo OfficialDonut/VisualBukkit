@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The max fire ticks of an entity", "Returns: number"})
+@Description({"The max fire ticks of an entity", "Changers: set, add, remove", "Returns: number"})
 public class ExprMaxFireTicks extends ChangeableExpressionBlock<Integer> {
 
     @Override

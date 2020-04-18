@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The item stacks dropped in an EntityDeathEvent", "Returns: list of item stacks"})
+@Description({"The item stacks dropped in an EntityDeathEvent", "Changers: clear, add, remove", "Returns: list of item stacks"})
 @Event(EntityDeathEvent.class)
 public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
 

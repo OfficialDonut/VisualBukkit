@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The saturation level of a player", "Returns: number"})
+@Description({"The saturation level of a player", "Changers: set, add, remove", "Returns: number"})
 public class ExprSaturation extends ChangeableExpressionBlock<Float> {
 
     @Override

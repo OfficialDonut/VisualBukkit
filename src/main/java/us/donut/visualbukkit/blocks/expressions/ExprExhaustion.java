@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The exhaustion level of a player", "Returns: number"})
+@Description({"The exhaustion level of a player", "Changers: set, add, remove", "Returns: number"})
 public class ExprExhaustion extends ChangeableExpressionBlock<Float> {
 
     @Override

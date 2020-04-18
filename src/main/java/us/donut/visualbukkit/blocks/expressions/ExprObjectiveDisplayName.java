@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The display name of a scoreboard objective", "Returns: string"})
+@Description({"The display name of a scoreboard objective", "Changers: set", "Returns: string"})
 public class ExprObjectiveDisplayName extends ChangeableExpressionBlock<String> {
 
     @Override

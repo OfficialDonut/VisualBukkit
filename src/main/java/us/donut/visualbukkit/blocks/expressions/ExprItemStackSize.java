@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Item Stack")
-@Description({"The size of an item stack", "Returns: number"})
+@Description({"The size of an item stack", "Changers: set, add, remove",  "Returns: number"})
 public class ExprItemStackSize extends ChangeableExpressionBlock<Integer> {
 
     @Override

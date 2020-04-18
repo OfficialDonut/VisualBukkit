@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The item stack in the boots slot of a player", "Returns: item stack"})
+@Description({"The item stack in the boots slot of a player", "Changers: set", "Returns: item stack"})
 public class ExprPlayerBoots extends ChangeableExpressionBlock<ItemStack> {
 
     @Override

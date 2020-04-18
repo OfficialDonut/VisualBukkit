@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The displayed player list header for a player", "Returns: string"})
+@Description({"The displayed player list header for a player", "Changers: set", "Returns: string"})
 public class ExprPlayerListHeader extends ChangeableExpressionBlock<String> {
 
     @Override

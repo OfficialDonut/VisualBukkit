@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Location")
-@Description({"The pitch of a location", "Returns: number"})
+@Description({"The pitch of a location", "Changers: set, add, remove", "Returns: number"})
 public class ExprLocationPitch extends ChangeableExpressionBlock<Float> {
 
     @Override

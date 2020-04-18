@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The spawn location of a world", "Returns: location"})
+@Description({"The spawn location of a world", "Changers: set", "Returns: location"})
 public class ExprSpawnLocation extends ChangeableExpressionBlock<Location> {
 
     @Override

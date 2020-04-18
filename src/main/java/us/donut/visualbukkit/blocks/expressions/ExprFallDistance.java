@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The distance an entity has fallen", "Returns: number"})
+@Description({"The distance an entity has fallen", "Changers: set, add, remove", "Returns: number"})
 public class ExprFallDistance extends ChangeableExpressionBlock<Float> {
 
     @Override

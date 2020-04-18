@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The message recipients in an AsyncPlayerChatEvent", "Returns: list of players"})
+@Description({"The message recipients in an AsyncPlayerChatEvent", "Changers: clear, add, remove", "Returns: list of players"})
 @Event(AsyncPlayerChatEvent.class)
 public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList> {
 

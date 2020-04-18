@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Inventory")
-@Description({"The contents of an inventory", "Returns: list of item stacks"})
+@Description({"The contents of an inventory", "Changers: clear, add, remove", "Returns: list of item stacks"})
 public class ExprInventoryContents extends ChangeableExpressionBlock<SimpleList> {
 
     @Override

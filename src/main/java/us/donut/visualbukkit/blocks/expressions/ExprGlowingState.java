@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The glowing state of an entity", "Returns: boolean"})
+@Description({"The glowing state of an entity", "Changers: set", "Returns: boolean"})
 public class ExprGlowingState extends ChangeableExpressionBlock<Boolean> {
 
     @Override

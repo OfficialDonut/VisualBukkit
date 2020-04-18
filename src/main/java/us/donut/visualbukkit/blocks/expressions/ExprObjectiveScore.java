@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The score of an entry for a scoreboard objective", "Returns: number"})
+@Description({"The score of an entry for a scoreboard objective", "Changers: set", "Returns: number"})
 public class ExprObjectiveScore extends ChangeableExpressionBlock<Integer> {
 
     @Override

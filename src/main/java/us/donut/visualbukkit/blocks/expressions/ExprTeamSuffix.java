@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The suffix of a scoreboard team", "Returns: string"})
+@Description({"The suffix of a scoreboard team", "Changers: set", "Returns: string"})
 public class ExprTeamSuffix extends ChangeableExpressionBlock<String> {
 
     @Override

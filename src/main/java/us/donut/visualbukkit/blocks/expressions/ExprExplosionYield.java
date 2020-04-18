@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The percentage of blocks to drop in a BlockExplodeEvent or EntityExplodeEvent", "Returns: number"})
+@Description({"The percentage of blocks to drop in a BlockExplodeEvent or EntityExplodeEvent", "Changers: set, add, remove", "Returns: number"})
 @Event({BlockExplodeEvent.class, EntityExplodeEvent.class})
 public class ExprExplosionYield extends ChangeableExpressionBlock<Float> {
 

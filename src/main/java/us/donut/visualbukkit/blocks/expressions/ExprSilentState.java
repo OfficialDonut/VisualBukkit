@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The silent state of an entity", "Returns: boolean"})
+@Description({"The silent state of an entity", "Changers: set", "Returns: boolean"})
 public class ExprSilentState extends ChangeableExpressionBlock<Boolean> {
 
     @Override

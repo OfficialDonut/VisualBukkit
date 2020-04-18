@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"An element at an index in a list", "Returns: object"})
+@Description({"An element at an index in a list", "Changers: set", "Returns: object"})
 public class ExprListElement extends ChangeableExpressionBlock<Object> {
 
     @Override

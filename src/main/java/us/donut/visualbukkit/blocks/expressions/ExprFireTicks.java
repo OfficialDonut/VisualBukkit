@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The number of ticks before an entity stops being on fire", "Returns: number"})
+@Description({"The number of ticks before an entity stops being on fire", "Changers: set, add, remove", "Returns: number"})
 public class ExprFireTicks extends ChangeableExpressionBlock<Integer> {
 
     @Override

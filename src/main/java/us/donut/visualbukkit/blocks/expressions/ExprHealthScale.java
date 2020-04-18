@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The health scale of a player", "Returns: number"})
+@Description({"The health scale of a player", "Changers: set, add, remove", "Returns: number"})
 public class ExprHealthScale extends ChangeableExpressionBlock<Double> {
 
     @Override

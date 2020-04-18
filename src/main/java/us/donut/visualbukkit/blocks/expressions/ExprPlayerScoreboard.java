@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The scoreboard of a player", "Returns: scoreboard"})
+@Description({"The scoreboard of a player", "Changers: set", "Returns: scoreboard"})
 public class ExprPlayerScoreboard extends ChangeableExpressionBlock<Scoreboard> {
 
     @Override

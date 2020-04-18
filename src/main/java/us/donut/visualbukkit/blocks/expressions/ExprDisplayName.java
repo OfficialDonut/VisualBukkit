@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The display name of a player", "Returns: string"})
+@Description({"The display name of a player", "Changers: set", "Returns: string"})
 public class ExprDisplayName extends ChangeableExpressionBlock<String> {
 
     @Override

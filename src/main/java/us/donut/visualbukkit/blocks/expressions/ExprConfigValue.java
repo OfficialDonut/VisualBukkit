@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"A value in a config", "Returns: object"})
+@Description({"A value in a config", "Changers: set", "Returns: object"})
 public class ExprConfigValue extends ChangeableExpressionBlock<Object> {
 
     @Override

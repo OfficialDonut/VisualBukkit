@@ -10,7 +10,7 @@ import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent", "Returns: list of blocks"})
+@Description({"The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent", "Changers: set, add, remove", "Returns: list of blocks"})
 @Event({BlockExplodeEvent.class, EntityExplodeEvent.class})
 public class ExprExplodedBlocks extends ChangeableExpressionBlock<SimpleList> {
 

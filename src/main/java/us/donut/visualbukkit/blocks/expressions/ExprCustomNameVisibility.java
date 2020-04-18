@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The custom name visibility state of an entity", "Returns: boolean"})
+@Description({"The custom name visibility state of an entity", "Changers: set", "Returns: boolean"})
 public class ExprCustomNameVisibility extends ChangeableExpressionBlock<Boolean> {
 
     @Override

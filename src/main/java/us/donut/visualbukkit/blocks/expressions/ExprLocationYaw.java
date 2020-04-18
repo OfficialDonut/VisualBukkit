@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Location")
-@Description({"The yaw of a location", "Returns: number"})
+@Description({"The yaw of a location", "Changers: set, add, remove", "Returns: number"})
 public class ExprLocationYaw extends ChangeableExpressionBlock<Float> {
 
     @Override

@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Entity")
-@Description({"The passengers of an entity", "Returns: list of entities"})
+@Description({"The passengers of an entity", "Changers: add, remove", "Returns: list of entities"})
 public class ExprPassengers extends ChangeableExpressionBlock<SimpleList> {
 
     @Override

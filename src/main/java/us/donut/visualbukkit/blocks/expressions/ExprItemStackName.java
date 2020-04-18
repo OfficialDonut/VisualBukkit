@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Item Stack")
-@Description({"The name of an item stack", "Returns: string"})
+@Description({"The name of an item stack", "Changers: set", "Returns: string"})
 public class ExprItemStackName extends ChangeableExpressionBlock<String> {
 
     @Override

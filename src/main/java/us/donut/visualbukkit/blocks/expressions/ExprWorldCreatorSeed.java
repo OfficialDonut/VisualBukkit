@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The seed of a world creator", "Returns: number"})
+@Description({"The seed of a world creator", "Changers: set", "Returns: number"})
 public class ExprWorldCreatorSeed extends ChangeableExpressionBlock<Long> {
 
     @Override

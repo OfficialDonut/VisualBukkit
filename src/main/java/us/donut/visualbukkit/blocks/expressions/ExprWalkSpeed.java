@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The walk speed of a player", "Returns: number"})
+@Description({"The walk speed of a player", "Changers: set, add, remove", "Returns: number"})
 public class ExprWalkSpeed extends ChangeableExpressionBlock<Float> {
 
     @Override

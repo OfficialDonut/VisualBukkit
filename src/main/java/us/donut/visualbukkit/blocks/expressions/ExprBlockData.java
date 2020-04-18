@@ -9,7 +9,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Block")
-@Description({"The data of a block", "Returns: block data"})
+@Description({"The data of a block", "Changers: set", "Returns: block data"})
 public class ExprBlockData extends ChangeableExpressionBlock<BlockData> {
 
     @Override

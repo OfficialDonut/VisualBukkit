@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The message format in an AsyncPlayerChatEvent", "Returns: string"})
+@Description({"The message format in an AsyncPlayerChatEvent", "Changers: set", "Returns: string"})
 @Event(AsyncPlayerChatEvent.class)
 public class ExprMessageFormat extends ChangeableExpressionBlock<String> {
 

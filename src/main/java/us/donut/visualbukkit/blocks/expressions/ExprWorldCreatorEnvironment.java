@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The world environment of a world creator", "Returns: environment"})
+@Description({"The world environment of a world creator", "Changers: set", "Returns: environment"})
 public class ExprWorldCreatorEnvironment extends ChangeableExpressionBlock<World.Environment> {
 
     @Override

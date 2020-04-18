@@ -6,7 +6,7 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The custom name of an entity", "Returns: string"})
+@Description({"The custom name of an entity", "Changers: set", "Returns: string"})
 public class ExprCustomName extends ChangeableExpressionBlock<String> {
 
     @Override
