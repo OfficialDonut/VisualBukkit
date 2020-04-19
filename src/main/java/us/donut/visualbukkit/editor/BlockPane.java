@@ -39,7 +39,9 @@ public abstract class BlockPane extends Tab implements Loadable {
     }
 
     public void open() {
-        project.getTabPane().getTabs().add(this);
+        if (!project.getTabPane().getTabs().contains(this)) {
+            project.getTabPane().getTabs().add(this);
+        }
     }
 
     public abstract void insertInto(CtClass mainClass) throws Exception;
