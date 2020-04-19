@@ -28,6 +28,8 @@ public class PluginBuilder {
     private static ClassPool classPool = ClassPool.getDefault();
 
     public static void init() {
+        classPool.importPackage("java.io");
+        classPool.importPackage("java.nio.file");
         classPool.importPackage("java.util");
         classPool.importPackage("org.bukkit");
         classPool.importPackage("org.bukkit.entity");
