@@ -65,6 +65,7 @@ public class ProjectManager {
         splitPane.setDividerPositions(0.2, 0.825);
         currentProject = project;
         currentProject.load();
+        VisualBukkitLauncher.DATA_FILE.getConfig().set("last-project", currentProject.getName());
     }
 
     public static void promptCreateProject(boolean canCancel) {
