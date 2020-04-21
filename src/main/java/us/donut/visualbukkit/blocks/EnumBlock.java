@@ -8,11 +8,11 @@ import java.util.Map;
 
 public abstract class EnumBlock<T extends Enum<?>> extends ExpressionBlock<T> {
 
-    private static Map<Class<? extends Enum<?>>, String[]> constants = new HashMap<>();
+    private static Map<Class<?>, String[]> constants = new HashMap<>();
 
     @Override
     protected final SyntaxNode init() {
-        return new SyntaxNode(new ChoiceParameter(constants.computeIfAbsent(getEnum(), key -> computeConstants())));
+        return new SyntaxNode(new ChoiceParameter(constants.computeIfAbsent(getClass(), key -> computeConstants())));
     }
 
     protected String[] computeConstants() {
