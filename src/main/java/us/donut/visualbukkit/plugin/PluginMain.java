@@ -69,6 +69,10 @@ public class PluginMain extends JavaPlugin implements Listener {
         }
     }
 
+    private String decode(String string) {
+        return new String(Base64.getDecoder().decode(string), StandardCharsets.UTF_8);
+    }
+
     private boolean checkEquals(Object o1, Object o2) {
         if (o1 == null || o2 == null) {
             return false;
