@@ -110,7 +110,7 @@ public class BlockInfo<T extends CodeBlock> {
     public class Node extends Label {
 
         public Node() {
-            getStyleClass().add("block-info-node");
+            getStyleClass().add(StatementBlock.class.isAssignableFrom(blockType) ? "statement-block-info-node" : "expression-block-info-node");
             setText(getName());
             DragManager.enableDragging(this);
             if (description != null) {

@@ -60,13 +60,6 @@
     -fx-spacing: 10;
 }
 
-.block-info-node {
-    -fx-background-color: lightgray;
-    -fx-border-color: black;
-    -fx-padding: 5;
-    -fx-text-fill: black;
-}
-
 .block-pane-info-area {
     -fx-alignment: center-left;
     -fx-border-color: gray;
@@ -88,6 +81,16 @@
     -fx-padding: 0;
 }
 
+.expression-block-info-node {
+    -fx-background-color: lightgray;
+    -fx-background-insets: 1;
+    -fx-background-radius: 30;
+    -fx-border-color: black;
+    -fx-border-radius: 30;
+    -fx-padding: 5;
+    -fx-text-fill: black;
+}
+
 .expression-parameter-filled {
     -fx-alignment: center;
 }
@@ -95,7 +98,11 @@
 .expression-parameter-empty {
     -fx-alignment: center;
     -fx-background-color: gold;
+    -fx-background-insets: 1;
+    -fx-background-radius: 30;
     -fx-border-color: black;
+    -fx-border-radius: 30;
+    -fx-padding: 1;
 }
 
 .input-parameter {
@@ -133,6 +140,13 @@
     -fx-background-color: lightgreen;
     -fx-border-color: black;
     -fx-padding: 3;
+}
+
+.statement-block-info-node {
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-padding: 5;
+    -fx-text-fill: black;
 }
 
 .syntax-node {
