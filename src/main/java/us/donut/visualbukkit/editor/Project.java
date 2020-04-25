@@ -30,6 +30,7 @@ public class Project {
     private DataFile dataFile;
     private Pane projectPane;
     private DndTabPane tabPane;
+    private PluginConfigPane pluginConfigPane = new PluginConfigPane(this);
     private PluginEnablePane pluginEnablePane = new PluginEnablePane(this);
     private List<CommandPane> commands = new ArrayList<>();
     private List<EventPane> events = new ArrayList<>();
@@ -90,7 +91,7 @@ public class Project {
             }
         }
 
-        ConfigurationSection commandSection = getDataFile().getConfig().getConfigurationSection("commands");
+        ConfigurationSection commandSection = dataFile.getConfig().getConfigurationSection("commands");
         if (commandSection != null) {
             for (String command : commandSection.getKeys(false)) {
                 CommandPane commandPane = new CommandPane(this, command);
@@ -103,7 +104,7 @@ public class Project {
             }
         }
 
-        ConfigurationSection eventSection = getDataFile().getConfig().getConfigurationSection("events");
+        ConfigurationSection eventSection = dataFile.getConfig().getConfigurationSection("events");
         if (eventSection != null) {
             for (String eventClass : eventSection.getKeys(false)) {
                 try {
@@ -117,13 +118,18 @@ public class Project {
             }
         }
 
-        ConfigurationSection pluginEnableSection = getDataFile().getConfig().getConfigurationSection("plugin-enable");
+        ConfigurationSection pluginEnableSection = dataFile.getConfig().getConfigurationSection("plugin-enable");
         if (pluginEnableSection != null) {
             try {
                 pluginEnablePane.load(pluginEnableSection);
             } catch (Exception e) {
                 VisualBukkit.displayException("Failed to load plugin enable", e);
             }
+        }
+
+        ConfigurationSection pluginConfigSection = dataFile.getConfig().getConfigurationSection("plugin-config");
+        if (pluginConfigSection != null) {
+            pluginConfigPane.load(pluginConfigSection);
         }
     }
 
@@ -171,6 +177,7 @@ public class Project {
         data.set("plugin.depend", getPluginDepend());
         data.set("plugin.soft-depend", getPluginSoftDepend());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
+        pluginConfigPane.unload(data.createSection("plugin-config"));
         pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
         procedures.forEach(procedure -> procedure.unload(data.createSection("procedures." + procedure.getProcedure())));
@@ -205,6 +212,10 @@ public class Project {
 
     public TabPane getTabPane() {
         return tabPane;
+    }
+
+    public PluginConfigPane getPluginConfigPane() {
+        return pluginConfigPane;
     }
 
     public PluginEnablePane getPluginEnablePane() {
@@ -319,8 +330,11 @@ public class Project {
             newFunctionButton.setOnAction(e -> FunctionPane.promptNew(Project.this));
 
             TreeNode structureTree = new TreeNode("Project Structure");
-            structureTree.add(pluginEnablePane.getProjectStructureLabel(), commandTree, eventTree, procedureTree, functionTree);
             structureTree.toggle();
+            structureTree.add(
+                    pluginConfigPane.getProjectStructureLabel(),
+                    pluginEnablePane.getProjectStructureLabel(),
+                    commandTree, eventTree, procedureTree, functionTree);
 
             DirectoryChooser chooser = new DirectoryChooser();
             chooser.setTitle("Output Directory");

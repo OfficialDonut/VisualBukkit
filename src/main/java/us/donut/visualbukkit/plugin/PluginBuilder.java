@@ -71,6 +71,7 @@ public class PluginBuilder {
         Path srcDir = outputDir.resolve("src");
         Path jar = outputDir.resolve(name + ".jar");
         Path pluginYml = srcDir.resolve("plugin.yml");
+        Path configYml = srcDir.resolve("config.yml");
 
         Files.deleteIfExists(jar);
         if (Files.exists(srcDir)) {
@@ -80,6 +81,7 @@ public class PluginBuilder {
         Files.createDirectories(srcDir);
         addClasses(srcDir, mainClass, classPool.get(SimpleList.class.getCanonicalName()));
         Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
+        Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
     }
 

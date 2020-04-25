@@ -33,6 +33,7 @@ public class PluginMain extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
         if (!dataFile.exists()) {
             save(dataConfig, dataFile);

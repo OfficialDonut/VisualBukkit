@@ -67,6 +67,24 @@
     -fx-padding: 5 5 15 5;
 }
 
+.caret {
+    -fx-stroke: -fx-light-text-color
+}
+
+.code-area {
+   -fx-background-color: -fx-color;
+   -fx-padding: 3;
+}
+
+.code-area .lineno .text {
+    -fx-fill: -fx-mid-text-color;
+}
+
+.code-area .text {
+    -fx-fill: -fx-light-text-color;
+    -fx-font-family: consolas;
+}
+
 .combo-box-view {
     -fx-border-color: black;
     -fx-border-radius: 2;
@@ -108,6 +126,10 @@
 .input-parameter {
     -fx-padding: 1 1 1 3;
     -fx-min-width: 30;
+}
+
+.lineno {
+    -fx-background-color: -fx-color;
 }
 
 .parent-block {
