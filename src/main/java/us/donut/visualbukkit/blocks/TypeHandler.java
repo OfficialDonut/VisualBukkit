@@ -92,6 +92,9 @@ public class TypeHandler {
         if (from.isAssignableFrom(to) || from == Void.class) {
             return "((" + to.getCanonicalName() + ")" + src + ")";
         }
+        if (from == Object.class && isPrimitiveNumber(to)) {
+            return convert(Number.class, to, "((Number)" + src + ")");
+        }
         if (from == Object.class && to.isPrimitive()) {
             Class<?> wrapper = ClassUtils.primitiveToWrapper(to);
             return convert(wrapper, to, "((" + wrapper.getCanonicalName() + ")" + src + ")");
