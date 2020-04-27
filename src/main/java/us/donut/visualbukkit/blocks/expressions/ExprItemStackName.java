@@ -18,7 +18,7 @@ public class ExprItemStackName extends ChangeableExpressionBlock<String> {
 
     @Override
     public String toJava() {
-        return arg(0) + ".getItemMeta().getName()";
+        return arg(0) + ".getItemMeta().getDisplayName()";
     }
 
     @Override
