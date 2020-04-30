@@ -14,7 +14,9 @@ public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("temp variable", new InputParameter());
+        InputParameter inputParameter = new InputParameter();
+        inputParameter.getStyleClass().add("temp-variable");
+        return new SyntaxNode(inputParameter);
     }
 
     @Override

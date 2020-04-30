@@ -178,6 +178,10 @@
     -fx-spacing: 5;
 }
 
+.temp-variable {
+    -fx-background-color: yellow;
+}
+
 /*
 MIT License
 
