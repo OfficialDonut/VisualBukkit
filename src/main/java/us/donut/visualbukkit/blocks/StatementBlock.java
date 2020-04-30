@@ -48,10 +48,9 @@ public abstract class StatementBlock extends CodeBlock {
         return disabledContextMenu;
     }
 
-    private void disable() {
+    protected void disable() {
         disabled = true;
         if (PluginBuilder.isCodeValid(getBlockPane())) {
-            UndoManager.capture();
             setOpacity(0.5);
         } else {
             disabled = false;
@@ -59,10 +58,9 @@ public abstract class StatementBlock extends CodeBlock {
         }
     }
 
-    private void enable() {
+    protected void enable() {
         disabled = false;
         if (PluginBuilder.isCodeValid(getBlockPane())) {
-            UndoManager.capture();
             setOpacity(1);
         } else {
             disabled = true;
