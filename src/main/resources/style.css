@@ -141,7 +141,6 @@
 }
 
 .parent-block {
-    -fx-background-color: lightblue;
     -fx-border-color: black;
     -fx-fill-width: false;
     -fx-padding: 5 5 50 5;
