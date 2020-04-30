@@ -40,6 +40,14 @@
     -fx-background-color: derive(-fx-base, 5%);
 }
 
+.text-area {
+    -fx-text-fill: black;
+}
+
+.text-area .content {
+    -fx-background-color: white;
+}
+
 .text-field {
     -fx-border-color: black;
     -fx-border-radius: 2;

@@ -1,6 +1,7 @@
 package us.donut.visualbukkit.editor;
 
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import org.bukkit.configuration.ConfigurationSection;
@@ -177,6 +178,7 @@ public class Project {
         data.set("plugin.depend", getPluginDepend());
         data.set("plugin.soft-depend", getPluginSoftDepend());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
+        data.set("notes", projectPane.projectNotesArea.getText());
         pluginConfigPane.unload(data.createSection("plugin-config"));
         pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
@@ -294,6 +296,7 @@ public class Project {
         private TextField pluginDependField = new TextField();
         private TextField pluginSoftDependField = new TextField();
         private TextField pluginOutputDirField = new TextField();
+        private TextArea projectNotesArea = new TextArea();
 
         public Pane() {
             getStyleClass().add("project-pane");
@@ -306,6 +309,7 @@ public class Project {
             pluginDependField.setText(data.getString("plugin.depend", ""));
             pluginSoftDependField.setText(data.getString("plugin.soft-depend", ""));
             pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
+            projectNotesArea.setText(data.getString("notes", ""));
 
             Button buildButton = new Button("Build Plugin");
             buildButton.setOnAction(e -> {
@@ -329,6 +333,18 @@ public class Project {
             Button newFunctionButton = new Button("New Function");
             newFunctionButton.setOnAction(e -> FunctionPane.promptNew(Project.this));
 
+            GridPane buttonGrid = new GridPane();
+            buttonGrid.setHgap(5);
+            buttonGrid.setVgap(5);
+            buttonGrid.add(newCommandButton, 0, 0);
+            buttonGrid.add(newEventButton, 1, 0);
+            buttonGrid.add(newProcedureButton, 0, 1);
+            buttonGrid.add(newFunctionButton, 1, 1);
+            buttonGrid.getChildren().forEach(child -> {
+                ((Button) child).setMaxWidth(Double.MAX_VALUE);
+                GridPane.setFillWidth(child, true);
+            });
+
             TreeNode structureTree = new TreeNode("Project Structure");
             structureTree.toggle();
             structureTree.add(
@@ -350,8 +366,8 @@ public class Project {
             getChildren().addAll(
                     new TitleLabel("Project Manager", 1.5, true),
                     new Label("Name: " + name),
-                    structureTree, newCommandButton, newEventButton, newProcedureButton, newFunctionButton,
-                    new Separator(), new TitleLabel("Plugin Information", 1.5, true),
+                    structureTree, buttonGrid, new Separator(),
+                    new TitleLabel("Plugin Information", 1.5, true),
                     new CenteredHBox(10, new Label("Name:       "), pluginNameField),
                     new CenteredHBox(10, new Label("Version:    "), pluginVerField),
                     new CenteredHBox(10, new Label("Author:     "), pluginAuthorField),
@@ -360,7 +376,8 @@ public class Project {
                     new CenteredHBox(10, new Label("Depend:     "), pluginDependField),
                     new CenteredHBox(10, new Label("Soft Depend:"), pluginSoftDependField),
                     new CenteredHBox(10, new Label("Output dir: "), pluginOutputDirField),
-                    buildButton);
+                    buildButton, new Separator(),
+                    new TitleLabel("Project Notes", 1.5, true), projectNotesArea);
         }
     }
 }
