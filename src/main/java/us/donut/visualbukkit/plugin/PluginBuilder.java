@@ -83,6 +83,7 @@ public class PluginBuilder {
         Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
         Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
+        MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
     }
 
     private static CtClass getMainClass() throws NotFoundException {
