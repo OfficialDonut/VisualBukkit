@@ -16,6 +16,6 @@ public class StatDeleteFile extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(0) + ".delete()";
+        return arg(0) + ".delete();";
     }
 }
