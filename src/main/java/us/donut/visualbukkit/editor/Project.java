@@ -6,11 +6,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.controlsfx.control.CheckComboBox;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.TypeHandler;
 import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.plugin.hooks.PluginHookManager;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.DataFile;
 import us.donut.visualbukkit.util.TitleLabel;
@@ -170,6 +172,7 @@ public class Project {
     public void save() throws IOException {
         YamlConfiguration data = new YamlConfiguration();
         dataFile.setConfig(data);
+        data.set("plugin-hooks", projectPane.pluginHooksBox.getCheckModel().getCheckedItems());
         data.set("plugin.name", getPluginName());
         data.set("plugin.version", getPluginVer());
         data.set("plugin.author", getPluginAuthor());
@@ -250,6 +253,10 @@ public class Project {
         return blockPanes;
     }
 
+    public List<String> getPluginHooks() {
+        return projectPane.pluginHooksBox.getCheckModel().getCheckedItems();
+    }
+
     public String getPluginName() {
         return projectPane.pluginNameField.getText();
     }
@@ -288,6 +295,7 @@ public class Project {
         private TreeNode eventTree = new TreeNode("Events");
         private TreeNode procedureTree = new TreeNode("Procedures");
         private TreeNode functionTree = new TreeNode("Functions");
+        private CheckComboBox<String> pluginHooksBox = new CheckComboBox<>();
         private TextField pluginNameField = new TextField();
         private TextField pluginVerField = new TextField();
         private TextField pluginAuthorField = new TextField();
@@ -310,6 +318,15 @@ public class Project {
             pluginSoftDependField.setText(data.getString("plugin.soft-depend", ""));
             pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
             projectNotesArea.setText(data.getString("notes", ""));
+
+            pluginHooksBox.setStyle("-fx-focus-color: -fx-control-inner-background;");
+            List<String> hooks = data.getStringList("plugin-hooks");
+            for (String pluginName : PluginHookManager.getPluginNames()) {
+                pluginHooksBox.getItems().add(pluginName);
+                if (hooks.contains(pluginName)) {
+                    pluginHooksBox.getCheckModel().check(pluginName);
+                }
+            }
 
             Button buildButton = new Button("Build Plugin");
             buildButton.setOnAction(e -> {
@@ -365,8 +382,9 @@ public class Project {
 
             getChildren().addAll(
                     new TitleLabel("Project Manager", 1.5, true),
-                    new Label("Name: " + name),
-                    structureTree, buttonGrid, new Separator(),
+                    new Label("Name: " + name), structureTree,
+                    new CenteredHBox(10, new Label("Plugin Hooks:"), pluginHooksBox),
+                    buttonGrid, new Separator(),
                     new TitleLabel("Plugin Information", 1.5, true),
                     new CenteredHBox(10, new Label("Name:       "), pluginNameField),
                     new CenteredHBox(10, new Label("Version:    "), pluginVerField),

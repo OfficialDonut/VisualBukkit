@@ -11,6 +11,7 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
+import us.donut.visualbukkit.plugin.hooks.PluginHookManager;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.*;
@@ -47,7 +48,11 @@ public class PluginBuilder {
 
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
-            blockPane.insertInto(getMainClass());
+            CtClass mainClass = getMainClass();
+            for (String pluginHook : blockPane.getProject().getPluginHooks()) {
+                PluginHookManager.getPluginHook(pluginHook).insertInto(mainClass);
+            }
+            blockPane.insertInto(mainClass);
             return true;
         } catch (Exception e) {
             return false;
@@ -62,6 +67,10 @@ public class PluginBuilder {
         }
 
         CtClass mainClass = getMainClass();
+
+        for (String pluginHook : project.getPluginHooks()) {
+            PluginHookManager.getPluginHook(pluginHook).insertInto(mainClass);
+        }
 
         for (BlockPane blockPane : project.getBlockPanes()) {
             blockPane.insertInto(mainClass);
