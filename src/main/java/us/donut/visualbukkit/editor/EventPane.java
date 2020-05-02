@@ -30,7 +30,7 @@ public class EventPane extends BlockPane {
             Set<Class<?>> events = new TreeSet<>(Comparator.comparing(Class::getSimpleName));
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(eventPackage)) {
                 Class<?> clazz = classInfo.load();
-                if (Event.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
+                if (Event.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && !clazz.isAnnotationPresent(Deprecated.class)) {
                     events.add(classInfo.load());
                 }
             }
