@@ -16,14 +16,14 @@ public class ExprPlayerBalance extends ChangeableExpressionBlock<Double> {
 
     @Override
     public String toJava() {
-        return "vaultEconomy.getBalance(" + arg(0) + ")";
+        return "VaultHook.getEconomy().getBalance(" + arg(0) + ")";
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
-            case ADD: return "vaultEconomy.depositPlayer(" + arg(0) + "," + delta + ");";
-            case REMOVE: return "vaultEconomy.withdrawPlayer(" + arg(0) + "," + delta + ");";
+            case ADD: return "VaultHook.getEconomy().depositPlayer(" + arg(0) + "," + delta + ");";
+            case REMOVE: return "VaultHook.getEconomy().withdrawPlayer(" + arg(0) + "," + delta + ");";
             default: return null;
         }
     }

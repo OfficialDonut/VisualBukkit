@@ -3,13 +3,11 @@ package us.donut.visualbukkit.plugin.hooks.papi;
 import javassist.CtClass;
 import javassist.CtMethod;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.plugin.hooks.PluginHook;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PapiHook implements PluginHook {
+
+    private Class<?>[] classes = {ExpansionHandler.class, PapiExpansion.class, PlaceholderExpansion.class};
 
     @Override
     public void insertInto(CtClass mainClass) throws Exception {
@@ -21,11 +19,7 @@ public class PapiHook implements PluginHook {
     }
 
     @Override
-    public Map<Class<?>, CtClass> getCtClasses(String packageName) throws Exception {
-        Map<Class<?>, CtClass> classes = new HashMap<>();
-        classes.put(ExpansionHandler.class, PluginBuilder.getCtClass(ExpansionHandler.class, packageName));
-        classes.put(PapiExpansion.class, PluginBuilder.getCtClass(PapiExpansion.class, packageName));
-        classes.put(PlaceholderEvent.class, PluginBuilder.getCtClass(PlaceholderExpansion.class, packageName));
+    public Class<?>[] getClasses() {
         return classes;
     }
 }

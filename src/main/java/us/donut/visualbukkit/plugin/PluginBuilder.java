@@ -41,6 +41,7 @@ public class PluginBuilder {
         classPool.importPackage("org.bukkit.inventory.meta");
         classPool.importPackage("org.bukkit.util");
         classPool.importPackage("us.donut.visualbukkit.plugin");
+        classPool.importPackage("us.donut.visualbukkit.plugin.hooks");
         classPool.importPackage("us.donut.visualbukkit.util");
 
         try {
@@ -80,7 +81,9 @@ public class PluginBuilder {
         for (String pluginName : project.getPluginHooks()) {
             PluginHook pluginHook = PluginHookManager.getPluginHook(pluginName);
             pluginHook.insertInto(mainClass);
-            classes.putAll(pluginHook.getCtClasses(mainClass.getPackageName()));
+            for (Class<?> clazz : pluginHook.getClasses()) {
+                classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+            }
         }
 
         for (BlockPane blockPane : project.getBlockPanes()) {
@@ -110,13 +113,6 @@ public class PluginBuilder {
         Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
         MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
-    }
-
-    public static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
-        if (packageName == null) {
-            packageName = "a" + UUID.randomUUID().toString().replace("-", "");
-        }
-        return classPool.getAndRename(clazz.getCanonicalName(), packageName + "." + clazz.getSimpleName());
     }
 
     private static String createYml(Project project, String name, String mainClassName) {
@@ -166,6 +162,13 @@ public class PluginBuilder {
             }
         }
         return pluginYml.toString();
+    }
+
+    private static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
+        if (packageName == null) {
+            packageName = "a" + UUID.randomUUID().toString().replace("-", "");
+        }
+        return classPool.getAndRename(clazz.getCanonicalName(), packageName + "." + clazz.getSimpleName());
     }
 
     private static void createJar(Path rootDir, Path jar) throws IOException {

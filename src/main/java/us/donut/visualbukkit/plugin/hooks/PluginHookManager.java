@@ -1,20 +1,19 @@
 package us.donut.visualbukkit.plugin.hooks;
 
 import us.donut.visualbukkit.plugin.hooks.papi.PapiHook;
-import us.donut.visualbukkit.plugin.hooks.worldguard.WorldGuardHook;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class PluginHookManager {
 
-    private static Map<String, PluginHook> pluginHooks = new HashMap<>();
+    private static Map<String, PluginHook> pluginHooks = new LinkedHashMap<>();
 
     static {
         pluginHooks.put("PlaceholderAPI", new PapiHook());
-        pluginHooks.put("Vault", new VaultHook());
-        pluginHooks.put("WorldGuard", new WorldGuardHook());
+        pluginHooks.put("Vault", new SimplePluginHook(VaultHook.class));
+        pluginHooks.put("WorldGuard", new SimplePluginHook(WorldGuardHook.class));
     }
 
     public static PluginHook getPluginHook(String pluginName) {

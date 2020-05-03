@@ -1,18 +1,13 @@
 package us.donut.visualbukkit.plugin.hooks;
 
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 
-public class VaultHook implements PluginHook {
+public class VaultHook {
 
-    public VaultHook() {
-        ClassPool.getDefault().importPackage("net.milkbowl.vault.economy");
-    }
+    private static Economy economy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();
 
-    @Override
-    public void insertInto(CtClass mainClass) throws Exception {
-        CtField field = CtField.make("private Economy vaultEconomy = Bukkit.getServicesManager().getRegistration(Economy.class).getProvider();", mainClass);
-        mainClass.addField(field);
+    public static Economy getEconomy() {
+        return economy;
     }
 }

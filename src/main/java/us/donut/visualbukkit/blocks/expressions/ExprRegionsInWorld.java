@@ -16,6 +16,6 @@ public class ExprRegionsInWorld extends ExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "us.donut.visualbukkit.plugin.hooks.worldguard.WorldGuardHandler.getRegions(" + arg(0) + ")";
+        return "WorldGuardHook.getRegions(" + arg(0) + ")";
     }
 }

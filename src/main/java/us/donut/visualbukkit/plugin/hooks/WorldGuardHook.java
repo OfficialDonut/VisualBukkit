@@ -1,4 +1,4 @@
-package us.donut.visualbukkit.plugin.hooks.worldguard;
+package us.donut.visualbukkit.plugin.hooks;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -8,7 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import us.donut.visualbukkit.util.SimpleList;
 
-public class WorldGuardHandler {
+public class WorldGuardHook {
 
     private static RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
 
