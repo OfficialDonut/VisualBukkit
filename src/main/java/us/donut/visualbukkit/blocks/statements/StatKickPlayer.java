@@ -17,6 +17,6 @@ public class StatKickPlayer extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(0) + ".kickPlayer(color(" + arg(1) + "));";
+        return arg(0) + ".kickPlayer(PluginMain.color(" + arg(1) + "));";
     }
 }

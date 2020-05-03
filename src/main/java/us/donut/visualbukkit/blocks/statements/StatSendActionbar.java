@@ -17,6 +17,6 @@ public class StatSendActionbar extends StatementBlock {
     public String toJava() {
         return arg(1) + ".spigot().sendMessage(" +
                 "net.md_5.bungee.api.ChatMessageType.ACTION_BAR, " +
-                "net.md_5.bungee.api.chat.TextComponent.fromLegacyText(color(" + arg(0) + ")));";
+                "net.md_5.bungee.api.chat.TextComponent.fromLegacyText(PluginMain.color(" + arg(0) + ")));";
     }
 }

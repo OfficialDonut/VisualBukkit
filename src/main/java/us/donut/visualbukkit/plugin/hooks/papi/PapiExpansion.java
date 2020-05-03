@@ -3,13 +3,13 @@ package us.donut.visualbukkit.plugin.hooks.papi;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import us.donut.visualbukkit.plugin.PluginMain;
 
-public class VisualBukkitExpansion extends PlaceholderExpansion {
+public class PapiExpansion extends PlaceholderExpansion {
 
-    private JavaPlugin plugin;
+    private PluginMain plugin;
 
-    public VisualBukkitExpansion(JavaPlugin plugin){
+    public PapiExpansion(PluginMain plugin) {
         this.plugin = plugin;
     }
 

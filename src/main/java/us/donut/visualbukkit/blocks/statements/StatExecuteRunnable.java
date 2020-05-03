@@ -17,8 +17,8 @@ public class StatExecuteRunnable extends StatementBlock {
     @Override
     public String toJava() {
         switch (arg(1)) {
-            case "sync": return arg(0) + ".runTask(this);";
-            case "async": return arg(0) + ".runTaskAsynchronously(this);";
+            case "sync": return arg(0) + ".runTask(PluginMain.getInstance());";
+            case "async": return arg(0) + ".runTaskAsynchronously(PluginMain.getInstance());";
             default: return arg(0) + ".run();";
         }
     }

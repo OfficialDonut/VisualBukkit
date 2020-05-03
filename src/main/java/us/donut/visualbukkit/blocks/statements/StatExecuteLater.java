@@ -19,6 +19,6 @@ public class StatExecuteLater extends StatementBlock {
     @Override
     public String toJava() {
         String method = arg(1).equals("async") ? ".runTaskLaterAsynchronously" : ".runTaskLater";
-        return arg(0) + method + "(this," + arg(2) + ".getSeconds() * 20);";
+        return arg(0) + method + "(PluginMain.getInstance()," + arg(2) + ".getSeconds() * 20);";
     }
 }

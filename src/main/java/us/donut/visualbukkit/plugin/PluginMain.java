@@ -1,51 +1,48 @@
 package us.donut.visualbukkit.plugin;
 
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.*;
 
-@SuppressWarnings("UnstableApiUsage")
 public class PluginMain extends JavaPlugin implements Listener {
 
-    private final Map<String, Object> variables = new HashMap<>();
-    private final HashFunction hashFunction = Hashing.md5();
-    private File dataFile = new File(getDataFolder(), "data.yml");
-    private YamlConfiguration dataConfig = YamlConfiguration.loadConfiguration(dataFile);
+    private static PluginMain instance;
+    private static File dataFile;
+    private static YamlConfiguration dataConfig;
 
     @Override
     public void onEnable() {
+        instance = this;
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
+        dataFile = new File(getDataFolder(), "data.yml");
+        dataConfig = YamlConfiguration.loadConfiguration(dataFile);
         if (!dataFile.exists()) {
-            save(dataConfig, dataFile);
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        loadVariables();
-        Bukkit.getScheduler().runTaskTimer(this, this::saveVariables, 0, 18000);
+        VariableManager.loadVariables();
+        Bukkit.getScheduler().runTaskTimer(this, VariableManager::saveVariables, 0, 18000);
     }
 
     @Override
     public void onDisable() {
-        saveVariables();
+        VariableManager.saveVariables();
     }
 
     @Override
@@ -53,41 +50,24 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
-    public BukkitRunnable getRunnable(String procedure, Object... args) {
-        return new BukkitRunnable() {
-            @Override
-            public void run() {
-                procedure(procedure, args);
-            }
-        };
-    }
+    public static void procedure(String procedure, Object... args) {}
 
-    public void procedure(String procedure, Object... args) {}
-
-    public Object function(String function, Object... args) {
+    public static Object function(String function, Object... args) {
         return null;
     }
 
-    private void save(YamlConfiguration config, File file) {
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String decode(String string) {
+    public static String decode(String string) {
         return new String(Base64.getDecoder().decode(string), StandardCharsets.UTF_8);
     }
 
-    private boolean checkEquals(Object o1, Object o2) {
+    public static boolean checkEquals(Object o1, Object o2) {
         if (o1 == null || o2 == null) {
             return false;
         }
         return o1 instanceof Number && o2 instanceof Number ? ((Number) o1).doubleValue() == ((Number) o2).doubleValue() : o1.equals(o2);
     }
 
-    private String getString(Object object) {
+    public static String getString(Object object) {
         if (object == null) {
             return "null";
         }
@@ -103,11 +83,11 @@ public class PluginMain extends JavaPlugin implements Listener {
         return object.toString();
     }
 
-    private String color(String string) {
+    public static String color(String string) {
         return string != null ? ChatColor.translateAlternateColorCodes('&', string) : null;
     }
 
-    private List<String> color(List<String> strings) {
+    public static List<String> color(List<String> strings) {
         for (int i = 0; i < strings.size(); i++) {
             strings.add(i, color(strings.get(i)));
             strings.remove(i + 1);
@@ -115,68 +95,15 @@ public class PluginMain extends JavaPlugin implements Listener {
         return strings;
     }
 
-    private String getVariable(Object... objects) {
-        StringBuilder variable = new StringBuilder();
-        for (Object object : objects) {
-            String string = object.toString();
-            if (object instanceof Entity) {
-                string = ((Entity) object).getUniqueId().toString();
-            } else if (object instanceof OfflinePlayer) {
-                string = ((OfflinePlayer) object).getUniqueId().toString();
-            } else if (object instanceof World) {
-                string = ((World) object).getUID().toString();
-            } else if (object instanceof Block) {
-                string = ((Block) object).getLocation().toString();
-            }
-            variable.append(object.getClass().getCanonicalName()).append(string);
-        }
-        return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
+    public static PluginMain getInstance() {
+        return instance;
     }
 
-    private void addToVariable(String variable, Object obj, Map<String, Object> variables) {
-        Object variableValue = variables.get(variable);
-        if (variableValue instanceof SimpleList) {
-            ((SimpleList) variableValue).add(obj);
-        } else if (variableValue instanceof Number && obj instanceof Number) {
-            variables.put(variable, ((Number) variableValue).doubleValue() + ((Number) obj).doubleValue());
-        } else if (variableValue instanceof Duration && obj instanceof Duration) {
-            variables.put(variable, ((Duration) variableValue).plus((Duration) obj));
-        }
+    public static File getDataFile() {
+        return dataFile;
     }
 
-    private void removeFromVariable(String variable, Object obj, Map<String, Object> variables) {
-        Object variableValue = variables.get(variable);
-        if (variableValue instanceof SimpleList) {
-            ((SimpleList) variableValue).remove(obj);
-        } else if (variableValue instanceof Number && obj instanceof Number) {
-            variables.put(variable, ((Number) variableValue).doubleValue() - ((Number) obj).doubleValue());
-        } else if (variableValue instanceof Duration && obj instanceof Duration) {
-            variables.put(variable, ((Duration) variableValue).minus((Duration) obj));
-        }
-    }
-
-    private void loadVariables() {
-        for (String key : dataConfig.getKeys(false)) {
-            Object object = dataConfig.get(key);
-            variables.put(key, object instanceof Collection ? new SimpleList(object) : object);
-        }
-    }
-
-    private void saveVariables() {
-        for (Map.Entry<String, Object> entry : variables.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (value instanceof SimpleList) {
-                value = ((SimpleList) value).stream().filter(this::isSerializable).toArray();
-            }
-            if (isSerializable(value)) {
-                dataConfig.set(key, value);
-            }
-        }
-        save(dataConfig, dataFile);
-    }
-
-    private boolean isSerializable(Object object) {
-        return object instanceof Serializable || object instanceof ConfigurationSerializable;
+    public static YamlConfiguration getDataConfig() {
+        return dataConfig;
     }
 }

@@ -15,6 +15,6 @@ public class ExprEquals extends ConditionBlock {
 
     @Override
     protected String toNonNegatedJava() {
-        return "checkEquals(" + arg(0) + "," + arg(2) + ")";
+        return "PluginMain.checkEquals(" + arg(0) + "," + arg(2) + ")";
     }
 }

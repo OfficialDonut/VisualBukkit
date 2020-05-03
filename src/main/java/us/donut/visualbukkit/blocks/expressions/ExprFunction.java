@@ -55,9 +55,9 @@ public class ExprFunction extends ExpressionBlock<Object> {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
                 getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-                return "this.function(\"" + function.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
+                return "PluginMain.function(\"" + function.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
             } else {
-                return "this.function(\"" + function.getMethodName() + "\", new Object[0])";
+                return "PluginMain.function(\"" + function.getMethodName() + "\", new Object[0])";
             }
         }
         return "new Object()";

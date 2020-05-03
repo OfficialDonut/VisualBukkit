@@ -19,6 +19,6 @@ public class StatExecutePeriodically extends StatementBlock {
     @Override
     public String toJava() {
         String method = arg(1).equals("async") ? ".runTaskTimerAsynchronously" : ".runTaskTimer";
-        return arg(0) + method + "(this, 0L," + arg(2) + ".getSeconds() * 20);";
+        return arg(0) + method + "(PluginMain.getInstance(), 0L," + arg(2) + ".getSeconds() * 20);";
     }
 }

@@ -23,8 +23,8 @@ public class ExprTeamEntries extends ChangeableExpressionBlock<SimpleList> {
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
-            case ADD: return arg(0) + ".addEntry(color(" + delta + "));";
-            case REMOVE: return arg(0) + ".removeEntry(color(" + delta + "));";
+            case ADD: return arg(0) + ".addEntry(PluginMain.color(" + delta + "));";
+            case REMOVE: return arg(0) + ".removeEntry(PluginMain.color(" + delta + "));";
             default: return null;
         }
     }

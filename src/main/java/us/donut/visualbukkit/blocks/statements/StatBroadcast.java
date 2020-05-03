@@ -14,6 +14,6 @@ public class StatBroadcast extends StatementBlock {
 
     @Override
     public String toJava() {
-        return "Bukkit.broadcastMessage(color(" + arg(0) + "));";
+        return "Bukkit.broadcastMessage(PluginMain.color(" + arg(0) + "));";
     }
 }

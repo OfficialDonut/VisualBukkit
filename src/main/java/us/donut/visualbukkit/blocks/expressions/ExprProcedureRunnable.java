@@ -54,12 +54,12 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
                 getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-                return "getRunnable(\"" + procedure.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
+                return "new ProcedureRunnable(\"" + procedure.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
             } else {
-                return "getRunnable(\"" + procedure.getMethodName() + "\", new Object[0])";
+                return "new ProcedureRunnable(\"" + procedure.getMethodName() + "\", new Object[0])";
             }
         }
-        return "getRunnable(null, null)";
+        return "new ProcedureRunnable(null, null)";
     }
 
     @Override

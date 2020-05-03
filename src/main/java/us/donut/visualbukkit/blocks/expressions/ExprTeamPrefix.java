@@ -21,6 +21,6 @@ public class ExprTeamPrefix extends ChangeableExpressionBlock<String> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setPrefix(color(" + delta + "));" : null;
+        return changeType == ChangeType.SET ? arg(0) + ".setPrefix(PluginMain.color(" + delta + "));" : null;
     }
 }
