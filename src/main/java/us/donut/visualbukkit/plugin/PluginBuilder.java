@@ -89,6 +89,9 @@ public class PluginBuilder {
 
         Files.createDirectories(srcDir);
         addClasses(srcDir, mainClass, classPool.get(SimpleList.class.getCanonicalName()));
+        for (String pluginHook : project.getPluginHooks()) {
+            addClasses(srcDir, PluginHookManager.getPluginHook(pluginHook).getClasses().toArray(new CtClass[0]));
+        }
         Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
         Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);

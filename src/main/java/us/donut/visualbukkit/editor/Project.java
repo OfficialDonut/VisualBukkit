@@ -320,6 +320,7 @@ public class Project {
             projectNotesArea.setText(data.getString("notes", ""));
 
             pluginHooksBox.setStyle("-fx-focus-color: -fx-control-inner-background;");
+            pluginHooksBox.setMaxWidth(150);
             List<String> hooks = data.getStringList("plugin-hooks");
             for (String pluginName : PluginHookManager.getPluginNames()) {
                 pluginHooksBox.getItems().add(pluginName);

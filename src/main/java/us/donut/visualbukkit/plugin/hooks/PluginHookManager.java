@@ -9,6 +9,7 @@ public class PluginHookManager {
     private static Map<String, PluginHook> pluginHooks = new HashMap<>();
 
     static {
+        pluginHooks.put("PlaceholderAPI", new PapiHook());
         pluginHooks.put("Vault", new VaultHook());
     }
 
