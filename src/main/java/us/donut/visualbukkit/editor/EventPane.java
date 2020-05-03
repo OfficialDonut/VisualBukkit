@@ -12,7 +12,7 @@ import javassist.bytecode.annotation.Annotation;
 import org.bukkit.event.Event;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.BlockRegistry;
-import us.donut.visualbukkit.plugin.hooks.PlaceholderEvent;
+import us.donut.visualbukkit.plugin.hooks.papi.PlaceholderEvent;
 import us.donut.visualbukkit.util.TitleLabel;
 
 import java.io.IOException;

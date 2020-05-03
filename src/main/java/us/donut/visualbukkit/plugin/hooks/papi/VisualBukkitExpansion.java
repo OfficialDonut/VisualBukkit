@@ -1,4 +1,4 @@
-package us.donut.visualbukkit.plugin.hooks;
+package us.donut.visualbukkit.plugin.hooks.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
@@ -35,7 +35,7 @@ public class VisualBukkitExpansion extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier(){
-        throw new UnsupportedOperationException();
+        return plugin.getName().toLowerCase();
     }
 
     @Override

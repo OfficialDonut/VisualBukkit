@@ -1,5 +1,7 @@
 package us.donut.visualbukkit.plugin.hooks;
 
+import us.donut.visualbukkit.plugin.hooks.papi.PapiHook;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
