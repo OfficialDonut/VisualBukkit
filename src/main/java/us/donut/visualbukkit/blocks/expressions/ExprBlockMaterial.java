@@ -11,6 +11,7 @@ import java.util.List;
 public class ExprBlockMaterial extends EnumBlock<Material> {
 
     @Override
+    @SuppressWarnings("deprecation")
     protected String[] computeConstants() {
         List<String> materials = new ArrayList<>();
         for (Material value : Material.values()) {
