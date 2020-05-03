@@ -14,6 +14,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
@@ -52,8 +53,13 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
-    public Runnable getRunnable(String procedure, Object... args) {
-        return () -> procedure(procedure, args);
+    public BukkitRunnable getRunnable(String procedure, Object... args) {
+        return new BukkitRunnable() {
+            @Override
+            public void run() {
+                procedure(procedure, args);
+            }
+        };
     }
 
     public void procedure(String procedure, Object... args) {}

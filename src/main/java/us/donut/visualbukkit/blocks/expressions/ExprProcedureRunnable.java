@@ -3,6 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.scheduler.BukkitRunnable;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
@@ -14,8 +15,8 @@ import us.donut.visualbukkit.editor.ProjectManager;
 import java.util.List;
 import java.util.StringJoiner;
 
-@Description({"Gets a procedure runnable", "Returns: runnable"})
-public class ExprProcedureRunnable extends ExpressionBlock<Runnable> {
+@Description({"Gets a procedure runnable", "Returns: bukkit runnable"})
+public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
 
     private ProcedurePane procedure;
 

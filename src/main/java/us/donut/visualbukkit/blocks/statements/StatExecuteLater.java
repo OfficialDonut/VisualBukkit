@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.blocks.statements;
 
+import org.bukkit.scheduler.BukkitRunnable;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
@@ -12,12 +13,12 @@ public class StatExecuteLater extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("execute", Runnable.class, new ChoiceParameter("sync", "async"), "after", Duration.class);
+        return new SyntaxNode("execute", BukkitRunnable.class, new ChoiceParameter("sync", "async"), "after", Duration.class);
     }
 
     @Override
     public String toJava() {
-        String method = arg(1).equals("async") ? "Bukkit.getScheduler().runTaskLaterAsynchronously" : "Bukkit.getScheduler().runTaskLater";
-        return method + "(this," + arg(0) + "," + arg(2) + ".getSeconds() * 20);";
+        String method = arg(1).equals("async") ? ".runTaskLaterAsynchronously" : ".runTaskLater";
+        return arg(0) + method + "(this," + arg(2) + ".getSeconds() * 20);";
     }
 }
