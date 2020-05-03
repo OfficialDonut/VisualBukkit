@@ -23,6 +23,6 @@ public class ExprJoinMessage extends ChangeableExpressionBlock<String> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? "event.setJoinMessage(" + delta + ");" : null;
+        return changeType == ChangeType.SET ? "event.setJoinMessage(PluginMain.color(" + delta + "));" : null;
     }
 }
