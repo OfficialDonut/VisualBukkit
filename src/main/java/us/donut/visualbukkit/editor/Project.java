@@ -76,7 +76,7 @@ public class Project {
 
         for (ProcedurePane procedure : procedures) {
             try {
-                procedure.load(procedureSection.getConfigurationSection(procedure.getProcedure()));
+                procedure.load(procedureSection.getConfigurationSection(procedure.getMethodName()));
                 projectPane.procedureTree.add(procedure.getProjectStructureLabel());
             } catch (Exception e) {
                 procedures.remove(procedure);
@@ -86,7 +86,7 @@ public class Project {
 
         for (FunctionPane function : functions) {
             try {
-                function.load(functionSection.getConfigurationSection(function.getFunction()));
+                function.load(functionSection.getConfigurationSection(function.getMethodName()));
                 projectPane.functionTree.add(function.getProjectStructureLabel());
             } catch (Exception e) {
                 functions.remove(function);
@@ -185,8 +185,8 @@ public class Project {
         pluginConfigPane.unload(data.createSection("plugin-config"));
         pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
-        procedures.forEach(procedure -> procedure.unload(data.createSection("procedures." + procedure.getProcedure())));
-        functions.forEach(function -> function.unload(data.createSection("functions." + function.getFunction())));
+        procedures.forEach(procedure -> procedure.unload(data.createSection("procedures." + procedure.getMethodName())));
+        functions.forEach(function -> function.unload(data.createSection("functions." + function.getMethodName())));
         events.forEach(eventPane -> {
             String className = eventPane.getEvent().getCanonicalName().replace('.', '_');
             eventPane.unload(data.createSection("events." + className));

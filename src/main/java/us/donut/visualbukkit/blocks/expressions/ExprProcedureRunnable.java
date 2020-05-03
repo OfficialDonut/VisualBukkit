@@ -54,9 +54,9 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
                 getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-                return "getRunnable(\"" + procedure.getProcedure() + "\", new Object[]{" + joiner.toString() + "})";
+                return "getRunnable(\"" + procedure.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
             } else {
-                return "getRunnable(\"" + procedure.getProcedure() + "\", new Object[0])";
+                return "getRunnable(\"" + procedure.getMethodName() + "\", new Object[0])";
             }
         }
         return "getRunnable(null, null)";
@@ -65,13 +65,13 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
     @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
-        section.set("procedure", procedure.getProcedure());
+        section.set("procedure", procedure.getMethodName());
     }
 
     @Override
     public void load(ConfigurationSection section) throws Exception {
         for (ProcedurePane procedure : ProjectManager.getCurrentProject().getProcedures()) {
-            if (procedure.getProcedure().equalsIgnoreCase(section.getString("procedure"))) {
+            if (procedure.getMethodName().equalsIgnoreCase(section.getString("procedure"))) {
                 setProcedure(procedure);
             }
         }
@@ -85,7 +85,7 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
     private void setProcedure(ProcedurePane procedure) {
         this.procedure = procedure;
         getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add(procedure.getProcedure() + "(");
+        getSyntaxNode().add(procedure.getMethodName() + "(");
         Class<?>[] parameters = procedure.getParameters();
         for (int i = 0; i < parameters.length; i++) {
             getSyntaxNode().add(parameters[i]);
