@@ -1,10 +1,7 @@
 package us.donut.visualbukkit.blocks;
 
-import com.google.common.reflect.ClassPath;
-import javafx.application.Platform;
-import us.donut.visualbukkit.VisualBukkit;
+import org.reflections.Reflections;
 
-import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,23 +12,16 @@ public class BlockRegistry {
 
     private static Map<Class<? extends CodeBlock>, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
 
-    @SuppressWarnings({"UnstableApiUsage", "unchecked"})
+    @SuppressWarnings("unchecked")
     public static void registerAll() {
-        try {
-            ClassPath classPath = ClassPath.from(BlockRegistry.class.getClassLoader());
-            String blockPackage = "us.donut.visualbukkit.blocks";
-            for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(blockPackage)) {
-                Class<?> clazz = classInfo.load();
-                if (CodeBlock.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
-                    Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
-                    BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
-                    blockTypes.put(blockType, blockInfo);
-                    blockInfo.createBlock();
-                }
+        Reflections reflections = new Reflections("us.donut.visualbukkit.blocks");
+        for (Class<?> clazz : reflections.getSubTypesOf(CodeBlock.class)) {
+            if (!Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
+                Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
+                BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
+                blockTypes.put(blockType, blockInfo);
+                blockInfo.createBlock();
             }
-        } catch (IOException e) {
-            VisualBukkit.displayException("Failed to register blocks", e);
-            Platform.exit();
         }
     }
 

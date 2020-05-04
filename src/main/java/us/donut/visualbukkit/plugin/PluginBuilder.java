@@ -11,6 +11,8 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
+import us.donut.visualbukkit.plugin.hooks.PluginHook;
+import us.donut.visualbukkit.plugin.hooks.PluginHookManager;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.*;
@@ -19,6 +21,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
@@ -36,10 +40,12 @@ public class PluginBuilder {
         classPool.importPackage("org.bukkit.inventory");
         classPool.importPackage("org.bukkit.inventory.meta");
         classPool.importPackage("org.bukkit.util");
+        classPool.importPackage("us.donut.visualbukkit.plugin");
+        classPool.importPackage("us.donut.visualbukkit.plugin.hooks");
         classPool.importPackage("us.donut.visualbukkit.util");
 
         try {
-            getMainClass();
+            getCtClass(PluginMain.class, null);
         } catch (NotFoundException e) {
             VisualBukkit.displayException("Failed to init plugin main class", e);
         }
@@ -47,7 +53,11 @@ public class PluginBuilder {
 
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
-            blockPane.insertInto(getMainClass());
+            CtClass mainClass = getCtClass(PluginMain.class, null);
+            for (String pluginHook : blockPane.getProject().getPluginHooks()) {
+                PluginHookManager.getPluginHook(pluginHook).insertInto(mainClass);
+            }
+            blockPane.insertInto(mainClass);
             return true;
         } catch (Exception e) {
             return false;
@@ -61,7 +71,20 @@ public class PluginBuilder {
             name = "VisualBukkitPlugin";
         }
 
-        CtClass mainClass = getMainClass();
+        Map<Class<?>, CtClass> classes = new HashMap<>();
+        CtClass mainClass = getCtClass(PluginMain.class, null);
+        classes.put(PluginMain.class, mainClass);
+        classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
+        classes.put(ProcedureRunnable.class, getCtClass(ProcedureRunnable.class, mainClass.getPackageName()));
+        classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
+
+        for (String pluginName : project.getPluginHooks()) {
+            PluginHook pluginHook = PluginHookManager.getPluginHook(pluginName);
+            pluginHook.insertInto(mainClass);
+            for (Class<?> clazz : pluginHook.getClasses()) {
+                classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+            }
+        }
 
         for (BlockPane blockPane : project.getBlockPanes()) {
             blockPane.insertInto(mainClass);
@@ -71,21 +94,25 @@ public class PluginBuilder {
         Path srcDir = outputDir.resolve("src");
         Path jar = outputDir.resolve(name + ".jar");
         Path pluginYml = srcDir.resolve("plugin.yml");
+        Path configYml = srcDir.resolve("config.yml");
 
         Files.deleteIfExists(jar);
         if (Files.exists(srcDir)) {
             MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
         }
-
         Files.createDirectories(srcDir);
-        addClasses(srcDir, mainClass, classPool.get(SimpleList.class.getCanonicalName()));
-        Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
-        createJar(srcDir, jar);
-    }
 
-    private static CtClass getMainClass() throws NotFoundException {
-        String name = "visualbukkit.a" + UUID.randomUUID().toString().replace("-", "");
-        return classPool.getAndRename(PluginMain.class.getCanonicalName(), name);
+        for (CtClass ctClass : classes.values()) {
+            for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
+                ctClass.replaceClassName(entry.getKey().getCanonicalName(), entry.getValue().getName());
+            }
+        }
+
+        addClasses(srcDir, classes.values());
+        Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
+        Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
+        createJar(srcDir, jar);
+        MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
     }
 
     private static String createYml(Project project, String name, String mainClassName) {
@@ -137,6 +164,13 @@ public class PluginBuilder {
         return pluginYml.toString();
     }
 
+    private static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
+        if (packageName == null) {
+            packageName = "a" + UUID.randomUUID().toString().replace("-", "");
+        }
+        return classPool.getAndRename(clazz.getCanonicalName(), packageName + "." + clazz.getSimpleName());
+    }
+
     private static void createJar(Path rootDir, Path jar) throws IOException {
         try (OutputStream os = Files.newOutputStream(jar);
              JarOutputStream jos = new JarOutputStream(os);
@@ -167,7 +201,7 @@ public class PluginBuilder {
         }
     }
 
-    private static void addClasses(Path dir, CtClass... classes) throws IOException, CannotCompileException {
+    private static void addClasses(Path dir, Iterable<CtClass> classes) throws IOException, CannotCompileException {
         for (CtClass ctClass : classes) {
             Path packageDir = dir;
             for (String packageComponent : ctClass.getPackageName().split("\\.")) {

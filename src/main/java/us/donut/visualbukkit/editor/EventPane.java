@@ -12,6 +12,7 @@ import javassist.bytecode.annotation.Annotation;
 import org.bukkit.event.Event;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.BlockRegistry;
+import us.donut.visualbukkit.plugin.hooks.papi.PlaceholderEvent;
 import us.donut.visualbukkit.util.TitleLabel;
 
 import java.io.IOException;
@@ -30,10 +31,11 @@ public class EventPane extends BlockPane {
             Set<Class<?>> events = new TreeSet<>(Comparator.comparing(Class::getSimpleName));
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(eventPackage)) {
                 Class<?> clazz = classInfo.load();
-                if (Event.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
+                if (Event.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && !clazz.isAnnotationPresent(Deprecated.class)) {
                     events.add(classInfo.load());
                 }
             }
+            events.add(PlaceholderEvent.class);
             EVENTS = events.toArray(new Class<?>[0]);
         } catch (IOException e) {
             VisualBukkit.displayException("Failed to load events", e);

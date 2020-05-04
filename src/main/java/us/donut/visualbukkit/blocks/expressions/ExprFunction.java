@@ -55,9 +55,9 @@ public class ExprFunction extends ExpressionBlock<Object> {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
                 getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-                return "this.function(\"" + function.getFunction() + "\", new Object[]{" + joiner.toString() + "})";
+                return "PluginMain.function(\"" + function.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
             } else {
-                return "this.function(\"" + function.getFunction() + "\", new Object[0])";
+                return "PluginMain.function(\"" + function.getMethodName() + "\", new Object[0])";
             }
         }
         return "new Object()";
@@ -66,13 +66,13 @@ public class ExprFunction extends ExpressionBlock<Object> {
     @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
-        section.set("function", function.getFunction());
+        section.set("function", function.getMethodName());
     }
 
     @Override
     public void load(ConfigurationSection section) throws Exception {
         for (FunctionPane function : ProjectManager.getCurrentProject().getFunctions()) {
-            if (function.getFunction().equalsIgnoreCase(section.getString("function"))) {
+            if (function.getMethodName().equalsIgnoreCase(section.getString("function"))) {
                 setFunction(function);
             }
         }
@@ -86,7 +86,7 @@ public class ExprFunction extends ExpressionBlock<Object> {
     private void setFunction(FunctionPane function) {
         this.function = function;
         getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add(function.getFunction() + "(");
+        getSyntaxNode().add(function.getMethodName() + "(");
         Class<?>[] parameters = function.getParameters();
         for (int i = 0; i < parameters.length; i++) {
             getSyntaxNode().add(parameters[i]);

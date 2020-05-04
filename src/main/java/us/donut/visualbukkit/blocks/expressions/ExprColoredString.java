@@ -16,6 +16,6 @@ public class ExprColoredString extends ExpressionBlock<String> {
 
     @Override
     public String toJava() {
-        return "color(" + arg(0) + ")";
+        return "PluginMain.color(" + arg(0) + ")";
     }
 }

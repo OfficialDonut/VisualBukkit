@@ -15,6 +15,6 @@ public class StatMessage extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(1) + ".sendMessage(" + arg(0) + ");";
+        return arg(1) + ".sendMessage(PluginMain.color(" + arg(0) + "));";
     }
 }

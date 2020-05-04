@@ -29,7 +29,7 @@ public class ExprItemStackLore extends ChangeableExpressionBlock<SimpleList> {
             String itemMetaVar = randomVar();
             return "ItemStack " + itemStackVar + "=" + arg(0) + ";" +
                     "ItemMeta " + itemMetaVar + "=" + itemStackVar + ".getItemMeta();" +
-                    itemMetaVar + ".setLore(color(" + delta + "));" +
+                    itemMetaVar + ".setLore(PluginMain.color(" + delta + "));" +
                     itemStackVar + ".setItemMeta(" + itemMetaVar + ");";
         }
         return null;

@@ -21,6 +21,6 @@ public class ExprTeamSuffix extends ChangeableExpressionBlock<String> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setSuffix(color(" + delta + "));" : null;
+        return changeType == ChangeType.SET ? arg(0) + ".setSuffix(PluginMain.color(" + delta + "));" : null;
     }
 }

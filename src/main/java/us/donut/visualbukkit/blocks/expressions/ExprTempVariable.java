@@ -14,7 +14,9 @@ public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("temp variable", new InputParameter());
+        InputParameter inputParameter = new InputParameter();
+        inputParameter.getStyleClass().add("temp-variable");
+        return new SyntaxNode(inputParameter);
     }
 
     @Override
@@ -26,8 +28,8 @@ public class ExprTempVariable extends ChangeableExpressionBlock<Object> {
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
             case SET: return "tempVariables.put(" + getVariable() + "," + delta + ");";
-            case ADD: return "addToVariable(" + getVariable() + "," + delta + ", tempVariables);";
-            case REMOVE: return "removeFromVariable(" + getVariable() + "," + delta + ", tempVariables);";
+            case ADD: return "VariableManager.addToVariable(" + getVariable() + "," + delta + ", tempVariables);";
+            case REMOVE: return "VariableManager.removeFromVariable(" + getVariable() + "," + delta + ", tempVariables);";
             case DELETE: case CLEAR: return "tempVariables.remove(" + getVariable() + ");" ;
             default: return null;
         }

@@ -3,6 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.scheduler.BukkitRunnable;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
@@ -14,8 +15,8 @@ import us.donut.visualbukkit.editor.ProjectManager;
 import java.util.List;
 import java.util.StringJoiner;
 
-@Description({"Gets a procedure runnable", "Returns: runnable"})
-public class ExprProcedureRunnable extends ExpressionBlock<Runnable> {
+@Description({"Gets a procedure runnable", "Returns: bukkit runnable"})
+public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
 
     private ProcedurePane procedure;
 
@@ -53,24 +54,24 @@ public class ExprProcedureRunnable extends ExpressionBlock<Runnable> {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
                 getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-                return "getRunnable(\"" + procedure.getProcedure() + "\", new Object[]{" + joiner.toString() + "})";
+                return "new ProcedureRunnable(\"" + procedure.getMethodName() + "\", new Object[]{" + joiner.toString() + "})";
             } else {
-                return "getRunnable(\"" + procedure.getProcedure() + "\", new Object[0])";
+                return "new ProcedureRunnable(\"" + procedure.getMethodName() + "\", new Object[0])";
             }
         }
-        return "getRunnable(null, null)";
+        return "new ProcedureRunnable(null, null)";
     }
 
     @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
-        section.set("procedure", procedure.getProcedure());
+        section.set("procedure", procedure.getMethodName());
     }
 
     @Override
     public void load(ConfigurationSection section) throws Exception {
         for (ProcedurePane procedure : ProjectManager.getCurrentProject().getProcedures()) {
-            if (procedure.getProcedure().equalsIgnoreCase(section.getString("procedure"))) {
+            if (procedure.getMethodName().equalsIgnoreCase(section.getString("procedure"))) {
                 setProcedure(procedure);
             }
         }
@@ -84,7 +85,7 @@ public class ExprProcedureRunnable extends ExpressionBlock<Runnable> {
     private void setProcedure(ProcedurePane procedure) {
         this.procedure = procedure;
         getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add(procedure.getProcedure() + "(");
+        getSyntaxNode().add(procedure.getMethodName() + "(");
         Class<?>[] parameters = procedure.getParameters();
         for (int i = 0; i < parameters.length; i++) {
             getSyntaxNode().add(parameters[i]);

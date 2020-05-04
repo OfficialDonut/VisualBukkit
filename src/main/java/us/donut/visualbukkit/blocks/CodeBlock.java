@@ -28,8 +28,13 @@ public abstract class CodeBlock extends VBox implements Loadable {
             e.consume();
         });
         MenuItem copyItem = new MenuItem("Copy");
+        MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
         copyItem.setOnAction(e -> CopyPasteManager.copy(this));
+        cutItem.setOnAction(e -> {
+            copyItem.getOnAction().handle(e);
+            deleteItem.getOnAction().handle(e);
+        });
         deleteItem.setOnAction(e -> {
             SelectorPane selectorPane = VisualBukkit.getInstance().getSelectorPane();
             if (selectorPane.canAccept(this, -1)) {
@@ -38,7 +43,7 @@ public abstract class CodeBlock extends VBox implements Loadable {
                 VisualBukkit.displayError("Cannot delete block");
             }
         });
-        contextMenu.getItems().addAll(copyItem, deleteItem);
+        contextMenu.getItems().addAll(copyItem, cutItem, deleteItem);
         getChildren().add(syntaxNode = init());
     }
 

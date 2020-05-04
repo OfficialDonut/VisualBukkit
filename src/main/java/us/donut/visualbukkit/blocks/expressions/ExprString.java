@@ -21,6 +21,6 @@ public class ExprString extends ExpressionBlock<String> {
     @Override
     public String toJava() {
         String encodedString = Base64.getEncoder().encodeToString(arg(0).getBytes(StandardCharsets.UTF_8));
-        return "decode(\"" + encodedString + "\")";
+        return "PluginMain.decode(\"" + encodedString + "\")";
     }
 }

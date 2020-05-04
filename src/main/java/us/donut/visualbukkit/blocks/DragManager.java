@@ -1,10 +1,12 @@
 package us.donut.visualbukkit.blocks;
 
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,9 @@ public class DragManager {
             ClipboardContent content = new ClipboardContent();
             content.putString("block-transfer");
             Dragboard dragboard = node.startDragAndDrop(TransferMode.MOVE);
-            dragboard.setDragView(node.snapshot(null, null));
+            SnapshotParameters snapshotParameters = new SnapshotParameters();
+            snapshotParameters.setFill(Color.TRANSPARENT);
+            dragboard.setDragView(node.snapshot(snapshotParameters, null));
             dragboard.setContent(content);
             e.consume();
         });

@@ -28,7 +28,7 @@ public class ExprItemStackName extends ChangeableExpressionBlock<String> {
             String itemMetaVar = randomVar();
             return "ItemStack " + itemStackVar + "=" + arg(0) + ";" +
                     "ItemMeta " + itemMetaVar + "=" + itemStackVar + ".getItemMeta();" +
-                    itemMetaVar + ".setDisplayName(color(" + delta + "));" +
+                    itemMetaVar + ".setDisplayName(PluginMain.color(" + delta + "));" +
                     itemStackVar + ".setItemMeta(" + itemMetaVar + ");";
         }
         return null;

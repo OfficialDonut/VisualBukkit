@@ -1,10 +1,17 @@
 package us.donut.visualbukkit.blocks;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import org.bukkit.configuration.ConfigurationSection;
+import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.util.ArrayList;
@@ -12,6 +19,7 @@ import java.util.List;
 
 public abstract class ParentBlock extends StatementBlock implements BlockContainer {
 
+    private static Color[] colors = {Color.LIGHTBLUE, Color.CORNFLOWERBLUE, Color.STEELBLUE};
     private double contextMenuYCoord;
 
     public ParentBlock() {
@@ -61,6 +69,22 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
         }
         getChildren().add(DragManager.getIndexAt(this, yCoord), block);
         Platform.runLater(block::onDragDrop);
+    }
+
+    @Override
+    public void onDragDrop() {
+        Parent parent = getParent();
+        if (parent != null) {
+            int level = 0;
+            while (!(parent instanceof BlockPane.BlockArea)) {
+                if (parent instanceof ParentBlock) {
+                    level++;
+                }
+                parent = parent.getParent();
+            }
+            Color color = colors[level % colors.length];
+            setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+        }
     }
 
     @Override

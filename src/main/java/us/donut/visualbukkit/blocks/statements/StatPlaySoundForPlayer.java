@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.blocks.statements;
 
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import us.donut.visualbukkit.blocks.StatementBlock;
@@ -11,13 +12,11 @@ public class StatPlaySoundForPlayer extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("play", Sound.class, "for", Player.class, "with volume", float.class, "and pitch", float.class);
+        return new SyntaxNode("play", Sound.class, "for", Player.class, "with volume", float.class, "and pitch", float.class, "at", Location.class);
     }
 
     @Override
     public String toJava() {
-        String playerVar = randomVar();
-        return "Player " + playerVar + "=" + arg(1) + ";" +
-                playerVar + ".playSound(" + playerVar + ".getLocation()," + arg(0) + "," + arg(2) + "," + arg(3) + ");";
+        return arg(1) + ".playSound(" + arg(4) + "," + arg(0) + "," + arg(2) + "," + arg(3) + ");";
     }
 }

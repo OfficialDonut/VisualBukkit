@@ -21,6 +21,6 @@ public class ExprObjectiveDisplayName extends ChangeableExpressionBlock<String> 
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setDisplayName(color(" + delta + "));" : null;
+        return changeType == ChangeType.SET ? arg(0) + ".setDisplayName(PluginMain.color(" + delta + "));" : null;
     }
 }

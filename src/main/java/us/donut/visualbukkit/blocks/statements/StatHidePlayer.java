@@ -17,6 +17,6 @@ public class StatHidePlayer extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(1) + ".hidePlayer(this," + arg(0) + ");";
+        return arg(1) + ".hidePlayer(PluginMain.getInstance()," + arg(0) + ");";
     }
 }

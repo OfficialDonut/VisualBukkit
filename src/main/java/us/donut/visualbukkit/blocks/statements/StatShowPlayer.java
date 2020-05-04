@@ -17,6 +17,6 @@ public class StatShowPlayer extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(1) + ".showPlayer(this," + arg(0) + ");";
+        return arg(1) + ".showPlayer(PluginMain.getInstance()," + arg(0) + ");";
     }
 }

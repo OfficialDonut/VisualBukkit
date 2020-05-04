@@ -29,7 +29,7 @@ public class SelectorPane extends VBox implements BlockContainer {
     static {
         try {
             Tooltip tooltip = new Tooltip();
-            Class<?> clazz = tooltip.getClass().getDeclaredClasses()[0];
+            Class<?> clazz = Class.forName("javafx.scene.control.Tooltip$TooltipBehavior");
             Constructor<?> constructor = clazz.getDeclaredConstructor(Duration.class, Duration.class, Duration.class, boolean.class);
             constructor.setAccessible(true);
             Object tooltipBehavior = constructor.newInstance(new Duration(150), new Duration(60000), new Duration(0), false);

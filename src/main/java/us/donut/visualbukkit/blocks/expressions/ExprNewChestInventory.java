@@ -17,6 +17,6 @@ public class ExprNewChestInventory extends ExpressionBlock<Inventory> {
 
     @Override
     public String toJava() {
-        return "Bukkit.createInventory(null," + arg(1) + ",color(" + arg(0) + "))";
+        return "Bukkit.createInventory(null," + arg(1) + ",PluginMain.color(" + arg(0) + "))";
     }
 }

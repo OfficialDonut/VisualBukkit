@@ -33,16 +33,16 @@ public class ExprVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return "variables.get(" + getVariable() + ")";
+        return "VariableManager.getVariables().get(" + getVariable() + ")";
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
-            case SET: return "variables.put(" + getVariable() + "," + delta + ");";
-            case ADD: return "addToVariable(" + getVariable() + "," + delta + ", variables);";
-            case REMOVE: return "removeFromVariable(" + getVariable() + "," + delta + ", variables);";
-            case DELETE: case CLEAR: return "variables.remove(" + getVariable() + ");" ;
+            case SET: return "VariableManager.getVariables().put(" + getVariable() + "," + delta + ");";
+            case ADD: return "VariableManager.addToVariable(" + getVariable() + "," + delta + ", VariableManager.getVariables());";
+            case REMOVE: return "VariableManager.removeFromVariable(" + getVariable() + "," + delta + ", VariableManager.getVariables());";
+            case DELETE: case CLEAR: return "VariableManager.getVariables().remove(" + getVariable() + ");" ;
             default: return null;
         }
     }
@@ -75,7 +75,7 @@ public class ExprVariable extends ChangeableExpressionBlock<Object> {
         if (!getParameters().isEmpty()) {
             StringJoiner joiner = new StringJoiner(",");
             getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-            return "getVariable(new Object[]{" + joiner.toString() + "})";
+            return "VariableManager.getVariableString(new Object[]{" + joiner.toString() + "})";
         } else {
             return "null";
         }
