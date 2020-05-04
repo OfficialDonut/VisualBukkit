@@ -73,18 +73,7 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
 
     @Override
     public void onDragDrop() {
-        Parent parent = getParent();
-        if (parent != null) {
-            int level = 0;
-            while (!(parent instanceof BlockPane.BlockArea)) {
-                if (parent instanceof ParentBlock) {
-                    level++;
-                }
-                parent = parent.getParent();
-            }
-            Color color = colors[level % colors.length];
-            setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-        }
+        color();
     }
 
     @Override
@@ -119,6 +108,7 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
                 }
             }
         }
+        color();
     }
 
     public String getChildJava() {
@@ -136,5 +126,23 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
             }
         }
         return blocks;
+    }
+
+    private void color() {
+        Parent parent = getParent();
+        int level = 0;
+        while (parent != null && !(parent instanceof BlockPane.BlockArea)) {
+            if (parent instanceof ParentBlock) {
+                level++;
+            }
+            parent = parent.getParent();
+        }
+        Color color = colors[level % colors.length];
+        setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+        for (Node child : getChildren()) {
+            if (child instanceof ParentBlock) {
+                ((ParentBlock) child).color();
+            }
+        }
     }
 }
