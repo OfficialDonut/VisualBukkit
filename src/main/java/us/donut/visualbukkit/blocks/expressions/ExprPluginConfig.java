@@ -15,6 +15,6 @@ public class ExprPluginConfig extends ExpressionBlock<FileConfiguration> {
 
     @Override
     public String toJava() {
-        return "PluginMain.getConfig()";
+        return "PluginMain.getInstance().getConfig()";
     }
 }
