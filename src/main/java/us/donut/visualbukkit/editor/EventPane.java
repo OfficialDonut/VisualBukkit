@@ -1,6 +1,5 @@
 package us.donut.visualbukkit.editor;
 
-import com.google.common.reflect.ClassPath;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
@@ -10,36 +9,28 @@ import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
 import org.bukkit.event.Event;
+import org.reflections.Reflections;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.blocks.BlockRegistry;
 import us.donut.visualbukkit.plugin.hooks.papi.PlaceholderEvent;
 import us.donut.visualbukkit.util.TitleLabel;
 
-import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-@SuppressWarnings("UnstableApiUsage")
 public class EventPane extends BlockPane {
 
-    public static Class<?>[] EVENTS;
+    public static final Class<?>[] EVENTS;
 
     static {
-        try {
-            ClassPath classPath = ClassPath.from(BlockRegistry.class.getClassLoader());
-            String eventPackage = "org.bukkit.event";
-            Set<Class<?>> events = new TreeSet<>(Comparator.comparing(Class::getSimpleName));
-            for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(eventPackage)) {
-                Class<?> clazz = classInfo.load();
-                if (Event.class.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers()) && !clazz.isAnnotationPresent(Deprecated.class)) {
-                    events.add(classInfo.load());
-                }
+        Reflections reflections = new Reflections("org.bukkit.event");
+        Set<Class<?>> events = new TreeSet<>(Comparator.comparing(Class::getSimpleName));
+        for (Class<? extends Event> clazz : reflections.getSubTypesOf(Event.class)) {
+            if (!Modifier.isAbstract(clazz.getModifiers()) && !clazz.isAnnotationPresent(Deprecated.class)) {
+                events.add(clazz);
             }
-            events.add(PlaceholderEvent.class);
-            EVENTS = events.toArray(new Class<?>[0]);
-        } catch (IOException e) {
-            VisualBukkit.displayException("Failed to load events", e);
         }
+        events.add(PlaceholderEvent.class);
+        EVENTS = events.toArray(new Class<?>[0]);
     }
 
     @SuppressWarnings("unchecked")
