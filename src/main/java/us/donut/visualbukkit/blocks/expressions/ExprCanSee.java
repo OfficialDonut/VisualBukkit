@@ -18,6 +18,6 @@ public class ExprCanSee extends ConditionBlock {
 
     @Override
     protected String toNonNegatedJava() {
-        return arg(0) + ".canSee(" + arg(1) + ")";
+        return arg(0) + ".canSee(" + arg(2) + ")";
     }
 }
