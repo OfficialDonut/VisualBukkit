@@ -74,9 +74,11 @@ public class ExprFunction extends ExpressionBlock<Object> {
         for (FunctionPane function : ProjectManager.getCurrentProject().getFunctions()) {
             if (function.getMethodName().equalsIgnoreCase(section.getString("function"))) {
                 setFunction(function);
+                super.load(section);
+                return;
             }
         }
-        super.load(section);
+        throw new IllegalStateException("Undefined function");
     }
 
     public FunctionPane getFunction() {

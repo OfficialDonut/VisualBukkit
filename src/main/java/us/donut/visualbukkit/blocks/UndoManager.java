@@ -59,6 +59,7 @@ public class UndoManager {
                 try {
                     blockPane.load(undoStates.pop());
                 } catch (Exception e) {
+                    redo();
                     VisualBukkit.displayException("Failed to undo changes", e);
                 }
             }
@@ -77,6 +78,7 @@ public class UndoManager {
                 try {
                     blockPane.load(state);
                 } catch (Exception e) {
+                    undo();
                     VisualBukkit.displayException("Failed to redo changes", e);
                 }
             }

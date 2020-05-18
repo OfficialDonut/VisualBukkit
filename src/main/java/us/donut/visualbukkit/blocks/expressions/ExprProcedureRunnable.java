@@ -73,9 +73,11 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
         for (ProcedurePane procedure : ProjectManager.getCurrentProject().getProcedures()) {
             if (procedure.getMethodName().equalsIgnoreCase(section.getString("procedure"))) {
                 setProcedure(procedure);
+                super.load(section);
+                return;
             }
         }
-        super.load(section);
+        throw new IllegalStateException("Undefined procedure");
     }
 
     public ProcedurePane getProcedure() {
