@@ -5,16 +5,16 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"A vector", "Returns: vector"})
-public class ExprVector extends ExpressionBlock<Vector> {
+@Description({"The sum of two vectors", "Returns: vector"})
+public class ExprVectorAddition extends ExpressionBlock<Vector> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("vector(", double.class, ",", double.class, ",", double.class, ")");
+        return new SyntaxNode(Vector.class, "+", Vector.class);
     }
 
     @Override
     public String toJava() {
-        return "new org.bukkit.util.Vector(" + arg(0) + "," + arg(1) + "," + arg(2) + ")";
+        return arg(0) + ".add(" + arg(1) + ")";
     }
 }
