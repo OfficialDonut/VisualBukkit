@@ -157,9 +157,6 @@ public class PluginBuilder {
             if (!command.getPermMessage().isEmpty()) {
                 pluginYml.append("    permission-message: ").append(command.getPermMessage()).append('\n');
             }
-            if (!command.getUsage().isEmpty()) {
-                pluginYml.append("    usage: ").append(command.getUsage()).append('\n');
-            }
         }
         return pluginYml.toString();
     }

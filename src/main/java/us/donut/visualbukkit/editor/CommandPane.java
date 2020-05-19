@@ -44,7 +44,6 @@ public class CommandPane extends BlockPane {
     private TextField aliasesField = new TextField();
     private TextField permField = new TextField();
     private TextField permMessageField = new TextField();
-    private TextField usageField = new TextField();
 
     public CommandPane(Project project, String command) {
         super(project, "/" + command);
@@ -91,7 +90,7 @@ public class CommandPane extends BlockPane {
 
         getInfoArea().getChildren().add(new VBox(5,
                 new CenteredHBox(10, label, renameButton, deleteButton),
-                new CenteredHBox(10, new Label("Description:"), descField, new Label("Permission:  "), permField, new Label("Usage:"), usageField),
+                new CenteredHBox(10, new Label("Description:"), descField, new Label("Permission:  "), permField),
                 new CenteredHBox(10, new Label("Aliases:    "), aliasesField, new Label("Perm Message:"), permMessageField)));
     }
 
@@ -114,7 +113,6 @@ public class CommandPane extends BlockPane {
         section.set("aliases", aliasesField.getText());
         section.set("permission", permField.getText());
         section.set("permission-message", permMessageField.getText());
-        section.set("usage", usageField.getText());
     }
 
     @Override
@@ -124,7 +122,6 @@ public class CommandPane extends BlockPane {
         aliasesField.setText(section.getString("aliases", ""));
         permField.setText(section.getString("permission", ""));
         permMessageField.setText(section.getString("permission-message", ""));
-        usageField.setText(section.getString("usage", ""));
     }
 
     public String getCommand() {
@@ -145,9 +142,5 @@ public class CommandPane extends BlockPane {
 
     public String getPermMessage() {
         return permMessageField.getText();
-    }
-
-    public String getUsage() {
-        return usageField.getText();
     }
 }
