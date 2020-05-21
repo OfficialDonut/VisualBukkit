@@ -5,6 +5,7 @@ import com.google.common.hash.Hashing;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Entity;
 import us.donut.visualbukkit.util.SimpleList;
@@ -68,27 +69,33 @@ public class VariableManager {
     }
 
     public static void loadVariables() {
-        for (String key : PluginMain.getDataConfig().getKeys(false)) {
-            Object object = PluginMain.getDataConfig().get(key);
-            variables.put(key, object instanceof Collection ? new SimpleList(object) : object);
+        YamlConfiguration dataConfig = PluginMain.getDataConfig();
+        if (dataConfig != null) {
+            for (String key : dataConfig.getKeys(false)) {
+                Object object = dataConfig.get(key);
+                variables.put(key, object instanceof Collection ? new SimpleList(object) : object);
+            }
         }
     }
 
     public static void saveVariables() {
-        for (Map.Entry<String, Object> entry : variables.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (value instanceof SimpleList) {
-                value = ((SimpleList) value).stream().filter(VariableManager::isSerializable).toArray();
+        YamlConfiguration dataConfig = PluginMain.getDataConfig();
+        if (dataConfig != null) {
+            for (Map.Entry<String, Object> entry : variables.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                if (value instanceof SimpleList) {
+                    value = ((SimpleList) value).stream().filter(VariableManager::isSerializable).toArray();
+                }
+                if (isSerializable(value)) {
+                    dataConfig.set(key, value);
+                }
             }
-            if (isSerializable(value)) {
-                PluginMain.getDataConfig().set(key, value);
+            try {
+                dataConfig.save(PluginMain.getDataFile());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }
-        try {
-            PluginMain.getDataConfig().save(PluginMain.getDataFile());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

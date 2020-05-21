@@ -329,16 +329,6 @@ public class Project {
                 }
             }
 
-            Button buildButton = new Button("Build Plugin");
-            buildButton.setOnAction(e -> {
-                try {
-                    PluginBuilder.build(Project.this);
-                    VisualBukkit.displayMessage("Successfully built plugin");
-                } catch (Exception ex) {
-                    VisualBukkit.displayException("Failed to build plugin", ex);
-                }
-            });
-
             Button newCommandButton = new Button("New Command");
             newCommandButton.setOnAction(e -> CommandPane.promptNew(Project.this));
 
@@ -370,6 +360,16 @@ public class Project {
                     pluginEnablePane.getProjectStructureLabel(),
                     commandTree, eventTree, procedureTree, functionTree);
 
+            Button buildButton = new Button("Build Plugin");
+            buildButton.setOnAction(e -> {
+                try {
+                    PluginBuilder.build(Project.this);
+                    VisualBukkit.displayMessage("Successfully built plugin");
+                } catch (Exception ex) {
+                    VisualBukkit.displayException("Failed to build plugin", ex);
+                }
+            });
+
             DirectoryChooser chooser = new DirectoryChooser();
             chooser.setTitle("Output Directory");
             chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -380,6 +380,10 @@ public class Project {
                     pluginOutputDirField.setText(dir.toPath().toString());
                 }
             });
+
+            Button testButton = new Button("Test Plugin");
+            testButton.prefWidthProperty().bind(buildButton.widthProperty());
+            testButton.setOnAction(e -> new PluginTestStage(Project.this).show());
 
             getChildren().addAll(
                     new TitleLabel("Project Manager", 1.5, true),
@@ -395,7 +399,7 @@ public class Project {
                     new CenteredHBox(10, new Label("Depend:     "), pluginDependField),
                     new CenteredHBox(10, new Label("Soft Depend:"), pluginSoftDependField),
                     new CenteredHBox(10, new Label("Output dir: "), pluginOutputDirField),
-                    buildButton, new Separator(),
+                    testButton, buildButton, new Separator(),
                     new TitleLabel("Project Notes", 1.5, true), projectNotesArea);
         }
     }

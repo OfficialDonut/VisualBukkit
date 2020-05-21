@@ -115,7 +115,7 @@ public class PluginBuilder {
         MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
     }
 
-    private static String createYml(Project project, String name, String mainClassName) {
+    public static String createYml(Project project, String name, String mainClassName) {
         StringBuilder pluginYml = new StringBuilder();
         String ver = project.getPluginVer();
         String author = project.getPluginAuthor();
@@ -161,7 +161,7 @@ public class PluginBuilder {
         return pluginYml.toString();
     }
 
-    private static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
+    public static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
         if (packageName == null) {
             packageName = "a" + UUID.randomUUID().toString().replace("-", "");
         }

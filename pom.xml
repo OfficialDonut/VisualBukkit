@@ -50,6 +50,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.seeseemelk</groupId>
+            <artifactId>MockBukkit</artifactId>
+            <version>v1.15-c9f97a74a7-1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.sibvisions.external.jvxfx</groupId>
             <artifactId>dndtabpane</artifactId>
             <version>0.1</version>
