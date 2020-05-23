@@ -1,9 +1,11 @@
 package us.donut.visualbukkit.editor;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.controlsfx.control.CheckComboBox;
@@ -181,7 +183,7 @@ public class Project {
         data.set("plugin.depend", getPluginDepend());
         data.set("plugin.soft-depend", getPluginSoftDepend());
         data.set("plugin.output-dir", getPluginOutputDir().toString());
-        data.set("notes", projectPane.projectNotesArea.getText());
+        data.set("notes", projectPane.projectNotesTextArea.getText());
         pluginConfigPane.unload(data.createSection("plugin-config"));
         pluginEnablePane.unload(data.createSection("plugin-enable"));
         commands.forEach(command -> command.unload(data.createSection("commands." + command.getCommand())));
@@ -304,7 +306,7 @@ public class Project {
         private TextField pluginDependField = new TextField();
         private TextField pluginSoftDependField = new TextField();
         private TextField pluginOutputDirField = new TextField();
-        private TextArea projectNotesArea = new TextArea();
+        private TextArea projectNotesTextArea = new TextArea();
 
         public Pane() {
             getStyleClass().add("project-pane");
@@ -317,7 +319,7 @@ public class Project {
             pluginDependField.setText(data.getString("plugin.depend", ""));
             pluginSoftDependField.setText(data.getString("plugin.soft-depend", ""));
             pluginOutputDirField.setText(data.getString("plugin.output-dir", folder.resolve("output").toString()));
-            projectNotesArea.setText(data.getString("notes", ""));
+            projectNotesTextArea.setText(data.getString("notes", ""));
 
             pluginHooksBox.setStyle("-fx-focus-color: -fx-control-inner-background;");
             pluginHooksBox.setMaxWidth(150);
@@ -328,6 +330,20 @@ public class Project {
                     pluginHooksBox.getCheckModel().check(pluginName);
                 }
             }
+
+            Button projectNotesButton = new Button("Notes");
+            projectNotesButton.setOnAction(e -> {
+                Stage stage = new Stage();
+                stage.initOwner(VisualBukkit.getInstance().getPrimaryStage());
+                stage.setTitle("Project Notes");
+                if (projectNotesTextArea.getParent() != null) {
+                    projectNotesTextArea.getScene().getWindow().hide();
+                }
+                VBox rootPane = new VBox(projectNotesTextArea);
+                projectNotesTextArea.prefHeightProperty().bind(rootPane.heightProperty());
+                stage.setScene(new Scene(rootPane, 300, 400));
+                stage.show();
+            });
 
             Button newCommandButton = new Button("New Command");
             newCommandButton.setOnAction(e -> CommandPane.promptNew(Project.this));
@@ -360,6 +376,9 @@ public class Project {
                     pluginEnablePane.getProjectStructureLabel(),
                     commandTree, eventTree, procedureTree, functionTree);
 
+            Button testButton = new Button("Test Plugin");
+            testButton.setOnAction(e -> new PluginTestStage(Project.this).show());
+
             Button buildButton = new Button("Build Plugin");
             buildButton.setOnAction(e -> {
                 try {
@@ -381,14 +400,11 @@ public class Project {
                 }
             });
 
-            Button testButton = new Button("Test Plugin");
-            testButton.prefWidthProperty().bind(buildButton.widthProperty());
-            testButton.setOnAction(e -> new PluginTestStage(Project.this).show());
-
             getChildren().addAll(
                     new TitleLabel("Project Manager", 1.5, true),
                     new Label("Name: " + name), structureTree,
                     new CenteredHBox(10, new Label("Plugin Hooks:"), pluginHooksBox),
+                    new CenteredHBox(10, new Label("Project Notes:"), projectNotesButton),
                     buttonGrid, new Separator(),
                     new TitleLabel("Plugin Information", 1.5, true),
                     new CenteredHBox(10, new Label("Name:       "), pluginNameField),
@@ -399,8 +415,7 @@ public class Project {
                     new CenteredHBox(10, new Label("Depend:     "), pluginDependField),
                     new CenteredHBox(10, new Label("Soft Depend:"), pluginSoftDependField),
                     new CenteredHBox(10, new Label("Output dir: "), pluginOutputDirField),
-                    testButton, buildButton, new Separator(),
-                    new TitleLabel("Project Notes", 1.5, true), projectNotesArea);
+                    testButton, buildButton);
         }
     }
 }
