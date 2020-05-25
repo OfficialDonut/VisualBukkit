@@ -3,18 +3,17 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The arguments of a command", "Returns: list of strings"})
-public class ExprCommandArgs extends ExpressionBlock<SimpleList> {
+@Description({"An argument of a command", "Returns: string"})
+public class ExprCommandArg extends ExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("command args");
+        return new SyntaxNode("command arg", int.class);
     }
 
     @Override
     public String toJava() {
-        return "new SimpleList(commandArgs)";
+        return "commandArgs[" + arg(0) + "]";
     }
 }
