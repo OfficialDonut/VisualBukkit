@@ -1,14 +1,13 @@
 package us.donut.visualbukkit.plugin;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -103,6 +102,29 @@ public class PluginMain extends JavaPlugin implements Listener {
             strings.remove(i + 1);
         }
         return strings;
+    }
+
+    public static ShapedRecipe getShapedRecipe(ItemStack result, Material... ingredients) {
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(getInstance(), UUID.randomUUID().toString()), result);
+        for (int i = 0; i < ingredients.length; i++) {
+            Material ingredient = ingredients[i];
+            if (ingredient != null && ingredient != Material.AIR) {
+                if (i < 3) {
+                    recipe.shape("012");
+                } else if (i < 6) {
+                    recipe.shape("012", "345");
+                } else {
+                    recipe.shape("012", "345", "678");
+                }
+            }
+        }
+        for (int i = 0; i < ingredients.length; i++) {
+            Material ingredient = ingredients[i];
+            if (ingredient != null && ingredient != Material.AIR) {
+                recipe.setIngredient(Character.forDigit(i, 10), ingredient);
+            }
+        }
+        return recipe;
     }
 
     public static PluginMain getInstance() {
