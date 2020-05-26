@@ -2,16 +2,21 @@ package us.donut.visualbukkit.editor;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ConstPool;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.EnumMemberValue;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventPriority;
 import org.reflections.Reflections;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.plugin.hooks.papi.PlaceholderEvent;
+import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.TitleLabel;
 
 import java.lang.reflect.Modifier;
@@ -63,6 +68,7 @@ public class EventPane extends BlockPane {
     }
 
     private Class<? extends Event> event;
+    private ComboBox<String> priorityComboBox = new ComboBox<>();
 
     @SuppressWarnings("unchecked")
     public EventPane(Project project, Class<?> event) {
@@ -71,6 +77,8 @@ public class EventPane extends BlockPane {
             throw new IllegalArgumentException(event.getCanonicalName() + " is not an event");
         }
         this.event = (Class<? extends Event>) event;
+        priorityComboBox.getItems().addAll(Arrays.stream(EventPriority.values()).map(Enum::toString).toArray(String[]::new));
+        priorityComboBox.setValue("HIGHEST");
         Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> {
             Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this event?");
@@ -81,7 +89,9 @@ public class EventPane extends BlockPane {
                 VisualBukkit.displayMessage("Successfully deleted event");
             }
         });
-        getInfoArea().getChildren().addAll(new TitleLabel("Event: " + getText(), 2), deleteButton);
+        getInfoArea().getChildren().add(new VBox(5,
+                new CenteredHBox(10, new TitleLabel("Event: " + getText(), 2), deleteButton),
+                new CenteredHBox(10, new Label("Listener priority:"), priorityComboBox)));
     }
 
     @Override
@@ -95,9 +105,29 @@ public class EventPane extends BlockPane {
         CtMethod eventMethod = CtMethod.make(src, mainClass);
         ConstPool methodConstPool = eventMethod.getMethodInfo().getConstPool();
         AnnotationsAttribute annotationsAttribute = new AnnotationsAttribute(methodConstPool, AnnotationsAttribute.visibleTag);
-        annotationsAttribute.setAnnotation(new Annotation("org.bukkit.event.EventHandler", methodConstPool));
+        Annotation annotation = new Annotation("org.bukkit.event.EventHandler", methodConstPool);
+        EnumMemberValue priority = new EnumMemberValue(methodConstPool);
+        priority.setType(EventPriority.class.getCanonicalName());
+        priority.setValue(priorityComboBox.getValue());
+        annotation.addMemberValue("priority", priority);
+        annotationsAttribute.setAnnotation(annotation);
         eventMethod.getMethodInfo().addAttribute(annotationsAttribute);
         mainClass.addMethod(eventMethod);
+    }
+
+    @Override
+    public void unload(ConfigurationSection section) {
+        super.unload(section);
+        section.set("priority", priorityComboBox.getValue());
+    }
+
+    @Override
+    public void load(ConfigurationSection section) throws Exception {
+        super.load(section);
+        String priority = section.getString("priority");
+        if (priority != null) {
+            priorityComboBox.setValue(priority);
+        }
     }
 
     public Class<? extends Event> getEvent() {
