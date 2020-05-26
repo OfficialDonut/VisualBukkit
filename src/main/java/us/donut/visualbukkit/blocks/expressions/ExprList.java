@@ -15,7 +15,7 @@ public class ExprList extends ExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("<...>");
+        return new SyntaxNode("empty list");
     }
 
     @Override
@@ -23,11 +23,11 @@ public class ExprList extends ExpressionBlock<SimpleList> {
         if (getParameters().isEmpty()) {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();
-            spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
+            spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
             dialog.getDialogPane().setContent(new CenteredHBox(new Label("Size of list: "), spinner));
             dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
             dialog.setResultConverter(buttonType -> spinner.getValue());
-            setSize(dialog.showAndWait().orElse(1));
+            setSize(dialog.showAndWait().orElse(0));
         }
     }
 
@@ -55,11 +55,13 @@ public class ExprList extends ExpressionBlock<SimpleList> {
     }
 
     private void setSize(int size) {
-        getSyntaxNode().getChildren().clear();
-        for (int i = 0; i < size; i++) {
-            getSyntaxNode().add(Object.class);
-            if (i != size - 1) {
-                getSyntaxNode().add(",");
+        if (size > 0) {
+            getSyntaxNode().getChildren().clear();
+            for (int i = 0; i < size; i++) {
+                getSyntaxNode().add(Object.class);
+                if (i != size - 1) {
+                    getSyntaxNode().add(",");
+                }
             }
         }
     }
