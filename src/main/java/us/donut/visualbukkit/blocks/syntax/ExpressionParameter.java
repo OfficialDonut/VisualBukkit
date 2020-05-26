@@ -4,13 +4,10 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
-import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.util.Collections;
@@ -43,14 +40,6 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
                     }
                     parent = parent.getParent();
                 }
-                e.consume();
-            }
-        });
-        String returnTypeAlias = TypeHandler.isNumber(returnType) ? "number" : TypeHandler.getAlias(returnType);
-        setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY && isEmpty()) {
-                SelectorPane selectorPane = VisualBukkit.getInstance().getSelectorPane();
-                selectorPane.getReturnTypeComboBox().getComboBox().setValue(returnTypeAlias != null ? returnTypeAlias : "---");
                 e.consume();
             }
         });
