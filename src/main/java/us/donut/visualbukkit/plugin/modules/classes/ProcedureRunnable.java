@@ -1,6 +1,7 @@
-package us.donut.visualbukkit.plugin;
+package us.donut.visualbukkit.plugin.modules.classes;
 
 import org.bukkit.scheduler.BukkitRunnable;
+import us.donut.visualbukkit.plugin.PluginMain;
 
 public class ProcedureRunnable extends BukkitRunnable {
 

@@ -4,9 +4,12 @@ import org.bukkit.OfflinePlayer;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Module;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.modules.PluginModule;
 
 @Description({"The balance of a player", "Changers: add, remove", "Returns: number", "Requires: Vault"})
+@Module(PluginModule.VAULT)
 public class ExprPlayerBalance extends ChangeableExpressionBlock<Double> {
 
     @Override

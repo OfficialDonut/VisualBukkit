@@ -1,4 +1,4 @@
-package us.donut.visualbukkit.plugin.hooks;
+package us.donut.visualbukkit.plugin.modules.classes;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;

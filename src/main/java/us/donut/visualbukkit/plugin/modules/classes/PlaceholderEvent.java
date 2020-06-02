@@ -1,4 +1,4 @@
-package us.donut.visualbukkit.plugin.hooks.papi;
+package us.donut.visualbukkit.plugin.modules.classes;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;

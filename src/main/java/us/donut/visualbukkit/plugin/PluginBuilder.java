@@ -11,8 +11,7 @@ import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
-import us.donut.visualbukkit.plugin.hooks.PluginHook;
-import us.donut.visualbukkit.plugin.hooks.PluginHookManager;
+import us.donut.visualbukkit.plugin.modules.PluginModule;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.*;
@@ -41,7 +40,7 @@ public class PluginBuilder {
         classPool.importPackage("org.bukkit.inventory.meta");
         classPool.importPackage("org.bukkit.util");
         classPool.importPackage("us.donut.visualbukkit.plugin");
-        classPool.importPackage("us.donut.visualbukkit.plugin.hooks");
+        classPool.importPackage("us.donut.visualbukkit.plugin.modules.classes");
         classPool.importPackage("us.donut.visualbukkit.util");
 
         try {
@@ -54,8 +53,8 @@ public class PluginBuilder {
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
             CtClass mainClass = getCtClass(PluginMain.class, null);
-            for (String pluginHook : blockPane.getProject().getPluginHooks()) {
-                PluginHookManager.getPluginHook(pluginHook).insertInto(mainClass);
+            for (PluginModule module : blockPane.findUsedModules()) {
+                module.insertInto(mainClass);
             }
             blockPane.insertInto(mainClass);
             return true;
@@ -75,14 +74,14 @@ public class PluginBuilder {
         CtClass mainClass = getCtClass(PluginMain.class, null);
         classes.put(PluginMain.class, mainClass);
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
-        classes.put(ProcedureRunnable.class, getCtClass(ProcedureRunnable.class, mainClass.getPackageName()));
         classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
-        for (String pluginName : project.getPluginHooks()) {
-            PluginHook pluginHook = PluginHookManager.getPluginHook(pluginName);
-            pluginHook.insertInto(mainClass);
-            for (Class<?> clazz : pluginHook.getClasses()) {
-                classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+        for (BlockPane blockPane : project.getBlockPanes()) {
+            for (PluginModule module : blockPane.findUsedModules()) {
+                module.insertInto(mainClass);
+                for (Class<?> clazz : module.getClasses()) {
+                    classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+                }
             }
         }
 

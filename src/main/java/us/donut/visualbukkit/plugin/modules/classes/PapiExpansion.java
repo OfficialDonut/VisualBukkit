@@ -1,4 +1,4 @@
-package us.donut.visualbukkit.plugin.hooks.papi;
+package us.donut.visualbukkit.plugin.modules.classes;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;

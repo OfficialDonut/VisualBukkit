@@ -10,10 +10,10 @@ import javassist.CtClass;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.plugin.modules.PluginModule;
 import us.donut.visualbukkit.util.Loadable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class BlockPane extends Tab implements Loadable {
 
@@ -45,6 +45,27 @@ public abstract class BlockPane extends Tab implements Loadable {
     }
 
     public abstract void insertInto(CtClass mainClass) throws Exception;
+
+    public Set<PluginModule> findUsedModules() {
+        Set<PluginModule> modules = new HashSet<>();
+        collectModules(blockArea, modules);
+        return modules;
+    }
+
+    private void collectModules(Pane pane, Set<PluginModule> modules) {
+        for (Node child : pane.getChildren()) {
+            if (child instanceof CodeBlock) {
+                CodeBlock block = (CodeBlock) child;
+                PluginModule[] requiredModules = BlockRegistry.getInfo(block).getModules();
+                if (requiredModules != null) {
+                    Collections.addAll(modules, requiredModules);
+                }
+            }
+            if (child instanceof Pane) {
+                collectModules((Pane) child, modules);
+            }
+        }
+    }
 
     @Override
     public void unload(ConfigurationSection section) {

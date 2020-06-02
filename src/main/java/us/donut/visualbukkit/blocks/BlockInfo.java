@@ -4,10 +4,8 @@ import com.google.gson.internal.Primitives;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import org.apache.commons.lang.WordUtils;
-import us.donut.visualbukkit.blocks.annotations.Category;
-import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
-import us.donut.visualbukkit.blocks.annotations.Name;
+import us.donut.visualbukkit.blocks.annotations.*;
+import us.donut.visualbukkit.plugin.modules.PluginModule;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -22,6 +20,7 @@ public class BlockInfo<T extends CodeBlock> {
     private String description;
     private String[] categories;
     private Class<?>[] events;
+    private PluginModule[] modules;
     private Class<?> returnType;
 
     public BlockInfo(Class<T> blockType) {
@@ -47,6 +46,10 @@ public class BlockInfo<T extends CodeBlock> {
 
         if (blockType.isAnnotationPresent(Event.class)) {
             events = blockType.getAnnotation(Event.class).value();
+        }
+
+        if (blockType.isAnnotationPresent(Module.class)) {
+            modules = blockType.getAnnotation(Module.class).value();
         }
 
         if (ExpressionBlock.class.isAssignableFrom(blockType)) {
@@ -101,6 +104,10 @@ public class BlockInfo<T extends CodeBlock> {
 
     public Class<?>[] getEvents() {
         return events;
+    }
+
+    public PluginModule[] getModules() {
+        return modules;
     }
 
     public Class<?> getReturnType() {

@@ -15,7 +15,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.reflections.Reflections;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.plugin.hooks.papi.PlaceholderEvent;
+import us.donut.visualbukkit.plugin.modules.PluginModule;
+import us.donut.visualbukkit.plugin.modules.classes.PlaceholderEvent;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.TitleLabel;
 
@@ -114,6 +115,15 @@ public class EventPane extends BlockPane {
         annotationsAttribute.setAnnotation(annotation);
         eventMethod.getMethodInfo().addAttribute(annotationsAttribute);
         mainClass.addMethod(eventMethod);
+    }
+
+    @Override
+    public Set<PluginModule> findUsedModules() {
+        Set<PluginModule> modules = super.findUsedModules();
+        if (event == PlaceholderEvent.class) {
+            modules.add(PluginModule.PlACEHOLDERAPI);
+        }
+        return modules;
     }
 
     @Override
