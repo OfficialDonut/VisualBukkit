@@ -21,59 +21,17 @@ import java.util.Map;
 @SuppressWarnings("UnstableApiUsage")
 public class VariableManager {
 
-    private static Map<String, Object> variables = new HashMap<>();
+    private static Map<Object, Map<String, Object>> localVariables = new HashMap<>();
+    private static Map<String, Object> nonPersistentVariables = new HashMap<>();
+    private static Map<String, Object> persistentVariables = new HashMap<>();
     private static HashFunction hashFunction = Hashing.md5();
-
-    public static Map<String, Object> getVariables() {
-        return variables;
-    }
-
-    public static String getVariableString(Object... objects) {
-        StringBuilder variable = new StringBuilder();
-        for (Object object : objects) {
-            String string = object.toString();
-            if (object instanceof Entity) {
-                string = ((Entity) object).getUniqueId().toString();
-            } else if (object instanceof OfflinePlayer) {
-                string = ((OfflinePlayer) object).getUniqueId().toString();
-            } else if (object instanceof World) {
-                string = ((World) object).getUID().toString();
-            } else if (object instanceof Block) {
-                string = ((Block) object).getLocation().toString();
-            }
-            variable.append(object.getClass().getCanonicalName()).append(string);
-        }
-        return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
-    }
-
-    public static void addToVariable(String variable, Object obj, Map<String, Object> variables) {
-        Object variableValue = variables.get(variable);
-        if (variableValue instanceof SimpleList) {
-            ((SimpleList) variableValue).add(obj);
-        } else if (variableValue instanceof Number && obj instanceof Number) {
-            variables.put(variable, ((Number) variableValue).doubleValue() + ((Number) obj).doubleValue());
-        } else if (variableValue instanceof Duration && obj instanceof Duration) {
-            variables.put(variable, ((Duration) variableValue).plus((Duration) obj));
-        }
-    }
-
-    public static void removeFromVariable(String variable, Object obj, Map<String, Object> variables) {
-        Object variableValue = variables.get(variable);
-        if (variableValue instanceof SimpleList) {
-            ((SimpleList) variableValue).remove(obj);
-        } else if (variableValue instanceof Number && obj instanceof Number) {
-            variables.put(variable, ((Number) variableValue).doubleValue() - ((Number) obj).doubleValue());
-        } else if (variableValue instanceof Duration && obj instanceof Duration) {
-            variables.put(variable, ((Duration) variableValue).minus((Duration) obj));
-        }
-    }
 
     public static void loadVariables() {
         YamlConfiguration dataConfig = PluginMain.getDataConfig();
         if (dataConfig != null) {
             for (String key : dataConfig.getKeys(false)) {
                 Object object = dataConfig.get(key);
-                variables.put(key, object instanceof Collection ? new SimpleList(object) : object);
+                persistentVariables.put(key, object instanceof Collection ? new SimpleList(object) : object);
             }
         }
     }
@@ -81,7 +39,7 @@ public class VariableManager {
     public static void saveVariables() {
         YamlConfiguration dataConfig = PluginMain.getDataConfig();
         if (dataConfig != null) {
-            for (Map.Entry<String, Object> entry : variables.entrySet()) {
+            for (Map.Entry<String, Object> entry : persistentVariables.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
                 if (value instanceof SimpleList) {
@@ -97,6 +55,94 @@ public class VariableManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static Object getLocalVarValue(Object scope, String variableString) {
+        return getLocalVarMap(scope).get(variableString);
+    }
+
+    public static Object getVarValue(boolean persistent, Object... args) {
+        return (persistent ? persistentVariables : nonPersistentVariables).get(getVariableString(args));
+    }
+
+    public static void setLocalVarValue(Object scope, String variableString, Object value) {
+        getLocalVarMap(scope).put(variableString, value);
+    }
+
+    public static void setVarValue(boolean persistent, Object value, Object... args) {
+        (persistent ? persistentVariables : nonPersistentVariables).put(getVariableString(args), value);
+    }
+
+    public static void deleteLocalVar(Object scope, String variableString) {
+        getLocalVarMap(scope).remove(variableString);
+    }
+
+    public static void deleteLocalVars(Object scope) {
+        localVariables.remove(scope);
+    }
+
+    public static void deleteVar(boolean persistent, Object... args) {
+        (persistent ? persistentVariables : nonPersistentVariables).remove(getVariableString(args));
+    }
+
+    public static void addToLocalVar(Object scope, String variableString, Object delta) {
+        addToVar(getLocalVarMap(scope), variableString, delta);
+    }
+
+    public static void addToVar(boolean persistent, Object delta, Object... args) {
+        addToVar(persistent ? persistentVariables : nonPersistentVariables, getVariableString(args), delta);
+    }
+
+    public static void removeFromLocalVar(Object scope, String variableString, Object delta) {
+        removeFromVar(getLocalVarMap(scope), variableString, delta);
+    }
+
+    public static void removeFromVar(boolean persistent, Object delta, Object... args) {
+        removeFromVar(persistent ? persistentVariables : nonPersistentVariables, getVariableString(args), delta);
+    }
+
+    private static void addToVar(Map<String, Object> variableMap, String variableString, Object delta) {
+        Object value = variableMap.get(variableString);
+        if (value instanceof SimpleList) {
+            ((SimpleList) value).add(delta);
+        } else if (value instanceof Number && delta instanceof Number) {
+            variableMap.put(variableString, ((Number) value).doubleValue() + ((Number) delta).doubleValue());
+        } else if (value instanceof Duration && delta instanceof Duration) {
+            variableMap.put(variableString, ((Duration) value).plus((Duration) delta));
+        }
+    }
+
+    private static void removeFromVar(Map<String, Object> variableMap, String variableString, Object delta) {
+        Object value = variableMap.get(variableString);
+        if (value instanceof SimpleList) {
+            ((SimpleList) value).remove(delta);
+        } else if (value instanceof Number && delta instanceof Number) {
+            variableMap.put(variableString, ((Number) value).doubleValue() - ((Number) delta).doubleValue());
+        } else if (value instanceof Duration && delta instanceof Duration) {
+            variableMap.put(variableString, ((Duration) value).minus((Duration) delta));
+        }
+    }
+
+    private static String getVariableString(Object... args) {
+        StringBuilder variable = new StringBuilder();
+        for (Object object : args) {
+            String string = object.toString();
+            if (object instanceof Entity) {
+                string = ((Entity) object).getUniqueId().toString();
+            } else if (object instanceof OfflinePlayer) {
+                string = ((OfflinePlayer) object).getUniqueId().toString();
+            } else if (object instanceof World) {
+                string = ((World) object).getUID().toString();
+            } else if (object instanceof Block) {
+                string = ((Block) object).getLocation().toString();
+            }
+            variable.append(object.getClass().getCanonicalName()).append(string);
+        }
+        return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
+    }
+
+    private static Map<String, Object> getLocalVarMap(Object scope) {
+        return localVariables.computeIfAbsent(scope, k -> new HashMap<>());
     }
 
     private static boolean isSerializable(Object object) {

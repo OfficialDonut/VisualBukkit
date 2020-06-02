@@ -82,8 +82,9 @@ public class ProcedurePane extends MethodPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (procedure.equalsIgnoreCase(\"" + methodName + "\")) {" +
-                "Map tempVariables = new HashMap();" +
-                stringJoiner.toString() + "}";
+                "Object localVarScope = \"procedure:" + methodName + "\";" +
+                stringJoiner.toString() +
+                "VariableManager.deleteLocalVars(localVarScope);}";
         procedureMethod.insertBefore(src);
     }
 }

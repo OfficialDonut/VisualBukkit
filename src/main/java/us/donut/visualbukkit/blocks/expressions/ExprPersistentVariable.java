@@ -10,8 +10,8 @@ import us.donut.visualbukkit.util.CenteredHBox;
 
 import java.util.StringJoiner;
 
-@Description({"A variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
-public class ExprVariable extends ChangeableExpressionBlock<Object> {
+@Description({"A persistent variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
+public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -33,16 +33,16 @@ public class ExprVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return "VariableManager.getVariables().get(" + getVariable() + ")";
+        return "VariableManager.getVarValue(true," + getVarArgs() + ")";
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
         switch (changeType) {
-            case SET: return "VariableManager.getVariables().put(" + getVariable() + "," + delta + ");";
-            case ADD: return "VariableManager.addToVariable(" + getVariable() + "," + delta + ", VariableManager.getVariables());";
-            case REMOVE: return "VariableManager.removeFromVariable(" + getVariable() + "," + delta + ", VariableManager.getVariables());";
-            case DELETE: case CLEAR: return "VariableManager.getVariables().remove(" + getVariable() + ");" ;
+            case SET: return "VariableManager.setVarValue(true," + delta + "," + getVarArgs() + ");";
+            case ADD: return "VariableManager.addToVar(true," + delta + "," + getVarArgs() + ");";
+            case REMOVE: return "VariableManager.removeFromVar(true," + delta + "," + getVarArgs() + ");";
+            case DELETE: case CLEAR: return "VariableManager.deleteVar(true," + getVarArgs() + ");" ;
             default: return null;
         }
     }
@@ -71,11 +71,11 @@ public class ExprVariable extends ChangeableExpressionBlock<Object> {
         getSyntaxNode().add(")");
     }
 
-    private String getVariable() {
+    private String getVarArgs() {
         if (!getParameters().isEmpty()) {
             StringJoiner joiner = new StringJoiner(",");
             getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-            return "VariableManager.getVariableString(new Object[]{" + joiner.toString() + "})";
+            return "new Object[]{" + joiner.toString() + "}";
         } else {
             return "null";
         }

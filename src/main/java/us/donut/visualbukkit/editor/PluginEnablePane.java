@@ -21,7 +21,10 @@ public class PluginEnablePane extends BlockPane {
         CtMethod enableMethod = mainClass.getDeclaredMethod("onEnable");
         StringJoiner stringJoiner = new StringJoiner("\n");
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
-        String src = "Map tempVariables = new HashMap();" + stringJoiner.toString();
+        String src =
+                "Object localVarScope = \"plugin-enable\";" +
+                stringJoiner.toString() +
+                "VariableManager.deleteLocalVars(localVarScope);";
         enableMethod.insertAfter(src);
     }
 }

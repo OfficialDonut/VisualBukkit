@@ -149,6 +149,10 @@
     -fx-background-color: -fx-color;
 }
 
+.local-variable {
+    -fx-background-color: yellow;
+}
+
 .parent-block {
     -fx-border-color: black;
     -fx-fill-width: false;
@@ -192,10 +196,6 @@
     -fx-alignment: center-left;
     -fx-fill-height: false;
     -fx-spacing: 5;
-}
-
-.temp-variable {
-    -fx-background-color: yellow;
 }
 
 /*

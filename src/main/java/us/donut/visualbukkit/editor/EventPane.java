@@ -100,8 +100,9 @@ public class EventPane extends BlockPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "public void on" + event.getSimpleName() + "(" + event.getCanonicalName() + " event) {" +
-                "Map tempVariables = new HashMap();" +
-                stringJoiner.toString() + "}";
+                "Object localVarScope = event;" +
+                stringJoiner.toString() +
+                "VariableManager.deleteLocalVars(localVarScope);}";
         CtMethod eventMethod = CtMethod.make(src, mainClass);
         ConstPool methodConstPool = eventMethod.getMethodInfo().getConstPool();
         AnnotationsAttribute annotationsAttribute = new AnnotationsAttribute(methodConstPool, AnnotationsAttribute.visibleTag);

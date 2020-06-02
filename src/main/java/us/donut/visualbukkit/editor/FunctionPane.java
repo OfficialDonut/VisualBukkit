@@ -82,8 +82,9 @@ public class FunctionPane extends MethodPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (function.equalsIgnoreCase(\"" + methodName + "\")) {" +
-                "Map tempVariables = new HashMap();" +
-                stringJoiner.toString() + "}";
+                "Object localVarScope = \"function:" + methodName + "\";" +
+                stringJoiner.toString() +
+                "VariableManager.deleteLocalVars(localVarScope);}";
         functionMethod.insertBefore(src);
     }
 }
