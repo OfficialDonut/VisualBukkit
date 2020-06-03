@@ -46,6 +46,7 @@ public class TypeHandler {
         register(Number.class, "number", s -> "Double.valueOf(" + s + ")");
         register(Object.class, "object");
         register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
+        register(Particle.class, "particle", s -> "Particle.valueOf(" + s + ".toUpperCase())");
         register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
         register(Scoreboard.class, "scoreboard");
         register(SimpleList.class, "list");
