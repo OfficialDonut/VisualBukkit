@@ -1,6 +1,8 @@
 package us.donut.visualbukkit.blocks;
 
 import org.reflections.Reflections;
+import us.donut.visualbukkit.blocks.expressions.ExprLocalVariable;
+import us.donut.visualbukkit.blocks.expressions.ExprPersistentVariable;
 
 import java.lang.reflect.Modifier;
 import java.util.Collection;
@@ -10,7 +12,7 @@ import java.util.Map;
 
 public class BlockRegistry {
 
-    private static Map<Class<? extends CodeBlock>, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
+    private static Map<String, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public static void registerAll() {
@@ -19,15 +21,21 @@ public class BlockRegistry {
             if (!Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
                 Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
                 BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
-                blockTypes.put(blockType, blockInfo);
+                blockTypes.put(blockType.getCanonicalName(), blockInfo);
                 blockInfo.createBlock();
             }
         }
+        blockTypes.put("us.donut.visualbukkit.blocks.expressions.ExprTempVariable", getInfo(ExprLocalVariable.class));
+        blockTypes.put("us.donut.visualbukkit.blocks.expressions.ExprVariable", getInfo(ExprPersistentVariable.class));
+    }
+
+    public static BlockInfo<? extends CodeBlock> getInfo(String blockType) {
+        return blockTypes.get(blockType);
     }
 
     @SuppressWarnings("unchecked")
     public static <T extends CodeBlock> BlockInfo<T> getInfo(Class<T> blockType) {
-        return (BlockInfo<T>) blockTypes.get(blockType);
+        return (BlockInfo<T>) getInfo(blockType.getCanonicalName());
     }
 
     @SuppressWarnings("unchecked")

@@ -90,7 +90,6 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void load(ConfigurationSection section) throws Exception {
         super.load(section);
         ConfigurationSection childrenSection = section.getConfigurationSection("children");
@@ -98,9 +97,8 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
             for (String key : childrenSection.getKeys(false)) {
                 ConfigurationSection childSection = childrenSection.getConfigurationSection(key);
                 if (childSection != null) {
-                    String className = childSection.getString("block-type");
-                    if (className != null) {
-                        Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
+                    String blockType = childSection.getString("block-type");
+                    if (blockType != null) {
                         CodeBlock child = BlockRegistry.getInfo(blockType).createBlock();
                         child.load(childSection);
                         getChildren().add(child);

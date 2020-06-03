@@ -104,17 +104,12 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void load(ConfigurationSection section) throws Exception {
-        String className = section.getString("block-type");
-        if (className != null) {
-            Class<? extends ExpressionBlock<?>> blockType = (Class<? extends ExpressionBlock<?>>) Class.forName(className);
-            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
-            if (blockInfo != null) {
-                ExpressionBlock<?> expression = (ExpressionBlock<?>) blockInfo.createBlock();
-                expression.load(section);
-                setExpression(expression);
-            }
+        String blockType = section.getString("block-type");
+        if (blockType != null) {
+            ExpressionBlock<?> expression = (ExpressionBlock<?>) BlockRegistry.getInfo(blockType).createBlock();
+            expression.load(section);
+            setExpression(expression);
         }
     }
 

@@ -83,7 +83,6 @@ public abstract class BlockPane extends Tab implements Loadable {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void load(ConfigurationSection section) throws Exception {
         if (section.getBoolean("open")) {
             open();
@@ -93,9 +92,8 @@ public abstract class BlockPane extends Tab implements Loadable {
             for (String key : blocksSection.getKeys(false)) {
                 ConfigurationSection blockSection = blocksSection.getConfigurationSection(key);
                 if (blockSection != null) {
-                    String className = blockSection.getString("block-type");
-                    if (className != null) {
-                        Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
+                    String blockType = blockSection.getString("block-type");
+                    if (blockType != null) {
                         CodeBlock block = BlockRegistry.getInfo(blockType).createBlock();
                         block.load(blockSection);
                         blockArea.getChildren().add(block);

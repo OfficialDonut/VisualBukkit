@@ -9,7 +9,7 @@ public class CopyPasteManager {
     private static YamlConfiguration blockData;
 
     public static void copy(CodeBlock block) {
-        copiedBlock = BlockRegistry.getInfo(block.getClass());
+        copiedBlock = BlockRegistry.getInfo(block);
         blockData = new YamlConfiguration();
         block.unload(blockData);
     }

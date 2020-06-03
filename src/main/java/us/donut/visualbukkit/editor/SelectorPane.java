@@ -50,7 +50,6 @@ public class SelectorPane extends VBox implements BlockContainer {
     private TreeNode pinnedBlocks = new TreeNode("Pinned Blocks");
     private TextField searchField = new TextField();
 
-    @SuppressWarnings("unchecked")
     public SelectorPane() {
         VBox content = new VBox();
         ScrollPane scrollPane = new ScrollPane(content);
@@ -110,12 +109,12 @@ public class SelectorPane extends VBox implements BlockContainer {
             expressionBox.setManaged(state);
         });
 
-        for (String className : VisualBukkitLauncher.DATA_FILE.getConfig().getStringList("pinned-blocks")) {
-            try {
-                Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) Class.forName(className);
-                pin(BlockRegistry.getInfo(blockType));
-            } catch (ClassNotFoundException e) {
-                VisualBukkit.displayException("Failed to load pinned block", e);
+        for (String blockType : VisualBukkitLauncher.DATA_FILE.getConfig().getStringList("pinned-blocks")) {
+            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
+            if (blockInfo != null) {
+                pin(blockInfo);
+            } else {
+                VisualBukkit.displayError("Failed to load pinned block " + blockType);
             }
         }
 
