@@ -107,9 +107,12 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     public void load(ConfigurationSection section) throws Exception {
         String blockType = section.getString("block-type");
         if (blockType != null) {
-            ExpressionBlock<?> expression = (ExpressionBlock<?>) BlockRegistry.getInfo(blockType).createBlock();
-            expression.load(section);
-            setExpression(expression);
+            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
+            if (blockInfo != null) {
+                ExpressionBlock<?> expression = (ExpressionBlock<?>) blockInfo.createBlock();
+                expression.load(section);
+                setExpression(expression);
+            }
         }
     }
 
