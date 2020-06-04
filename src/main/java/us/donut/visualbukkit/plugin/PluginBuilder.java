@@ -35,6 +35,7 @@ public class PluginBuilder {
         classPool.importPackage("java.nio.file");
         classPool.importPackage("java.util");
         classPool.importPackage("org.bukkit");
+        classPool.importPackage("org.bukkit.block");
         classPool.importPackage("org.bukkit.entity");
         classPool.importPackage("org.bukkit.inventory");
         classPool.importPackage("org.bukkit.inventory.meta");

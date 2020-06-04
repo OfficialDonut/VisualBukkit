@@ -7,6 +7,7 @@ import us.donut.visualbukkit.plugin.modules.classes.*;
 public enum PluginModule {
 
     PROCEDURE_RUNNABLE(ProcedureRunnable.class),
+    REFLECTION_UTIL(ReflectionUtil.class),
     WORLDGUARD(WorldGuardHook.class),
     VAULT(VaultHook.class),
 
