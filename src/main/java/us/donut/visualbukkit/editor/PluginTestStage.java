@@ -166,9 +166,9 @@ public class PluginTestStage extends Stage {
                     Node node = outputPane.getItems().get(0);
                     if (equals(node)) {
                         sendMessage();
+                        e.consume();
                     }
                 }
-                e.consume();
             });
             getChildren().addAll(new Label("Player: " + player.getName()), outputTextArea, new CenteredHBox(5, new Label("Message/Command:"), messageField, sendButton));
         }
