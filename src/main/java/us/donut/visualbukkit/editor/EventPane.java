@@ -118,15 +118,6 @@ public class EventPane extends BlockPane {
     }
 
     @Override
-    public Set<PluginModule> findUsedModules() {
-        Set<PluginModule> modules = super.findUsedModules();
-        if (event == PlaceholderEvent.class) {
-            modules.add(PluginModule.PlACEHOLDERAPI);
-        }
-        return modules;
-    }
-
-    @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
         section.set("priority", priorityComboBox.getValue());
@@ -139,6 +130,14 @@ public class EventPane extends BlockPane {
         if (priority != null) {
             priorityComboBox.setValue(priority);
         }
+    }
+
+    @Override
+    public PluginModule[] getModules() {
+        if (event == PlaceholderEvent.class) {
+            return new PluginModule[]{PluginModule.PlACEHOLDERAPI};
+        }
+        return null;
     }
 
     public Class<? extends Event> getEvent() {

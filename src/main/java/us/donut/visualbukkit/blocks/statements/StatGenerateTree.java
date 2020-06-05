@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.TreeType;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Description("Generates a tree at a location")
@@ -16,8 +17,11 @@ public class StatGenerateTree extends StatementBlock {
 
     @Override
     public String toJava() {
-        String locVar = randomVar();
-        return "Location " + locVar + "=" + arg(1) + ";" +
-                locVar + ".getWorld().generateTree(" + locVar + "," + arg(0) + ");";
+        return "generateTree(" + arg(0) + "," + arg(1) + ");";
+    }
+
+    @UtilMethod
+    public static void generateTree(TreeType treeType, Location loc) {
+        loc.getWorld().generateTree(loc, treeType);
     }
 }

@@ -241,7 +241,7 @@ public class Project {
         return functions;
     }
 
-    public List<? extends BlockPane> getBlockPanes() {
+    public List<BlockPane> getBlockPanes() {
         List<BlockPane> blockPanes = new ArrayList<>(1 + commands.size() + events.size() + procedures.size() + functions.size());
         blockPanes.add(pluginEnablePane);
         blockPanes.addAll(commands);

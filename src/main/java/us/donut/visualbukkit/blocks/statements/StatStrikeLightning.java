@@ -3,6 +3,7 @@ package us.donut.visualbukkit.blocks.statements;
 import org.bukkit.Location;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
@@ -16,9 +17,15 @@ public class StatStrikeLightning extends StatementBlock {
 
     @Override
     public String toJava() {
-        String method = arg(0).equals("real") ? "strikeLightning" : "strikeLightningEffect";
-        String locVar = randomVar();
-        return "Location " + locVar + "=" + arg(1) + ";" +
-                locVar + ".getWorld()." + method + "(" + locVar + ");";
+        return "strikeLightning(" + arg(1) + "," + arg(0).equals("fake") + ");";
+    }
+
+    @UtilMethod
+    public static void strikeLightning(Location loc, boolean fake) {
+        if (fake) {
+            loc.getWorld().strikeLightningEffect(loc);
+        } else {
+            loc.getWorld().strikeLightning(loc);
+        }
     }
 }

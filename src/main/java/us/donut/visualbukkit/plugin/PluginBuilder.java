@@ -3,11 +3,13 @@ package us.donut.visualbukkit.plugin;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.NotFoundException;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
+import javassist.*;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.blocks.BlockInfo;
+import us.donut.visualbukkit.blocks.BlockRegistry;
+import us.donut.visualbukkit.blocks.CodeBlock;
 import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
@@ -19,10 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
@@ -54,8 +53,11 @@ public class PluginBuilder {
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
             CtClass mainClass = getCtClass(PluginMain.class, null);
-            for (PluginModule module : blockPane.findUsedModules()) {
-                module.insertInto(mainClass);
+            insertModules(blockPane.getModules(), mainClass);
+            for (CodeBlock block : getBlocksRecursive(blockPane.getBlockArea())) {
+                BlockInfo<?> blockInfo = BlockRegistry.getInfo(block);
+                insertModules(blockInfo.getModules(), mainClass);
+                insertMethods(blockInfo.getUtilMethods(), mainClass);
             }
             blockPane.insertInto(mainClass);
             return true;
@@ -77,16 +79,22 @@ public class PluginBuilder {
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
         classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
-        for (BlockPane blockPane : project.getBlockPanes()) {
-            for (PluginModule module : blockPane.findUsedModules()) {
-                module.insertInto(mainClass);
-                for (Class<?> clazz : module.getClasses()) {
-                    classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+        for (CodeBlock block : getBlocksRecursive(project.getBlockPanes())) {
+            BlockInfo<?> blockInfo = BlockRegistry.getInfo(block);
+            PluginModule[] modules = blockInfo.getModules();
+            if (modules != null) {
+                for (PluginModule module : modules) {
+                    for (Class<?> clazz : module.getClasses()) {
+                        classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+                    }
                 }
+                insertModules(modules, mainClass);
             }
+            insertMethods(blockInfo.getUtilMethods(), mainClass);
         }
 
         for (BlockPane blockPane : project.getBlockPanes()) {
+            insertModules(blockPane.getModules(), mainClass);
             blockPane.insertInto(mainClass);
         }
 
@@ -209,6 +217,47 @@ public class PluginBuilder {
             }
             try (OutputStream os = Files.newOutputStream(packageDir.resolve(ctClass.getSimpleName() + ".class"))) {
                 os.write(ctClass.toBytecode());
+            }
+        }
+    }
+
+    public static void insertModules(PluginModule[] modules, CtClass mainClass) throws Exception {
+        if (modules != null) {
+            for (PluginModule module : modules) {
+                module.insertInto(mainClass);
+            }
+        }
+    }
+
+    public static void insertMethods(CtMethod[] methods, CtClass mainClass) throws Exception {
+        if (methods != null) {
+            for (CtMethod method : methods) {
+                mainClass.addMethod(new CtMethod(method, mainClass, null));
+            }
+        }
+    }
+
+    public static Set<CodeBlock> getBlocksRecursive(List<BlockPane> panes) {
+        Set<CodeBlock> blocks = new HashSet<>();
+        for (BlockPane pane : panes) {
+            getBlocksRecursive(pane.getBlockArea(), blocks);
+        }
+        return blocks;
+    }
+
+    public static Set<CodeBlock> getBlocksRecursive(Pane pane) {
+        Set<CodeBlock> blocks = new HashSet<>();
+        getBlocksRecursive(pane, blocks);
+        return blocks;
+    }
+
+    private static void getBlocksRecursive(Pane pane, Set<CodeBlock> blocks) {
+        for (Node child : pane.getChildren()) {
+            if (child instanceof CodeBlock) {
+                blocks.add((CodeBlock) child);
+            }
+            if (child instanceof Pane) {
+                getBlocksRecursive((Pane) child, blocks);
             }
         }
     }

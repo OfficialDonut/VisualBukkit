@@ -3,6 +3,8 @@ package us.donut.visualbukkit.blocks;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
+import java.util.UUID;
+
 public class EmptyExpressionBlock<T> extends ChangeableExpressionBlock<T> {
 
     private Class<T> returnType;
@@ -23,7 +25,7 @@ public class EmptyExpressionBlock<T> extends ChangeableExpressionBlock<T> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return getReturnType().getCanonicalName() + " " + randomVar() + "=" + delta + ";";
+        return getReturnType().getCanonicalName() + " a" + UUID.randomUUID().toString().replace("-", "") + "=" + delta + ";";
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.bukkit.entity.EntityType;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
@@ -18,8 +19,11 @@ public class StatSpawnEntity extends StatementBlock {
 
     @Override
     public String toJava() {
-        String locVar = randomVar();
-        return "Location " + locVar + "=" + arg(1) + ";" +
-                locVar + ".getWorld().spawnEntity(" + locVar + "," + arg(0) + ");";
+        return "spawnEntity(" + arg(0) + "," + arg(1) + ");";
+    }
+
+    @UtilMethod
+    public static void spawnEntity(EntityType entityType, Location loc) {
+        loc.getWorld().spawnEntity(loc, entityType);
     }
 }

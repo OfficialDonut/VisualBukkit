@@ -71,10 +71,7 @@ public class TypeHandler {
             return src;
         }
         if (to == String.class) {
-            if (from.isPrimitive()) {
-                src = convert(from, ClassUtils.primitiveToWrapper(from), src);
-            }
-            return "getString(" + src + ")";
+            return "String.valueOf(" + src + ")";
         }
         if (isPrimitiveNumber(from) && isPrimitiveNumber(to)) {
             return "((" + to.getSimpleName() + ")" + src + ")";

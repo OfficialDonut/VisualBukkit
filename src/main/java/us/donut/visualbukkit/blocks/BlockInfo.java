@@ -3,14 +3,18 @@ package us.donut.visualbukkit.blocks;
 import com.google.gson.internal.Primitives;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
 import org.apache.commons.lang.WordUtils;
+import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.annotations.*;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockInfo<T extends CodeBlock> {
 
@@ -21,6 +25,7 @@ public class BlockInfo<T extends CodeBlock> {
     private String[] categories;
     private Class<?>[] events;
     private PluginModule[] modules;
+    private CtMethod[] utilMethods;
     private Class<?> returnType;
 
     public BlockInfo(Class<T> blockType) {
@@ -50,6 +55,24 @@ public class BlockInfo<T extends CodeBlock> {
 
         if (blockType.isAnnotationPresent(Module.class)) {
             modules = blockType.getAnnotation(Module.class).value();
+        }
+
+        List<Method> methods = new ArrayList<>();
+        for (Method method : blockType.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(UtilMethod.class)) {
+                methods.add(method);
+            }
+        }
+        if (!methods.isEmpty()) {
+            try {
+                CtClass ctClass = ClassPool.getDefault().get(blockType.getCanonicalName());
+                utilMethods = new CtMethod[methods.size()];
+                for (int i = 0; i < methods.size(); i++) {
+                    utilMethods[i] = ctClass.getDeclaredMethod(methods.get(i).getName());
+                }
+            } catch (NotFoundException e) {
+                VisualBukkit.displayException("Failed to register util method", e);
+            }
         }
 
         if (ExpressionBlock.class.isAssignableFrom(blockType)) {
@@ -108,6 +131,10 @@ public class BlockInfo<T extends CodeBlock> {
 
     public PluginModule[] getModules() {
         return modules;
+    }
+
+    public CtMethod[] getUtilMethods() {
+        return utilMethods;
     }
 
     public Class<?> getReturnType() {

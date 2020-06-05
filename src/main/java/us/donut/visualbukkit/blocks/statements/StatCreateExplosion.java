@@ -3,6 +3,7 @@ package us.donut.visualbukkit.blocks.statements;
 import org.bukkit.Location;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
@@ -17,10 +18,11 @@ public class StatCreateExplosion extends StatementBlock {
 
     @Override
     public String toJava() {
-        boolean fire = arg(2).equals("fire");
-        boolean blocks = arg(3).equals("break blocks");
-        String locVar = randomVar();
-        return "Location " + locVar + "=" + arg(0) + ";" +
-                locVar + ".getWorld().createExplosion(" + locVar + "," + arg(1) + "," + fire + "," + blocks + ");";
+        return "createExplosion(" + arg(0) + "," + arg(1) + ");";
+    }
+
+    @UtilMethod
+    public static void createExplosion(Location loc, float power) {
+        loc.getWorld().createExplosion(loc, power);
     }
 }

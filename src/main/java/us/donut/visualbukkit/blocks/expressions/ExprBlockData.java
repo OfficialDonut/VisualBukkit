@@ -6,8 +6,12 @@ import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Module;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
+import us.donut.visualbukkit.plugin.modules.classes.ReflectionUtil;
+
+import java.lang.reflect.InvocationTargetException;
 
 @Category("Block")
 @Description({"The data of a block", "Changers: set", "Returns: number"})
@@ -26,11 +30,11 @@ public class ExprBlockData extends ChangeableExpressionBlock<Byte> {
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        String blockVar = randomVar();
-        return changeType == ChangeType.SET ?
-                "Block " + blockVar + "=" + arg(0) + ";" +
-                "ReflectionUtil" +
-                        ".getDeclaredMethod(" + blockVar + ".getClass(),\"setData\",new Class[]{byte.class})" +
-                        ".invoke(" + blockVar + ",new Object[]{new Byte(" + delta + ")});" : null;
+        return changeType == ChangeType.SET ? "setBlockData(" + arg(0) + "," + delta + ");" : null;
+    }
+
+    @UtilMethod
+    public static void setBlockData(Block block, byte data) throws InvocationTargetException, IllegalAccessException {
+        ReflectionUtil.getDeclaredMethod(block.getClass(), "setData", byte.class).invoke(block, data);
     }
 }

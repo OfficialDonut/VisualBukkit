@@ -16,6 +16,6 @@ public class ExprToString extends ExpressionBlock<String> {
 
     @Override
     public String toJava() {
-        return "PluginMain.getString(" + arg(0) + ")";
+        return "String.valueOf(" + arg(0) + ")";
     }
 }
