@@ -54,8 +54,7 @@ public class PluginBuilder {
         try {
             CtClass mainClass = getCtClass(PluginMain.class, null);
             insertModules(blockPane.getModules(), mainClass);
-            for (CodeBlock block : getBlocksRecursive(blockPane.getBlockArea())) {
-                BlockInfo<?> blockInfo = BlockRegistry.getInfo(block);
+            for (BlockInfo<?> blockInfo : getBlocksRecursive(blockPane.getBlockArea())) {
                 insertModules(blockInfo.getModules(), mainClass);
                 insertMethods(blockInfo.getUtilMethods(), mainClass);
             }
@@ -79,8 +78,7 @@ public class PluginBuilder {
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
         classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
-        for (CodeBlock block : getBlocksRecursive(project.getBlockPanes())) {
-            BlockInfo<?> blockInfo = BlockRegistry.getInfo(block);
+        for (BlockInfo<?> blockInfo : getBlocksRecursive(project.getBlockPanes())) {
             PluginModule[] modules = blockInfo.getModules();
             if (modules != null) {
                 for (PluginModule module : modules) {
@@ -237,24 +235,24 @@ public class PluginBuilder {
         }
     }
 
-    public static Set<CodeBlock> getBlocksRecursive(List<BlockPane> panes) {
-        Set<CodeBlock> blocks = new HashSet<>();
+    public static Set<BlockInfo<?>> getBlocksRecursive(List<BlockPane> panes) {
+        Set<BlockInfo<?>> blocks = new HashSet<>();
         for (BlockPane pane : panes) {
             getBlocksRecursive(pane.getBlockArea(), blocks);
         }
         return blocks;
     }
 
-    public static Set<CodeBlock> getBlocksRecursive(Pane pane) {
-        Set<CodeBlock> blocks = new HashSet<>();
+    public static Set<BlockInfo<?>> getBlocksRecursive(Pane pane) {
+        Set<BlockInfo<?>> blocks = new HashSet<>();
         getBlocksRecursive(pane, blocks);
         return blocks;
     }
 
-    private static void getBlocksRecursive(Pane pane, Set<CodeBlock> blocks) {
+    private static void getBlocksRecursive(Pane pane, Set<BlockInfo<?>> blocks) {
         for (Node child : pane.getChildren()) {
             if (child instanceof CodeBlock) {
-                blocks.add((CodeBlock) child);
+                blocks.add(BlockRegistry.getInfo((CodeBlock) child));
             }
             if (child instanceof Pane) {
                 getBlocksRecursive((Pane) child, blocks);
