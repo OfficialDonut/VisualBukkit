@@ -157,9 +157,11 @@ public class PluginTestStage extends Stage {
             this.player = player;
             outputTextArea.setEditable(false);
             outputTextArea.prefHeightProperty().bind(heightProperty());
+
             Button sendButton = new Button("Send");
             sendButton.setOnAction(e -> sendMessage());
-            setPadding(new Insets(5, 5, 5, 5));
+            setPadding(new Insets(5, 5, 10, 5));
+
             messageField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
                 if (e.getCode() == KeyCode.ENTER) {
                     Node node = outputPane.getItems().get(0);
@@ -169,7 +171,12 @@ public class PluginTestStage extends Stage {
                     }
                 }
             });
-            getChildren().addAll(new Label("Player: " + player.getName()), outputTextArea, new CenteredHBox(5, new Label("Message/Command:"), messageField, sendButton));
+
+            CheckBox opCheckBox = new CheckBox("Operator");
+            opCheckBox.setFocusTraversable(false);
+            opCheckBox.setOnAction(e -> player.setOp(opCheckBox.isSelected()));
+
+            getChildren().addAll(new Label("Player: " + player.getName()), outputTextArea, new CenteredHBox(5, new Label("Message/Command:"), messageField, sendButton), opCheckBox);
         }
 
         public void sendMessage() {
