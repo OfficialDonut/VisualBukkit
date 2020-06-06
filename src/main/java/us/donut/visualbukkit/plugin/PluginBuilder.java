@@ -53,11 +53,15 @@ public class PluginBuilder {
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
             CtClass mainClass = getCtClass(PluginMain.class, null);
-            insertModules(blockPane.getModules(), mainClass);
+            Set<PluginModule> modules = new HashSet<>(Arrays.asList(blockPane.getModules()));
             for (BlockInfo<?> blockInfo : getBlocksRecursive(blockPane.getBlockArea())) {
-                insertModules(blockInfo.getModules(), mainClass);
+                PluginModule[] pluginModules = blockInfo.getModules();
+                if (pluginModules != null) {
+                    modules.addAll(Arrays.asList(pluginModules));
+                }
                 insertMethods(blockInfo.getUtilMethods(), mainClass);
             }
+            insertModules(modules, mainClass);
             blockPane.insertInto(mainClass);
             return true;
         } catch (Exception e) {
@@ -78,21 +82,28 @@ public class PluginBuilder {
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
         classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
+        Set<PluginModule> modules = new HashSet<>();
         for (BlockInfo<?> blockInfo : getBlocksRecursive(project.getBlockPanes())) {
-            PluginModule[] modules = blockInfo.getModules();
-            if (modules != null) {
-                for (PluginModule module : modules) {
+            PluginModule[] pluginModules = blockInfo.getModules();
+            if (pluginModules != null) {
+                for (PluginModule module : pluginModules) {
+                    modules.add(module);
                     for (Class<?> clazz : module.getClasses()) {
                         classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
                     }
                 }
-                insertModules(modules, mainClass);
             }
             insertMethods(blockInfo.getUtilMethods(), mainClass);
         }
+        for (BlockPane blockPane : project.getBlockPanes()) {
+            PluginModule[] pluginModules = blockPane.getModules();
+            if (pluginModules != null) {
+                modules.addAll(Arrays.asList(pluginModules));
+            }
+        }
+        insertModules(modules, mainClass);
 
         for (BlockPane blockPane : project.getBlockPanes()) {
-            insertModules(blockPane.getModules(), mainClass);
             blockPane.insertInto(mainClass);
         }
 
@@ -219,7 +230,7 @@ public class PluginBuilder {
         }
     }
 
-    public static void insertModules(PluginModule[] modules, CtClass mainClass) throws Exception {
+    public static void insertModules(Set<PluginModule> modules, CtClass mainClass) throws Exception {
         if (modules != null) {
             for (PluginModule module : modules) {
                 module.insertInto(mainClass);
