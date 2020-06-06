@@ -53,9 +53,10 @@ public class PluginBuilder {
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
             CtClass mainClass = getCtClass(PluginMain.class, null);
-            Set<PluginModule> modules = new HashSet<>(Arrays.asList(blockPane.getModules()));
+            PluginModule[] pluginModules = blockPane.getModules();
+            Set<PluginModule> modules = pluginModules == null ? new HashSet<>() : new HashSet<>(Arrays.asList(pluginModules));
             for (BlockInfo<?> blockInfo : getBlocksRecursive(blockPane.getBlockArea())) {
-                PluginModule[] pluginModules = blockInfo.getModules();
+                pluginModules = blockInfo.getModules();
                 if (pluginModules != null) {
                     modules.addAll(Arrays.asList(pluginModules));
                 }
