@@ -8,4 +8,4 @@ Visual Bukkit is a visual programming language for Bukkit plugins, allowing you 
 
 [![](https://www.ej-technologies.com/images/product_banners/install4j_small.png) Multi-platform installer built with Install4J](https://www.ej-technologies.com/products/install4j/overview.html)
 
-![](https://i.imgur.com/3IxbLxr.png)
+![](https://i.imgur.com/TslMCjw.png)
