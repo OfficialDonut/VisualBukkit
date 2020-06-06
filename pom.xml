@@ -6,7 +6,7 @@
 
     <groupId>us.donut</groupId>
     <artifactId>visual-bukkit</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
