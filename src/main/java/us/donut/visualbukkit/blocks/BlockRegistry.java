@@ -13,6 +13,7 @@ import java.util.Map;
 public class BlockRegistry {
 
     private static Map<String, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
+    private static Map<String, String> renamedBlocks = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public static void registerAll() {
@@ -25,12 +26,12 @@ public class BlockRegistry {
                 blockInfo.createBlock();
             }
         }
-        blockTypes.put("us.donut.visualbukkit.blocks.expressions.ExprTempVariable", getInfo(ExprLocalVariable.class));
-        blockTypes.put("us.donut.visualbukkit.blocks.expressions.ExprVariable", getInfo(ExprPersistentVariable.class));
+        renamedBlocks.put("us.donut.visualbukkit.blocks.expressions.ExprTempVariable", ExprLocalVariable.class.getCanonicalName());
+        renamedBlocks.put("us.donut.visualbukkit.blocks.expressions.ExprVariable", ExprPersistentVariable.class.getCanonicalName());
     }
 
     public static BlockInfo<? extends CodeBlock> getInfo(String blockType) {
-        return blockTypes.get(blockType);
+        return blockTypes.get(renamedBlocks.getOrDefault(blockType, blockType));
     }
 
     @SuppressWarnings("unchecked")
