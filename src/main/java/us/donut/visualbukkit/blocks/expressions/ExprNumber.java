@@ -1,12 +1,14 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.InputParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 import java.util.regex.Pattern;
 
+@Category("Math")
 @Description({"A number", "Returns: number"})
 public class ExprNumber extends ExpressionBlock<Double> {
 
