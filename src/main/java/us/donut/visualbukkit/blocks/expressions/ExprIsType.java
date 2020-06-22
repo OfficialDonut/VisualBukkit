@@ -2,6 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
@@ -15,6 +16,11 @@ public class ExprIsType extends ConditionBlock {
 
     @Override
     protected String toNonNegatedJava() {
-        return arg(2) + ".isAssignableFrom(" + arg(0) + ".getClass())";
+        return "isType(" + arg(0) + "," + arg(2) + ")";
+    }
+
+    @UtilMethod
+    public static boolean isType(Object obj, Class<?> clazz) {
+        return obj != null && clazz.isAssignableFrom(obj.getClass());
     }
 }
