@@ -34,6 +34,7 @@ public class ExprItemStackName extends ChangeableExpressionBlock<String> {
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta != null) {
             itemMeta.setDisplayName(PluginMain.color(name));
+            item.setItemMeta(itemMeta);
         }
     }
 }
