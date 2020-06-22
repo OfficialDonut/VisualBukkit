@@ -21,6 +21,7 @@ import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 
@@ -41,6 +42,7 @@ public class TypeHandler {
         register(Inventory.class, "inventory");
         register(InventoryView.class, "inventory view");
         register(LivingEntity.class, "living entity");
+        register(LocalDateTime.class, "date");
         register(Location.class, "location");
         register(Material.class, "material", s -> "Material.valueOf(" + s + ".toUpperCase())");
         register(Number.class, "number", s -> "Double.valueOf(" + s + ")");
