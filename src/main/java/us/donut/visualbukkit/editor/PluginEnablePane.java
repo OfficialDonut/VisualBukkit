@@ -22,9 +22,8 @@ public class PluginEnablePane extends BlockPane {
         StringJoiner stringJoiner = new StringJoiner("\n");
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
-                "Object localVarScope = \"plugin-enable\";" +
-                stringJoiner.toString() +
-                "VariableManager.deleteLocalVars(localVarScope);";
+                "Object localVarScope = new Object();" +
+                stringJoiner.toString();
         enableMethod.insertAfter(src);
     }
 }

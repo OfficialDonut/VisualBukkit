@@ -17,11 +17,12 @@ import java.time.Duration;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 @SuppressWarnings("UnstableApiUsage")
 public class VariableManager {
 
-    private static Map<Object, Map<String, Object>> localVariables = new HashMap<>();
+    private static Map<Object, Map<String, Object>> localVariables = new WeakHashMap<>();
     private static Map<String, Object> nonPersistentVariables = new HashMap<>();
     private static Map<String, Object> persistentVariables = new HashMap<>();
     private static HashFunction hashFunction = Hashing.md5();
@@ -75,10 +76,6 @@ public class VariableManager {
 
     public static void deleteLocalVar(Object scope, String variableString) {
         getLocalVarMap(scope).remove(variableString);
-    }
-
-    public static void deleteLocalVars(Object scope) {
-        localVariables.remove(scope);
     }
 
     public static void deleteVar(boolean persistent, Object... args) {

@@ -101,9 +101,9 @@ public class CommandPane extends BlockPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (command.getName().equalsIgnoreCase(\"" + command + "\")) {" +
-                "Object localVarScope = \"command:" + command + "\";" +
+                "Object localVarScope = new Object();" +
                 stringJoiner.toString() +
-                "VariableManager.deleteLocalVars(localVarScope);}";
+                "}";
         commandMethod.insertBefore(src);
     }
 
