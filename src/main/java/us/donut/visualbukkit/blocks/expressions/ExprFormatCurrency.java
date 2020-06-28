@@ -14,6 +14,6 @@ public class ExprFormatCurrency extends ExpressionBlock<String> {
 
     @Override
     public String toJava() {
-        return "vaultEconomy.format(" + arg(0) + ")";
+        return "VaultHook.getEconomy().format(" + arg(0) + ")";
     }
 }
