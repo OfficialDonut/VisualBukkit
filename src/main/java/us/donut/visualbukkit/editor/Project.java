@@ -300,7 +300,6 @@ public class Project {
         private TextArea projectNotesTextArea = new TextArea();
 
         public Pane() {
-            getStyleClass().add("project-pane");
             YamlConfiguration data = dataFile.getConfig();
             pluginNameField.setText(data.getString("plugin.name", ""));
             pluginVerField.setText(data.getString("plugin.version", ""));
@@ -381,7 +380,15 @@ public class Project {
                 }
             });
 
-            getChildren().addAll(
+            VBox content = new VBox();
+            ScrollPane scrollPane = new ScrollPane(content);
+            scrollPane.prefWidthProperty().bind(widthProperty());
+            scrollPane.prefHeightProperty().bind(heightProperty());
+            scrollPane.setFitToWidth(true);
+            scrollPane.setFitToHeight(true);
+            getChildren().add(scrollPane);
+            content.getStyleClass().add("project-pane");
+            content.getChildren().addAll(
                     new TitleLabel("Project Manager", 1.5, true),
                     new Label("Name: " + name), structureTree,
                     new CenteredHBox(10, new Label("Project Notes:"), projectNotesButton),
