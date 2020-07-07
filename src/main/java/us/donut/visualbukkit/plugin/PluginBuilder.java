@@ -131,6 +131,7 @@ public class PluginBuilder {
         Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
         createJar(srcDir, jar);
         MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
+        VisualBukkit.displayMessage("Successfully built plugin\n(" + jar.toString() + ")");
     }
 
     public static String createYml(Project project, String name, String mainClassName) {

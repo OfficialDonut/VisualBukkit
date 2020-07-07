@@ -363,7 +363,6 @@ public class Project {
             buildButton.setOnAction(e -> {
                 try {
                     PluginBuilder.build(Project.this);
-                    VisualBukkit.displayMessage("Successfully built plugin");
                 } catch (Exception ex) {
                     VisualBukkit.displayException("Failed to build plugin", ex);
                 }
