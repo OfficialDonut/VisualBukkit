@@ -52,26 +52,26 @@ public abstract class ExpressionBlock<T> extends CodeBlock {
         });
 
         setOnContextMenuRequested(e -> {
-            getContextMenu().show(this, e.getScreenX(), e.getScreenY());
+            contextMenu.show(this, e.getScreenX(), e.getScreenY());
             ExpressionParameter expressionParameter = (ExpressionParameter) getParent();
             if (getReturnType() == String.class || expressionParameter.getReturnType() == String.class) {
-                if (!getContextMenu().getItems().contains(addStringItem)) {
-                    getContextMenu().getItems().add(addStringItem);
+                if (!contextMenu.getItems().contains(addStringItem)) {
+                    contextMenu.getItems().add(addStringItem);
                 }
             } else {
-                getContextMenu().getItems().remove(addStringItem);
+                contextMenu.getItems().remove(addStringItem);
             }
             if (getReturnType() == boolean.class || expressionParameter.getReturnType() == boolean.class) {
-                if (!getContextMenu().getItems().contains(addAndItem)) {
-                    getContextMenu().getItems().addAll(addAndItem, addOrItem);
+                if (!contextMenu.getItems().contains(addAndItem)) {
+                    contextMenu.getItems().addAll(addAndItem, addOrItem);
                 }
             } else {
-                getContextMenu().getItems().removeAll(addAndItem, addOrItem);
+                contextMenu.getItems().removeAll(addAndItem, addOrItem);
             }
             Parent parent = getParent();
             while (parent != null) {
                 if (parent instanceof StatementBlock) {
-                    ((StatementBlock) parent).getContextMenu().hide();
+                    ((StatementBlock) parent).contextMenu.hide();
                     break;
                 }
                 parent = parent.getParent();

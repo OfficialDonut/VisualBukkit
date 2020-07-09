@@ -13,6 +13,8 @@ import java.util.StringJoiner;
 @Description({"A persistent variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
 public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
 
+    private int numArgs = -1;
+
     @Override
     protected SyntaxNode init() {
         return new SyntaxNode("<...>");
@@ -20,7 +22,7 @@ public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     public void onDragDrop() {
-        if (getParameters().size() == 0) {
+        if (numArgs < 1) {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();
             spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100));
@@ -50,7 +52,7 @@ public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
     @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
-        section.set("num-args", getParameters().size());
+        section.set("num-args", numArgs);
     }
 
     @Override
@@ -59,16 +61,17 @@ public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
         super.load(section);
     }
 
-    private void setNumArgs(int num) {
-        getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add("variable(");
-        for (int i = 0; i < num; i++) {
-            getSyntaxNode().add(Object.class);
-            if (i != num - 1) {
-                getSyntaxNode().add(",");
+    private void setNumArgs(int numArgs) {
+        this.numArgs = numArgs;
+        syntaxNode.clear();
+        syntaxNode.add("variable(");
+        for (int i = 0; i < numArgs; i++) {
+            syntaxNode.add(Object.class);
+            if (i != numArgs - 1) {
+                syntaxNode.add(",");
             }
         }
-        getSyntaxNode().add(")");
+        syntaxNode.add(")");
     }
 
     private String getVarArgs() {

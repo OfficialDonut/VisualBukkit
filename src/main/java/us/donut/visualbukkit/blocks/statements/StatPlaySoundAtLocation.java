@@ -12,7 +12,11 @@ public class StatPlaySoundAtLocation extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("play", Sound.class, "at", Location.class, "with volume", float.class, "and pitch", float.class);
+        return new SyntaxNode("play sound at location")
+                .line("sound:   ", Sound.class)
+                .line("location:", Location.class)
+                .line("volume:  ", float.class)
+                .line("pitch:   ", float.class);
     }
 
     @Override

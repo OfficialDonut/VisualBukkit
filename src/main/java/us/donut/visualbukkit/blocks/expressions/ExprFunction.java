@@ -87,15 +87,15 @@ public class ExprFunction extends ExpressionBlock<Object> {
 
     private void setFunction(FunctionPane function) {
         this.function = function;
-        getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add(function.getMethodName() + "(");
+        syntaxNode.clear();
+        syntaxNode.add(function.getMethodName() + "(");
         Class<?>[] parameters = function.getParameters();
         for (int i = 0; i < parameters.length; i++) {
-            getSyntaxNode().add(parameters[i]);
+            syntaxNode.add(parameters[i]);
             if (i != parameters.length - 1) {
-                getSyntaxNode().add(",");
+                syntaxNode.add(",");
             }
         }
-        getSyntaxNode().add(")");
+        syntaxNode.add(")");
     }
 }

@@ -14,9 +14,13 @@ public class StatSendTitle extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode(
-                "send title", String.class, "with subtitle", String.class, "to", Player.class,
-                "and fade in for", Duration.class, "stay for", Duration.class, "fade out for", Duration.class);
+        return new SyntaxNode("send title to player")
+                .line("title:   ", String.class)
+                .line("subtitle:", String.class)
+                .line("player:  ", Player.class)
+                .line("fade in: ", Duration.class)
+                .line("stay for:", Duration.class)
+                .line("fade out:", Duration.class);
     }
 
     @Override

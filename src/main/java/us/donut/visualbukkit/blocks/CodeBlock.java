@@ -16,8 +16,8 @@ import java.util.List;
 
 public abstract class CodeBlock extends VBox implements Loadable {
 
-    private SyntaxNode syntaxNode;
-    private ContextMenu contextMenu;
+    protected SyntaxNode syntaxNode;
+    protected ContextMenu contextMenu;
 
     public CodeBlock() {
         DragManager.enableDragging(this);
@@ -76,7 +76,7 @@ public abstract class CodeBlock extends VBox implements Loadable {
     }
 
     public List<BlockParameter> getParameters() {
-        return getSyntaxNode().getParameters();
+        return syntaxNode.getParameters();
     }
 
     public BlockParameter getParameter(int i) {

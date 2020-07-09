@@ -12,7 +12,7 @@ public class StatBreakNaturally extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("break", Block.class, "naturally");
+        return new SyntaxNode("naturally break", Block.class);
     }
 
     @Override

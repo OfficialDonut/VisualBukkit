@@ -13,6 +13,8 @@ import java.util.StringJoiner;
 @Description({"A list of objects", "Returns: list"})
 public class ExprList extends ExpressionBlock<SimpleList> {
 
+    private int size = -1;
+
     @Override
     protected SyntaxNode init() {
         return new SyntaxNode("empty list");
@@ -20,7 +22,7 @@ public class ExprList extends ExpressionBlock<SimpleList> {
 
     @Override
     public void onDragDrop() {
-        if (getParameters().isEmpty()) {
+        if (size < 0) {
             Dialog<Integer> dialog = new Dialog<>();
             Spinner<Integer> spinner = new Spinner<>();
             spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
@@ -45,7 +47,7 @@ public class ExprList extends ExpressionBlock<SimpleList> {
     @Override
     public void unload(ConfigurationSection section) {
         super.unload(section);
-        section.set("size", getParameters().size());
+        section.set("size", size);
     }
 
     @Override
@@ -55,12 +57,13 @@ public class ExprList extends ExpressionBlock<SimpleList> {
     }
 
     private void setSize(int size) {
+        this.size = size;
         if (size > 0) {
-            getSyntaxNode().getChildren().clear();
+            syntaxNode.clear();
             for (int i = 0; i < size; i++) {
-                getSyntaxNode().add(Object.class);
+                syntaxNode.add(Object.class);
                 if (i != size - 1) {
-                    getSyntaxNode().add(",");
+                    syntaxNode.add(",");
                 }
             }
         }

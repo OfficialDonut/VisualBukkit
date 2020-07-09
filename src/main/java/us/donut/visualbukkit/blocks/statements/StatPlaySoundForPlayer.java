@@ -12,11 +12,16 @@ public class StatPlaySoundForPlayer extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("play", Sound.class, "for", Player.class, "with volume", float.class, "and pitch", float.class, "at", Location.class);
+        return new SyntaxNode("play sound for player")
+                .line("sound:   ", Sound.class)
+                .line("player:  ", Player.class)
+                .line("location:", Location.class)
+                .line("volume:  ", float.class)
+                .line("pitch:   ", float.class);
     }
 
     @Override
     public String toJava() {
-        return arg(1) + ".playSound(" + arg(4) + "," + arg(0) + "," + arg(2) + "," + arg(3) + ");";
+        return arg(1) + ".playSound(" + arg(2) + "," + arg(0) + "," + arg(3) + "," + arg(4) + ");";
     }
 }

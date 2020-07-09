@@ -89,15 +89,15 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
 
     private void setProcedure(ProcedurePane procedure) {
         this.procedure = procedure;
-        getSyntaxNode().getChildren().clear();
-        getSyntaxNode().add(procedure.getMethodName() + "(");
+        syntaxNode.clear();
+        syntaxNode.add(procedure.getMethodName() + "(");
         Class<?>[] parameters = procedure.getParameters();
         for (int i = 0; i < parameters.length; i++) {
-            getSyntaxNode().add(parameters[i]);
+            syntaxNode.add(parameters[i]);
             if (i != parameters.length - 1) {
-                getSyntaxNode().add(",");
+                syntaxNode.add(",");
             }
         }
-        getSyntaxNode().add(")");
+        syntaxNode.add(")");
     }
 }

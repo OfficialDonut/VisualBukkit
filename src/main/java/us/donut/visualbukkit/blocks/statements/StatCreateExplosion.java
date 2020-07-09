@@ -12,17 +12,20 @@ public class StatCreateExplosion extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("create explosion at", Location.class, "with power", float.class, "with",
-                new ChoiceParameter("fire", "no fire"), "and", new ChoiceParameter("break blocks", "do not break blocks"));
+        return new SyntaxNode("create explosion")
+                .line("location:", Location.class)
+                .line("power:   ", float.class)
+                .line("fire:    ", new ChoiceParameter("make fire", "do not make fire"))
+                .line("blocks:  ", new ChoiceParameter("break blocks", "do not break blocks"));
     }
 
     @Override
     public String toJava() {
-        return "createExplosion(" + arg(0) + "," + arg(1) + ");";
+        return "createExplosion(" + arg(0) + "," + arg(1) + "," + arg(2).equals("make fire") + "," + arg(3).equals("break blocks") + ");";
     }
 
     @UtilMethod
-    public static void createExplosion(Location loc, float power) {
-        loc.getWorld().createExplosion(loc, power);
+    public static void createExplosion(Location loc, float power, boolean fire, boolean breakBlocks) {
+        loc.getWorld().createExplosion(loc, power, fire, breakBlocks);
     }
 }

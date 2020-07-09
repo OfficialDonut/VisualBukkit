@@ -10,7 +10,10 @@ public class StatBan extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("ban", new ChoiceParameter("name", "IP"), String.class, "with reason", String.class);
+        return new SyntaxNode("ban player")
+                .line("ban type:", new ChoiceParameter("name", "IP"))
+                .line("name/IP: ", String.class)
+                .line("reason:  ", String.class);
     }
 
     @Override

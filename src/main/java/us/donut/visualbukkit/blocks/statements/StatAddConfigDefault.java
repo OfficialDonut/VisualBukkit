@@ -10,12 +10,15 @@ public class StatAddConfigDefault extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("set default for", String.class, "in", Configuration.class, "to", Object.class);
+        return new SyntaxNode("set config default")
+                .line("config:", Configuration.class)
+                .line("key:   ", String.class)
+                .line("value: ", Object.class);
     }
 
     @Override
     public String toJava() {
-        return arg(1) + ".addDefault(" + arg(0) + "," + arg(2) + ");" +
-                arg(1) + ".options().copyDefaults(true);";
+        return arg(0) + ".addDefault(" + arg(1) + "," + arg(2) + ");" +
+                arg(0) + ".options().copyDefaults(true);";
     }
 }

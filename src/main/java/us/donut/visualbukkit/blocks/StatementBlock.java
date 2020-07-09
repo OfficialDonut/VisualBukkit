@@ -15,12 +15,12 @@ public abstract class StatementBlock extends CodeBlock {
         getStyleClass().add("statement-block");
         MenuItem disableItem = new MenuItem("Disable");
         MenuItem enableItem = new MenuItem("Enable");
-        getContextMenu().getItems().add(disableItem);
+        contextMenu.getItems().add(disableItem);
         disabledContextMenu = new ContextMenu(enableItem);
         disableItem.setOnAction(e -> disable());
         enableItem.setOnAction(e -> enable());
         setOnContextMenuRequested(e -> {
-            (disabled ? disabledContextMenu : getContextMenu()).show(this, e.getScreenX(), e.getScreenY());
+            (disabled ? disabledContextMenu : contextMenu).show(this, e.getScreenX(), e.getScreenY());
             e.consume();
         });
     }

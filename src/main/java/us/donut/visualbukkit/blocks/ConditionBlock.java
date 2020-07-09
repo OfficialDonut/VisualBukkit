@@ -17,7 +17,7 @@ public abstract class ConditionBlock extends ExpressionBlock<Boolean> {
     }
 
     protected boolean isNegated() {
-        for (BlockParameter parameter : getSyntaxNode().getParameters()) {
+        for (BlockParameter parameter : syntaxNode.getParameters()) {
             if (parameter instanceof ChoiceParameter) {
                 return ((ChoiceParameter) parameter).getComboBox().getSelectionModel().getSelectedIndex() != 0;
             }

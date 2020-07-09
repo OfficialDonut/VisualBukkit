@@ -9,9 +9,9 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 public class StatComment extends StatementBlock {
 
     public StatComment() {
-        getContextMenu().getItems().remove(getContextMenu().getItems().size() - 1);
+        contextMenu.getItems().remove(contextMenu.getItems().size() - 1);
         setOnContextMenuRequested(e -> {
-            getContextMenu().show(this, e.getScreenX(), e.getScreenY());
+            contextMenu.show(this, e.getScreenX(), e.getScreenY());
             e.consume();
         });
     }

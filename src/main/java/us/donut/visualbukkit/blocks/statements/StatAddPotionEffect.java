@@ -13,7 +13,10 @@ public class StatAddPotionEffect extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("add", PotionEffectType.class, "to", LivingEntity.class, "for", Duration.class);
+        return new SyntaxNode("add potion effect")
+                .line("effect:  ", PotionEffectType.class)
+                .line("entity:  ", LivingEntity.class)
+                .line("duration:", Duration.class);
     }
 
     @Override

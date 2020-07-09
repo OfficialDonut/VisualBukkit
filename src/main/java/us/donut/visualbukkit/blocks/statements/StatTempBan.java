@@ -12,7 +12,11 @@ public class StatTempBan extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("temp ban", new ChoiceParameter("name", "IP"), String.class, "with reason", String.class, "for", Duration.class);
+        return new SyntaxNode("temp ban player")
+                .line("ban type:", new ChoiceParameter("name", "IP"))
+                .line("name/IP: ", String.class)
+                .line("reason:  ", String.class)
+                .line("duration:", Duration.class);
     }
 
     @Override

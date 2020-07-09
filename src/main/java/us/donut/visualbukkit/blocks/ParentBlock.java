@@ -27,7 +27,7 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
         DragManager.enableBlockContainer(this);
         setOnContextMenuRequested(e -> {
             if (isEnabled()) {
-                getContextMenu().show(this, e.getScreenX(), e.getScreenY());
+                contextMenu.show(this, e.getScreenX(), e.getScreenY());
                 contextMenuYCoord = e.getY();
             } else {
                 getDisabledContextMenu().show(this, e.getScreenX(), e.getScreenY());
@@ -36,7 +36,7 @@ public abstract class ParentBlock extends StatementBlock implements BlockContain
         });
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setOnAction(e -> CopyPasteManager.paste(this, contextMenuYCoord));
-        getContextMenu().getItems().add(1, pasteItem);
+        contextMenu.getItems().add(1, pasteItem);
     }
 
     @Override
