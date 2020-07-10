@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 @Description("Plays a sound at a location")
 public class StatPlaySoundAtLocation extends StatementBlock {
@@ -21,11 +21,7 @@ public class StatPlaySoundAtLocation extends StatementBlock {
 
     @Override
     public String toJava() {
-        return "playSound(" + arg(0) + "," + arg(1) + "," + arg(2) + "," + arg(3) + ");";
-    }
-
-    @UtilMethod
-    public static void playSound(Sound sound, Location loc, float vol, float pitch) {
-        loc.getWorld().playSound(loc, sound, vol, pitch);
+        BuildContext.addUtilMethod("playSound");
+        return "UtilMethods.playSound(" + arg(0) + "," + arg(1) + "," + arg(2) + "," + arg(3) + ");";
     }
 }

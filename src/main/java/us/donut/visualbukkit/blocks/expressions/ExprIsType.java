@@ -2,9 +2,9 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 @Description({"Checks if an object is a certain type", "Returns: boolean"})
 public class ExprIsType extends ConditionBlock {
@@ -16,11 +16,7 @@ public class ExprIsType extends ConditionBlock {
 
     @Override
     protected String toNonNegatedJava() {
-        return "isType(" + arg(0) + "," + arg(2) + ")";
-    }
-
-    @UtilMethod
-    public static boolean isType(Object obj, Class<?> clazz) {
-        return obj != null && clazz.isAssignableFrom(obj.getClass());
+        BuildContext.addUtilMethod("isType");
+        return "UtilMethods.isType(" + arg(0) + "," + arg(2) + ")";
     }
 }

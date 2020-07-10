@@ -27,7 +27,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.blocks.BlockInfo;
+import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.plugin.PluginMain;
 import us.donut.visualbukkit.util.CenteredHBox;
@@ -89,10 +89,8 @@ public class PluginTestStage extends Stage {
 
         try {
             serverMock = MockBukkit.mock();
+            BuildContext.create();
             CtClass mainCtClass = PluginBuilder.getCtClass(PluginMain.class, null);
-            for (BlockInfo<?> blockInfo : PluginBuilder.getBlocksRecursive(project.getBlockPanes())) {
-                PluginBuilder.insertMethods(blockInfo.getUtilMethods(), mainCtClass);
-            }
             for (BlockPane blockPane : project.getBlockPanes()) {
                 blockPane.insertInto(mainCtClass);
             }

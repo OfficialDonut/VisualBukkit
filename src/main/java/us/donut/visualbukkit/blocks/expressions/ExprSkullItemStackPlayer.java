@@ -2,12 +2,11 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 @Description({"The player of a skull item stack", "Changers: set", "Returns: offline player"})
 public class ExprSkullItemStackPlayer extends ChangeableExpressionBlock<OfflinePlayer> {
@@ -24,15 +23,7 @@ public class ExprSkullItemStackPlayer extends ChangeableExpressionBlock<OfflineP
 
     @Override
     public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? "setOwningPlayer(" + arg(0) + "," + delta + ");" : null;
-    }
-
-    @UtilMethod
-    public static void setOwningPlayer(ItemStack item, OfflinePlayer player) {
-        SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-        if (skullMeta != null) {
-            skullMeta.setOwningPlayer(player);
-            item.setItemMeta(skullMeta);
-        }
+        BuildContext.addUtilMethod("setOwningPlayer");
+        return changeType == ChangeType.SET ? "UtilMethods.setOwningPlayer(" + arg(0) + "," + delta + ");" : null;
     }
 }

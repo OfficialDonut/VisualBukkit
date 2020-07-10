@@ -10,7 +10,6 @@ import javassist.CtClass;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.plugin.PluginBuilder;
-import us.donut.visualbukkit.plugin.modules.PluginModule;
 import us.donut.visualbukkit.util.Loadable;
 
 import java.util.*;
@@ -96,10 +95,6 @@ public abstract class BlockPane extends Tab implements Loadable {
 
     public Label getProjectStructureLabel() {
         return projectStructureLabel;
-    }
-
-    public PluginModule[] getModules() {
-        return null;
     }
 
     public class BlockArea extends VBox implements BlockContainer {

@@ -15,6 +15,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.reflections.Reflections;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 import us.donut.visualbukkit.plugin.modules.classes.PlaceholderEvent;
 import us.donut.visualbukkit.util.CenteredHBox;
@@ -115,6 +116,9 @@ public class EventPane extends BlockPane {
         annotationsAttribute.setAnnotation(annotation);
         eventMethod.getMethodInfo().addAttribute(annotationsAttribute);
         mainClass.addMethod(eventMethod);
+        if (event == PlaceholderEvent.class) {
+            BuildContext.addPluginModule(PluginModule.PlACEHOLDERAPI);
+        }
     }
 
     @Override
@@ -130,14 +134,6 @@ public class EventPane extends BlockPane {
         if (priority != null) {
             priorityComboBox.setValue(priority);
         }
-    }
-
-    @Override
-    public PluginModule[] getModules() {
-        if (event == PlaceholderEvent.class) {
-            return new PluginModule[]{PluginModule.PlACEHOLDERAPI};
-        }
-        return null;
     }
 
     public Class<? extends Event> getEvent() {

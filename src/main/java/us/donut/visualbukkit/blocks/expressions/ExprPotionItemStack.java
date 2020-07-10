@@ -1,15 +1,12 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 import java.util.Arrays;
 
@@ -28,17 +25,7 @@ public class ExprPotionItemStack extends ExpressionBlock<ItemStack> {
 
     @Override
     public String toJava() {
-        return "createPotion(" + PotionType.class.getCanonicalName() + "." + arg(0) + ")";
-    }
-
-    @UtilMethod
-    public static ItemStack createPotion(PotionType potionType) {
-        ItemStack item = new ItemStack(Material.POTION);
-        PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
-        if (potionMeta != null) {
-            potionMeta.setBasePotionData(new PotionData(potionType));
-            item.setItemMeta(potionMeta);
-        }
-        return item;
+        BuildContext.addUtilMethod("createPotion");
+        return "UtilMethods.createPotion(" + PotionType.class.getCanonicalName() + "." + arg(0) + ")";
     }
 }

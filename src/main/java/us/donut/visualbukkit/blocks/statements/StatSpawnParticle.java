@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.UtilMethod;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 @Description("Spawns particles at a locations")
 public class StatSpawnParticle extends StatementBlock {
@@ -17,11 +17,7 @@ public class StatSpawnParticle extends StatementBlock {
 
     @Override
     public String toJava() {
-        return "spawnParticle(" + arg(0) + "," + arg(1) + "," + arg(2) + ");";
-    }
-
-    @UtilMethod
-    public static void spawnParticle(int num, Particle particle, Location loc) {
-        loc.getWorld().spawnParticle(particle, loc, num);
+        BuildContext.addUtilMethod("spawnParticle");
+        return "UtilMethods.spawnParticle(" + arg(0) + "," + arg(1) + "," + arg(2) + ");";
     }
 }

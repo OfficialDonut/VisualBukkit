@@ -3,13 +3,8 @@ package us.donut.visualbukkit.plugin;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javassist.*;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.blocks.BlockInfo;
-import us.donut.visualbukkit.blocks.BlockRegistry;
-import us.donut.visualbukkit.blocks.CodeBlock;
 import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
@@ -52,18 +47,8 @@ public class PluginBuilder {
 
     public static boolean isCodeValid(BlockPane blockPane) {
         try {
-            CtClass mainClass = getCtClass(PluginMain.class, null);
-            PluginModule[] pluginModules = blockPane.getModules();
-            Set<PluginModule> modules = pluginModules == null ? new HashSet<>() : new HashSet<>(Arrays.asList(pluginModules));
-            for (BlockInfo<?> blockInfo : getBlocksRecursive(blockPane.getBlockArea())) {
-                pluginModules = blockInfo.getModules();
-                if (pluginModules != null) {
-                    modules.addAll(Arrays.asList(pluginModules));
-                }
-                insertMethods(blockInfo.getUtilMethods(), mainClass);
-            }
-            insertModules(modules, mainClass);
-            blockPane.insertInto(mainClass);
+            BuildContext.create();
+            blockPane.insertInto(getCtClass(PluginMain.class, null));
             return true;
         } catch (Exception e) {
             return false;
@@ -83,29 +68,27 @@ public class PluginBuilder {
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
         classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
-        Set<PluginModule> modules = new HashSet<>();
-        for (BlockInfo<?> blockInfo : getBlocksRecursive(project.getBlockPanes())) {
-            PluginModule[] pluginModules = blockInfo.getModules();
-            if (pluginModules != null) {
-                for (PluginModule module : pluginModules) {
-                    modules.add(module);
-                    for (Class<?> clazz : module.getClasses()) {
-                        classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
-                    }
-                }
-            }
-            insertMethods(blockInfo.getUtilMethods(), mainClass);
-        }
-        for (BlockPane blockPane : project.getBlockPanes()) {
-            PluginModule[] pluginModules = blockPane.getModules();
-            if (pluginModules != null) {
-                modules.addAll(Arrays.asList(pluginModules));
-            }
-        }
-        insertModules(modules, mainClass);
+        BuildContext.create();
 
         for (BlockPane blockPane : project.getBlockPanes()) {
             blockPane.insertInto(mainClass);
+        }
+
+        for (PluginModule module : BuildContext.getPluginModules()) {
+            module.insertInto(mainClass);
+            for (Class<?> clazz : module.getClasses()) {
+                classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+            }
+        }
+
+        CtClass utilMethodsClass = getCtClass(UtilMethods.class, mainClass.getPackageName());
+        for (CtMethod method : utilMethodsClass.getDeclaredMethods()) {
+            if (!BuildContext.getUtilMethods().contains(method.getName())) {
+                utilMethodsClass.removeMethod(method);
+            }
+        }
+        if (utilMethodsClass.getDeclaredMethods().length > 0) {
+            classes.put(UtilMethods.class, utilMethodsClass);
         }
 
         Path outputDir = project.getPluginOutputDir();
@@ -228,47 +211,6 @@ public class PluginBuilder {
             }
             try (OutputStream os = Files.newOutputStream(packageDir.resolve(ctClass.getSimpleName() + ".class"))) {
                 os.write(ctClass.toBytecode());
-            }
-        }
-    }
-
-    public static void insertModules(Set<PluginModule> modules, CtClass mainClass) throws Exception {
-        if (modules != null) {
-            for (PluginModule module : modules) {
-                module.insertInto(mainClass);
-            }
-        }
-    }
-
-    public static void insertMethods(CtMethod[] methods, CtClass mainClass) throws Exception {
-        if (methods != null) {
-            for (CtMethod method : methods) {
-                mainClass.addMethod(new CtMethod(method, mainClass, null));
-            }
-        }
-    }
-
-    public static Set<BlockInfo<?>> getBlocksRecursive(List<BlockPane> panes) {
-        Set<BlockInfo<?>> blocks = new HashSet<>();
-        for (BlockPane pane : panes) {
-            getBlocksRecursive(pane.getBlockArea(), blocks);
-        }
-        return blocks;
-    }
-
-    public static Set<BlockInfo<?>> getBlocksRecursive(Pane pane) {
-        Set<BlockInfo<?>> blocks = new HashSet<>();
-        getBlocksRecursive(pane, blocks);
-        return blocks;
-    }
-
-    private static void getBlocksRecursive(Pane pane, Set<BlockInfo<?>> blocks) {
-        for (Node child : pane.getChildren()) {
-            if (child instanceof CodeBlock) {
-                blocks.add(BlockRegistry.getInfo((CodeBlock) child));
-            }
-            if (child instanceof Pane) {
-                getBlocksRecursive((Pane) child, blocks);
             }
         }
     }

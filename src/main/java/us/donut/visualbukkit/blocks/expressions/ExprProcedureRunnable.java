@@ -7,18 +7,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Module;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.editor.ProcedurePane;
 import us.donut.visualbukkit.editor.ProjectManager;
+import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
 import java.util.List;
 import java.util.StringJoiner;
 
 @Description({"Gets a procedure runnable", "Returns: bukkit runnable"})
-@Module(PluginModule.PROCEDURE_RUNNABLE)
 public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
 
     private ProcedurePane procedure;
@@ -53,6 +52,7 @@ public class ExprProcedureRunnable extends ExpressionBlock<BukkitRunnable> {
 
     @Override
     public String toJava() {
+        BuildContext.addPluginModule(PluginModule.PROCEDURE_RUNNABLE);
         if (procedure != null) {
             if (!getParameters().isEmpty()) {
                 StringJoiner joiner = new StringJoiner(",");
