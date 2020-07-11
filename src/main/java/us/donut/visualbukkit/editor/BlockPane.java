@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javassist.CtClass;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
+import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.Loadable;
 
@@ -41,6 +42,15 @@ public abstract class BlockPane extends Tab implements Loadable {
         if (!project.getTabPane().getTabs().contains(this)) {
             project.getTabPane().getTabs().add(this);
         }
+    }
+
+    public String declareLocalVariables() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String variable : BuildContext.getLocalVariables()) {
+            stringBuilder.append("Object ").append(variable).append("= null;");
+        }
+        BuildContext.getLocalVariables().clear();
+        return stringBuilder.toString();
     }
 
     public abstract void insertInto(CtClass mainClass) throws Exception;

@@ -82,7 +82,7 @@ public class ProcedurePane extends MethodPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (procedure.equalsIgnoreCase(\"" + methodName + "\")) {" +
-                "Object localVarScope = new Object();" +
+                declareLocalVariables() +
                 stringJoiner.toString() +
                 "}";
         procedureMethod.insertBefore(src);

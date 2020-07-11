@@ -102,7 +102,7 @@ public class EventPane extends BlockPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "public void on" + event.getSimpleName() + "(" + event.getCanonicalName() + " event) {" +
-                "Object localVarScope = new Object();" +
+                declareLocalVariables() +
                 stringJoiner.toString() +
                 "}";
         CtMethod eventMethod = CtMethod.make(src, mainClass);

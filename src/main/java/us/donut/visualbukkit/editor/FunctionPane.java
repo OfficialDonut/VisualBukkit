@@ -82,7 +82,7 @@ public class FunctionPane extends MethodPane {
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
         String src =
                 "if (function.equalsIgnoreCase(\"" + methodName + "\")) {" +
-                "Object localVarScope = new Object();" +
+                declareLocalVariables() +
                 stringJoiner.toString() +
                 "}";
         functionMethod.insertBefore(src);

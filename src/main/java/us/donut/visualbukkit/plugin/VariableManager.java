@@ -15,16 +15,14 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @SuppressWarnings("UnstableApiUsage")
 public class VariableManager {
 
-    private static Map<Object, Map<String, Object>> localVariables = new WeakHashMap<>();
-    private static Map<String, Object> nonPersistentVariables = new HashMap<>();
-    private static Map<String, Object> persistentVariables = new HashMap<>();
+    private static Map<String, Object> nonPersistentVariables = new ConcurrentHashMap<>();
+    private static Map<String, Object> persistentVariables = new ConcurrentHashMap<>();
     private static HashFunction hashFunction = Hashing.md5();
 
     public static void loadVariables() {
@@ -58,66 +56,52 @@ public class VariableManager {
         }
     }
 
-    public static Object getLocalVarValue(Object scope, String variableString) {
-        return getLocalVarMap(scope).get(variableString);
-    }
-
     public static Object getVarValue(boolean persistent, Object... args) {
         return (persistent ? persistentVariables : nonPersistentVariables).get(getVariableString(args));
-    }
-
-    public static void setLocalVarValue(Object scope, String variableString, Object value) {
-        getLocalVarMap(scope).put(variableString, value);
     }
 
     public static void setVarValue(boolean persistent, Object value, Object... args) {
         (persistent ? persistentVariables : nonPersistentVariables).put(getVariableString(args), value);
     }
 
-    public static void deleteLocalVar(Object scope, String variableString) {
-        getLocalVarMap(scope).remove(variableString);
-    }
-
     public static void deleteVar(boolean persistent, Object... args) {
         (persistent ? persistentVariables : nonPersistentVariables).remove(getVariableString(args));
     }
 
-    public static void addToLocalVar(Object scope, String variableString, Object delta) {
-        addToVar(getLocalVarMap(scope), variableString, delta);
-    }
-
     public static void addToVar(boolean persistent, Object delta, Object... args) {
-        addToVar(persistent ? persistentVariables : nonPersistentVariables, getVariableString(args), delta);
-    }
-
-    public static void removeFromLocalVar(Object scope, String variableString, Object delta) {
-        removeFromVar(getLocalVarMap(scope), variableString, delta);
+        Map<String, Object> map = persistent ? persistentVariables : nonPersistentVariables;
+        String variableString = getVariableString(args);
+        map.put(variableString, addToObject(map.get(variableString), delta));
     }
 
     public static void removeFromVar(boolean persistent, Object delta, Object... args) {
-        removeFromVar(persistent ? persistentVariables : nonPersistentVariables, getVariableString(args), delta);
+        Map<String, Object> map = persistent ? persistentVariables : nonPersistentVariables;
+        String variableString = getVariableString(args);
+        map.put(variableString, removeFromObject(map.get(variableString), delta));
     }
 
-    private static void addToVar(Map<String, Object> variableMap, String variableString, Object delta) {
-        Object value = variableMap.get(variableString);
-        if (value instanceof SimpleList) {
-            ((SimpleList) value).add(delta);
-        } else if (value instanceof Number && delta instanceof Number) {
-            variableMap.put(variableString, ((Number) value).doubleValue() + ((Number) delta).doubleValue());
-        } else if (value instanceof Duration && delta instanceof Duration) {
-            variableMap.put(variableString, ((Duration) value).plus((Duration) delta));
+    public static Object addToObject(Object object, Object delta) {
+        if (object instanceof SimpleList) {
+            ((SimpleList) object).add(delta);
+            return object;
+        } else if (object instanceof Number && delta instanceof Number) {
+            return ((Number) object).doubleValue() + ((Number) delta).doubleValue();
+        } else if (object instanceof Duration && delta instanceof Duration) {
+            return ((Duration) object).plus((Duration) delta);
         }
+        throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
     }
 
-    private static void removeFromVar(Map<String, Object> variableMap, String variableString, Object delta) {
-        Object value = variableMap.get(variableString);
-        if (value instanceof SimpleList) {
-            ((SimpleList) value).remove(delta);
-        } else if (value instanceof Number && delta instanceof Number) {
-            variableMap.put(variableString, ((Number) value).doubleValue() - ((Number) delta).doubleValue());
-        } else if (value instanceof Duration && delta instanceof Duration) {
-            variableMap.put(variableString, ((Duration) value).minus((Duration) delta));
+    public static Object removeFromObject(Object object, Object delta) {
+        if (object instanceof SimpleList) {
+            ((SimpleList) object).remove(delta);
+            return object;
+        } else if (object instanceof Number && delta instanceof Number) {
+            return ((Number) object).doubleValue() - ((Number) delta).doubleValue();
+        } else if (object instanceof Duration && delta instanceof Duration) {
+            return ((Duration) object).minus((Duration) delta);
         }
+        throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
     }
 
     private static String getVariableString(Object... args) {
@@ -136,10 +120,6 @@ public class VariableManager {
             variable.append(object.getClass().getCanonicalName()).append(string);
         }
         return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
-    }
-
-    private static Map<String, Object> getLocalVarMap(Object scope) {
-        return localVariables.computeIfAbsent(scope, k -> new HashMap<>());
     }
 
     private static boolean isSerializable(Object object) {

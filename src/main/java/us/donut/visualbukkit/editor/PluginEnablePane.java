@@ -21,9 +21,7 @@ public class PluginEnablePane extends BlockPane {
         CtMethod enableMethod = mainClass.getDeclaredMethod("onEnable");
         StringJoiner stringJoiner = new StringJoiner("\n");
         getBlockArea().getBlocks(true).forEach(block -> stringJoiner.add(block.toJava()));
-        String src =
-                "Object localVarScope = new Object();" +
-                stringJoiner.toString();
+        String src = declareLocalVariables() + stringJoiner.toString();
         enableMethod.insertAfter(src);
     }
 }

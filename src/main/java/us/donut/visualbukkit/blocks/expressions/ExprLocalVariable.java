@@ -1,16 +1,21 @@
 package us.donut.visualbukkit.blocks.expressions;
 
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import us.donut.visualbukkit.blocks.ChangeType;
 import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.InputParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.plugin.BuildContext;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 @Description({"A local variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
+@SuppressWarnings("UnstableApiUsage")
 public class ExprLocalVariable extends ChangeableExpressionBlock<Object> {
+
+    private static HashFunction hashFunction = Hashing.md5();
 
     @Override
     protected SyntaxNode init() {
@@ -21,22 +26,25 @@ public class ExprLocalVariable extends ChangeableExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return "VariableManager.getLocalVarValue(localVarScope," + getVariable() + ")";
+        String variable = getVariableName();
+        BuildContext.addLocalVariable(variable);
+        return variable;
     }
 
     @Override
     public String change(ChangeType changeType, String delta) {
+        String variable = getVariableName();
+        BuildContext.addLocalVariable(variable);
         switch (changeType) {
-            case SET: return "VariableManager.setLocalVarValue(localVarScope," + getVariable() + "," + delta + ");";
-            case ADD: return "VariableManager.addToLocalVar(localVarScope," + getVariable() + "," + delta + ");";
-            case REMOVE: return "VariableManager.removeFromLocalVar(localVarScope," + getVariable() + "," + delta + ");";
-            case DELETE: case CLEAR: return "VariableManager.deleteLocalVar(localVarScope," + getVariable() + ");" ;
+            case SET: return variable + "=" + delta + ";";
+            case ADD: return change(ChangeType.SET, "VariableManager.addToObject(" + variable + "," + delta + ");");
+            case REMOVE: return change(ChangeType.SET, "VariableManager.removeFromObject(" + variable + "," + delta + ");");
+            case DELETE: case CLEAR: return change(ChangeType.SET, "null");
             default: return null;
         }
     }
 
-    private String getVariable() {
-        String encodedString = Base64.getEncoder().encodeToString(arg(0).getBytes(StandardCharsets.UTF_8));
-        return "PluginMain.decode(\"" + encodedString + "\")";
+    private String getVariableName() {
+        return "a" + hashFunction.hashString(arg(0), StandardCharsets.UTF_8);
     }
 }
