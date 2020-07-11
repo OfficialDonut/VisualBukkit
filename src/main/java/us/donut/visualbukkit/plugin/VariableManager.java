@@ -101,7 +101,7 @@ public class VariableManager {
         } else if (object instanceof Duration && delta instanceof Duration) {
             return ((Duration) object).minus((Duration) delta);
         }
-        throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
+        throw new IllegalArgumentException("Cannot remove " + delta + " from " + object);
     }
 
     private static String getVariableString(Object... args) {
