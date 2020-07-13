@@ -71,6 +71,17 @@ public abstract class CodeBlock extends VBox implements Loadable {
         }
     }
 
+    public boolean isChildOf(Class<? extends CodeBlock> clazz) {
+        Parent parent = getParent();
+        while (parent != null && !(parent instanceof BlockPane.BlockArea)) {
+            if (clazz.isAssignableFrom(parent.getClass())) {
+                return true;
+            }
+            parent = parent.getParent();
+        }
+        return false;
+    }
+
     public String arg(int i) {
         return getParameter(i).toJava();
     }

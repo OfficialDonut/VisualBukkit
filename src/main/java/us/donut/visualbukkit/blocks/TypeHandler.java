@@ -20,6 +20,7 @@ import org.bukkit.util.Vector;
 import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
+import java.sql.PreparedStatement;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -50,6 +51,7 @@ public class TypeHandler {
         register(OfflinePlayer.class, "offline player", s -> "Bukkit.getOfflinePlayer(" + s + ")");
         register(Particle.class, "particle", s -> "Particle.valueOf(" + s + ".toUpperCase())");
         register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
+        register(PreparedStatement.class, "SQL statement");
         register(Scoreboard.class, "scoreboard");
         register(SimpleList.class, "list");
         register(Sound.class, "sound", s -> "Sound.valueOf(" + s + ".toUpperCase())");

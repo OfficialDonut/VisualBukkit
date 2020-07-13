@@ -27,6 +27,7 @@ public class PluginBuilder {
     public static void init() {
         classPool.importPackage("java.io");
         classPool.importPackage("java.nio.file");
+        classPool.importPackage("java.sql");
         classPool.importPackage("java.util");
         classPool.importPackage("org.bukkit");
         classPool.importPackage("org.bukkit.block");
@@ -105,7 +106,7 @@ public class PluginBuilder {
 
         for (CtClass ctClass : classes.values()) {
             for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
-                ctClass.replaceClassName(entry.getKey().getCanonicalName(), entry.getValue().getName());
+                ctClass.replaceClassName(entry.getKey().getName(), entry.getValue().getName());
             }
         }
 
@@ -167,7 +168,8 @@ public class PluginBuilder {
         if (packageName == null) {
             packageName = "a" + UUID.randomUUID().toString().replace("-", "");
         }
-        return classPool.getAndRename(clazz.getCanonicalName(), packageName + "." + clazz.getSimpleName());
+        String className = clazz.isAnonymousClass() ? clazz.getName().replaceFirst(clazz.getPackage().getName() + "\\.", "") : clazz.getSimpleName();
+        return classPool.getAndRename(clazz.getName(), packageName + "." + className);
     }
 
     private static void createJar(Path rootDir, Path jar) throws IOException {
