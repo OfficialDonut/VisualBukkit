@@ -51,13 +51,16 @@ public class SelectorPane extends VBox implements BlockContainer {
     private TextField searchField = new TextField();
 
     public SelectorPane() {
-        VBox content = new VBox();
-        ScrollPane scrollPane = new ScrollPane(content);
-        getChildren().add(scrollPane);
-        content.getStyleClass().add("selector-pane");
-        content.prefWidthProperty().bind(widthProperty());
-        content.prefHeightProperty().bind(heightProperty());
+        VBox blockSelector = new VBox();
+        VBox blocksArea = new VBox();
+        blockSelector.getStyleClass().add("selector-pane");
+        blocksArea.getStyleClass().add("selector-pane");
+        ScrollPane scrollPane = new ScrollPane(blocksArea);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        getChildren().addAll(blockSelector, new Separator(), scrollPane);
         DragManager.enableBlockContainer(this);
+
         TitleLabel selectorTitle = new TitleLabel("Block Selector", 1.5, true);
         TitleLabel statementTitle = new TitleLabel("Statements", 1.5, true);
         TitleLabel expressionTitle = new TitleLabel("Expressions", 1.5, true);
@@ -118,14 +121,16 @@ public class SelectorPane extends VBox implements BlockContainer {
             }
         }
 
-        content.getChildren().addAll(selectorTitle,
+        blockSelector.getChildren().addAll(selectorTitle,
                 new CenteredHBox(10, new Label("Category:"), categoryComboBox),
                 new CenteredHBox(10, new Label("Event:   "), eventComboBox),
                 new CenteredHBox(10, new Label("Returns: "), returnTypeComboBox),
                 new CenteredHBox(10, new Label("Type:    "), statementCheckBox),
                 new CenteredHBox(10, new Label("         "), expressionCheckBox),
                 new CenteredHBox(10, new Label("Search:  "), searchField),
-                pinnedBlocks, statementBox, expressionBox);
+                pinnedBlocks);
+
+        blocksArea.getChildren().addAll(statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
             BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();
