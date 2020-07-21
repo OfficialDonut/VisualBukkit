@@ -55,6 +55,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         VBox blocksArea = new VBox();
         blockSelector.getStyleClass().add("selector-pane");
         blocksArea.getStyleClass().add("selector-pane");
+        backgroundProperty().bind(blockSelector.backgroundProperty());
         ScrollPane scrollPane = new ScrollPane(blocksArea);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -98,6 +99,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         returnTypeComboBox.getComboBox().setValue("---");
         returnTypeComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
 
+        statementCheckBox.setFocusTraversable(false);
         statementCheckBox.setSelected(true);
         statementCheckBox.setOnAction(e -> {
             boolean state = statementCheckBox.isSelected();
@@ -105,6 +107,7 @@ public class SelectorPane extends VBox implements BlockContainer {
             statementBox.setManaged(state);
         });
 
+        expressionCheckBox.setFocusTraversable(false);
         expressionCheckBox.setSelected(true);
         expressionCheckBox.setOnAction(e -> {
             boolean state = expressionCheckBox.isSelected();
