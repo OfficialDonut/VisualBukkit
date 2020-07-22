@@ -2,7 +2,6 @@ package us.donut.visualbukkit.editor;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -22,9 +21,7 @@ import us.donut.visualbukkit.util.TreeNode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SelectorPane extends VBox implements BlockContainer {
 
@@ -43,7 +40,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         }
     }
 
-    private List<BlockInfo<?>.Node> blockInfoNodes = new ArrayList<>();
+    private Set<BlockInfo<?>.Node> blockInfoNodes = new TreeSet<>(Comparator.comparing(Labeled::getText));
     private ComboBoxView<String> categoryComboBox = new ComboBoxView<>();
     private ComboBoxView<Class<?>> eventComboBox = new ComboBoxView<>();
     private ComboBoxView<String> returnTypeComboBox = new ComboBoxView<>();
@@ -168,18 +165,19 @@ public class SelectorPane extends VBox implements BlockContainer {
                     }
                 }
             }
+        }
 
-            Node selectorNode = blockInfoNode;
+        for (BlockInfo<?>.Node blockInfoNode : blockInfoNodes) {
+            BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
             if (blockInfo instanceof ExpressionBlockInfo) {
                 Class<? extends ModifierBlock>[] modifiers = ((ExpressionBlockInfo<?>) blockInfo).getModifiers();
                 if (modifiers != null) {
                     CenteredHBox modifiersBox = new CenteredHBox(5, new Label("-"));
                     modifiersBox.setPadding(new Insets(0, 0, 0, 20));
-                    modifiersBox.visibleProperty().bind(blockInfoNode.visibleProperty());
-                    modifiersBox.managedProperty().bind(blockInfoNode.managedProperty());
-                    selectorNode = new VBox(5, blockInfoNode, modifiersBox);
-                    selectorNode.visibleProperty().bind(blockInfoNode.visibleProperty());
-                    selectorNode.managedProperty().bind(blockInfoNode.managedProperty());
+                    VBox vBox = new VBox(5, blockInfoNode, modifiersBox);
+                    vBox.visibleProperty().bind(blockInfoNode.visibleProperty());
+                    vBox.managedProperty().bind(blockInfoNode.managedProperty());
+                    expressionBox.getChildren().add(vBox);
                     for (Class<? extends ModifierBlock> modifierClass : modifiers) {
                         modifiersBox.getChildren().add(new BlockInfo(modifierClass) {
                             @Override
@@ -190,14 +188,12 @@ public class SelectorPane extends VBox implements BlockContainer {
                             }
                         }.createNode());
                     }
+                } else {
+                    expressionBox.getChildren().add(blockInfoNode);
                 }
+            } else {
+                statementBox.getChildren().add(blockInfoNode);
             }
-
-            VBox vBox = StatementBlock.class.isAssignableFrom(blockInfo.getBlockType()) ? statementBox : expressionBox;
-            int i = 1 + vBox.getChildren()
-                    .filtered(node -> node instanceof BlockInfo.Node && blockInfo.getName().compareTo(((BlockInfo<?>.Node) node).getText()) > 0)
-                    .size();
-            vBox.getChildren().add(i, selectorNode);
         }
     }
 
