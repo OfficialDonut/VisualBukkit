@@ -30,6 +30,7 @@ public class TypeHandler {
 
     private static BiMap<Class<?>, String> types = HashBiMap.create();
     private static Map<String, Function<String, String>> stringParsers = new HashMap<>();
+    private static Set<String> aliases;
 
     static {
         register(Block.class, "block");
@@ -59,14 +60,18 @@ public class TypeHandler {
         register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
         register(Vector.class, "vector");
         register(World.class, "world", s -> "Bukkit.getWorld(" + s + ")");
+
+        aliases = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        aliases.addAll(types.values());
+        aliases = Collections.unmodifiableSet(aliases);
     }
 
-    public static void register(Class<?> clazz, String alias, Function<String, String> stringParser) {
+    private static void register(Class<?> clazz, String alias, Function<String, String> stringParser) {
         stringParsers.put(alias, stringParser);
         register(clazz, alias);
     }
 
-    public static void register(Class<?> clazz, String alias) {
+    private static void register(Class<?> clazz, String alias) {
         types.put(clazz, alias);
     }
 
@@ -143,7 +148,7 @@ public class TypeHandler {
     }
 
     public static Set<String> getAliases() {
-        return types.values();
+        return aliases;
     }
 
     public static String getAlias(Class<?> type) {
