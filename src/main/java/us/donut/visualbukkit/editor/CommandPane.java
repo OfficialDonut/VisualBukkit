@@ -22,20 +22,16 @@ public class CommandPane extends BlockPane {
         dialog.setGraphic(null);
         String command = dialog.showAndWait().orElse("").replaceAll("\\s", "");
         if (!command.isEmpty()) {
-            if (StringUtils.isAlphanumeric(command)) {
-                for (CommandPane commandPane : project.getCommands()) {
-                    if (commandPane.getCommand().equalsIgnoreCase(command)) {
-                        VisualBukkit.displayError("Command already exists");
-                        return;
-                    }
+            for (CommandPane commandPane : project.getCommands()) {
+                if (commandPane.getCommand().equalsIgnoreCase(command)) {
+                    VisualBukkit.displayError("Command already exists");
+                    return;
                 }
-                CommandPane commandPane = new CommandPane(project, command);
-                project.add(commandPane);
-                commandPane.open();
-                project.getTabPane().getSelectionModel().select(commandPane);
-            } else {
-                VisualBukkit.displayError("Invalid command name");
             }
+            CommandPane commandPane = new CommandPane(project, command);
+            project.add(commandPane);
+            commandPane.open();
+            project.getTabPane().getSelectionModel().select(commandPane);
         }
     }
 
