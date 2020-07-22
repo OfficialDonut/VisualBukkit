@@ -22,6 +22,7 @@ public abstract class CodeBlock extends VBox implements Loadable {
     public CodeBlock() {
         DragManager.enableDragging(this);
         contextMenu = new ContextMenu();
+        setOnMouseClicked(e -> contextMenu.hide());
         setOnContextMenuRequested(e -> {
             contextMenu.show(this, e.getScreenX(), e.getScreenY());
             e.consume();
