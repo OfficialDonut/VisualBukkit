@@ -2,13 +2,15 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Skull;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The player of a skull block", "Changers: set", "Returns: offline player"})
-public class ExprSkullBlockPlayer extends ChangeableExpressionBlock<OfflinePlayer> {
+@Description({"The player of a skull block", "Returns: offline player"})
+@Modifier(ModificationType.SET)
+public class ExprSkullBlockPlayer extends ModifiableExpressionBlock<OfflinePlayer> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +23,7 @@ public class ExprSkullBlockPlayer extends ChangeableExpressionBlock<OfflinePlaye
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setOwningPlayer(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setOwningPlayer(" + delta + ");" : null;
     }
 }

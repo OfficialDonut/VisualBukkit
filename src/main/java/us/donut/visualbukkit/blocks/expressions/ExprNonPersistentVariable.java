@@ -2,9 +2,10 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import javafx.scene.control.*;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.annotations.Name;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.CenteredHBox;
@@ -12,8 +13,9 @@ import us.donut.visualbukkit.util.CenteredHBox;
 import java.util.StringJoiner;
 
 @Name("Non-Persistent Variable")
-@Description({"A non-persistent variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
-public class ExprNonPersistentVariable extends ChangeableExpressionBlock<Object> {
+@Description({"A non-persistent variable", "Returns: object"})
+@Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE, ModificationType.DELETE})
+public class ExprNonPersistentVariable extends ModifiableExpressionBlock<Object> {
 
     private int numArgs = -1;
 
@@ -41,12 +43,12 @@ public class ExprNonPersistentVariable extends ChangeableExpressionBlock<Object>
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case SET: return "VariableManager.setVarValue(false," + delta + "," + getVarArgs() + ");";
             case ADD: return "VariableManager.addToVar(false," + delta + "," + getVarArgs() + ");";
             case REMOVE: return "VariableManager.removeFromVar(false," + delta + "," + getVarArgs() + ");";
-            case DELETE: case CLEAR: return "VariableManager.deleteVar(false," + getVarArgs() + ");" ;
+            case DELETE: return "VariableManager.deleteVar(false," + getVarArgs() + ");" ;
             default: return null;
         }
     }

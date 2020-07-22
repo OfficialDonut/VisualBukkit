@@ -1,29 +1,44 @@
 package us.donut.visualbukkit.blocks.statements;
 
+import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
-import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Name;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Name("Set Expression")
-@Description("Sets an expression to a value")
-public class StatSet extends StatementBlock {
+public class StatSet extends ModifierBlock {
+
+    private ExpressionParameter deltaParameter;
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("set", Object.class, "to", Object.class);
+        return new SyntaxNode();
+    }
+
+    @Override
+    public void init(ExpressionBlockInfo<?> expressionBlockInfo) {
+        super.init(expressionBlockInfo);
+        deltaParameter = new ExpressionParameter(expressionBlock.getDeltaType(ModificationType.SET));
+        ExpressionParameter expressionParameter = new ExpressionParameter(Object.class);
+        expressionParameter.setExpression(expressionBlock);
+        getSyntaxNode().add("set", expressionParameter, "to", deltaParameter);
     }
 
     @Override
     public String toJava() {
-        ChangeableExpressionBlock<?> changeable = (ChangeableExpressionBlock<?>) ((ExpressionParameter) getParameter(0)).getExpression();
-        ExpressionBlock<?> deltaExpr = ((ExpressionParameter) getParameter(1)).getExpression();
-        String delta = TypeHandler.convert(deltaExpr.getReturnType(), changeable.getDeltaType(ChangeType.SET), deltaExpr.toJava());
-        String java = changeable.change(ChangeType.SET, delta);
-        if (java != null) {
-            return java;
+        ExpressionBlock<?> deltaExpr = deltaParameter.getExpression();
+        String delta = TypeHandler.convert(deltaExpr.getReturnType(), expressionBlock.getDeltaType(ModificationType.SET), deltaExpr.toJava());
+        return expressionBlock.modify(ModificationType.SET, delta);
+    }
+
+    @Override
+    public void load(ConfigurationSection section) throws Exception {
+        BlockInfo<?> expressionBlockInfo = BlockRegistry.getInfo(section.getString("parameters.0.block-type"));
+        if (expressionBlockInfo instanceof ExpressionBlockInfo) {
+            init((ExpressionBlockInfo<?>) expressionBlockInfo);
+            expressionBlock.load(section.getConfigurationSection("parameters.0"));
+            deltaParameter.load(section.getConfigurationSection("parameters.1"));
+        } else {
+            throw new IllegalStateException();
         }
-        throw new IllegalStateException();
     }
 }

@@ -2,13 +2,15 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The spawn location of a world", "Changers: set", "Returns: location"})
-public class ExprSpawnLocation extends ChangeableExpressionBlock<Location> {
+@Description({"The spawn location of a world", "Returns: location"})
+@Modifier(ModificationType.SET)
+public class ExprSpawnLocation extends ModifiableExpressionBlock<Location> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +23,7 @@ public class ExprSpawnLocation extends ChangeableExpressionBlock<Location> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setSpawnLocation(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setSpawnLocation(" + delta + ");" : null;
     }
 }

@@ -81,6 +81,6 @@ public abstract class ExpressionBlock<T> extends CodeBlock {
     }
 
     public Class<?> getReturnType() {
-        return BlockRegistry.getInfo(this).getReturnType();
+        return ((ExpressionBlockInfo<?>) BlockRegistry.getInfo(this)).getReturnType();
     }
 }

@@ -1,15 +1,17 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.event.player.PlayerJoinEvent;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The join message in a PlayerJoinEvent", "Changers: set", "Returns: string"})
+@Description({"The join message in a PlayerJoinEvent", "Returns: string"})
 @Event(PlayerJoinEvent.class)
-public class ExprJoinMessage extends ChangeableExpressionBlock<String> {
+@Modifier(ModificationType.SET)
+public class ExprJoinMessage extends ModifiableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,7 +24,7 @@ public class ExprJoinMessage extends ChangeableExpressionBlock<String> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? "event.setJoinMessage(PluginMain.color(" + delta + "));" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? "event.setJoinMessage(PluginMain.color(" + delta + "));" : null;
     }
 }

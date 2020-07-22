@@ -2,16 +2,18 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The message recipients in an AsyncPlayerChatEvent", "Changers: clear, add, remove", "Returns: list of players"})
+@Description({"The message recipients in an AsyncPlayerChatEvent", "Returns: list of players"})
 @Event(AsyncPlayerChatEvent.class)
-public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList> {
+@Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
+public class ExprMessageRecipients extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,8 +26,8 @@ public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList>
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case CLEAR: return "event.getRecipients().clear();";
             case ADD: return "event.getRecipients().add(" + delta + ");";
             case REMOVE: return "event.getRecipients().remove(" + delta + ");";
@@ -34,7 +36,7 @@ public class ExprMessageRecipients extends ChangeableExpressionBlock<SimpleList>
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
+    public Class<?> getDeltaType(ModificationType modificationType) {
         return Player.class;
     }
 }

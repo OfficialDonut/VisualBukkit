@@ -1,6 +1,8 @@
 package us.donut.visualbukkit.editor;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -136,24 +138,12 @@ public class SelectorPane extends VBox implements BlockContainer {
         blocksArea.getChildren().addAll(statementBox, expressionBox);
 
         for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
-            BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();
-            blockInfoNodes.add(blockInfoNode);
-
-            String[] categories = blockInfo.getCategories();
-            if (categories != null) {
-                for (String category : blockInfo.getCategories()) {
-                    if (!categoryComboBox.getComboBox().getItems().contains(category)) {
-                        int i = categoryComboBox.getComboBox().getItems().filtered(item -> category.compareTo(item) > 0).size();
-                        categoryComboBox.getComboBox().getItems().add(i, category);
-                    }
-                }
+            if (ModifierBlock.class.isAssignableFrom(blockInfo.getBlockType())) {
+                continue;
             }
 
-            VBox vBox = StatementBlock.class.isAssignableFrom(blockInfo.getBlockType()) ? statementBox : expressionBox;
-            int i = 1 + vBox.getChildren()
-                    .filtered(node -> node instanceof BlockInfo.Node && blockInfo.getName().compareTo(((BlockInfo<?>.Node) node).getText()) > 0)
-                    .size();
-            vBox.getChildren().add(i, blockInfoNode);
+            BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();
+            blockInfoNodes.add(blockInfoNode);
 
             MenuItem pinItem = new MenuItem("Pin");
             pinItem.setOnAction(e -> {
@@ -168,6 +158,46 @@ public class SelectorPane extends VBox implements BlockContainer {
                 contextMenu.show(blockInfoNode, e.getScreenX(), e.getScreenY());
                 e.consume();
             });
+
+            String[] categories = blockInfo.getCategories();
+            if (categories != null) {
+                for (String category : blockInfo.getCategories()) {
+                    if (!categoryComboBox.getComboBox().getItems().contains(category)) {
+                        int i = categoryComboBox.getComboBox().getItems().filtered(item -> category.compareTo(item) > 0).size();
+                        categoryComboBox.getComboBox().getItems().add(i, category);
+                    }
+                }
+            }
+
+            Node selectorNode = blockInfoNode;
+            if (blockInfo instanceof ExpressionBlockInfo) {
+                Class<? extends ModifierBlock>[] modifiers = ((ExpressionBlockInfo<?>) blockInfo).getModifiers();
+                if (modifiers != null) {
+                    CenteredHBox modifiersBox = new CenteredHBox(5, new Label("-"));
+                    modifiersBox.setPadding(new Insets(0, 0, 0, 20));
+                    modifiersBox.visibleProperty().bind(blockInfoNode.visibleProperty());
+                    modifiersBox.managedProperty().bind(blockInfoNode.managedProperty());
+                    selectorNode = new VBox(5, blockInfoNode, modifiersBox);
+                    selectorNode.visibleProperty().bind(blockInfoNode.visibleProperty());
+                    selectorNode.managedProperty().bind(blockInfoNode.managedProperty());
+                    for (Class<? extends ModifierBlock> modifierClass : modifiers) {
+                        modifiersBox.getChildren().add(new BlockInfo(modifierClass) {
+                            @Override
+                            public CodeBlock createBlock() {
+                                ModifierBlock statement = (ModifierBlock) super.createBlock();
+                                statement.init((ExpressionBlockInfo<?>) blockInfo);
+                                return statement;
+                            }
+                        }.createNode());
+                    }
+                }
+            }
+
+            VBox vBox = StatementBlock.class.isAssignableFrom(blockInfo.getBlockType()) ? statementBox : expressionBox;
+            int i = 1 + vBox.getChildren()
+                    .filtered(node -> node instanceof BlockInfo.Node && blockInfo.getName().compareTo(((BlockInfo<?>.Node) node).getText()) > 0)
+                    .size();
+            vBox.getChildren().add(i, selectorNode);
         }
     }
 
@@ -207,26 +237,6 @@ public class SelectorPane extends VBox implements BlockContainer {
     @Override
     public List<? extends CodeBlock> getBlocks(boolean ignoreDisabled) {
         return Collections.emptyList();
-    }
-
-    public ComboBoxView<String> getCategoryComboBox() {
-        return categoryComboBox;
-    }
-
-    public ComboBoxView<Class<?>> getEventComboBox() {
-        return eventComboBox;
-    }
-
-    public ComboBoxView<String> getReturnTypeComboBox() {
-        return returnTypeComboBox;
-    }
-
-    public CheckBox getStatementCheckBox() {
-        return statementCheckBox;
-    }
-
-    public CheckBox getExpressionCheckBox() {
-        return expressionCheckBox;
     }
 
     private void pin(BlockInfo<?> blockInfo) {
@@ -285,11 +295,14 @@ public class SelectorPane extends VBox implements BlockContainer {
     }
 
     private boolean checkReturnType(BlockInfo<?> blockInfo, Class<?> returnType) {
-        Class<?> blockReturn = blockInfo.getReturnType();
-        return blockReturn != null &&
-                (returnType.isAssignableFrom(blockReturn) ||
-                (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)) ||
-                (blockReturn == boolean.class && returnType == Boolean.class));
+        if (blockInfo instanceof ExpressionBlockInfo) {
+            Class<?> blockReturn = ((ExpressionBlockInfo<?>) blockInfo).getReturnType();
+            return blockReturn != null &&
+                    (returnType.isAssignableFrom(blockReturn) ||
+                    (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)) ||
+                    (blockReturn == boolean.class && returnType == Boolean.class));
+        }
+        return false;
     }
 
     private static class Any {}

@@ -1,16 +1,18 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.event.server.TabCompleteEvent;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The tab completions in a TabCompleteEvent", "Changers: set, add, remove", "Returns: list of strings"})
+@Description({"The tab completions in a TabCompleteEvent", "Returns: list of strings"})
 @Event(TabCompleteEvent.class)
-public class ExprTabCompletions extends ChangeableExpressionBlock<SimpleList> {
+@Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE})
+public class ExprTabCompletions extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,8 +25,8 @@ public class ExprTabCompletions extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case SET: return "event.setCompletions(" + delta + ");";
             case ADD: return "event.getCompletions().add(" + delta + ");";
             case REMOVE: return "event.getCompletions().remove(" + delta + ");";
@@ -34,7 +36,7 @@ public class ExprTabCompletions extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
-        return changeType == ChangeType.SET ? SimpleList.class : String.class;
+    public Class<?> getDeltaType(ModificationType modificationType) {
+        return modificationType == ModificationType.SET ? SimpleList.class : String.class;
     }
 }

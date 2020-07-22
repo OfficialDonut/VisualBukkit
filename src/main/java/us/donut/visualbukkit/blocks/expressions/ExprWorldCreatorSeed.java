@@ -1,13 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.WorldCreator;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The seed of a world creator", "Changers: set", "Returns: number"})
-public class ExprWorldCreatorSeed extends ChangeableExpressionBlock<Long> {
+@Description({"The seed of a world creator", "Returns: number"})
+@Modifier(ModificationType.SET)
+public class ExprWorldCreatorSeed extends ModifiableExpressionBlock<Long> {
 
     @Override
     protected SyntaxNode init() {
@@ -20,7 +22,7 @@ public class ExprWorldCreatorSeed extends ChangeableExpressionBlock<Long> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".seed(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".seed(" + delta + ");" : null;
     }
 }

@@ -1,15 +1,17 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Entity;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Entity")
-@Description({"The distance an entity has fallen", "Changers: set, add, remove", "Returns: number"})
-public class ExprFallDistance extends ChangeableExpressionBlock<Float> {
+@Description({"The distance an entity has fallen", "Returns: number"})
+@Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE})
+public class ExprFallDistance extends ModifiableExpressionBlock<Float> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,11 +24,11 @@ public class ExprFallDistance extends ChangeableExpressionBlock<Float> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case SET: return arg(0) + ".setFallDistance(" + delta + ");";
-            case ADD: return change(ChangeType.SET, toJava() + "-" + delta);
-            case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
+            case ADD: return modify(ModificationType.SET, toJava() + "-" + delta);
+            case REMOVE: return modify(ModificationType.SET, toJava() + "+" + delta);
             default: return null;
         }
     }

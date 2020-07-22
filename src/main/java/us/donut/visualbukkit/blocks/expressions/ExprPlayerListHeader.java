@@ -1,15 +1,17 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Player;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The displayed player list header for a player", "Changers: set", "Returns: string"})
-public class ExprPlayerListHeader extends ChangeableExpressionBlock<String> {
+@Description({"The displayed player list header for a player", "Returns: string"})
+@Modifier(ModificationType.SET)
+public class ExprPlayerListHeader extends ModifiableExpressionBlock<String> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,7 +24,7 @@ public class ExprPlayerListHeader extends ChangeableExpressionBlock<String> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setPlayerListHeader(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setPlayerListHeader(" + delta + ");" : null;
     }
 }

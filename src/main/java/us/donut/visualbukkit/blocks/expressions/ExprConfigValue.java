@@ -1,13 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.configuration.Configuration;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"A value in a config", "Changers: set", "Returns: object"})
-public class ExprConfigValue extends ChangeableExpressionBlock<Object> {
+@Description({"A value in a config", "Returns: object"})
+@Modifier(ModificationType.SET)
+public class ExprConfigValue extends ModifiableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -20,7 +22,7 @@ public class ExprConfigValue extends ChangeableExpressionBlock<Object> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(1) + ".set(" + arg(0) + "," + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(1) + ".set(" + arg(0) + "," + delta + ");" : null;
     }
 }

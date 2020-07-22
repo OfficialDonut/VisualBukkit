@@ -2,13 +2,15 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The display slot of a scoreboard objective", "Changers: set", "Returns: display slot"})
-public class ExprObjectiveDisplaySlot extends ChangeableExpressionBlock<DisplaySlot> {
+@Description({"The display slot of a scoreboard objective", "Returns: display slot"})
+@Modifier(ModificationType.SET)
+public class ExprObjectiveDisplaySlot extends ModifiableExpressionBlock<DisplaySlot> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +23,7 @@ public class ExprObjectiveDisplaySlot extends ChangeableExpressionBlock<DisplayS
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setDisplaySlot(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setDisplaySlot(" + delta + ");" : null;
     }
 }

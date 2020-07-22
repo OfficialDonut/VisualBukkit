@@ -1,29 +1,38 @@
 package us.donut.visualbukkit.blocks.statements;
 
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
-import us.donut.visualbukkit.blocks.StatementBlock;
-import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Name;
+import org.bukkit.configuration.ConfigurationSection;
+import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Name("Delete Expression")
-@Description("Deletes an expression")
-public class StatDelete extends StatementBlock {
+public class StatDelete extends ModifierBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("delete", Object.class);
+        return new SyntaxNode();
+    }
+
+    @Override
+    public void init(ExpressionBlockInfo<?> expressionBlockInfo) {
+        super.init(expressionBlockInfo);
+        ExpressionParameter expressionParameter = new ExpressionParameter(Object.class);
+        expressionParameter.setExpression(expressionBlock);
+        getSyntaxNode().add("delete", expressionParameter);
     }
 
     @Override
     public String toJava() {
-        ChangeableExpressionBlock<?> deleteExpr = (ChangeableExpressionBlock<?>) ((ExpressionParameter) getParameter(0)).getExpression();
-        String java = deleteExpr.change(ChangeType.DELETE, null);
-        if (java != null) {
-            return java;
+        return expressionBlock.modify(ModificationType.DELETE, null);
+    }
+
+    @Override
+    public void load(ConfigurationSection section) throws Exception {
+        BlockInfo<?> expressionBlockInfo = BlockRegistry.getInfo(section.getString("parameters.0.block-type"));
+        if (expressionBlockInfo instanceof ExpressionBlockInfo) {
+            init((ExpressionBlockInfo<?>) expressionBlockInfo);
+            expressionBlock.load(section.getConfigurationSection("parameters.0"));
+        } else {
+            throw new IllegalStateException();
         }
-        throw new IllegalStateException();
     }
 }

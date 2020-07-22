@@ -2,15 +2,17 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The scoreboard of a player", "Changers: set", "Returns: scoreboard"})
-public class ExprPlayerScoreboard extends ChangeableExpressionBlock<Scoreboard> {
+@Description({"The scoreboard of a player", "Returns: scoreboard"})
+@Modifier(ModificationType.SET)
+public class ExprPlayerScoreboard extends ModifiableExpressionBlock<Scoreboard> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,7 +25,7 @@ public class ExprPlayerScoreboard extends ChangeableExpressionBlock<Scoreboard> 
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setScoreboard(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setScoreboard(" + delta + ");" : null;
     }
 }

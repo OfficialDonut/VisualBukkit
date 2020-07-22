@@ -1,15 +1,17 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.OfflinePlayer;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
-@Description({"The balance of a player", "Changers: add, remove", "Returns: number", "Requires: Vault"})
-public class ExprPlayerBalance extends ChangeableExpressionBlock<Double> {
+@Description({"The balance of a player", "Returns: number", "Requires: Vault"})
+@Modifier({ModificationType.ADD, ModificationType.REMOVE})
+public class ExprPlayerBalance extends ModifiableExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,9 +25,9 @@ public class ExprPlayerBalance extends ChangeableExpressionBlock<Double> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
+    public String modify(ModificationType modificationType, String delta) {
         BuildContext.addPluginModule(PluginModule.VAULT);
-        switch (changeType) {
+        switch (modificationType) {
             case ADD: return "VaultHook.getEconomy().depositPlayer(" + arg(0) + "," + delta + ");";
             case REMOVE: return "VaultHook.getEconomy().withdrawPlayer(" + arg(0) + "," + delta + ");";
             default: return null;

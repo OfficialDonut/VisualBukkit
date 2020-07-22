@@ -1,14 +1,16 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.scoreboard.Team;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The entries of a scoreboard team", "Changers: add, remove", "Returns: list of strings"})
-public class ExprTeamEntries extends ChangeableExpressionBlock<SimpleList> {
+@Description({"The entries of a scoreboard team", "Returns: list of strings"})
+@Modifier({ModificationType.ADD, ModificationType.REMOVE})
+public class ExprTeamEntries extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,8 +23,8 @@ public class ExprTeamEntries extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case ADD: return arg(0) + ".addEntry(PluginMain.color(" + delta + "));";
             case REMOVE: return arg(0) + ".removeEntry(PluginMain.color(" + delta + "));";
             default: return null;
@@ -30,7 +32,7 @@ public class ExprTeamEntries extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
+    public Class<?> getDeltaType(ModificationType modificationType) {
         return String.class;
     }
 }

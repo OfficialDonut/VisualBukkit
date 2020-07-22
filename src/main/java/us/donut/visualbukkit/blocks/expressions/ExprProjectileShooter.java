@@ -2,13 +2,15 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The shooter of a projectile", "Changers: set", "Returns: projectile source"})
-public class ExprProjectileShooter extends ChangeableExpressionBlock<ProjectileSource> {
+@Description({"The shooter of a projectile", "Returns: projectile source"})
+@Modifier(ModificationType.SET)
+public class ExprProjectileShooter extends ModifiableExpressionBlock<ProjectileSource> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +23,7 @@ public class ExprProjectileShooter extends ChangeableExpressionBlock<ProjectileS
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setShooter(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setShooter(" + delta + ");" : null;
     }
 }

@@ -2,16 +2,18 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The item stacks dropped in an EntityDeathEvent", "Changers: clear, add, remove", "Returns: list of item stacks"})
+@Description({"The item stacks dropped in an EntityDeathEvent", "Returns: list of item stacks"})
 @Event(EntityDeathEvent.class)
-public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
+@Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
+public class ExprDeathDrops extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,8 +26,8 @@ public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case CLEAR: return "event.getDrops().clear();";
             case ADD: return "event.getDrops().add(" + delta + ");";
             case REMOVE: return "event.getDrops().remove(" + delta + ");";
@@ -34,7 +36,7 @@ public class ExprDeathDrops extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
+    public Class<?> getDeltaType(ModificationType modificationType) {
         return ItemStack.class;
     }
 }

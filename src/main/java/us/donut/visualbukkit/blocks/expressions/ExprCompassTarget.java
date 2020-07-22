@@ -2,15 +2,17 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Player")
-@Description({"The compass target of a player", "Changers: set", "Returns: location"})
-public class ExprCompassTarget extends ChangeableExpressionBlock<Location> {
+@Description({"The compass target of a player", "Returns: location"})
+@Modifier(ModificationType.SET)
+public class ExprCompassTarget extends ModifiableExpressionBlock<Location> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,7 +25,7 @@ public class ExprCompassTarget extends ChangeableExpressionBlock<Location> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setCompassTarget(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setCompassTarget(" + delta + ");" : null;
     }
 }

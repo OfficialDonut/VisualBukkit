@@ -1,13 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"An element at an index in a list", "Changers: set", "Returns: object"})
-public class ExprListElement extends ChangeableExpressionBlock<Object> {
+@Description({"An element at an index in a list", "Returns: object"})
+@Modifier(ModificationType.SET)
+public class ExprListElement extends ModifiableExpressionBlock<Object> {
 
     @Override
     protected SyntaxNode init() {
@@ -20,7 +22,7 @@ public class ExprListElement extends ChangeableExpressionBlock<Object> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(1) + ".set(" + arg(0) + "," + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(1) + ".set(" + arg(0) + "," + delta + ");" : null;
     }
 }

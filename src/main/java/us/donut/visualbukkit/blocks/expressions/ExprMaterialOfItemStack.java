@@ -2,15 +2,17 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 @Category("Item Stack")
-@Description({"The material of an item stack", "Changers: set", "Returns: material"})
-public class ExprMaterialOfItemStack extends ChangeableExpressionBlock<Material> {
+@Description({"The material of an item stack", "Returns: material"})
+@Modifier(ModificationType.SET)
+public class ExprMaterialOfItemStack extends ModifiableExpressionBlock<Material> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,7 +25,7 @@ public class ExprMaterialOfItemStack extends ChangeableExpressionBlock<Material>
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setType(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setType(" + delta + ");" : null;
     }
 }

@@ -3,16 +3,18 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
-@Description({"The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent", "Changers: set, add, remove", "Returns: list of blocks"})
+@Description({"The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent", "Returns: list of blocks"})
 @Event({BlockExplodeEvent.class, EntityExplodeEvent.class})
-public class ExprExplodedBlocks extends ChangeableExpressionBlock<SimpleList> {
+@Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
+public class ExprExplodedBlocks extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -25,8 +27,8 @@ public class ExprExplodedBlocks extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case CLEAR: return "event.blockList().clear();";
             case ADD: return "event.blockList().add(" + delta + ");";
             case REMOVE: return "event.blockList().remove(" + delta + ");";
@@ -35,7 +37,7 @@ public class ExprExplodedBlocks extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
+    public Class<?> getDeltaType(ModificationType modificationType) {
         return Block.class;
     }
 }

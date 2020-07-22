@@ -1,17 +1,19 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.block.Block;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
 @Category("Block")
-@Description({"The data of a block", "Changers: set", "Returns: number"})
-public class ExprBlockData extends ChangeableExpressionBlock<Byte> {
+@Description({"The data of a block", "Returns: number"})
+@Modifier(ModificationType.SET)
+public class ExprBlockData extends ModifiableExpressionBlock<Byte> {
 
     @Override
     protected SyntaxNode init() {
@@ -24,9 +26,9 @@ public class ExprBlockData extends ChangeableExpressionBlock<Byte> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
+    public String modify(ModificationType modificationType, String delta) {
         BuildContext.addPluginModule(PluginModule.REFLECTION_UTIL);
         BuildContext.addUtilMethod("setBlockData");
-        return changeType == ChangeType.SET ? "UtilMethods.setBlockData(" + arg(0) + "," + delta + ");" : null;
+        return modificationType == ModificationType.SET ? "UtilMethods.setBlockData(" + arg(0) + "," + delta + ");" : null;
     }
 }

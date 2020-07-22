@@ -1,6 +1,5 @@
 package us.donut.visualbukkit.blocks;
 
-import com.google.gson.internal.Primitives;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import org.apache.commons.lang.WordUtils;
@@ -16,7 +15,6 @@ public class BlockInfo<T extends CodeBlock> {
     private String description;
     private String[] categories;
     private Class<?>[] events;
-    private Class<?> returnType;
 
     public BlockInfo(Class<T> blockType) {
         this.blockType = blockType;
@@ -41,27 +39,6 @@ public class BlockInfo<T extends CodeBlock> {
 
         if (blockType.isAnnotationPresent(Event.class)) {
             events = blockType.getAnnotation(Event.class).value();
-        }
-
-        if (ExpressionBlock.class.isAssignableFrom(blockType)) {
-            Class<?> clazz = blockType;
-            while (clazz != null && clazz != ExpressionBlock.class) {
-                if (clazz.getGenericSuperclass() instanceof ParameterizedType) {
-                    Type type = ((ParameterizedType) clazz.getGenericSuperclass()).getActualTypeArguments()[0];
-                    if (type instanceof Class) {
-                        returnType = (Class<?>) type;
-                        break;
-                    }
-                }
-                clazz = clazz.getSuperclass();
-            }
-            if (returnType != null) {
-                if (Primitives.isWrapperType(returnType)) {
-                    returnType = Primitives.unwrap(returnType);
-                }
-            } else {
-                throw new IllegalStateException("Missing return type for " + blockType.getCanonicalName());
-            }
         }
     }
 
@@ -95,10 +72,6 @@ public class BlockInfo<T extends CodeBlock> {
 
     public Class<?>[] getEvents() {
         return events;
-    }
-
-    public Class<?> getReturnType() {
-        return returnType;
     }
 
     public class Node extends Label {

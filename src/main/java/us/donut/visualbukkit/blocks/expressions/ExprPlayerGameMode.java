@@ -2,13 +2,15 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
-@Description({"The game mode of a player", "Changers: set", "Returns: game mode"})
-public class ExprPlayerGameMode extends ChangeableExpressionBlock<GameMode> {
+@Description({"The game mode of a player", "Returns: game mode"})
+@Modifier(ModificationType.SET)
+public class ExprPlayerGameMode extends ModifiableExpressionBlock<GameMode> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +23,7 @@ public class ExprPlayerGameMode extends ChangeableExpressionBlock<GameMode> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        return changeType == ChangeType.SET ? arg(0) + ".setGameMode(" + delta + ");" : null;
+    public String modify(ModificationType modificationType, String delta) {
+        return modificationType == ModificationType.SET ? arg(0) + ".setGameMode(" + delta + ");" : null;
     }
 }

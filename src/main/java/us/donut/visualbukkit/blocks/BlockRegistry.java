@@ -1,37 +1,31 @@
 package us.donut.visualbukkit.blocks;
 
 import org.reflections.Reflections;
-import us.donut.visualbukkit.blocks.expressions.ExprLocalVariable;
-import us.donut.visualbukkit.blocks.expressions.ExprPersistentVariable;
 
 import java.lang.reflect.Modifier;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BlockRegistry {
 
     private static Map<String, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
-    private static Map<String, String> renamedBlocks = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public static void registerAll() {
-        Reflections reflections = new Reflections("us.donut.visualbukkit.blocks");
-        for (Class<?> clazz : reflections.getSubTypesOf(CodeBlock.class)) {
-            if (!Modifier.isAbstract(clazz.getModifiers()) && clazz != EmptyExpressionBlock.class) {
-                Class<? extends CodeBlock> blockType = (Class<? extends CodeBlock>) clazz;
-                BlockInfo<?> blockInfo = new BlockInfo<>(blockType);
-                blockTypes.put(blockType.getCanonicalName(), blockInfo);
+        Set<Class<? extends CodeBlock>> blockTypes = new TreeSet<>((c1, c2) -> c1.equals(c2) ? 0 : StatementBlock.class.isAssignableFrom(c1) ? -1 : 1);
+        blockTypes.addAll(new Reflections("us.donut.visualbukkit.blocks").getSubTypesOf(CodeBlock.class));
+        for (Class<? extends CodeBlock> blockType : blockTypes) {
+            if (!Modifier.isAbstract(blockType.getModifiers()) && blockType != EmptyExpressionBlock.class) {
+                BlockInfo<?> blockInfo = ExpressionBlock.class.isAssignableFrom(blockType) ?
+                        new ExpressionBlockInfo<>((Class<? extends ExpressionBlock<?>>) blockType) :
+                        new BlockInfo<>(blockType);
+                BlockRegistry.blockTypes.put(blockType.getCanonicalName(), blockInfo);
                 blockInfo.createBlock();
             }
         }
-        renamedBlocks.put("us.donut.visualbukkit.blocks.expressions.ExprTempVariable", ExprLocalVariable.class.getCanonicalName());
-        renamedBlocks.put("us.donut.visualbukkit.blocks.expressions.ExprVariable", ExprPersistentVariable.class.getCanonicalName());
     }
 
     public static BlockInfo<? extends CodeBlock> getInfo(String blockType) {
-        return blockTypes.get(renamedBlocks.getOrDefault(blockType, blockType));
+        return blockTypes.get(blockType);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,16 +1,18 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Entity;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.SimpleList;
 
 @Category("Entity")
-@Description({"The passengers of an entity", "Changers: add, remove", "Returns: list of entities"})
-public class ExprPassengers extends ChangeableExpressionBlock<SimpleList> {
+@Description({"The passengers of an entity", "Returns: list of entities"})
+@Modifier({ModificationType.ADD, ModificationType.REMOVE})
+public class ExprPassengers extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,8 +25,8 @@ public class ExprPassengers extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case ADD: return arg(0) + ".addPassenger(" + delta + ");";
             case REMOVE: return arg(0) + ".removePassenger(" + delta + ");";
             default: return null;
@@ -32,7 +34,7 @@ public class ExprPassengers extends ChangeableExpressionBlock<SimpleList> {
     }
 
     @Override
-    public Class<?> getDeltaType(ChangeType changeType) {
+    public Class<?> getDeltaType(ModificationType modificationType) {
         return Entity.class;
     }
 }

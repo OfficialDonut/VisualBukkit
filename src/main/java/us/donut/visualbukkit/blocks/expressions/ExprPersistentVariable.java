@@ -2,16 +2,18 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import javafx.scene.control.*;
 import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.CenteredHBox;
 
 import java.util.StringJoiner;
 
-@Description({"A persistent variable", "Changers: set, delete, clear, add, remove", "Returns: object"})
-public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
+@Description({"A persistent variable", "Returns: object"})
+@Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE, ModificationType.DELETE})
+public class ExprPersistentVariable extends ModifiableExpressionBlock<Object> {
 
     private int numArgs = -1;
 
@@ -39,12 +41,12 @@ public class ExprPersistentVariable extends ChangeableExpressionBlock<Object> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
-        switch (changeType) {
+    public String modify(ModificationType modificationType, String delta) {
+        switch (modificationType) {
             case SET: return "VariableManager.setVarValue(true," + delta + "," + getVarArgs() + ");";
             case ADD: return "VariableManager.addToVar(true," + delta + "," + getVarArgs() + ");";
             case REMOVE: return "VariableManager.removeFromVar(true," + delta + "," + getVarArgs() + ");";
-            case DELETE: case CLEAR: return "VariableManager.deleteVar(true," + getVarArgs() + ");" ;
+            case DELETE: return "VariableManager.deleteVar(true," + getVarArgs() + ");" ;
             default: return null;
         }
     }

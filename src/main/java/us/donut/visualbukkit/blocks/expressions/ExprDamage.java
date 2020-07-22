@@ -1,16 +1,18 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.event.entity.EntityDamageEvent;
-import us.donut.visualbukkit.blocks.ChangeType;
-import us.donut.visualbukkit.blocks.ChangeableExpressionBlock;
+import us.donut.visualbukkit.blocks.ModificationType;
+import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
+import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.editor.EventPane;
 
-@Description({"The damage amount in an EntityDamageEvent", "Changers: set, add, remove", "Returns: number"})
+@Description({"The damage amount in an EntityDamageEvent", "Returns: number"})
 @Event(EntityDamageEvent.class)
-public class ExprDamage extends ChangeableExpressionBlock<Double> {
+@Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE})
+public class ExprDamage extends ModifiableExpressionBlock<Double> {
 
     @Override
     protected SyntaxNode init() {
@@ -26,14 +28,14 @@ public class ExprDamage extends ChangeableExpressionBlock<Double> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
+    public String modify(ModificationType modificationType, String delta) {
         if (!EntityDamageEvent.class.isAssignableFrom(((EventPane) getBlockPane()).getEvent())) {
             throw new IllegalStateException();
         }
-        switch (changeType) {
+        switch (modificationType) {
             case SET: return "event.setDamage(" + delta + ");";
-            case ADD: return change(ChangeType.SET, toJava() + "-" + delta);
-            case REMOVE: return change(ChangeType.SET, toJava() + "+" + delta);
+            case ADD: return modify(ModificationType.SET, toJava() + "-" + delta);
+            case REMOVE: return modify(ModificationType.SET, toJava() + "+" + delta);
             default: return null;
         }
     }

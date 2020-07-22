@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 
 import java.util.UUID;
 
-public class EmptyExpressionBlock<T> extends ChangeableExpressionBlock<T> {
+public class EmptyExpressionBlock<T> extends ModifiableExpressionBlock<T> {
 
     private Class<T> returnType;
 
@@ -24,7 +24,7 @@ public class EmptyExpressionBlock<T> extends ChangeableExpressionBlock<T> {
     }
 
     @Override
-    public String change(ChangeType changeType, String delta) {
+    public String modify(ModificationType modificationType, String delta) {
         return getReturnType().getCanonicalName() + " a" + UUID.randomUUID().toString().replace("-", "") + "=" + delta + ";";
     }
 
