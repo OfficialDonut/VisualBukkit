@@ -3,6 +3,7 @@ package us.donut.visualbukkit.editor;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -46,6 +47,7 @@ public class PluginTestStage extends Stage {
     private Map<Integer, PlayerVBox> playerVBoxes = new HashMap<>();
     private ListView<String> playerListView = new ListView<>();
     private ServerMock serverMock;
+    private PlayerMockFactory playerFactory;
     private Timeline playerUpdater;
 
     @SuppressWarnings("unchecked")
@@ -89,6 +91,7 @@ public class PluginTestStage extends Stage {
 
         try {
             serverMock = MockBukkit.mock();
+            playerFactory = new PlayerMockFactory(serverMock);
             BuildContext.create();
             CtClass mainCtClass = PluginBuilder.getCtClass(PluginMain.class, null);
             for (BlockPane blockPane : project.getBlockPanes()) {
@@ -129,7 +132,10 @@ public class PluginTestStage extends Stage {
 
     private void addPlayer() {
         try {
-            PlayerMock player = serverMock.addPlayer();
+            PlayerMock player = playerFactory.createRandomPlayer();
+            player.setName(player.getName().replace(" ", ""));
+            player.setDisplayName(player.getName());
+            serverMock.addPlayer(player);
             playerVBoxes.put(serverMock.getOnlinePlayers().size() - 1, new PlayerVBox(player));
             playerListView.getItems().add(player.getName());
         } catch (Throwable e) {
