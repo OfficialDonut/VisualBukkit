@@ -1,8 +1,10 @@
 package us.donut.visualbukkit.plugin;
 
+import com.google.common.collect.ForwardingMultimap;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.Damageable;
@@ -137,6 +139,15 @@ public class UtilMethods {
             skullMeta.setOwningPlayer(player);
             item.setItemMeta(skullMeta);
         }
+    }
+
+    public static void setSkin(Player player, String value, String signature) throws InvocationTargetException, IllegalAccessException, InstantiationException {
+        Object entityPlayer = ReflectionUtil.getDeclaredMethod(player.getClass(), "getHandle").invoke(player);
+        Object gameProfile = ReflectionUtil.getDeclaredMethod(ReflectionUtil.getNmsClass("EntityHuman"), "getProfile").invoke(entityPlayer);
+        Object propertyMap = ReflectionUtil.getDeclaredMethod(gameProfile.getClass(), "getProperties").invoke(gameProfile);
+        Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass("com.mojang.authlib.properties.Property"), String.class, String.class, String.class).newInstance("textures", value, signature);
+        ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "removeAll", Object.class).invoke(propertyMap, "textures");
+        ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "put", Object.class, Object.class).invoke(propertyMap, "textures", property);
     }
 
     public static void spawnEntity(EntityType entityType, Location loc) {
