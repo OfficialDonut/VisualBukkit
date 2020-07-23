@@ -9,7 +9,7 @@ public class StatBreakLoop extends StatementBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("break;");
+        return new SyntaxNode("break");
     }
 
     @Override
