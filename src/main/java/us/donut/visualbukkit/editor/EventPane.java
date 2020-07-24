@@ -1,8 +1,9 @@
 package us.donut.visualbukkit.editor;
 
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -19,6 +20,7 @@ import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 import us.donut.visualbukkit.plugin.modules.classes.PlaceholderEvent;
 import us.donut.visualbukkit.util.CenteredHBox;
+import us.donut.visualbukkit.util.ComboBoxView;
 import us.donut.visualbukkit.util.TitleLabel;
 
 import java.lang.reflect.Modifier;
@@ -40,11 +42,10 @@ public class EventPane extends BlockPane {
         EVENTS = events.toArray(new Class<?>[0]);
     }
 
-    @SuppressWarnings("unchecked")
     public static void promptNew(Project project) {
-        ChoiceDialog<Class<?>> dialog = new ChoiceDialog<>();
-        ComboBox<Class<?>> comboBox = (ComboBox<Class<?>>) ((GridPane) dialog.getDialogPane().getContent()).getChildren().get(1);
-        comboBox.setConverter(new StringConverter<Class<?>>() {
+        ComboBoxView<Class<?>> comboBoxView = new ComboBoxView<>();
+        comboBoxView.getStylesheets().add("/style.css");
+        comboBoxView.getComboBox().setConverter(new StringConverter<Class<?>>() {
             @Override
             public String toString(Class<?> clazz) {
                 return clazz != null ? clazz.getSimpleName() : null;
@@ -54,18 +55,23 @@ public class EventPane extends BlockPane {
                 return null;
             }
         });
-        dialog.setTitle("New Event");
-        dialog.setContentText("Event:");
-        dialog.setHeaderText(null);
-        dialog.setGraphic(null);
-        dialog.getItems().addAll(EVENTS);
-        project.getEvents().forEach(event -> dialog.getItems().remove(event.getEvent()));
-        Optional<Class<?>> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            EventPane eventPane = new EventPane(project, result.get());
-            project.add(eventPane);
-            eventPane.open();
-            project.getTabPane().getSelectionModel().select(eventPane);
+        comboBoxView.getComboBox().getItems().addAll(EVENTS);
+        project.getEvents().forEach(event -> comboBoxView.getComboBox().getItems().remove(event.getEvent()));
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "New Event", ButtonType.OK, ButtonType.CLOSE);
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+        alert.getDialogPane().setContent(new HBox(5, new Text("Event:"), comboBoxView));
+        alert.getDialogPane().setPrefWidth(300);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Class<?> event = comboBoxView.getComboBox().getValue();
+            if (event != null) {
+                EventPane eventPane = new EventPane(project, event);
+                project.add(eventPane);
+                eventPane.open();
+                project.getTabPane().getSelectionModel().select(eventPane);
+            }
         }
     }
 
