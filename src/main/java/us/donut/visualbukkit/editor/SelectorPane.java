@@ -114,6 +114,10 @@ public class SelectorPane extends VBox implements BlockContainer {
             expressionBox.setManaged(state);
         });
 
+        CheckBox modifiersCheckBox = new CheckBox("Modifiers");
+        modifiersCheckBox.setFocusTraversable(false);
+        modifiersCheckBox.setSelected(true);
+
         for (String blockType : VisualBukkitLauncher.DATA_FILE.getConfig().getStringList("pinned-blocks")) {
             BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
             if (blockInfo != null) {
@@ -129,6 +133,7 @@ public class SelectorPane extends VBox implements BlockContainer {
                 new CenteredHBox(10, new Label("Returns: "), returnTypeComboBox),
                 new CenteredHBox(10, new Label("Type:    "), statementCheckBox),
                 new CenteredHBox(10, new Label("         "), expressionCheckBox),
+                new CenteredHBox(10, new Label("         "), modifiersCheckBox),
                 new CenteredHBox(10, new Label("Search:  "), searchField),
                 pinnedBlocks);
 
@@ -177,6 +182,8 @@ public class SelectorPane extends VBox implements BlockContainer {
                     VBox vBox = new VBox(5, blockInfoNode, modifiersBox);
                     vBox.visibleProperty().bind(blockInfoNode.visibleProperty());
                     vBox.managedProperty().bind(blockInfoNode.managedProperty());
+                    modifiersBox.visibleProperty().bind(vBox.visibleProperty().and(modifiersCheckBox.selectedProperty()));
+                    modifiersBox.managedProperty().bind(modifiersBox.visibleProperty());
                     expressionBox.getChildren().add(vBox);
                     for (Class<? extends ModifierBlock> modifierClass : modifiers) {
                         modifiersBox.getChildren().add(new BlockInfo(modifierClass) {
