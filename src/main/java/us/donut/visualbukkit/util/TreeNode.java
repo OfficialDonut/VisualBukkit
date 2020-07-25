@@ -32,6 +32,10 @@ public class TreeNode extends VBox {
         content.getChildren().remove(node);
     }
 
+    public void clear() {
+        content.getChildren().clear();
+    }
+
     public void toggle() {
         label.setText((expanded ? RIGHT_ARROW : DOWN_ARROW) + labelText);
         expanded = !expanded;

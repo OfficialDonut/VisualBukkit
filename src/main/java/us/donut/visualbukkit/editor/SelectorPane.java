@@ -118,14 +118,7 @@ public class SelectorPane extends VBox implements BlockContainer {
         modifiersCheckBox.setFocusTraversable(false);
         modifiersCheckBox.setSelected(true);
 
-        for (String blockType : VisualBukkitLauncher.DATA_FILE.getConfig().getStringList("pinned-blocks")) {
-            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
-            if (blockInfo != null) {
-                pin(blockInfo);
-            } else {
-                VisualBukkit.displayError("Failed to load pinned block " + blockType);
-            }
-        }
+        updatePins();
 
         blockSelector.getChildren().addAll(selectorTitle,
                 new CenteredHBox(10, new Label("Category:"), categoryComboBox),
@@ -149,11 +142,11 @@ public class SelectorPane extends VBox implements BlockContainer {
 
             MenuItem pinItem = new MenuItem("Pin");
             pinItem.setOnAction(e -> {
-                pin(blockInfo);
                 YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
                 List<String> pinned = config.getStringList("pinned-blocks");
                 pinned.add(blockInfo.getBlockType().getCanonicalName());
                 config.set("pinned-blocks", pinned);
+                updatePins();
             });
             ContextMenu contextMenu = new ContextMenu(pinItem);
             blockInfoNode.setOnContextMenuRequested(e -> {
@@ -242,22 +235,50 @@ public class SelectorPane extends VBox implements BlockContainer {
         return Collections.emptyList();
     }
 
-    private void pin(BlockInfo<?> blockInfo) {
-        BlockInfo<?>.Node node = blockInfo.createNode();
-        pinnedBlocks.add(node);
-        MenuItem unpinItem = new MenuItem("Unpin");
-        unpinItem.setOnAction(e -> {
-            pinnedBlocks.remove(node);
-            YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
-            List<String> pinned = config.getStringList("pinned-blocks");
-            pinned.remove(blockInfo.getBlockType().getCanonicalName());
-            config.set("pinned-blocks", pinned);
-        });
-        ContextMenu contextMenu = new ContextMenu(unpinItem);
-        node.setOnContextMenuRequested(e -> {
-            contextMenu.show(node, e.getScreenX(), e.getScreenY());
-            e.consume();
-        });
+    private void updatePins() {
+        YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
+        pinnedBlocks.clear();
+        for (String blockType : config.getStringList("pinned-blocks")) {
+            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
+            if (blockInfo != null) {
+                BlockInfo<?>.Node node = blockInfo.createNode();
+                MenuItem unpinItem = new MenuItem("Unpin");
+                unpinItem.setOnAction(e -> {
+                    List<String> pinned = config.getStringList("pinned-blocks");
+                    pinned.remove(blockInfo.getBlockType().getCanonicalName());
+                    config.set("pinned-blocks", pinned);
+                    updatePins();
+                });
+                MenuItem moveUpItem = new MenuItem("Move Up");
+                moveUpItem.setOnAction(e -> {
+                    List<String> pinned = config.getStringList("pinned-blocks");
+                    int index = pinned.indexOf(blockInfo.getBlockType().getCanonicalName());
+                    if (index != 0) {
+                        Collections.swap(pinned, index, index - 1);
+                        config.set("pinned-blocks", pinned);
+                        updatePins();
+                    }
+                });
+                MenuItem moveDownItem = new MenuItem("Move Down");
+                moveDownItem.setOnAction(e -> {
+                    List<String> pinned = config.getStringList("pinned-blocks");
+                    int index = pinned.indexOf(blockInfo.getBlockType().getCanonicalName());
+                    if (index != pinned.size() - 1) {
+                        Collections.swap(pinned, index, index + 1);
+                        config.set("pinned-blocks", pinned);
+                        updatePins();
+                    }
+                });
+                ContextMenu contextMenu = new ContextMenu(unpinItem, moveUpItem, moveDownItem);
+                node.setOnContextMenuRequested(e -> {
+                    contextMenu.show(node, e.getScreenX(), e.getScreenY());
+                    e.consume();
+                });
+                pinnedBlocks.add(node);
+            } else {
+                VisualBukkit.displayError("Failed to load pinned block " + blockType);
+            }
+        }
     }
 
     private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {
