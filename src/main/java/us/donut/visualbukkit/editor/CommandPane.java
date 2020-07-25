@@ -7,6 +7,10 @@ import javassist.CtMethod;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.VisualBukkit;
+import us.donut.visualbukkit.blocks.BlockRegistry;
+import us.donut.visualbukkit.blocks.expressions.ExprCommandArg;
+import us.donut.visualbukkit.blocks.expressions.ExprCommandArgs;
+import us.donut.visualbukkit.blocks.expressions.ExprCommandSender;
 import us.donut.visualbukkit.util.CenteredHBox;
 import us.donut.visualbukkit.util.TitleLabel;
 
@@ -84,10 +88,17 @@ public class CommandPane extends BlockPane {
             }
         });
 
-        getInfoArea().getChildren().add(new VBox(5,
+        getInfoArea().getChildren().add(new VBox(15,
                 new CenteredHBox(10, label, renameButton, deleteButton),
-                new CenteredHBox(10, new Label("Description:"), descField, new Label("Permission:  "), permField),
-                new CenteredHBox(10, new Label("Aliases:    "), aliasesField, new Label("Perm Message:"), permMessageField)));
+                new CenteredHBox(5,
+                        new Label("Aliases:"), aliasesField,
+                        new Label("  Description:"), descField,
+                        new Label("  Permission:"), permField,
+                        new Label("  Perm Message:"), permMessageField),
+                new CenteredHBox(10, new Label("Blocks:"),
+                        BlockRegistry.getInfo(ExprCommandSender.class).createNode(),
+                        BlockRegistry.getInfo(ExprCommandArgs.class).createNode(),
+                        BlockRegistry.getInfo(ExprCommandArg.class).createNode())));
     }
 
     @Override
