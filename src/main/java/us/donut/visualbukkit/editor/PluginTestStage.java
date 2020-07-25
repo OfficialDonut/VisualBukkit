@@ -9,7 +9,6 @@ import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -36,9 +35,7 @@ import us.donut.visualbukkit.util.CenteredHBox;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PluginTestStage extends Stage {
 
@@ -154,6 +151,8 @@ public class PluginTestStage extends Stage {
 
         private TextArea outputTextArea = new TextArea();
         private TextField messageField = new TextField();
+        private List<String> messageLog = new ArrayList<>();
+        private int messageIndex;
         private PlayerMock player;
 
         public PlayerVBox(PlayerMock player) {
@@ -168,11 +167,18 @@ public class PluginTestStage extends Stage {
 
             messageField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
                 if (e.getCode() == KeyCode.ENTER) {
-                    Node node = outputPane.getItems().get(0);
-                    if (equals(node)) {
-                        sendMessage();
-                        e.consume();
+                    sendMessage();
+                    e.consume();
+                } else if (e.getCode() == KeyCode.UP) {
+                    if (!messageLog.isEmpty() && messageIndex > 0) {
+                        messageField.setText(messageLog.get(--messageIndex));
                     }
+                    e.consume();
+                } else if (e.getCode() == KeyCode.DOWN) {
+                    if (messageLog.size() > messageIndex + 1) {
+                        messageField.setText(messageLog.get(++messageIndex));
+                    }
+                    e.consume();
                 }
             });
 
@@ -186,6 +192,8 @@ public class PluginTestStage extends Stage {
         public void sendMessage() {
             try {
                 String message = messageField.getText();
+                messageLog.add(message);
+                messageIndex = messageLog.size();
                 messageField.clear();
                 if (message.startsWith("/")) {
                     player.performCommand(message.substring(1));
