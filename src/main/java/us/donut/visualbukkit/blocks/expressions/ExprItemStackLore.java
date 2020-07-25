@@ -22,7 +22,7 @@ public class ExprItemStackLore extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return arg(0) + ".getItemMeta().getLore()";
+        return "new SimpleList(" + arg(0) + ".getItemMeta().getLore())";
     }
 
     @Override
