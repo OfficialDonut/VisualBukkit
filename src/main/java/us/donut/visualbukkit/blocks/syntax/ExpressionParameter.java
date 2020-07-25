@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
+import us.donut.visualbukkit.blocks.expressions.ExprNumber;
+import us.donut.visualbukkit.blocks.expressions.ExprString;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
 import java.util.Collections;
@@ -41,6 +43,17 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
                     parent = parent.getParent();
                 }
                 e.consume();
+            }
+        });
+        setOnMouseClicked(e -> {
+            if (isEmpty()) {
+                if (returnType == String.class) {
+                    setExpression(BlockRegistry.getInfo(ExprString.class).createBlock());
+                    e.consume();
+                } else if (TypeHandler.isNumber(returnType)) {
+                    setExpression(BlockRegistry.getInfo(ExprNumber.class).createBlock());
+                    e.consume();
+                }
             }
         });
     }
