@@ -7,6 +7,10 @@ import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,8 +29,10 @@ import us.donut.visualbukkit.editor.ProjectManager;
 import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 
 public class VisualBukkit extends Application {
 
@@ -79,9 +85,7 @@ public class VisualBukkit extends Application {
 
     private void setupMenuBar() {
         MenuItem saveItem = new MenuItem("Save");
-        MenuItem helpItem = new MenuItem("Help");
         MenuItem exitItem = new MenuItem("Exit");
-        helpItem.setOnAction(e -> getHostServices().showDocument("https://github.com/OfficialDonut/VisualBukkit/wiki"));
         exitItem.setOnAction(e -> primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)));
         saveItem.setOnAction(e -> {
             if (ProjectManager.getCurrentProject() != null) {
@@ -94,7 +98,7 @@ public class VisualBukkit extends Application {
             }
         });
         Menu fileMenu = new Menu("File");
-        fileMenu.getItems().addAll(saveItem, helpItem, exitItem);
+        fileMenu.getItems().addAll(saveItem, exitItem);
 
         MenuItem createItem = new MenuItem("Create");
         MenuItem openItem = new MenuItem("Open");
@@ -165,7 +169,24 @@ public class VisualBukkit extends Application {
         Menu settingsMenu = new Menu("Settings");
         settingsMenu.getItems().addAll(fontSizeMenu, autosaveMenu);
 
-        rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu, settingsMenu));
+        MenuItem githubItem = new MenuItem("Github");
+        githubItem.setOnAction(e -> openURI("https://github.com/OfficialDonut/VisualBukkit"));
+        MenuItem spigotItem = new MenuItem("Spigot");
+        spigotItem.setOnAction(e -> openURI("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"));
+        MenuItem discordItem = new MenuItem("Discord");
+        discordItem.setOnAction(e -> openURI("https://discord.gg/ugkvGpu"));
+        Menu supportMenu = new Menu("Support");
+        supportMenu.getItems().addAll(githubItem, spigotItem, discordItem);
+
+        rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu, settingsMenu, supportMenu));
+    }
+
+    private void openURI(String uri) {
+        try {
+            Desktop.getDesktop().browse(URI.create(uri));
+        } catch (IOException e) {
+            displayException("Failed to open " + uri, e);
+        }
     }
 
     private void autoSave(double minutes) {
