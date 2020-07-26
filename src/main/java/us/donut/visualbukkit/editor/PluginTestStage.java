@@ -58,7 +58,9 @@ public class PluginTestStage extends Stage {
             if (playerUpdater != null) {
                 playerUpdater.stop();
             }
-            MockBukkit.unmock();
+            try {
+                MockBukkit.unmock();
+            } catch (Exception ignored) {}
         });
 
         playerListView.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
