@@ -17,7 +17,6 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
 import java.sql.PreparedStatement;
@@ -44,6 +43,7 @@ public class TypeHandler {
         register(Inventory.class, "inventory");
         register(InventoryView.class, "inventory view");
         register(LivingEntity.class, "living entity");
+        register(List.class, "list");
         register(LocalDateTime.class, "date");
         register(Location.class, "location");
         register(Material.class, "material", s -> "Material.valueOf(" + s + ".toUpperCase())");
@@ -54,7 +54,6 @@ public class TypeHandler {
         register(Player.class, "player", s -> "Bukkit.getPlayer(" + s + ")");
         register(PreparedStatement.class, "SQL statement");
         register(Scoreboard.class, "scoreboard");
-        register(SimpleList.class, "list");
         register(Sound.class, "sound", s -> "Sound.valueOf(" + s + ".toUpperCase())");
         register(String.class, "string");
         register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");

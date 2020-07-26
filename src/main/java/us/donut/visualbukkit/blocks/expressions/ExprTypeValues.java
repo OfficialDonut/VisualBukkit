@@ -8,10 +8,11 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"All values of a type", "Returns: list of types"})
-public class ExprTypeValues extends ExpressionBlock<SimpleList> {
+public class ExprTypeValues extends ExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -27,6 +28,6 @@ public class ExprTypeValues extends ExpressionBlock<SimpleList> {
             case "particle": enumClass = Particle.class; break;
             case "sound": enumClass = Sound.class; break;
         }
-        return "new SimpleList(" + enumClass.getCanonicalName() + ".values())";
+        return "PluginMain.createList(" + enumClass.getCanonicalName() + ".values())";
     }
 }

@@ -6,11 +6,12 @@ import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"The entries of a scoreboard team", "Returns: list of strings"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE})
-public class ExprTeamEntries extends ModifiableExpressionBlock<SimpleList> {
+public class ExprTeamEntries extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -19,7 +20,7 @@ public class ExprTeamEntries extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getEntries())";
+        return "PluginMain.createList(" + arg(0) + ".getEntries())";
     }
 
     @Override

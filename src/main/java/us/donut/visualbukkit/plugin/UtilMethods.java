@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import us.donut.visualbukkit.plugin.modules.classes.ReflectionUtil;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class UtilMethods {
         loc.getWorld().generateTree(loc, treeType);
     }
 
-    public static Object getRandomElement(SimpleList list) {
+    public static Object getRandomElement(List list) {
         return list.get(ThreadLocalRandom.current().nextInt(list.size()));
     }
 
@@ -113,7 +112,7 @@ public class UtilMethods {
         }
     }
 
-    public static void setItemLore(ItemStack item, SimpleList lore) {
+    public static void setItemLore(ItemStack item, List lore) {
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta != null) {
             List<String> coloredLore = new ArrayList<>(lore.size());

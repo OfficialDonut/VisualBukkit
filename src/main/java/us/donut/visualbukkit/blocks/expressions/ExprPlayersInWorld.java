@@ -5,11 +5,12 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Category("Player")
 @Description({"The players in a world", "Returns: list of players"})
-public class ExprPlayersInWorld extends ExpressionBlock<SimpleList> {
+public class ExprPlayersInWorld extends ExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -18,6 +19,6 @@ public class ExprPlayersInWorld extends ExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getPlayers())";
+        return "PluginMain.createList(" + arg(0) + ".getPlayers())";
     }
 }

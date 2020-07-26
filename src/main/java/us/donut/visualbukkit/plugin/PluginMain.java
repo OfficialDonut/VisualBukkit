@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -61,6 +62,21 @@ public class PluginMain extends JavaPlugin implements Listener {
 
     public static Object function(String function, Object... args) {
         return null;
+    }
+
+    public static List<Object> createList(Object obj) {
+        List<Object> list = new ArrayList<>();
+        if (obj.getClass().isArray()) {
+            int length = Array.getLength(obj);
+            for (int i = 0; i < length; i++) {
+                list.add(Array.get(obj, i));
+            }
+        } else if (obj instanceof Collection<?>) {
+            list.addAll((Collection<?>) obj);
+        } else {
+            list.add(obj);
+        }
+        return list;
     }
 
     public static String decode(String string) {

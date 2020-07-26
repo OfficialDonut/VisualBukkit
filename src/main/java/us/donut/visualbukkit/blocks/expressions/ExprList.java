@@ -6,12 +6,12 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.util.CenteredHBox;
-import us.donut.visualbukkit.util.SimpleList;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 @Description({"A list of objects", "Returns: list"})
-public class ExprList extends ExpressionBlock<SimpleList> {
+public class ExprList extends ExpressionBlock<List> {
 
     private int size = -1;
 
@@ -38,9 +38,9 @@ public class ExprList extends ExpressionBlock<SimpleList> {
         if (!getParameters().isEmpty()) {
             StringJoiner joiner = new StringJoiner(",");
             getParameters().forEach(parameter -> joiner.add(parameter.toJava()));
-            return "new SimpleList(new Object[]{" + joiner.toString() + "})";
+            return "PluginMain.createList(new Object[]{" + joiner.toString() + "})";
         } else {
-            return "new SimpleList(new Object[0])";
+            return "new ArrayList()";
         }
     }
 

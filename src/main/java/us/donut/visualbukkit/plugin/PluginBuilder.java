@@ -9,7 +9,6 @@ import us.donut.visualbukkit.editor.BlockPane;
 import us.donut.visualbukkit.editor.CommandPane;
 import us.donut.visualbukkit.editor.Project;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -67,7 +66,6 @@ public class PluginBuilder {
         CtClass mainClass = getCtClass(PluginMain.class, null);
         classes.put(PluginMain.class, mainClass);
         classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
-        classes.put(SimpleList.class, getCtClass(SimpleList.class, mainClass.getPackageName()));
 
         BuildContext.create();
 

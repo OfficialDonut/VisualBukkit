@@ -7,12 +7,13 @@ import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Category("Entity")
 @Description({"The passengers of an entity", "Returns: list of entities"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE})
-public class ExprPassengers extends ModifiableExpressionBlock<SimpleList> {
+public class ExprPassengers extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +22,7 @@ public class ExprPassengers extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getPassengers())";
+        return "PluginMain.createList(" + arg(0) + ".getPassengers())";
     }
 
     @Override

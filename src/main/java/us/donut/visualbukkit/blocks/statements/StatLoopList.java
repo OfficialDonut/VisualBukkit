@@ -5,14 +5,15 @@ import us.donut.visualbukkit.blocks.ParentBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.editor.BlockPane;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description("Iterates through the elements of a list")
 public class StatLoopList extends ParentBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode("loop", SimpleList.class);
+        return new SyntaxNode("loop", List.class);
     }
 
     @Override

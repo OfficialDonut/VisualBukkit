@@ -7,12 +7,13 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"The tab completions in a TabCompleteEvent", "Returns: list of strings"})
 @Event(TabCompleteEvent.class)
 @Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE})
-public class ExprTabCompletions extends ModifiableExpressionBlock<SimpleList> {
+public class ExprTabCompletions extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -21,7 +22,7 @@ public class ExprTabCompletions extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "event.getCompletions()";
+        return "PluginMain.createList(event.getCompletions())";
     }
 
     @Override
@@ -37,6 +38,6 @@ public class ExprTabCompletions extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public Class<?> getDeltaType(ModificationType modificationType) {
-        return modificationType == ModificationType.SET ? SimpleList.class : String.class;
+        return modificationType == ModificationType.SET ? List.class : String.class;
     }
 }

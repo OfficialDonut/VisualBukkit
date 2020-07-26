@@ -6,18 +6,21 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import org.bukkit.Location;
 import org.bukkit.World;
-import us.donut.visualbukkit.util.SimpleList;
+import us.donut.visualbukkit.plugin.PluginMain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorldGuardHook {
 
     private static RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
 
-    public static SimpleList getRegions(World world) {
+    public static List<Object> getRegions(World world) {
         RegionManager regionManager = regionContainer.get(BukkitAdapter.adapt(world));
-        return regionManager != null ? new SimpleList(regionManager.getRegions().values()) : new SimpleList();
+        return regionManager != null ? PluginMain.createList(regionManager.getRegions().values()) : new ArrayList<>();
     }
 
-    public static SimpleList getRegions(Location location) {
-        return new SimpleList(regionContainer.createQuery().getApplicableRegions(BukkitAdapter.adapt(location)).getRegions());
+    public static List<Object> getRegions(Location location) {
+        return PluginMain.createList(regionContainer.createQuery().getApplicableRegions(BukkitAdapter.adapt(location)).getRegions());
     }
 }

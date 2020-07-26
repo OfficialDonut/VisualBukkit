@@ -7,11 +7,12 @@ import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"The players viewing a boss bar", "Returns: list of players"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
-public class ExprBossBarPlayers extends ModifiableExpressionBlock<SimpleList> {
+public class ExprBossBarPlayers extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -20,7 +21,7 @@ public class ExprBossBarPlayers extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getPlayers())";
+        return "PluginMain.createList(" + arg(0) + ".getPlayers())";
     }
 
     @Override

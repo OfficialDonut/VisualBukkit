@@ -3,12 +3,12 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.File;
+import java.util.List;
 
 @Description({"The lines of a file", "Returns: list of strings"})
-public class ExprFileLines extends ExpressionBlock<SimpleList> {
+public class ExprFileLines extends ExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -17,6 +17,6 @@ public class ExprFileLines extends ExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(Files.readAllLines(" + arg(0) + ".toPath(),java.nio.charset.StandardCharsets.UTF_8))";
+        return "PluginMain.createList(Files.readAllLines(" + arg(0) + ".toPath(),java.nio.charset.StandardCharsets.UTF_8))";
     }
 }

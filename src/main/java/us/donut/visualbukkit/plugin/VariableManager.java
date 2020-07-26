@@ -8,13 +8,12 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Entity;
-import us.donut.visualbukkit.util.SimpleList;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,7 +29,7 @@ public class VariableManager {
         if (dataConfig != null) {
             for (String key : dataConfig.getKeys(false)) {
                 Object object = dataConfig.get(key);
-                persistentVariables.put(key, object instanceof Collection ? new SimpleList(object) : object);
+                persistentVariables.put(key, object);
             }
         }
     }
@@ -41,8 +40,8 @@ public class VariableManager {
             for (Map.Entry<String, Object> entry : persistentVariables.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
-                if (value instanceof SimpleList) {
-                    value = ((SimpleList) value).stream().filter(VariableManager::isSerializable).toArray();
+                if (value instanceof List) {
+                    value = ((List<?>) value).stream().filter(VariableManager::isSerializable).toArray();
                 }
                 if (isSerializable(value)) {
                     dataConfig.set(key, value);
@@ -81,8 +80,8 @@ public class VariableManager {
     }
 
     public static Object addToObject(Object object, Object delta) {
-        if (object instanceof SimpleList) {
-            ((SimpleList) object).add(delta);
+        if (object instanceof List) {
+            ((List) object).add(delta);
             return object;
         } else if (object instanceof Number && delta instanceof Number) {
             return ((Number) object).doubleValue() + ((Number) delta).doubleValue();
@@ -93,8 +92,8 @@ public class VariableManager {
     }
 
     public static Object removeFromObject(Object object, Object delta) {
-        if (object instanceof SimpleList) {
-            ((SimpleList) object).remove(delta);
+        if (object instanceof List) {
+            ((List<?>) object).remove(delta);
             return object;
         } else if (object instanceof Number && delta instanceof Number) {
             return ((Number) object).doubleValue() - ((Number) delta).doubleValue();

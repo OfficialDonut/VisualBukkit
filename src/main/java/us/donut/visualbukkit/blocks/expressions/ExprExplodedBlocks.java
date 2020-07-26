@@ -9,12 +9,13 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent", "Returns: list of blocks"})
 @Event({BlockExplodeEvent.class, EntityExplodeEvent.class})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
-public class ExprExplodedBlocks extends ModifiableExpressionBlock<SimpleList> {
+public class ExprExplodedBlocks extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -23,7 +24,7 @@ public class ExprExplodedBlocks extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "event.blockList()";
+        return "PluginMain.createList(event.blockList())";
     }
 
     @Override

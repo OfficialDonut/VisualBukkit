@@ -8,12 +8,13 @@ import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Category("Item Stack")
 @Description({"The item flags of an item stack", "Returns: list of item flags"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE})
-public class ExprItemFlags extends ModifiableExpressionBlock<SimpleList> {
+public class ExprItemFlags extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,7 +23,7 @@ public class ExprItemFlags extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getItemMeta().getItemFlags())";
+        return "PluginMain.createList(" + arg(0) + ".getItemMeta().getItemFlags())";
     }
 
     @Override

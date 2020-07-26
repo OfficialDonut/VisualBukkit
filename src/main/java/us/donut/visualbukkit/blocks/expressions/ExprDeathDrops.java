@@ -8,12 +8,13 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Description({"The item stacks dropped in an EntityDeathEvent", "Returns: list of item stacks"})
 @Event(EntityDeathEvent.class)
 @Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
-public class ExprDeathDrops extends ModifiableExpressionBlock<SimpleList> {
+public class ExprDeathDrops extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,7 +23,7 @@ public class ExprDeathDrops extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(event.getDrops())";
+        return "PluginMain.createList(event.getDrops())";
     }
 
     @Override

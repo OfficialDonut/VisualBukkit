@@ -8,12 +8,13 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
 import us.donut.visualbukkit.plugin.BuildContext;
-import us.donut.visualbukkit.util.SimpleList;
+
+import java.util.List;
 
 @Category("Item Stack")
 @Description({"The lore of an item stack", "Returns: list of strings"})
 @Modifier(ModificationType.SET)
-public class ExprItemStackLore extends ModifiableExpressionBlock<SimpleList> {
+public class ExprItemStackLore extends ModifiableExpressionBlock<List> {
 
     @Override
     protected SyntaxNode init() {
@@ -22,7 +23,7 @@ public class ExprItemStackLore extends ModifiableExpressionBlock<SimpleList> {
 
     @Override
     public String toJava() {
-        return "new SimpleList(" + arg(0) + ".getItemMeta().getLore())";
+        return "PluginMain.createList(" + arg(0) + ".getItemMeta().getLore())";
     }
 
     @Override
