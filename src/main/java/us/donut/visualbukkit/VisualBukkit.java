@@ -1,5 +1,7 @@
 package us.donut.visualbukkit;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -14,9 +16,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import us.donut.visualbukkit.blocks.BlockRegistry;
 import us.donut.visualbukkit.blocks.UndoManager;
+import us.donut.visualbukkit.editor.Project;
 import us.donut.visualbukkit.editor.ProjectManager;
 import us.donut.visualbukkit.editor.SelectorPane;
 import us.donut.visualbukkit.plugin.PluginBuilder;
@@ -32,6 +36,7 @@ public class VisualBukkit extends Application {
     private Scene scene = new Scene(rootPane, 500, 500);
     private Stage primaryStage;
     private SelectorPane selectorPane;
+    private Timeline autoSaveTimer;
     private int fontSize;
 
     public VisualBukkit() {
@@ -108,26 +113,75 @@ public class VisualBukkit extends Application {
         editMenu.getItems().addAll(undoItem, redoItem);
 
         Menu fontSizeMenu = new Menu("Font Size");
-        ToggleGroup toggleGroup = new ToggleGroup();
+        ToggleGroup fontToggleGroup = new ToggleGroup();
         fontSize = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("font-size", 14);
         for (int i = 8; i <= 36; i++) {
-            RadioMenuItem sizeItem = new RadioMenuItem(String.valueOf(i));
+            int size = i;
+            RadioMenuItem sizeItem = new RadioMenuItem(String.valueOf(size));
             sizeItem.setOnAction(e -> {
-                fontSize = Integer.parseInt(sizeItem.getText());
+                fontSize = size;
                 rootPane.setStyle("-fx-font-size:" + fontSize + ";");
                 VisualBukkitLauncher.DATA_FILE.getConfig().set("font-size", fontSize);
             });
-            toggleGroup.getToggles().add(sizeItem);
+            fontToggleGroup.getToggles().add(sizeItem);
             fontSizeMenu.getItems().add(sizeItem);
-            if (i == fontSize) {
+            if (size == fontSize) {
                 sizeItem.setSelected(true);
                 rootPane.setStyle("-fx-font-size:" + fontSize + ";");
             }
         }
+        Menu autosaveMenu = new Menu("Autosave");
+        ToggleGroup autosaveToggleGroup = new ToggleGroup();
+        int autoSaveDuration = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("autosave", -1);
+        for (int duration : new int[]{5, 15, 30, -1}) {
+            RadioMenuItem durationItem;
+            if (duration != -1) {
+                durationItem = new RadioMenuItem(duration + " minutes");
+                durationItem.setOnAction(e -> {
+                    if (autoSaveTimer != null) {
+                        autoSaveTimer.stop();
+                    }
+                    autoSave(duration);
+                    VisualBukkitLauncher.DATA_FILE.getConfig().set("autosave", duration);
+                });
+            } else {
+                durationItem = new RadioMenuItem("Never");
+                durationItem.setOnAction(e -> {
+                    if (autoSaveTimer != null) {
+                        autoSaveTimer.stop();
+                    }
+                    VisualBukkitLauncher.DATA_FILE.getConfig().set("autosave", null);
+                });
+            }
+            autosaveToggleGroup.getToggles().add(durationItem);
+            autosaveMenu.getItems().add(durationItem);
+            if (duration == autoSaveDuration) {
+                durationItem.setSelected(true);
+                if (autoSaveDuration != -1) {
+                    autoSave(duration);
+                }
+            }
+        }
         Menu settingsMenu = new Menu("Settings");
-        settingsMenu.getItems().add(fontSizeMenu);
+        settingsMenu.getItems().addAll(fontSizeMenu, autosaveMenu);
 
         rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu, settingsMenu));
+    }
+
+    private void autoSave(double minutes) {
+        autoSaveTimer = new Timeline(new KeyFrame(Duration.minutes(minutes), event -> {
+            Project project = ProjectManager.getCurrentProject();
+            if (project != null) {
+                try {
+                    project.save();
+                    VisualBukkitLauncher.DATA_FILE.save();
+                } catch (IOException ex) {
+                    Platform.runLater(() -> displayException("Failed to autosave", ex));
+                }
+            }
+        }));
+        autoSaveTimer.setCycleCount(Timeline.INDEFINITE);
+        autoSaveTimer.play();
     }
 
     private void setupSaving() {
