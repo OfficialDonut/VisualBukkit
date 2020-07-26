@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.bukkit.configuration.ConfigurationSection;
@@ -46,7 +47,7 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
             }
         });
         setOnMouseClicked(e -> {
-            if (isEmpty()) {
+            if (isEmpty() && e.getButton() == MouseButton.PRIMARY) {
                 if (returnType == String.class) {
                     setExpression(BlockRegistry.getInfo(ExprString.class).createBlock());
                     e.consume();
