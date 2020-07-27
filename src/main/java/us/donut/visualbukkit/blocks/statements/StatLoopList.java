@@ -21,7 +21,7 @@ public class StatLoopList extends ParentBlock {
         int nestedLoops = getNestedLoops();
         String list = "loopList" + nestedLoops;
         String index = "loopIndex" + nestedLoops;
-        return "SimpleList " + list + " = " + arg(0) + ";" +
+        return "List " + list + " = " + arg(0) + ";" +
                 "for (int " + index + "=0;" + index + "<" + list + ".size();" + index + "++) {" +
                 getChildJava() + "}";
     }
