@@ -29,6 +29,7 @@ public class Project {
 
     private String name;
     private Path folder;
+    private Path backupFolder;
     private DataFile dataFile;
     private Pane projectPane;
     private DndTabPane tabPane;
@@ -39,12 +40,17 @@ public class Project {
     private List<ProcedurePane> procedures = new ArrayList<>();
     private List<FunctionPane> functions = new ArrayList<>();
     private boolean loaded = false;
+    private int backupNum;
 
     public Project(String name) throws IOException {
         this.name = name;
         folder = ProjectManager.getProjectsFolder().resolve(name);
         if (Files.notExists(folder)) {
             Files.createDirectory(folder);
+        }
+        backupFolder = folder.resolve("backup");
+        if (Files.notExists(backupFolder)) {
+            Files.createDirectory(backupFolder);
         }
         dataFile = new DataFile(folder.resolve("data.yml"));
         projectPane = new Pane();
@@ -190,6 +196,8 @@ public class Project {
             eventPane.unload(data.createSection("events." + className));
         });
         dataFile.save();
+        dataFile.getConfig().save(backupFolder.resolve("backup-" + (backupNum + 1) + ".yml").toFile());
+        backupNum = (backupNum + 1) % 3;
     }
 
     @Override
