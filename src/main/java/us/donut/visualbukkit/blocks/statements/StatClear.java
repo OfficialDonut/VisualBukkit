@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.blocks.statements;
 
+import javafx.event.Event;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
@@ -16,6 +17,7 @@ public class StatClear extends ModifierBlock {
     public void init(ExpressionBlockInfo<?> expressionBlockInfo) {
         super.init(expressionBlockInfo);
         ExpressionParameter expressionParameter = new ExpressionParameter(Object.class);
+        expressionParameter.setOnDragOver(Event::consume);
         expressionParameter.setExpression(expressionBlock);
         getSyntaxNode().add("clear", expressionParameter);
     }

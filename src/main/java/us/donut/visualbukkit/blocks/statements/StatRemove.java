@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.blocks.statements;
 
+import javafx.event.Event;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
@@ -19,6 +20,7 @@ public class StatRemove extends ModifierBlock {
         super.init(expressionBlockInfo);
         deltaParameter = new ExpressionParameter(expressionBlock.getDeltaType(ModificationType.REMOVE));
         ExpressionParameter expressionParameter = new ExpressionParameter(Object.class);
+        expressionParameter.setOnDragOver(Event::consume);
         expressionParameter.setExpression(expressionBlock);
         getSyntaxNode().add("remove", deltaParameter, "from", expressionParameter);
     }
