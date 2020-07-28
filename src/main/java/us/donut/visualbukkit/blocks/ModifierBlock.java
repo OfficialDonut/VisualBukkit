@@ -12,4 +12,10 @@ public abstract class ModifierBlock extends StatementBlock {
         expressionBlock.setOnDragDetected(this::fireEvent);
         expressionBlock.setOnMouseMoved(Event::consume);
     }
+
+    @Override
+    public void onDragDrop() {
+        super.onDragDrop();
+        expressionBlock.onDragDrop();
+    }
 }
