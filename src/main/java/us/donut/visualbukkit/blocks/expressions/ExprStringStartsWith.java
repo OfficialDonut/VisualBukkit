@@ -12,7 +12,7 @@ public class ExprStringStartsWith extends ConditionBlock {
 
     @Override
     protected SyntaxNode init() {
-        return new SyntaxNode(String.class, new ChoiceParameter("does", "does not"), "starts with", String.class);
+        return new SyntaxNode(String.class, new ChoiceParameter("does", "does not"), "start with", String.class);
     }
 
     @Override
