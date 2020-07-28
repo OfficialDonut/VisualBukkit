@@ -263,6 +263,7 @@ public class VisualBukkit extends Application {
     }
 
     public static void displayException(String message, Throwable e) {
+        VisualBukkitLauncher.LOGGER.severe(ExceptionUtils.getStackTrace(e));
         Alert alert = new Alert(Alert.AlertType.ERROR, null, ButtonType.CLOSE);
         alert.setHeaderText(null);
         alert.setGraphic(null);
