@@ -3,17 +3,15 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Inventory")
 @Description({"A new inventory", "Returns: inventory"})
 public class ExprNewInventory extends ExpressionBlock<Inventory> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("new", InventoryType.class, "inventory named", String.class);
+    protected Syntax init() {
+        return new Syntax("new", InventoryType.class, "inventory named", String.class);
     }
 
     @Override

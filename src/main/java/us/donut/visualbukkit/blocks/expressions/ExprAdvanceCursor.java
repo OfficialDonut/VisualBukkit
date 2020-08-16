@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.statements.StatOpenDatabaseConnection;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.sql.ResultSet;
 
@@ -11,15 +11,18 @@ import java.sql.ResultSet;
 public class ExprAdvanceCursor extends ExpressionBlock<Boolean> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("advance cursor of", ResultSet.class);
+    protected Syntax init() {
+        return new Syntax("advance cursor of", ResultSet.class);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateParent(StatOpenDatabaseConnection.class);
     }
 
     @Override
     public String toJava() {
-        if (isChildOf(StatOpenDatabaseConnection.class)) {
-            return arg(0) + ".next()";
-        }
-        throw new IllegalStateException();
+        return arg(0) + ".next()";
     }
 }

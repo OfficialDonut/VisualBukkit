@@ -4,7 +4,7 @@ import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Name;
 import us.donut.visualbukkit.blocks.statements.StatOpenDatabaseConnection;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,15 +14,18 @@ import java.sql.ResultSet;
 public class ExprSQLQueryResultSet extends ExpressionBlock<ResultSet> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("result set of", PreparedStatement.class);
+    protected Syntax init() {
+        return new Syntax("result set of", PreparedStatement.class);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(StatOpenDatabaseConnection.class);
     }
 
     @Override
     public String toJava() {
-        if (isChildOf(StatOpenDatabaseConnection.class)) {
-            return arg(0) + ".executeQuery()";
-        }
-        throw new IllegalStateException();
+        return arg(0) + ".executeQuery()";
     }
 }

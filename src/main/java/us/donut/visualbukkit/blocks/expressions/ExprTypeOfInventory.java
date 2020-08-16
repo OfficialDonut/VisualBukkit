@@ -3,17 +3,15 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Inventory")
 @Description("The size of an inventory")
 public class ExprTypeOfInventory extends ExpressionBlock<InventoryType> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("type of", Inventory.class);
+    protected Syntax init() {
+        return new Syntax("type of", Inventory.class);
     }
 
     @Override

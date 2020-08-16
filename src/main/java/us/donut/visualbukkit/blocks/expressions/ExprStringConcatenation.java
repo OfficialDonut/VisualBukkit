@@ -3,15 +3,15 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Name;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Name("Combine Strings")
 @Description({"Combines two strings together", "Returns: string"})
 public class ExprStringConcatenation extends ExpressionBlock<String> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(String.class, "+", String.class);
+    protected Syntax init() {
+        return new Syntax(String.class, "+", String.class);
     }
 
     @Override

@@ -1,44 +1,68 @@
 package us.donut.visualbukkit.blocks;
 
 import org.reflections.Reflections;
+import us.donut.visualbukkit.VisualBukkit;
 
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlockRegistry {
 
-    private static Map<String, BlockInfo<? extends CodeBlock>> blockTypes = new HashMap<>();
+    private static Map<String, StatementDefinition<?>> statements = new HashMap<>();
+    private static Map<String, ExpressionDefinition<?>> expressions = new HashMap<>();
 
-    @SuppressWarnings("unchecked")
     public static void registerAll() {
-        Set<Class<? extends CodeBlock>> blockTypes = new TreeSet<>((c1, c2) -> c1.equals(c2) ? 0 : StatementBlock.class.isAssignableFrom(c1) ? -1 : 1);
-        blockTypes.addAll(new Reflections("us.donut.visualbukkit.blocks").getSubTypesOf(CodeBlock.class));
-        for (Class<? extends CodeBlock> blockType : blockTypes) {
-            if (!Modifier.isAbstract(blockType.getModifiers()) && blockType != EmptyExpressionBlock.class) {
-                BlockInfo<?> blockInfo = ExpressionBlock.class.isAssignableFrom(blockType) ?
-                        new ExpressionBlockInfo<>((Class<? extends ExpressionBlock<?>>) blockType) :
-                        new BlockInfo<>(blockType);
-                BlockRegistry.blockTypes.put(blockType.getCanonicalName(), blockInfo);
-                blockInfo.createBlock();
+        Reflections reflections = new Reflections("us.donut.visualbukkit.blocks");
+        for (Class<? extends StatementBlock> clazz : reflections.getSubTypesOf(StatementBlock.class)) {
+            if (!Modifier.isAbstract(clazz.getModifiers()) && !clazz.isMemberClass()) {
+                try {
+                    statements.put(clazz.getName(), new StatementDefinition<>(clazz));
+                } catch (NoSuchMethodException e) {
+                    VisualBukkit.displayException("Failed to load statement", e);
+                }
+            }
+        }
+        for (Class<? extends ExpressionBlock> clazz : reflections.getSubTypesOf(ExpressionBlock.class)) {
+            if (!Modifier.isAbstract(clazz.getModifiers()) && !clazz.isMemberClass()) {
+                try {
+                    expressions.put(clazz.getName(), new ExpressionDefinition<>(clazz));
+                } catch (NoSuchMethodException e) {
+                    VisualBukkit.displayException("Failed to load expression", e);
+                }
             }
         }
     }
 
-    public static BlockInfo<? extends CodeBlock> getInfo(String blockType) {
-        return blockTypes.get(blockType);
+    public static StatementDefinition<?> getStatement(String className) {
+        if (className != null && !className.startsWith("us.donut.visualbukkit.blocks.")) {
+            className = "us.donut.visualbukkit.blocks." + className;
+        }
+        return statements.get(className);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T extends CodeBlock> BlockInfo<T> getInfo(Class<T> blockType) {
-        return (BlockInfo<T>) getInfo(blockType.getCanonicalName());
+    public static ExpressionDefinition<?> getExpression(String className) {
+        if (className != null && !className.startsWith("us.donut.visualbukkit.blocks.")) {
+            className = "us.donut.visualbukkit.blocks." + className;
+        }
+        return expressions.get(className);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T extends CodeBlock> BlockInfo<T> getInfo(T block) {
-        return (BlockInfo<T>) getInfo(block.getClass());
+    public static StatementDefinition<?> getStatement(Class<? extends StatementBlock> clazz) {
+        return getStatement(clazz.getName());
     }
 
-    public static Collection<BlockInfo<? extends CodeBlock>> getAll() {
-        return Collections.unmodifiableCollection(blockTypes.values());
+    public static ExpressionDefinition<?> getExpression(Class<? extends ExpressionBlock> clazz) {
+        return getExpression(clazz.getName());
+    }
+
+    public static Collection<StatementDefinition<?>> getStatements() {
+        return Collections.unmodifiableCollection(statements.values());
+    }
+
+    public static Collection<ExpressionDefinition<?>> getExpressions() {
+        return Collections.unmodifiableCollection(expressions.values());
     }
 }

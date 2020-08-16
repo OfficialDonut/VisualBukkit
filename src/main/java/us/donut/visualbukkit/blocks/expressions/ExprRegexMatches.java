@@ -3,14 +3,14 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Checks if a string matches a regex", "Returns: boolean"})
 public class ExprRegexMatches extends ConditionBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(String.class, new ChoiceParameter("matches", "does not match"), "regex", String.class);
+    protected Syntax init() {
+        return new Syntax(String.class, new ChoiceParameter("matches", "does not match"), "regex", String.class);
     }
 
     @Override

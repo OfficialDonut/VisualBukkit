@@ -4,16 +4,20 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The item in a PlayerInteractEvent", "Returns: item stack"})
-@Event(PlayerInteractEvent.class)
 public class ExprEventItem extends ExpressionBlock<ItemStack> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("event item");
+    protected Syntax init() {
+        return new Syntax("event item");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(PlayerInteractEvent.class);
     }
 
     @Override

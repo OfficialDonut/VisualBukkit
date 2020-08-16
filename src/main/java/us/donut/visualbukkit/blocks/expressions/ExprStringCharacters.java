@@ -1,19 +1,17 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
-@Category("String")
 @Description({"The characters of a string", "Returns: list of strings"})
 public class ExprStringCharacters extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("characters of", String.class);
+    protected Syntax init() {
+        return new Syntax("characters of", String.class);
     }
 
     @Override

@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks.syntax;
 import javafx.event.Event;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
-import org.bukkit.configuration.ConfigurationSection;
+import us.donut.visualbukkit.util.DataConfig;
 
 public class InputParameter extends TextField implements BlockParameter {
 
@@ -11,7 +11,7 @@ public class InputParameter extends TextField implements BlockParameter {
         getStyleClass().add("input-parameter");
         prefColumnCountProperty().bind(textProperty().length().add(1));
         addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, e -> {
-            Event.fireEvent(getParent().getParent(), e);
+            Event.fireEvent(getParent(), e);
             e.consume();
         });
     }
@@ -22,12 +22,12 @@ public class InputParameter extends TextField implements BlockParameter {
     }
 
     @Override
-    public void unload(ConfigurationSection section) {
-        section.set("value", getText());
+    public void saveTo(DataConfig config) {
+        config.set("value", getText());
     }
 
     @Override
-    public void load(ConfigurationSection section) {
-        setText(section.getString("value"));
+    public void loadFrom(DataConfig config) {
+        setText(config.getString("value", ""));
     }
 }

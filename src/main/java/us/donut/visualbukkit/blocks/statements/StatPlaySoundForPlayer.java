@@ -4,20 +4,23 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Plays a sound for a player")
+@Category(StatementCategory.PLAYER)
 public class StatPlaySoundForPlayer extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("play sound for player")
-                .line("sound:   ", Sound.class)
-                .line("player:  ", Player.class)
-                .line("location:", Location.class)
-                .line("volume:  ", float.class)
-                .line("pitch:   ", float.class);
+    protected Syntax init() {
+        return new Syntax("play sound for player", Syntax.LINE_SEPARATOR,
+                "sound:   ", Sound.class, Syntax.LINE_SEPARATOR,
+                "player:  ", Player.class, Syntax.LINE_SEPARATOR,
+                "location:", Location.class, Syntax.LINE_SEPARATOR,
+                "volume:  ", float.class, Syntax.LINE_SEPARATOR,
+                "pitch:   ", float.class);
     }
 
     @Override

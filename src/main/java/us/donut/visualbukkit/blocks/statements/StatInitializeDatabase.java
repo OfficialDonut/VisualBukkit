@@ -1,20 +1,23 @@
 package us.donut.visualbukkit.blocks.statements;
 
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
 @Description("Initializes database connections")
+@Category(StatementCategory.IO)
 public class StatInitializeDatabase extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("initialize database connections")
-                .line("url:     ", String.class)
-                .line("username:", String.class)
-                .line("password:", String.class);
+    protected Syntax init() {
+        return new Syntax("initialize database connections", Syntax.LINE_SEPARATOR,
+                "url:     ", String.class, Syntax.LINE_SEPARATOR,
+                "username:", String.class, Syntax.LINE_SEPARATOR,
+                "password:", String.class);
     }
 
     @Override

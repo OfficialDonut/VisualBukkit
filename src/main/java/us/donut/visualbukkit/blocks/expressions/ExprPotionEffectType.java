@@ -4,7 +4,7 @@ import org.bukkit.potion.PotionEffectType;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"A potion effect type", "Returns: potion effect type"})
 public class ExprPotionEffectType extends ExpressionBlock<PotionEffectType> {
@@ -17,8 +17,8 @@ public class ExprPotionEffectType extends ExpressionBlock<PotionEffectType> {
             "WEAKNESS", "WITHER"};
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(new ChoiceParameter(types));
+    protected Syntax init() {
+        return new Syntax(new ChoiceParameter(types));
     }
 
     @Override

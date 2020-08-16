@@ -2,21 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Item Stack")
 @Description({"The material of an item stack", "Returns: material"})
 @Modifier(ModificationType.SET)
-public class ExprMaterialOfItemStack extends ModifiableExpressionBlock<Material> {
+public class ExprMaterialOfItemStack extends ExpressionBlock<Material> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("material of", ItemStack.class);
+    protected Syntax init() {
+        return new Syntax("material of", ItemStack.class);
     }
 
     @Override

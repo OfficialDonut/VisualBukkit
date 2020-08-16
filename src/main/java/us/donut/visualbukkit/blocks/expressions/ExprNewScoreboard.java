@@ -3,14 +3,14 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.scoreboard.Scoreboard;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"A new scoreboard", "Returns: scoreboard"})
 public class ExprNewScoreboard extends ExpressionBlock<Scoreboard> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("new scoreboard");
+    protected Syntax init() {
+        return new Syntax("new scoreboard");
     }
 
     @Override

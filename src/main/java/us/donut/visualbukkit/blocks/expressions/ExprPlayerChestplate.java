@@ -2,21 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Player")
 @Description({"The item stack in the chestplate slot of a player", "Returns: item stack"})
 @Modifier(ModificationType.SET)
-public class ExprPlayerChestplate extends ModifiableExpressionBlock<ItemStack> {
+public class ExprPlayerChestplate extends ExpressionBlock<ItemStack> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("chestplate of", Player.class);
+    protected Syntax init() {
+        return new Syntax("chestplate of", Player.class);
     }
 
     @Override

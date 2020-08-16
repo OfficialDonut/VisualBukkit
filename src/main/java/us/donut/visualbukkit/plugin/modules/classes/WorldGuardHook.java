@@ -6,7 +6,6 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import org.bukkit.Location;
 import org.bukkit.World;
-import us.donut.visualbukkit.plugin.PluginMain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +16,10 @@ public class WorldGuardHook {
 
     public static List<Object> getRegions(World world) {
         RegionManager regionManager = regionContainer.get(BukkitAdapter.adapt(world));
-        return regionManager != null ? PluginMain.createList(regionManager.getRegions().values()) : new ArrayList<>();
+        return regionManager != null ? new ArrayList<>(regionManager.getRegions().values()) : new ArrayList<>();
     }
 
     public static List<Object> getRegions(Location location) {
-        return PluginMain.createList(regionContainer.createQuery().getApplicableRegions(BukkitAdapter.adapt(location)).getRegions());
+        return new ArrayList<>(regionContainer.createQuery().getApplicableRegions(BukkitAdapter.adapt(location)).getRegions());
     }
 }

@@ -2,17 +2,18 @@ package us.donut.visualbukkit.blocks.statements;
 
 import org.bukkit.entity.Player;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Player")
 @Description("Hides a player from another player")
+@Category(StatementCategory.PLAYER)
 public class StatHidePlayer extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("hide", Player.class, "from", Player.class);
+    protected Syntax init() {
+        return new Syntax("hide", Player.class, "from", Player.class);
     }
 
     @Override

@@ -10,12 +10,6 @@
     -fx-focus-traversable: false;
 }
 
-.check-box .box {
-    -fx-border-color: black;
-    -fx-border-radius: 2;
-    -fx-padding: 3;
-}
-
 .list-view {
     -fx-faint-focus-color: transparent;
     -fx-focus-color: transparent;
@@ -37,6 +31,10 @@
 .tab-pane .tab {
     -fx-faint-focus-color: transparent;
     -fx-focus-color: transparent;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
 }
 
 .tab-pane .tab-header-background {
@@ -64,49 +62,17 @@
     -fx-text-fill: black;
 }
 
-.tree-view {
-    -fx-control-inner-background: derive(-fx-base, 5%);
-    -fx-focus-traversable: false;
+.tooltip {
+    -fx-border-color: lightgray;
+    -fx-border-radius: 2;
 }
 
 /* Custom Style Classes */
 
-.block-area {
-    -fx-fill-width: false;
-    -fx-padding: 10 10 50 10;
-    -fx-spacing: 10;
-}
-
-.block-pane-info-area {
-    -fx-alignment: center-left;
-    -fx-border-color: gray;
-    -fx-border-width: 0 0 3 0;
-    -fx-padding: 5 5 15 5;
-}
-
-.caret {
-    -fx-stroke: -fx-light-text-color
-}
-
-.code-area {
-   -fx-background-color: -fx-color;
-   -fx-padding: 3;
-}
-
-.code-area .lineno .text {
-    -fx-fill: -fx-mid-text-color;
-}
-
-.code-area .text {
-    -fx-fill: -fx-light-text-color;
-    -fx-font-family: "JetBrains Mono";
-}
-
 .combo-box-view {
     -fx-border-color: black;
-    -fx-border-radius: 2;
-    -fx-padding: 0 3 0 3;
-    -fx-spacing: 15;
+    -fx-padding: 1 3 1 1;
+    -fx-spacing: 5;
 }
 
 .combo-box-view .menu-item {
@@ -116,60 +82,44 @@
     -fx-padding: 0;
 }
 
-.expression-block-info-node {
-    -fx-background-color: lightgray;
-    -fx-background-insets: 1;
-    -fx-background-radius: 30;
+.expression-block {
+    -fx-background-color: gold;
+    -fx-background-radius: 10;
     -fx-border-color: black;
-    -fx-border-radius: 30;
-    -fx-padding: 5;
+    -fx-border-radius: 7;
+    -fx-fill-height: false;
+    -fx-padding: 1 3 1 3;
+    -fx-spacing: 5;
+}
+
+.expression-parameter {
+    -fx-background-color: white;
+    -fx-background-insets: 1;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.expression-parameter .label {
     -fx-text-fill: black;
 }
 
-.expression-parameter-filled {
-    -fx-alignment: center;
-}
-
-.expression-parameter-empty {
-    -fx-alignment: center;
-    -fx-background-color: gold;
-    -fx-background-insets: 1;
-    -fx-background-radius: 30;
-    -fx-border-color: black;
-    -fx-border-radius: 30;
-    -fx-padding: 1;
-}
-
 .input-parameter {
-    -fx-padding: 1 1 1 3;
     -fx-min-width: 30;
-}
-
-.lineno {
-    -fx-background-color: -fx-color;
-}
-
-.local-variable {
-    -fx-background-color: yellow;
+    -fx-padding: 1 1 1 3;
 }
 
 .parent-block {
     -fx-border-color: black;
-    -fx-fill-width: false;
-    -fx-padding: 5 5 50 5;
-    -fx-spacing: 10;
+    -fx-padding: 3;
 }
 
 .project-pane {
-    -fx-background-color: derive(-fx-base, 5%);
     -fx-padding: 10;
     -fx-spacing: 10;
 }
 
 .selector-pane {
-    -fx-background-color: derive(-fx-base, 5%);
-    -fx-fill-width: false;
-    -fx-padding: 10;
+    -fx-padding: 15 0 15 15;
     -fx-spacing: 10;
 }
 
@@ -179,22 +129,25 @@
 }
 
 .statement-block {
-    -fx-alignment: center-left;
     -fx-background-color: lightgreen;
     -fx-border-color: black;
     -fx-padding: 3;
+    -fx-spacing: 5;
 }
 
-.statement-block-info-node {
+.statement-label {
     -fx-background-color: lightgray;
     -fx-border-color: black;
     -fx-padding: 5;
     -fx-text-fill: black;
 }
 
-.syntax-node {
-    -fx-alignment: center-left;
-    -fx-fill-height: false;
+.structure-block {
+    -fx-background-color: orchid;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-color: black;
+    -fx-border-radius: 10 10 0 0;
+    -fx-padding: 5;
     -fx-spacing: 5;
 }
 

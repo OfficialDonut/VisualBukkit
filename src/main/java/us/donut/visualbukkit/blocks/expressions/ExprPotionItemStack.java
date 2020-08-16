@@ -5,8 +5,9 @@ import org.bukkit.potion.PotionType;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
+import us.donut.visualbukkit.plugin.UtilMethod;
 
 import java.util.Arrays;
 
@@ -19,13 +20,13 @@ public class ExprPotionItemStack extends ExpressionBlock<ItemStack> {
             .toArray(String[]::new);
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(new ChoiceParameter(potionTypes), "potion item stack");
+    protected Syntax init() {
+        return new Syntax(new ChoiceParameter(potionTypes), "potion item stack");
     }
 
     @Override
     public String toJava() {
-        BuildContext.addUtilMethod("createPotion");
+        BuildContext.addUtilMethod(UtilMethod.CREATE_POTION);
         return "UtilMethods.createPotion(" + PotionType.class.getCanonicalName() + "." + arg(0) + ")";
     }
 }

@@ -1,138 +1,149 @@
 package us.donut.visualbukkit.blocks.syntax;
 
-import javafx.application.Platform;
 import javafx.scene.Parent;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import org.bukkit.configuration.ConfigurationSection;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import us.donut.visualbukkit.blocks.*;
-import us.donut.visualbukkit.blocks.expressions.ExprNumber;
-import us.donut.visualbukkit.blocks.expressions.ExprString;
-import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.editor.BlockCanvas;
+import us.donut.visualbukkit.editor.ContextMenuManager;
+import us.donut.visualbukkit.editor.CopyPasteManager;
+import us.donut.visualbukkit.editor.UndoManager;
+import us.donut.visualbukkit.util.ComboBoxView;
+import us.donut.visualbukkit.util.DataConfig;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
-public class ExpressionParameter extends VBox implements BlockParameter, BlockContainer {
+public class ExpressionParameter extends ComboBoxView<ExpressionDefinition<?>> implements BlockParameter {
 
+    private static Map<Predicate<ExpressionDefinition<?>>, Set<ExpressionDefinition<?>>> expressionInfoMap = new HashMap<>();
+    private static Map<Class<?>, Predicate<ExpressionDefinition<?>>> validators = new HashMap<>();
     private Class<?> returnType;
     private ExpressionBlock<?> expression;
-    private EmptyExpressionBlock<?> emptyExprBlock;
-    private Text emptyText;
 
     public ExpressionParameter(Class<?> returnType) {
-        getStyleClass().add("expression-parameter-empty");
+        this(returnType, validators.computeIfAbsent(returnType, k -> expression -> TypeHandler.canConvert(expression.getReturnType(), returnType)));
+    }
+
+    public ExpressionParameter(Class<?> returnType, Predicate<ExpressionDefinition<?>> validator) {
+        super("<" + TypeHandler.getUserFriendlyName(returnType) + ">");
         this.returnType = returnType;
-        emptyExprBlock = new EmptyExpressionBlock<>(returnType);
-        getChildren().add(emptyText = new Text("<" + TypeHandler.getUserFriendlyName(returnType) + ">"));
-        DragManager.enableBlockContainer(this);
-        MenuItem pasteItem = new MenuItem("Paste");
-        pasteItem.setOnAction(e -> CopyPasteManager.paste(this, -1));
-        ContextMenu contextMenu = new ContextMenu(pasteItem);
-        setOnContextMenuRequested(e -> {
-            if (isEmpty()) {
-                contextMenu.show(this, e.getScreenX(), e.getScreenY());
-                Parent parent = getParent();
-                while (parent != null) {
-                    if (parent instanceof StatementBlock) {
-                        ((StatementBlock) parent).getContextMenu().hide();
-                        break;
+        getStyleClass().add("expression-parameter");
+
+        getComboBox().setConverter(new StringConverter<ExpressionDefinition<?>>() {
+            @Override
+            public String toString(ExpressionDefinition<?> expression) {
+                return expression.getName();
+            }
+
+            @Override
+            public ExpressionDefinition<?> fromString(String string) {
+                return null;
+            }
+        });
+
+        getComboBox().getItems().addAll(expressionInfoMap.computeIfAbsent(validator, k -> {
+            Set<ExpressionDefinition<?>> expressions = new TreeSet<>(Comparator.comparing(ExpressionDefinition::getName));
+            expressions.addAll(BlockRegistry.getExpressions());
+            expressions.removeIf(expression -> !validator.test(expression));
+            return expressions;
+        }));
+
+        getListView().setCellFactory(new Callback<ListView<ExpressionDefinition<?>>, ListCell<ExpressionDefinition<?>>>() {
+            @Override
+            public ListCell<ExpressionDefinition<?>> call(ListView<ExpressionDefinition<?>> param) {
+                TextFieldListCell<ExpressionDefinition<?>> cell = new TextFieldListCell<ExpressionDefinition<?>>() {
+                    @Override
+                    public void updateItem(ExpressionDefinition<?> expression, boolean empty) {
+                        super.updateItem(expression, empty);
+                        setTooltip(expression != null && !empty ? new Tooltip(expression.getDescription()) : null);
                     }
-                    parent = parent.getParent();
-                }
-                e.consume();
+                };
+                cell.setConverter(getComboBox().getConverter());
+                return cell;
             }
         });
-        setOnMouseClicked(e -> {
-            if (isEmpty() && e.getButton() == MouseButton.PRIMARY) {
-                if (returnType == String.class) {
-                    setExpression(BlockRegistry.getInfo(ExprString.class).createBlock());
-                    e.consume();
-                } else if (TypeHandler.isNumber(returnType)) {
-                    setExpression(BlockRegistry.getInfo(ExprNumber.class).createBlock());
-                    e.consume();
-                }
-            }
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem invalidPasteItem = new MenuItem("Paste");
+        MenuItem pasteItem = new MenuItem("Paste");
+        invalidPasteItem.setStyle("-fx-text-fill: white; -fx-opacity: 0.5;");
+        pasteItem.setStyle("-fx-text-fill: white;");
+        pasteItem.setOnAction(e -> {
+            UndoManager.capture();
+            expression = (ExpressionBlock<?>) CopyPasteManager.paste();
+            getComboBox().setValue(BlockRegistry.getExpression(expression.getClass()));
+        });
+        contextMenu.getItems().add(pasteItem);
+        setOnContextMenuRequested(e -> {
+            BlockDefinition<?> copied = CopyPasteManager.getCopied();
+            contextMenu.getItems().set(0, copied instanceof ExpressionDefinition && validator.test((ExpressionDefinition<?>) copied) ? pasteItem : invalidPasteItem);
+            ContextMenuManager.show(this, contextMenu, e);
         });
     }
 
     @Override
-    public boolean canAccept(CodeBlock block, double yCoord) {
-        boolean valid = false;
-        if (block instanceof ExpressionBlock) {
-            ExpressionParameter parent = (ExpressionParameter) block.getParent();
-            ExpressionBlock<?> newExpression = (ExpressionBlock<?>) block;
-            ExpressionBlock<?> currentExpression = getExpression();
-            if (parent != null) {
-                parent.setExpression(null);
+    protected void onSelection(ExpressionDefinition<?> value) {
+        if (value != null) {
+            if (expression == null) {
+                UndoManager.capture();
+                expression = value.createBlock();
             }
-            setExpression(newExpression);
-            valid = PluginBuilder.isCodeValid(block.getBlockPane());
-            setExpression(currentExpression);
-            if (parent != null) {
-                parent.setExpression(newExpression);
-            }
-        }
-        return valid;
-    }
-
-    @Override
-    public void accept(CodeBlock block, double yCoord) {
-        UndoManager.capture();
-        ExpressionParameter parent = (ExpressionParameter) block.getParent();
-        if (parent != null) {
-            parent.setExpression(null);
-        }
-        setExpression((ExpressionBlock<?>) block);
-        Platform.runLater(block::onDragDrop);
-    }
-
-    public void setExpression(ExpressionBlock<?> expression) {
-        getChildren().clear();
-        if (expression == null || expression instanceof EmptyExpressionBlock) {
-            this.expression = null;
-            getChildren().add(emptyText);
-            getStyleClass().set(0, "expression-parameter-empty");
+            getStyleClass().clear();
+            getChildren().setAll(expression);
         } else {
-            getChildren().add(this.expression = expression);
-            getStyleClass().set(0, "expression-parameter-filled");
+            expression = null;
+            getStyleClass().addAll("expression-parameter", "combo-box-view");
+            getChildren().setAll(getPromptLabel(), getArrowLabel());
+        }
+        StatementBlock statement = getStatement();
+        if (statement != null) {
+            statement.update();
         }
     }
 
-    public boolean isEmpty() {
-        return expression == null;
+    @Override
+    public void update() {
+        if (expression != null) {
+            expression.update();
+        }
     }
 
     @Override
     public String toJava() {
-        return TypeHandler.convert(getExpression().getReturnType(), returnType, getExpression().toJava());
+        return expression != null && expression.isValid() ?
+                TypeHandler.convert(expression.getReturnType(), returnType, expression.toJava()) :
+                "((" + returnType.getCanonicalName() + ")" + (returnType.isPrimitive() ? "0" : "null") + ")";
     }
 
     @Override
-    public void unload(ConfigurationSection section) {
-        section.set("block-type", getExpression().getClass().getCanonicalName());
-        getExpression().unload(section);
-    }
-
-    @Override
-    public void load(ConfigurationSection section) throws Exception {
-        String blockType = section.getString("block-type");
-        if (blockType != null) {
-            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
-            if (blockInfo != null) {
-                ExpressionBlock<?> expression = (ExpressionBlock<?>) blockInfo.createBlock();
-                expression.load(section);
-                setExpression(expression);
-            }
+    public void saveTo(DataConfig config) {
+        if (expression != null) {
+            config.set("=", expression.getIdentifier());
+            expression.saveTo(config);
         }
     }
 
     @Override
-    public List<ExpressionBlock<?>> getBlocks(boolean ignoreDisabled) {
-        return expression == null ? Collections.emptyList() : Collections.singletonList(expression);
+    public void loadFrom(DataConfig config) {
+        ExpressionDefinition<?> expression = BlockRegistry.getExpression(config.getString("="));
+        if (expression != null) {
+            this.expression = expression.createBlock(config);
+            getComboBox().setValue(expression);
+        }
+    }
+
+    public StatementBlock getStatement() {
+        Parent parent = getParent();
+        while (parent != null && (!(parent instanceof BlockCanvas))) {
+            if (parent instanceof StatementBlock) {
+                return (StatementBlock) parent;
+            }
+            parent = parent.getParent();
+        }
+        return null;
     }
 
     public Class<?> getReturnType() {
@@ -140,6 +151,6 @@ public class ExpressionParameter extends VBox implements BlockParameter, BlockCo
     }
 
     public ExpressionBlock<?> getExpression() {
-        return expression != null ? expression : emptyExprBlock;
+        return expression;
     }
 }

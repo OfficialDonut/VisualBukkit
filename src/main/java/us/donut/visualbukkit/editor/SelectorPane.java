@@ -1,29 +1,19 @@
 package us.donut.visualbukkit.editor;
 
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
+import javafx.geometry.Side;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import javafx.util.StringConverter;
-import org.bukkit.configuration.file.YamlConfiguration;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.VisualBukkitLauncher;
 import us.donut.visualbukkit.blocks.*;
-import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
-import us.donut.visualbukkit.plugin.PluginBuilder;
 import us.donut.visualbukkit.util.CenteredHBox;
-import us.donut.visualbukkit.util.ComboBoxView;
-import us.donut.visualbukkit.util.TitleLabel;
-import us.donut.visualbukkit.util.TreeNode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class SelectorPane extends VBox implements BlockContainer {
+public class SelectorPane extends TabPane {
 
     static {
         try {
@@ -40,294 +30,54 @@ public class SelectorPane extends VBox implements BlockContainer {
         }
     }
 
-    private Set<BlockInfo<?>.Node> blockInfoNodes = new TreeSet<>(Comparator.comparing(Labeled::getText));
-    private ComboBoxView<String> categoryComboBox = new ComboBoxView<>();
-    private ComboBoxView<Class<?>> eventComboBox = new ComboBoxView<>();
-    private ComboBoxView<String> returnTypeComboBox = new ComboBoxView<>();
-    private CheckBox statementCheckBox = new CheckBox("Statements");
-    private CheckBox expressionCheckBox = new CheckBox("Expressions");
-    private TreeNode pinnedBlocks = new TreeNode("Pinned Blocks");
-    private TextField searchField = new TextField();
-
     public SelectorPane() {
-        VBox blockSelector = new VBox();
-        VBox blocksArea = new VBox();
-        blockSelector.getStyleClass().add("selector-pane");
-        blocksArea.getStyleClass().add("selector-pane");
-        backgroundProperty().bind(blockSelector.backgroundProperty());
-        ScrollPane scrollPane = new ScrollPane(blocksArea);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        getChildren().addAll(blockSelector, new Separator(), scrollPane);
-        DragManager.enableBlockContainer(this);
-
-        TitleLabel selectorTitle = new TitleLabel("Block Selector", 1.5, true);
-        TitleLabel statementTitle = new TitleLabel("Statements", 1.5, true);
-        TitleLabel expressionTitle = new TitleLabel("Expressions", 1.5, true);
-        VBox statementBox = new VBox(10, statementTitle);
-        VBox expressionBox = new VBox(10, expressionTitle);
-        statementBox.setFillWidth(false);
-        expressionBox.setFillWidth(false);
-
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
-
-        categoryComboBox.setFocusTraversable(false);
-        categoryComboBox.getComboBox().getItems().add("---");
-        categoryComboBox.getComboBox().setValue("---");
-        categoryComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
-
-        eventComboBox.getComboBox().setConverter(new StringConverter<Class<?>>() {
-            @Override
-            public String toString(Class<?> clazz) {
-                return clazz == Any.class ? "---" : clazz != null ? clazz.getSimpleName() : null;
+        setSide(Side.LEFT);
+        setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        Map<StatementCategory, Set<StatementLabel>> labels = new TreeMap<>();
+        for (StatementDefinition<?> statement : BlockRegistry.getStatements()) {
+            for (StatementCategory category : statement.getCategories()) {
+                labels.computeIfAbsent(category, k -> new TreeSet<>(Comparator.comparing(Labeled::getText))).add(statement.createLabel());
             }
-            @Override
-            public Class<?> fromString(String string) {
-                return null;
-            }
-        });
-        eventComboBox.setFocusTraversable(false);
-        eventComboBox.getComboBox().getItems().add(Any.class);
-        eventComboBox.getComboBox().getItems().addAll(EventPane.EVENTS);
-        eventComboBox.getComboBox().setValue(Any.class);
-        eventComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
-
-        returnTypeComboBox.setFocusTraversable(false);
-        returnTypeComboBox.getComboBox().getItems().add("---");
-        returnTypeComboBox.getComboBox().getItems().addAll(TypeHandler.getAliases());
-        returnTypeComboBox.getComboBox().setValue("---");
-        returnTypeComboBox.getComboBox().valueProperty().addListener((observable, oldValue, newValue) -> blockInfoNodes.forEach(this::updateVisibility));
-
-        statementCheckBox.setFocusTraversable(false);
-        statementCheckBox.setSelected(true);
-        statementCheckBox.setOnAction(e -> {
-            boolean state = statementCheckBox.isSelected();
-            statementBox.setVisible(state);
-            statementBox.setManaged(state);
-        });
-
-        expressionCheckBox.setFocusTraversable(false);
-        expressionCheckBox.setSelected(true);
-        expressionCheckBox.setOnAction(e -> {
-            boolean state = expressionCheckBox.isSelected();
-            expressionBox.setVisible(state);
-            expressionBox.setManaged(state);
-        });
-
-        CheckBox modifiersCheckBox = new CheckBox("Modifiers");
-        modifiersCheckBox.setFocusTraversable(false);
-        modifiersCheckBox.setSelected(true);
-
-        updatePins();
-
-        blockSelector.getChildren().addAll(selectorTitle,
-                new CenteredHBox(10, new Label("Category:"), categoryComboBox),
-                new CenteredHBox(10, new Label("Event:   "), eventComboBox),
-                new CenteredHBox(10, new Label("Returns: "), returnTypeComboBox),
-                new CenteredHBox(10, new Label("Type:    "), statementCheckBox),
-                new CenteredHBox(10, new Label("         "), expressionCheckBox),
-                new CenteredHBox(10, new Label("         "), modifiersCheckBox),
-                new CenteredHBox(10, new Label("Search:  "), searchField),
-                pinnedBlocks);
-
-        blocksArea.getChildren().addAll(statementBox, expressionBox);
-
-        for (BlockInfo<?> blockInfo : BlockRegistry.getAll()) {
-            if (ModifierBlock.class.isAssignableFrom(blockInfo.getBlockType())) {
-                continue;
-            }
-
-            BlockInfo<?>.Node blockInfoNode = blockInfo.createNode();
-            blockInfoNodes.add(blockInfoNode);
-
-            MenuItem pinItem = new MenuItem("Pin");
-            pinItem.setOnAction(e -> {
-                YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
-                List<String> pinned = config.getStringList("pinned-blocks");
-                pinned.add(blockInfo.getBlockType().getCanonicalName());
-                config.set("pinned-blocks", pinned);
-                updatePins();
+        }
+        for (Map.Entry<StatementCategory, Set<StatementLabel>> entry : labels.entrySet()) {
+            TextField searchField = new TextField();
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                for (Label label : entry.getValue()) {
+                    boolean state = newValue.isEmpty() || label.getText().toLowerCase().contains(newValue);
+                    label.setVisible(state);
+                    label.setManaged(state);
+                }
             });
-            ContextMenu contextMenu = new ContextMenu(pinItem);
-            blockInfoNode.setOnContextMenuRequested(e -> {
-                contextMenu.show(blockInfoNode, e.getScreenX(), e.getScreenY());
-                e.consume();
-            });
+            Label titleLabel = new Label(entry.getKey().getLabel());
+            titleLabel.setUnderline(true);
+            VBox titleArea = new VBox(10, titleLabel, new CenteredHBox(10, new Label("Search:"), searchField));
+            VBox labelArea = new VBox(10);
+            labelArea.getChildren().addAll(entry.getValue());
+            ScrollPane scrollPane = new ScrollPane(labelArea);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setFitToHeight(true);
+            Tab tab = new Tab(entry.getKey().getLabel(), new VBox(titleArea, scrollPane));
+            VBox content = new VBox(titleArea, scrollPane);
+            content.getStyleClass().add("selector-pane");
+            tab.setContent(content);
+            getTabs().add(tab);
+        }
 
-            String[] categories = blockInfo.getCategories();
-            if (categories != null) {
-                for (String category : blockInfo.getCategories()) {
-                    if (!categoryComboBox.getComboBox().getItems().contains(category)) {
-                        int i = categoryComboBox.getComboBox().getItems().filtered(item -> category.compareTo(item) > 0).size();
-                        categoryComboBox.getComboBox().getItems().add(i, category);
-                    }
-                }
+        setOnDragOver(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof StatementBlock) {
+                e.acceptTransferModes(TransferMode.ANY);
             }
-        }
+            e.consume();
+        });
 
-        for (BlockInfo<?>.Node blockInfoNode : blockInfoNodes) {
-            BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
-            if (blockInfo instanceof ExpressionBlockInfo) {
-                Class<? extends ModifierBlock>[] modifiers = ((ExpressionBlockInfo<?>) blockInfo).getModifiers();
-                if (modifiers != null) {
-                    CenteredHBox modifiersBox = new CenteredHBox(5, new Label("-"));
-                    modifiersBox.setPadding(new Insets(0, 0, 0, 20));
-                    VBox vBox = new VBox(5, blockInfoNode, modifiersBox);
-                    vBox.visibleProperty().bind(blockInfoNode.visibleProperty());
-                    vBox.managedProperty().bind(blockInfoNode.managedProperty());
-                    modifiersBox.visibleProperty().bind(vBox.visibleProperty().and(modifiersCheckBox.selectedProperty()));
-                    modifiersBox.managedProperty().bind(modifiersBox.visibleProperty());
-                    expressionBox.getChildren().add(vBox);
-                    for (Class<? extends ModifierBlock> modifierClass : modifiers) {
-                        modifiersBox.getChildren().add(new BlockInfo(modifierClass) {
-                            @Override
-                            public CodeBlock createBlock() {
-                                ModifierBlock statement = (ModifierBlock) super.createBlock();
-                                statement.init((ExpressionBlockInfo<?>) blockInfo);
-                                return statement;
-                            }
-                        }.createNode());
-                    }
-                } else {
-                    expressionBox.getChildren().add(blockInfoNode);
-                }
-            } else {
-                statementBox.getChildren().add(blockInfoNode);
-            }
-        }
+        setOnDragDropped(e -> {
+            UndoManager.capture();
+            ((StatementBlock) e.getGestureSource()).disconnect();
+            e.setDropCompleted(true);
+            e.consume();
+        });
+
+        setOnMousePressed(e -> ContextMenuManager.hide());
     }
-
-    @Override
-    public boolean canAccept(CodeBlock block, double yCoord) {
-        boolean valid = false;
-        Pane parent = (Pane) block.getParent();
-        if (parent != null) {
-            BlockPane blockPane = block.getBlockPane();
-            if (parent instanceof ExpressionParameter) {
-                ExpressionParameter expressionParameter = (ExpressionParameter) parent;
-                expressionParameter.setExpression(null);
-                valid = PluginBuilder.isCodeValid(blockPane);
-                expressionParameter.setExpression((ExpressionBlock<?>) block);
-            } else {
-                int currentIndex = parent.getChildren().indexOf(block);
-                parent.getChildren().remove(block);
-                valid = PluginBuilder.isCodeValid(blockPane);
-                parent.getChildren().add(currentIndex, block);
-            }
-        }
-        return valid;
-    }
-
-    @Override
-    public void accept(CodeBlock block, double yCoord) {
-        UndoManager.capture();
-        Parent parent = block.getParent();
-        if (parent instanceof ExpressionParameter) {
-            ((ExpressionParameter) parent).setExpression(null);
-        } else if (parent instanceof Pane) {
-            ((Pane) parent).getChildren().remove(block);
-        }
-        Platform.runLater(block::onDragDrop);
-    }
-
-    @Override
-    public List<? extends CodeBlock> getBlocks(boolean ignoreDisabled) {
-        return Collections.emptyList();
-    }
-
-    private void updatePins() {
-        YamlConfiguration config = VisualBukkitLauncher.DATA_FILE.getConfig();
-        pinnedBlocks.clear();
-        for (String blockType : config.getStringList("pinned-blocks")) {
-            BlockInfo<?> blockInfo = BlockRegistry.getInfo(blockType);
-            if (blockInfo != null) {
-                BlockInfo<?>.Node node = blockInfo.createNode();
-                MenuItem unpinItem = new MenuItem("Unpin");
-                unpinItem.setOnAction(e -> {
-                    List<String> pinned = config.getStringList("pinned-blocks");
-                    pinned.remove(blockInfo.getBlockType().getCanonicalName());
-                    config.set("pinned-blocks", pinned);
-                    updatePins();
-                });
-                MenuItem moveUpItem = new MenuItem("Move Up");
-                moveUpItem.setOnAction(e -> {
-                    List<String> pinned = config.getStringList("pinned-blocks");
-                    int index = pinned.indexOf(blockInfo.getBlockType().getCanonicalName());
-                    if (index != 0) {
-                        Collections.swap(pinned, index, index - 1);
-                        config.set("pinned-blocks", pinned);
-                        updatePins();
-                    }
-                });
-                MenuItem moveDownItem = new MenuItem("Move Down");
-                moveDownItem.setOnAction(e -> {
-                    List<String> pinned = config.getStringList("pinned-blocks");
-                    int index = pinned.indexOf(blockInfo.getBlockType().getCanonicalName());
-                    if (index != pinned.size() - 1) {
-                        Collections.swap(pinned, index, index + 1);
-                        config.set("pinned-blocks", pinned);
-                        updatePins();
-                    }
-                });
-                ContextMenu contextMenu = new ContextMenu(unpinItem, moveUpItem, moveDownItem);
-                node.setOnContextMenuRequested(e -> {
-                    contextMenu.show(node, e.getScreenX(), e.getScreenY());
-                    e.consume();
-                });
-                pinnedBlocks.add(node);
-            } else {
-                VisualBukkit.displayError("Failed to load pinned block " + blockType);
-            }
-        }
-    }
-
-    private void updateVisibility(BlockInfo<?>.Node blockInfoNode) {
-        BlockInfo<?> blockInfo = blockInfoNode.getBlockInfo();
-        String category = categoryComboBox.getComboBox().getValue();
-        Class<?> event = eventComboBox.getComboBox().getValue();
-        String returnType = returnTypeComboBox.getComboBox().getValue();
-        String search = searchField.getText().toLowerCase();
-        boolean state =
-                (category.equals("---") || checkCategory(blockInfo, category)) &&
-                (event == Any.class || checkEvent(blockInfo, event)) &&
-                (returnType.equals("---") || checkReturnType(blockInfo, TypeHandler.getType(returnType))) &&
-                (search.isEmpty() || blockInfoNode.getText().toLowerCase().contains(search));
-        blockInfoNode.setVisible(state);
-        blockInfoNode.setManaged(state);
-    }
-
-    private boolean checkCategory(BlockInfo<?> blockInfo, String category) {
-        if (blockInfo.getCategories() != null) {
-            for (String blockCategory : blockInfo.getCategories()) {
-                if (blockCategory.equalsIgnoreCase(category)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean checkEvent(BlockInfo<?> blockInfo, Class<?> clazz) {
-        if (blockInfo.getEvents() != null) {
-            for (Class<?> event : blockInfo.getEvents()) {
-                if (event.isAssignableFrom(clazz)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean checkReturnType(BlockInfo<?> blockInfo, Class<?> returnType) {
-        if (blockInfo instanceof ExpressionBlockInfo) {
-            Class<?> blockReturn = ((ExpressionBlockInfo<?>) blockInfo).getReturnType();
-            return blockReturn != null &&
-                    (returnType.isAssignableFrom(blockReturn) ||
-                    (TypeHandler.isNumber(returnType) && TypeHandler.isNumber(blockReturn)) ||
-                    (blockReturn == boolean.class && returnType == Boolean.class));
-        }
-        return false;
-    }
-
-    private static class Any {}
 }

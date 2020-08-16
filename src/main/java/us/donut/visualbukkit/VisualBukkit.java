@@ -22,28 +22,37 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.controlsfx.control.Notifications;
 import us.donut.visualbukkit.blocks.BlockRegistry;
-import us.donut.visualbukkit.blocks.UndoManager;
-import us.donut.visualbukkit.editor.Project;
+import us.donut.visualbukkit.editor.UndoManager;
 import us.donut.visualbukkit.editor.ProjectManager;
 import us.donut.visualbukkit.editor.SelectorPane;
-import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.util.DataFile;
 
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class VisualBukkit extends Application {
 
+    public static final String VERSION = "v" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
+    public static final Path DATA_FOLDER = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
+    public static final DataFile DATA_FILE = new DataFile(DATA_FOLDER.resolve("data.yml"));
+    public static final Logger LOGGER = Logger.getLogger("VisualBukkit");
     private static VisualBukkit instance;
+
     private BorderPane rootPane = new BorderPane();
     private SplitPane splitPane = new SplitPane();
     private Scene scene = new Scene(rootPane, 500, 500);
     private Stage primaryStage;
-    private SelectorPane selectorPane;
     private Timeline autoSaveTimer;
-    private int fontSize;
 
     public VisualBukkit() {
         if (instance != null) {
@@ -53,16 +62,22 @@ public class VisualBukkit extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> displayException("An exception occurred", e)));
+    public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
+        if (Files.notExists(DATA_FOLDER)) {
+            Files.createDirectory(DATA_FOLDER);
+        }
+        FileHandler fileHandler = new FileHandler(DATA_FOLDER.resolve("log.txt").toString(), true);
+        fileHandler.setFormatter(new SimpleFormatter());
+        LOGGER.addHandler(fileHandler);
+        Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> displayException("An exception occurred", e)));
         Platform.runLater(this::load);
     }
 
     private void load() {
-        primaryStage.setTitle("Visual Bukkit " + VisualBukkitLauncher.VERSION);
-        primaryStage.setMaximized(true);
+        primaryStage.setTitle("Visual Bukkit " + VERSION);
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         rootPane.getStylesheets().add("/style.css");
 
         try (InputStream inputStream = VisualBukkit.class.getResourceAsStream("/icon.png")) {
@@ -72,42 +87,32 @@ public class VisualBukkit extends Application {
         }
 
         BlockRegistry.registerAll();
-        PluginBuilder.init();
-        setupMenuBar();
+        createMenuBar();
         setupSaving();
-        splitPane.getItems().addAll(selectorPane = new SelectorPane(), new Pane(), new Pane());
+        splitPane.getItems().addAll(new SelectorPane(), new Pane(), new Pane());
         rootPane.setCenter(splitPane);
         notifyPreloader(new Preloader.ProgressNotification(1));
         primaryStage.show();
-        splitPane.setDividerPositions(0.2, 0.825);
-        ProjectManager.loadProjects();
+        ProjectManager.init();
     }
 
-    private void setupMenuBar() {
+    private void createMenuBar() {
         MenuItem saveItem = new MenuItem("Save");
-        MenuItem exitItem = new MenuItem("Exit");
-        exitItem.setOnAction(e -> primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)));
-        saveItem.setOnAction(e -> {
-            if (ProjectManager.getCurrentProject() != null) {
-                try {
-                    ProjectManager.getCurrentProject().save();
-                    displayMessage("Successfully saved project");
-                } catch (IOException ex) {
-                    displayException("Failed to save project", ex);
-                }
-            }
-        });
-        Menu fileMenu = new Menu("File");
-        fileMenu.getItems().addAll(saveItem, exitItem);
-
-        MenuItem createItem = new MenuItem("Create");
+        MenuItem newItem = new MenuItem("New");
         MenuItem openItem = new MenuItem("Open");
         MenuItem deleteItem = new MenuItem("Delete");
-        createItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
+        MenuItem importItem = new MenuItem("Import");
+        MenuItem exportItem = new MenuItem("Export");
+        MenuItem exitItem = new MenuItem("Exit");
+        saveItem.setOnAction(e -> save(true));
+        newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
         openItem.setOnAction(e -> ProjectManager.promptOpenProject());
         deleteItem.setOnAction(e -> ProjectManager.promptDeleteProject());
-        Menu projectMenu = new Menu("Project");
-        projectMenu.getItems().addAll(createItem, openItem, deleteItem);
+        importItem.setOnAction(e -> ProjectManager.promptImportProject());
+        exportItem.setOnAction(e -> ProjectManager.promptExportProject());
+        exitItem.setOnAction(e -> primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+        Menu fileMenu = new Menu("File");
+        fileMenu.getItems().addAll(newItem, openItem, deleteItem, new SeparatorMenuItem(), importItem, exportItem, new SeparatorMenuItem(), saveItem, exitItem);
 
         MenuItem undoItem = new MenuItem("Undo");
         MenuItem redoItem = new MenuItem("Redo");
@@ -118,25 +123,24 @@ public class VisualBukkit extends Application {
 
         Menu fontSizeMenu = new Menu("Font Size");
         ToggleGroup fontToggleGroup = new ToggleGroup();
-        fontSize = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("font-size", 14);
+        int fontSize = DATA_FILE.getInt("font-size", 14);
         for (int i = 8; i <= 36; i++) {
             int size = i;
             RadioMenuItem sizeItem = new RadioMenuItem(String.valueOf(size));
             sizeItem.setOnAction(e -> {
-                fontSize = size;
-                rootPane.setStyle("-fx-font-size:" + fontSize + ";");
-                VisualBukkitLauncher.DATA_FILE.getConfig().set("font-size", fontSize);
+                rootPane.setStyle("-fx-font-size:" + size + ";");
+                DATA_FILE.set("font-size", size);
             });
             fontToggleGroup.getToggles().add(sizeItem);
             fontSizeMenu.getItems().add(sizeItem);
-            if (size == fontSize) {
+            if (i == fontSize) {
                 sizeItem.setSelected(true);
                 rootPane.setStyle("-fx-font-size:" + fontSize + ";");
             }
         }
         Menu autosaveMenu = new Menu("Autosave");
         ToggleGroup autosaveToggleGroup = new ToggleGroup();
-        int autoSaveDuration = VisualBukkitLauncher.DATA_FILE.getConfig().getInt("autosave", -1);
+        int autoSaveDuration = DATA_FILE.getInt("autosave", -1);
         for (int duration : new int[]{5, 15, 30, -1}) {
             RadioMenuItem durationItem;
             if (duration != -1) {
@@ -146,7 +150,7 @@ public class VisualBukkit extends Application {
                         autoSaveTimer.stop();
                     }
                     autoSave(duration);
-                    VisualBukkitLauncher.DATA_FILE.getConfig().set("autosave", duration);
+                    DATA_FILE.set("autosave", duration);
                 });
             } else {
                 durationItem = new RadioMenuItem("Never");
@@ -154,7 +158,7 @@ public class VisualBukkit extends Application {
                     if (autoSaveTimer != null) {
                         autoSaveTimer.stop();
                     }
-                    VisualBukkitLauncher.DATA_FILE.getConfig().set("autosave", null);
+                    DATA_FILE.set("autosave", null);
                 });
             }
             autosaveToggleGroup.getToggles().add(durationItem);
@@ -178,43 +182,13 @@ public class VisualBukkit extends Application {
         Menu supportMenu = new Menu("Support");
         supportMenu.getItems().addAll(githubItem, spigotItem, discordItem);
 
-        rootPane.setTop(new MenuBar(fileMenu, projectMenu, editMenu, settingsMenu, supportMenu));
-    }
-
-    private void openURI(String uri) {
-        try {
-            Desktop.getDesktop().browse(URI.create(uri));
-        } catch (IOException e) {
-            displayException("Failed to open " + uri, e);
-        }
-    }
-
-    private void autoSave(double minutes) {
-        autoSaveTimer = new Timeline(new KeyFrame(Duration.minutes(minutes), event -> {
-            Project project = ProjectManager.getCurrentProject();
-            if (project != null) {
-                try {
-                    project.save();
-                    VisualBukkitLauncher.DATA_FILE.save();
-                } catch (IOException ex) {
-                    Platform.runLater(() -> displayException("Failed to autosave", ex));
-                }
-            }
-        }));
-        autoSaveTimer.setCycleCount(Timeline.INDEFINITE);
-        autoSaveTimer.play();
+        rootPane.setTop(new MenuBar(fileMenu, editMenu, settingsMenu, supportMenu));
     }
 
     private void setupSaving() {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            if (e.isShortcutDown() && e.getCode() == KeyCode.S && ProjectManager.getCurrentProject() != null) {
-                try {
-                    ProjectManager.getCurrentProject().save();
-                    VisualBukkitLauncher.DATA_FILE.save();
-                    displayMessage("Successfully saved project");
-                } catch (IOException ex) {
-                    displayException("Failed to save project", ex);
-                }
+            if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
+                save(true);
                 e.consume();
             }
         });
@@ -230,12 +204,7 @@ public class VisualBukkit extends Application {
             if (ProjectManager.getCurrentProject() != null) {
                 saveAlert.showAndWait().ifPresent(buttonType -> {
                     if (buttonType.equals(saveButton)) {
-                        try {
-                            ProjectManager.getCurrentProject().save();
-                            VisualBukkitLauncher.DATA_FILE.save();
-                        } catch (IOException ex) {
-                            displayException("Failed to save project", ex);
-                        }
+                        save(false);
                         Platform.exit();
                     } else if (buttonType.equals(noSaveButton)) {
                         Platform.exit();
@@ -248,22 +217,53 @@ public class VisualBukkit extends Application {
         });
     }
 
-    public static void displayMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, message, ButtonType.CLOSE);
-        alert.setHeaderText(null);
-        alert.setGraphic(null);
-        alert.showAndWait();
+    private void openURI(String uri) {
+        try {
+            Desktop.getDesktop().browse(URI.create(uri));
+        } catch (IOException e) {
+            displayException("Failed to open " + uri, e);
+        }
     }
 
-    public static void displayError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.CLOSE);
-        alert.setHeaderText(null);
-        alert.setGraphic(null);
-        alert.showAndWait();
+    private void autoSave(double minutes) {
+        autoSaveTimer = new Timeline(new KeyFrame(Duration.minutes(minutes), e -> save(false)));
+        autoSaveTimer.setCycleCount(Timeline.INDEFINITE);
+        autoSaveTimer.play();
+    }
+
+    private void save(boolean notification) {
+        try {
+            if (ProjectManager.getCurrentProject() != null) {
+                ProjectManager.getCurrentProject().save();
+            }
+            DATA_FILE.save();
+            if (notification) {
+                displayMessage("Saved", "Successfully saved");
+            }
+        } catch (IOException e) {
+            displayException("Failed to save", e);
+        }
+    }
+
+    public static void displayMessage(String title, String message) {
+        Notifications.create()
+                .title(title)
+                .text(message)
+                .hideAfter(Duration.seconds(4))
+                .showInformation();
+    }
+
+    public static void displayError(String title, String message) {
+        Notifications.create()
+                .title(title)
+                .text(message)
+                .hideAfter(Duration.seconds(4))
+                .showError();
+        Toolkit.getDefaultToolkit().beep();
     }
 
     public static void displayException(String message, Throwable e) {
-        VisualBukkitLauncher.LOGGER.severe(ExceptionUtils.getStackTrace(e));
+        LOGGER.severe(ExceptionUtils.getStackTrace(e));
         Alert alert = new Alert(Alert.AlertType.ERROR, null, ButtonType.CLOSE);
         alert.setHeaderText(null);
         alert.setGraphic(null);
@@ -290,13 +290,5 @@ public class VisualBukkit extends Application {
 
     public SplitPane getSplitPane() {
         return splitPane;
-    }
-
-    public SelectorPane getSelectorPane() {
-        return selectorPane;
-    }
-
-    public int getFontSize() {
-        return fontSize;
     }
 }

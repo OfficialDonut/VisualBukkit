@@ -1,20 +1,20 @@
 package us.donut.visualbukkit.blocks.expressions;
 
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
 @Description({"An element at an index in a list", "Returns: object"})
 @Modifier(ModificationType.SET)
-public class ExprListElement extends ModifiableExpressionBlock<Object> {
+public class ExprListElement extends ExpressionBlock<Object> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("element", int.class, "of", List.class);
+    protected Syntax init() {
+        return new Syntax("element", int.class, "of", List.class);
     }
 
     @Override

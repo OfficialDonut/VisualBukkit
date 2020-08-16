@@ -2,14 +2,14 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"A hex color code", "Returns: string"})
 public class ExprHexColor extends ExpressionBlock<String> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("hex color", String.class);
+    protected Syntax init() {
+        return new Syntax("hex color", String.class);
     }
 
     @Override

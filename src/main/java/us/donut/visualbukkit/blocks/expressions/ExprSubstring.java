@@ -1,17 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("String")
 @Description({"A substring of a string", "Returns: string"})
 public class ExprSubstring extends ExpressionBlock<String> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("substring of", String.class, "from", int.class, "to", int.class);
+    protected Syntax init() {
+        return new Syntax("substring of", String.class, "from", int.class, "to", int.class);
     }
 
     @Override

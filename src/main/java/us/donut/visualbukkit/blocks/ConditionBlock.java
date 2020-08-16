@@ -1,9 +1,11 @@
 package us.donut.visualbukkit.blocks;
 
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
 
 public abstract class ConditionBlock extends ExpressionBlock<Boolean> {
+
+    private BinaryChoiceParameter choiceParameter;
 
     protected abstract String toNonNegatedJava();
 
@@ -17,11 +19,14 @@ public abstract class ConditionBlock extends ExpressionBlock<Boolean> {
     }
 
     protected boolean isNegated() {
-        for (BlockParameter parameter : syntaxNode.getParameters()) {
-            if (parameter instanceof ChoiceParameter) {
-                return ((ChoiceParameter) parameter).getComboBox().getSelectionModel().getSelectedIndex() != 0;
+        if (choiceParameter == null) {
+            for (BlockParameter parameter : getParameters()) {
+                if (parameter instanceof BinaryChoiceParameter) {
+                    choiceParameter = (BinaryChoiceParameter) parameter;
+                }
             }
+            throw new IllegalStateException("No choice parameter found");
         }
-        throw new IllegalStateException("No choice parameter found");
+        return choiceParameter.isSecond();
     }
 }

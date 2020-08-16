@@ -2,14 +2,14 @@ package us.donut.visualbukkit.blocks.statements;
 
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Broadcasts a string")
 public class StatBroadcast extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("broadcast", String.class);
+    protected Syntax init() {
+        return new Syntax("broadcast", String.class);
     }
 
     @Override

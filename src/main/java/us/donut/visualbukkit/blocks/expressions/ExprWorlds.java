@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
 public class ExprWorlds extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("worlds");
+    protected Syntax init() {
+        return new Syntax("worlds");
     }
 
     @Override

@@ -4,7 +4,7 @@ import org.apache.commons.lang.WordUtils;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.time.Duration;
 
@@ -12,8 +12,8 @@ import java.time.Duration;
 public class ExprDuration extends ExpressionBlock<Duration> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(long.class, new ChoiceParameter("ticks", "seconds", "minutes", "hours", "days"));
+    protected Syntax init() {
+        return new Syntax(long.class, new ChoiceParameter("ticks", "seconds", "minutes", "hours", "days"));
     }
 
     @Override

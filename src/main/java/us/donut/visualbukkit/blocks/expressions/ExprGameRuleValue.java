@@ -1,19 +1,19 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.World;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The value of a game rule in a world", "Returns: object"})
 @Modifier(ModificationType.SET)
-public class ExprGameRuleValue extends ModifiableExpressionBlock<Object> {
+public class ExprGameRuleValue extends ExpressionBlock<Object> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("value of game rule", String.class, "in", World.class);
+    protected Syntax init() {
+        return new Syntax("value of game rule", String.class, "in", World.class);
     }
 
     @Override

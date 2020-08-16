@@ -1,146 +1,245 @@
 package us.donut.visualbukkit.blocks;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import org.bukkit.configuration.ConfigurationSection;
-import us.donut.visualbukkit.editor.BlockPane;
-import us.donut.visualbukkit.plugin.PluginBuilder;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
+import us.donut.visualbukkit.editor.ContextMenuManager;
+import us.donut.visualbukkit.util.DataConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ParentBlock extends StatementBlock implements BlockContainer {
+public abstract class ParentBlock extends StatementBlock {
 
     private static Color[] colors = {Color.LIGHTBLUE, Color.CORNFLOWERBLUE, Color.STEELBLUE};
-    private double contextMenuYCoord;
+    protected VBox container = new VBox();
+    protected Pane childIndicator = new Pane();
+    protected ChildConnector childConnector = new ChildConnector();
 
     public ParentBlock() {
-        getStyleClass().set(0, "parent-block");
-        DragManager.enableBlockContainer(this);
-        setOnContextMenuRequested(e -> {
-            if (isEnabled()) {
-                contextMenu.show(this, e.getScreenX(), e.getScreenY());
-                contextMenuYCoord = e.getY();
-            } else {
-                getDisabledContextMenu().show(this, e.getScreenX(), e.getScreenY());
+        syntaxBox.getStyleClass().clear();
+        syntaxBox.setSpacing(5);
+        syntaxBox.setPadding(new Insets(0, 0, 1, 0));
+
+        container.getStyleClass().add("parent-block");
+        container.getChildren().addAll(syntaxBox, childIndicator, childConnector);
+        setupChildConnector();
+        updateColor();
+        getChildren().add(0, container);
+
+        container.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
+        container.setOnDragDetected(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+                Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
+                SnapshotParameters snapshotParameters = new SnapshotParameters();
+                snapshotParameters.setFill(Color.TRANSPARENT);
+                dragboard.setDragView(snapshot(snapshotParameters, null));
+                ClipboardContent content = new ClipboardContent();
+                content.putString("");
+                dragboard.setContent(content);
+                setOpacity(0.5);
+                DRAG_CACHE.clear();
+                e.consume();
+            }
+        });
+
+        setOnDragOver(e -> {
+            double y = e.getY() - container.getBoundsInParent().getMaxY();
+            nextStatementIndicator.setPrefHeight(y > 0 && y < 15 ? 15 : 0);
+        });
+    }
+
+    private void setupChildConnector() {
+        childIndicator.setPrefHeight(15);
+        childIndicator.setOpacity(0.5);
+        childIndicator.setOnDragExited(e -> childIndicator.setStyle(null));
+        childIndicator.setOnDragOver(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof StatementLabel || source instanceof StatementBlock) {
+                childIndicator.setStyle("-fx-background-color: yellow;");
+                Boolean isValid = StatementBlock.DRAG_CACHE.get(childIndicator);
+                if (isValid == null) {
+                    isValid = false;
+                    StatementBlock first = source instanceof StatementLabel ?
+                            ((StatementLabel) source).getValidationBlock() :
+                            (StatementBlock) source;
+                    if (!equals(source) && !source.equals(getChild()) && !isChild(childIndicator, (Parent) source)) {
+                        StatementBlock last = first.getLast();
+                        StatementBlock currentChild = getChild();
+                        StatementBlock currentPrevious = first.previous;
+                        childConnector.next = first;
+                        first.previous = childConnector;
+                        if (currentChild != null) {
+                            last.next = currentChild;
+                            currentChild.previous = last;
+                        }
+                        if (currentPrevious != null) {
+                            currentPrevious.next = null;
+                        }
+                        try {
+                            first.validate();
+                            isValid = true;
+                        } catch (IllegalStateException ignored) {}
+                        childConnector.next = currentChild;
+                        first.previous = currentPrevious;
+                        if (currentChild != null) {
+                            last.next = null;
+                            currentChild.previous = childConnector;
+                        }
+                        if (currentPrevious != null) {
+                            currentPrevious.next = first;
+                        }
+                    }
+                    StatementBlock.DRAG_CACHE.put(childIndicator, isValid);
+                }
+                if (isValid) {
+                    e.acceptTransferModes(TransferMode.ANY);
+                }
             }
             e.consume();
         });
-        MenuItem pasteItem = new MenuItem("Paste");
-        pasteItem.setOnAction(e -> CopyPasteManager.paste(this, contextMenuYCoord));
-        contextMenu.getItems().add(1, pasteItem);
+
+        childIndicator.setOnDragDropped(e -> {
+            Object source = e.getGestureSource();
+            connectChild(source instanceof StatementLabel ?
+                    ((StatementLabel) source).getStatement().createBlock() :
+                    (StatementBlock) source);
+            e.setDropCompleted(true);
+            e.consume();
+        });
     }
 
     @Override
-    public boolean canAccept(CodeBlock block, double yCoord) {
-        boolean valid = false;
-        if (block instanceof StatementBlock) {
-            Pane parent = (Pane) block.getParent();
-            int currentIndex = -1;
-            if (parent != null) {
-                currentIndex = parent.getChildren().indexOf(block);
-                parent.getChildren().remove(currentIndex);
-            }
-            int index = DragManager.getIndexAt(this, yCoord);
-            getChildren().add(index, block);
-            valid = PluginBuilder.isCodeValid(block.getBlockPane());
-            getChildren().remove(index);
-            if (parent != null) {
-                parent.getChildren().add(currentIndex, block);
-            }
-        }
-        return valid;
-    }
-
-    @Override
-    public void accept(CodeBlock block, double yCoord) {
-        UndoManager.capture();
-        Pane parent = (Pane) block.getParent();
-        if (parent != null) {
-            parent.getChildren().remove(block);
-        }
-        getChildren().add(DragManager.getIndexAt(this, yCoord), block);
-        Platform.runLater(block::onDragDrop);
-    }
-
-    @Override
-    public void onDragDrop() {
-        color();
-    }
-
-    @Override
-    public void unload(ConfigurationSection section) {
-        super.unload(section);
-        List<StatementBlock> children = getBlocks(false);
-        ConfigurationSection childrenSection = section.createSection("children");
-        for (int i = 0; i < children.size(); i++) {
-            CodeBlock child = children.get(i);
-            ConfigurationSection childSection = childrenSection.createSection(String.valueOf(i));
-            childSection.set("block-type", child.getClass().getCanonicalName());
-            child.unload(childSection);
+    public void validate() throws IllegalStateException {
+        super.validate();
+        if (hasChild()) {
+            getChild().validate();
         }
     }
 
     @Override
-    public void load(ConfigurationSection section) throws Exception {
-        super.load(section);
-        ConfigurationSection childrenSection = section.getConfigurationSection("children");
-        if (childrenSection != null) {
-            for (String key : childrenSection.getKeys(false)) {
-                ConfigurationSection childSection = childrenSection.getConfigurationSection(key);
-                if (childSection != null) {
-                    String blockType = childSection.getString("block-type");
-                    if (blockType != null) {
-                        CodeBlock child = BlockRegistry.getInfo(blockType).createBlock();
-                        child.load(childSection);
-                        getChildren().add(child);
-                    }
-                }
-            }
+    public void update() {
+        super.update();
+        updateColor();
+        if (hasChild()) {
+            getChild().update();
         }
-        color();
+    }
+
+    public void connectChild(StatementBlock block) {
+        block.disconnect();
+        if (hasChild()) {
+            block.getLast().connectNext(getChild());
+        }
+        childConnector.connectNext(block);
+        if (block.equals(this)) {
+            System.out.println("!!!!");
+        }
+    }
+
+    public boolean hasChild() {
+        return childConnector.hasNext();
+    }
+
+    public StatementBlock getChild() {
+        return childConnector.getNext();
     }
 
     public String getChildJava() {
-        StringBuilder childJava = new StringBuilder();
-        getBlocks(true).forEach(block -> childJava.append(block.toJava()));
-        return childJava.toString();
+        StringBuilder builder = new StringBuilder();
+        StatementBlock child = getChild();
+        while (child != null) {
+            builder.append(child.toJava());
+            child = child.getNext();
+        }
+        return builder.toString();
     }
 
     @Override
-    public List<StatementBlock> getBlocks(boolean ignoreDisabled) {
-        List<StatementBlock> blocks = new ArrayList<>();
-        for (Node child : getChildren()) {
-            if (child instanceof StatementBlock && (!ignoreDisabled || ((StatementBlock) child).isEnabled())) {
-                blocks.add((StatementBlock) child);
-            }
+    public void saveTo(DataConfig config) {
+        super.saveTo(config);
+        List<DataConfig> childConfigs = new ArrayList<>();
+        StatementBlock child = getChild();
+        while (child != null) {
+            DataConfig childConfig = new DataConfig();
+            childConfig.set("=", child.getIdentifier());
+            child.saveTo(childConfig);
+            childConfigs.add(childConfig);
+            child = child.getNext();
         }
-        return blocks;
+        config.set("children", childConfigs);
     }
 
-    private void color() {
-        Parent parent = getParent();
-        int level = 0;
-        while (parent != null && !(parent instanceof BlockPane.BlockArea)) {
-            if (parent instanceof ParentBlock) {
-                level++;
+    @Override
+    public void loadFrom(DataConfig config) {
+        super.loadFrom(config);
+        List<DataConfig> childConfigs = config.getConfigList("children");
+        for (DataConfig childConfig : childConfigs) {
+            StatementDefinition<?> statement = BlockRegistry.getStatement(childConfig.getString("="));
+            if (statement != null) {
+                StatementBlock child = statement.createBlock(childConfig);
+                if (hasChild()) {
+                    getChild().getLast().connectNext(child);
+                } else {
+                    connectChild(child);
+                }
             }
-            parent = parent.getParent();
+        }
+    }
+
+    private void updateColor() {
+        int level = 0;
+        StatementBlock block = this;
+        while (block != null) {
+            if (block instanceof ChildConnector) {
+                level++;
+                block = ((ChildConnector) block).getParentStatement();
+            } else {
+                block = block.previous;
+            }
         }
         Color color = colors[level % colors.length];
-        setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-        for (Node child : getChildren()) {
+        container.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+        StatementBlock child = getChild();
+        while (child != null) {
             if (child instanceof ParentBlock) {
-                ((ParentBlock) child).color();
+                ((ParentBlock) child).updateColor();
             }
+            child = child.getNext();
+        }
+    }
+
+    public class ChildConnector extends StatementBlock {
+
+        public ChildConnector() {
+            getChildren().clear();
+            getChildren().add(nextStatementPane);
+        }
+
+        @Override
+        protected Syntax init() {
+            return null;
+        }
+
+        @Override
+        public String toJava() {
+            throw new UnsupportedOperationException();
+        }
+
+        public ParentBlock getParentStatement() {
+            return ParentBlock.this;
+        }
+
+        @Override
+        public StructureBlock getStructure() {
+            return ParentBlock.this.getStructure();
         }
     }
 }

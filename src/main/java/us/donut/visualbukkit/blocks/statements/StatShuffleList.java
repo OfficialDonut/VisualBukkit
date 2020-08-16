@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.statements;
 
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
 public class StatShuffleList extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("shuffle", List.class);
+    protected Syntax init() {
+        return new Syntax("shuffle", List.class);
     }
 
     @Override

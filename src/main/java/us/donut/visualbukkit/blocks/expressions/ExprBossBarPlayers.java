@@ -2,21 +2,21 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
 @Description({"The players viewing a boss bar", "Returns: list of players"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE, ModificationType.CLEAR})
-public class ExprBossBarPlayers extends ModifiableExpressionBlock<List> {
+public class ExprBossBarPlayers extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("players of", BossBar.class);
+    protected Syntax init() {
+        return new Syntax("players of", BossBar.class);
     }
 
     @Override

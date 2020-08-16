@@ -1,18 +1,19 @@
 package us.donut.visualbukkit.blocks.statements;
 
-import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Inventory")
-@Description("Closes a human entity's inventory")
+@Description("Closes a player's inventory")
+@Category(StatementCategory.PLAYER)
 public class StatCloseInventory extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("close inventory of", HumanEntity.class);
+    protected Syntax init() {
+        return new Syntax("close inventory of", Player.class);
     }
 
     @Override

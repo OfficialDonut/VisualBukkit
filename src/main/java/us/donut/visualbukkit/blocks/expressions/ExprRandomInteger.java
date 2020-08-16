@@ -2,14 +2,14 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Generates a random integer between two numbers (inclusive)", "Returns: number"})
 public class ExprRandomInteger extends ExpressionBlock<Integer> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("random integer between", int.class, "and", int.class);
+    protected Syntax init() {
+        return new Syntax("random integer between", int.class, "and", int.class);
     }
 
     @Override

@@ -3,14 +3,14 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.util.Vector;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Multiplies all components of a vector by a scalar", "Returns: vector"})
 public class ExprScaledVector extends ExpressionBlock<Vector> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(Vector.class, "*", double.class);
+    protected Syntax init() {
+        return new Syntax(Vector.class, "*", double.class);
     }
 
     @Override

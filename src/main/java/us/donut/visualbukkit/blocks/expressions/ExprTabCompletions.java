@@ -1,23 +1,27 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.event.server.TabCompleteEvent;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
 @Description({"The tab completions in a TabCompleteEvent", "Returns: list of strings"})
-@Event(TabCompleteEvent.class)
 @Modifier({ModificationType.SET, ModificationType.ADD, ModificationType.REMOVE})
-public class ExprTabCompletions extends ModifiableExpressionBlock<List> {
+public class ExprTabCompletions extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("tab completions");
+    protected Syntax init() {
+        return new Syntax("tab completions");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(TabCompleteEvent.class);
     }
 
     @Override

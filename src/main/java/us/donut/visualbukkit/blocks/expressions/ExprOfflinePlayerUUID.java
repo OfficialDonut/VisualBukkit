@@ -4,7 +4,7 @@ import org.bukkit.OfflinePlayer;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Name;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.UUID;
 
@@ -13,8 +13,8 @@ import java.util.UUID;
 public class ExprOfflinePlayerUUID extends ExpressionBlock<UUID> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("UUID of", OfflinePlayer.class);
+    protected Syntax init() {
+        return new Syntax("UUID of", OfflinePlayer.class);
     }
 
     @Override

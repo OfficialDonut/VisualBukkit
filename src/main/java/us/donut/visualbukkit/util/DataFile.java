@@ -1,38 +1,35 @@
 package us.donut.visualbukkit.util;
 
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.InvalidConfigurationException;
+import us.donut.visualbukkit.VisualBukkit;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashSet;
 
-public class DataFile {
+public class DataFile extends DataConfig {
 
     private File file;
-    private YamlConfiguration config;
 
     public DataFile(Path path) {
         this.file = path.toFile();
-        this.config = YamlConfiguration.loadConfiguration(file);
+        if (file.exists()) {
+            try {
+                load(file);
+            } catch (IOException | InvalidConfigurationException e) {
+                VisualBukkit.displayException("Failed to load data file", e);
+            }
+        }
     }
 
     public void save() throws IOException {
-        config.save(file);
+        save(file);
     }
 
-    public void setFile(File file) {
-        this.file = file;
-    }
-
-    public void setConfig(YamlConfiguration config) {
-        this.config = config;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public YamlConfiguration getConfig() {
-        return config;
+    public void clear() {
+        for (String key : new HashSet<>(getKeys(false))) {
+            set(key, null);
+        }
     }
 }

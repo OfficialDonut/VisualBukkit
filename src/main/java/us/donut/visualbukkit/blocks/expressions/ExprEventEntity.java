@@ -3,19 +3,21 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.EntityEvent;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Entity")
-@Description({"The entity involved in an event", "Returns: entity"})
-@Event(EntityEvent.class)
+@Description({"The entity involved in an EntityEvent", "Returns: entity"})
 public class ExprEventEntity extends ExpressionBlock<Entity> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("event entity");
+    protected Syntax init() {
+        return new Syntax("event entity");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(EntityEvent.class);
     }
 
     @Override

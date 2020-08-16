@@ -4,16 +4,20 @@ import org.bukkit.World;
 import org.bukkit.event.world.WorldEvent;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Description({"The world involved in an event", "Returns: world"})
-@Event(WorldEvent.class)
+@Description({"The world involved in a WorldEvent", "Returns: world"})
 public class ExprEventWorld extends ExpressionBlock<World> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("event world");
+    protected Syntax init() {
+        return new Syntax("event world");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(WorldEvent.class);
     }
 
     @Override

@@ -3,14 +3,14 @@ package us.donut.visualbukkit.blocks.expressions;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Checks if a number is greater than another number", "Returns: boolean"})
 public class ExprIsGreaterThan extends ExpressionBlock<Boolean> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(double.class, new ChoiceParameter(">", ">="), double.class);
+    protected Syntax init() {
+        return new Syntax(double.class, new ChoiceParameter(">", ">="), double.class);
     }
 
     @Override

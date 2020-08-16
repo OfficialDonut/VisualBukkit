@@ -1,7 +1,7 @@
 package us.donut.visualbukkit.blocks.syntax;
 
-import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.util.ComboBoxView;
+import us.donut.visualbukkit.util.DataConfig;
 
 import java.util.Collection;
 
@@ -23,17 +23,18 @@ public class ChoiceParameter extends ComboBoxView<String> implements BlockParame
     }
 
     @Override
-    public void unload(ConfigurationSection section) {
-        if (getComboBox().getValue() != null) {
-            section.set("selected-value", getComboBox().getValue());
+    public void saveTo(DataConfig config) {
+        String value = getComboBox().getValue();
+        if (value != null) {
+            config.set("value", value);
         }
     }
 
     @Override
-    public void load(ConfigurationSection section) {
-        String selectedValue = section.getString("selected-value");
-        if (selectedValue != null) {
-            getComboBox().setValue(selectedValue);
+    public void loadFrom(DataConfig config) {
+        String value = config.getString("value");
+        if (value != null) {
+            getComboBox().setValue(value);
         }
     }
 }

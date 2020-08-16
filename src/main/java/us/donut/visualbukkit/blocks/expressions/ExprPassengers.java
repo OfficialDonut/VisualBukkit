@@ -1,23 +1,21 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Entity;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
-@Category("Entity")
 @Description({"The passengers of an entity", "Returns: list of entities"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE})
-public class ExprPassengers extends ModifiableExpressionBlock<List> {
+public class ExprPassengers extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("passengers of", Entity.class);
+    protected Syntax init() {
+        return new Syntax("passengers of", Entity.class);
     }
 
     @Override

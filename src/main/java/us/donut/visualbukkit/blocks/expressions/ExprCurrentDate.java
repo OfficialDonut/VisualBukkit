@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class ExprCurrentDate extends ExpressionBlock<LocalDateTime> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("current date");
+    protected Syntax init() {
+        return new Syntax("current date");
     }
 
     @Override

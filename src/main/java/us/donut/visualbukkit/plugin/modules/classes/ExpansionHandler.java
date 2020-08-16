@@ -1,10 +1,10 @@
 package us.donut.visualbukkit.plugin.modules.classes;
 
-import us.donut.visualbukkit.plugin.PluginMain;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class ExpansionHandler {
     
-    public static void register(PluginMain plugin) {
+    public static void register(JavaPlugin plugin) {
         new PapiExpansion(plugin).register();
     }
 }

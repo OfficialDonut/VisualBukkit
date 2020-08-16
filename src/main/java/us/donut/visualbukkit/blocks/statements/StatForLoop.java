@@ -1,35 +1,27 @@
 package us.donut.visualbukkit.blocks.statements;
 
-import javafx.scene.Parent;
 import us.donut.visualbukkit.blocks.ParentBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.editor.BlockPane;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
+
+import java.util.UUID;
 
 @Description("Iterates a certain number of times")
+@Category(StatementCategory.CONTROLS)
 public class StatForLoop extends ParentBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("loop", int.class, "times");
+    protected Syntax init() {
+        return new Syntax("loop", int.class, "times");
     }
 
     @Override
     public String toJava() {
-        String index = "loopIndex" + getNestedLoops();
-        return "for (int " + index + "=0;" + index + "<" + arg(0) + ";" + index + "++) {" +
-                getChildJava() + "}";
-    }
-
-    private int getNestedLoops() {
-        int nestedLoops = 0;
-        Parent parent = getParent();
-        while (!(parent instanceof BlockPane.BlockArea)) {
-            if (parent instanceof StatLoopList || parent instanceof StatForLoop) {
-                nestedLoops++;
-            }
-            parent = parent.getParent();
-        }
-        return nestedLoops;
+        String indexVar = "a" + UUID.randomUUID().toString().replace("-", "");
+        return "for (int " + indexVar + "=0;" + indexVar + "<" + arg(0) + ";" + indexVar + "++) {" +
+                getChildJava() +
+                "}";
     }
 }

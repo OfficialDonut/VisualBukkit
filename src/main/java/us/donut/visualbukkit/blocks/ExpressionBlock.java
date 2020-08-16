@@ -1,86 +1,119 @@
 package us.donut.visualbukkit.blocks;
 
-import javafx.scene.Parent;
+import javafx.event.Event;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import us.donut.visualbukkit.blocks.expressions.ExprAnd;
-import us.donut.visualbukkit.blocks.expressions.ExprOr;
-import us.donut.visualbukkit.blocks.expressions.ExprStringConcatenation;
+import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.ExpressionParameter;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
+import us.donut.visualbukkit.editor.ContextMenuManager;
+import us.donut.visualbukkit.editor.CopyPasteManager;
+import us.donut.visualbukkit.editor.UndoManager;
+import us.donut.visualbukkit.util.CenteredHBox;
 
-public abstract class ExpressionBlock<T> extends CodeBlock {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlock {
+
+    protected List<BlockParameter> parameters = new ArrayList<>();
+    protected ContextMenu contextMenu = new ContextMenu();
 
     public ExpressionBlock() {
-        setOnMouseMoved(e -> {
-            setStyle("-fx-background-color: yellow;");
-            Parent parent = getParent();
-            while (!(parent instanceof StatementBlock)) {
-                if (parent instanceof ExpressionBlock) {
-                    parent.setStyle(null);
+        getStyleClass().add("expression-block");
+        setOnMouseClicked(Event::consume);
+
+        Syntax syntax = init();
+        if (syntax != null) {
+            for (Object component : syntax.getComponents()) {
+                if (component instanceof BlockParameter) {
+                    parameters.add((BlockParameter) component);
                 }
-                parent = parent.getParent();
-            }
-            e.consume();
-        });
-
-        setOnMouseExited(e -> {
-            setStyle(null);
-            e.consume();
-        });
-
-        MenuItem addStringItem = new MenuItem("Add string");
-        addStringItem.setOnAction(e -> {
-            ExprStringConcatenation concatExpr = new ExprStringConcatenation();
-            ExpressionParameter expressionParameter = (ExpressionParameter) getParent();
-            expressionParameter.setExpression(concatExpr);
-            ((ExpressionParameter) concatExpr.getParameter(0)).setExpression(this);
-        });
-
-        MenuItem addAndItem = new MenuItem("Add 'and'");
-        addAndItem.setOnAction(e -> {
-            ExprAnd andExpr = new ExprAnd();
-            ExpressionParameter expressionParameter = (ExpressionParameter) getParent();
-            expressionParameter.setExpression(andExpr);
-            ((ExpressionParameter) andExpr.getParameter(0)).setExpression(this);
-        });
-
-        MenuItem addOrItem = new MenuItem("Add 'or'");
-        addOrItem.setOnAction(e -> {
-            ExprOr orExpr = new ExprOr();
-            ExpressionParameter expressionParameter = (ExpressionParameter) getParent();
-            expressionParameter.setExpression(orExpr);
-            ((ExpressionParameter) orExpr.getParameter(0)).setExpression(this);
-        });
-
-        setOnContextMenuRequested(e -> {
-            contextMenu.show(this, e.getScreenX(), e.getScreenY());
-            ExpressionParameter expressionParameter = (ExpressionParameter) getParent();
-            if (getReturnType() == String.class || expressionParameter.getReturnType() == String.class) {
-                if (!contextMenu.getItems().contains(addStringItem)) {
-                    contextMenu.getItems().add(addStringItem);
+                if (component instanceof Node) {
+                    getChildren().add((Node) component);
                 }
-            } else {
-                contextMenu.getItems().remove(addStringItem);
             }
-            if (getReturnType() == boolean.class || expressionParameter.getReturnType() == boolean.class) {
-                if (!contextMenu.getItems().contains(addAndItem)) {
-                    contextMenu.getItems().addAll(addAndItem, addOrItem);
-                }
-            } else {
-                contextMenu.getItems().removeAll(addAndItem, addOrItem);
-            }
-            Parent parent = getParent();
-            while (parent != null) {
-                if (parent instanceof StatementBlock) {
-                    ((StatementBlock) parent).contextMenu.hide();
-                    break;
-                }
-                parent = parent.getParent();
-            }
-            e.consume();
+        }
+
+        MenuItem copyItem = new MenuItem("Copy");
+        MenuItem deleteItem = new MenuItem("Delete");
+        copyItem.setOnAction(e -> CopyPasteManager.copy(this));
+        deleteItem.setOnAction(e -> {
+            UndoManager.capture();
+            ((ExpressionParameter) getParent()).getComboBox().setValue(null);
         });
+        contextMenu.getItems().addAll(copyItem, deleteItem);
+        setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
+    }
+
+    protected abstract Syntax init();
+
+    public String modify(ModificationType modificationType, String delta) {
+        throw new UnsupportedOperationException();
+    }
+
+    public Class<?> getDeltaType(ModificationType modificationType) {
+        return getReturnType();
+    }
+
+    @Override
+    public void update() {
+        CodeBlock.super.update();
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected final void validateStructure(Class... structureTypes) {
+        try {
+            getStatement().validateStructure(structureTypes);
+            validate();
+        } catch (IllegalStateException e) {
+            invalidate();
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected final void validateEvent(Class... eventTypes) {
+        try {
+            getStatement().validateEvent(eventTypes);
+            validate();
+        } catch (IllegalStateException e) {
+            invalidate();
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected final void validateParent(Class... parentTypes) {
+        try {
+            getStatement().validateParent(parentTypes);
+            validate();
+        } catch (IllegalStateException e) {
+            invalidate();
+        }
+    }
+
+    private void validate() {
+        setStyle(null);
+    }
+
+    private void invalidate() {
+        setStyle("-fx-background-color: red;");
+    }
+
+    public boolean isValid() {
+        return !"-fx-background-color: red;".equals(getStyle());
     }
 
     public Class<?> getReturnType() {
-        return ((ExpressionBlockInfo<?>) BlockRegistry.getInfo(this)).getReturnType();
+        return BlockRegistry.getExpression(getClass()).getReturnType();
+    }
+
+    public StatementBlock getStatement() {
+        return ((ExpressionParameter) getParent()).getStatement();
+    }
+
+    @Override
+    public List<BlockParameter> getParameters() {
+        return parameters;
     }
 }

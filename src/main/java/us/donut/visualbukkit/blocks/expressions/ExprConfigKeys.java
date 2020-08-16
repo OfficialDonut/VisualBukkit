@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.configuration.ConfigurationSection;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import java.util.List;
 public class ExprConfigKeys extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("keys of", ConfigurationSection.class);
+    protected Syntax init() {
+        return new Syntax("keys of", ConfigurationSection.class);
     }
 
     @Override

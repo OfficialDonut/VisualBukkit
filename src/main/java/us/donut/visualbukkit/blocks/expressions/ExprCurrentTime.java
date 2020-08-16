@@ -2,14 +2,14 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The current time in milliseconds", "Returns: number"})
 public class ExprCurrentTime extends ExpressionBlock<Long> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("current time millis");
+    protected Syntax init() {
+        return new Syntax("current time millis");
     }
 
     @Override

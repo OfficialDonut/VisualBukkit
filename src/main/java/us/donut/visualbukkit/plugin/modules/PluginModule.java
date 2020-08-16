@@ -1,8 +1,9 @@
 package us.donut.visualbukkit.plugin.modules;
 
 import com.google.common.collect.ObjectArrays;
-import javassist.CtClass;
-import javassist.CtMethod;
+import org.bstats.bukkit.Metrics;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 import us.donut.visualbukkit.plugin.modules.classes.*;
@@ -13,20 +14,30 @@ import java.util.Set;
 
 public enum PluginModule {
 
+    BSTATS(Metrics.class),
     DATABASE(ObjectArrays.concat(DatabaseManager.class, getClasses("com.zaxxer.hikari"))),
-    PROCEDURE_RUNNABLE(ProcedureRunnable.class),
     REFLECTION_UTIL(ReflectionUtil.class),
     WORLDGUARD(WorldGuardHook.class),
     VAULT(VaultHook.class),
 
     PlACEHOLDERAPI(ExpansionHandler.class, PapiExpansion.class, PlaceholderEvent.class) {
         @Override
-        public void insertInto(CtClass mainClass) throws Exception {
-            CtMethod enableMethod = mainClass.getDeclaredMethod("onEnable");
-            enableMethod.insertAfter(
-                    "if(Bukkit.getPluginManager().getPlugin(\"PlaceholderAPI\") != null) {" +
-                            "us.donut.visualbukkit.plugin.modules.classes.ExpansionHandler.register(PluginMain.getInstance());" +
-                            "}");
+        public void insertInto(JavaClassSource mainClass) {
+            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+            enableMethod.setBody(enableMethod.getBody() +
+                    "if (Bukkit.getPluginManager().getPlugin(\"PlaceholderAPI\") != null) {" +
+                    "ExpansionHandler.register(this);" +
+                    "}");
+        }
+    },
+
+    VARIABLES(VariableManager.class) {
+        @Override
+        public void insertInto(JavaClassSource mainClass) {
+            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+            enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
+            MethodSource<JavaClassSource> disableMethod = mainClass.getMethod("onDisable");
+            disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
         }
     };
 
@@ -47,7 +58,7 @@ public enum PluginModule {
         this.classes = classes;
     }
 
-    public void insertInto(CtClass mainClass) throws Exception {}
+    public void insertInto(JavaClassSource mainClass) {}
 
     public Class<?>[] getClasses() {
         return classes;

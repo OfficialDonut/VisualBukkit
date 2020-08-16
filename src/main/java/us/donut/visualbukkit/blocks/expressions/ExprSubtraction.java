@@ -1,17 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Math")
 @Description({"The difference of two numbers", "Returns: number"})
 public class ExprSubtraction extends ExpressionBlock<Double> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(double.class, "-", double.class);
+    protected Syntax init() {
+        return new Syntax(double.class, "-", double.class);
     }
 
     @Override

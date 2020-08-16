@@ -2,21 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Entity")
 @Description({"The velocity of an entity", "Returns: vector"})
 @Modifier(ModificationType.SET)
-public class ExprVelocity extends ModifiableExpressionBlock<Vector> {
+public class ExprVelocity extends ExpressionBlock<Vector> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("velocity of", Entity.class);
+    protected Syntax init() {
+        return new Syntax("velocity of", Entity.class);
     }
 
     @Override

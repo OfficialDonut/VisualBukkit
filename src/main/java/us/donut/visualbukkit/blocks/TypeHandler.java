@@ -8,10 +8,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -39,11 +36,12 @@ public class TypeHandler {
         register(Entity.class, "entity");
         register(EntityType.class, "entity type", s -> "EntityType.valueOf(" + s + ".toUpperCase())");
         register(File.class, "file");
+        register(Item.class, "dropped item");
         register(ItemStack.class, "item stack");
         register(Inventory.class, "inventory");
         register(InventoryView.class, "inventory view");
-        register(LivingEntity.class, "living entity");
         register(List.class, "list");
+        register(LivingEntity.class, "living entity");
         register(LocalDateTime.class, "date");
         register(Location.class, "location");
         register(Material.class, "material", s -> "Material.valueOf(" + s + ".toUpperCase())");
@@ -74,8 +72,17 @@ public class TypeHandler {
         types.put(clazz, alias);
     }
 
+    public static boolean canConvert(Class<?> from, Class<?> to) {
+        try {
+            convert(from, to, "");
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
     public static String convert(Class<?> from, Class<?> to, String src) {
-        if (to.isAssignableFrom(from) || to == Void.class) {
+        if (to.isAssignableFrom(from)) {
             return src;
         }
         if (to == String.class) {
@@ -99,7 +106,7 @@ public class TypeHandler {
         if (from.isPrimitive() && to == Object.class) {
             return boxPrimitive(from, src);
         }
-        if (from.isAssignableFrom(to) || from == Void.class) {
+        if (from.isAssignableFrom(to)) {
             return "((" + to.getCanonicalName() + ")" + src + ")";
         }
         if (from == Object.class && isPrimitiveNumber(to)) {
@@ -109,7 +116,7 @@ public class TypeHandler {
             Class<?> wrapper = ClassUtils.primitiveToWrapper(to);
             return convert(wrapper, to, "((" + wrapper.getCanonicalName() + ")" + src + ")");
         }
-        throw new UnsupportedOperationException();
+        throw new IllegalArgumentException();
     }
 
     private static String boxPrimitive(Class<?> primitive, String src) {
@@ -147,7 +154,7 @@ public class TypeHandler {
     }
 
     public static Set<String> getAliases() {
-        return aliases;
+        return Collections.unmodifiableSet(aliases);
     }
 
     public static String getAlias(Class<?> type) {
@@ -159,6 +166,6 @@ public class TypeHandler {
     }
 
     public static Map<String, Function<String, String>> getStringParsers() {
-        return stringParsers;
+        return Collections.unmodifiableMap(stringParsers);
     }
 }

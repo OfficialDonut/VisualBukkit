@@ -2,15 +2,18 @@ package us.donut.visualbukkit.blocks.statements;
 
 import org.bukkit.WorldCreator;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Creates a world")
+@Category(StatementCategory.WORLD)
 public class StatCreateWorld extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("create world with", WorldCreator.class);
+    protected Syntax init() {
+        return new Syntax("create world with", WorldCreator.class);
     }
 
     @Override

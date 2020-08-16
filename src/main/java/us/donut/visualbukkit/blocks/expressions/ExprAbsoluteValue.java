@@ -1,17 +1,15 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Math")
 @Description({"The absolute value of a number", "Returns: number"})
 public class ExprAbsoluteValue extends ExpressionBlock<Double> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("absolute value of", double.class);
+    protected Syntax init() {
+        return new Syntax("absolute value of", double.class);
     }
 
     @Override

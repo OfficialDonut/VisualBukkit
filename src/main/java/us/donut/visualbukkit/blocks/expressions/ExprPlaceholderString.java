@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.OfflinePlayer;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
@@ -11,8 +11,8 @@ import us.donut.visualbukkit.plugin.modules.PluginModule;
 public class ExprPlaceholderString extends ExpressionBlock<String> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(String.class, "parsed with", OfflinePlayer.class);
+    protected Syntax init() {
+        return new Syntax(String.class, "parsed with", OfflinePlayer.class);
     }
 
     @Override

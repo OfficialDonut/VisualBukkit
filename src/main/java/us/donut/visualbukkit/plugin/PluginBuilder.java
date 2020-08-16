@@ -1,15 +1,30 @@
 package us.donut.visualbukkit.plugin;
 
 import com.google.common.io.ByteStreams;
+import com.google.common.io.CharStreams;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javassist.*;
+import org.eclipse.jdt.internal.compiler.tool.EclipseCompiler;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.editor.BlockPane;
-import us.donut.visualbukkit.editor.CommandPane;
+import us.donut.visualbukkit.blocks.StructureBlock;
+import us.donut.visualbukkit.blocks.structures.StructCommand;
+import us.donut.visualbukkit.editor.BlockCanvas;
 import us.donut.visualbukkit.editor.Project;
 import us.donut.visualbukkit.plugin.modules.PluginModule;
 
+import javax.tools.DiagnosticListener;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
@@ -19,68 +34,54 @@ import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
+@SuppressWarnings("UnstableApiUsage")
 public class PluginBuilder {
 
-    private static ClassPool classPool = ClassPool.getDefault();
+    private static EclipseCompiler compiler = new EclipseCompiler();
+    private static String mainClassSource;
 
-    public static void init() {
-        classPool.importPackage("java.io");
-        classPool.importPackage("java.nio.file");
-        classPool.importPackage("java.sql");
-        classPool.importPackage("java.util");
-        classPool.importPackage("org.bukkit");
-        classPool.importPackage("org.bukkit.block");
-        classPool.importPackage("org.bukkit.entity");
-        classPool.importPackage("org.bukkit.inventory");
-        classPool.importPackage("org.bukkit.inventory.meta");
-        classPool.importPackage("org.bukkit.util");
-        classPool.importPackage("us.donut.visualbukkit.plugin");
-        classPool.importPackage("us.donut.visualbukkit.plugin.modules.classes");
-        classPool.importPackage("us.donut.visualbukkit.util");
-
-        try {
-            getCtClass(PluginMain.class, null);
-        } catch (NotFoundException e) {
-            VisualBukkit.displayException("Failed to init plugin main class", e);
+    static  {
+        try (Reader reader = new InputStreamReader(PluginBuilder.class.getResourceAsStream("/PluginMain.java"), StandardCharsets.UTF_8)) {
+            mainClassSource = CharStreams.toString(reader);
+        } catch (IOException e) {
+            VisualBukkit.displayException("Failed to load resource", e);
+            Platform.exit();
         }
     }
 
-    public static boolean isCodeValid(BlockPane blockPane) {
-        try {
-            BuildContext.create();
-            blockPane.insertInto(getCtClass(PluginMain.class, null));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @SuppressWarnings("UnstableApiUsage")
-    public static void build(Project project) throws Exception {
+    public static void build(Project project) throws IOException, CannotCompileException, NotFoundException {
         String name = project.getPluginName().replaceAll("\\s", "");
         if (name.isEmpty()) {
-            name = "VisualBukkitPlugin";
+            name = project.getName() + "Plugin";
         }
+        String packageName = "a" + UUID.randomUUID().toString().replace("-", "");
+
+        JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, mainClassSource);
+        mainClass.setPackage(packageName);
 
         Map<Class<?>, CtClass> classes = new HashMap<>();
-        CtClass mainClass = getCtClass(PluginMain.class, null);
-        classes.put(PluginMain.class, mainClass);
-        classes.put(VariableManager.class, getCtClass(VariableManager.class, mainClass.getPackageName()));
-
         BuildContext.create();
 
-        for (BlockPane blockPane : project.getBlockPanes()) {
-            blockPane.insertInto(mainClass);
+        for (BlockCanvas canvas : project.getCanvases()) {
+            for (StructureBlock structure : canvas.getStructures()) {
+                structure.insertInto(mainClass);
+            }
         }
 
         for (PluginModule module : BuildContext.getPluginModules()) {
             module.insertInto(mainClass);
             for (Class<?> clazz : module.getClasses()) {
-                classes.put(clazz, getCtClass(clazz, mainClass.getPackageName()));
+                classes.put(clazz, getCtClass(clazz, packageName));
             }
         }
 
-        CtClass utilMethodsClass = getCtClass(UtilMethods.class, mainClass.getPackageName());
+        for (CtClass ctClass : classes.values()) {
+            for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
+                ctClass.replaceClassName(entry.getKey().getName(), entry.getValue().getName());
+            }
+        }
+
+        CtClass utilMethodsClass = getCtClass(UtilMethods.class, packageName);
         for (CtMethod method : utilMethodsClass.getDeclaredMethods()) {
             if (!BuildContext.getUtilMethods().contains(method.getName())) {
                 utilMethodsClass.removeMethod(method);
@@ -92,28 +93,41 @@ public class PluginBuilder {
 
         Path outputDir = project.getPluginOutputDir();
         Path srcDir = outputDir.resolve("src");
+        Path packageDir = srcDir.resolve(packageName);
         Path jar = outputDir.resolve(name + ".jar");
-        Path pluginYml = srcDir.resolve("plugin.yml");
-        Path configYml = srcDir.resolve("config.yml");
 
         Files.deleteIfExists(jar);
         if (Files.exists(srcDir)) {
             MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
         }
-        Files.createDirectories(srcDir);
+        Files.createDirectories(packageDir);
 
-        for (CtClass ctClass : classes.values()) {
-            for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
-                ctClass.replaceClassName(entry.getKey().getName(), entry.getValue().getName());
-            }
+        String config = project.getPluginConfig();
+        if (!config.isEmpty()) {
+            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+            enableMethod.setBody("saveDefaultConfig();" + enableMethod.getBody());
+            Files.write(srcDir.resolve("config.yml"), config.getBytes(StandardCharsets.UTF_8));
         }
 
-        addClasses(srcDir, classes.values());
-        Files.write(pluginYml, Arrays.asList(createYml(project, name, mainClass.getName()).split("\n")), StandardCharsets.UTF_8);
-        Files.write(configYml, Arrays.asList(project.getPluginConfigPane().getConfigContent().split("\n")), StandardCharsets.UTF_8);
-        createJar(srcDir, jar);
-        MoreFiles.deleteRecursively(srcDir, RecursiveDeleteOption.ALLOW_INSECURE);
-        VisualBukkit.displayMessage("Successfully built plugin\n(" + jar.toString() + ")");
+        for (CtClass ctClass : classes.values()) {
+            ctClass.writeFile(srcDir.toString());
+        }
+
+        Files.write(packageDir.resolve("PluginMain.java"), mainClass.toString().getBytes(StandardCharsets.UTF_8));
+        Files.write(srcDir.resolve("plugin.yml"), createYml(project, name, mainClass.getQualifiedName()).getBytes(StandardCharsets.UTF_8));
+
+        String compileResult = compile(packageDir);
+        if (compileResult.isEmpty()) {
+            createJar(srcDir, jar);
+            VisualBukkit.displayMessage("Built plugin", "Successfully built plugin\n(" + jar.toString() + ")");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, null, ButtonType.CLOSE);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            VBox content = new VBox(5, new Text("Failed to build plugin"), new TextArea(compileResult));
+            alert.getDialogPane().setContent(content);
+            alert.showAndWait();
+        }
     }
 
     public static String createYml(Project project, String name, String mainClassName) {
@@ -144,30 +158,38 @@ public class PluginBuilder {
         }
         pluginYml.append("api-version: 1.13\n");
         pluginYml.append("commands:\n");
-        for (CommandPane command : project.getCommands()) {
-            pluginYml.append("  ").append(command.getCommand()).append(":\n");
-            if (!command.getDescription().isEmpty()) {
-                pluginYml.append("    description: ").append(command.getDescription()).append('\n');
-            }
-            if (!command.getAliases().isEmpty()) {
-                pluginYml.append("    aliases: [").append(command.getAliases()).append("]\n");
-            }
-            if (!command.getPermission().isEmpty()) {
-                pluginYml.append("    permission: ").append(command.getPermission()).append('\n');
-            }
-            if (!command.getPermMessage().isEmpty()) {
-                pluginYml.append("    permission-message: ").append(command.getPermMessage()).append('\n');
+        for (BlockCanvas canvas : project.getCanvases()) {
+            for (StructureBlock structure : canvas.getStructures()) {
+                if (structure instanceof StructCommand) {
+                    StructCommand command = (StructCommand) structure;
+                    if (!command.getName().isEmpty()) {
+                        pluginYml.append("  ").append(command.getName()).append(":\n");
+                        if (!command.getDescription().isEmpty()) {
+                            pluginYml.append("    description: ").append(command.getDescription()).append('\n');
+                        }
+                        if (!command.getAliases().isEmpty()) {
+                            pluginYml.append("    aliases: [").append(command.getAliases()).append("]\n");
+                        }
+                        if (!command.getPermission().isEmpty()) {
+                            pluginYml.append("    permission: ").append(command.getPermission()).append('\n');
+                        }
+                    }
+                }
             }
         }
         return pluginYml.toString();
     }
 
-    public static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
-        if (packageName == null) {
-            packageName = "a" + UUID.randomUUID().toString().replace("-", "");
-        }
-        String className = clazz.isAnonymousClass() ? clazz.getName().replaceFirst(clazz.getPackage().getName() + "\\.", "") : clazz.getSimpleName();
-        return classPool.getAndRename(clazz.getName(), packageName + "." + className);
+    private static String compile(Path packageDir) {
+        StringJoiner errorStringJoiner = new StringJoiner("\n");
+        DiagnosticListener<JavaFileObject> listener = (diagnostic) -> errorStringJoiner.add(
+                diagnostic.getMessage(Locale.getDefault()) +
+                " (" + new File(diagnostic.getSource().getName()).getName() + " " + diagnostic.getLineNumber() + ")");
+        StandardJavaFileManager manager = compiler.getStandardFileManager(listener, Locale.getDefault(), StandardCharsets.UTF_8);
+        Iterable<? extends JavaFileObject> files = manager.getJavaFileObjects(packageDir.toFile().listFiles(file -> file.getName().endsWith(".java")));
+        List<String> options = Arrays.asList("-cp", ".;" + packageDir.getParent(), "-source", "1.8", "-target", "1.8", "-nowarn");
+        compiler.getTask(null, manager, listener, options, null, files).call();
+        return errorStringJoiner.toString();
     }
 
     private static void createJar(Path rootDir, Path jar) throws IOException {
@@ -188,7 +210,7 @@ public class PluginBuilder {
                     addJarEntries(jos, rootDir, path);
                 }
             }
-        } else {
+        } else if (!file.getFileName().toString().endsWith(".java")) {
             try (InputStream is = Files.newInputStream(file)) {
                 JarEntry jarEntry = new JarEntry(file.toString()
                         .replace(rootDir.getParent() + File.separator, "")
@@ -200,18 +222,10 @@ public class PluginBuilder {
         }
     }
 
-    private static void addClasses(Path dir, Iterable<CtClass> classes) throws IOException, CannotCompileException {
-        for (CtClass ctClass : classes) {
-            Path packageDir = dir;
-            for (String packageComponent : ctClass.getPackageName().split("\\.")) {
-                packageDir = packageDir.resolve(packageComponent);
-                if (Files.notExists(packageDir)) {
-                    Files.createDirectory(packageDir);
-                }
-            }
-            try (OutputStream os = Files.newOutputStream(packageDir.resolve(ctClass.getSimpleName() + ".class"))) {
-                os.write(ctClass.toBytecode());
-            }
-        }
+    private static CtClass getCtClass(Class<?> clazz, String packageName) throws NotFoundException {
+        String className = packageName + "." + (clazz.isAnonymousClass() ?
+                clazz.getName().replaceFirst(clazz.getPackage().getName() + "\\.", "") :
+                clazz.getSimpleName());
+        return ClassPool.getDefault().getAndRename(clazz.getName(), className);
     }
 }

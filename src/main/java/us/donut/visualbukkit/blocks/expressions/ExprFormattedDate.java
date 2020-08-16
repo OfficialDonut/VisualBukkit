@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class ExprFormattedDate extends ExpressionBlock<String> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(LocalDateTime.class, "with format", String.class);
+    protected Syntax init() {
+        return new Syntax(LocalDateTime.class, "with format", String.class);
     }
 
     @Override

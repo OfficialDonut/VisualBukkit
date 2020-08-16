@@ -4,12 +4,17 @@ import org.bukkit.entity.*;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
+import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.Map;
 import java.util.TreeMap;
 
+@Description("Launched a projectile")
+@Category(StatementCategory.WORLD)
 public class StatLaunchProjectile extends StatementBlock {
 
     private static Map<String, Class<? extends Projectile>> projectileClasses = new TreeMap<>();
@@ -32,9 +37,9 @@ public class StatLaunchProjectile extends StatementBlock {
     }
 
     @Override
-    protected SyntaxNode init() {
+    protected Syntax init() {
         ChoiceParameter choiceParameter = new ChoiceParameter(projectileClasses.keySet());
-        return new SyntaxNode("launch", choiceParameter, "from", ProjectileSource.class, "with velocity", Vector.class);
+        return new Syntax("launch", choiceParameter, "from", ProjectileSource.class, "with velocity", Vector.class);
     }
 
     @Override

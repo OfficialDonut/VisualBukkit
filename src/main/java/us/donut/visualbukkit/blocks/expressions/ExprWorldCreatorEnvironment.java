@@ -2,19 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The world environment of a world creator", "Returns: environment"})
 @Modifier(ModificationType.SET)
-public class ExprWorldCreatorEnvironment extends ModifiableExpressionBlock<World.Environment> {
+public class ExprWorldCreatorEnvironment extends ExpressionBlock<World.Environment> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("world environment of", WorldCreator.class);
+    protected Syntax init() {
+        return new Syntax("world environment of", WorldCreator.class);
     }
 
     @Override

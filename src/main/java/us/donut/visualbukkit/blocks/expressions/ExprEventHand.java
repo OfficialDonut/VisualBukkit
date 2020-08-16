@@ -4,16 +4,20 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.annotations.Event;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The hand used in a PlayerInteractEvent", "Returns: equipment slot"})
-@Event(PlayerInteractEvent.class)
 public class ExprEventHand extends ExpressionBlock<EquipmentSlot> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("event hand");
+    protected Syntax init() {
+        return new Syntax("event hand");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        validateEvent(PlayerInteractEvent.class);
     }
 
     @Override

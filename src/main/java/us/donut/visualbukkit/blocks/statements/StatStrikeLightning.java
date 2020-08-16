@@ -2,22 +2,23 @@ package us.donut.visualbukkit.blocks.statements;
 
 import org.bukkit.Location;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.plugin.BuildContext;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Strikes lightning at a location")
+@Category(StatementCategory.WORLD)
 public class StatStrikeLightning extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("strike", new ChoiceParameter("real", "fake"), "lightning at", Location.class);
+    protected Syntax init() {
+        return new Syntax("strike", new ChoiceParameter("real", "fake"), "lightning at", Location.class);
     }
 
     @Override
     public String toJava() {
-        BuildContext.addUtilMethod("strikeLightning");
-        return "UtilMethods.strikeLightning(" + arg(1) + "," + arg(0).equals("fake") + ");";
+        return arg(1) + ".getWorld().strike" + (arg(0).equals("real") ? "lightning" : "lightningEffect") + "(" + arg(1) + ");";
     }
 }

@@ -4,14 +4,14 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The bed location of a player", "Returns: location"})
 public class ExprBedLocation extends ExpressionBlock<Location> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("bed location of", Player.class);
+    protected Syntax init() {
+        return new Syntax("bed location of", Player.class);
     }
 
     @Override

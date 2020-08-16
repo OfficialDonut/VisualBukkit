@@ -3,25 +3,26 @@ package us.donut.visualbukkit.blocks.statements;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import us.donut.visualbukkit.blocks.StatementBlock;
+import us.donut.visualbukkit.blocks.StatementCategory;
+import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
-import us.donut.visualbukkit.plugin.BuildContext;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Plays a sound at a location")
+@Category(StatementCategory.WORLD)
 public class StatPlaySoundAtLocation extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("play sound at location")
-                .line("sound:   ", Sound.class)
-                .line("location:", Location.class)
-                .line("volume:  ", float.class)
-                .line("pitch:   ", float.class);
+    protected Syntax init() {
+        return new Syntax("play sound at location", Syntax.LINE_SEPARATOR,
+                "sound:   ", Sound.class, Syntax.LINE_SEPARATOR,
+                "location:", Location.class, Syntax.LINE_SEPARATOR,
+                "volume:  ", float.class, Syntax.LINE_SEPARATOR,
+                "pitch:   ", float.class);
     }
 
     @Override
     public String toJava() {
-        BuildContext.addUtilMethod("playSound");
-        return "UtilMethods.playSound(" + arg(0) + "," + arg(1) + "," + arg(2) + "," + arg(3) + ");";
+        return arg(1) + ".getWorld().playSound(" + arg(1) + "," + arg(0) + "," + arg(2) + "," + arg(3) + ");";
     }
 }

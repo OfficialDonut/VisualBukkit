@@ -2,19 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Skull;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The player of a skull block", "Returns: offline player"})
 @Modifier(ModificationType.SET)
-public class ExprSkullBlockPlayer extends ModifiableExpressionBlock<OfflinePlayer> {
+public class ExprSkullBlockPlayer extends ExpressionBlock<OfflinePlayer> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("player of skull", Skull.class);
+    protected Syntax init() {
+        return new Syntax("player of skull", Skull.class);
     }
 
     @Override

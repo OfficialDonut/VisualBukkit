@@ -3,14 +3,14 @@ package us.donut.visualbukkit.blocks.statements;
 import org.bukkit.entity.Damageable;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Damages a living entity")
 public class StatDamage extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("damage", Damageable.class, "by", double.class);
+    protected Syntax init() {
+        return new Syntax("damage", Damageable.class, "by", double.class);
     }
 
     @Override

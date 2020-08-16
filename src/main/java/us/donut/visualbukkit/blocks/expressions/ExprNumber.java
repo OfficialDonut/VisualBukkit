@@ -1,28 +1,27 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.InputParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.regex.Pattern;
 
-@Category("Math")
 @Description({"A number", "Returns: number"})
 public class ExprNumber extends ExpressionBlock<Double> {
 
     private static Pattern numPattern = Pattern.compile("-?\\d*\\.?\\d*");
 
     @Override
-    protected SyntaxNode init() {
+    protected Syntax init() {
+        getStyleClass().clear();
         InputParameter inputParameter = new InputParameter();
         inputParameter.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!numPattern.matcher(inputParameter.getText()).matches()) {
                 inputParameter.setText(oldValue);
             }
         });
-        return new SyntaxNode(inputParameter);
+        return new Syntax(inputParameter);
     }
 
     @Override

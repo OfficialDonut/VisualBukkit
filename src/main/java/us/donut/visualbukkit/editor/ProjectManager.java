@@ -6,37 +6,37 @@ import javafx.application.Platform;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import org.zeroturnaround.zip.ZipUtil;
 import us.donut.visualbukkit.VisualBukkit;
-import us.donut.visualbukkit.VisualBukkitLauncher;
-import us.donut.visualbukkit.blocks.UndoManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ProjectManager {
 
-    private static Path projectsFolder = VisualBukkitLauncher.DATA_FOLDER.resolve("Projects");
-    private static List<Project> projects = new ArrayList<>();
+    private static Path projectsFolder = VisualBukkit.DATA_FOLDER.resolve("Projects");
+    private static List<String> projects = new ArrayList<>();
     private static Project currentProject;
 
-    public static void loadProjects() {
+    public static void init() {
         try {
             if (Files.notExists(projectsFolder)) {
                 Files.createDirectory(projectsFolder);
             }
-
-            Files.list(projectsFolder).forEach(path -> {
-                if (Files.isDirectory(path)) {
-                    try {
-                        projects.add(new Project(path.getFileName().toString()));
-                    } catch (IOException e) {
-                        VisualBukkit.displayException("Failed to load project", e);
+            try (Stream<Path> pathStream = Files.list(projectsFolder)) {
+                pathStream.forEach(path -> {
+                    if (Files.isDirectory(path)) {
+                        projects.add(path.getFileName().toString());
                     }
-                }
-            });
+                });
+            }
         } catch (IOException e) {
             VisualBukkit.displayException("Failed to load projects", e);
             Platform.exit();
@@ -45,12 +45,13 @@ public class ProjectManager {
         if (projects.isEmpty()) {
             promptCreateProject(false);
         } else {
-            Project lastProject = getProject(VisualBukkitLauncher.DATA_FILE.getConfig().getString("last-project"));
+            String lastProject = VisualBukkit.DATA_FILE.getString("last-project");
             open(lastProject == null ? projects.get(0) : lastProject);
         }
     }
 
-    public static void open(Project project) {
+    public static void open(String projectName) {
+        Project project = new Project(projectName);
         try {
             if (currentProject != null) {
                 currentProject.save();
@@ -58,14 +59,12 @@ public class ProjectManager {
         } catch (IOException e) {
             VisualBukkit.displayException("Failed to save project", e);
         }
-        UndoManager.clear();
         SplitPane splitPane = VisualBukkit.getInstance().getSplitPane();
         splitPane.getItems().set(1, project.getTabPane());
         splitPane.getItems().set(2, project.getProjectPane());
         splitPane.setDividerPositions(0.2, 0.825);
         currentProject = project;
-        currentProject.load();
-        VisualBukkitLauncher.DATA_FILE.getConfig().set("last-project", currentProject.getName());
+        VisualBukkit.DATA_FILE.set("last-project", currentProject.getName());
     }
 
     public static void promptCreateProject(boolean canCancel) {
@@ -77,29 +76,23 @@ public class ProjectManager {
 
         String name = newProjectDialog.showAndWait().orElse("").replaceAll("\\s", "");
 
-        if (projects.stream().anyMatch(project -> project.getName().equalsIgnoreCase(name))) {
-            VisualBukkit.displayError("Project already exists");
+        if (projects.stream().anyMatch(projectName -> projectName.equalsIgnoreCase(name))) {
+            VisualBukkit.displayError("Invalid project name", "There is already a project with this name");
             promptCreateProject(canCancel);
         } else if (name.isEmpty()) {
             if (!canCancel) {
-                VisualBukkit.displayError("Invalid project name");
+                VisualBukkit.displayError("Invalid project name", "Project name cannot be empty");
                 promptCreateProject(false);
             }
         } else {
-            try {
-                Project project = new Project(name);
-                projects.add(project);
-                open(project);
-                project.getPluginEnablePane().open();
-                VisualBukkit.displayMessage("Successfully created project");
-            } catch (IOException e) {
-                VisualBukkit.displayException("Failed to create project", e);
-            }
+            projects.add(name);
+            open(name);
+            VisualBukkit.displayMessage("Created project", "Successfully created project");
         }
     }
 
     public static void promptOpenProject() {
-        ChoiceDialog<Project> openProjectDialog = new ChoiceDialog<>();
+        ChoiceDialog<String> openProjectDialog = new ChoiceDialog<>();
         openProjectDialog.getItems().addAll(projects);
         openProjectDialog.setTitle("Open Project");
         openProjectDialog.setContentText("Project:");
@@ -107,13 +100,13 @@ public class ProjectManager {
         openProjectDialog.setGraphic(null);
         openProjectDialog.showAndWait().ifPresent(project -> {
             open(project);
-            VisualBukkit.displayMessage("Successfully opened project");
+            VisualBukkit.displayMessage("Opened project", "Successfully opened project");
         });
     }
 
     @SuppressWarnings("UnstableApiUsage")
     public static void promptDeleteProject() {
-        ChoiceDialog<Project> deleteProjectDialog = new ChoiceDialog<>();
+        ChoiceDialog<String> deleteProjectDialog = new ChoiceDialog<>();
         deleteProjectDialog.getItems().addAll(projects);
         deleteProjectDialog.setTitle("Delete Project");
         deleteProjectDialog.setContentText("Project:");
@@ -121,12 +114,12 @@ public class ProjectManager {
         deleteProjectDialog.setGraphic(null);
         deleteProjectDialog.showAndWait().ifPresent(project -> {
             try {
-                MoreFiles.deleteRecursively(project.getFolder(), RecursiveDeleteOption.ALLOW_INSECURE);
+                MoreFiles.deleteRecursively(projectsFolder.resolve(project), RecursiveDeleteOption.ALLOW_INSECURE);
                 projects.remove(project);
-                if (project.equals(currentProject)) {
+                if (project.equals(currentProject.getName())) {
                     currentProject = null;
                 }
-                VisualBukkit.displayMessage("Successfully deleted project");
+                VisualBukkit.displayMessage("Deleted project", "Successfully deleted project");
                 if (projects.isEmpty()) {
                     promptCreateProject(false);
                 } else {
@@ -138,20 +131,63 @@ public class ProjectManager {
         });
     }
 
-    public static Project getProject(String name) {
-        for (Project project : projects) {
-            if (project.getName().equalsIgnoreCase(name)) {
-                return project;
+    public static void promptImportProject() {
+        TextInputDialog importProjectDialog = new TextInputDialog();
+        importProjectDialog.setTitle("Import Project");
+        importProjectDialog.setContentText("Project name:");
+        importProjectDialog.setHeaderText(null);
+        importProjectDialog.setGraphic(null);
+
+        String name = importProjectDialog.showAndWait().orElse("").replaceAll("\\s", "");
+
+        if (projects.stream().anyMatch(projectName -> projectName.equalsIgnoreCase(name))) {
+            VisualBukkit.displayError("Invalid project name", "There is already a project with this name");
+            promptImportProject();
+        } else if (!name.isEmpty()) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+            File zipFile = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
+            if (zipFile != null) {
+                ZipUtil.unpack(zipFile, projectsFolder.resolve(name).toFile());
+                projects.add(name);
+                open(name);
+                VisualBukkit.displayMessage("Imported project", "Successfully imported project");
             }
         }
-        return null;
+    }
+
+    public static void promptExportProject() {
+        ChoiceDialog<String> exportProjectDialog = new ChoiceDialog<>();
+        exportProjectDialog.getItems().addAll(projects);
+        exportProjectDialog.setTitle("Export Project");
+        exportProjectDialog.setContentText("Project:");
+        exportProjectDialog.setHeaderText(null);
+        exportProjectDialog.setGraphic(null);
+        exportProjectDialog.showAndWait().ifPresent(project -> {
+            File projectDir = projectsFolder.resolve(project).toFile();
+            if (projectDir.exists()) {
+                DirectoryChooser directoryChooser = new DirectoryChooser();
+                File outputDir = directoryChooser.showDialog(VisualBukkit.getInstance().getPrimaryStage());
+                if (outputDir != null) {
+                    if (currentProject != null && currentProject.getName().equalsIgnoreCase(project)) {
+                        try {
+                            currentProject.save();
+                        } catch (IOException ignored) {}
+                    }
+                    File zipFile = new File(outputDir, project + ".zip");
+                    ZipUtil.pack(projectDir, zipFile);
+                    VisualBukkit.displayMessage("Exported project", "Successfully exported project\n(" + zipFile.toPath() + ")");
+                }
+            }
+        });
+    }
+
+
+    public static Path getProjectsFolder() {
+        return projectsFolder;
     }
 
     public static Project getCurrentProject() {
         return currentProject;
-    }
-
-    public static Path getProjectsFolder() {
-        return projectsFolder;
     }
 }

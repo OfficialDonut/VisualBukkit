@@ -2,14 +2,14 @@ package us.donut.visualbukkit.blocks.statements;
 
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description("Runs a command through console")
 public class StatRunCommand extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("run command", String.class);
+    protected Syntax init() {
+        return new Syntax("run command", String.class);
     }
 
     @Override

@@ -1,18 +1,16 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Math")
 @Description({"A trigonometric function (radians)", "Returns: number"})
 public class ExprTrigFunction extends ExpressionBlock<Double> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(new ChoiceParameter("cos", "sin", "tan", "acos", "asin", "atan"), "(", double.class, ")");
+    protected Syntax init() {
+        return new Syntax(new ChoiceParameter("cos", "sin", "tan", "acos", "asin", "atan"), "(", double.class, ")");
     }
 
     @Override

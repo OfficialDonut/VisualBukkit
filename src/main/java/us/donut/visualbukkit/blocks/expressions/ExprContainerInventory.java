@@ -4,14 +4,14 @@ import org.bukkit.block.Container;
 import org.bukkit.inventory.Inventory;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The inventory of a container block", "Returns: inventory"})
 public class ExprContainerInventory extends ExpressionBlock<Inventory> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("inventory of", Container.class);
+    protected Syntax init() {
+        return new Syntax("inventory of", Container.class);
     }
 
     @Override

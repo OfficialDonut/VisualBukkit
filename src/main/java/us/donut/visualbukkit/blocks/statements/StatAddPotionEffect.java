@@ -4,7 +4,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffectType;
 import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.time.Duration;
 
@@ -12,11 +12,11 @@ import java.time.Duration;
 public class StatAddPotionEffect extends StatementBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("add potion effect")
-                .line("effect:  ", PotionEffectType.class)
-                .line("entity:  ", LivingEntity.class)
-                .line("duration:", Duration.class);
+    protected Syntax init() {
+        return new Syntax("add potion effect", Syntax.LINE_SEPARATOR,
+                "effect:  ", PotionEffectType.class, Syntax.LINE_SEPARATOR,
+                "entity:  ", LivingEntity.class, Syntax.LINE_SEPARATOR,
+                "duration:", Duration.class);
     }
 
     @Override

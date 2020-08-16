@@ -1,19 +1,19 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.boss.BossBar;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The visibility state of a boss bar", "Returns: boolean"})
 @Modifier(ModificationType.SET)
-public class ExprBossBarVisibility extends ModifiableExpressionBlock<Boolean> {
+public class ExprBossBarVisibility extends ExpressionBlock<Boolean> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("visibility state of", BossBar.class);
+    protected Syntax init() {
+        return new Syntax("visibility state of", BossBar.class);
     }
 
     @Override

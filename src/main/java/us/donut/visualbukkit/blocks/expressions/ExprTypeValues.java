@@ -7,7 +7,7 @@ import org.bukkit.entity.EntityType;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import java.util.List;
 public class ExprTypeValues extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("all", new ChoiceParameter("entity", "material", "particle", "sound"), "types");
+    protected Syntax init() {
+        return new Syntax("all", new ChoiceParameter("entity", "material", "particle", "sound"), "types");
     }
 
     @Override

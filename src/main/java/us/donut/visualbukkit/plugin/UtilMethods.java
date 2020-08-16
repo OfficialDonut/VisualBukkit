@@ -1,9 +1,10 @@
 package us.donut.visualbukkit.plugin;
 
 import com.google.common.collect.ForwardingMultimap;
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.EntityType;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -11,28 +12,37 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import us.donut.visualbukkit.plugin.modules.classes.ReflectionUtil;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-@SuppressWarnings("unused")
 public class UtilMethods {
+
+    public static Object addToObject(Object object, Object delta) {
+        if (object instanceof List) {
+            ((List) object).add(delta);
+            return object;
+        } else if (object instanceof Number && delta instanceof Number) {
+            return ((Number) object).doubleValue() + ((Number) delta).doubleValue();
+        } else if (object instanceof Duration && delta instanceof Duration) {
+            return ((Duration) object).plus((Duration) delta);
+        }
+        throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
+    }
 
     public static boolean checkEquals(Object o1, Object o2) {
         if (o1 == null || o2 == null) {
             return false;
         }
         return o1 instanceof Number && o2 instanceof Number ? ((Number) o1).doubleValue() == ((Number) o2).doubleValue() : o1.equals(o2);
-    }
-
-    public static void createExplosion(Location loc, float power, boolean fire, boolean breakBlocks) {
-        loc.getWorld().createExplosion(loc, power, fire, breakBlocks);
     }
 
     public static ItemStack createPotion(PotionType potionType) {
@@ -45,24 +55,12 @@ public class UtilMethods {
         return item;
     }
 
-    public static void dropItem(ItemStack item, Location loc, boolean naturally) {
-        if (naturally) {
-            loc.getWorld().dropItemNaturally(loc, item);
-        } else {
-            loc.getWorld().dropItem(loc, item);
-        }
-    }
-
-    public static void generateTree(TreeType treeType, Location loc) {
-        loc.getWorld().generateTree(loc, treeType);
-    }
-
     public static Object getRandomElement(List list) {
         return list.get(ThreadLocalRandom.current().nextInt(list.size()));
     }
 
-    public static ShapedRecipe getShapedRecipe(ItemStack result, Material... ingredients) {
-        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(PluginMain.getInstance(), UUID.randomUUID().toString()), result);
+    public static ShapedRecipe getShapedRecipe(JavaPlugin plugin, ItemStack result, Material... ingredients) {
+        ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(plugin, UUID.randomUUID().toString()), result);
         for (int i = 0; i < ingredients.length; i++) {
             Material ingredient = ingredients[i];
             if (ingredient != null && ingredient != Material.AIR) {
@@ -97,18 +95,23 @@ public class UtilMethods {
         return obj != null && clazz.isAssignableFrom(obj.getClass());
     }
 
-    public static void playSound(Sound sound, Location loc, float vol, float pitch) {
-        loc.getWorld().playSound(loc, sound, vol, pitch);
-    }
-
-    public static void setBlockData(Block block, byte data) throws InvocationTargetException, IllegalAccessException {
-        ReflectionUtil.getDeclaredMethod(block.getClass(), "setData", byte.class).invoke(block, data);
+    public static Object removeFromObject(Object object, Object delta) {
+        if (object instanceof List) {
+            ((List<?>) object).remove(delta);
+            return object;
+        } else if (object instanceof Number && delta instanceof Number) {
+            return ((Number) object).doubleValue() - ((Number) delta).doubleValue();
+        } else if (object instanceof Duration && delta instanceof Duration) {
+            return ((Duration) object).minus((Duration) delta);
+        }
+        throw new IllegalArgumentException("Cannot remove " + delta + " from " + object);
     }
 
     public static void setDurability(ItemStack item, int damage) {
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta instanceof Damageable) {
             ((Damageable) itemMeta).setDamage(damage);
+            item.setItemMeta(itemMeta);
         }
     }
 
@@ -117,7 +120,7 @@ public class UtilMethods {
         if (itemMeta != null) {
             List<String> coloredLore = new ArrayList<>(lore.size());
             for (Object obj : lore) {
-                coloredLore.add(PluginMain.color((String) obj));
+                coloredLore.add(ChatColor.translateAlternateColorCodes('&', (String) obj));
             }
             itemMeta.setLore(coloredLore);
             item.setItemMeta(itemMeta);
@@ -127,7 +130,7 @@ public class UtilMethods {
     public static void setItemName(ItemStack item, String name) {
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta != null) {
-            itemMeta.setDisplayName(PluginMain.color(name));
+            itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
             item.setItemMeta(itemMeta);
         }
     }
@@ -147,21 +150,5 @@ public class UtilMethods {
         Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass("com.mojang.authlib.properties.Property"), String.class, String.class, String.class).newInstance("textures", value, signature);
         ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "removeAll", Object.class).invoke(propertyMap, "textures");
         ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "put", Object.class, Object.class).invoke(propertyMap, "textures", property);
-    }
-
-    public static void spawnEntity(EntityType entityType, Location loc) {
-        loc.getWorld().spawnEntity(loc, entityType);
-    }
-
-    public static void spawnParticle(int num, Particle particle, Location loc) {
-        loc.getWorld().spawnParticle(particle, loc, num);
-    }
-
-    public static void strikeLightning(Location loc, boolean fake) {
-        if (fake) {
-            loc.getWorld().strikeLightningEffect(loc);
-        } else {
-            loc.getWorld().strikeLightning(loc);
-        }
     }
 }

@@ -2,19 +2,19 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The shooter of a projectile", "Returns: projectile source"})
 @Modifier(ModificationType.SET)
-public class ExprProjectileShooter extends ModifiableExpressionBlock<ProjectileSource> {
+public class ExprProjectileShooter extends ExpressionBlock<ProjectileSource> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("shooter of", Projectile.class);
+    protected Syntax init() {
+        return new Syntax("shooter of", Projectile.class);
     }
 
     @Override

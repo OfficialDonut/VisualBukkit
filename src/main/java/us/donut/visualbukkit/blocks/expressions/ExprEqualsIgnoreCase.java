@@ -4,15 +4,14 @@ import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("String")
 @Description({"Checks if a string equals another ignoring case", "Returns: boolean"})
 public class ExprEqualsIgnoreCase extends ConditionBlock {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode(String.class, new ChoiceParameter("=", "!="), String.class, "ignoring case");
+    protected Syntax init() {
+        return new Syntax(String.class, new ChoiceParameter("=", "!="), String.class, "ignoring case");
     }
 
     @Override

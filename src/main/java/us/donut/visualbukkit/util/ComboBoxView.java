@@ -1,21 +1,28 @@
 package us.donut.visualbukkit.util;
 
-import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseButton;
+import us.donut.visualbukkit.editor.ContextMenuManager;
 
-public class ComboBoxView<T> extends HBox {
+public class ComboBoxView<T> extends CenteredHBox {
 
     private ComboBox<T> comboBox = new ComboBox<>();
+    private ListView<T> listView = new ListView<>();
     private ContextMenu contextMenu = new ContextMenu();
+    private Label arrowLabel = new Label("▾");
+    private Label promptLabel;
     private StringBuilder stringBuilder;
 
     public ComboBoxView() {
-        getStyleClass().addAll("combo-box-base", "combo-box-view");
+        this("---");
+    }
 
-        ListView<T> listView = new ListView<>();
+    public ComboBoxView(String promptText) {
+        getStyleClass().addAll("combo-box-base", "combo-box-view");
+        listView.setPrefHeight(250);
+        listView.setPrefWidth(200);
         listView.setCellFactory(view -> {
             TextFieldListCell<T> cell = new TextFieldListCell<>();
             cell.setConverter(comboBox.getConverter());
@@ -24,12 +31,11 @@ public class ComboBoxView<T> extends HBox {
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 comboBox.setValue(newValue);
-                contextMenu.hide();
+                ContextMenuManager.hide();
             }
         });
 
-        Label label = new Label();
-        label.setOnKeyReleased(e -> {
+        arrowLabel.setOnKeyReleased(e -> {
             if (contextMenu.isShowing()) {
                 if (e.getCode() == KeyCode.BACK_SPACE && stringBuilder.length() > 0) {
                     stringBuilder.deleteCharAt(stringBuilder.length() - 1);
@@ -41,28 +47,49 @@ public class ComboBoxView<T> extends HBox {
                 listView.getItems().removeIf(o -> !comboBox.getConverter().toString(o).toLowerCase().contains(search));
             }
         });
-        getChildren().addAll(label, new Label("▾"));
 
-        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> label.setText(comboBox.getConverter().toString(newValue)));
+        arrowLabel.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.SPACE) {
+                e.consume();
+            }
+        });
 
-        contextMenu.getItems().add(new CustomMenuItem(listView, false));
-        listView.setPrefHeight(250);
-        listView.setPrefWidth(200);
+        comboBox.valueProperty().addListener((observable, oldValue, newValue) -> onSelection(newValue));
+        contextMenu.getItems().add(new CustomMenuItem(listView, true));
+        getChildren().addAll(promptLabel = new Label(promptText), arrowLabel);
 
         setOnMouseClicked(e -> {
-            stringBuilder = new StringBuilder();
-            listView.getItems().setAll(comboBox.getItems());
-            label.requestFocus();
-            Bounds bounds = localToScreen(getBoundsInLocal());
-            contextMenu.show(this, bounds.getMinX(), bounds.getMaxY());
+            if (e.getButton() == MouseButton.PRIMARY) {
+                stringBuilder = new StringBuilder();
+                listView.getItems().setAll(comboBox.getItems());
+                arrowLabel.requestFocus();
+                ContextMenuManager.show(this, contextMenu, e.getScreenX(), localToScreen(getBoundsInLocal()).getMaxY());
+                e.consume();
+            }
         });
+    }
+
+    protected void onSelection(T value) {
+        getChildren().set(0, value != null ? new Label(comboBox.getConverter().toString(value)) : promptLabel);
     }
 
     public ComboBox<T> getComboBox() {
         return comboBox;
     }
 
+    public ListView<T> getListView() {
+        return listView;
+    }
+
     public ContextMenu getContextMenu() {
         return contextMenu;
+    }
+
+    public Label getPromptLabel() {
+        return promptLabel;
+    }
+
+    public Label getArrowLabel() {
+        return arrowLabel;
     }
 }

@@ -1,21 +1,19 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.Player;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
-import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Category("Player")
 @Description({"The flying ability of a player", "Returns: boolean"})
 @Modifier(ModificationType.SET)
-public class ExprFlyingAbility extends ModifiableExpressionBlock<Boolean> {
+public class ExprFlyingAbility extends ExpressionBlock<Boolean> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("flying ability of", Player.class);
+    protected Syntax init() {
+        return new Syntax("flying ability of", Player.class);
     }
 
     @Override

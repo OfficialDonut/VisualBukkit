@@ -1,21 +1,21 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.scoreboard.Team;
+import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.ModificationType;
-import us.donut.visualbukkit.blocks.ModifiableExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
-import us.donut.visualbukkit.blocks.syntax.SyntaxNode;
+import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
 
 @Description({"The entries of a scoreboard team", "Returns: list of strings"})
 @Modifier({ModificationType.ADD, ModificationType.REMOVE})
-public class ExprTeamEntries extends ModifiableExpressionBlock<List> {
+public class ExprTeamEntries extends ExpressionBlock<List> {
 
     @Override
-    protected SyntaxNode init() {
-        return new SyntaxNode("entries of", Team.class);
+    protected Syntax init() {
+        return new Syntax("entries of", Team.class);
     }
 
     @Override
