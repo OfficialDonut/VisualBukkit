@@ -4,7 +4,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Checks if an inventory contains an item stack", "Returns: boolean"})
@@ -12,7 +12,7 @@ public class ExprInventoryContainsItemStack extends ConditionBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(Inventory.class, new ChoiceParameter("contains", "does not contain"), "at least", int.class, ItemStack.class);
+        return new Syntax(Inventory.class, new BinaryChoiceParameter("contains", "does not contain"), "at least", int.class, ItemStack.class);
     }
 
     @Override

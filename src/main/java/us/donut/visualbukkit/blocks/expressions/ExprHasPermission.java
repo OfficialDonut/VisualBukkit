@@ -3,7 +3,7 @@ package us.donut.visualbukkit.blocks.expressions;
 import org.bukkit.permissions.Permissible;
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"Checks if a permissible object has a permission", "Returns: boolean"})
@@ -11,7 +11,7 @@ public class ExprHasPermission extends ConditionBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(Permissible.class, new ChoiceParameter("has", "does not have"), "permission", String.class);
+        return new Syntax(Permissible.class, new BinaryChoiceParameter("has", "does not have"), "permission", String.class);
     }
 
     @Override

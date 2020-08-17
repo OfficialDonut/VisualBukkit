@@ -20,13 +20,18 @@ public abstract class ConditionBlock extends ExpressionBlock<Boolean> {
 
     protected boolean isNegated() {
         if (choiceParameter == null) {
-            for (BlockParameter parameter : getParameters()) {
-                if (parameter instanceof BinaryChoiceParameter) {
-                    choiceParameter = (BinaryChoiceParameter) parameter;
-                }
-            }
-            throw new IllegalStateException("No choice parameter found");
+            findChoiceParameter();
         }
         return choiceParameter.isSecond();
+    }
+
+    private void findChoiceParameter() {
+        for (BlockParameter parameter : getParameters()) {
+            if (parameter instanceof BinaryChoiceParameter) {
+                choiceParameter = (BinaryChoiceParameter) parameter;
+                return;
+            }
+        }
+        throw new IllegalStateException("No choice parameter found");
     }
 }

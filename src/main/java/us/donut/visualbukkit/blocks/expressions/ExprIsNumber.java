@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
 import us.donut.visualbukkit.plugin.UtilMethod;
@@ -12,7 +12,7 @@ public class ExprIsNumber extends ConditionBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(String.class, new ChoiceParameter("is", "is not"), "a number");
+        return new Syntax(String.class, new BinaryChoiceParameter("is", "is not"), "a number");
     }
 
     @Override

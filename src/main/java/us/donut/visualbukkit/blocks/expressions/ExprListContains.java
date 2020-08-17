@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class ExprListContains extends ConditionBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(List.class, new ChoiceParameter("contains", "does not contain"), Object.class);
+        return new Syntax(List.class, new BinaryChoiceParameter("contains", "does not contain"), Object.class);
     }
 
     @Override

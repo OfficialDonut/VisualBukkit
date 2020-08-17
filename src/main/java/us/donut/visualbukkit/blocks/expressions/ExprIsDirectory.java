@@ -2,7 +2,7 @@ package us.donut.visualbukkit.blocks.expressions;
 
 import us.donut.visualbukkit.blocks.ConditionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
-import us.donut.visualbukkit.blocks.syntax.ChoiceParameter;
+import us.donut.visualbukkit.blocks.syntax.BinaryChoiceParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 import java.io.File;
@@ -12,7 +12,7 @@ public class ExprIsDirectory extends ConditionBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(File.class, new ChoiceParameter("is", "is not"), "a directory");
+        return new Syntax(File.class, new BinaryChoiceParameter("is", "is not"), "a directory");
     }
 
     @Override
