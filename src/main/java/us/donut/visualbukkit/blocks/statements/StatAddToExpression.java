@@ -36,6 +36,9 @@ public class StatAddToExpression extends StatementBlock {
             if (deltaParameter == null || deltaParameter.getReturnType() != deltaType) {
                 getSyntaxLine(0).getChildren().set(1, deltaParameter = new ExpressionParameter(deltaType));
             }
+            if (deltaParameter != null) {
+                deltaParameter.update();
+            }
         } else {
             deltaParameter = null;
             getSyntaxLine(0).getChildren().set(1, placeholder);
