@@ -1,5 +1,6 @@
 package us.donut.visualbukkit.util;
 
+import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.KeyCode;
@@ -63,7 +64,8 @@ public class ComboBoxView<T> extends CenteredHBox {
                 stringBuilder = new StringBuilder();
                 listView.getItems().setAll(comboBox.getItems());
                 arrowLabel.requestFocus();
-                ContextMenuManager.show(this, contextMenu, e.getScreenX(), localToScreen(getBoundsInLocal()).getMaxY());
+                Bounds bounds = localToScreen(getBoundsInLocal());
+                ContextMenuManager.show(this, contextMenu, bounds.getMinX(), bounds.getMaxY());
                 e.consume();
             }
         });
