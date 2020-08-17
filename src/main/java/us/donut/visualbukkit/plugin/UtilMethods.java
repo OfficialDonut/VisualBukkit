@@ -26,6 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UtilMethods {
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static Object addToObject(Object object, Object delta) {
         if (object instanceof List) {
             ((List) object).add(delta);

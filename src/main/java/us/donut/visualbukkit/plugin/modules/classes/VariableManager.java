@@ -100,6 +100,7 @@ public class VariableManager {
         return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private static Object addToObject(Object object, Object delta) {
         if (object instanceof List) {
             ((List) object).add(delta);

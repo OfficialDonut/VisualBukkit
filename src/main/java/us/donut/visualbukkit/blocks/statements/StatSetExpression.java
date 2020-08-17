@@ -70,7 +70,7 @@ public class StatSetExpression extends StatementBlock {
         List<DataConfig> parameterConfigs = config.getConfigList("parameters");
         if (!parameterConfigs.isEmpty()) {
             exprParameter.loadFrom(parameterConfigs.get(0));
-            ExpressionBlock expression = exprParameter.getExpression();
+            ExpressionBlock<?> expression = exprParameter.getExpression();
             if (expression != null && parameterConfigs.size() > 1) {
                 deltaParameter = new ExpressionParameter(expression.getDeltaType(ModificationType.SET));
                 getSyntaxLine(0).getChildren().set(3, deltaParameter);
