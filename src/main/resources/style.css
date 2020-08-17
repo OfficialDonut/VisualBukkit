@@ -84,7 +84,7 @@
 
 .expression-block {
     -fx-background-color: gold;
-    -fx-background-radius: 10;
+    -fx-background-radius: 7;
     -fx-border-color: black;
     -fx-border-radius: 7;
     -fx-fill-height: false;
@@ -95,8 +95,8 @@
 .expression-parameter {
     -fx-background-color: white;
     -fx-background-insets: 1;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
 }
 
 .expression-parameter .label {
