@@ -146,7 +146,7 @@
 }
 
 .structure-block {
-    -fx-background-color: orchid;
+    -fx-background-color: rgb(198, 134, 240);
     -fx-background-radius: 10 10 0 0;
     -fx-border-color: black;
     -fx-border-radius: 10 10 0 0;
