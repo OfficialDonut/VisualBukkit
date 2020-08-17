@@ -25,8 +25,8 @@ public class ExprHealth extends ExpressionBlock<Double> {
     public String modify(ModificationType modificationType, String delta) {
         switch (modificationType) {
             case SET: return arg(0) + ".setHealth(" + delta + ");";
-            case ADD: return modify(ModificationType.SET, toJava() + "-" + delta);
-            case REMOVE: return modify(ModificationType.SET, toJava() + "+" + delta);
+            case ADD: return modify(ModificationType.SET, toJava() + "+" + delta);
+            case REMOVE: return modify(ModificationType.SET, toJava() + "-" + delta);
             default: return null;
         }
     }
