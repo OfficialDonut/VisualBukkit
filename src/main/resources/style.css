@@ -93,7 +93,7 @@
 }
 
 .expression-parameter {
-    -fx-background-color: white;
+    -fx-background-color: rgb(241, 109, 208);
     -fx-background-insets: 1;
     -fx-background-radius: 7;
     -fx-border-radius: 7;
