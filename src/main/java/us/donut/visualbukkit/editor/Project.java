@@ -29,6 +29,7 @@ import java.util.List;
 public class Project {
 
     private String name;
+    private Path folder;
     private DataFile dataFile;
     private TabPane tabPane;
     private Pane projectPane;
@@ -45,7 +46,7 @@ public class Project {
 
     public Project(String name) {
         this.name = name;
-        Path folder = ProjectManager.getProjectsFolder().resolve(name);
+        folder = ProjectManager.getProjectsFolder().resolve(name);
         if (Files.notExists(folder)) {
             try {
                 Files.createDirectory(folder);
@@ -53,13 +54,7 @@ public class Project {
                 VisualBukkit.displayException("Failed to create project folder", e);
             }
         }
-        Path dataFilePath = folder.resolve("data.yml");
-        if (Files.exists(dataFilePath)) {
-            try {
-                Files.copy(dataFilePath, folder.resolve("data-backup.yml"), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException ignored) {}
-        }
-        dataFile = new DataFile(dataFilePath);
+        dataFile = new DataFile(folder.resolve("data.yml"));
         tabPane = (DndTabPane) DndTabPaneFactory.createDefaultDnDPane(DndTabPaneFactory.FeedbackType.MARKER, null).getChildren().get(0);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         projectPane = new Pane();
@@ -105,6 +100,11 @@ public class Project {
     }
 
     public void save() throws IOException {
+        if (Files.exists(folder.resolve("data.yml"))) {
+            try {
+                Files.copy(folder.resolve("data.yml"), folder.resolve("data-backup.yml"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ignored) {}
+        }
         dataFile.clear();
         List<DataConfig> canvasConfigs = new ArrayList<>();
         for (BlockCanvas canvas : canvases) {
