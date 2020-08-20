@@ -19,6 +19,6 @@ public class StatStrikeLightning extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(1) + ".getWorld().strike" + (arg(0).equals("real") ? "lightning" : "lightningEffect") + "(" + arg(1) + ");";
+        return arg(1) + ".getWorld().strike" + (arg(0).equals("real") ? "Lightning" : "LightningEffect") + "(" + arg(1) + ");";
     }
 }
