@@ -42,6 +42,7 @@ public class SelectorPane extends TabPane {
         for (Map.Entry<StatementCategory, Set<StatementLabel>> entry : labels.entrySet()) {
             TextField searchField = new TextField();
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                newValue = newValue.toLowerCase();
                 for (Label label : entry.getValue()) {
                     boolean state = newValue.isEmpty() || label.getText().toLowerCase().contains(newValue);
                     label.setVisible(state);
