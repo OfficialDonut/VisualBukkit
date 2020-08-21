@@ -1,12 +1,12 @@
 package us.donut.visualbukkit.blocks.expressions;
 
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
 import us.donut.visualbukkit.blocks.ExpressionBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Description({"The human entity that clicked in an InventoryClickEvent", "Returns: human entity"})
+@Description({"The human entity that clicked in an InventoryInteractEvent", "Returns: human entity"})
 public class ExprEventInventoryClicker extends ExpressionBlock<HumanEntity> {
 
     @Override
@@ -17,7 +17,7 @@ public class ExprEventInventoryClicker extends ExpressionBlock<HumanEntity> {
     @Override
     public void update() {
         super.update();
-        validateEvent(InventoryClickEvent.class);
+        validateEvent(InventoryInteractEvent.class);
     }
 
     @Override
