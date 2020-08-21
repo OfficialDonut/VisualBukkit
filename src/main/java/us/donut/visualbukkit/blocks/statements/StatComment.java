@@ -10,8 +10,13 @@ public class StatComment extends StatementBlock {
 
     @Override
     protected Syntax init() {
-        setOpacity(0.5);
         return new Syntax("//", new InputParameter());
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        syntaxBox.setOpacity(0.5);
     }
 
     @Override
