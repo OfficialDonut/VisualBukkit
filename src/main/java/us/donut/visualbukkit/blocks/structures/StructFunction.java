@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.StringLiteralParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
 
-import java.util.Collection;
+import java.util.List;
 
 @Description("Defines a function")
 public class StructFunction extends StructureBlock {
@@ -20,7 +20,7 @@ public class StructFunction extends StructureBlock {
 
     @Override
     public void insertInto(JavaClassSource mainClass) {
-        MethodSource<JavaClassSource> functionMethod = mainClass.getMethod("function", String.class, Collection.class);
+        MethodSource<JavaClassSource> functionMethod = mainClass.getMethod("function", String.class, List.class);
         String childJava = getChildJava();
         functionMethod.setBody(
                 "if (function.equalsIgnoreCase(" + arg(0) + ")) {" +

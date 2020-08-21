@@ -21,6 +21,6 @@ public class ExprFunctionArgument extends ExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return "args[" + arg(0) + "]";
+        return "args.get(" + arg(0) + ")";
     }
 }

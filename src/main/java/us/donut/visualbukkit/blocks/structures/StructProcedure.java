@@ -8,7 +8,7 @@ import us.donut.visualbukkit.blocks.syntax.StringLiteralParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.plugin.BuildContext;
 
-import java.util.Collection;
+import java.util.List;
 
 @Description("Defines a procedure")
 public class StructProcedure extends StructureBlock {
@@ -20,7 +20,7 @@ public class StructProcedure extends StructureBlock {
 
     @Override
     public void insertInto(JavaClassSource mainClass) {
-        MethodSource<JavaClassSource> procedureMethod = mainClass.getMethod("procedure", String.class, Collection.class);
+        MethodSource<JavaClassSource> procedureMethod = mainClass.getMethod("procedure", String.class, List.class);
         String childJava = getChildJava();
         procedureMethod.setBody(
                 "if (procedure.equalsIgnoreCase(" + arg(0) + ")) {" +

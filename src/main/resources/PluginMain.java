@@ -27,9 +27,9 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
-    public static void procedure(String procedure, Collection<?> args) throws Exception {}
+    public static void procedure(String procedure, List<?> args) throws Exception {}
 
-    public static Object function(String function, Collection<?> args) throws Exception {
+    public static Object function(String function, List<?> args) throws Exception {
         return null;
     }
 
