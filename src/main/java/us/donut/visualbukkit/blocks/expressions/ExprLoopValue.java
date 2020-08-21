@@ -39,6 +39,6 @@ public class ExprLoopValue extends ExpressionBlock<Object> {
                 block = block.getPrevious();
             }
         }
-        return num;
+        return num - 1;
     }
 }
