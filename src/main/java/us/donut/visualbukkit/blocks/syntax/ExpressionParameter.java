@@ -115,7 +115,7 @@ public class ExpressionParameter extends ComboBoxView<ExpressionDefinition<?>> i
     public String toJava() {
         return expression != null && expression.isValid() ?
                 TypeHandler.convert(expression.getReturnType(), returnType, expression.toJava()) :
-                "((" + returnType.getCanonicalName() + ")" + (returnType.isPrimitive() ? "0" : "null") + ")";
+                "((" + returnType.getCanonicalName() + ")" + (returnType.isPrimitive() ? "(Object) null" : "null") + ")";
     }
 
     @Override
