@@ -16,17 +16,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.structures.StructEventListener;
 import us.donut.visualbukkit.blocks.syntax.BlockParameter;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 import us.donut.visualbukkit.editor.*;
 import us.donut.visualbukkit.util.CenteredHBox;
+import us.donut.visualbukkit.util.DataFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 public abstract class StatementBlock extends VBox implements CodeBlock {
 
@@ -48,6 +49,7 @@ public abstract class StatementBlock extends VBox implements CodeBlock {
         getChildren().addAll(syntaxBox, nextStatementIndicator, nextStatementPane);
         MenuItem copyItem = new MenuItem("Copy");
         MenuItem deleteItem = new MenuItem("Delete");
+        MenuItem exportItem = new MenuItem("Export");
         copyItem.setOnAction(e -> CopyPasteManager.copy(this));
         deleteItem.setOnAction(e -> {
             if (canDelete()) {
@@ -67,7 +69,22 @@ public abstract class StatementBlock extends VBox implements CodeBlock {
                 VisualBukkit.displayError("Invalid deletion", "Cannot delete this block");
             }
         });
-        contextMenu.getItems().addAll(copyItem, deleteItem);
+        exportItem.setOnAction(e -> {
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            File outputDir = directoryChooser.showDialog(VisualBukkit.getInstance().getPrimaryStage());
+            if (outputDir != null) {
+                DataFile dataFile = new DataFile(new File(outputDir, UUID.randomUUID() + ".yml").toPath());
+                try {
+                    dataFile.set("=", getIdentifier());
+                    saveTo(dataFile);
+                    dataFile.save();
+                    VisualBukkit.displayMessage("Exported block", "Successfully exported block\n(" + outputDir + ")");
+                } catch (IOException ex) {
+                    VisualBukkit.displayException("Failed to export block", ex);
+                }
+            }
+        });
+        contextMenu.getItems().addAll(copyItem, deleteItem, exportItem);
         syntaxBox.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 

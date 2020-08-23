@@ -7,10 +7,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import us.donut.visualbukkit.VisualBukkit;
 import us.donut.visualbukkit.blocks.*;
 import us.donut.visualbukkit.util.DataConfig;
+import us.donut.visualbukkit.util.DataFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +104,7 @@ public class BlockCanvas extends Pane {
         MenuItem renameItem = new MenuItem("Rename");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem newCanvasItem = new MenuItem("New Canvas");
+        MenuItem importItem = new MenuItem("Import Block");
         invalidPasteItem.setStyle("-fx-opacity: 0.5;");
         pasteItem.setOnAction(e -> {
             UndoManager.capture();
@@ -159,9 +163,24 @@ public class BlockCanvas extends Pane {
                 }
             }
         });
+        importItem.setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("YAML", "*.yml"));
+            File file = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
+            if (file != null) {
+                DataFile dataFile = new DataFile(file.toPath());
+                StatementDefinition<?> statement = BlockRegistry.getStatement(dataFile.getString("="));
+                if (statement != null) {
+                    add(statement.createBlock(dataFile), contextMenu.getX(), contextMenu.getY());
+                } else {
+                    VisualBukkit.displayError("Import failed", "Failed to import block");
+                }
+                VisualBukkit.displayMessage("Imported block", "Successfully imported block");
+            }
+        });
         contextMenu.getItems().addAll(name.equalsIgnoreCase("Main Canvas") ?
-                new MenuItem[]{pasteItem, organizeItem, clearItem, newCanvasItem} :
-                new MenuItem[]{pasteItem, organizeItem, clearItem, renameItem, deleteItem, newCanvasItem});
+                new MenuItem[]{pasteItem, organizeItem, clearItem, newCanvasItem, importItem} :
+                new MenuItem[]{pasteItem, organizeItem, clearItem, renameItem, deleteItem, newCanvasItem, importItem});
         setOnMousePressed(e -> ContextMenuManager.hide());
         setOnContextMenuRequested(e -> {
             contextMenu.getItems().set(0, CopyPasteManager.getCopied() instanceof StatementDefinition ? pasteItem : invalidPasteItem);
