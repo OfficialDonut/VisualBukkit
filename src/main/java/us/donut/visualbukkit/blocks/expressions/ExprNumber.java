@@ -16,6 +16,7 @@ public class ExprNumber extends ExpressionBlock<Double> {
     protected Syntax init() {
         getStyleClass().clear();
         InputParameter inputParameter = new InputParameter();
+        inputParameter.setStyle("-fx-background-color: lightgreen;");
         inputParameter.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!numPattern.matcher(inputParameter.getText()).matches()) {
                 inputParameter.setText(oldValue);
