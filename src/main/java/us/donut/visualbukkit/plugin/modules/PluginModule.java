@@ -20,6 +20,14 @@ public enum PluginModule {
     WORLDGUARD(WorldGuardHook.class),
     VAULT(VaultHook.class),
 
+    GUI(GuiManager.class, GuiIdentifier.class) {
+        @Override
+        public void insertInto(JavaClassSource mainClass) {
+            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+            enableMethod.setBody(enableMethod.getBody() + "getServer().getPluginManager().registerEvents(GuiManager.getInstance(), this);");
+        }
+    },
+
     PlACEHOLDERAPI(ExpansionHandler.class, PapiExpansion.class, PlaceholderEvent.class) {
         @Override
         public void insertInto(JavaClassSource mainClass) {
