@@ -5,7 +5,9 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.apache.commons.lang.ClassUtils;
 import org.bukkit.*;
+import org.bukkit.attribute.Attributable;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.*;
@@ -115,6 +117,15 @@ public class TypeHandler {
         if (from == Object.class && to.isPrimitive()) {
             Class<?> wrapper = ClassUtils.primitiveToWrapper(to);
             return convert(wrapper, to, "((" + wrapper.getCanonicalName() + ")" + src + ")");
+        }
+        if (CommandSender.class.isAssignableFrom(from) && to == OfflinePlayer.class) {
+            return "((" + to.getCanonicalName() + ")" + src + ")";
+        }
+        if (Entity.class.isAssignableFrom(from) && to == Sittable.class) {
+            return "((" + to.getCanonicalName() + ")" + src + ")";
+        }
+        if ((CommandSender.class.isAssignableFrom(from) || Entity.class.isAssignableFrom(from)) && to == Attributable.class) {
+            return "((" + to.getCanonicalName() + ")" + src + ")";
         }
         throw new IllegalArgumentException();
     }

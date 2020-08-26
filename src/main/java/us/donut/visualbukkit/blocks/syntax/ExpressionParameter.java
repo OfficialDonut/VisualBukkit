@@ -6,6 +6,8 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import us.donut.visualbukkit.blocks.*;
+import us.donut.visualbukkit.blocks.expressions.ExprNumber;
+import us.donut.visualbukkit.blocks.expressions.ExprString;
 import us.donut.visualbukkit.editor.BlockCanvas;
 import us.donut.visualbukkit.editor.ContextMenuManager;
 import us.donut.visualbukkit.editor.CopyPasteManager;
@@ -77,6 +79,18 @@ public class ExpressionParameter extends ComboBoxView<ExpressionDefinition<?>> i
             getComboBox().setValue(BlockRegistry.getExpression(expression.getClass()));
         });
         contextMenu.getItems().add(pasteItem);
+        if (returnType == String.class) {
+            MenuItem stringItem = new MenuItem("Insert String");
+            stringItem.setStyle("-fx-text-fill: white;");
+            stringItem.setOnAction(e -> getComboBox().setValue(BlockRegistry.getExpression(ExprString.class)));
+            contextMenu.getItems().add(stringItem);
+        }
+        if (TypeHandler.isNumber(returnType)) {
+            MenuItem numberItem = new MenuItem("Insert Number");
+            numberItem.setStyle("-fx-text-fill: white;");
+            numberItem.setOnAction(e -> getComboBox().setValue(BlockRegistry.getExpression(ExprNumber.class)));
+            contextMenu.getItems().add(numberItem);
+        }
         setOnContextMenuRequested(e -> {
             BlockDefinition<?> copied = CopyPasteManager.getCopied();
             contextMenu.getItems().set(0, copied instanceof ExpressionDefinition && validator.test((ExpressionDefinition<?>) copied) ? pasteItem : invalidPasteItem);
@@ -115,7 +129,7 @@ public class ExpressionParameter extends ComboBoxView<ExpressionDefinition<?>> i
     public String toJava() {
         return expression != null && expression.isValid() ?
                 TypeHandler.convert(expression.getReturnType(), returnType, expression.toJava()) :
-                "((" + returnType.getCanonicalName() + ")" + (returnType.isPrimitive() ? "0" : "null") + ")";
+                "((" + returnType.getCanonicalName() + ")" + (returnType.isPrimitive() ? "(Object) null" : "null") + ")";
     }
 
     @Override

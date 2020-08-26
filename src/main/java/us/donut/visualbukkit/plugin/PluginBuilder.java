@@ -187,7 +187,14 @@ public class PluginBuilder {
                 " (" + new File(diagnostic.getSource().getName()).getName() + " " + diagnostic.getLineNumber() + ")");
         StandardJavaFileManager manager = compiler.getStandardFileManager(listener, Locale.getDefault(), StandardCharsets.UTF_8);
         Iterable<? extends JavaFileObject> files = manager.getJavaFileObjects(packageDir.toFile().listFiles(file -> file.getName().endsWith(".java")));
-        List<String> options = Arrays.asList("-cp", ".;" + packageDir.getParent(), "-source", "1.8", "-target", "1.8", "-nowarn");
+        StringBuilder classPath = new StringBuilder("." + File.pathSeparator + packageDir.getParent());
+        Path dependDir = packageDir.getParent().resolveSibling("depend");
+        if (Files.isDirectory(dependDir)) {
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dependDir, path -> path.toString().endsWith(".jar"))) {
+                stream.forEach(path -> classPath.append(File.pathSeparator).append(path));
+            } catch (IOException ignored) {}
+        }
+        List<String> options = Arrays.asList("-cp", classPath.toString(), "-source", "1.8", "-target", "1.8", "-nowarn");
         compiler.getTask(null, manager, listener, options, null, files).call();
         return errorStringJoiner.toString();
     }
