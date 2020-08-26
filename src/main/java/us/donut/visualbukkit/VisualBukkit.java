@@ -1,5 +1,6 @@
 package us.donut.visualbukkit;
 
+import com.google.common.io.CharStreams;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -32,7 +33,10 @@ import us.donut.visualbukkit.util.DataFile;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,16 +98,18 @@ public class VisualBukkit extends Application {
         notifyPreloader(new Preloader.ProgressNotification(1));
         primaryStage.show();
         ProjectManager.init();
+        checkForUpdate();
     }
 
     private void createMenuBar() {
-        MenuItem saveItem = new MenuItem("Save");
         MenuItem newItem = new MenuItem("New");
         MenuItem openItem = new MenuItem("Open");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem importItem = new MenuItem("Import");
         MenuItem exportItem = new MenuItem("Export");
+        MenuItem saveItem = new MenuItem("Save");
         MenuItem exitItem = new MenuItem("Exit");
+        MenuItem updateItem = new MenuItem("Check For Update");
         saveItem.setOnAction(e -> save(true));
         newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
         openItem.setOnAction(e -> ProjectManager.promptOpenProject());
@@ -111,8 +117,13 @@ public class VisualBukkit extends Application {
         importItem.setOnAction(e -> ProjectManager.promptImportProject());
         exportItem.setOnAction(e -> ProjectManager.promptExportProject());
         exitItem.setOnAction(e -> primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+        updateItem.setOnAction(e -> {
+            if (!checkForUpdate()) {
+                VisualBukkit.displayMessage("No update", "Running latest Visual Bukkit version");
+            }
+        });
         Menu fileMenu = new Menu("File");
-        fileMenu.getItems().addAll(newItem, openItem, deleteItem, new SeparatorMenuItem(), importItem, exportItem, new SeparatorMenuItem(), saveItem, exitItem);
+        fileMenu.getItems().addAll(newItem, openItem, deleteItem, new SeparatorMenuItem(), importItem, exportItem, new SeparatorMenuItem(), saveItem, exitItem, new SeparatorMenuItem(), updateItem);
 
         MenuItem undoItem = new MenuItem("Undo");
         MenuItem redoItem = new MenuItem("Redo");
@@ -243,6 +254,26 @@ public class VisualBukkit extends Application {
         } catch (IOException e) {
             displayException("Failed to save", e);
         }
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    private boolean checkForUpdate() {
+        try (InputStreamReader reader = new InputStreamReader(new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream(), StandardCharsets.UTF_8)) {
+            if (!VERSION.equals("v" + CharStreams.toString(reader).trim())) {
+                ButtonType viewButton = new ButtonType("View Update");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "An update is available", viewButton, new ButtonType("Ignore"));
+                alert.setTitle("Update Available");
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == viewButton) {
+                        openURI("https://github.com/OfficialDonut/VisualBukkit/releases");
+                    }
+                });
+                return true;
+            }
+        } catch (IOException ignored) {}
+        return false;
     }
 
     public static void displayMessage(String title, String message) {
