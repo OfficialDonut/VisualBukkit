@@ -86,7 +86,7 @@ public class StructEventListener extends StructureBlock {
         String childJava = getChildJava();
         mainSource.addMethod(
                 "@EventHandler(priority=EventPriority." + arg(0) + ")" +
-                "public void on" + event.getSimpleName() + (counter++) + "(" + event.getCanonicalName() + " event) throws Exception {" +
+                "public void on" + event.getSimpleName() + (counter++) + "(" + (event == PlaceholderEvent.class ? event.getSimpleName() : event.getCanonicalName()) + " event) throws Exception {" +
                 BuildContext.declareLocalVariables() +
                 childJava +
                 "}");
