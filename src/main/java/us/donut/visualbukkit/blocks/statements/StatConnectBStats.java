@@ -17,6 +17,6 @@ public class StatConnectBStats extends StatementBlock {
     @Override
     public String toJava() {
         BuildContext.addPluginModule(PluginModule.BSTATS);
-        return "new org.bstats.bukkit.Metrics(PluginMain.getInstance()," + arg(0) + ");";
+        return "new Metrics(PluginMain.getInstance()," + arg(0) + ");";
     }
 }

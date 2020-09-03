@@ -1,6 +1,9 @@
 package us.donut.visualbukkit.plugin.modules;
 
 import com.google.common.collect.ObjectArrays;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.NotFoundException;
 import org.bstats.bukkit.Metrics;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -60,15 +63,22 @@ public enum PluginModule {
         return classes.toArray(new Class<?>[0]);
     }
 
-    private Class<?>[] classes;
+    private Set<Class<?>> classes = new HashSet<>();
 
     PluginModule(Class<?>... classes) {
-        this.classes = classes;
+        for (Class<?> clazz : classes) {
+            this.classes.add(clazz);
+            try {
+                for (CtClass ctClass : ClassPool.getDefault().getCtClass(clazz.getName()).getNestedClasses()) {
+                    this.classes.add(Class.forName(ctClass.getName()));
+                }
+            } catch (NoClassDefFoundError | NotFoundException | ClassNotFoundException ignored) {}
+        }
     }
 
     public void insertInto(JavaClassSource mainClass) {}
 
-    public Class<?>[] getClasses() {
+    public Set<Class<?>> getClasses() {
         return classes;
     }
 }
