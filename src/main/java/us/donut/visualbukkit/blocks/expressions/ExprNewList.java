@@ -47,7 +47,7 @@ public class ExprNewList extends ExpressionBlock<List> {
         for (BlockParameter parameter : parameters) {
             joiner.add(parameter.toJava());
         }
-        return "Arrays.asList(" + joiner + ")";
+        return "new ArrayList(Arrays.asList(" + joiner + "))";
     }
 
     @Override
