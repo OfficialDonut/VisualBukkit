@@ -16,6 +16,6 @@ public class ExprJoinStrings extends ExpressionBlock<String> {
 
     @Override
     public String toJava() {
-        return "String.join(" + arg(1) + ",(List<String>)" + arg(0) + ")";
+        return "String.join(" + arg(1) + ",(List<String>) (Object)" + arg(0) + ")";
     }
 }
