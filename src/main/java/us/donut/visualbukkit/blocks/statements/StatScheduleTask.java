@@ -17,7 +17,7 @@ public class StatScheduleTask extends ParentBlock {
 
     @Override
     protected Syntax init() {
-        return new Syntax(new BinaryChoiceParameter("synchronously", "asynchronously"), "execute", new BinaryChoiceParameter("after", "every"), Duration.class);
+        return new Syntax(new BinaryChoiceParameter("sync", "async"), "execute", new BinaryChoiceParameter("after", "every"), Duration.class);
     }
 
     @Override
