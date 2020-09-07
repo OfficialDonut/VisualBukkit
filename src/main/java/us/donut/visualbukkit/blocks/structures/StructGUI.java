@@ -32,7 +32,6 @@ public class StructGUI extends StructureBlock {
                 .filter(InventoryType::isCreatable)
                 .sorted(Comparator.comparing(Enum::name))
                 .toArray(InventoryType[]::new));
-        typeComboBoxView.getComboBox().setValue(InventoryType.CHEST);
         typeComboBoxView.getStylesheets().add("/style.css");
     }
 
@@ -48,7 +47,7 @@ public class StructGUI extends StructureBlock {
     public void update() {
         super.update();
         if (type == null) {
-            typeComboBoxView.getComboBox().getSelectionModel().select(0);
+            typeComboBoxView.getComboBox().getSelectionModel().select(InventoryType.CHEST);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("New GUI");
             alert.setHeaderText(null);
