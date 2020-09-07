@@ -14,9 +14,9 @@ public class StatAddPotionEffect extends StatementBlock {
     @Override
     protected Syntax init() {
         return new Syntax("add potion effect", Syntax.LINE_SEPARATOR,
-                "effect:  ", PotionEffectType.class, Syntax.LINE_SEPARATOR,
-                "entity:  ", LivingEntity.class, Syntax.LINE_SEPARATOR,
-                "duration:", Duration.class, Syntax.LINE_SEPARATOR,
+                "effect:   ", PotionEffectType.class, Syntax.LINE_SEPARATOR,
+                "entity:   ", LivingEntity.class, Syntax.LINE_SEPARATOR,
+                "duration: ", Duration.class, Syntax.LINE_SEPARATOR,
                 "amplifier:", int.class, Syntax.LINE_SEPARATOR,
                 "ambient:  ", boolean.class, Syntax.LINE_SEPARATOR,
                 "particles:", boolean.class, Syntax.LINE_SEPARATOR,
