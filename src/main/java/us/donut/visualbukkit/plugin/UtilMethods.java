@@ -5,13 +5,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
@@ -112,6 +110,15 @@ public class UtilMethods {
         ItemMeta itemMeta = item.getItemMeta();
         if (itemMeta instanceof Damageable) {
             ((Damageable) itemMeta).setDamage(damage);
+            item.setItemMeta(itemMeta);
+        }
+    }
+
+    public static void setItemBlockState(ItemStack item, BlockState state) {
+        ItemMeta itemMeta = item.getItemMeta();
+        if (itemMeta instanceof BlockStateMeta) {
+            state.update();
+            ((BlockStateMeta) itemMeta).setBlockState(state);
             item.setItemMeta(itemMeta);
         }
     }

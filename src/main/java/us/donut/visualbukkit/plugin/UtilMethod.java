@@ -11,6 +11,7 @@ public enum UtilMethod {
     IS_TYPE("isType"),
     REMOVE_FROM_OBJECT("removeFromObject"),
     SET_DURABILITY("setDurability"),
+    SET_ITEM_BLOCK_STATE("setItemBlockState"),
     SET_ITEM_LORE("setItemLore"),
     SET_ITEM_NAME("setItemName"),
     SET_OWNING_PLAYER("setOwningPlayer"),
