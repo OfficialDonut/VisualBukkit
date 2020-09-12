@@ -19,6 +19,7 @@ public enum PluginModule {
 
     BSTATS(Metrics.class),
     DATABASE(ObjectArrays.concat(DatabaseManager.class, getClasses("com.zaxxer.hikari"))),
+    DURATION(Duration.class),
     REFLECTION_UTIL(ReflectionUtil.class),
     WORLDGUARD(WorldGuardHook.class),
     VAULT(VaultHook.class),

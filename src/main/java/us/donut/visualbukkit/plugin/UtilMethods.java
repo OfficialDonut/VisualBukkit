@@ -16,7 +16,6 @@ import org.bukkit.potion.PotionType;
 import us.donut.visualbukkit.plugin.modules.classes.ReflectionUtil;
 
 import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,8 +30,6 @@ public class UtilMethods {
             return object;
         } else if (object instanceof Number && delta instanceof Number) {
             return ((Number) object).doubleValue() + ((Number) delta).doubleValue();
-        } else if (object instanceof Duration && delta instanceof Duration) {
-            return ((Duration) object).plus((Duration) delta);
         }
         throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
     }
@@ -100,8 +97,6 @@ public class UtilMethods {
             return object;
         } else if (object instanceof Number && delta instanceof Number) {
             return ((Number) object).doubleValue() - ((Number) delta).doubleValue();
-        } else if (object instanceof Duration && delta instanceof Duration) {
-            return ((Duration) object).minus((Duration) delta);
         }
         throw new IllegalArgumentException("Cannot remove " + delta + " from " + object);
     }

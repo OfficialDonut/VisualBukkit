@@ -16,10 +16,10 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
+import us.donut.visualbukkit.plugin.modules.classes.Duration;
 
 import java.io.File;
 import java.sql.PreparedStatement;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;

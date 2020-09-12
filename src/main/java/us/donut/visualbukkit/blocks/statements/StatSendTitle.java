@@ -6,8 +6,7 @@ import us.donut.visualbukkit.blocks.StatementCategory;
 import us.donut.visualbukkit.blocks.annotations.Category;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
-
-import java.time.Duration;
+import us.donut.visualbukkit.plugin.modules.classes.Duration;
 
 @Description("Sends a title to a player")
 @Category(StatementCategory.PLAYER)
@@ -27,6 +26,6 @@ public class StatSendTitle extends StatementBlock {
     @Override
     public String toJava() {
         return arg(2) + ".sendTitle(" + arg(0) + "," + arg(1) + ",(int)" +
-                arg(3) + ".getSeconds()*20,(int)" + arg(4) + ".getSeconds()*20,(int)" + arg(5) + ".getSeconds()*20);";
+                arg(3) + ".getTicks(),(int)" + arg(4) + ".getTicks(),(int)" + arg(5) + ".getTicks());";
     }
 }
