@@ -59,9 +59,9 @@ public class StatScheduleTask extends ParentBlock {
         BuildContext.getLocalVariables().addAll(parentVariables);
         String method;
         if (arg(1).equals("after")) {
-            method = (arg(0).equals("synchronously") ? ".runTaskLater" : ".runTaskLaterAsynchronously") + "(PluginMain.getInstance()," + arg(2) + ".getTicks());";
+            method = (arg(0).equals("sync") ? ".runTaskLater" : ".runTaskLaterAsynchronously") + "(PluginMain.getInstance()," + arg(2) + ".getTicks());";
         } else {
-            method = (arg(0).equals("synchronously") ? ".runTaskTimer" : ".runTaskTimerAsynchronously") + "(PluginMain.getInstance(), 0, " + arg(2) + ".getTicks());";
+            method = (arg(0).equals("sync") ? ".runTaskTimer" : ".runTaskTimerAsynchronously") + "(PluginMain.getInstance(), 0, " + arg(2) + ".getTicks());";
         }
         return finalDeclarations +
                 "new org.bukkit.scheduler.BukkitRunnable() {" +
