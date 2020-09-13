@@ -14,6 +14,7 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import us.donut.visualbukkit.plugin.modules.classes.Duration;
@@ -118,7 +119,7 @@ public class TypeHandler {
             Class<?> wrapper = ClassUtils.primitiveToWrapper(to);
             return convert(wrapper, to, "((" + wrapper.getCanonicalName() + ")" + src + ")");
         }
-        if (CommandSender.class.isAssignableFrom(from) && to == OfflinePlayer.class) {
+        if (CommandSender.class.isAssignableFrom(from) && (to == OfflinePlayer.class || to == ProjectileSource.class)) {
             return "((" + to.getCanonicalName() + ")" + src + ")";
         }
         if (Entity.class.isAssignableFrom(from) && to == Sittable.class) {
