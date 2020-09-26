@@ -7,7 +7,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.annotations.Modifier;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Description("The tamed state of a tameable entity")
+@Description({"The tamed state of a tameable entity", "Returns: boolean"})
 @Modifier(ModificationType.SET)
 public class ExprTamedState extends ExpressionBlock<Boolean> {
 
