@@ -37,13 +37,19 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
         }
 
         MenuItem copyItem = new MenuItem("Copy");
+        MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
         copyItem.setOnAction(e -> CopyPasteManager.copy(this));
+        cutItem.setOnAction(e -> {
+            CopyPasteManager.copy(this);
+            UndoManager.capture();
+            ((ExpressionParameter) getParent()).getComboBox().setValue(null);
+        });
         deleteItem.setOnAction(e -> {
             UndoManager.capture();
             ((ExpressionParameter) getParent()).getComboBox().setValue(null);
         });
-        contextMenu.getItems().addAll(copyItem, deleteItem);
+        contextMenu.getItems().addAll(copyItem, cutItem, deleteItem);
         setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
