@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
 @Description({"The value of pi", "Returns: number"})
-public class ExprPi extends ExpressionBlock<Number> {
+public class ExprPi extends ExpressionBlock<Double> {
 
     @Override
     protected Syntax init() {
