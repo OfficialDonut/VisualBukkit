@@ -48,23 +48,23 @@ public abstract class StatementBlock extends VBox implements CodeBlock {
         setOnMouseDragged(Event::consume);
         getChildren().addAll(syntaxBox, nextStatementIndicator, nextStatementPane);
         MenuItem copyItem = new MenuItem("Copy");
+        MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem exportItem = new MenuItem("Export");
         copyItem.setOnAction(e -> CopyPasteManager.copy(this));
+        cutItem.setOnAction(e -> {
+            if (canDelete()) {
+                CopyPasteManager.copy(this);
+                UndoManager.capture();
+                delete();
+            } else {
+                VisualBukkit.displayError("Invalid cut", "Cannot cut this block");
+            }
+        });
         deleteItem.setOnAction(e -> {
             if (canDelete()) {
                 UndoManager.capture();
-                StatementBlock currentPrevious = previous;
-                StatementBlock currentNext = next;
-                disconnect();
-                if (currentPrevious != null) {
-                    if (currentNext != null) {
-                        currentPrevious.connectNext(next);
-                    }
-                } else if (currentNext != null) {
-                    currentNext.disconnect();
-                    ProjectManager.getCurrentProject().getCurrentCanvas().add(currentNext, contextMenu.getX(), contextMenu.getY());
-                }
+                delete();
             } else {
                 VisualBukkit.displayError("Invalid deletion", "Cannot delete this block");
             }
@@ -84,7 +84,7 @@ public abstract class StatementBlock extends VBox implements CodeBlock {
                 }
             }
         });
-        contextMenu.getItems().addAll(copyItem, deleteItem, exportItem);
+        contextMenu.getItems().addAll(copyItem, cutItem, deleteItem, exportItem);
         syntaxBox.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
@@ -229,6 +229,20 @@ public abstract class StatementBlock extends VBox implements CodeBlock {
             next.previous = this;
         }
         return canDelete;
+    }
+
+    private void delete() {
+        StatementBlock currentPrevious = previous;
+        StatementBlock currentNext = next;
+        disconnect();
+        if (currentPrevious != null) {
+            if (currentNext != null) {
+                currentPrevious.connectNext(next);
+            }
+        } else if (currentNext != null) {
+            currentNext.disconnect();
+            ProjectManager.getCurrentProject().getCurrentCanvas().add(currentNext, contextMenu.getX(), contextMenu.getY());
+        }
     }
 
     public void validate() throws IllegalStateException {
