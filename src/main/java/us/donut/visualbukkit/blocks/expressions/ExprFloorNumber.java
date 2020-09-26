@@ -14,6 +14,6 @@ public class ExprFloorNumber extends ExpressionBlock<Integer> {
 
     @Override
     public String toJava() {
-        return "((int)" + arg(0) + ")";
+        return "((int) Math.floor(" + arg(0) + "))";
     }
 }
