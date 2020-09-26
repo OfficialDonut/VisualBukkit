@@ -18,6 +18,7 @@ public class ExprPotionEffectType extends ExpressionBlock<PotionEffectType> {
 
     @Override
     protected Syntax init() {
+        getStyleClass().clear();
         return new Syntax(new ChoiceParameter(types));
     }
 
