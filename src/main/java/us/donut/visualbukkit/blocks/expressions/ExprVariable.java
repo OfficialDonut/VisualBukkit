@@ -23,12 +23,18 @@ public class ExprVariable extends ExpressionBlock<Object> {
     @Override
     public String toJava() {
         BuildContext.addPluginModule(PluginModule.VARIABLES);
+        if (arg(0).equals("persistent")) {
+            BuildContext.addPluginModule(PluginModule.PERSISTENT_VARIABLES);
+        }
         return "VariableManager.getValue(" + arg(0).equals("persistent") + "," + arg(1) + ")";
     }
 
     @Override
     public String modify(ModificationType modificationType, String delta) {
         BuildContext.addPluginModule(PluginModule.VARIABLES);
+        if (arg(0).equals("persistent")) {
+            BuildContext.addPluginModule(PluginModule.PERSISTENT_VARIABLES);
+        }
         switch (modificationType) {
             case SET: return "VariableManager.setValue(" + arg(0).equals("persistent") + "," + delta + "," + arg(1) + ");";
             case ADD: return "VariableManager.addToValue(" + arg(0).equals("persistent") + "," + delta + "," + arg(1) + ");";

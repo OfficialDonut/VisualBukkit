@@ -22,6 +22,7 @@ public enum PluginModule {
     DURATION(Duration.class),
     REFLECTION_UTIL(ReflectionUtil.class),
     WORLDGUARD(WorldGuardHook.class),
+    VARIABLES(VariableManager.class),
     VAULT(VaultHook.class),
 
     GUI(GuiManager.class, GuiIdentifier.class) {
@@ -29,6 +30,16 @@ public enum PluginModule {
         public void insertInto(JavaClassSource mainClass) {
             MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
             enableMethod.setBody(enableMethod.getBody() + "getServer().getPluginManager().registerEvents(GuiManager.getInstance(), this);");
+        }
+    },
+
+    PERSISTENT_VARIABLES() {
+        @Override
+        public void insertInto(JavaClassSource mainClass) {
+            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+            enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
+            MethodSource<JavaClassSource> disableMethod = mainClass.getMethod("onDisable");
+            disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
         }
     },
 
@@ -40,16 +51,6 @@ public enum PluginModule {
                     "if (Bukkit.getPluginManager().getPlugin(\"PlaceholderAPI\") != null) {" +
                     "ExpansionHandler.register(this);" +
                     "}");
-        }
-    },
-
-    VARIABLES(VariableManager.class) {
-        @Override
-        public void insertInto(JavaClassSource mainClass) {
-            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
-            enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
-            MethodSource<JavaClassSource> disableMethod = mainClass.getMethod("onDisable");
-            disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
         }
     };
 
