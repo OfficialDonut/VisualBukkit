@@ -22,8 +22,8 @@ public class ComboBoxView<T> extends CenteredHBox {
 
     public ComboBoxView(String promptText) {
         getStyleClass().addAll("combo-box-base", "combo-box-view");
-        listView.setPrefHeight(250);
-        listView.setPrefWidth(200);
+        listView.setPrefHeight(200);
+        listView.setPrefWidth(250);
         listView.setCellFactory(view -> {
             TextFieldListCell<T> cell = new TextFieldListCell<>();
             cell.setConverter(comboBox.getConverter());
