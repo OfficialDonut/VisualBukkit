@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -36,6 +37,7 @@ public class TypeHandler {
         register(Boolean.class, "boolean", s -> "Boolean.valueOf(" + s + ")");
         register(ConfigurationSection.class, "config");
         register(Duration.class, "duration");
+        register(Enchantment.class, "enchantment", s -> "((Enchantment) Enchantment.class.getDeclaredField(" + s + ").get(null))");
         register(Entity.class, "entity");
         register(EntityType.class, "entity type", s -> "EntityType.valueOf(" + s + ".toUpperCase())");
         register(File.class, "file");
