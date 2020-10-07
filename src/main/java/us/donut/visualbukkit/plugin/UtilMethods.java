@@ -154,4 +154,18 @@ public class UtilMethods {
         ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "removeAll", Object.class).invoke(propertyMap, "textures");
         ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "put", Object.class, Object.class).invoke(propertyMap, "textures", property);
     }
+
+    public static void setSkullSkin(ItemStack item, String value, String signature) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        ItemMeta itemMeta = item.getItemMeta();
+        if (itemMeta instanceof SkullMeta) {
+            SkullMeta skullMeta = (SkullMeta) itemMeta;
+            Object gameProfile = ReflectionUtil.getClass("com.mojang.authlib.GameProfile").getConstructor(UUID.class, String.class).newInstance(UUID.randomUUID(), null);
+            Object propertyMap = ReflectionUtil.getDeclaredMethod(gameProfile.getClass(), "getProperties").invoke(gameProfile);
+            Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass("com.mojang.authlib.properties.Property"), String.class, String.class, String.class).newInstance("textures", value, signature);
+            ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "removeAll", Object.class).invoke(propertyMap, "textures");
+            ReflectionUtil.getDeclaredMethod(ForwardingMultimap.class, "put", Object.class, Object.class).invoke(propertyMap, "textures", property);
+            ReflectionUtil.getDeclaredField(skullMeta.getClass(), "profile").set(skullMeta, gameProfile);
+            item.setItemMeta(skullMeta);
+        }
+    }
 }

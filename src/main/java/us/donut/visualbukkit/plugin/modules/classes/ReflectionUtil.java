@@ -60,7 +60,9 @@ public class ReflectionUtil {
         String signature = clazz.getCanonicalName() + name;
         return fieldCache.computeIfAbsent(signature, k -> {
             try {
-                return clazz.getDeclaredField(name);
+                Field field = clazz.getDeclaredField(name);
+                field.setAccessible(true);
+                return field;
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
                 return null;

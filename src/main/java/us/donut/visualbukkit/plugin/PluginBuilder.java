@@ -75,12 +75,6 @@ public class PluginBuilder {
             }
         }
 
-        for (CtClass ctClass : classes.values()) {
-            for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
-                ctClass.replaceClassName(entry.getKey().getName(), entry.getValue().getName());
-            }
-        }
-
         CtClass utilMethodsClass = getCtClass(UtilMethods.class, packageName);
         for (CtMethod method : utilMethodsClass.getDeclaredMethods()) {
             if (!BuildContext.getUtilMethods().contains(method.getName())) {
@@ -89,6 +83,12 @@ public class PluginBuilder {
         }
         if (utilMethodsClass.getDeclaredMethods().length > 0) {
             classes.put(UtilMethods.class, utilMethodsClass);
+        }
+
+        for (CtClass ctClass : classes.values()) {
+            for (Map.Entry<Class<?>, CtClass> entry : classes.entrySet()) {
+                ctClass.replaceClassName(entry.getKey().getName(), entry.getValue().getName());
+            }
         }
 
         Path outputDir = project.getPluginOutputDir();

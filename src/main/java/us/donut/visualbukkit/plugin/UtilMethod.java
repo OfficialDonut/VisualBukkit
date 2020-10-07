@@ -15,6 +15,7 @@ public enum UtilMethod {
     SET_ITEM_LORE("setItemLore"),
     SET_ITEM_NAME("setItemName"),
     SET_OWNING_PLAYER("setOwningPlayer"),
+    SET_SKULL_SKIN("setSkullSkin"),
     SET_SKIN("setSkin");
 
     private String methodName;
