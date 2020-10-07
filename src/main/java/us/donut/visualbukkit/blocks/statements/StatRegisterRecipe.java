@@ -5,7 +5,7 @@ import us.donut.visualbukkit.blocks.StatementBlock;
 import us.donut.visualbukkit.blocks.annotations.Description;
 import us.donut.visualbukkit.blocks.syntax.Syntax;
 
-@Description("registers a recipe")
+@Description("Registers a recipe")
 public class StatRegisterRecipe extends StatementBlock {
 
     @Override
