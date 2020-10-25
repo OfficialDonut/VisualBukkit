@@ -29,6 +29,6 @@ public class ExprBlockData extends ExpressionBlock<Byte> {
         return modificationType == ModificationType.SET ?
                 "ReflectionUtil" +
                         ".getDeclaredMethod(" + arg(0) + ".getClass(), \"setData\", byte.class)" +
-                        ".invoke(" + arg(0) + "," + delta + ")" : null;
+                        ".invoke(" + arg(0) + "," + delta + ");" : null;
     }
 }
