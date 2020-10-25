@@ -37,7 +37,7 @@ public class TypeHandler {
         register(Boolean.class, "boolean", s -> "Boolean.valueOf(" + s + ")");
         register(ConfigurationSection.class, "config");
         register(Duration.class, "duration");
-        register(Enchantment.class, "enchantment", s -> "((Enchantment) Enchantment.class.getDeclaredField(" + s + ").get(null))");
+        register(Enchantment.class, "enchantment", s -> "((org.bukkit.enchantments.Enchantment) org.bukkit.enchantments.Enchantment.class.getDeclaredField(" + s + ").get(null))");
         register(Entity.class, "entity");
         register(EntityType.class, "entity type", s -> "EntityType.valueOf(" + s + ".toUpperCase())");
         register(File.class, "file");
