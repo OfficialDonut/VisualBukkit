@@ -29,7 +29,7 @@ public class StructCommand extends StructureBlock {
     public void prepareBuild(BuildContext context) {
         MethodSource<JavaClassSource> commandMethod = context.getMainClass().getMethod("onCommand", "CommandSender", "Command", "String", "String[]");
         commandMethod.setBody(
-                "if (command.getName().equalsIgnoreCase(" + name + ")) {" +
+                "if (command.getName().equalsIgnoreCase(" + name.toJava() + ")) {" +
                 "try {" +
                 getChildJava() +
                 "} catch (Exception e) { e.printStackTrace(); }}" +
@@ -41,18 +41,18 @@ public class StructCommand extends StructureBlock {
     }
 
     public String getAliases() {
-        return aliases.toJava().trim();
+        return aliases.getText().trim();
     }
 
     public String getDescription() {
-        return description.toJava().trim();
+        return description.getText().trim();
     }
 
     public String getPermission() {
-        return permission.toJava().trim();
+        return permission.getText().trim();
     }
 
     public String getPermissionMessage() {
-        return permissionMessage.toJava().trim();
+        return permissionMessage.getText().trim();
     }
 }

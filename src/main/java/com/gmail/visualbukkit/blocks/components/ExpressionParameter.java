@@ -7,8 +7,10 @@ import com.gmail.visualbukkit.blocks.expressions.ExprNumber;
 import com.gmail.visualbukkit.blocks.expressions.ExprString;
 import com.gmail.visualbukkit.gui.ContextMenuManager;
 import com.gmail.visualbukkit.gui.CopyPasteManager;
+import com.gmail.visualbukkit.gui.ElementInspector;
 import com.gmail.visualbukkit.gui.UndoManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
+import com.gmail.visualbukkit.util.PropertyGridPane;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Insets;
@@ -90,17 +92,17 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         contextMenu.getItems().add(pasteItem);
         if (returnType == String.class) {
             MenuItem stringItem = new MenuItem("Insert String");
-            stringItem.setOnAction(e -> setExpression(BlockRegistry.getExpression(ExprString.class)));
+            stringItem.setOnAction(e -> setExpression(new ExprString()));
             contextMenu.getItems().add(stringItem);
         }
         if (returnType == boolean.class) {
             MenuItem booleanItem = new MenuItem("Insert Boolean");
-            booleanItem.setOnAction(e -> setExpression(BlockRegistry.getExpression(ExprBoolean.class)));
+            booleanItem.setOnAction(e -> setExpression(new ExprBoolean()));
             contextMenu.getItems().add(booleanItem);
         }
         if (TypeHandler.isNumber(returnType)) {
             MenuItem numberItem = new MenuItem("Insert Number");
-            numberItem.setOnAction(e -> setExpression(BlockRegistry.getExpression(ExprNumber.class)));
+            numberItem.setOnAction(e -> setExpression(new ExprNumber()));
             contextMenu.getItems().add(numberItem);
         }
         setOnContextMenuRequested(e -> {
@@ -138,7 +140,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
     public void deserialize(JSONObject obj) {
         ExpressionDefinition<?> def = BlockRegistry.getExpression(obj.optString("="));
         if (def != null) {
-            setExpression(def);
+            setExpression(def.createBlock());
             JSONObject exprObj = obj.optJSONObject("expression");
             if (exprObj != null) {
                 expression.deserialize(exprObj);
@@ -146,18 +148,13 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         }
     }
 
-    public void setExpression(ExpressionDefinition<?> expression) {
+    public void setExpression(ExpressionBlock<?> expression) {
+        this.expression = expression;
         if (expression != null) {
-            getChildren().setAll(this.expression = expression.createBlock());
+            getChildren().setAll(expression);
         } else {
-            this.expression = null;
             getChildren().setAll(promptLabel);
         }
-    }
-
-    @Override
-    public String toString() {
-        return toJava();
     }
 
     public StatementBlock getStatement() {
@@ -175,17 +172,17 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         return returnType;
     }
 
-    private class ExpressionCell extends ListCell<ExpressionDefinition<?>> {
+    private class ExpressionCell extends ListCell<ExpressionDefinition<?>> implements ElementInspector.Inspectable {
 
         public ExpressionCell(PopOver popOver) {
             setOnMouseClicked(e -> {
                 ExpressionDefinition<?> def = getItem();
                 if (def != null) {
-                    VisualBukkit.getInstance().getElementInspector().inspect(def);
+                    VisualBukkit.getInstance().getElementInspector().inspect(this);
                     if (e.getClickCount() == 2) {
                         UndoManager.capture();
-                        ExpressionParameter.this.setExpression(def);
-                        ExpressionParameter.this.getStatement().update();
+                        setExpression(def.createBlock());
+                        getStatement().update();
                         popOver.hide();
                     }
                 }
@@ -196,6 +193,15 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         protected void updateItem(ExpressionDefinition<?> item, boolean empty) {
             super.updateItem(item, empty);
             setText(item != null ? item.toString() : "");
+        }
+
+        @Override
+        public Pane createInspectorPane() {
+            PropertyGridPane gridPane = new PropertyGridPane();
+            gridPane.addProperty(0, "Name", getItem().getName());
+            gridPane.addProperty(1, "Description", getItem().getDescription());
+            gridPane.addProperty(2, "Return type", TypeHandler.getUserFriendlyName(returnType));
+            return gridPane;
         }
     }
 }

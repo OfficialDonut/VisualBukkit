@@ -16,6 +16,7 @@ public class ElementInspector extends ScrollPane {
     private ScrollPane scrollPane = new ScrollPane();
     private VBox unselectedVbox = new VBox();
     private Map<Inspectable, Pane> inspectionPanes = new WeakHashMap<>();
+    private Inspectable currentElement;
 
     public ElementInspector() {
         Label titleLabel = new Label("Element Inspector");
@@ -40,15 +41,27 @@ public class ElementInspector extends ScrollPane {
     }
 
     public void inspect(Inspectable inspectable) {
+        if (currentElement != null) {
+            currentElement.unhighlight();
+        }
+        currentElement = inspectable;
         scrollPane.setContent(inspectionPanes.computeIfAbsent(inspectable, k -> inspectable.createInspectorPane()));
+        inspectable.highlight();
     }
 
     public void uninspect() {
+        if (currentElement != null) {
+            currentElement.unhighlight();
+        }
         scrollPane.setContent(unselectedVbox);
     }
 
     public interface Inspectable {
 
         Pane createInspectorPane();
+
+        default void highlight() {}
+
+        default void unhighlight() {}
     }
 }

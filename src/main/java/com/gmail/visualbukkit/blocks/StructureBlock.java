@@ -17,6 +17,18 @@ public abstract class StructureBlock extends StatementBlock {
     }
 
     @Override
+    public void highlight() {
+        syntaxBox.setBorder(new Border(
+                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(2)),
+                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(1))));
+    }
+
+    @Override
+    public void unhighlight() {
+        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), BorderStroke.THIN)));
+    }
+
+    @Override
     public final String toJava() {
         return "";
     }

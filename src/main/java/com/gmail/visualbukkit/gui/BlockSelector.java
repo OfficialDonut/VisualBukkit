@@ -8,6 +8,7 @@ import com.gmail.visualbukkit.util.CenteredHBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 
@@ -40,8 +41,10 @@ public class BlockSelector extends TabPane {
         });
 
         setOnMouseClicked(e -> {
-            VisualBukkit.getInstance().getElementInspector().uninspect();
-            e.consume();
+            if (e.getButton() == MouseButton.PRIMARY) {
+                VisualBukkit.getInstance().getElementInspector().uninspect();
+                e.consume();
+            }
         });
     }
 

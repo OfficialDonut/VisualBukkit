@@ -47,6 +47,7 @@ public class VisualBukkit extends Application {
     private static Logger logger = Logger.getLogger("VisualBukkit");
     private static FileHandler logFileHandler;
     private static VisualBukkit instance;
+    private static boolean saveOnExit = true;
 
     private BorderPane rootPane = new BorderPane();
     private BlockSelector blockSelector = new BlockSelector();
@@ -78,7 +79,9 @@ public class VisualBukkit extends Application {
 
     @Override
     public void stop() {
-        save(false);
+        if (saveOnExit) {
+            save(false);
+        }
         logFileHandler.close();
     }
 
@@ -100,6 +103,7 @@ public class VisualBukkit extends Application {
         sideSplitPane.getItems().addAll(elementInspector, projectView);
         splitPane.getItems().addAll(blockSelector, canvasPane, sideSplitPane);
         canvasPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        canvasPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
 
         rootPane.setCenter(splitPane);
         rootPane.setTop(createMenuBar());
@@ -121,17 +125,20 @@ public class VisualBukkit extends Application {
         splitPane.setDividerPositions(0.2, 0.8);
         sideSplitPane.setDividerPositions(0.5);
         ProjectManager.init();
+
+        checkForUpdate();
     }
 
     private MenuBar createMenuBar() {
+        MenuItem saveItem = new MenuItem("Save");
         MenuItem newItem = new MenuItem("New");
         MenuItem openItem = new MenuItem("Open");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem importItem = new MenuItem("Import");
         MenuItem exportItem = new MenuItem("Export");
-        MenuItem saveItem = new MenuItem("Save");
-        MenuItem exitItem = new MenuItem("Exit");
-        MenuItem updateItem = new MenuItem("Check For Update");
+        MenuItem exitItem = new MenuItem("Save and Exit");
+        MenuItem exitNoSaveItem = new MenuItem("Exit w/o Saving");
+        MenuItem updateItem = new MenuItem("Check for Update");
         saveItem.setOnAction(e -> save(true));
         newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
         openItem.setOnAction(e -> ProjectManager.promptOpenProject());
@@ -139,6 +146,17 @@ public class VisualBukkit extends Application {
         importItem.setOnAction(e -> ProjectManager.promptImportProject());
         exportItem.setOnAction(e -> ProjectManager.promptExportProject());
         exitItem.setOnAction(e -> primaryStage.fireEvent(new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+        exitNoSaveItem.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit without saving?");
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == ButtonType.OK) {
+                    saveOnExit = false;
+                    Platform.exit();
+                }
+            });
+        });
         updateItem.setOnAction(e -> {
             if (!checkForUpdate()) {
                 NotificationManager.displayMessage("No update", "Running latest Visual Bukkit version");
@@ -146,9 +164,9 @@ public class VisualBukkit extends Application {
         });
         Menu fileMenu = new Menu("File");
         fileMenu.getItems().addAll(
-                newItem, openItem, deleteItem, new SeparatorMenuItem(),
+                saveItem, newItem, openItem, deleteItem, new SeparatorMenuItem(),
                 importItem, exportItem, new SeparatorMenuItem(),
-                saveItem, exitItem, new SeparatorMenuItem(),
+                exitItem, exitNoSaveItem, new SeparatorMenuItem(),
                 updateItem);
 
         MenuItem undoItem = new MenuItem("Undo");
@@ -166,20 +184,14 @@ public class VisualBukkit extends Application {
         Menu extensionsMenu = new Menu("Extensions");
         extensionsMenu.getItems().addAll(installExtensionItem, uninstallExtensionItem, extensionInfoItem);
 
-        MenuItem editConfigItem = new MenuItem("Edit Config");
+        MenuItem resourceFilesItem = new MenuItem("Resource Files");
         MenuItem addCanvasItem = new MenuItem("Add Canvas");
         MenuItem buildItem = new MenuItem("Build Plugin");
-        editConfigItem.setOnAction(e -> projectView.openConfig());
+        resourceFilesItem.setOnAction(e -> ProjectManager.getCurrentProject().openResourceFolder());
         addCanvasItem.setOnAction(e -> ProjectManager.getCurrentProject().promptAddCanvas());
-        buildItem.setOnAction(e -> {
-            try {
-                PluginBuilder.build(ProjectManager.getCurrentProject());
-            } catch (IOException ex) {
-                NotificationManager.displayException("Failed to build project", ex);
-            }
-        });
+        buildItem.setOnAction(e -> PluginBuilder.build(ProjectManager.getCurrentProject()));
         Menu pluginMenu = new Menu("Plugin");
-        pluginMenu.getItems().addAll(editConfigItem, addCanvasItem, buildItem);
+        pluginMenu.getItems().addAll(addCanvasItem, resourceFilesItem, buildItem);
 
         Menu fontSizeMenu = new Menu("Font Size");
         ToggleGroup fontToggleGroup = new ToggleGroup();

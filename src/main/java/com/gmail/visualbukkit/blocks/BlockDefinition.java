@@ -3,10 +3,7 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.annotations.Name;
-import com.gmail.visualbukkit.gui.ElementInspector;
 import com.gmail.visualbukkit.gui.NotificationManager;
-import com.gmail.visualbukkit.util.PropertyGridPane;
-import javafx.scene.layout.*;
 import org.apache.commons.lang.WordUtils;
 import org.json.JSONObject;
 
@@ -17,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class BlockDefinition<T extends CodeBlock> implements ElementInspector.Inspectable, Comparable<BlockDefinition<T>> {
+public abstract class BlockDefinition<T extends CodeBlock> implements Comparable<BlockDefinition<T>> {
 
     private Class<T> blockClass;
     private String name;
@@ -56,14 +53,6 @@ public abstract class BlockDefinition<T extends CodeBlock> implements ElementIns
         T block = createBlock();
         block.deserialize(obj);
         return block;
-    }
-
-    @Override
-    public Pane createInspectorPane() {
-        PropertyGridPane gridPane = new PropertyGridPane();
-        gridPane.addProperty(0, "Name", name);
-        gridPane.addProperty(1, "Description", description);
-        return gridPane;
     }
 
     @Override

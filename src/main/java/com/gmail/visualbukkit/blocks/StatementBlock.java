@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.annotations.BlockColor;
 import com.gmail.visualbukkit.blocks.components.BlockParameter;
+import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
 import com.gmail.visualbukkit.gui.*;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.gmail.visualbukkit.util.DataFile;
@@ -161,6 +162,10 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         for (Object component : components) {
             if (component instanceof String) {
                 hBox.getChildren().add(new Text((String) component));
+            } else if (component instanceof Class) {
+                ExpressionParameter exprParameter = new ExpressionParameter((Class<?>) component);
+                hBox.getChildren().add(exprParameter);
+                component = exprParameter;
             } else if (component instanceof Node) {
                 hBox.getChildren().add((Node) component);
             }
@@ -170,9 +175,17 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         }
     }
 
-    protected final <T extends Node & BlockParameter> void add(String label, T parameter) {
-        parameters.add(parameter);
-        syntaxBox.getChildren().add(new CenteredHBox(5, new Text("  " + label), parameter));
+    protected final void add(String label, Object parameter) {
+        if (parameter instanceof Class) {
+            ExpressionParameter exprParameter = new ExpressionParameter((Class<?>) parameter);
+            syntaxBox.getChildren().add(new CenteredHBox(5, new Text("  " + label), exprParameter));
+            parameters.add(exprParameter);
+        } else if (parameter instanceof Node) {
+            syntaxBox.getChildren().add(new CenteredHBox(5, new Text("  " + label), (Node) parameter));
+            if (parameter instanceof BlockParameter) {
+                parameters.add((BlockParameter) parameter);
+            }
+        }
     }
 
     @Override
@@ -296,6 +309,18 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         gridPane.addProperty(0, "Name", getDefinition().getName());
         gridPane.addProperty(1, "Description", getDefinition().getDescription());
         return gridPane;
+    }
+
+    @Override
+    public void highlight() {
+        syntaxBox.setBorder(new Border(
+                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)),
+                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+    }
+
+    @Override
+    public void unhighlight() {
+        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
     }
 
     protected void setAcceptingConnections(boolean state) {

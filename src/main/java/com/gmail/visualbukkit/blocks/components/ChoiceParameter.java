@@ -55,9 +55,4 @@ public class ChoiceParameter extends SearchableComboBox<String> implements Block
             setValue(value);
         }
     }
-
-    @Override
-    public String toString() {
-        return toJava();
-    }
 }

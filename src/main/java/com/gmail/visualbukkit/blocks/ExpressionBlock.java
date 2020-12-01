@@ -3,6 +3,9 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.components.BlockParameter;
 import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
+import com.gmail.visualbukkit.blocks.expressions.ExprBooleanAnd;
+import com.gmail.visualbukkit.blocks.expressions.ExprBooleanOr;
+import com.gmail.visualbukkit.blocks.expressions.ExprCombineStrings;
 import com.gmail.visualbukkit.gui.ContextMenuManager;
 import com.gmail.visualbukkit.gui.CopyPasteManager;
 import com.gmail.visualbukkit.gui.UndoManager;
@@ -14,10 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -59,20 +59,62 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
         cutItem.setOnAction(e -> {
             UndoManager.capture();
             CopyPasteManager.copy(this);
-            ((ExpressionParameter) getParent()).setExpression(null);
+            getExpressionParameter().setExpression(null);
         });
         deleteItem.setOnAction(e -> {
             UndoManager.capture();
-            ((ExpressionParameter) getParent()).setExpression(null);
+            getExpressionParameter().setExpression(null);
         });
         contextMenu.getItems().addAll(copyItem, cutItem, deleteItem);
-        setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
+
+        MenuItem addStringItem = new MenuItem("Add String");
+        addStringItem.setOnAction(e -> {
+            ExprCombineStrings expr = new ExprCombineStrings();
+            getExpressionParameter().setExpression(expr);
+            expr.getString1().setExpression(this);
+        });
+
+        MenuItem addAndItem = new MenuItem("Add 'And'");
+        addAndItem.setOnAction(e -> {
+            ExprBooleanAnd expr = new ExprBooleanAnd();
+            getExpressionParameter().setExpression(expr);
+            expr.getBoolean1().setExpression(this);
+        });
+
+        MenuItem addOrItem = new MenuItem("Add 'Or'");
+        addOrItem.setOnAction(e -> {
+            ExprBooleanOr expr = new ExprBooleanOr();
+            getExpressionParameter().setExpression(expr);
+            expr.getBoolean1().setExpression(this);
+        });
+
+        setOnContextMenuRequested(e -> {
+            if (getExpressionParameter().getReturnType() == String.class) {
+                if (!contextMenu.getItems().contains(addStringItem)) {
+                    contextMenu.getItems().add(addStringItem);
+                }
+            } else {
+                contextMenu.getItems().remove(addStringItem);
+            }
+            if (getExpressionParameter().getReturnType() == boolean.class) {
+                if (!contextMenu.getItems().contains(addAndItem)) {
+                    contextMenu.getItems().addAll(addAndItem, addOrItem);
+                }
+            } else {
+                contextMenu.getItems().removeAll(addAndItem, addOrItem);
+            }
+            ContextMenuManager.show(this, contextMenu, e);
+        });
     }
 
     protected final void init(Object... components) {
         for (Object component : components) {
             if (component instanceof String) {
                 getChildren().add(new Text((String) component));
+            } else if (component instanceof Class) {
+                ExpressionParameter exprParameter = new ExpressionParameter((Class<?>) component);
+                getChildren().add(exprParameter);
+                component = exprParameter;
             } else if (component instanceof Node) {
                 getChildren().add((Node) component);
             }
@@ -114,6 +156,10 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
             highlightedBlock = null;
             setBackground(null);
         }
+    }
+
+    public ExpressionParameter getExpressionParameter() {
+        return (ExpressionParameter) getParent();
     }
 
     public StatementBlock getStatement() {

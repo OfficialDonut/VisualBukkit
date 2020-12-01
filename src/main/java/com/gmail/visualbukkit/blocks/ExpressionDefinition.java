@@ -1,8 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.util.PropertyGridPane;
 import com.google.gson.internal.Primitives;
-import javafx.scene.layout.Pane;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -30,13 +28,6 @@ public class ExpressionDefinition<T extends ExpressionBlock<?>> extends BlockDef
         } else if (Primitives.isWrapperType(returnType)) {
             returnType = Primitives.unwrap(returnType);
         }
-    }
-
-    @Override
-    public Pane createInspectorPane() {
-        PropertyGridPane gridPane = (PropertyGridPane) super.createInspectorPane();
-        gridPane.addProperty(2, "Return type", TypeHandler.getUserFriendlyName(returnType));
-        return gridPane;
     }
 
     public Class<?> getReturnType() {

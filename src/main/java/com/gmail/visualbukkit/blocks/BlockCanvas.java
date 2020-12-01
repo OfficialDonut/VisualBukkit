@@ -92,7 +92,9 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
 
         setOnMouseClicked(e -> {
             ContextMenuManager.hide();
-            VisualBukkit.getInstance().getElementInspector().uninspect();
+            if (e.getButton() == MouseButton.PRIMARY) {
+                VisualBukkit.getInstance().getElementInspector().uninspect();
+            }
             e.consume();
         });
 

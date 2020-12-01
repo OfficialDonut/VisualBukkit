@@ -7,14 +7,12 @@ import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 @Description("A string literal")
 public class ExprString extends ExpressionBlock<String> {
 
-    private StringLiteralParameter literal = new StringLiteralParameter();
-
     public ExprString() {
-        init(literal);
+        init(new StringLiteralParameter());
     }
 
     @Override
     public String toJava() {
-        return literal.toJava();
+        return arg(0);
     }
 }

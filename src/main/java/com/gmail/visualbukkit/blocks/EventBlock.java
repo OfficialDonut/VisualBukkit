@@ -17,11 +17,10 @@ public abstract class EventBlock extends StructureBlock {
     private static Map<BuildContext, Integer> eventCounters = new WeakHashMap<>();
 
     private Class<? extends Event> event;
-    private ChoiceParameter priorityChoice;
+    private ChoiceParameter priorityChoice = new ChoiceParameter(priorities);
 
     public EventBlock(Class<? extends Event> event) {
         this.event = event;
-        priorityChoice = new ChoiceParameter(priorities);
         priorityChoice.setValue("NORMAL");
         init(event.getSimpleName(), " with priority ", priorityChoice);
     }
@@ -29,7 +28,7 @@ public abstract class EventBlock extends StructureBlock {
     @Override
     public void prepareBuild(BuildContext context) {
         context.getMainClass().addMethod(
-                "@EventHandler(priority=EventPriority." + priorityChoice + ")" +
+                "@EventHandler(priority=EventPriority." + priorityChoice.toJava() + ")" +
                 "public void on" + event.getSimpleName() + eventCounters.computeIfAbsent(context, c -> 1) + "(" + event.getCanonicalName() + " event) throws Exception {" +
                 getChildJava() +
                 "}");

@@ -122,7 +122,18 @@ public abstract class ParentBlock extends StatementBlock {
         }
         Color color = colors[level % colors.length];
         container.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-        StatementBlock child = getChild();
+    }
+
+    @Override
+    public void highlight() {
+        container.setBorder(new Border(
+                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)),
+                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+    }
+
+    @Override
+    public void unhighlight() {
+        container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
     }
 
     @Override
@@ -200,6 +211,8 @@ public abstract class ParentBlock extends StatementBlock {
         public ChildConnector() {
             getChildren().clear();
             getChildren().add(nextStatementPane);
+            setOnMouseClicked(e -> {});
+            setOnContextMenuRequested(e -> {});
         }
 
         @Override

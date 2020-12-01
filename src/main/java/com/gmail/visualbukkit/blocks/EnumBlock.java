@@ -9,13 +9,12 @@ import java.util.Map;
 public abstract class EnumBlock<T extends Enum<?>> extends ExpressionBlock<T> {
 
     private static Map<Class<?>, String[]> constants = new HashMap<>();
-    private ChoiceParameter enumChoice;
     private Class<T> enumClass;
 
     @SuppressWarnings("unchecked")
     public EnumBlock() {
         enumClass = (Class<T>) getDefinition().getReturnType();
-        init(enumChoice = new ChoiceParameter(constants.computeIfAbsent(getClass(), k -> computeConstants())));
+        init(new ChoiceParameter(constants.computeIfAbsent(getClass(), k -> computeConstants())));
     }
 
     protected String[] computeConstants() {
@@ -27,6 +26,6 @@ public abstract class EnumBlock<T extends Enum<?>> extends ExpressionBlock<T> {
 
     @Override
     public final String toJava() {
-        return enumClass.getCanonicalName() + "." + enumChoice;
+        return enumClass.getCanonicalName() + "." + arg(0);
     }
 }

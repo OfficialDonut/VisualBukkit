@@ -21,6 +21,10 @@ public interface CodeBlock {
         getParameters().forEach(BlockParameter::update);
     }
 
+    default String arg(int i) {
+        return getParameters().get(i).toJava();
+    }
+
     default JSONObject serialize() {
         JSONObject obj = new JSONObject();
         JSONArray parameterArray = new JSONArray();

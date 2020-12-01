@@ -35,10 +35,6 @@ public class BlockRegistry {
         return block.getClass().getName();
     }
 
-    public static String getIdentifier(Class<? extends CodeBlock> clazz) {
-        return clazz.getName();
-    }
-
     public static StatementDefinition<?> getStatement(String identifier) {
         return statements.get(identifier);
     }
@@ -53,14 +49,6 @@ public class BlockRegistry {
 
     public static ExpressionDefinition<?> getExpression(ExpressionBlock<?> block) {
         return expressions.get(getIdentifier(block));
-    }
-
-    public static StatementDefinition<?> getStatement(Class<? extends StatementBlock> clazz) {
-        return statements.get(getIdentifier(clazz));
-    }
-
-    public static ExpressionDefinition<?> getExpression(Class<? extends ExpressionBlock<?>> clazz) {
-        return expressions.get(getIdentifier(clazz));
     }
 
     public static Collection<StatementDefinition<?>> getStatements() {

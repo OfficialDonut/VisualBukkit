@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.maven.shared.invoker.*;
 import org.jboss.forge.roaster.Roaster;
@@ -56,69 +57,97 @@ public class PluginBuilder {
         });
     }
 
-    public static void build(Project project) throws IOException {
-        String name = project.getPluginName().replaceAll("\\s", "");
-        if (name.isBlank()) {
-            name = project.getName() + "Plugin";
-        }
-        String version = project.getPluginVersion();
-        if (version.isBlank()) {
-            version = "1.0";
-        }
-        String packageName = "vb." + name.toLowerCase();
-
-        JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, getClassResource("PluginMain.java"));
-        mainClass.setPackage(packageName);
-
-        BuildContext buildContext = new BuildContext(mainClass);
-        buildContext.getUtilMethods().forEach(mainClass::addMethod);
-
-        for (BlockCanvas canvas : project.getCanvases()) {
-            for (StructureBlock structure : canvas.getStructures()) {
-                structure.prepareBuild(buildContext);
-            }
-        }
-
-        Path buildDir = project.getFolder().resolve("build");
-        Path mainDir = buildDir.resolve("src").resolve("main");
-        Path packageDir = mainDir.resolve("java").resolve("vb").resolve(name.toLowerCase());
-        Path resourcesDir = mainDir.resolve("resources");
-
-        if (Files.exists(buildDir)) {
-            MoreFiles.deleteRecursively(buildDir, RecursiveDeleteOption.ALLOW_INSECURE);
-        }
-
-        Files.createDirectories(packageDir);
-        Files.createDirectories(resourcesDir);
-
-        Files.writeString(buildDir.resolve("pom.xml"), createPom(packageName, name.toLowerCase(), version, buildContext), StandardCharsets.UTF_8);
-        Files.writeString(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()), StandardCharsets.UTF_8);
-        Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString(), StandardCharsets.UTF_8);
-
-        String config = project.getPluginConfig();
-        if (!config.isEmpty()) {
-            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
-            enableMethod.setBody("saveDefaultConfig();" + enableMethod.getBody());
-            Files.writeString(resourcesDir.resolve("config.yml"), config, StandardCharsets.UTF_8);
-        }
-
-        Set<JavaClassSource> utilClasses = buildContext.getUtilClasses().stream().map(s -> Roaster.parse(JavaClassSource.class, s)).collect(Collectors.toSet());
-        for (JavaClassSource utilClass : utilClasses) {
-            utilClass.setPackage(packageName);
-            Files.writeString(packageDir.resolve(utilClass.getName() + ".java"), utilClass.toString(), StandardCharsets.UTF_8);
-        }
-
-        buildWindow.prepare(project, buildDir);
-        buildWindow.println("Executing maven tasks...");
-        buildWindow.println();
+    public static void build(Project project) {
+        buildWindow.prepare(project);
         buildWindow.show();
+        buildWindow.println("Building plugin...");
 
         new Thread(() -> {
-            InvocationRequest request = new DefaultInvocationRequest();
-            request.setBaseDirectory(buildDir.toFile());
-            request.setGoals(mavenGoals);
+            String name = project.getPluginName().replaceAll("\\s", "");
+            if (name.isBlank()) {
+                name = project.getName() + "Plugin";
+            }
+            String version = project.getPluginVersion();
+            if (version.isBlank()) {
+                version = "1.0";
+            }
+            String packageName = "vb." + name.toLowerCase();
+
+            Path buildDir = project.getFolder().resolve("build");
+            Path mainDir = buildDir.resolve("src").resolve("main");
+            Path packageDir = mainDir.resolve("java").resolve("vb").resolve(name.toLowerCase());
+            Path resourcesDir = mainDir.resolve("resources");
+            Path resourceFilesDir = resourcesDir.resolve("files");
+
             try {
+                buildWindow.println("Generating build directory...");
+                if (Files.exists(buildDir)) {
+                    MoreFiles.deleteRecursively(buildDir, RecursiveDeleteOption.ALLOW_INSECURE);
+                }
+                Files.createDirectories(packageDir);
+                Files.createDirectories(resourceFilesDir);
+
+                JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, getClassResource("PluginMain.java"));
+                mainClass.setPackage(packageName);
+
+                File[] resourceFiles = project.getResourceFolder().toFile().listFiles();
+                if (resourceFiles != null && resourceFiles.length > 0) {
+                    buildWindow.println("Copying resource files...");
+                    MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+                    for (File file : resourceFiles) {
+                        if (file.isFile()) {
+                            String fileName = StringEscapeUtils.escapeJava(file.getName());
+                            String fileString = "new File(getDataFolder(), \"" + fileName + "\")";
+                            if (!fileName.equals("config.yml")) {
+                                Files.copy(file.toPath(), resourceFilesDir.resolve(file.getName()));
+                                enableMethod.setBody(enableMethod.getBody() +
+                                        "if (!" + fileString + ".exists()) {" +
+                                        "try {" +
+                                        "Files.copy(getClass().getResourceAsStream(\"/files/" + fileName + "\"), " + fileString + ".toPath());" +
+                                        "} catch (IOException e) { e.printStackTrace(); }}");
+                            } else {
+                                Files.copy(file.toPath(), resourcesDir.resolve(file.getName()));
+                                enableMethod.setBody(enableMethod.getBody() + "saveDefaultConfig();");
+                            }
+                        }
+                    }
+                } else {
+                    Files.delete(resourceFilesDir);
+                }
+
+                buildWindow.println("Generating source code...");
+                BuildContext buildContext = new BuildContext(mainClass);
+                buildContext.getUtilMethods().forEach(mainClass::addMethod);
+                for (BlockCanvas canvas : project.getCanvases()) {
+                    for (StructureBlock structure : canvas.getStructures()) {
+                        structure.prepareBuild(buildContext);
+                    }
+                }
+                Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString(), StandardCharsets.UTF_8);
+
+                buildWindow.println("Generating pom.xml...");
+                Files.writeString(buildDir.resolve("pom.xml"), createPom(packageName, name.toLowerCase(), version, buildContext), StandardCharsets.UTF_8);
+
+                buildWindow.println("Generating plugin.yml...");
+                Files.writeString(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()), StandardCharsets.UTF_8);
+
+                Set<JavaClassSource> utilClasses = buildContext.getUtilClasses().stream().map(s -> Roaster.parse(JavaClassSource.class, s)).collect(Collectors.toSet());
+                if (!utilClasses.isEmpty()) {
+                    buildWindow.println("Copying utility classes...");
+                    for (JavaClassSource utilClass : utilClasses) {
+                        utilClass.setPackage(packageName);
+                        Files.writeString(packageDir.resolve(utilClass.getName() + ".java"), utilClass.toString(), StandardCharsets.UTF_8);
+                    }
+                }
+
+                buildWindow.println("Executing maven tasks...");
+                buildWindow.println();
+
+                InvocationRequest request = new DefaultInvocationRequest();
+                request.setBaseDirectory(buildDir.toFile());
+                request.setGoals(mavenGoals);
                 mavenInvoker.execute(request);
+
             } catch (Exception e) {
                 buildWindow.println(ExceptionUtils.getStackTrace(e));
             }
@@ -287,12 +316,12 @@ public class PluginBuilder {
             setScene(scene);
         }
 
-        public void prepare(Project project, Path buildDir) {
+        public void prepare(Project project) {
             textArea.clear();
 
             openDirButton.setOnAction(e -> {
                 try {
-                    Desktop.getDesktop().browse(buildDir.toUri());
+                    Desktop.getDesktop().browse(project.getFolder().resolve("build").toUri());
                 } catch (IOException ex) {
                     NotificationManager.displayException("Failed to open URI", ex);
                 }
@@ -300,11 +329,7 @@ public class PluginBuilder {
 
             rebuildButton.setOnAction(e -> {
                 close();
-                try {
-                    PluginBuilder.build(project);
-                } catch (IOException ex) {
-                    println(ExceptionUtils.getStackTrace(ex));
-                }
+                PluginBuilder.build(project);
             });
         }
 

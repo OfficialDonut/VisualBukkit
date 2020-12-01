@@ -18,6 +18,7 @@ public class PluginMain extends JavaPlugin implements Listener {
 
     public void onEnable() {
         instance = this;
+        getDataFolder().mkdir();
         getServer().getPluginManager().registerEvents(this, this);
     }
 

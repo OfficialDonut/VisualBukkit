@@ -34,9 +34,4 @@ public class InputParameter extends TextField implements BlockParameter {
             setText(value);
         }
     }
-
-    @Override
-    public String toString() {
-        return toJava();
-    }
 }

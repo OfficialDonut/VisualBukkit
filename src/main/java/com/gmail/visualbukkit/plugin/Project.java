@@ -11,19 +11,21 @@ import javafx.scene.control.TextInputDialog;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Project implements Comparable<Project> {
 
     private String name;
     private Path folder;
+    private Path resourceFolder;
     private DataFile dataFile;
-    private Set<BlockCanvas> canvases = new TreeSet<>();
+    private List<BlockCanvas> canvases = new ArrayList<>();
 
     private String pluginName;
     private String pluginVersion;
@@ -31,13 +33,21 @@ public class Project implements Comparable<Project> {
     private String pluginDescription;
     private String pluginDependencies;
     private String pluginSoftDepend;
-    private String pluginConfig;
 
     public Project(String name) {
         this.name = name;
 
         folder = ProjectManager.getProjectsFolder().resolve(name);
+        resourceFolder = folder.resolve("Resource Files");
         dataFile = new DataFile(folder.resolve("data.json"));
+
+        if (Files.notExists(resourceFolder)) {
+            try {
+                Files.createDirectories(resourceFolder);
+            } catch (IOException e) {
+                NotificationManager.displayException("Failed to create resource folder", e);
+            }
+        }
 
         JSONObject obj = dataFile.getJson();
         pluginName = obj.optString("plugin-name", "");
@@ -46,7 +56,6 @@ public class Project implements Comparable<Project> {
         pluginDescription = obj.optString("plugin-description", "");
         pluginDependencies = obj.optString("plugin-depend", "");
         pluginSoftDepend = obj.optString("plugin-soft-depend", "");
-        pluginConfig = obj.optString("plugin-config", "");
 
         JSONArray canvasArray = obj.optJSONArray("canvases");
         if (canvasArray != null) {
@@ -67,6 +76,14 @@ public class Project implements Comparable<Project> {
         }
     }
 
+    public void openResourceFolder() {
+        try {
+            Desktop.getDesktop().browse(resourceFolder.toUri());
+        } catch (IOException e) {
+            NotificationManager.displayException("Failed to open resource files", e);
+        }
+    }
+
     public void promptAddCanvas() {
         TextInputDialog newCanvasDialog = new TextInputDialog();
         newCanvasDialog.setTitle("New Canvas");
@@ -79,11 +96,7 @@ public class Project implements Comparable<Project> {
             canvases.add(canvas);
             TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
             Tab tab = new Tab(canvasName, canvas);
-            int i = 0;
-            while (i < canvasPane.getTabs().size() && tab.getText().compareTo(canvasPane.getTabs().get(i).getText()) > 0) {
-                i++;
-            }
-            canvasPane.getTabs().add(i, tab);
+            canvasPane.getTabs().add(tab);
             canvasPane.getSelectionModel().select(tab);
             NotificationManager.displayMessage("Created canvas", "Successfully created canvas");
         }
@@ -108,14 +121,12 @@ public class Project implements Comparable<Project> {
         pluginDescription = projectView.getPluginDescription();
         pluginDependencies = projectView.getPluginDepend();
         pluginSoftDepend = projectView.getPluginSoftDepend();
-        pluginConfig = projectView.getPluginConfig();
         obj.put("plugin-name", pluginName);
         obj.put("plugin-version", pluginVersion);
         obj.put("plugin-author", pluginAuthor);
         obj.put("plugin-description", pluginDescription);
         obj.put("plugin-depend", pluginDependencies);
         obj.put("plugin-soft-depend", pluginSoftDepend);
-        obj.put("plugin-config", pluginConfig);
         obj.put("canvases", canvasArray);
         dataFile.save();
     }
@@ -133,7 +144,11 @@ public class Project implements Comparable<Project> {
         return folder;
     }
 
-    public Set<BlockCanvas> getCanvases() {
+    public Path getResourceFolder() {
+        return resourceFolder;
+    }
+
+    public List<BlockCanvas> getCanvases() {
         return canvases;
     }
 
@@ -159,9 +174,5 @@ public class Project implements Comparable<Project> {
 
     public String getPluginSoftDepend() {
         return pluginSoftDepend.trim();
-    }
-
-    public String getPluginConfig() {
-        return pluginConfig.trim();
     }
 }

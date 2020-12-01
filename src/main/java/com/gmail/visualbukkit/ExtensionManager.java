@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ExtensionManager {
@@ -50,14 +51,16 @@ public class ExtensionManager {
     public static void promptInstall() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Jar", "*.jar"));
-        File jarFile = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
-        if (jarFile != null) {
-            try {
-                Files.copy(jarFile.toPath(), extensionsFolder.resolve(jarFile.getName()), StandardCopyOption.REPLACE_EXISTING);
-                NotificationManager.displayMessage("Installed Extension", "Restart Visual Bukkit to complete installation");
-            } catch (IOException e) {
-                NotificationManager.displayException("Failed to install extension", e);
+        List<File> jarFiles = fileChooser.showOpenMultipleDialog(VisualBukkit.getInstance().getPrimaryStage());
+        if (jarFiles != null && jarFiles.size() > 0) {
+            for (File jarFile : jarFiles) {
+                try {
+                    Files.copy(jarFile.toPath(), extensionsFolder.resolve(jarFile.getName()), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    NotificationManager.displayException("Failed to install extension", e);
+                }
             }
+            NotificationManager.displayMessage("Installed Extensions", "Restart Visual Bukkit to complete installation");
         }
     }
 
