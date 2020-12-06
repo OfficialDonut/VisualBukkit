@@ -136,33 +136,9 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
             clear();
         });
 
-        renameItem.setOnAction(e -> {
-            TextInputDialog renameDialog = new TextInputDialog();
-            renameDialog.setTitle("Rename Canvas");
-            renameDialog.setContentText("New name:");
-            renameDialog.setHeaderText(null);
-            renameDialog.setGraphic(null);
-            String newName = renameDialog.showAndWait().orElse("");
-            if (!newName.isBlank()) {
-                name = newName;
-                VisualBukkit.getInstance().getCanvasPane().getSelectionModel().getSelectedItem().setText(newName);
-                NotificationManager.displayMessage("Renamed canvas", "Successfully renamed canvas");
-            }
-        });
+        renameItem.setOnAction(e -> ProjectManager.getCurrentProject().promptRenameCanvas(this));
 
-        deleteItem.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this canvas?", ButtonType.YES, ButtonType.CANCEL);
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == ButtonType.YES) {
-                    TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
-                    canvasPane.getTabs().remove(canvasPane.getSelectionModel().getSelectedItem());
-                    ProjectManager.getCurrentProject().getCanvases().remove(this);
-                    NotificationManager.displayMessage("Deleted canvas", "Successfully deleted canvas");
-                }
-            });
-        });
+        deleteItem.setOnAction(e -> ProjectManager.getCurrentProject().promptDeleteCanvas(this));
 
         importItem.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
@@ -271,6 +247,10 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
     @Override
     public int compareTo(BlockCanvas canvas) {
         return name.compareTo(canvas.name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @SuppressWarnings("unchecked")

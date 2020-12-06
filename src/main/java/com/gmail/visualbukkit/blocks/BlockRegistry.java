@@ -31,6 +31,10 @@ public class BlockRegistry {
         }
     }
 
+    public static String getIdentifier(BlockDefinition<?> def) {
+        return def.getBlockClass().getName();
+    }
+
     public static String getIdentifier(CodeBlock block) {
         return block.getClass().getName();
     }

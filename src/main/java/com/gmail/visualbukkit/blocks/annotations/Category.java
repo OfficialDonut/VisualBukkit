@@ -10,6 +10,6 @@ public @interface Category {
     String[] value();
 
     String EVENTS = "Events";
-    String STATEMENTS = "All Statements";
+    String STATEMENTS = "All Blocks";
     String STRUCTURES = "Structures";
 }

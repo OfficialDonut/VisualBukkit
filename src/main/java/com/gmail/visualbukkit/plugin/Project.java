@@ -5,9 +5,7 @@ import com.gmail.visualbukkit.blocks.BlockCanvas;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.gui.ProjectView;
 import com.gmail.visualbukkit.util.DataFile;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,17 +13,16 @@ import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Project implements Comparable<Project> {
 
     private String name;
     private Path folder;
+    private Path canvasFolder;
     private Path resourceFolder;
     private DataFile dataFile;
-    private List<BlockCanvas> canvases = new ArrayList<>();
+    private Map<String, BlockCanvas> canvases = new HashMap<>();
 
     private String pluginName;
     private String pluginVersion;
@@ -38,15 +35,15 @@ public class Project implements Comparable<Project> {
         this.name = name;
 
         folder = ProjectManager.getProjectsFolder().resolve(name);
+        canvasFolder = folder.resolve("Canvases");
         resourceFolder = folder.resolve("Resource Files");
         dataFile = new DataFile(folder.resolve("data.json"));
 
-        if (Files.notExists(resourceFolder)) {
-            try {
-                Files.createDirectories(resourceFolder);
-            } catch (IOException e) {
-                NotificationManager.displayException("Failed to create resource folder", e);
-            }
+        try {
+            Files.createDirectories(canvasFolder);
+            Files.createDirectories(resourceFolder);
+        } catch (IOException e) {
+            NotificationManager.displayException("Failed to create project folder", e);
         }
 
         JSONObject obj = dataFile.getJson();
@@ -57,22 +54,21 @@ public class Project implements Comparable<Project> {
         pluginDependencies = obj.optString("plugin-depend", "");
         pluginSoftDepend = obj.optString("plugin-soft-depend", "");
 
-        JSONArray canvasArray = obj.optJSONArray("canvases");
-        if (canvasArray != null) {
-            for (Object o : canvasArray) {
-                if (o instanceof JSONObject) {
-                    JSONObject canvasObj = (JSONObject) o;
-                    String canvasName = canvasObj.optString("name");
-                    if (canvasName != null) {
-                        BlockCanvas canvas = new BlockCanvas(canvasName);
-                        canvas.deserialize(canvasObj);
-                        canvases.add(canvas);
-                    }
+        JSONArray canvasNameArray = obj.optJSONArray("canvases");
+        if (canvasNameArray != null) {
+            for (Object o : canvasNameArray) {
+                if (o instanceof String) {
+                    String canvasName = (String) o;
+                    DataFile canvasFile = new DataFile(canvasFolder.resolve(canvasName + ".json"));
+                    BlockCanvas canvas = new BlockCanvas(canvasName);
+                    canvas.deserialize(canvasFile.getJson());
+                    canvases.put(canvasName, canvas);
                 }
             }
         }
+
         if (canvases.isEmpty()) {
-            canvases.add(new BlockCanvas("Main"));
+            canvases.put("Main", new BlockCanvas("Main"));
         }
     }
 
@@ -92,43 +88,86 @@ public class Project implements Comparable<Project> {
         newCanvasDialog.setGraphic(null);
         String canvasName = newCanvasDialog.showAndWait().orElse("");
         if (!canvasName.isBlank()) {
-            BlockCanvas canvas = new BlockCanvas(canvasName);
-            canvases.add(canvas);
-            TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
-            Tab tab = new Tab(canvasName, canvas);
-            canvasPane.getTabs().add(tab);
-            canvasPane.getSelectionModel().select(tab);
-            NotificationManager.displayMessage("Created canvas", "Successfully created canvas");
+            if (!canvases.containsKey(canvasName)) {
+                BlockCanvas canvas = new BlockCanvas(canvasName);
+                canvases.put(canvasName, canvas);
+                TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
+                Tab tab = new Tab(canvasName, canvas);
+                canvasPane.getTabs().add(tab);
+                canvasPane.getSelectionModel().select(tab);
+                NotificationManager.displayMessage("Created canvas", "Successfully created canvas");
+            } else {
+                NotificationManager.displayError("Invalid canvas name", "There is already a canvas with this name");
+                promptAddCanvas();
+            }
+        }
+    }
+
+    public void promptDeleteCanvas(BlockCanvas canvas) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this canvas?", ButtonType.YES, ButtonType.CANCEL);
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.YES) {
+                canvases.remove(canvas.getName());
+                TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
+                canvasPane.getTabs().remove(canvasPane.getSelectionModel().getSelectedItem());
+                try {
+                    Files.deleteIfExists(canvasFolder.resolve(canvas.getName() + ".json"));
+                    NotificationManager.displayMessage("Deleted canvas", "Successfully deleted canvas");
+                } catch (IOException e) {
+                    NotificationManager.displayException("Failed to delete canvas file", e);
+                }
+            }
+        });
+    }
+
+    public void promptRenameCanvas(BlockCanvas canvas) {
+        TextInputDialog renameDialog = new TextInputDialog();
+        renameDialog.setTitle("Rename Canvas");
+        renameDialog.setContentText("New name:");
+        renameDialog.setHeaderText(null);
+        renameDialog.setGraphic(null);
+        String newName = renameDialog.showAndWait().orElse("");
+        if (!newName.isBlank()) {
+            if (!canvases.containsKey(newName)) {
+                canvases.remove(canvas.getName());
+                canvases.put(newName, canvas);
+                canvas.setName(newName);
+                VisualBukkit.getInstance().getCanvasPane().getSelectionModel().getSelectedItem().setText(newName);
+                NotificationManager.displayMessage("Renamed canvas", "Successfully renamed canvas");
+            } else {
+                NotificationManager.displayError("Invalid canvas name", "There is already a canvas with this name");
+                promptRenameCanvas(canvas);
+            }
         }
     }
 
     public void save() throws IOException {
-        try {
-            Files.copy(dataFile.getPath(), folder.resolve("data-backup.json"), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ignored) {}
         dataFile.clear();
         JSONObject obj = dataFile.getJson();
-        JSONArray canvasArray = new JSONArray();
-        for (BlockCanvas canvas : canvases) {
-            JSONObject canvasObj = canvas.serialize();
-            canvasObj.put("name", canvas.getName());
-            canvasArray.put(canvasObj);
-        }
+
         ProjectView projectView = VisualBukkit.getInstance().getProjectView();
-        pluginName = projectView.getPluginName();
-        pluginVersion = projectView.getPluginVersion();
-        pluginAuthor = projectView.getPluginAuthor();
-        pluginDescription = projectView.getPluginDescription();
-        pluginDependencies = projectView.getPluginDepend();
-        pluginSoftDepend = projectView.getPluginSoftDepend();
-        obj.put("plugin-name", pluginName);
-        obj.put("plugin-version", pluginVersion);
-        obj.put("plugin-author", pluginAuthor);
-        obj.put("plugin-description", pluginDescription);
-        obj.put("plugin-depend", pluginDependencies);
-        obj.put("plugin-soft-depend", pluginSoftDepend);
-        obj.put("canvases", canvasArray);
+        obj.put("plugin-name", pluginName = projectView.getPluginName());
+        obj.put("plugin-version", pluginVersion = projectView.getPluginVersion());
+        obj.put("plugin-author", pluginAuthor = projectView.getPluginAuthor());
+        obj.put("plugin-description", pluginDescription = projectView.getPluginDescription());
+        obj.put("plugin-depend", pluginDependencies = projectView.getPluginDepend());
+        obj.put("plugin-soft-depend", pluginSoftDepend = projectView.getPluginSoftDepend());
+
+        JSONArray canvasNameArray = new JSONArray();
+        for (Tab tab : VisualBukkit.getInstance().getCanvasPane().getTabs()) {
+            canvasNameArray.put(tab.getText());
+        }
+        obj.put("canvases", canvasNameArray);
+
         dataFile.save();
+
+        for (BlockCanvas canvas : canvases.values()) {
+            DataFile canvasFile = new DataFile(canvasFolder.resolve(canvas.getName() + ".json"));
+            canvasFile.setJson(canvas.serialize());
+            canvasFile.save();
+        }
     }
 
     @Override
@@ -148,8 +187,8 @@ public class Project implements Comparable<Project> {
         return resourceFolder;
     }
 
-    public List<BlockCanvas> getCanvases() {
-        return canvases;
+    public Collection<BlockCanvas> getCanvases() {
+        return Collections.unmodifiableCollection(canvases.values());
     }
 
     public String getPluginName() {

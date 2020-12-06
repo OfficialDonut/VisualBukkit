@@ -19,13 +19,15 @@ public class ProjectView extends ScrollPane {
 
     public ProjectView() {
         Button addCanvasButton = new Button("Add Canvas");
-        addCanvasButton.setOnAction(e -> ProjectManager.getCurrentProject().promptAddCanvas());
-
         Button resourceFilesButton = new Button("Resource Files");
-        resourceFilesButton.setOnAction(e -> ProjectManager.getCurrentProject().openResourceFolder());
-
         Button buildButton = new Button("Build Plugin");
+
+        addCanvasButton.setOnAction(e -> ProjectManager.getCurrentProject().promptAddCanvas());
+        resourceFilesButton.setOnAction(e -> ProjectManager.getCurrentProject().openResourceFolder());
         buildButton.setOnAction(e -> PluginBuilder.build(ProjectManager.getCurrentProject()));
+
+        addCanvasButton.prefWidthProperty().bind(resourceFilesButton.widthProperty());
+        buildButton.prefWidthProperty().bind(resourceFilesButton.widthProperty());
 
         Label titleLabel = new Label("Plugin Information");
         titleLabel.setUnderline(true);

@@ -1,25 +1,28 @@
 package com.gmail.visualbukkit.gui;
 
 import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.StatementDefinition;
 import com.gmail.visualbukkit.blocks.StatementLabel;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.util.CenteredHBox;
+import com.gmail.visualbukkit.util.TreeNode;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import org.json.JSONArray;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BlockSelector extends TabPane {
 
     private Map<String, CategoryTab> categoryTabs = new HashMap<>();
+    private Set<StatementDefinition<?>> favoriteStatements = new TreeSet<>();
+    private TreeNode favoriteTree = new TreeNode("Favorite Blocks");
 
     public BlockSelector() {
         setSide(Side.LEFT);
@@ -46,12 +49,39 @@ public class BlockSelector extends TabPane {
                 e.consume();
             }
         });
+
+        CategoryTab allTab = createTab(Category.STATEMENTS);
+        categoryTabs.put(Category.STATEMENTS, allTab);
+        allTab.content.getChildren().add(1, favoriteTree);
+    }
+
+    public void loadFavorites() {
+        JSONArray favoriteArray = VisualBukkit.getDataFile().getJson().optJSONArray("favorites");
+        for (Object obj : favoriteArray) {
+            if (obj instanceof String) {
+                StatementDefinition<?> statement = BlockRegistry.getStatement((String) obj);
+                if (statement != null) {
+                    favoriteStatements.add(statement);
+                }
+            }
+        }
+        updateFavorites();
     }
 
     public void add(StatementDefinition<?> statement) {
         for (String category : statement.getCategories()) {
             CategoryTab tab = categoryTabs.computeIfAbsent(category, this::createTab);
-            tab.add(new StatementLabel(statement));
+            StatementLabel label = new StatementLabel(statement);
+            tab.add(label);
+            ContextMenu contextMenu = new ContextMenu();
+            label.setContextMenu(contextMenu);
+            MenuItem favoriteItem = new MenuItem("Favorite");
+            contextMenu.getItems().add(favoriteItem);
+            favoriteItem.setOnAction(e -> {
+                favoriteStatements.add(statement);
+                saveFavorites();
+                updateFavorites();
+            });
         }
     }
 
@@ -65,8 +95,32 @@ public class BlockSelector extends TabPane {
         return tab;
     }
 
+    private void updateFavorites() {
+        favoriteTree.clear();
+        for (StatementDefinition<?> statement : favoriteStatements) {
+            StatementLabel label = new StatementLabel(statement);
+            favoriteTree.add(label);
+            ContextMenu contextMenu = new ContextMenu();
+            label.setContextMenu(contextMenu);
+            MenuItem removeItem = new MenuItem("Remove Favorite");
+            contextMenu.getItems().add(removeItem);
+            removeItem.setOnAction(e -> {
+                favoriteStatements.remove(statement);
+                saveFavorites();
+                updateFavorites();
+            });
+        }
+    }
+
+    private void saveFavorites() {
+        JSONArray favoriteArray = new JSONArray();
+        favoriteStatements.stream().map(BlockRegistry::getIdentifier).forEach(favoriteArray::put);
+        VisualBukkit.getDataFile().getJson().put("favorites", favoriteArray);
+    }
+
     private static class CategoryTab extends Tab {
 
+        private VBox content = new VBox(15);
         private VBox labelBox = new VBox(10);
         private Set<StatementLabel> labels = new HashSet<>();
 
@@ -90,14 +144,12 @@ public class BlockSelector extends TabPane {
             scrollPane.setFitToWidth(true);
             scrollPane.setFitToHeight(true);
 
-            VBox filterBox = new VBox(10, titleLabel, new CenteredHBox(5, new Label("Search:"), searchField));
-
-            VBox content = new VBox(15, filterBox, new Separator(), scrollPane);
+            content.getChildren().addAll(new VBox(10, titleLabel, new CenteredHBox(5, new Label("Search:"), searchField)), new Separator(), scrollPane);
             content.setPadding(new Insets(10));
             setContent(content);
         }
 
-        private void add(StatementLabel label) {
+        public void add(StatementLabel label) {
             labels.add(label);
             int i = 0;
             while (i < labelBox.getChildren().size() && label.getText().compareTo(((StatementLabel) labelBox.getChildren().get(i)).getText()) > 0) {

@@ -1,6 +1,5 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.annotations.Name;
 import com.gmail.visualbukkit.gui.NotificationManager;
@@ -9,17 +8,12 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public abstract class BlockDefinition<T extends CodeBlock> implements Comparable<BlockDefinition<T>> {
 
     private Class<T> blockClass;
     private String name;
     private String description;
-    private Set<String> categories;
     private Constructor<T> constructor;
 
     public BlockDefinition(Class<T> clazz) throws NoSuchMethodException {
@@ -33,11 +27,6 @@ public abstract class BlockDefinition<T extends CodeBlock> implements Comparable
         description = clazz.isAnnotationPresent(Description.class) ?
                 clazz.getAnnotation(Description.class).value() :
                 "No description provided";
-
-        categories = clazz.isAnnotationPresent(Category.class) ?
-                Arrays.stream(clazz.getAnnotation(Category.class).value()).collect(Collectors.toSet()) :
-                new HashSet<>(1);
-        categories.add(Category.STATEMENTS);
     }
 
     public T createBlock() {
@@ -75,9 +64,5 @@ public abstract class BlockDefinition<T extends CodeBlock> implements Comparable
 
     public String getDescription() {
         return description;
-    }
-
-    public Set<String> getCategories() {
-        return categories;
     }
 }

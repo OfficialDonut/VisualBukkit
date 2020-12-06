@@ -117,6 +117,7 @@ public class VisualBukkit extends Application {
 
         ExtensionManager.init();
         new Reflections("com.gmail.visualbukkit").getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
+        blockSelector.loadFavorites();
         blockSelector.getSelectionModel().select(0);
 
         notifyPreloader(new Preloader.ProgressNotification(1));
