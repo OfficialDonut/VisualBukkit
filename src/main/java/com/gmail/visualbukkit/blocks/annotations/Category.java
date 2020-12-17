@@ -12,4 +12,5 @@ public @interface Category {
     String EVENTS = "Events";
     String STATEMENTS = "All Blocks";
     String STRUCTURES = "Structures";
+    String VARIABLES = "Variables";
 }

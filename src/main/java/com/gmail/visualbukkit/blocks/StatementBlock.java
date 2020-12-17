@@ -95,7 +95,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
 
         invalidatedTooltip.setShowDelay(Duration.millis(100));
 
-        setStyle("-fx-font-family: \"Jetbrains Mono\"");
         setPadding(new Insets(0, 0, 15, 0));
         setOnMouseDragged(Event::consume);
         setOnDragExited(e -> nextStatementIndicator.setPrefHeight(0));

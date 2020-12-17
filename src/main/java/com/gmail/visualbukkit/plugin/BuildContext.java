@@ -8,10 +8,11 @@ import java.util.Set;
 
 public class BuildContext {
 
+    private Set<PluginModule> pluginModules = new HashSet<>();
     private Set<String> mavenRepositories = new HashSet<>();
     private Set<String> mavenDependencies = new HashSet<>();
-    private Set<String> utilClasses = new HashSet<>();
     private Set<String> utilMethods = new HashSet<>();
+    private Set<Class<?>> utilClasses = new HashSet<>();
     private JavaClassSource mainClass;
 
     public BuildContext(JavaClassSource mainClass) {
@@ -20,7 +21,9 @@ public class BuildContext {
 
     public void addPluginModules(PluginModule... modules) {
         for (PluginModule module : modules) {
-            module.prepareBuild(this);
+            if (pluginModules.add(module)) {
+                module.prepareBuild(this);
+            }
         }
     }
 
@@ -32,12 +35,12 @@ public class BuildContext {
         mavenDependencies.addAll(Arrays.asList(dependencies));
     }
 
-    public void addUtilClasses(String... classes) {
-        utilClasses.addAll(Arrays.asList(classes));
-    }
-
     public void addUtilMethods(String... methods) {
         utilMethods.addAll(Arrays.asList(methods));
+    }
+
+    public void addUtilClasses(Class<?>... classes) {
+        utilClasses.addAll(Arrays.asList(classes));
     }
 
     public Set<String> getMavenRepositories() {
@@ -48,12 +51,12 @@ public class BuildContext {
         return mavenDependencies;
     }
 
-    public Set<String> getUtilClasses() {
-        return utilClasses;
-    }
-
     public Set<String> getUtilMethods() {
         return utilMethods;
+    }
+
+    public Set<Class<?>> getUtilClasses() {
+        return utilClasses;
     }
 
     public JavaClassSource getMainClass() {

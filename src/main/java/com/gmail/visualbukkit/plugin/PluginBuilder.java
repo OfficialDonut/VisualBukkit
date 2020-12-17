@@ -2,13 +2,15 @@ package com.gmail.visualbukkit.plugin;
 
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.BlockCanvas;
-import com.gmail.visualbukkit.blocks.StructureBlock;
+import com.gmail.visualbukkit.blocks.CodeBlock;
 import com.gmail.visualbukkit.blocks.structures.StructCommand;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -16,6 +18,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -24,6 +29,7 @@ import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 import org.slf4j.impl.SimpleLogger;
+import org.zeroturnaround.zip.ZipUtil;
 
 import java.awt.*;
 import java.io.*;
@@ -36,10 +42,11 @@ import java.util.stream.Collectors;
 
 public class PluginBuilder {
 
-    private static Map<String, String> resourceCache = new HashMap<>();
     private static BuildWindow buildWindow = new BuildWindow();
     private static Invoker mavenInvoker = new DefaultInvoker();
     private static List<String> mavenGoals = Arrays.asList("clean", "package");
+    private static Map<Class<?>, CtClass> classCache = new HashMap<>();
+    private static final String MAIN_CLASS_SOURCE;
 
     static {
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
@@ -55,6 +62,15 @@ public class PluginBuilder {
                 Platform.runLater(() -> buildWindow.println(string));
             }
         });
+
+        String mainClassSource;
+        try (InputStream inputStream = PluginBuilder.class.getResourceAsStream("/PluginMain.java")) {
+            mainClassSource = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            mainClassSource = null;
+            NotificationManager.displayException("Failed to load main class source", e);
+        }
+        MAIN_CLASS_SOURCE = mainClassSource;
     }
 
     public static void build(Project project) {
@@ -87,7 +103,7 @@ public class PluginBuilder {
                 Files.createDirectories(packageDir);
                 Files.createDirectories(resourceFilesDir);
 
-                JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, getClassResource("PluginMain.java"));
+                JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, MAIN_CLASS_SOURCE);
                 mainClass.setPackage(packageName);
 
                 File[] resourceFiles = project.getResourceFolder().toFile().listFiles();
@@ -119,8 +135,8 @@ public class PluginBuilder {
                 BuildContext buildContext = new BuildContext(mainClass);
                 buildContext.getUtilMethods().forEach(mainClass::addMethod);
                 for (BlockCanvas canvas : project.getCanvases()) {
-                    for (StructureBlock structure : canvas.getStructures()) {
-                        structure.prepareBuild(buildContext);
+                    for (CodeBlock block : canvas.getCodeBlocks()) {
+                        prepareBuild(block, buildContext);
                     }
                 }
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString(), StandardCharsets.UTF_8);
@@ -131,13 +147,20 @@ public class PluginBuilder {
                 buildWindow.println("Generating plugin.yml...");
                 Files.writeString(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()), StandardCharsets.UTF_8);
 
-                Set<JavaClassSource> utilClasses = buildContext.getUtilClasses().stream().map(s -> Roaster.parse(JavaClassSource.class, s)).collect(Collectors.toSet());
+                Set<Class<?>> utilClasses = buildContext.getUtilClasses();
                 if (!utilClasses.isEmpty()) {
                     buildWindow.println("Copying utility classes...");
-                    for (JavaClassSource utilClass : utilClasses) {
-                        utilClass.setPackage(packageName);
-                        Files.writeString(packageDir.resolve(utilClass.getName() + ".java"), utilClass.toString(), StandardCharsets.UTF_8);
+                    Path utilDir = buildDir.resolve("util");
+                    Path classesDir = utilDir.resolve("classes");
+                    Files.createDirectories(classesDir);
+                    for (Class<?> utilClass : utilClasses) {
+                        CtClass ctClass = classCache.computeIfAbsent(utilClass, k -> ClassPool.getDefault().getOrNull(utilClass.getName()));
+                        if (ctClass != null) {
+                            ctClass.writeFile(classesDir.toString());
+                        }
                     }
+                    FileUtils.copyDirectory(classesDir.toFile(), resourcesDir.toFile());
+                    ZipUtil.pack(classesDir.toFile(), utilDir.resolve("util-classes.jar").toFile());
                 }
 
                 buildWindow.println("Executing maven tasks...");
@@ -146,12 +169,24 @@ public class PluginBuilder {
                 InvocationRequest request = new DefaultInvocationRequest();
                 request.setBaseDirectory(buildDir.toFile());
                 request.setGoals(mavenGoals);
+                request.setBatchMode(true);
                 mavenInvoker.execute(request);
 
             } catch (Exception e) {
                 buildWindow.println(ExceptionUtils.getStackTrace(e));
             }
         }).start();
+    }
+
+    private static void prepareBuild(Object obj, BuildContext context) {
+        if (obj instanceof CodeBlock) {
+            ((CodeBlock) obj).prepareBuild(context);
+        }
+        if (obj instanceof Parent) {
+            for (Node child : ((Parent) obj).getChildrenUnmodifiable()) {
+                prepareBuild(child, context);
+            }
+        }
     }
 
     private static String createPom(String groupId, String artifactId, String version, BuildContext buildContext) {
@@ -182,6 +217,14 @@ public class PluginBuilder {
                 "    </repositories>\n" +
                 "\n" +
                 "    <dependencies>\n" +
+                (buildContext.getUtilClasses().isEmpty() ? "" :
+                "        <dependency>\n" +
+                "            <groupId>com.gmail.visualbukkit</groupId>\n" +
+                "            <artifactId>util</artifactId>\n" +
+                "            <version>0</version>\n" +
+                "            <scope>system</scope>\n" +
+                "            <systemPath>${pom.basedir}/util/util-classes.jar</systemPath>\n" +
+                "        </dependency>\n\n") +
                 "        <dependency>\n" +
                 "            <groupId>org.spigotmc</groupId>\n" +
                 "            <artifactId>spigot-api</artifactId>\n" +
@@ -251,9 +294,9 @@ public class PluginBuilder {
         pluginYml.append("api-version: 1.13\n");
         pluginYml.append("commands:\n");
         for (BlockCanvas canvas : project.getCanvases()) {
-            for (StructureBlock structure : canvas.getStructures()) {
-                if (structure instanceof StructCommand) {
-                    StructCommand command = (StructCommand) structure;
+            for (CodeBlock block : canvas.getCodeBlocks()) {
+                if (block instanceof StructCommand) {
+                    StructCommand command = (StructCommand) block;
                     if (!command.getName().isBlank()) {
                         pluginYml.append("  ").append(command.getName()).append(":\n");
                         if (!command.getDescription().isEmpty()) {
@@ -273,18 +316,6 @@ public class PluginBuilder {
             }
         }
         return pluginYml.toString();
-    }
-
-    public static String getClassResource(String name) throws IOException {
-        if (resourceCache.containsKey(name)) {
-            return resourceCache.get(name);
-        } else {
-            try (InputStream inputStream = PluginBuilder.class.getResourceAsStream("/classes/" + name)) {
-                String resource = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-                resourceCache.put(name, resource);
-                return resource;
-            }
-        }
     }
 
     private static class BuildWindow extends Stage {

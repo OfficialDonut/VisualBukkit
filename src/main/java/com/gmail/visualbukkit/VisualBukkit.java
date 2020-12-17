@@ -2,6 +2,7 @@ package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.CodeBlock;
+import com.gmail.visualbukkit.extensions.ExtensionManager;
 import com.gmail.visualbukkit.gui.*;
 import com.gmail.visualbukkit.plugin.PluginBuilder;
 import com.gmail.visualbukkit.plugin.ProjectManager;

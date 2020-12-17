@@ -31,6 +31,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
 
     public BlockCanvas(String canvasName) {
         name = canvasName;
+        setStyle("-fx-font-family: \"Jetbrains Mono\"");
         getChildren().add(innerPane);
         innerPane.setMaxWidth(1);
         innerPane.setMaxHeight(1);
@@ -254,8 +255,8 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<StructureBlock> getStructures() {
-        return (List<StructureBlock>) (Object) innerPane.getChildren().filtered(node -> node instanceof StructureBlock);
+    public List<CodeBlock> getCodeBlocks() {
+        return (List<CodeBlock>) (Object) innerPane.getChildren().filtered(node -> node instanceof CodeBlock);
     }
 
     public String getName() {

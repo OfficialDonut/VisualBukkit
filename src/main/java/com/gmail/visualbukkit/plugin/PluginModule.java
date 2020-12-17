@@ -1,16 +1,22 @@
 package com.gmail.visualbukkit.plugin;
 
-import java.util.function.Consumer;
+import com.gmail.visualbukkit.stdlib.VariableManager;
+import com.gmail.visualbukkit.stdlib.VariableType;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 
-public class PluginModule {
+public abstract class PluginModule {
 
-    private Consumer<BuildContext> buildAction;
+    public abstract void prepareBuild(BuildContext buildContext);
 
-    public PluginModule(Consumer<BuildContext> buildAction) {
-        this.buildAction = buildAction;
-    }
-
-    public void prepareBuild(BuildContext buildContext) {
-        buildAction.accept(buildContext);
-    }
+    public static final PluginModule VARIABLES = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext context) {
+            context.addUtilClasses(VariableManager.class, VariableType.class);
+            MethodSource<JavaClassSource> enableMethod = context.getMainClass().getMethod("onEnable");
+            MethodSource<JavaClassSource> disableMethod = context.getMainClass().getMethod("onDisable");
+            enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
+            disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
+        }
+    };
 }

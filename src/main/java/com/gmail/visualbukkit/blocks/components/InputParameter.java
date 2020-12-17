@@ -8,6 +8,7 @@ import org.json.JSONObject;
 public class InputParameter extends TextField implements BlockParameter {
 
     public InputParameter() {
+        setFocusTraversable(false);
         prefColumnCountProperty().bind(textProperty().length().add(1));
         addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, e -> {
             Event.fireEvent(getParent(), e);

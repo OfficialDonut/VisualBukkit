@@ -21,6 +21,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.gmail.visualbukkit</groupId>
+            <artifactId>stdlib</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.maven.shared</groupId>
             <artifactId>maven-invoker</artifactId>
             <version>3.0.1</version>
@@ -30,6 +36,12 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>11.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.27.0-GA</version>
         </dependency>
 
         <dependency>

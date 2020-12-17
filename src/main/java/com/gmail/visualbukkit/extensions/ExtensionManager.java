@@ -1,5 +1,6 @@
-package com.gmail.visualbukkit;
+package com.gmail.visualbukkit.extensions;
 
+import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.CodeBlock;
 import com.gmail.visualbukkit.gui.NotificationManager;
@@ -34,9 +35,13 @@ public class ExtensionManager {
                 for (Path path : pathStream) {
                     if (path.toString().endsWith(".jar")) {
                         try (URLClassLoader classLoader = new URLClassLoader(new URL[]{path.toUri().toURL()}, ExtensionManager.class.getClassLoader())) {
-                            new Reflections(classLoader).getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
+                            Reflections reflections = new Reflections(classLoader);
+                            for (Class<? extends VisualBukkitExtension> clazz : reflections.getSubTypesOf(VisualBukkitExtension.class)) {
+                                clazz.getConstructor().newInstance().init();
+                            }
+                            reflections.getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
                             extensions.add(path.getFileName().toString());
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             NotificationManager.displayException("Failed to load extension", e);
                         }
                     }

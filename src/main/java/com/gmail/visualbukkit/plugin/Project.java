@@ -6,11 +6,13 @@ import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.gui.ProjectView;
 import com.gmail.visualbukkit.util.DataFile;
 import javafx.scene.control.*;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -112,12 +114,7 @@ public class Project implements Comparable<Project> {
                 canvases.remove(canvas.getName());
                 TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
                 canvasPane.getTabs().remove(canvasPane.getSelectionModel().getSelectedItem());
-                try {
-                    Files.deleteIfExists(canvasFolder.resolve(canvas.getName() + ".json"));
-                    NotificationManager.displayMessage("Deleted canvas", "Successfully deleted canvas");
-                } catch (IOException e) {
-                    NotificationManager.displayException("Failed to delete canvas file", e);
-                }
+                NotificationManager.displayMessage("Deleted canvas", "Successfully deleted canvas");
             }
         });
     }
@@ -162,6 +159,17 @@ public class Project implements Comparable<Project> {
         obj.put("canvases", canvasNameArray);
 
         dataFile.save();
+
+        Path backupDir = canvasFolder.resolve("Backup");
+        Files.createDirectories(backupDir);
+        FileUtils.cleanDirectory(backupDir.toFile());
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(canvasFolder)) {
+            for (Path path : directoryStream) {
+                if (Files.isRegularFile(path)) {
+                    Files.move(path, backupDir.resolve(path.getFileName()));
+                }
+            }
+        }
 
         for (BlockCanvas canvas : canvases.values()) {
             DataFile canvasFile = new DataFile(canvasFolder.resolve(canvas.getName() + ".json"));
