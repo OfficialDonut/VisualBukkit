@@ -140,6 +140,11 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
     }
 
     @Override
+    public void update() {
+        CodeBlock.super.update();
+    }
+
+    @Override
     public Pane createInspectorPane() {
         PropertyGridPane gridPane = new PropertyGridPane();
         gridPane.addProperty(0, "Name", getDefinition().getName());

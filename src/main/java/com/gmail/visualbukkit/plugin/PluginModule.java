@@ -12,6 +12,7 @@ public abstract class PluginModule {
     public static final PluginModule VARIABLES = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext context) {
+            context.getMainClass().addImport("com.gmail.visualbukkit.stdlib.*");
             context.addUtilClasses(VariableManager.class, VariableType.class);
             MethodSource<JavaClassSource> enableMethod = context.getMainClass().getMethod("onEnable");
             MethodSource<JavaClassSource> disableMethod = context.getMainClass().getMethod("onDisable");

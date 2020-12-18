@@ -15,7 +15,7 @@ public class ExprCommandSender extends ExpressionBlock<CommandSender> {
     @Override
     public void update() {
         super.update();
-        validateStructure("'Command Sender' must be used in a command block", StructCommand.class);
+        validateStructure("Command sender must be used in a command", StructCommand.class);
     }
 
     @Override

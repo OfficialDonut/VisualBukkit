@@ -183,6 +183,7 @@ public class VisualBukkit extends Application {
         MenuItem extensionInfoItem = new MenuItem("Information");
         installExtensionItem.setOnAction(e -> ExtensionManager.promptInstall());
         uninstallExtensionItem.setOnAction(e -> ExtensionManager.promptUninstall());
+        extensionInfoItem.setOnAction(e -> openURI("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions"));
         Menu extensionsMenu = new Menu("Extensions");
         extensionsMenu.getItems().addAll(installExtensionItem, uninstallExtensionItem, extensionInfoItem);
 

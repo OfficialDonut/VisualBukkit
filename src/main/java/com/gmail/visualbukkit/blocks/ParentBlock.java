@@ -106,6 +106,7 @@ public abstract class ParentBlock extends StatementBlock {
     protected void setInvalid(String message) {
         valid = false;
         container.setBackground(invalidatedBackground);
+        invalidatedTooltip.setText(message);
         Tooltip.install(container, invalidatedTooltip);
     }
 

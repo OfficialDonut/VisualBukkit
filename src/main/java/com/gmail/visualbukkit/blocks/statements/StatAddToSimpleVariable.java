@@ -1,17 +1,19 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
 
-@Description("Adds a value to a simple variable (the variable must be set to a number or a list)")
+@Category(Category.VARIABLES)
+@Description("Adds a number to a simple variable")
 public class StatAddToSimpleVariable extends StatementBlock {
 
     public StatAddToSimpleVariable() {
-        init("add ", Object.class, " to ", new ChoiceParameter("local", "global", "persistent"), " ", new StringLiteralParameter());
+        init(new ChoiceParameter("local", "global", "persistent"), " ", new StringLiteralParameter(), " += ", double.class);
     }
 
     @Override
@@ -21,6 +23,6 @@ public class StatAddToSimpleVariable extends StatementBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.addToVariable(VariableType." + arg(1).toUpperCase() + "," + arg(0) + "," + arg(2) + ");";
+        return "VariableManager.addToVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ");";
     }
 }

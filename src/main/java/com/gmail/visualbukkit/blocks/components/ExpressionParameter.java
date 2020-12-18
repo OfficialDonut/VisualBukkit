@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks.components;
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.*;
 import com.gmail.visualbukkit.blocks.expressions.ExprBoolean;
+import com.gmail.visualbukkit.blocks.expressions.ExprNewList;
 import com.gmail.visualbukkit.blocks.expressions.ExprNumber;
 import com.gmail.visualbukkit.blocks.expressions.ExprString;
 import com.gmail.visualbukkit.gui.ContextMenuManager;
@@ -23,10 +24,7 @@ import javafx.scene.text.Text;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ExpressionParameter extends CenteredHBox implements BlockParameter {
 
@@ -94,21 +92,27 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
             MenuItem stringItem = new MenuItem("Insert String");
             stringItem.setOnAction(e -> setExpression(new ExprString()));
             contextMenu.getItems().add(stringItem);
-        }
-        if (returnType == boolean.class) {
+        } else if (returnType == boolean.class) {
             MenuItem booleanItem = new MenuItem("Insert Boolean");
             booleanItem.setOnAction(e -> setExpression(new ExprBoolean()));
             contextMenu.getItems().add(booleanItem);
-        }
-        if (TypeHandler.isNumber(returnType)) {
+        } else if (returnType == List.class) {
+            MenuItem newListItem = new MenuItem("Insert New List");
+            newListItem.setOnAction(e -> setExpression(new ExprNewList()));
+            contextMenu.getItems().add(newListItem);
+        } else if (TypeHandler.isNumber(returnType)) {
             MenuItem numberItem = new MenuItem("Insert Number");
             numberItem.setOnAction(e -> setExpression(new ExprNumber()));
             contextMenu.getItems().add(numberItem);
         }
         setOnContextMenuRequested(e -> {
-            BlockDefinition<?> copied = CopyPasteManager.peek();
-            contextMenu.getItems().set(0, copied instanceof ExpressionDefinition && expressionCache.get(returnType).contains(copied) ? pasteItem : invalidPasteItem);
-            ContextMenuManager.show(this, contextMenu, e);
+            if (!popOver.isShowing()) {
+                BlockDefinition<?> copied = CopyPasteManager.peek();
+                contextMenu.getItems().set(0, copied instanceof ExpressionDefinition && expressionCache.get(returnType).contains(copied) ? pasteItem : invalidPasteItem);
+                ContextMenuManager.show(this, contextMenu, e);
+            } else {
+                e.consume();
+            }
         });
     }
 
@@ -152,6 +156,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         this.expression = expression;
         if (expression != null) {
             getChildren().setAll(expression);
+            expression.update();
         } else {
             getChildren().setAll(promptLabel);
         }

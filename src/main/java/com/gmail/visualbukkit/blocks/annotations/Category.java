@@ -9,6 +9,7 @@ public @interface Category {
 
     String[] value();
 
+    String CONTROLS = "Controls";
     String EVENTS = "Events";
     String STATEMENTS = "All Blocks";
     String STRUCTURES = "Structures";
