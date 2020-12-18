@@ -57,11 +57,13 @@ public class BlockSelector extends TabPane {
 
     public void loadFavorites() {
         JSONArray favoriteArray = VisualBukkit.getDataFile().getJson().optJSONArray("favorites");
-        for (Object obj : favoriteArray) {
-            if (obj instanceof String) {
-                StatementDefinition<?> statement = BlockRegistry.getStatement((String) obj);
-                if (statement != null) {
-                    favoriteStatements.add(statement);
+        if (favoriteArray != null) {
+            for (Object obj : favoriteArray) {
+                if (obj instanceof String) {
+                    StatementDefinition<?> statement = BlockRegistry.getStatement((String) obj);
+                    if (statement != null) {
+                        favoriteStatements.add(statement);
+                    }
                 }
             }
         }
