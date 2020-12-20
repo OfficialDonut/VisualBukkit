@@ -9,9 +9,15 @@ public @interface Category {
 
     String[] value();
 
+    String BLOCK = "Block";
     String CONTROLS = "Controls";
+    String ENTITY = "Entity";
     String EVENTS = "Events";
-    String STATEMENTS = "All Blocks";
+    String IO = "I/O";
+    String ITEM = "Item";
+    String PLAYER = "Player";
+    String STATEMENTS = "All";
     String STRUCTURES = "Structures";
     String VARIABLES = "Variables";
+    String WORLD = "World";
 }

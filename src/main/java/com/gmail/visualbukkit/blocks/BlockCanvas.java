@@ -57,8 +57,8 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                 if (!innerPane.equals(block.getParent())) {
                     add(block, e.getScreenX(), e.getScreenY());
                 }
-                block.update();
             }
+            block.update();
             e.setDropCompleted(true);
             e.consume();
         });

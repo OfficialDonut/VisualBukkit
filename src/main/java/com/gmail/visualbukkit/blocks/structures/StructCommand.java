@@ -19,10 +19,10 @@ public class StructCommand extends StructureBlock {
 
     public StructCommand() {
         init("command /", name);
-        add("aliases:     ", aliases);
-        add("description: ", description);
-        add("permission:  ", permission);
-        add("perm-message:", permissionMessage);
+        initLine("aliases:     ", aliases);
+        initLine("description: ", description);
+        initLine("permission:  ", permission);
+        initLine("perm-message:", permissionMessage);
     }
 
     @Override

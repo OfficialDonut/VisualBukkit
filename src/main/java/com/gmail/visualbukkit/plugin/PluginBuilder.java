@@ -133,12 +133,12 @@ public class PluginBuilder {
 
                 buildWindow.println("Generating source code...");
                 BuildContext buildContext = new BuildContext(mainClass);
-                buildContext.getUtilMethods().forEach(mainClass::addMethod);
                 for (BlockCanvas canvas : project.getCanvases()) {
                     for (CodeBlock block : canvas.getCodeBlocks()) {
                         prepareBuild(block, buildContext);
                     }
                 }
+                buildContext.getUtilMethods().forEach(mainClass::addMethod);
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString(), StandardCharsets.UTF_8);
 
                 buildWindow.println("Generating pom.xml...");

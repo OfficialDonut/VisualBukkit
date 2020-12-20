@@ -156,7 +156,14 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
     }
 
     protected final void init(Object... components) {
-        CenteredHBox hBox = new CenteredHBox();
+        init(new CenteredHBox(), components);
+    }
+
+    protected final void initLine(Object... components) {
+        init(new CenteredHBox(5, new Text("  ")), components);
+    }
+
+    private void init(HBox hBox, Object... components) {
         syntaxBox.getChildren().add(hBox);
         for (Object component : components) {
             if (component instanceof String) {
@@ -170,19 +177,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
             }
             if (component instanceof BlockParameter) {
                 parameters.add((BlockParameter) component);
-            }
-        }
-    }
-
-    protected final void add(String label, Object parameter) {
-        if (parameter instanceof Class) {
-            ExpressionParameter exprParameter = new ExpressionParameter((Class<?>) parameter);
-            syntaxBox.getChildren().add(new CenteredHBox(5, new Text("  " + label), exprParameter));
-            parameters.add(exprParameter);
-        } else if (parameter instanceof Node) {
-            syntaxBox.getChildren().add(new CenteredHBox(5, new Text("  " + label), (Node) parameter));
-            if (parameter instanceof BlockParameter) {
-                parameters.add((BlockParameter) parameter);
             }
         }
     }
