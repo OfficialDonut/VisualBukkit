@@ -1,10 +1,12 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 
+@Category(Category.WORLD)
 @Description("Plays a sound at a location")
 public class StatPlaySoundAtLocation extends StatementBlock {
 

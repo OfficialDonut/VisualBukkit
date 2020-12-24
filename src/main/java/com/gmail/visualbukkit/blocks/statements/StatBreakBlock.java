@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.block.Block;
 
-@Category(Category.BLOCK)
+@Category(Category.WORLD)
 @Description("Breaks a block and spawns drops")
 public class StatBreakBlock extends StatementBlock {
 

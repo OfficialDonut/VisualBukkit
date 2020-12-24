@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.BinaryChoiceParameter;
 
 import java.io.File;
 
+@Category(Category.IO)
 @Description("Writes a string to a file")
 public class StatWriteToFile extends StatementBlock {
 

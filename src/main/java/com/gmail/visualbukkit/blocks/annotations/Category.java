@@ -8,15 +8,14 @@ import java.lang.annotation.*;
 public @interface Category {
 
     String[] value();
-
-    String BLOCK = "Block";
+    
     String CONTROLS = "Controls";
     String ENTITY = "Entity";
     String EVENTS = "Events";
     String IO = "I/O";
     String ITEM = "Item";
     String PLAYER = "Player";
-    String STATEMENTS = "All";
+    String STATEMENTS = "All Blocks";
     String STRUCTURES = "Structures";
     String VARIABLES = "Variables";
     String WORLD = "World";

@@ -1,9 +1,11 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.entity.Player;
 
+@Category(Category.PLAYER)
 @Description("Requests a player to download a resource pack from a URL")
 public class StatSetResourcePack extends StatementBlock {
 

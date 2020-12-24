@@ -1,9 +1,11 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.WorldCreator;
 
+@Category(Category.WORLD)
 @Description("Creates a world")
 public class StatCreateWorld extends StatementBlock {
 

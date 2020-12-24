@@ -1,10 +1,12 @@
 package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 
+@Category(Category.ENTITY)
 @Description("Spawns an entity")
 public class StatSpawnEntity extends StatementBlock {
 

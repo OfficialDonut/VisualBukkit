@@ -28,13 +28,13 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
-    public static void procedure(String procedure, List<?> args) throws Exception {}
+    public static void procedure(String procedure, List<?> procedureArgs) throws Exception {}
 
-    public static Object function(String function, List<?> args) throws Exception {
+    public static Object function(String function, List<?> functionArgs) throws Exception {
         return null;
     }
 
-    private static List<Object> createList(Object obj) {
+    public static List<Object> createList(Object obj) {
         List<Object> list = new ArrayList<>();
         if (obj.getClass().isArray()) {
             int length = java.lang.reflect.Array.getLength(obj);
@@ -49,7 +49,7 @@ public class PluginMain extends JavaPlugin implements Listener {
         return list;
     }
 
-    private static String color(String string) {
+    public static String color(String string) {
         return string != null ? ChatColor.translateAlternateColorCodes('&', string) : null;
     }
 

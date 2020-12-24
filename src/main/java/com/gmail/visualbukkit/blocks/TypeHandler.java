@@ -8,10 +8,10 @@ import org.bukkit.*;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -27,18 +27,18 @@ import java.util.function.Function;
 
 public class TypeHandler {
 
-    private static BiMap<Class<?>, String> types = HashBiMap.create();
+    private static BiMap<Class<?>, String> aliases = HashBiMap.create();
     private static Map<String, Function<String, String>> stringParsers = new HashMap<>();
-    private static Set<String> aliases;
 
     static {
         register(Block.class, "block");
         register(Boolean.class, "boolean", s -> "Boolean.valueOf(" + s + ")");
+        register(ClickType.class, "inventory click type");
         register(ConfigurationSection.class, "config");
         register(Enchantment.class, "enchantment", s -> "((org.bukkit.enchantments.Enchantment) org.bukkit.enchantments.Enchantment.class.getDeclaredField(" + s + ").get(null))");
         register(Entity.class, "entity");
         register(EntityType.class, "entity type", s -> "EntityType.valueOf(" + s + ".toUpperCase())");
-        register(File.class, "file path");
+        register(File.class, "file");
         register(Item.class, "dropped item");
         register(ItemStack.class, "item");
         register(Inventory.class, "inventory");
@@ -60,10 +60,6 @@ public class TypeHandler {
         register(UUID.class, "UUID", s -> "UUID.fromString(" + s + ")");
         register(Vector.class, "vector");
         register(World.class, "world", s -> "Bukkit.getWorld(" + s + ")");
-
-        aliases = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        aliases.addAll(types.values());
-        aliases = Collections.unmodifiableSet(aliases);
     }
 
     public static void register(Class<?> clazz, String alias, Function<String, String> stringParser) {
@@ -72,7 +68,7 @@ public class TypeHandler {
     }
 
     public static void register(Class<?> clazz, String alias) {
-        types.put(clazz, alias);
+        aliases.put(clazz, alias);
     }
 
     public static boolean canConvert(Class<?> from, Class<?> to) {
@@ -144,14 +140,16 @@ public class TypeHandler {
         if (name != null) {
             return name;
         }
+        for (Map.Entry<Class<?>, String> entry : aliases.entrySet()) {
+            if (entry.getKey().isAssignableFrom(clazz) && entry.getKey() != Object.class) {
+                return entry.getValue();
+            }
+        }
         if (isNumber(clazz)) {
             return "number";
         }
         if (clazz == Class.class) {
             return "type";
-        }
-        if (Configuration.class.isAssignableFrom(clazz)) {
-            return "config";
         }
         name = clazz.getSimpleName();
         if (name.toUpperCase().equals(name)) {
@@ -160,16 +158,16 @@ public class TypeHandler {
         return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name).replace("_", " ");
     }
 
-    public static Set<String> getAliases() {
-        return Collections.unmodifiableSet(aliases);
-    }
-
     public static String getAlias(Class<?> type) {
-        return types.get(type);
+        return aliases.get(type);
     }
 
     public static Class<?> getType(String alias) {
-        return types.inverse().get(alias);
+        return aliases.inverse().get(alias);
+    }
+
+    public static Set<String> getAliases() {
+        return Collections.unmodifiableSet(aliases.values());
     }
 
     public static Map<String, Function<String, String>> getStringParsers() {
