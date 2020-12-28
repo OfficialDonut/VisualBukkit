@@ -23,6 +23,7 @@ import javassist.CtClass;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.maven.shared.invoker.*;
 import org.jboss.forge.roaster.Roaster;
@@ -80,11 +81,11 @@ public class PluginBuilder {
 
         new Thread(() -> {
             String name = project.getPluginName().replaceAll("\\s", "");
-            if (name.isBlank()) {
+            if (StringUtils.isBlank(name)) {
                 name = project.getName() + "Plugin";
             }
             String version = project.getPluginVersion();
-            if (version.isBlank()) {
+            if (StringUtils.isBlank(version)) {
                 version = "1.0";
             }
             String packageName = "vb." + name.toLowerCase();
@@ -139,13 +140,13 @@ public class PluginBuilder {
                     }
                 }
                 buildContext.getUtilMethods().forEach(mainClass::addMethod);
-                Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString(), StandardCharsets.UTF_8);
+                Files.write(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString().getBytes(StandardCharsets.UTF_8));
 
                 buildWindow.println("Generating pom.xml...");
-                Files.writeString(buildDir.resolve("pom.xml"), createPom(packageName, name.toLowerCase(), version, buildContext), StandardCharsets.UTF_8);
+                Files.write(buildDir.resolve("pom.xml"), createPom(packageName, name.toLowerCase(), version, buildContext).getBytes(StandardCharsets.UTF_8));
 
                 buildWindow.println("Generating plugin.yml...");
-                Files.writeString(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()), StandardCharsets.UTF_8);
+                Files.write(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()).getBytes(StandardCharsets.UTF_8));
 
                 Set<Class<?>> utilClasses = buildContext.getUtilClasses();
                 if (!utilClasses.isEmpty()) {
@@ -279,16 +280,16 @@ public class PluginBuilder {
         pluginYml.append("name: ").append(pluginName).append('\n');
         pluginYml.append("version: ").append(version).append('\n');
         pluginYml.append("main: ").append(mainClassName).append('\n');
-        if (!author.isBlank()) {
+        if (StringUtils.isNotBlank(author)) {
             pluginYml.append("author: ").append(author).append('\n');
         }
-        if (!desc.isBlank()) {
+        if (StringUtils.isNotBlank(desc)) {
             pluginYml.append("description: ").append(desc).append('\n');
         }
-        if (!depend.isBlank()) {
+        if (StringUtils.isNotBlank(depend)) {
             pluginYml.append("depend: [").append(depend).append("]\n");
         }
-        if (!softDepend.isBlank()) {
+        if (StringUtils.isNotBlank(softDepend)) {
             pluginYml.append("softdepend: [").append(softDepend).append("]\n");
         }
         pluginYml.append("api-version: 1.13\n");
@@ -297,7 +298,7 @@ public class PluginBuilder {
             for (CodeBlock block : canvas.getCodeBlocks()) {
                 if (block instanceof StructCommand) {
                     StructCommand command = (StructCommand) block;
-                    if (!command.getName().isBlank()) {
+                    if (StringUtils.isNotBlank(command.getName())) {
                         pluginYml.append("  ").append(command.getName()).append(":\n");
                         if (!command.getDescription().isEmpty()) {
                             pluginYml.append("    description: ").append(command.getDescription()).append('\n');

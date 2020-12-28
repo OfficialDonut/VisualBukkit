@@ -62,7 +62,7 @@ public class ProjectManager {
         newProjectDialog.setGraphic(null);
 
         String name = newProjectDialog.showAndWait().orElse("");
-        if (name.isBlank()) {
+        if (StringUtils.isBlank(name)) {
             if (!canCancel) {
                 NotificationManager.displayError("Invalid project name", "Project name cannot be empty");
                 promptCreateProject(false);
@@ -131,7 +131,7 @@ public class ProjectManager {
         importProjectDialog.setGraphic(null);
 
         String name = importProjectDialog.showAndWait().orElse("");
-        if (name.isBlank()) {
+        if (StringUtils.isBlank(name)) {
             return;
         }
 

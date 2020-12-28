@@ -30,6 +30,8 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -49,6 +51,21 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
     protected Background invalidatedBackground = new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY));
     protected Tooltip invalidatedTooltip = new Tooltip();
     protected boolean valid = true;
+
+    static {
+        try {
+            Tooltip tooltip = new Tooltip();
+            Class<?> clazz = Class.forName("javafx.scene.control.Tooltip$TooltipBehavior");
+            Constructor<?> constructor = clazz.getDeclaredConstructor(Duration.class, Duration.class, Duration.class, boolean.class);
+            constructor.setAccessible(true);
+            Object tooltipBehavior = constructor.newInstance(new Duration(150), new Duration(60000), new Duration(0), false);
+            Field fieldBehavior = tooltip.getClass().getDeclaredField("BEHAVIOR");
+            fieldBehavior.setAccessible(true);
+            fieldBehavior.set(tooltip, tooltipBehavior);
+        } catch (Exception e) {
+            NotificationManager.displayException("Failed to modify tooltips", e);
+        }
+    }
 
     public StatementBlock() {
         syntaxBox.setPadding(new Insets(3));
@@ -93,8 +110,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
             e.setDropCompleted(true);
             e.consume();
         });
-
-        invalidatedTooltip.setShowDelay(Duration.millis(100));
 
         setPadding(new Insets(0, 0, 15, 0));
         setOnMouseDragged(Event::consume);

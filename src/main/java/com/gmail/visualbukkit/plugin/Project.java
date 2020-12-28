@@ -93,7 +93,7 @@ public class Project implements Comparable<Project> {
         renameDialog.setHeaderText(null);
         renameDialog.setGraphic(null);
         String newName = renameDialog.showAndWait().orElse("");
-        if (!newName.isBlank()) {
+        if (StringUtils.isNotBlank(newName)) {
             if (ProjectManager.exists(newName)) {
                 NotificationManager.displayError("Invalid project name", "There is already a project with this name");
                 promptRename();
@@ -120,7 +120,7 @@ public class Project implements Comparable<Project> {
         newCanvasDialog.setHeaderText(null);
         newCanvasDialog.setGraphic(null);
         String canvasName = newCanvasDialog.showAndWait().orElse("");
-        if (!canvasName.isBlank()) {
+        if (StringUtils.isNotBlank(canvasName)) {
             if (!canvases.containsKey(canvasName)) {
                 BlockCanvas canvas = new BlockCanvas(canvasName);
                 canvases.put(canvasName, canvas);
@@ -157,7 +157,7 @@ public class Project implements Comparable<Project> {
         renameDialog.setHeaderText(null);
         renameDialog.setGraphic(null);
         String newName = renameDialog.showAndWait().orElse("");
-        if (!newName.isBlank()) {
+        if (StringUtils.isNotBlank(newName)) {
             if (!canvases.containsKey(newName)) {
                 canvases.remove(canvas.getName());
                 canvases.put(newName, canvas);

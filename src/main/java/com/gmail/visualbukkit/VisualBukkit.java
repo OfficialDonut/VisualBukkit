@@ -24,6 +24,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 import org.reflections.Reflections;
 
 import java.awt.*;
@@ -54,7 +56,7 @@ public class VisualBukkit extends Application {
     private BlockSelector blockSelector = new BlockSelector();
     private ElementInspector elementInspector = new ElementInspector();
     private ProjectView projectView = new ProjectView();
-    private TabPane canvasPane = new TabPane();
+    private DndTabPane canvasPane = (DndTabPane) DndTabPaneFactory.createDefaultDnDPane(DndTabPaneFactory.FeedbackType.MARKER, null).getChildren().get(0);
     private Scene scene = new Scene(rootPane, 500, 500);
     private Stage primaryStage;
 
@@ -104,7 +106,6 @@ public class VisualBukkit extends Application {
         sideSplitPane.getItems().addAll(elementInspector, projectView);
         splitPane.getItems().addAll(blockSelector, canvasPane, sideSplitPane);
         canvasPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        canvasPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
 
         rootPane.setCenter(splitPane);
         rootPane.setTop(createMenuBar());
@@ -322,7 +323,7 @@ public class VisualBukkit extends Application {
         return elementInspector;
     }
 
-    public TabPane getCanvasPane() {
+    public DndTabPane getCanvasPane() {
         return canvasPane;
     }
 

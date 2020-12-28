@@ -19,7 +19,7 @@ public class DataFile {
         try {
             if (Files.exists(path)) {
                 try {
-                    json = new JSONObject(Files.readString(path, StandardCharsets.UTF_8));
+                    json = new JSONObject(String.join("\n", Files.readAllLines(path, StandardCharsets.UTF_8)));
                 } catch (JSONException e) {
                     json = new JSONObject();
                 }
@@ -34,7 +34,7 @@ public class DataFile {
     }
 
     public void save() throws IOException {
-        Files.writeString(path, json.toString(2), StandardCharsets.UTF_8);
+        Files.write(path, json.toString(2).getBytes(StandardCharsets.UTF_8));
     }
 
     public void clear() {
