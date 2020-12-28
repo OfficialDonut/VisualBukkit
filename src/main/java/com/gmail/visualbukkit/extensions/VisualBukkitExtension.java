@@ -1,6 +1,23 @@
 package com.gmail.visualbukkit.extensions;
 
-public interface VisualBukkitExtension {
+import javafx.scene.layout.GridPane;
 
-    void init();
+public abstract class VisualBukkitExtension {
+
+    public void init() {}
+
+    public void setupManager(GridPane gridPane) {}
+
+    public abstract String getName();
+
+    public abstract String getVersion();
+
+    public abstract String getAuthor();
+
+    public abstract String getDescription();
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.gui.ProjectView;
 import com.gmail.visualbukkit.util.DataFile;
 import javafx.scene.control.*;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,18 +36,7 @@ public class Project implements Comparable<Project> {
 
     public Project(String name) {
         this.name = name;
-
-        folder = ProjectManager.getProjectsFolder().resolve(name);
-        canvasFolder = folder.resolve("Canvases");
-        resourceFolder = folder.resolve("Resource Files");
-        dataFile = new DataFile(folder.resolve("data.json"));
-
-        try {
-            Files.createDirectories(canvasFolder);
-            Files.createDirectories(resourceFolder);
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to create project folder", e);
-        }
+        initFiles();
 
         JSONObject obj = dataFile.getJson();
         pluginName = obj.optString("plugin-name", "");
@@ -74,11 +64,52 @@ public class Project implements Comparable<Project> {
         }
     }
 
+    private void initFiles() {
+        folder = ProjectManager.getProjectsFolder().resolve(name);
+        canvasFolder = folder.resolve("Canvases");
+        resourceFolder = folder.resolve("Resource Files");
+        dataFile = new DataFile(folder.resolve("data.json"));
+
+        try {
+            Files.createDirectories(canvasFolder);
+            Files.createDirectories(resourceFolder);
+        } catch (IOException e) {
+            NotificationManager.displayException("Failed to create project folder", e);
+        }
+    }
+
     public void openResourceFolder() {
         try {
             Desktop.getDesktop().browse(resourceFolder.toUri());
         } catch (IOException e) {
             NotificationManager.displayException("Failed to open resource files", e);
+        }
+    }
+
+    public void promptRename() {
+        TextInputDialog renameDialog = new TextInputDialog();
+        renameDialog.setTitle("Rename Project");
+        renameDialog.setContentText("New name:");
+        renameDialog.setHeaderText(null);
+        renameDialog.setGraphic(null);
+        String newName = renameDialog.showAndWait().orElse("");
+        if (!newName.isBlank()) {
+            if (ProjectManager.exists(newName)) {
+                NotificationManager.displayError("Invalid project name", "There is already a project with this name");
+                promptRename();
+            } else if (!StringUtils.isAlphanumeric(name)) {
+                NotificationManager.displayError("Invalid project name", "Project name must be alphanumeric");
+                promptRename();
+            } else {
+                try {
+                    Files.move(folder, folder.resolveSibling(newName));
+                    name = newName;
+                    initFiles();
+                    NotificationManager.displayMessage("Renamed project", "Successfully renamed project");
+                } catch (IOException e) {
+                    NotificationManager.displayException("Failed to rename project", e);
+                }
+            }
         }
     }
 

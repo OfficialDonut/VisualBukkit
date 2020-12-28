@@ -48,12 +48,12 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         });
 
         PopOver popOver = new PopOver();
-        popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
         popOver.setAnimated(false);
 
         TextField searchField = new TextField();
         CenteredHBox searchBox = new CenteredHBox(5, new Text("Search:"), searchField);
         searchBox.setPadding(new Insets(3));
+        searchField.setPrefWidth(200);
         searchField.textProperty().addListener((observable, oldValue, newValue) -> expressions.setPredicate(expression -> expression.getName().toLowerCase().contains(searchField.getText().toLowerCase())));
 
         ListView<ExpressionDefinition<?>> listView = new ListView<>(expressions);
@@ -73,6 +73,9 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
                 listView.getSelectionModel().clearSelection();
                 searchField.clear();
                 expressions.setPredicate(null);
+                popOver.setArrowLocation(e.getSceneY() > VisualBukkit.getInstance().getScene().getHeight() / 2 ?
+                        PopOver.ArrowLocation.BOTTOM_LEFT :
+                        PopOver.ArrowLocation.TOP_LEFT);
                 popOver.show(this);
             }
             e.consume();

@@ -126,24 +126,26 @@ public class VisualBukkit extends Application {
 
         splitPane.setDividerPositions(0.2, 0.8);
         sideSplitPane.setDividerPositions(0.5);
-        ProjectManager.init();
+        ProjectManager.openLast();
 
         checkForUpdate();
     }
 
     private MenuBar createMenuBar() {
-        MenuItem saveItem = new MenuItem("Save");
-        MenuItem newItem = new MenuItem("New");
-        MenuItem openItem = new MenuItem("Open");
-        MenuItem deleteItem = new MenuItem("Delete");
-        MenuItem importItem = new MenuItem("Import");
-        MenuItem exportItem = new MenuItem("Export");
+        MenuItem saveItem = new MenuItem("Save Project");
+        MenuItem renameItem = new MenuItem("Rename Project");
+        MenuItem openItem = new MenuItem("Open Project");
+        MenuItem newItem = new MenuItem("New Project");
+        MenuItem deleteItem = new MenuItem("Delete Project");
+        MenuItem importItem = new MenuItem("Import Project");
+        MenuItem exportItem = new MenuItem("Export Project");
         MenuItem exitItem = new MenuItem("Save and Exit");
         MenuItem exitNoSaveItem = new MenuItem("Exit w/o Saving");
         MenuItem updateItem = new MenuItem("Check for Update");
         saveItem.setOnAction(e -> save(true));
-        newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
+        renameItem.setOnAction(e -> ProjectManager.getCurrentProject().promptRename());
         openItem.setOnAction(e -> ProjectManager.promptOpenProject());
+        newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
         deleteItem.setOnAction(e -> ProjectManager.promptDeleteProject());
         importItem.setOnAction(e -> ProjectManager.promptImportProject());
         exportItem.setOnAction(e -> ProjectManager.promptExportProject());
@@ -166,8 +168,8 @@ public class VisualBukkit extends Application {
         });
         Menu fileMenu = new Menu("File");
         fileMenu.getItems().addAll(
-                saveItem, newItem, openItem, deleteItem, new SeparatorMenuItem(),
-                importItem, exportItem, new SeparatorMenuItem(),
+                saveItem, renameItem, new SeparatorMenuItem(),
+                openItem, newItem, deleteItem, importItem, exportItem, new SeparatorMenuItem(),
                 exitItem, exitNoSaveItem, new SeparatorMenuItem(),
                 updateItem);
 
@@ -178,14 +180,12 @@ public class VisualBukkit extends Application {
         Menu editMenu = new Menu("Edit");
         editMenu.getItems().addAll(undoItem, redoItem);
 
-        MenuItem installExtensionItem = new MenuItem("Install");
-        MenuItem uninstallExtensionItem = new MenuItem("Uninstall");
-        MenuItem extensionInfoItem = new MenuItem("Information");
-        installExtensionItem.setOnAction(e -> ExtensionManager.promptInstall());
-        uninstallExtensionItem.setOnAction(e -> ExtensionManager.promptUninstall());
-        extensionInfoItem.setOnAction(e -> openURI("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions"));
+        MenuItem manageItem = new MenuItem("Manage");
+        MenuItem helpItem = new MenuItem("Help");
+        manageItem.setOnAction(e -> ExtensionManager.promptManage());
+        helpItem.setOnAction(e -> openURI("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions"));
         Menu extensionsMenu = new Menu("Extensions");
-        extensionsMenu.getItems().addAll(installExtensionItem, uninstallExtensionItem, extensionInfoItem);
+        extensionsMenu.getItems().addAll(manageItem, helpItem);
 
         MenuItem resourceFilesItem = new MenuItem("Resource Files");
         MenuItem addCanvasItem = new MenuItem("Add Canvas");

@@ -16,6 +16,7 @@ public class NotificationManager {
 
     public static void displayMessage(String title, String message) {
         Notifications.create()
+                .owner(VisualBukkit.getInstance().getPrimaryStage())
                 .title(title)
                 .text(message)
                 .hideAfter(Duration.seconds(4))
@@ -24,6 +25,7 @@ public class NotificationManager {
 
     public static void displayError(String title, String message) {
         Notifications.create()
+                .owner(VisualBukkit.getInstance().getPrimaryStage())
                 .title(title)
                 .text(message)
                 .hideAfter(Duration.seconds(4))

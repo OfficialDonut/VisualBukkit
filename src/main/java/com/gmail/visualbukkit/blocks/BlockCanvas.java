@@ -122,7 +122,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
 
         pasteItem.setOnAction(e -> {
             UndoManager.capture();
-            StatementBlock block = (StatementBlock) CopyPasteManager.paste();
+            StatementBlock block = CopyPasteManager.pasteStack();
             add(block, contextMenu.getX(), contextMenu.getY());
             block.update();
         });

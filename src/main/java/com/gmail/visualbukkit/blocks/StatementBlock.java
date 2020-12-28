@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -117,6 +118,10 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 VisualBukkit.getInstance().getElementInspector().inspect(this);
                 ContextMenuManager.hide();
                 e.consume();
+                if (e.isShortcutDown() && e.isAltDown()) {
+                    UndoManager.capture();
+                    delete();
+                }
             }
         });
 
@@ -151,7 +156,24 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 }
             }
         });
-        contextMenu.getItems().addAll(copyItem, cutItem, deleteItem, exportItem);
+
+        MenuItem copyStackItem = new MenuItem("Copy Stack");
+        MenuItem cutStackItem = new MenuItem("Cut Stack");
+        MenuItem deleteStackItem = new MenuItem("Delete Stack");
+        copyStackItem.setOnAction(e -> CopyPasteManager.copyStack(this));
+        cutStackItem.setOnAction(e -> {
+            UndoManager.capture();
+            CopyPasteManager.copyStack(this);
+            disconnect();
+        });
+        deleteStackItem.setOnAction(e -> {
+            UndoManager.capture();
+            disconnect();
+        });
+
+        contextMenu.getItems().addAll(
+                copyItem, cutItem, deleteItem, new SeparatorMenuItem(),
+                copyStackItem, cutStackItem, deleteStackItem, new SeparatorMenuItem(), exportItem);
         syntaxBox.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
@@ -290,9 +312,10 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 currentPrevious.connectNext(next);
             }
         } else if (next != null && currentParent instanceof Pane) {
+            StatementBlock next = this.next;
             next.disconnect();
             ((Pane) currentParent).getChildren().add(next);
-            next.relocate(contextMenu.getX(), contextMenu.getY());
+            next.relocate(getLayoutX(), getLayoutY());
         }
     }
 

@@ -5,7 +5,6 @@ import com.gmail.visualbukkit.blocks.BlockCanvas;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -16,38 +15,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProjectManager {
 
     private static Path projectsFolder = VisualBukkit.getDataFolder().resolve("Projects");
-    private static List<String> projects = new ArrayList<>();
     private static Project currentProject;
 
-    public static void init() {
-        try {
-            if (Files.notExists(projectsFolder)) {
-                Files.createDirectory(projectsFolder);
-            }
-            try (Stream<Path> pathStream = Files.list(projectsFolder)) {
-                pathStream.forEach(path -> {
-                    if (Files.isDirectory(path)) {
-                        projects.add(path.getFileName().toString());
-                    }
-                });
-            }
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to load projects", e);
-            Platform.exit();
-        }
-
+    public static void openLast() {
+        Set<String> projects = getProjects();
         if (projects.isEmpty()) {
             promptCreateProject(false);
         } else {
             String lastProject = VisualBukkit.getDataFile().getJson().optString("last-project");
-            open(projects.contains(lastProject) ? lastProject : projects.get(0));
+            open(projects.contains(lastProject) ? lastProject : projects.iterator().next());
         }
     }
 
@@ -86,14 +70,13 @@ public class ProjectManager {
             return;
         }
 
-        if (projects.stream().anyMatch(projectName -> projectName.equalsIgnoreCase(name))) {
+        if (exists(name)) {
             NotificationManager.displayError("Invalid project name", "There is already a project with this name");
             promptCreateProject(canCancel);
         } else if (!StringUtils.isAlphanumeric(name)) {
             NotificationManager.displayError("Invalid project name", "Project name must be alphanumeric");
             promptCreateProject(canCancel);
         } else {
-            projects.add(name);
             open(name);
             NotificationManager.displayMessage("Created project", "Successfully created project");
         }
@@ -101,7 +84,7 @@ public class ProjectManager {
 
     public static void promptOpenProject() {
         ChoiceDialog<String> openProjectDialog = new ChoiceDialog<>();
-        openProjectDialog.getItems().addAll(projects);
+        openProjectDialog.getItems().addAll(getProjects());
         openProjectDialog.setTitle("Open Project");
         openProjectDialog.setContentText("Project:");
         openProjectDialog.setHeaderText(null);
@@ -114,6 +97,7 @@ public class ProjectManager {
 
     @SuppressWarnings("UnstableApiUsage")
     public static void promptDeleteProject() {
+        Set<String> projects = getProjects();
         ChoiceDialog<String> deleteProjectDialog = new ChoiceDialog<>();
         deleteProjectDialog.getItems().addAll(projects);
         deleteProjectDialog.setTitle("Delete Project");
@@ -122,16 +106,16 @@ public class ProjectManager {
         deleteProjectDialog.setGraphic(null);
         deleteProjectDialog.showAndWait().ifPresent(project -> {
             try {
-                MoreFiles.deleteRecursively(projectsFolder.resolve(project), RecursiveDeleteOption.ALLOW_INSECURE);
                 projects.remove(project);
+                MoreFiles.deleteRecursively(projectsFolder.resolve(project), RecursiveDeleteOption.ALLOW_INSECURE);
+                NotificationManager.displayMessage("Deleted project", "Successfully deleted project");
                 if (project.equals(currentProject.getName())) {
                     currentProject = null;
-                }
-                NotificationManager.displayMessage("Deleted project", "Successfully deleted project");
-                if (projects.isEmpty()) {
-                    promptCreateProject(false);
-                } else {
-                    open(projects.get(0));
+                    if (projects.isEmpty()) {
+                        promptCreateProject(false);
+                    } else {
+                        open(projects.iterator().next());
+                    }
                 }
             } catch (IOException e) {
                 NotificationManager.displayException("Failed to delete project", e);
@@ -151,7 +135,7 @@ public class ProjectManager {
             return;
         }
 
-        if (projects.stream().anyMatch(projectName -> projectName.equalsIgnoreCase(name))) {
+        if (exists(name)) {
             NotificationManager.displayError("Invalid project name", "There is already a project with this name");
             promptImportProject();
         } else if (!StringUtils.isAlphanumeric(name)) {
@@ -163,7 +147,6 @@ public class ProjectManager {
             File zipFile = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
             if (zipFile != null) {
                 ZipUtil.unpack(zipFile, projectsFolder.resolve(name).toFile());
-                projects.add(name);
                 open(name);
                 NotificationManager.displayMessage("Imported project", "Successfully imported project");
             }
@@ -172,7 +155,7 @@ public class ProjectManager {
 
     public static void promptExportProject() {
         ChoiceDialog<String> exportProjectDialog = new ChoiceDialog<>();
-        exportProjectDialog.getItems().addAll(projects);
+        exportProjectDialog.getItems().addAll(getProjects());
         exportProjectDialog.setTitle("Export Project");
         exportProjectDialog.setContentText("Project:");
         exportProjectDialog.setHeaderText(null);
@@ -196,6 +179,17 @@ public class ProjectManager {
         });
     }
 
+    public static boolean exists(String projectName) {
+        return Files.exists(projectsFolder.resolve(projectName));
+    }
+
+    public static Set<String> getProjects() {
+        try (Stream<Path> pathStream = Files.list(projectsFolder)) {
+            return pathStream.filter(Files::isDirectory).map(path -> path.getFileName().toString()).collect(Collectors.toSet());
+        } catch (IOException e) {
+            return Collections.emptySet();
+        }
+    }
 
     public static Path getProjectsFolder() {
         return projectsFolder;

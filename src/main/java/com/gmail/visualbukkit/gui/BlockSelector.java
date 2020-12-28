@@ -27,6 +27,7 @@ public class BlockSelector extends TabPane {
     public BlockSelector() {
         setSide(Side.LEFT);
         setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> ((CategoryTab) newValue).content.getChildren().add(1, favoriteTree));
 
         setOnDragOver(e -> {
             Object source = e.getGestureSource();
@@ -50,9 +51,7 @@ public class BlockSelector extends TabPane {
             }
         });
 
-        CategoryTab allTab = createTab(Category.STATEMENTS);
-        categoryTabs.put(Category.STATEMENTS, allTab);
-        allTab.content.getChildren().add(1, favoriteTree);
+        categoryTabs.put(Category.STATEMENTS, createTab(Category.STATEMENTS));
     }
 
     public void loadFavorites() {
@@ -147,7 +146,7 @@ public class BlockSelector extends TabPane {
             scrollPane.setFitToHeight(true);
 
             content.getChildren().addAll(new VBox(10, titleLabel, new CenteredHBox(5, new Label("Search:"), searchField)), new Separator(), scrollPane);
-            content.setPadding(new Insets(10));
+            content.setPadding(new Insets(10, 0, 10, 10));
             setContent(content);
         }
 
