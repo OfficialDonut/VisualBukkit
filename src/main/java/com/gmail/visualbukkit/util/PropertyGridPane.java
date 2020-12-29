@@ -7,14 +7,21 @@ import javafx.scene.paint.Color;
 
 public class PropertyGridPane extends GridPane {
 
+    private int properties = 0;
+
     public PropertyGridPane() {
         ColumnConstraints columnConstraints = new ColumnConstraints();
         columnConstraints.setPercentWidth(30);
         getColumnConstraints().add(columnConstraints);
     }
 
+    public void addProperty(String property, String value) {
+        addProperty(properties, property, value);
+    }
+
     public void addProperty(int row, String property, String value) {
         addRow(row, createCell(property), createCell(value));
+        properties++;
     }
 
     private VBox createCell(String string) {

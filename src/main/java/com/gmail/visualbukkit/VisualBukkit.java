@@ -53,12 +53,12 @@ public class VisualBukkit extends Application {
     private static boolean saveOnExit = true;
 
     private BorderPane rootPane = new BorderPane();
-    private BlockSelector blockSelector = new BlockSelector();
-    private ElementInspector elementInspector = new ElementInspector();
-    private ProjectView projectView = new ProjectView();
-    private DndTabPane canvasPane = (DndTabPane) DndTabPaneFactory.createDefaultDnDPane(DndTabPaneFactory.FeedbackType.MARKER, null).getChildren().get(0);
     private Scene scene = new Scene(rootPane, 500, 500);
     private Stage primaryStage;
+    private BlockSelector blockSelector;
+    private ElementInspector elementInspector;
+    private ProjectView projectView;
+    private DndTabPane canvasPane;
 
     public VisualBukkit() {
         if (instance != null) {
@@ -100,12 +100,17 @@ public class VisualBukkit extends Application {
             NotificationManager.displayException("Failed to load icon", e);
         }
 
+        blockSelector = new BlockSelector();
+        elementInspector = new ElementInspector();
+        projectView = new ProjectView();
+        canvasPane = (DndTabPane) DndTabPaneFactory.createDefaultDnDPane(DndTabPaneFactory.FeedbackType.MARKER, null).getChildren().get(0);
+        canvasPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
         SplitPane splitPane = new SplitPane();
         SplitPane sideSplitPane = new SplitPane();
         sideSplitPane.setOrientation(Orientation.VERTICAL);
         sideSplitPane.getItems().addAll(elementInspector, projectView);
         splitPane.getItems().addAll(blockSelector, canvasPane, sideSplitPane);
-        canvasPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         rootPane.setCenter(splitPane);
         rootPane.setTop(createMenuBar());

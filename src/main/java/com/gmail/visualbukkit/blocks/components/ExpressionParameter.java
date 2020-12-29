@@ -206,9 +206,9 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         @Override
         public Pane createInspectorPane() {
             PropertyGridPane gridPane = new PropertyGridPane();
-            gridPane.addProperty(0, "Name", getItem().getName());
-            gridPane.addProperty(1, "Description", getItem().getDescription());
-            gridPane.addProperty(2, "Return type", TypeHandler.getUserFriendlyName(returnType));
+            gridPane.addProperty("Name", getItem().getName());
+            gridPane.addProperty("Description", getItem().getDescription());
+            gridPane.addProperty("Return type", TypeHandler.getUserFriendlyName(returnType));
             return gridPane;
         }
     }

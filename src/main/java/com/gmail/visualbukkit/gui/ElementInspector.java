@@ -1,9 +1,13 @@
 package com.gmail.visualbukkit.gui;
 
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.blocks.CodeBlock;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -38,6 +42,22 @@ public class ElementInspector extends ScrollPane {
         setFitToWidth(true);
         setFitToHeight(true);
         uninspect();
+
+        VisualBukkit.getInstance().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (currentElement instanceof CodeBlock) {
+                CodeBlock block = (CodeBlock) currentElement;
+                KeyCode key = e.getCode();
+                if (e.isShortcutDown()) {
+                    if (key == KeyCode.C) {
+                        block.copy();
+                    } else if (key == KeyCode.X) {
+                        block.cut();
+                    }
+                } else if (key == KeyCode.DELETE) {
+                    block.delete();
+                }
+            }
+        });
     }
 
     public void inspect(Inspectable inspectable) {

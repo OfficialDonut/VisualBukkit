@@ -1,14 +1,22 @@
 package com.gmail.visualbukkit.plugin;
 
-import com.gmail.visualbukkit.stdlib.ReflectionUtil;
-import com.gmail.visualbukkit.stdlib.VariableManager;
-import com.gmail.visualbukkit.stdlib.VariableType;
+import com.gmail.visualbukkit.stdlib.*;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
 public abstract class PluginModule {
 
     public abstract void prepareBuild(BuildContext buildContext);
+
+    public static final PluginModule GUI = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext context) {
+            context.addUtilClasses(GUIClickEvent.class, GUIIdentifier.class, GUIManager.class);
+            context.getMainClass().addImport("com.gmail.visualbukkit.stdlib.*");
+            MethodSource<JavaClassSource> enableMethod = context.getMainClass().getMethod("onEnable");
+            enableMethod.setBody(enableMethod.getBody() + "getServer().getPluginManager().registerEvents(GUIManager.getInstance(), this);");
+        }
+    };
 
     public static final PluginModule REFLECTION_UTIL = new PluginModule() {
         @Override

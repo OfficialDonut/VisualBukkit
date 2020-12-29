@@ -139,7 +139,7 @@ public abstract class ParentBlock extends StatementBlock {
 
     @Override
     public JSONObject serialize() {
-        JSONObject obj = new JSONObject();
+        JSONObject obj = super.serialize();
         JSONArray childArray = new JSONArray();
         StatementBlock child = getChild();
         while (child != null) {
@@ -154,6 +154,7 @@ public abstract class ParentBlock extends StatementBlock {
 
     @Override
     public void deserialize(JSONObject obj) {
+        super.deserialize(obj);
         JSONArray childArray = obj.optJSONArray("children");
         if (childArray != null) {
             for (Object o : childArray) {

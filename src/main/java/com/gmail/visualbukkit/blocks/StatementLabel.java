@@ -48,8 +48,8 @@ public class StatementLabel extends Label implements ElementInspector.Inspectabl
     @Override
     public Pane createInspectorPane() {
         PropertyGridPane gridPane = new PropertyGridPane();
-        gridPane.addProperty(0, "Name", statement.getName());
-        gridPane.addProperty(1, "Description", statement.getDescription());
+        gridPane.addProperty("Name", statement.getName());
+        gridPane.addProperty("Description", statement.getDescription());
         return gridPane;
     }
 

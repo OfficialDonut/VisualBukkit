@@ -1,13 +1,16 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.components.BlockParameter;
+import com.gmail.visualbukkit.gui.CopyPasteManager;
+import com.gmail.visualbukkit.gui.ElementInspector;
 import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.util.PropertyGridPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public interface CodeBlock {
+public interface CodeBlock extends ElementInspector.Inspectable {
 
     String toJava();
 
@@ -15,11 +18,30 @@ public interface CodeBlock {
 
     BlockDefinition<?> getDefinition();
 
-    default void prepareBuild(BuildContext context) {}
+    void delete();
+
+    default void copy() {
+        CopyPasteManager.copy(this);
+    }
+
+    default void cut() {
+        copy();
+        delete();
+    }
 
     default void update() {
         getParameters().forEach(BlockParameter::update);
     }
+
+    @Override
+    default PropertyGridPane createInspectorPane() {
+        PropertyGridPane gridPane = new PropertyGridPane();
+        gridPane.addProperty("Name", getDefinition().getName());
+        gridPane.addProperty("Description", getDefinition().getDescription());
+        return gridPane;
+    }
+
+    default void prepareBuild(BuildContext context) {}
 
     default String arg(int i) {
         return getParameters().get(i).toJava();

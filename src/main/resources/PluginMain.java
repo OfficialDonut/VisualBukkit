@@ -1,6 +1,5 @@
 import java.io.*;
 import java.nio.file.*;
-import java.sql.*;
 import java.util.*;
 import org.bukkit.*;
 import org.bukkit.block.*;

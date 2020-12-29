@@ -7,7 +7,6 @@ import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
 import com.gmail.visualbukkit.gui.*;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.gmail.visualbukkit.util.DataFile;
-import com.gmail.visualbukkit.util.PropertyGridPane;
 import javafx.collections.ListChangeListener;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -133,10 +132,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 VisualBukkit.getInstance().getElementInspector().inspect(this);
                 ContextMenuManager.hide();
                 e.consume();
-                if (e.isShortcutDown() && e.isAltDown()) {
-                    UndoManager.capture();
-                    delete();
-                }
             }
         });
 
@@ -146,16 +141,9 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem exportItem = new MenuItem("Export");
-        copyItem.setOnAction(e -> CopyPasteManager.copy(this));
-        cutItem.setOnAction(e -> {
-            UndoManager.capture();
-            CopyPasteManager.copy(this);
-            delete();
-        });
-        deleteItem.setOnAction(e -> {
-            UndoManager.capture();
-            delete();
-        });
+        copyItem.setOnAction(e -> copy());
+        cutItem.setOnAction(e -> cut());
+        deleteItem.setOnAction(e -> delete());
         exportItem.setOnAction(e -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File outputDir = directoryChooser.showDialog(VisualBukkit.getInstance().getPrimaryStage());
@@ -318,7 +306,9 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         }
     }
 
+    @Override
     public void delete() {
+        UndoManager.capture();
         Parent currentParent = getParent();
         StatementBlock currentPrevious = previous;
         disconnect();
@@ -332,14 +322,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
             ((Pane) currentParent).getChildren().add(next);
             next.relocate(getLayoutX(), getLayoutY());
         }
-    }
-
-    @Override
-    public Pane createInspectorPane() {
-        PropertyGridPane gridPane = new PropertyGridPane();
-        gridPane.addProperty(0, "Name", getDefinition().getName());
-        gridPane.addProperty(1, "Description", getDefinition().getDescription());
-        return gridPane;
     }
 
     @Override

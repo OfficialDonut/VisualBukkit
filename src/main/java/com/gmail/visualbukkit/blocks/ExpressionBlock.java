@@ -7,7 +7,6 @@ import com.gmail.visualbukkit.blocks.expressions.ExprBooleanAnd;
 import com.gmail.visualbukkit.blocks.expressions.ExprBooleanOr;
 import com.gmail.visualbukkit.blocks.expressions.ExprCombineStrings;
 import com.gmail.visualbukkit.gui.ContextMenuManager;
-import com.gmail.visualbukkit.gui.CopyPasteManager;
 import com.gmail.visualbukkit.gui.UndoManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.gmail.visualbukkit.gui.ElementInspector;
@@ -55,16 +54,9 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
         MenuItem copyItem = new MenuItem("Copy");
         MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
-        copyItem.setOnAction(e -> CopyPasteManager.copy(this));
-        cutItem.setOnAction(e -> {
-            UndoManager.capture();
-            CopyPasteManager.copy(this);
-            getExpressionParameter().setExpression(null);
-        });
-        deleteItem.setOnAction(e -> {
-            UndoManager.capture();
-            getExpressionParameter().setExpression(null);
-        });
+        copyItem.setOnAction(e -> copy());
+        cutItem.setOnAction(e -> cut());
+        deleteItem.setOnAction(e -> delete());
         contextMenu.getItems().addAll(copyItem, cutItem, deleteItem);
 
         MenuItem addStringItem = new MenuItem("Add String");
@@ -126,17 +118,26 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
 
     @SuppressWarnings("rawtypes")
     protected final void validateStructure(String message, Class... structureTypes) {
-        getStatement().validateStructure(message, structureTypes);
+        StatementBlock statement = getStatement();
+        if (statement != null) {
+            statement.validateStructure(message, structureTypes);
+        }
     }
 
     @SuppressWarnings("rawtypes")
     protected final void validateEvent(String message, Class... eventTypes) {
-        getStatement().validateEvent(message, eventTypes);
+        StatementBlock statement = getStatement();
+        if (statement != null) {
+            statement.validateEvent(message, eventTypes);
+        }
     }
 
     @SuppressWarnings("rawtypes")
     protected final void validateParent(String message, Class... parentTypes) {
-        getStatement().validateParent(message, parentTypes);
+        StatementBlock statement = getStatement();
+        if (statement != null) {
+            statement.validateParent(message, parentTypes);
+        }
     }
 
     @Override
@@ -145,11 +146,18 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
     }
 
     @Override
-    public Pane createInspectorPane() {
-        PropertyGridPane gridPane = new PropertyGridPane();
-        gridPane.addProperty(0, "Name", getDefinition().getName());
-        gridPane.addProperty(1, "Description", getDefinition().getDescription());
-        gridPane.addProperty(2, "Return type", TypeHandler.getUserFriendlyName(getDefinition().getReturnType()));
+    public void delete() {
+        UndoManager.capture();
+        ExpressionParameter exprParameter = getExpressionParameter();
+        if (exprParameter != null) {
+            getExpressionParameter().setExpression(null);
+        }
+    }
+
+    @Override
+    public PropertyGridPane createInspectorPane() {
+        PropertyGridPane gridPane = CodeBlock.super.createInspectorPane();
+        gridPane.addProperty("Return type", TypeHandler.getUserFriendlyName(getDefinition().getReturnType()));
         return gridPane;
     }
 
