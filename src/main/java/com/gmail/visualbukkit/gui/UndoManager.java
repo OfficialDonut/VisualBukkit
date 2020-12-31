@@ -8,15 +8,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.json.JSONObject;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UndoManager {
 
-    private static Map<BlockCanvas, Deque<JSONObject>> undoQueues = new HashMap<>();
-    private static Map<BlockCanvas, Deque<JSONObject>> redoQueues = new HashMap<>();
+    private static Map<BlockCanvas, Deque<JSONObject>> undoQueues = new WeakHashMap<>();
+    private static Map<BlockCanvas, Deque<JSONObject>> redoQueues = new WeakHashMap<>();
 
     static {
         VisualBukkit.getInstance().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
@@ -63,10 +60,12 @@ public class UndoManager {
             Deque<JSONObject> redoStates = redoQueues.computeIfAbsent(canvas, k -> new ArrayDeque<>(25));
             Deque<JSONObject> undoStates = undoQueues.computeIfAbsent(canvas, k -> new ArrayDeque<>(25));
             if (!redoStates.isEmpty()) {
-                JSONObject state = redoStates.pop();
-                undoStates.push(state);
+                if (undoStates.size() == 25) {
+                    undoStates.removeLast();
+                }
+                undoStates.push(canvas.serialize());
                 canvas.clear();
-                canvas.deserialize(state);
+                canvas.deserialize(redoStates.pop());
             }
         }
     }

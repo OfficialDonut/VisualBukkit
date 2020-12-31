@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
+import javafx.scene.layout.HBox;
 import org.bukkit.event.inventory.InventoryType;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -28,11 +29,14 @@ public class StructCreateGUI extends StructureBlock {
     }
 
     public StructCreateGUI() {
+        ChoiceParameter typeChoice = new ChoiceParameter(inventoryTypes);
         init("Create GUI");
-        initLine("type:  ", new ChoiceParameter(inventoryTypes));
+        initLine("type:  ", typeChoice);
         initLine("ID:    ", new StringLiteralParameter());
         initLine("title: ", String.class);
-        initLine("size:  ", int.class);
+        HBox sizeLine = initLine("size:  ", int.class);
+        sizeLine.visibleProperty().bind(typeChoice.getSelectionModel().selectedItemProperty().isEqualTo("CHEST"));
+        sizeLine.managedProperty().bind(sizeLine.visibleProperty());
     }
 
     @Override

@@ -11,21 +11,13 @@ import javafx.scene.paint.Color;
 public abstract class StructureBlock extends StatementBlock {
 
     public StructureBlock() {
+        normalBackground = new Background(new BackgroundFill(getDefinition().getBlockColor(), new CornerRadii(10, 10, 0, 0, false), Insets.EMPTY));
+        normalBorder = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), BorderStroke.THIN));
+        invalidatedBackground = new Background(new BackgroundFill(Color.RED, new CornerRadii(10, 10, 0, 0, false), Insets.EMPTY));
+        highlightedBorder = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(2)), new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(1)));
         syntaxBox.setPadding(new Insets(3));
-        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), BorderStroke.THIN)));
-        syntaxBox.setBackground(new Background(new BackgroundFill(getDefinition().getBlockColor(), new CornerRadii(10, 10, 0, 0, false), Insets.EMPTY)));
-    }
-
-    @Override
-    public void highlight() {
-        syntaxBox.setBorder(new Border(
-                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(2)),
-                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), new BorderWidths(1))));
-    }
-
-    @Override
-    public void unhighlight() {
-        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(10, 10, 0, 0, false), BorderStroke.THIN)));
+        syntaxBox.setBorder(normalBorder);
+        syntaxBox.setBackground(normalBackground);
     }
 
     @Override

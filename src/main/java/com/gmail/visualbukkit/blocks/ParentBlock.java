@@ -23,6 +23,7 @@ public abstract class ParentBlock extends StatementBlock {
     private VBox container = new VBox();
     private Pane childIndicator = new Pane();
     private ChildConnector childConnector = new ChildConnector();
+    private Background[] backgrounds = new Background[colors.length];
 
     public ParentBlock() {
         syntaxBox.setBorder(null);
@@ -30,7 +31,7 @@ public abstract class ParentBlock extends StatementBlock {
         syntaxBox.setPadding(new Insets(0, 3, 1, -10));
 
         container.setPadding(new Insets(3, -1, 3, 15));
-        container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
+        container.setBorder(normalBorder);
         container.getChildren().addAll(syntaxBox, childIndicator, childConnector);
         container.setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -84,6 +85,10 @@ public abstract class ParentBlock extends StatementBlock {
 
         getChildren().add(0, container);
         color();
+
+        for (int i = 0; i < colors.length; i++) {
+            backgrounds[i] = new Background(new BackgroundFill(colors[i], CornerRadii.EMPTY, Insets.EMPTY));
+        }
     }
 
     @Override
@@ -97,44 +102,46 @@ public abstract class ParentBlock extends StatementBlock {
 
     @Override
     protected void setValid() {
-        valid = true;
-        color();
+        super.setValid();
         Tooltip.uninstall(container, invalidatedTooltip);
+        syntaxBox.setBackground(null);
+        color();
     }
 
     @Override
     protected void setInvalid(String message) {
-        valid = false;
-        container.setBackground(invalidatedBackground);
-        invalidatedTooltip.setText(message);
+        super.setInvalid(message);
         Tooltip.install(container, invalidatedTooltip);
+        syntaxBox.setBackground(null);
+        color();
     }
 
     private void color() {
-        int level = 0;
-        StatementBlock block = this;
-        while (block != null) {
-            if (block instanceof ChildConnector) {
-                level++;
-                block = ((ChildConnector) block).getParentStatement();
-            } else {
-                block = block.previous;
+        if (isValid()) {
+            int level = 0;
+            StatementBlock block = this;
+            while (block != null) {
+                if (block instanceof ChildConnector) {
+                    level++;
+                    block = ((ChildConnector) block).getParentStatement();
+                } else {
+                    block = block.previous;
+                }
             }
+            container.setBackground(backgrounds[level % backgrounds.length]);
+        } else {
+            container.setBackground(invalidatedBackground);
         }
-        Color color = colors[level % colors.length];
-        container.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     @Override
     public void highlight() {
-        container.setBorder(new Border(
-                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)),
-                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+        container.setBorder(highlightedBorder);
     }
 
     @Override
     public void unhighlight() {
-        container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
+        container.setBorder(normalBorder);
     }
 
     @Override

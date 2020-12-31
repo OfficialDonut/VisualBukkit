@@ -47,9 +47,13 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
     protected StatementBlock next;
     protected boolean acceptingConnections = true;
 
+    protected Background normalBackground = new Background(new BackgroundFill(getDefinition().getBlockColor(), CornerRadii.EMPTY, Insets.EMPTY));
+    protected Border normalBorder = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN));
     protected Background invalidatedBackground = new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY));
+    protected Border highlightedBorder = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)), new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1)));
+
     protected Tooltip invalidatedTooltip = new Tooltip();
-    protected boolean valid = true;
+    private boolean valid = true;
 
     static {
         try {
@@ -68,8 +72,8 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
 
     public StatementBlock() {
         syntaxBox.setPadding(new Insets(3));
-        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
-        syntaxBox.setBackground(new Background(new BackgroundFill(getDefinition().getBlockColor(), CornerRadii.EMPTY, Insets.EMPTY)));
+        syntaxBox.setBorder(normalBorder);
+        syntaxBox.setBackground(normalBackground);
         syntaxBox.setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
@@ -180,12 +184,16 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         syntaxBox.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
-    protected final void init(Object... components) {
-        init(new CenteredHBox(), components);
+    protected final HBox init(Object... components) {
+        HBox line = new CenteredHBox();
+        init(line, components);
+        return line;
     }
 
-    protected final void initLine(Object... components) {
-        init(new CenteredHBox(5, new Text("  ")), components);
+    protected final HBox initLine(Object... components) {
+        HBox line = new CenteredHBox(new Text("  "));
+        init(line, components);
+        return line;
     }
 
     private void init(HBox hBox, Object... components) {
@@ -219,7 +227,7 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
 
     protected void setValid() {
         valid = true;
-        syntaxBox.setBackground(new Background(new BackgroundFill(getDefinition().getBlockColor(), CornerRadii.EMPTY, Insets.EMPTY)));
+        syntaxBox.setBackground(normalBackground);
         Tooltip.uninstall(syntaxBox, invalidatedTooltip);
     }
 
@@ -326,14 +334,12 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
 
     @Override
     public void highlight() {
-        syntaxBox.setBorder(new Border(
-                new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)),
-                new BorderStroke(Color.YELLOW, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+        syntaxBox.setBorder(highlightedBorder);
     }
 
     @Override
     public void unhighlight() {
-        syntaxBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.THIN)));
+        syntaxBox.setBorder(normalBorder);
     }
 
     protected void setAcceptingConnections(boolean state) {

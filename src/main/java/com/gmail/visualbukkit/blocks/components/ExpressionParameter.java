@@ -93,20 +93,32 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         contextMenu.getItems().add(pasteItem);
         if (returnType == String.class) {
             MenuItem stringItem = new MenuItem("Insert String");
-            stringItem.setOnAction(e -> setExpression(new ExprString()));
             contextMenu.getItems().add(stringItem);
+            stringItem.setOnAction(e -> {
+                UndoManager.capture();
+                setExpression(new ExprString());
+            });
         } else if (returnType == boolean.class) {
             MenuItem booleanItem = new MenuItem("Insert Boolean");
-            booleanItem.setOnAction(e -> setExpression(new ExprBoolean()));
             contextMenu.getItems().add(booleanItem);
+            booleanItem.setOnAction(e -> {
+                UndoManager.capture();
+                setExpression(new ExprBoolean());
+            });
         } else if (returnType == List.class) {
             MenuItem newListItem = new MenuItem("Insert New List");
-            newListItem.setOnAction(e -> setExpression(new ExprNewList()));
             contextMenu.getItems().add(newListItem);
+            newListItem.setOnAction(e -> {
+                UndoManager.capture();
+                setExpression(new ExprNewList());
+            });
         } else if (TypeHandler.isNumber(returnType)) {
             MenuItem numberItem = new MenuItem("Insert Number");
-            numberItem.setOnAction(e -> setExpression(new ExprNumber()));
             contextMenu.getItems().add(numberItem);
+            numberItem.setOnAction(e -> {
+                UndoManager.capture();
+                setExpression(new ExprNumber());
+            });
         }
         setOnContextMenuRequested(e -> {
             if (!popOver.isShowing()) {
@@ -159,9 +171,12 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         this.expression = expression;
         if (expression != null) {
             getChildren().setAll(expression);
-            expression.update();
         } else {
             getChildren().setAll(promptLabel);
+        }
+        StatementBlock statement = getStatement();
+        if (statement != null) {
+            statement.update();
         }
     }
 
