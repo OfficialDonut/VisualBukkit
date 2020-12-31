@@ -3,11 +3,6 @@ package com.gmail.visualbukkit.blocks.expressions;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.InputParameter;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
 import java.util.regex.Pattern;
 
@@ -15,21 +10,21 @@ import java.util.regex.Pattern;
 public class ExprNumber extends ExpressionBlock<Double> {
 
     private static Pattern numPattern = Pattern.compile("-?\\d*\\.?\\d*");
-    private InputParameter input = new InputParameter();
 
     public ExprNumber() {
-        init(input);
-        input.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+        InputParameter input = new InputParameter();
+        input.setStyle("-fx-control-inner-background: beige;");
         input.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!numPattern.matcher(input.getText()).matches()) {
                 input.setText(oldValue);
             }
         });
+        init(input);
     }
 
     @Override
     public String toJava() {
-        String number = input.toJava();
+        String number = arg(0);
         try {
             Double.parseDouble(number);
             return number + "d";

@@ -8,6 +8,19 @@ public abstract class PluginModule {
 
     public abstract void prepareBuild(BuildContext buildContext);
 
+    public static final PluginModule DATABASE = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext context) {
+            context.addUtilClasses(DatabaseManager.class);
+            context.getMainClass().addImport("com.gmail.visualbukkit.stdlib.*");
+            context.getMainClass().addImport("java.sql.*");
+            context.addMavenDependencies(
+                    "<groupId>com.zaxxer</groupId>\n" +
+                    "<artifactId>HikariCP</artifactId>\n" +
+                    "<version>3.4.5</version>\n");
+        }
+    };
+
     public static final PluginModule GUI = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext context) {

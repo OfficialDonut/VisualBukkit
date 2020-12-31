@@ -5,9 +5,9 @@ import com.gmail.visualbukkit.blocks.annotations.Description;
 import org.bukkit.Material;
 
 @Description("Checks if a material is air")
-public class ExprIsAir extends ExpressionBlock<Boolean> {
+public class ExprIsMaterialAir extends ExpressionBlock<Boolean> {
 
-    public ExprIsAir() {
+    public ExprIsMaterialAir() {
         init(Material.class, " is air");
     }
 
