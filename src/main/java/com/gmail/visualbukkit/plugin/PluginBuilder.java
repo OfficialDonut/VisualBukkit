@@ -60,7 +60,7 @@ public class PluginBuilder {
         }
         mavenInvoker.setOutputHandler(string -> {
             if (string != null) {
-                Platform.runLater(() -> buildWindow.println(string));
+                buildWindow.println(string);
             }
         });
 
@@ -366,15 +366,15 @@ public class PluginBuilder {
         }
 
         public void print(String string) {
-            textArea.appendText(string);
+            Platform.runLater(() -> textArea.appendText(string));
         }
 
         public void println(String string) {
-            textArea.appendText(string + "\n");
+            Platform.runLater(() -> textArea.appendText(string + "\n"));
         }
 
         public void println() {
-            textArea.appendText("\n");
+            Platform.runLater(() -> textArea.appendText("\n"));
         }
     }
 }

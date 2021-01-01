@@ -15,6 +15,8 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.Metadatable;
+import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
@@ -110,7 +112,7 @@ public class TypeHandler {
             Class<?> wrapper = ClassUtils.primitiveToWrapper(to);
             return convert(wrapper, to, "((" + wrapper.getCanonicalName() + ")" + src + ")");
         }
-        if (CommandSender.class.isAssignableFrom(from) && (to == OfflinePlayer.class || to == ProjectileSource.class)) {
+        if (CommandSender.class.isAssignableFrom(from) && (to == OfflinePlayer.class || to == ProjectileSource.class || to == Metadatable.class || to == PersistentDataHolder.class)) {
             return "((" + to.getCanonicalName() + ")" + src + ")";
         }
         if (Entity.class.isAssignableFrom(from) && to == Sittable.class) {
@@ -118,6 +120,9 @@ public class TypeHandler {
         }
         if ((CommandSender.class.isAssignableFrom(from) || Entity.class.isAssignableFrom(from)) && to == Attributable.class) {
             return "((" + to.getCanonicalName() + ")" + src + ")";
+        }
+        if (ItemStack.class.isAssignableFrom(from) && to == PersistentDataHolder.class) {
+            return src + ".getItemMeta()";
         }
         return null;
     }
