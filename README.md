@@ -1,4 +1,4 @@
-# VisualBukkit
+# Visual Bukkit
 Visual Bukkit is a visual programming language for Bukkit plugins, allowing you to create plugins without knowing Java.
 
 ### Quick Links
