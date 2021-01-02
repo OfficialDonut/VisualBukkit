@@ -1,7 +1,6 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.CodeBlock;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
 import com.gmail.visualbukkit.gui.*;
 import com.gmail.visualbukkit.plugin.PluginBuilder;
@@ -26,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
-import org.reflections.Reflections;
 
 import java.awt.*;
 import java.io.IOException;
@@ -123,7 +121,7 @@ public class VisualBukkit extends Application {
         });
 
         ExtensionManager.init();
-        new Reflections("com.gmail.visualbukkit").getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
+        BlockRegistry.registerBlocks("com.gmail.visualbukkit.blocks");
         blockSelector.loadFavorites();
         blockSelector.getSelectionModel().select(0);
 

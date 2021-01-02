@@ -1,8 +1,6 @@
 package com.gmail.visualbukkit.extensions;
 
 import com.gmail.visualbukkit.VisualBukkit;
-import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.CodeBlock;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import javafx.application.Platform;
@@ -16,11 +14,11 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
-import org.reflections.Reflections;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.DirectoryStream;
@@ -28,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 public class ExtensionManager {
 
@@ -40,40 +40,30 @@ public class ExtensionManager {
             if (Files.notExists(extensionsFolder)) {
                 Files.createDirectory(extensionsFolder);
             }
+            URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            method.setAccessible(true);
             try (DirectoryStream<Path> pathStream = Files.newDirectoryStream(extensionsFolder)) {
                 for (Path path : pathStream) {
                     if (path.toString().endsWith(".jar")) {
-                        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{path.toUri().toURL()}, ExtensionManager.class.getClassLoader())) {
-                            Reflections reflections = new Reflections(classLoader);
-                            Set<Class<? extends VisualBukkitExtension>> classes = reflections.getSubTypesOf(VisualBukkitExtension.class);
-                            VisualBukkitExtension extension = !classes.isEmpty() ? classes.iterator().next().getConstructor().newInstance() : new VisualBukkitExtension() {
-                                @Override
-                                public String getName() {
-                                    return FilenameUtils.removeExtension(path.getFileName().toString());
+                        try (JarFile jarFile = new JarFile(path.toFile())) {
+                            method.invoke(classLoader, path.toUri().toURL());
+                            Manifest manifest = jarFile.getManifest();
+                            String mainClassName = manifest.getMainAttributes().getValue("main-class");
+                            if (mainClassName != null) {
+                                Class<?> mainClass = Class.forName(mainClassName);
+                                if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
+                                    VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
+                                    extensions.put(extension, path);
                                 }
-                                @Override
-                                public String getVersion() {
-                                    return "Not provided";
-                                }
-                                @Override
-                                public String getAuthor() {
-                                    return "Not provided";
-                                }
-                                @Override
-                                public String getDescription() {
-                                    return "Not provided";
-                                }
-                            };
-                            extensions.put(extension, path);
-                            extension.init();
-                            reflections.getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
-                        } catch (Exception e) {
+                            }
+                        } catch (IllegalAccessException | InvocationTargetException | InstantiationException | ClassNotFoundException e) {
                             NotificationManager.displayException("Failed to load extension", e);
                         }
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | NoSuchMethodException e) {
             NotificationManager.displayException("Failed to load extensions", e);
             Platform.exit();
         }

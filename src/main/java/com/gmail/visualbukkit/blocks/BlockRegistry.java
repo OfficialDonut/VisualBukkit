@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.gui.NotificationManager;
+import org.reflections.Reflections;
 
 import java.lang.reflect.Modifier;
 import java.util.Collection;
@@ -13,6 +14,10 @@ public class BlockRegistry {
 
     private static Map<String, StatementDefinition<?>> statements = new HashMap<>();
     private static Map<String, ExpressionDefinition<?>> expressions = new HashMap<>();
+
+    public static void registerBlocks(String packageName) {
+        new Reflections(packageName).getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
+    }
 
     @SuppressWarnings("unchecked")
     public static void registerBlock(Class<? extends CodeBlock> blockClass) {

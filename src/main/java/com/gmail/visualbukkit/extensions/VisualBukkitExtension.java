@@ -4,8 +4,6 @@ import javafx.scene.layout.GridPane;
 
 public abstract class VisualBukkitExtension {
 
-    public void init() {}
-
     public void setupManager(GridPane gridPane) {}
 
     public abstract String getName();
@@ -17,7 +15,7 @@ public abstract class VisualBukkitExtension {
     public abstract String getDescription();
 
     @Override
-    public String toString() {
+    public final String toString() {
         return getName();
     }
 }

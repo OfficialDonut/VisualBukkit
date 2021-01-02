@@ -25,7 +25,7 @@ public class Project implements Comparable<Project> {
     private Path canvasFolder;
     private Path resourceFolder;
     private DataFile dataFile;
-    private Map<String, BlockCanvas> canvases = new HashMap<>();
+    private Map<String, BlockCanvas> canvases = new LinkedHashMap<>();
 
     private String pluginName;
     private String pluginVersion;
