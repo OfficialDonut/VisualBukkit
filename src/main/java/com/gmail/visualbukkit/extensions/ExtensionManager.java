@@ -21,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,35 +33,68 @@ import java.util.jar.Manifest;
 public class ExtensionManager {
 
     private static Path extensionsFolder = VisualBukkit.getDataFolder().resolve("Extensions");
+    private static Path installFolder = extensionsFolder.resolve("Install");
+    private static Path uninstallFile = extensionsFolder.resolve("uninstall.txt");
+    private static Set<String> uninstallSet = new HashSet<>();
     private static Map<VisualBukkitExtension, Path> extensions = new HashMap<>();
     private static ExtensionManagerStage managerStage = new ExtensionManagerStage();
 
     public static void init() {
         try {
-            if (Files.notExists(extensionsFolder)) {
-                Files.createDirectory(extensionsFolder);
+            if (Files.exists(uninstallFile)) {
+                for (String fileName : Files.readAllLines(uninstallFile, StandardCharsets.UTF_8)) {
+                    Files.deleteIfExists(extensionsFolder.resolve(fileName));
+                }
+                Files.delete(uninstallFile);
             }
-            URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-            Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-            method.setAccessible(true);
+
+            Files.createDirectories(installFolder);
+            Set<Path> installSet = new HashSet<>();
+            try (DirectoryStream<Path> pathStream = Files.newDirectoryStream(installFolder)) {
+                for (Path path : pathStream) {
+                    Path newPath = extensionsFolder.resolve(path.getFileName());
+                    installSet.add(newPath);
+                    Files.move(path, newPath, StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+
+            Map<String, Path> loadMap = new HashMap<>();
             try (DirectoryStream<Path> pathStream = Files.newDirectoryStream(extensionsFolder)) {
                 for (Path path : pathStream) {
                     if (path.toString().endsWith(".jar")) {
                         try (JarFile jarFile = new JarFile(path.toFile())) {
-                            method.invoke(classLoader, path.toUri().toURL());
                             Manifest manifest = jarFile.getManifest();
                             String mainClassName = manifest.getMainAttributes().getValue("main-class");
                             if (mainClassName != null) {
-                                Class<?> mainClass = Class.forName(mainClassName);
-                                if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
-                                    VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
-                                    extensions.put(extension, path);
+                                if (loadMap.containsKey(mainClassName)) {
+                                    if (installSet.contains(path)) {
+                                        Files.delete(loadMap.get(mainClassName));
+                                        loadMap.put(mainClassName, path);
+                                    } else {
+                                        Files.delete(path);
+                                    }
+                                } else {
+                                    loadMap.put(mainClassName, path);
                                 }
                             }
-                        } catch (IllegalAccessException | InvocationTargetException | InstantiationException | ClassNotFoundException e) {
-                            NotificationManager.displayException("Failed to load extension", e);
                         }
                     }
+                }
+            }
+
+            URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
+            method.setAccessible(true);
+            for (Map.Entry<String, Path> entry : loadMap.entrySet()) {
+                try {
+                    method.invoke(classLoader, entry.getValue().toUri().toURL());
+                    Class<?> mainClass = Class.forName(entry.getKey());
+                    if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
+                        VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
+                        extensions.put(extension, entry.getValue());
+                    }
+                } catch (IllegalAccessException | InvocationTargetException | InstantiationException | ClassNotFoundException e) {
+                    NotificationManager.displayException("Failed to load extension", e);
                 }
             }
         } catch (IOException | NoSuchMethodException e) {
@@ -126,7 +160,7 @@ public class ExtensionManager {
                 if (jarFiles != null && jarFiles.size() > 0) {
                     for (File jarFile : jarFiles) {
                         try {
-                            Files.copy(jarFile.toPath(), extensionsFolder.resolve(jarFile.getName()), StandardCopyOption.REPLACE_EXISTING);
+                            Files.copy(jarFile.toPath(), installFolder.resolve(jarFile.getName()), StandardCopyOption.REPLACE_EXISTING);
                         } catch (IOException ex) {
                             NotificationManager.displayException("Failed to install extension", ex);
                         }
@@ -137,11 +171,11 @@ public class ExtensionManager {
 
             uninstallButton.setOnAction(e -> {
                 if (uninstallButton.getOpacity() == 1) {
+                    VisualBukkitExtension extension = listView.getSelectionModel().getSelectedItem();
+                    uninstallSet.add(extensions.remove(extension).getFileName().toString());
+                    listView.getItems().remove(extension);
                     try {
-                        VisualBukkitExtension extension = listView.getSelectionModel().getSelectedItem();
-                        Files.deleteIfExists(extensions.get(extension));
-                        extensions.remove(extension);
-                        listView.getItems().remove(extension);
+                        Files.write(uninstallFile, String.join("\n", uninstallSet).getBytes(StandardCharsets.UTF_8));
                         NotificationManager.displayMessage("Uninstalled extension", "Restart Visual Bukkit to complete uninstallation");
                     } catch (IOException ex) {
                         NotificationManager.displayException("Failed to uninstall extension", ex);
