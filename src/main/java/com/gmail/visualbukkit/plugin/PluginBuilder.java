@@ -95,7 +95,7 @@ public class PluginBuilder {
 
             Path buildDir = project.getFolder().resolve("build");
             Path mainDir = buildDir.resolve("src").resolve("main");
-            Path packageDir = mainDir.resolve("java").resolve("vb").resolve(name.toLowerCase());
+            Path packageDir = mainDir.resolve("java").resolve("vb").resolve("$" + name.toLowerCase());
             Path resourcesDir = mainDir.resolve("resources");
             Path resourceFilesDir = resourcesDir.resolve("files");
 
