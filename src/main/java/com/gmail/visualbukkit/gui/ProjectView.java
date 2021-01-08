@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang.StringUtils;
 
 public class ProjectView extends ScrollPane {
 
@@ -18,6 +19,12 @@ public class ProjectView extends ScrollPane {
     private TextField pluginSoftDependField = new TextField();
 
     public ProjectView() {
+        pluginNameField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!StringUtils.isAlphanumericSpace(newValue)) {
+                pluginNameField.setText(oldValue);
+            }
+        });
+
         Button addCanvasButton = new Button("Add Canvas");
         Button resourceFilesButton = new Button("Resource Files");
         Button buildButton = new Button("Build Plugin");

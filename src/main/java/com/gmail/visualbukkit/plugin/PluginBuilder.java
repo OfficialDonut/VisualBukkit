@@ -75,6 +75,9 @@ public class PluginBuilder {
     }
 
     public static void build(Project project) {
+        try {
+            project.save();
+        } catch (IOException ignored) {};
         buildWindow.prepare(project);
         buildWindow.show();
         buildWindow.println("Building plugin...");
@@ -88,7 +91,7 @@ public class PluginBuilder {
             if (StringUtils.isBlank(version)) {
                 version = "1.0";
             }
-            String packageName = "vb." + name.toLowerCase();
+            String packageName = "vb.$" + name.toLowerCase();
 
             Path buildDir = project.getFolder().resolve("build");
             Path mainDir = buildDir.resolve("src").resolve("main");
@@ -143,7 +146,7 @@ public class PluginBuilder {
                 Files.write(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString().getBytes(StandardCharsets.UTF_8));
 
                 buildWindow.println("Generating pom.xml...");
-                Files.write(buildDir.resolve("pom.xml"), createPom(packageName, name.toLowerCase(), version, buildContext).getBytes(StandardCharsets.UTF_8));
+                Files.write(buildDir.resolve("pom.xml"), createPom(name.toLowerCase(), version, buildContext).getBytes(StandardCharsets.UTF_8));
 
                 buildWindow.println("Generating plugin.yml...");
                 Files.write(resourcesDir.resolve("plugin.yml"), createYml(project, name, version, mainClass.getQualifiedName()).getBytes(StandardCharsets.UTF_8));
@@ -190,7 +193,7 @@ public class PluginBuilder {
         }
     }
 
-    private static String createPom(String groupId, String artifactId, String version, BuildContext buildContext) {
+    private static String createPom(String artifactId, String version, BuildContext buildContext) {
         String repositories = buildContext.getMavenRepositories().stream().map(s -> "<repository>\n" + s + "</repository>").collect(Collectors.joining("\n"));
         String dependencies = buildContext.getMavenDependencies().stream().map(s -> "<dependency>\n" + s + "</dependency>").collect(Collectors.joining("\n"));
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -199,7 +202,7 @@ public class PluginBuilder {
                 "         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n" +
                 "    <modelVersion>4.0.0</modelVersion>\n" +
                 "\n" +
-                "    <groupId>" + groupId + "</groupId>\n" +
+                "    <groupId>vb</groupId>\n" +
                 "    <artifactId>" + artifactId + "</artifactId>\n" +
                 "    <version>" + version + "</version>\n" +
                 "\n" +
