@@ -1,14 +1,16 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.VisualBukkit;
-import com.gmail.visualbukkit.gui.NotificationManager;
-import org.reflections.Reflections;
-
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.gui.NotificationManager;
+
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ScanResult;
 
 public class BlockRegistry {
 
@@ -16,15 +18,17 @@ public class BlockRegistry {
     private static Map<String, ExpressionDefinition<?>> expressions = new HashMap<>();
 
     public static void registerBlocks(String packageName) {
-        new Reflections(packageName).getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
+    	try(ScanResult sr = new ClassGraph().enableAllInfo().acceptPackages(packageName).scan()) {
+    		sr.getSubclasses(CodeBlock.class.getName()).loadClasses().forEach(BlockRegistry::registerBlock);
+    	}
     }
 
     @SuppressWarnings("unchecked")
-    public static void registerBlock(Class<? extends CodeBlock> blockClass) {
+	public static void registerBlock(Class<?> blockClass) {
         if (!Modifier.isAbstract(blockClass.getModifiers()) && !blockClass.isMemberClass()) {
             try {
                 if (StatementBlock.class.isAssignableFrom(blockClass)) {
-                    StatementDefinition<?> statement = new StatementDefinition<>((Class<? extends StatementBlock>) blockClass);
+					StatementDefinition<?> statement = new StatementDefinition<>((Class<? extends StatementBlock>) blockClass);
                     statements.put(blockClass.getName(), statement);
                     VisualBukkit.getInstance().getBlockSelector().add(statement);
                 } else if (ExpressionBlock.class.isAssignableFrom(blockClass)) {
