@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.plugin;
 
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class BuildContext {
     private Set<PluginModule> pluginModules = new HashSet<>();
     private Set<String> mavenRepositories = new HashSet<>();
     private Set<String> mavenDependencies = new HashSet<>();
+    private Set<InputStream> jarDependencies = new HashSet<>();
     private Set<String> utilMethods = new HashSet<>();
     private Set<Class<?>> utilClasses = new HashSet<>();
     private JavaClassSource mainClass;
@@ -35,6 +37,10 @@ public class BuildContext {
         mavenDependencies.addAll(Arrays.asList(dependencies));
     }
 
+    public void addJarDependencies(InputStream... inputStreams) {
+        jarDependencies.addAll(Arrays.asList(inputStreams));
+    }
+
     public void addUtilMethods(String... methods) {
         utilMethods.addAll(Arrays.asList(methods));
     }
@@ -49,6 +55,10 @@ public class BuildContext {
 
     public Set<String> getMavenDependencies() {
         return mavenDependencies;
+    }
+
+    public Set<InputStream> getJarDependencies() {
+        return jarDependencies;
     }
 
     public Set<String> getUtilMethods() {

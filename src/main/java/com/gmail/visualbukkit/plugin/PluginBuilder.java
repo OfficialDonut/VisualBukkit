@@ -40,6 +40,7 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PluginBuilder {
 
@@ -167,6 +168,17 @@ public class PluginBuilder {
                     ZipUtil.pack(classesDir.toFile(), utilDir.resolve("util-classes.jar").toFile());
                 }
 
+                Set<InputStream> jarInputStreams = buildContext.getJarDependencies();
+                if (!jarInputStreams.isEmpty()) {
+                    buildWindow.println("Copying dependency jars...");
+                    Path dependDir = buildDir.resolve("depend");
+                    Files.createDirectories(dependDir);
+                    int i = 1;
+                    for (InputStream jarInputStream : jarInputStreams) {
+                        FileUtils.copyInputStreamToFile(jarInputStream, dependDir.resolve("depend-" + i++ + ".jar").toFile());
+                    }
+                }
+
                 buildWindow.println("Executing maven tasks...");
                 buildWindow.println();
 
@@ -229,6 +241,14 @@ public class PluginBuilder {
                 "            <scope>system</scope>\n" +
                 "            <systemPath>${pom.basedir}/util/util-classes.jar</systemPath>\n" +
                 "        </dependency>\n\n") +
+                (buildContext.getJarDependencies().isEmpty() ? "" : IntStream.rangeClosed(1, buildContext.getJarDependencies().size()).mapToObj(i ->
+                "        <dependency>\n" +
+                "            <groupId>com.gmail.visualbukkit</groupId>\n" +
+                "            <artifactId>depend-" + i + "</artifactId>\n" +
+                "            <version>0</version>\n" +
+                "            <scope>system</scope>\n" +
+                "            <systemPath>${pom.basedir}/depend/depend-" + i + ".jar</systemPath>\n" +
+                "        </dependency>\n\n").collect(Collectors.joining())) +
                 "        <dependency>\n" +
                 "            <groupId>org.spigotmc</groupId>\n" +
                 "            <artifactId>spigot-api</artifactId>\n" +
