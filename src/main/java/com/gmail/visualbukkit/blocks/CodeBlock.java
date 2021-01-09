@@ -14,6 +14,8 @@ public interface CodeBlock extends ElementInspector.Inspectable {
 
     String toJava();
 
+    void initParameters(int length);
+
     List<BlockParameter> getParameters();
 
     BlockDefinition<?> getDefinition();
@@ -58,9 +60,10 @@ public interface CodeBlock extends ElementInspector.Inspectable {
     }
 
     default void deserialize(JSONObject obj) {
-        List<BlockParameter> parameters = getParameters();
         JSONArray parameterArray = obj.optJSONArray("parameters");
         if (parameterArray != null) {
+            initParameters(parameterArray.length());
+            List<BlockParameter> parameters = getParameters();
             int len = Math.min(parameters.size(), parameterArray.length());
             for (int i = 0; i < len; i++) {
                 JSONObject parameterObj = parameterArray.optJSONObject(i);
