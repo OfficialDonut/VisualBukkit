@@ -10,6 +10,8 @@ import com.gmail.visualbukkit.util.DataFile;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
@@ -18,10 +20,13 @@ import javafx.stage.FileChooser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.File;
 import java.util.List;
 
 public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
+
+    public static final DataFormat POINT = new DataFormat("geom/Point2D");
 
     private Pane innerPane = new Pane();
     private String name;
@@ -55,7 +60,8 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                 block = (StatementBlock) source;
                 block.disconnect();
                 if (!innerPane.equals(block.getParent())) {
-                    add(block, e.getScreenX(), e.getScreenY());
+                    java.awt.geom.Point2D.Double point = (java.awt.geom.Point2D.Double)e.getDragboard().getContent(POINT);
+                    add(block, e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
                 }
             }
             block.update();
@@ -169,10 +175,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
     private void add(Node node, double screenX, double screenY) {
         innerPane.getChildren().add(node);
         Point2D point = innerPane.screenToLocal(screenX, screenY);
-        Point2D offset = VisualBukkit.getInstance().getLastOffset();
-        point = point.subtract(offset);
         node.relocate(point.getX(), point.getY());
-        VisualBukkit.getInstance().setLastOffset(0, 0);
     }
 
     public void pan(double deltaX, double deltaY) {

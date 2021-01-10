@@ -12,6 +12,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import jdk.nashorn.internal.ir.Block;
+
+import java.awt.geom.Point2D;
 
 public class StatementLabel extends Label implements ElementInspector.Inspectable {
 
@@ -31,9 +34,9 @@ public class StatementLabel extends Label implements ElementInspector.Inspectabl
             SnapshotParameters snapshotParameters = new SnapshotParameters();
             snapshotParameters.setFill(Color.TRANSPARENT);
             dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
-            VisualBukkit.getInstance().setLastOffset(e.getX(), e.getY());
             ClipboardContent content = new ClipboardContent();
             content.putString("");
+            content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
             dragboard.setContent(content);
             e.consume();
         });
