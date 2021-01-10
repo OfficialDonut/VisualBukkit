@@ -169,7 +169,10 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
     private void add(Node node, double screenX, double screenY) {
         innerPane.getChildren().add(node);
         Point2D point = innerPane.screenToLocal(screenX, screenY);
+        Point2D offset = VisualBukkit.getInstance().getLastOffset();
+        point = point.subtract(offset);
         node.relocate(point.getX(), point.getY());
+        VisualBukkit.getInstance().setLastOffset(0, 0);
     }
 
     public void pan(double deltaX, double deltaY) {

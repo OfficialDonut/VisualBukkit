@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.annotations.BlockColor;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.gui.UndoManager;
@@ -38,7 +39,8 @@ public abstract class ParentBlock extends StatementBlock {
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null));
+                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
+                VisualBukkit.getInstance().setLastOffset(e.getX(), e.getY());
                 ClipboardContent content = new ClipboardContent();
                 content.putString("");
                 dragboard.setContent(content);
