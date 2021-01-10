@@ -9,7 +9,7 @@
 }
 
 .combo-box {
-    -fx-pref-width: 100;
+    -fx-pref-width: 200;
 }
 
 .combo-box > .arrow-button {
