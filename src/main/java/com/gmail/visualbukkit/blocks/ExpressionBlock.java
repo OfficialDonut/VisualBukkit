@@ -185,11 +185,6 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
     }
 
     @Override
-    public void initParameters(int length) {
-
-    }
-
-    @Override
     public ExpressionDefinition<?> getDefinition() {
         return BlockRegistry.getExpression(this);
     }
