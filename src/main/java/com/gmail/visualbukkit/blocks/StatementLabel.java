@@ -34,7 +34,6 @@ public class StatementLabel extends Label implements ElementInspector.Inspectabl
             snapshotParameters.setFill(Color.TRANSPARENT);
             dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
             ClipboardContent content = new ClipboardContent();
-            content.putString("");
             content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
             dragboard.setContent(content);
             e.consume();
