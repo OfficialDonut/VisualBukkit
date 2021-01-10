@@ -23,7 +23,11 @@ public class QuestChoiceParameter extends ChoiceParameter {
             JSONObject quests = questData.getJSONObject("quests");
             questListValues.addAll(quests.keySet());
             for (String quest : quests.keySet()) {
-                List<String> values = quests.getJSONArray(quest).toList().stream().map(v -> quest + ":" + v).collect(Collectors.toList());
+                List<String> values = new ArrayList<>();
+                List names = quests.getJSONArray(quest).toList();
+                for (int i = 0; i < names.size(); i++) {
+                    values.add(i + ":" + names.get(i));
+                }
                 questValueParameters.put(quest, values);
             }
         } catch (IOException e) {
