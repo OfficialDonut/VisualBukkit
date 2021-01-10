@@ -8,6 +8,7 @@ import com.gmail.visualbukkit.blocks.StatementLabel;
 import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.gmail.visualbukkit.util.TreeNode;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
@@ -93,6 +94,9 @@ public class BlockSelector extends TabPane {
             i++;
         }
         getTabs().add(i, tab);
+        if(category.equals(Category.MINESCAPE)){
+            Platform.runLater( () -> getSelectionModel().select(tab));
+        }
         return tab;
     }
 
