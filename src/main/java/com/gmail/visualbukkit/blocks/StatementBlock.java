@@ -17,10 +17,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -386,11 +383,6 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
     @Override
     public List<BlockParameter> getParameters() {
         return parameters;
-    }
-
-    @Override
-    public void initParameters(int length) {
-
     }
 
     @Override

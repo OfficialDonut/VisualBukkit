@@ -1,13 +1,17 @@
-package com.gmail.visualbukkit.blocks.statements;
+package com.gmail.visualbukkit.blocks.minescape.npc;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 import javafx.scene.control.Button;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Category(Category.MINESCAPE)
 @Description("Defines a npc dialogue")
 public class StatNpcDialogue extends StatementBlock {
 
@@ -32,11 +36,10 @@ public class StatNpcDialogue extends StatementBlock {
 
     protected void build(){
         clear();
-        init("Title: ", title);
+        init("Title: ", title, " ", addLine);
         for(int line = 0; line < dialogueLines.size(); line++){
             initLine(createRemoveButton(line), " ", dialogueLines.get(line));
         }
-        initLine(addLine);
     }
 
     protected Button createRemoveButton(int line){
@@ -50,12 +53,16 @@ public class StatNpcDialogue extends StatementBlock {
         return "";
     }
 
+
     @Override
-    public void initParameters(int length) {
-        super.initParameters(length);
-        for(int i = 0; i < length - 1; i++){
-            dialogueLines.add(new StringLiteralParameter());
+    public void deserialize(JSONObject obj) {
+        JSONArray parameterArray = obj.optJSONArray("parameters");
+        if (parameterArray != null) {
+            for (int i = 0; i < parameterArray.length() - 1; i++) {
+                dialogueLines.add(new StringLiteralParameter());
+            }
+            build();
         }
-        build();
+        super.deserialize(obj);
     }
 }
