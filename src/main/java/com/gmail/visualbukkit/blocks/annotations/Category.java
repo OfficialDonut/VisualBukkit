@@ -19,4 +19,5 @@ public @interface Category {
     String STRUCTURES = "Structures";
     String VARIABLES = "Variables";
     String WORLD = "World";
+    String MINESCAPE = "MineScape";
 }
