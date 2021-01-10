@@ -45,11 +45,23 @@ public class BlockRegistry {
     }
 
     public static StatementDefinition<?> getStatement(String identifier) {
-        return statements.get(identifier);
+        StatementDefinition<?> statementDefinition = statements.get(identifier);
+        if(statementDefinition == null){
+            String last = identifier.substring(identifier.lastIndexOf("."));
+            identifier = statements.keySet().stream().filter(expression -> expression.endsWith(last)).findFirst().orElse(null);
+            statementDefinition = statements.get(identifier);
+        }
+        return statementDefinition;
     }
 
     public static ExpressionDefinition<?> getExpression(String identifier) {
-        return expressions.get(identifier);
+        ExpressionDefinition<?> expressionDefinition = expressions.get(identifier);
+        if(expressionDefinition == null){
+            String last = identifier.substring(identifier.lastIndexOf("."));
+            identifier = expressions.keySet().stream().filter(expression -> expression.endsWith(last)).findFirst().orElse(null);
+            expressionDefinition = expressions.get(identifier);
+        }
+        return expressionDefinition;
     }
 
     public static StatementDefinition<?> getStatement(StatementBlock block) {
