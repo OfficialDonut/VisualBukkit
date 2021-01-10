@@ -30,7 +30,8 @@ public class StatementLabel extends Label implements ElementInspector.Inspectabl
             Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
             SnapshotParameters snapshotParameters = new SnapshotParameters();
             snapshotParameters.setFill(Color.TRANSPARENT);
-            dragboard.setDragView(snapshot(snapshotParameters, null));
+            dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
+            VisualBukkit.getInstance().setLastOffset(e.getX(), e.getY());
             ClipboardContent content = new ClipboardContent();
             content.putString("");
             dragboard.setContent(content);
