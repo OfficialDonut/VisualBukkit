@@ -107,7 +107,7 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
             UndoManager.capture();
             Object source = e.getGestureSource();
             StatementBlock block = source instanceof StatementLabel ?
-                    ((StatementLabel) source).getStatement().createBlock() :
+                    ((StatementLabel) source).getStatement().createBlock(null) :
                     (StatementBlock) source;
             connectNext(block);
             block.update();

@@ -70,7 +70,7 @@ public abstract class ParentBlock extends StatementBlock {
             UndoManager.capture();
             Object source = e.getGestureSource();
             StatementBlock block = source instanceof StatementLabel ?
-                    ((StatementLabel) source).getStatement().createBlock() :
+                    ((StatementLabel) source).getStatement().createBlock(null) :
                     (StatementBlock) source;
             connectChild(block);
             block.update();

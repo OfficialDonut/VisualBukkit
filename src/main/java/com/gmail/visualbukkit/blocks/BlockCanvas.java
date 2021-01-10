@@ -52,7 +52,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
             Object source = e.getGestureSource();
             StatementBlock block;
             if (source instanceof StatementLabel) {
-                block = ((StatementLabel) source).getStatement().createBlock();
+                block = ((StatementLabel) source).getStatement().createBlock(null);
                 add(block, e.getScreenX(), e.getScreenY());
             } else {
                 block = (StatementBlock) source;

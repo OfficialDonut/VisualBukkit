@@ -159,11 +159,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
     public void deserialize(JSONObject obj) {
         ExpressionDefinition<?> def = BlockRegistry.getExpression(obj.optString("="));
         if (def != null) {
-            setExpression(def.createBlock());
-            JSONObject exprObj = obj.optJSONObject("expression");
-            if (exprObj != null) {
-                expression.deserialize(exprObj);
-            }
+            setExpression(def.createBlock(obj.optJSONObject("expression")));
         }
     }
 
@@ -204,7 +200,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
                     VisualBukkit.getInstance().getElementInspector().inspect(this);
                     if (e.getClickCount() == 2) {
                         UndoManager.capture();
-                        setExpression(def.createBlock());
+                        setExpression(def.createBlock(null));
                         getStatement().update();
                         popOver.hide();
                     }
