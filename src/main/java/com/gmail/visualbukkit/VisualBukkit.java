@@ -12,7 +12,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Orientation;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -334,5 +333,4 @@ public class VisualBukkit extends Application {
     public ProjectView getProjectView() {
         return projectView;
     }
-
 }

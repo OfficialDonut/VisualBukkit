@@ -59,7 +59,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                 block = (StatementBlock) source;
                 block.disconnect();
                 if (!innerPane.equals(block.getParent())) {
-                    java.awt.geom.Point2D.Double point = (java.awt.geom.Point2D.Double)e.getDragboard().getContent(POINT);
+                    java.awt.geom.Point2D.Double point = (java.awt.geom.Point2D.Double) e.getDragboard().getContent(POINT);
                     add(block, e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
                 }
             }
