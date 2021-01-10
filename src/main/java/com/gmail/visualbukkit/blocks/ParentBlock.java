@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.geom.Point2D;
+
 @BlockColor("#add8e6ff")
 public abstract class ParentBlock extends StatementBlock {
 
@@ -38,9 +40,9 @@ public abstract class ParentBlock extends StatementBlock {
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null));
+                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
                 ClipboardContent content = new ClipboardContent();
-                content.putString("");
+                content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
                 dragboard.setContent(content);
                 setOpacity(0.5);
                 setAcceptingConnections(false);

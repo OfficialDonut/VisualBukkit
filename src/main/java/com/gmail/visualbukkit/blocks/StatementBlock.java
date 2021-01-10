@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -79,9 +80,9 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null));
+                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
                 ClipboardContent content = new ClipboardContent();
-                content.putString("");
+                content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
                 dragboard.setContent(content);
                 setOpacity(0.5);
                 setAcceptingConnections(false);
