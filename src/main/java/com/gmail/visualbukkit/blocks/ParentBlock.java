@@ -15,7 +15,6 @@ import javafx.scene.paint.Color;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 
 @BlockColor("#add8e6ff")

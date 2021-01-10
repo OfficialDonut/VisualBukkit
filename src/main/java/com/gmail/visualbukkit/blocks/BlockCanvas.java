@@ -20,7 +20,6 @@ import javafx.stage.FileChooser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.io.File;
 import java.util.List;
 
