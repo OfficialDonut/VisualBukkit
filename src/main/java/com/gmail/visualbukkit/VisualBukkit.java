@@ -12,7 +12,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Orientation;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -58,7 +57,6 @@ public class VisualBukkit extends Application {
     private ElementInspector elementInspector;
     private ProjectView projectView;
     private DndTabPane canvasPane;
-    private Point2D lastOffset = new Point2D(0, 0);
 
     public VisualBukkit() {
         if (instance != null) {
@@ -337,13 +335,5 @@ public class VisualBukkit extends Application {
 
     public ProjectView getProjectView() {
         return projectView;
-    }
-
-    public Point2D getLastOffset() {
-        return lastOffset;
-    }
-
-    public void setLastOffset(double x, double y) {
-        this.lastOffset = new Point2D(x, y);
     }
 }
