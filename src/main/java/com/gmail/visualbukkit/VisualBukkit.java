@@ -264,6 +264,9 @@ public class VisualBukkit extends Application {
 
     @SuppressWarnings("UnstableApiUsage")
     private boolean checkForUpdate() {
+        if(true){
+            return false;
+        }
         try (InputStreamReader reader = new InputStreamReader(new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream(), StandardCharsets.UTF_8)) {
             if (!version.equals("v" + CharStreams.toString(reader).trim())) {
                 ButtonType viewButton = new ButtonType("View Update");
