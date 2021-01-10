@@ -33,7 +33,7 @@ public abstract class StatQuestStatement extends ParentBlock {
         if(valueChoice.getValue() ==null){
             super.setInvalid("Missing value.");
         }else if(questChoice.getValue() != null && valueChoice.getValue() != null){
-            if(!valueChoice.getValue().startsWith(questChoice.getValue())){
+            if(!QuestChoiceParameter.getChoiceParameter(questChoice.getValue()).contains(valueChoice.getValue())){
                 super.setInvalid("Quests do not match");
             }
         }
