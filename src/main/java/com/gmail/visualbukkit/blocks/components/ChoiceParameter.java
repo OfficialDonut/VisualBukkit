@@ -13,14 +13,20 @@ import java.util.Collection;
 public class ChoiceParameter extends SearchableComboBox<String> implements BlockParameter {
 
     public ChoiceParameter(String... choices) {
-        this(Arrays.asList(choices));
+        this(Arrays.asList(choices), true);
     }
 
     public ChoiceParameter(Collection<String> choices) {
+        this(choices, true);
+    }
+
+    public ChoiceParameter(Collection<String> choices, boolean defaultSet) {
         getItems().addAll(choices);
-        setValue(getItems().get(0));
+        if(defaultSet && getItems().size() != 0) {
+            setValue(getItems().get(0));
+        }
         setOnAction(e -> {
-            if (getValue() == null) {
+            if (defaultSet && getValue() == null && getItems().size() != 0) {
                 setValue(getItems().get(0));
             }
         });
