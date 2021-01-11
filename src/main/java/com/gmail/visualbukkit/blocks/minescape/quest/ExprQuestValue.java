@@ -2,15 +2,15 @@ package com.gmail.visualbukkit.blocks.minescape.quest;
 
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
-import com.gmail.visualbukkit.blocks.components.BinaryChoiceParameter;
 import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
-import com.gmail.visualbukkit.blocks.minescape.MineScape;
+import com.gmail.visualbukkit.blocks.minescape.MinescapeType;
 import javafx.collections.FXCollections;
 
 import java.util.Collections;
 
 @Description("A boolean (true or false)")
-public class ExprQuestValue extends ExpressionBlock<MineScape> {
+public class ExprQuestValue extends ExpressionBlock<MinescapeType> {
+
 
     private ChoiceParameter questChoice = new QuestChoiceParameter();
     private ChoiceParameter checkChoice = new ChoiceParameter("<", "<=", "==", "=>", ">");
