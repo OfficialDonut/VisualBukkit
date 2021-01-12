@@ -130,6 +130,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
 
         setOnContextMenuRequested(e -> {
             if (!popOver.isShowing()) {
+                expressions.setPredicate(null);
                 ContextMenuManager.show(this, contextMenu, e);
             } else {
                 e.consume();
