@@ -191,6 +191,10 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         return returnType;
     }
 
+    public ExpressionBlock<?> getExpression() {
+        return expression;
+    }
+
     private class ExpressionCell extends ListCell<ExpressionDefinition<?>> implements ElementInspector.Inspectable {
 
         public ExpressionCell(PopOver popOver) {

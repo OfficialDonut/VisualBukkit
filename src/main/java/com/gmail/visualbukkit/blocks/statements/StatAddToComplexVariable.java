@@ -1,6 +1,6 @@
 package com.gmail.visualbukkit.blocks.statements;
 
-import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.ComplexVariableBlock;
 import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Category(Category.VARIABLES)
 @Description("Adds a number to a complex variable")
-public class StatAddToComplexVariable extends StatementBlock {
+public class StatAddToComplexVariable extends ComplexVariableBlock {
 
     public StatAddToComplexVariable() {
         init(new ChoiceParameter("local", "global", "persistent"), " ", List.class, " += ", double.class);
