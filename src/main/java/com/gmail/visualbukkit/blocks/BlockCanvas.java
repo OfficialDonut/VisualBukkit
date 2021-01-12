@@ -16,6 +16,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.WindowEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -120,15 +121,14 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
         MenuItem renameItem = new MenuItem("Rename");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem importItem = new MenuItem("Import Block");
-        MenuItem invalidPasteItem = new MenuItem("Paste");
-        invalidPasteItem.setStyle("-fx-opacity: 0.5;");
-        contextMenu.getItems().addAll(pasteItem, organizeItem, clearItem, renameItem, deleteItem, importItem);
 
         pasteItem.setOnAction(e -> {
-            UndoManager.capture();
-            StatementBlock block = CopyPasteManager.pasteStack();
-            add(block, contextMenu.getX(), contextMenu.getY());
-            block.update();
+            if (!pasteItem.isDisable()) {
+                UndoManager.capture();
+                StatementBlock block = CopyPasteManager.pasteStack();
+                add(block, contextMenu.getX(), contextMenu.getY());
+                block.update();
+            }
         });
 
         organizeItem.setOnAction(e -> {
@@ -164,10 +164,9 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
             }
         });
 
-        setOnContextMenuRequested(e -> {
-            contextMenu.getItems().set(0, CopyPasteManager.peek() instanceof StatementDefinition ? pasteItem : invalidPasteItem);
-            ContextMenuManager.show(this, contextMenu, e);
-        });
+        contextMenu.getItems().addAll(pasteItem, organizeItem, clearItem, renameItem, deleteItem, importItem);
+        contextMenu.addEventHandler(WindowEvent.WINDOW_SHOWN, e -> pasteItem.setDisable(!(CopyPasteManager.peek() instanceof StatementDefinition)));
+        setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
     private void add(Node node, double screenX, double screenY) {

@@ -21,6 +21,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.WindowEvent;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
@@ -81,16 +82,22 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
             e.consume();
         });
 
-        ContextMenu contextMenu = new ContextMenu();
-        MenuItem invalidPasteItem = new MenuItem("Paste");
         MenuItem pasteItem = new MenuItem("Paste");
-        invalidPasteItem.setStyle("-fx-opacity: 0.5;");
         pasteItem.setOnAction(e -> {
-            UndoManager.capture();
-            getChildren().setAll(expression = (ExpressionBlock<?>) CopyPasteManager.paste());
-            getStatement().update();
+            if (!pasteItem.isDisable()) {
+                UndoManager.capture();
+                getChildren().setAll(expression = (ExpressionBlock<?>) CopyPasteManager.paste());
+                getStatement().update();
+            }
         });
+
+        ContextMenu contextMenu = new ContextMenu();
         contextMenu.getItems().add(pasteItem);
+        contextMenu.addEventHandler(WindowEvent.WINDOW_SHOWN, e -> {
+            BlockDefinition<?> copied = CopyPasteManager.peek();
+            pasteItem.setDisable(!(copied instanceof ExpressionDefinition) || !expressionCache.get(returnType).contains(copied));
+        });
+
         if (returnType == String.class) {
             MenuItem stringItem = new MenuItem("Insert String");
             contextMenu.getItems().add(stringItem);
@@ -120,10 +127,9 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
                 setExpression(new ExprNumber());
             });
         }
+
         setOnContextMenuRequested(e -> {
             if (!popOver.isShowing()) {
-                BlockDefinition<?> copied = CopyPasteManager.peek();
-                contextMenu.getItems().set(0, copied instanceof ExpressionDefinition && expressionCache.get(returnType).contains(copied) ? pasteItem : invalidPasteItem);
                 ContextMenuManager.show(this, contextMenu, e);
             } else {
                 e.consume();
