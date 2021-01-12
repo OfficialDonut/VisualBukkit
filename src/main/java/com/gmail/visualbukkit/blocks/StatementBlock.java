@@ -77,6 +77,7 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         syntaxBox.setBackground(normalBackground);
         syntaxBox.setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
+                ContextMenuManager.hide();
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
