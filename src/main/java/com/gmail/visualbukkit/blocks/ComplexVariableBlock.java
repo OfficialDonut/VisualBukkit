@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.expressions.ExprComplexVariable;
 import com.gmail.visualbukkit.gui.CopyPasteManager;
+import com.gmail.visualbukkit.gui.UndoManager;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.WindowEvent;
@@ -20,6 +21,7 @@ public abstract class ComplexVariableBlock extends StatementBlock {
         });
         pasteVarItem.setOnAction(e -> {
             if (!pasteVarItem.isDisable()) {
+                UndoManager.capture();
                 ExprComplexVariable expr = (ExprComplexVariable) CopyPasteManager.paste();
                 ((ChoiceParameter) parameters.get(0)).setValue(expr.parameters.get(0).toJava());
                 ((ExpressionParameter) parameters.get(1)).setExpression(((ExpressionParameter) expr.parameters.get(1)).getExpression());

@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 import com.gmail.visualbukkit.blocks.expressions.ExprSimpleVariable;
 import com.gmail.visualbukkit.gui.CopyPasteManager;
+import com.gmail.visualbukkit.gui.UndoManager;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.stage.WindowEvent;
@@ -20,6 +21,7 @@ public abstract class SimpleVariableBlock extends StatementBlock {
         });
         pasteVarItem.setOnAction(e -> {
             if (!pasteVarItem.isDisable()) {
+                UndoManager.capture();
                 ExprSimpleVariable expr = (ExprSimpleVariable) CopyPasteManager.paste();
                 ((ChoiceParameter) parameters.get(0)).setValue(expr.parameters.get(0).toJava());
                 ((StringLiteralParameter) parameters.get(1)).setText(((StringLiteralParameter) expr.parameters.get(1)).getText());
