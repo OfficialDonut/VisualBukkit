@@ -10,6 +10,7 @@ import com.gmail.visualbukkit.util.DataFile;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -20,6 +21,7 @@ import javafx.stage.WindowEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.File;
 import java.util.List;
 
@@ -110,6 +112,17 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                     zoom(1.15);
                 } else if (e.getCode() == KeyCode.MINUS) {
                     zoom(0.85);
+                } else if (e.getCode() == KeyCode.V) {
+                    if (CopyPasteManager.peek() instanceof StatementDefinition) {
+                        Point point = MouseInfo.getPointerInfo().getLocation();
+                        Point2D mouseLoc = new Point2D(point.getX(), point.getY());
+                        if (contains(screenToLocal(mouseLoc))) {
+                            UndoManager.capture();
+                            StatementBlock block = CopyPasteManager.pasteStack();
+                            add(block, mouseLoc.getX(), mouseLoc.getY());
+                            block.update();
+                        }
+                    }
                 }
             }
         });
