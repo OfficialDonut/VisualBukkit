@@ -21,7 +21,6 @@ import javafx.stage.WindowEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.io.File;
 import java.util.List;
 
@@ -34,6 +33,8 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
     private boolean panning;
     private double panX;
     private double panY;
+    private double mouseX = -1;
+    private double mouseY = -1;
 
     public BlockCanvas(String canvasName) {
         name = canvasName;
@@ -106,6 +107,16 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
             e.consume();
         });
 
+        setOnMouseMoved(e -> {
+            mouseX = e.getScreenX();
+            mouseY = e.getScreenY();
+        });
+
+        setOnMouseExited(e -> {
+            mouseX = -1;
+            mouseY = -1;
+        });
+
         VisualBukkit.getInstance().getScene().setOnKeyReleased(e -> {
             if (e.isShortcutDown()) {
                 if (e.getCode() == KeyCode.EQUALS) {
@@ -114,12 +125,10 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                     zoom(0.85);
                 } else if (e.getCode() == KeyCode.V) {
                     if (CopyPasteManager.peek() instanceof StatementDefinition) {
-                        Point point = MouseInfo.getPointerInfo().getLocation();
-                        Point2D mouseLoc = new Point2D(point.getX(), point.getY());
-                        if (contains(screenToLocal(mouseLoc))) {
+                        if (contains(screenToLocal(new Point2D(mouseX, mouseY)))) {
                             UndoManager.capture();
                             StatementBlock block = CopyPasteManager.pasteStack();
-                            add(block, mouseLoc.getX(), mouseLoc.getY());
+                            add(block, mouseX, mouseY);
                             block.update();
                         }
                     }
