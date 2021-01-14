@@ -1,16 +1,18 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.annotations.Description;
-import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 
-import java.util.List;
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
+import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
 
 @Description("All values of a type")
+@SuppressWarnings("rawtypes")
 public class ExprTypeValues extends ExpressionBlock<List> {
 
     public ExprTypeValues() {

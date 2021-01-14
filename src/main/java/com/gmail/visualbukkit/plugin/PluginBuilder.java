@@ -1,5 +1,35 @@
 package com.gmail.visualbukkit.plugin;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.maven.shared.invoker.DefaultInvocationRequest;
+import org.apache.maven.shared.invoker.DefaultInvoker;
+import org.apache.maven.shared.invoker.InvocationRequest;
+import org.apache.maven.shared.invoker.Invoker;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
+import org.slf4j.impl.SimpleLogger;
+import org.zeroturnaround.zip.ZipUtil;
+
 import com.gmail.visualbukkit.VisualBukkit;
 import com.gmail.visualbukkit.blocks.BlockCanvas;
 import com.gmail.visualbukkit.blocks.CodeBlock;
@@ -8,6 +38,7 @@ import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
+
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -20,27 +51,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javassist.ClassPool;
 import javassist.CtClass;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.maven.shared.invoker.*;
-import org.jboss.forge.roaster.Roaster;
-import org.jboss.forge.roaster.model.source.JavaClassSource;
-import org.jboss.forge.roaster.model.source.MethodSource;
-import org.slf4j.impl.SimpleLogger;
-import org.zeroturnaround.zip.ZipUtil;
-
-import java.awt.*;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class PluginBuilder {
 
@@ -386,10 +396,6 @@ public class PluginBuilder {
                 close();
                 PluginBuilder.build(project);
             });
-        }
-
-        public void print(String string) {
-            Platform.runLater(() -> textArea.appendText(string));
         }
 
         public void println(String string) {

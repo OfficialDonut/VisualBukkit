@@ -1,11 +1,12 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
+import java.util.List;
+
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 
-import java.util.List;
-
 @Description("The characters of a string")
+@SuppressWarnings("rawtypes")
 public class ExprStringCharacters extends ExpressionBlock<List> {
 
     public ExprStringCharacters() {

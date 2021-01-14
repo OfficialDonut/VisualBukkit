@@ -1,18 +1,25 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
+import java.util.List;
+import java.util.StringJoiner;
+
+import org.json.JSONObject;
+
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.BlockParameter;
 import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
 import com.gmail.visualbukkit.util.CenteredHBox;
-import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import org.json.JSONObject;
 
-import java.util.List;
-import java.util.StringJoiner;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.text.Text;
 
 @Description("A list of objects")
+@SuppressWarnings("rawtypes")
 public class ExprNewList extends ExpressionBlock<List> {
 
     private int size = -1;

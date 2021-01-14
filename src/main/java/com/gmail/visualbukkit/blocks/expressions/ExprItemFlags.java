@@ -1,12 +1,14 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.annotations.Description;
-import org.bukkit.inventory.ItemStack;
-
 import java.util.List;
 
+import org.bukkit.inventory.ItemStack;
+
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
+
 @Description("The item flags of an item")
+@SuppressWarnings("rawtypes")
 public class ExprItemFlags extends ExpressionBlock<List> {
 
     public ExprItemFlags() {

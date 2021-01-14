@@ -1,14 +1,15 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.VisualBukkit;
-import com.gmail.visualbukkit.gui.NotificationManager;
-import org.reflections.Reflections;
-
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.reflections.Reflections;
+
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.gui.NotificationManager;
 
 public class BlockRegistry {
 
@@ -19,7 +20,7 @@ public class BlockRegistry {
         new Reflections(packageName).getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void registerBlock(Class<? extends CodeBlock> blockClass) {
         if (!Modifier.isAbstract(blockClass.getModifiers()) && !blockClass.isMemberClass()) {
             try {

@@ -1,12 +1,13 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.annotations.Description;
-
 import java.io.File;
 import java.util.List;
 
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
+
 @Description("The files in a directory")
+@SuppressWarnings("rawtypes")
 public class ExprDirectoryFiles extends ExpressionBlock<List> {
 
     public ExprDirectoryFiles() {
