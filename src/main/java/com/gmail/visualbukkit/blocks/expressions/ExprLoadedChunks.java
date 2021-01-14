@@ -9,7 +9,6 @@ import com.gmail.visualbukkit.blocks.annotations.Description;
 
 @Description("The loaded chunks of a world")
 @SuppressWarnings("rawtypes")
-
 public class ExprLoadedChunks extends ExpressionBlock<List> {
 
     public ExprLoadedChunks() {
