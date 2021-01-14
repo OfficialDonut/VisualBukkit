@@ -8,6 +8,8 @@ import com.google.common.io.RecursiveDeleteOption;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.lang.StringUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
@@ -52,6 +54,7 @@ public class ProjectManager {
         }
         currentProject = project;
         VisualBukkit.getDataFile().getJson().put("last-project", project.getName());
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Working on " + projectName).setStartTimestamps(System.currentTimeMillis()).build());
     }
 
     public static void promptCreateProject(boolean canCancel) {

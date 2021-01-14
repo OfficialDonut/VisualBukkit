@@ -23,6 +23,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 
@@ -75,6 +78,8 @@ public class VisualBukkit extends Application {
         logFileHandler.setFormatter(new SimpleFormatter());
         logger.addHandler(logFileHandler);
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> NotificationManager.displayException("An exception occurred", e)));
+        DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
         Platform.runLater(this::load);
     }
 
@@ -84,6 +89,7 @@ public class VisualBukkit extends Application {
             save(false);
         }
         logFileHandler.close();
+        DiscordRPC.discordShutdown();
     }
 
     private void load() {
