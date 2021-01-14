@@ -23,6 +23,8 @@ public class StatSetSimpleVariable extends SimpleVariableBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.setVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ");";
+        return arg(0).equals("local") ?
+                ("VariableManager.setLocalVariable(localVariableScope," + arg(2) + "," + arg(1) + ");") :
+                ("VariableManager.setVariable(" + arg(0).equals("persistent") + "," + arg(2) + "," + arg(1) + ");");
     }
 }

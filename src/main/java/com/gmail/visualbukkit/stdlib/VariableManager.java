@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class VariableManager {
 
-    private static Map<String, Object> localVariables = Collections.synchronizedMap(new WeakHashMap<>());
+    private static Map<Object, Map<String, Object>> localVariables = Collections.synchronizedMap(new WeakHashMap<>());
     private static Map<String, Object> globalVariables = new ConcurrentHashMap<>();
     private static Map<String, Object> persistentVariables = new ConcurrentHashMap<>();
     private static HashFunction hashFunction = Hashing.md5();
@@ -52,12 +52,17 @@ public class VariableManager {
         }
     }
 
-    public static Object getVariable(VariableType type, Object... args) {
-        return (type == VariableType.PERSISTENT ? persistentVariables : type == VariableType.GLOBAL ? globalVariables : localVariables).get(hash(args));
+    public static Object getLocalVariable(Object scope, Object... args) {
+        Map<String, Object> map = localVariables.get(scope);
+        return map != null ? map.get(hash(args)) : null;
     }
 
-    public static void setVariable(VariableType type, Object value, Object... args) {
-        Map<String, Object> map = type == VariableType.PERSISTENT ? persistentVariables : type == VariableType.GLOBAL ? globalVariables : localVariables;
+    public static Object getVariable(boolean persistent, Object... args) {
+        return (persistent ? persistentVariables : globalVariables).get(hash(args));
+    }
+
+    public static void setLocalVariable(Object scope, Object value, Object... args) {
+        Map<String, Object> map = localVariables.computeIfAbsent(scope, k -> new ConcurrentHashMap<>());
         if (value != null) {
             map.put(hash(args), value);
         } else {
@@ -65,26 +70,43 @@ public class VariableManager {
         }
     }
 
-    public static void addToVariable(VariableType type, double delta, Object... args) {
-        Object object = getVariable(type, args);
+    public static void setVariable(boolean persistent, Object value, Object... args) {
+        Map<String, Object> map = persistent ? persistentVariables : globalVariables;
+        if (value != null) {
+            map.put(hash(args), value);
+        } else {
+            map.remove(hash(args));
+        }
+    }
+
+    public static void addToLocalVariable(Object scope, double delta, Object... args) {
+        Object object = getLocalVariable(scope, args);
         if (object == null) {
-            setVariable(type, delta, args);
+            setLocalVariable(scope, delta, args);
         } else if (object instanceof Number) {
-            setVariable(type, ((Number) object).doubleValue() + delta, args);
+            setLocalVariable(scope, ((Number) object).doubleValue() + delta, args);
         } else {
             throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
         }
     }
 
-    public static void removeFromVariable(VariableType type, double delta, Object... args) {
-        Object object = getVariable(type, args);
+    public static void addToVariable(boolean persistent, double delta, Object... args) {
+        Object object = getVariable(persistent, args);
         if (object == null) {
-            setVariable(type, -delta, args);
+            setVariable(persistent, delta, args);
         } else if (object instanceof Number) {
-            setVariable(type, ((Number) object).doubleValue() - delta, args);
+            setVariable(persistent, ((Number) object).doubleValue() + delta, args);
         } else {
-            throw new IllegalArgumentException("Cannot remove " + delta + " from " + object);
+            throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
         }
+    }
+
+    public static void removeFromLocalVariable(Object scope, double delta, Object... args) {
+        addToLocalVariable(scope, -delta, args);
+    }
+
+    public static void removeFromVariable(boolean persistent, double delta, Object... args) {
+        addToVariable(persistent, -delta, args);
     }
 
     private static String hash(Object[] args) {
@@ -115,5 +137,4 @@ public class VariableManager {
                 .map(o -> o instanceof Collection<?> ? filter((Collection<?>) o) : o)
                 .toArray();
     }
-
 }

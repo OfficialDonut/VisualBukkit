@@ -24,6 +24,8 @@ public class StatRemoveFromComplexVariable extends ComplexVariableBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.removeFromVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ".toArray());";
+        return arg(0).equals("local") ?
+                ("VariableManager.removeFromLocalVariable(localVariableScope," + arg(2) + "," + arg(1) + ".toArray());") :
+                ("VariableManager.removeFromVariable(" + arg(0).equals("persistent") + "," + arg(2) + "," + arg(1) + ".toArray());");
     }
 }

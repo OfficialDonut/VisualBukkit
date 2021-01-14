@@ -24,6 +24,8 @@ public class StatSetComplexVariable extends ComplexVariableBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.setVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ".toArray());";
+        return arg(0).equals("local") ?
+                ("VariableManager.setLocalVariable(localVariableScope," + arg(2) + "," + arg(1) + ".toArray());") :
+                ("VariableManager.setVariable(" + arg(0).equals("persistent") + "," + arg(2) + "," + arg(1) + ".toArray());");
     }
 }

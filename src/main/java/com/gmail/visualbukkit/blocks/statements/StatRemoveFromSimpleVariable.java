@@ -23,6 +23,8 @@ public class StatRemoveFromSimpleVariable extends SimpleVariableBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.removeFromVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ");";
+        return arg(0).equals("local") ?
+                ("VariableManager.removeFromLocalVariable(localVariableScope," + arg(2) + "," + arg(1) + ");") :
+                ("VariableManager.removeFromVariable(" + arg(0).equals("persistent") + "," + arg(2) + "," + arg(1) + ");");
     }
 }
