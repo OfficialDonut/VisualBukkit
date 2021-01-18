@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.annotations.Description;
-import org.bukkit.inventory.Inventory;
-
 import java.util.List;
 
+import org.bukkit.inventory.Inventory;
+
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
+
+@SuppressWarnings("rawtypes")
 @Description("The viewers of an inventory")
 public class ExprInventoryViewers extends ExpressionBlock<List> {
 

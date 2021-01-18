@@ -1,12 +1,14 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.annotations.Description;
-import org.bukkit.scoreboard.Team;
-
 import java.util.List;
 
+import org.bukkit.scoreboard.Team;
+
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
+
 @Description("The entries of a scoreboard team")
+@SuppressWarnings("rawtypes")
 public class ExprTeamEntries extends ExpressionBlock<List> {
 
     public ExprTeamEntries() {

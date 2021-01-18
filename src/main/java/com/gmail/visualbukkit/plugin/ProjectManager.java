@@ -22,6 +22,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang.StringUtils;
+import org.zeroturnaround.zip.ZipUtil;
+
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.blocks.BlockCanvas;
+import com.gmail.visualbukkit.gui.NotificationManager;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
+
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextInputDialog;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+
 public class ProjectManager {
 
     private static Path projectsFolder = VisualBukkit.getDataFolder().resolve("Projects");
@@ -98,7 +114,6 @@ public class ProjectManager {
         });
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     public static void promptDeleteProject() {
         Set<String> projects = getProjects();
         ChoiceDialog<String> deleteProjectDialog = new ChoiceDialog<>();

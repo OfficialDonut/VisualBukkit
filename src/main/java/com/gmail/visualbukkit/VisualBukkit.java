@@ -1,28 +1,57 @@
 package com.gmail.visualbukkit;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
+
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
-import com.gmail.visualbukkit.gui.*;
+import com.gmail.visualbukkit.gui.BlockSelector;
+import com.gmail.visualbukkit.gui.ElementInspector;
+import com.gmail.visualbukkit.gui.NotificationManager;
+import com.gmail.visualbukkit.gui.ProjectView;
+import com.gmail.visualbukkit.gui.UndoManager;
 import com.gmail.visualbukkit.plugin.PluginBuilder;
 import com.gmail.visualbukkit.plugin.ProjectManager;
 import com.gmail.visualbukkit.util.AutoSaver;
 import com.gmail.visualbukkit.util.DataFile;
 import com.google.common.io.CharStreams;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
@@ -268,7 +297,6 @@ public class VisualBukkit extends Application {
         }
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     private boolean checkForUpdate() {
         try (InputStreamReader reader = new InputStreamReader(new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream(), StandardCharsets.UTF_8)) {
             if (!version.equals("v" + CharStreams.toString(reader).trim())) {
