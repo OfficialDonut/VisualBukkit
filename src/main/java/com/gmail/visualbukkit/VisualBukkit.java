@@ -87,7 +87,7 @@ public class VisualBukkit extends Application {
     }
 
     private void load() {
-        primaryStage.setTitle("Visual Bukkit " + version);
+        //primaryStage.setTitle("Visual Bukkit " + version);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         rootPane.getStylesheets().add("/style.css");

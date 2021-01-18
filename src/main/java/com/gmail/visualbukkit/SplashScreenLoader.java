@@ -22,17 +22,17 @@ public class SplashScreenLoader extends Preloader {
         this.primaryStage = primaryStage;
         BorderPane rootPane = new BorderPane();
         rootPane.getStylesheets().add("/style.css");
-        try (InputStream inputStream = VisualBukkit.class.getResourceAsStream("/icon.png")) {
-            Image icon = new Image(inputStream, 150, 150, true, true);
-            VBox vBox = new VBox(15, new Label("Visual Bukkit"), new ImageView(icon));
-            vBox.setStyle("-fx-alignment: center; -fx-font-size: 36;");
-            rootPane.setCenter(vBox);
-            primaryStage.setTitle("Visual Bukkit v" + VisualBukkit.getVersion());
-            primaryStage.setScene(new Scene(rootPane, 600, 500));
-            primaryStage.getIcons().add(icon);
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-        }
+        //try (InputStream inputStream = VisualBukkit.class.getResourceAsStream("/icon.png")) {
+        //    Image icon = new Image(inputStream, 150, 150, true, true);
+        //    VBox vBox = new VBox(15, new Label("Visual Bukkit"), new ImageView(icon));
+        //    vBox.setStyle("-fx-alignment: center; -fx-font-size: 36;");
+        //    rootPane.setCenter(vBox);
+        //    primaryStage.setTitle("Visual Bukkit v" + VisualBukkit.getVersion());
+        //    primaryStage.setScene(new Scene(rootPane, 600, 500));
+        //    primaryStage.getIcons().add(icon);
+        //    primaryStage.initStyle(StageStyle.UNDECORATED);
+        //    primaryStage.show();
+        //}
     }
 
     @Override
