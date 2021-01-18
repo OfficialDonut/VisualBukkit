@@ -22,6 +22,8 @@ public class ExprComplexVariable extends ExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return "VariableManager.getVariable(VariableType." + arg(0).toUpperCase() + "," + arg(1) + ".toArray())";
+        return arg(0).equals("local") ?
+                ("VariableManager.getLocalVariable(localVariableScope," + arg(1) + ".toArray())") :
+                ("VariableManager.getVariable(" + arg(0).equals("persistent") + "," + arg(1) + ".toArray())");
     }
 }

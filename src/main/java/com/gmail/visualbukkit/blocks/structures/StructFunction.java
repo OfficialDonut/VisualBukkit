@@ -21,6 +21,7 @@ public class StructFunction extends StructureBlock {
         MethodSource<JavaClassSource> functionMethod = context.getMainClass().getMethod("function", String.class, List.class);
         functionMethod.setBody(
                 "if (function.equalsIgnoreCase(" + arg(0) + ")) {" +
+                "Object localVariableScope = new Object();" +
                 getChildJava() +
                 "}" +
                 functionMethod.getBody());

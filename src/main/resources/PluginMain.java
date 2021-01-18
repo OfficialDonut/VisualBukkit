@@ -14,11 +14,13 @@ import org.bukkit.util.*;
 public class PluginMain extends JavaPlugin implements Listener {
 
     private static PluginMain instance;
+    private Object localVariableScope = new Object();
 
     public void onEnable() {
         instance = this;
         getDataFolder().mkdir();
         getServer().getPluginManager().registerEvents(this, this);
+        Object localVariableScope = new Object();
     }
 
     public void onDisable() {}

@@ -1,5 +1,18 @@
 package com.gmail.visualbukkit.plugin;
 
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.blocks.BlockCanvas;
+import com.gmail.visualbukkit.gui.NotificationManager;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
+import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
+import org.apache.commons.lang.StringUtils;
+import org.zeroturnaround.zip.ZipUtil;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -57,6 +70,7 @@ public class ProjectManager {
         }
         currentProject = project;
         VisualBukkit.getDataFile().getJson().put("last-project", project.getName());
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Working on " + projectName).setStartTimestamps(System.currentTimeMillis()).build());
     }
 
     public static void promptCreateProject(boolean canCancel) {

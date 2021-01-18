@@ -31,6 +31,7 @@ public class StructCommand extends StructureBlock {
         commandMethod.setBody(
                 "if (command.getName().equalsIgnoreCase(" + name.toJava() + ")) {" +
                 "try {" +
+                "Object localVariableScope = new Object();" +
                 getChildJava() +
                 "} catch (Exception e) { e.printStackTrace(); }}" +
                 commandMethod.getBody());

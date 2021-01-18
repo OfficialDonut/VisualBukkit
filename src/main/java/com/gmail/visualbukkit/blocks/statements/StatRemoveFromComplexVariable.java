@@ -1,6 +1,6 @@
 package com.gmail.visualbukkit.blocks.statements;
 
-import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.ComplexVariableBlock;
 import com.gmail.visualbukkit.blocks.annotations.Category;
 import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.ChoiceParameter;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Category(Category.VARIABLES)
 @Description("Removes a number from a complex variable")
-public class StatRemoveFromComplexVariable extends StatementBlock {
+public class StatRemoveFromComplexVariable extends ComplexVariableBlock {
 
     public StatRemoveFromComplexVariable() {
         init(new ChoiceParameter("local", "global", "persistent"), " ", List.class, " -= ", double.class);
@@ -24,6 +24,8 @@ public class StatRemoveFromComplexVariable extends StatementBlock {
 
     @Override
     public String toJava() {
-        return "VariableManager.removeFromVariable(VariableType." + arg(0).toUpperCase() + "," + arg(2) + "," + arg(1) + ".toArray());";
+        return arg(0).equals("local") ?
+                ("VariableManager.removeFromLocalVariable(localVariableScope," + arg(2) + "," + arg(1) + ".toArray());") :
+                ("VariableManager.removeFromVariable(" + arg(0).equals("persistent") + "," + arg(2) + "," + arg(1) + ".toArray());");
     }
 }
