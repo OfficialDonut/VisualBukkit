@@ -45,7 +45,7 @@ import java.util.logging.SimpleFormatter;
 
 public class VisualBukkit extends Application {
 
-    private static String version = "v" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
+    private static String version = "" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static Path dataFolder = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
     private static DataFile dataFile = new DataFile(dataFolder.resolve("data.json"));
     private static Logger logger = Logger.getLogger("VisualBukkit");
@@ -93,7 +93,7 @@ public class VisualBukkit extends Application {
     }
 
     private void load() {
-        primaryStage.setTitle("Visual Bukkit " + version);
+        primaryStage.setTitle("Visual Bukkit");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         rootPane.getStylesheets().add("/style.css");
@@ -271,9 +271,10 @@ public class VisualBukkit extends Application {
     @SuppressWarnings("UnstableApiUsage")
     private boolean checkForUpdate() {
         try (InputStreamReader reader = new InputStreamReader(new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream(), StandardCharsets.UTF_8)) {
-            if (!version.equals("v" + CharStreams.toString(reader).trim())) {
+            String latestVersion = CharStreams.toString(reader).trim();
+            if (!version.equals(latestVersion)) {
                 ButtonType viewButton = new ButtonType("View Update");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "An update is available", viewButton, new ButtonType("Ignore"));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "An update is available!\n\nUsing version: " + version + "\n" + "Latest version: " + latestVersion, viewButton, new ButtonType("Ignore"));
                 alert.setTitle("Update Available");
                 alert.setHeaderText(null);
                 alert.setGraphic(null);

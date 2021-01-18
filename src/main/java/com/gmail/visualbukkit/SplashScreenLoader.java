@@ -27,7 +27,7 @@ public class SplashScreenLoader extends Preloader {
             VBox vBox = new VBox(15, new Label("Visual Bukkit"), new ImageView(icon));
             vBox.setStyle("-fx-alignment: center; -fx-font-size: 36;");
             rootPane.setCenter(vBox);
-            primaryStage.setTitle("Visual Bukkit v" + VisualBukkit.getVersion());
+            primaryStage.setTitle("Visual Bukkit");
             primaryStage.setScene(new Scene(rootPane, 600, 500));
             primaryStage.getIcons().add(icon);
             primaryStage.initStyle(StageStyle.UNDECORATED);
