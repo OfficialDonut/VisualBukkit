@@ -19,7 +19,7 @@ public class BlockRegistry {
         new Reflections(packageName).getSubTypesOf(CodeBlock.class).forEach(BlockRegistry::registerBlock);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void registerBlock(Class<? extends CodeBlock> blockClass) {
         if (!Modifier.isAbstract(blockClass.getModifiers()) && !blockClass.isMemberClass()) {
             try {

@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.List;
 
 @Description("The lines of a file")
+@SuppressWarnings("rawtypes")
 public class ExprFileLines extends ExpressionBlock<List> {
 
     public ExprFileLines() {

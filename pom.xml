@@ -6,7 +6,7 @@
 
     <groupId>com.gmail.visualbukkit</groupId>
     <artifactId>visual-bukkit</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,12 +16,23 @@
 
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+
+        <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.Vatuu</groupId>
+            <artifactId>discord-rpc</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
         <dependency>
             <groupId>com.sibvisions.external.jvxfx</groupId>
             <artifactId>dndtabpane</artifactId>

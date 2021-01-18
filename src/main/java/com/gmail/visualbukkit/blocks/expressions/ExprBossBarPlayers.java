@@ -6,6 +6,7 @@ import org.bukkit.boss.BossBar;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 @Description("The players viewing a boss bar")
 public class ExprBossBarPlayers extends ExpressionBlock<List> {
 

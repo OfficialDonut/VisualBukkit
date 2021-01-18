@@ -7,6 +7,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.List;
 
 @Description("All of the keys in a config")
+@SuppressWarnings("rawtypes")
 public class ExprConfigKeys extends ExpressionBlock<List> {
 
     public ExprConfigKeys() {

@@ -7,6 +7,7 @@ import org.bukkit.scoreboard.Team;
 import java.util.List;
 
 @Description("The entries of a scoreboard team")
+@SuppressWarnings("rawtypes")
 public class ExprTeamEntries extends ExpressionBlock<List> {
 
     public ExprTeamEntries() {

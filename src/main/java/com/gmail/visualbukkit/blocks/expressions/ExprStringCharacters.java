@@ -6,6 +6,7 @@ import com.gmail.visualbukkit.blocks.annotations.Description;
 import java.util.List;
 
 @Description("The characters of a string")
+@SuppressWarnings("rawtypes")
 public class ExprStringCharacters extends ExpressionBlock<List> {
 
     public ExprStringCharacters() {

@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 @Description("The lore of an item")
+@SuppressWarnings("rawtypes")
 public class ExprItemLore extends ExpressionBlock<List> {
 
     public ExprItemLore() {

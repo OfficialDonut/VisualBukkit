@@ -13,16 +13,19 @@ import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
 import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
 
@@ -42,7 +45,7 @@ import java.util.logging.SimpleFormatter;
 
 public class VisualBukkit extends Application {
 
-    private static String version = "v" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
+    private static String version = "" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static Path dataFolder = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
     private static DataFile dataFile = new DataFile(dataFolder.resolve("data.json"));
     private static Logger logger = Logger.getLogger("VisualBukkit");
@@ -75,6 +78,8 @@ public class VisualBukkit extends Application {
         logFileHandler.setFormatter(new SimpleFormatter());
         logger.addHandler(logFileHandler);
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> NotificationManager.displayException("An exception occurred", e)));
+        DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
         Platform.runLater(this::load);
     }
 
@@ -84,6 +89,7 @@ public class VisualBukkit extends Application {
             save(false);
         }
         logFileHandler.close();
+        DiscordRPC.discordShutdown();
     }
 
     private void load() {
@@ -132,7 +138,7 @@ public class VisualBukkit extends Application {
         sideSplitPane.setDividerPositions(0.5);
         ProjectManager.openLast();
 
-        checkForUpdate();
+        Platform.runLater(this::checkForUpdate);
     }
 
     private MenuBar createMenuBar() {
@@ -268,9 +274,10 @@ public class VisualBukkit extends Application {
             return false;
         }
         try (InputStreamReader reader = new InputStreamReader(new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream(), StandardCharsets.UTF_8)) {
-            if (!version.equals("v" + CharStreams.toString(reader).trim())) {
+            String latestVersion = CharStreams.toString(reader).trim();
+            if (!version.equals(latestVersion)) {
                 ButtonType viewButton = new ButtonType("View Update");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "An update is available", viewButton, new ButtonType("Ignore"));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "An update is available!\n\nUsing version: " + version + "\n" + "Latest version: " + latestVersion, viewButton, new ButtonType("Ignore"));
                 alert.setTitle("Update Available");
                 alert.setHeaderText(null);
                 alert.setGraphic(null);

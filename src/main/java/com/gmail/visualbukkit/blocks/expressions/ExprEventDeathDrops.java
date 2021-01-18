@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import java.util.List;
 
 @Description("The items dropped in an EntityDeathEvent (mutable list)")
+@SuppressWarnings("rawtypes")
 public class ExprEventDeathDrops extends ExpressionBlock<List> {
 
     public ExprEventDeathDrops() {

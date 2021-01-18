@@ -6,17 +6,20 @@ import com.gmail.visualbukkit.blocks.components.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.expressions.ExprBooleanAnd;
 import com.gmail.visualbukkit.blocks.expressions.ExprBooleanOr;
 import com.gmail.visualbukkit.blocks.expressions.ExprCombineStrings;
+import com.gmail.visualbukkit.blocks.expressions.ExprNegateBoolean;
 import com.gmail.visualbukkit.gui.ContextMenuManager;
+import com.gmail.visualbukkit.gui.ElementInspector;
 import com.gmail.visualbukkit.gui.UndoManager;
 import com.gmail.visualbukkit.util.CenteredHBox;
-import com.gmail.visualbukkit.gui.ElementInspector;
 import com.gmail.visualbukkit.util.PropertyGridPane;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -60,25 +63,68 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
         contextMenu.getItems().addAll(copyItem, cutItem, deleteItem);
 
         MenuItem addStringItem = new MenuItem("Add String");
-        addStringItem.setOnAction(e -> {
-            ExprCombineStrings expr = new ExprCombineStrings();
-            getExpressionParameter().setExpression(expr);
-            expr.getString1().setExpression(this);
-        });
+        addStringItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+            ExpressionParameter exprParameter;
+            @Override
+            public void run() {
+                exprParameter = getExpressionParameter();
+                ExprCombineStrings expr = new ExprCombineStrings();
+                exprParameter.setExpression(expr);
+                expr.getString1().setExpression(ExpressionBlock.this);
+            }
+            @Override
+            public void revert() {
+                exprParameter.setExpression(ExpressionBlock.this);
+            }
+        }));
 
         MenuItem addAndItem = new MenuItem("Add 'And'");
-        addAndItem.setOnAction(e -> {
-            ExprBooleanAnd expr = new ExprBooleanAnd();
-            getExpressionParameter().setExpression(expr);
-            expr.getBoolean1().setExpression(this);
-        });
+        addAndItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+            ExpressionParameter exprParameter;
+            @Override
+            public void run() {
+                exprParameter = getExpressionParameter();
+                ExprBooleanAnd expr = new ExprBooleanAnd();
+                exprParameter.setExpression(expr);
+                expr.getBoolean1().setExpression(ExpressionBlock.this);
+            }
+            @Override
+            public void revert() {
+                exprParameter.setExpression(ExpressionBlock.this);
+            }
+        }));
 
         MenuItem addOrItem = new MenuItem("Add 'Or'");
-        addOrItem.setOnAction(e -> {
-            ExprBooleanOr expr = new ExprBooleanOr();
-            getExpressionParameter().setExpression(expr);
-            expr.getBoolean1().setExpression(this);
-        });
+        addOrItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+            ExpressionParameter exprParameter;
+            @Override
+            public void run() {
+                exprParameter = getExpressionParameter();
+                ExprBooleanOr expr = new ExprBooleanOr();
+                exprParameter.setExpression(expr);
+                expr.getBoolean1().setExpression(ExpressionBlock.this);
+            }
+            @Override
+            public void revert() {
+                exprParameter.setExpression(ExpressionBlock.this);
+            }
+        }));
+
+        MenuItem negateItem = new MenuItem("Negate");
+        negateItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+            ExpressionParameter exprParameter;
+            @Override
+            public void run() {
+                exprParameter = getExpressionParameter();
+                ExprNegateBoolean expr = new ExprNegateBoolean();
+                exprParameter.setExpression(expr);
+                expr.getBoolean().setExpression(ExpressionBlock.this);
+            }
+            @Override
+            public void revert() {
+                exprParameter.setExpression(ExpressionBlock.this);
+            }
+        }));
 
         setOnContextMenuRequested(e -> {
             if (getExpressionParameter().getReturnType() == String.class) {
@@ -90,10 +136,10 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
             }
             if (getExpressionParameter().getReturnType() == boolean.class) {
                 if (!contextMenu.getItems().contains(addAndItem)) {
-                    contextMenu.getItems().addAll(addAndItem, addOrItem);
+                    contextMenu.getItems().addAll(addAndItem, addOrItem, negateItem);
                 }
             } else {
-                contextMenu.getItems().removeAll(addAndItem, addOrItem);
+                contextMenu.getItems().removeAll(addAndItem, addOrItem, negateItem);
             }
             ContextMenuManager.show(this, contextMenu, e);
         });
@@ -147,10 +193,18 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
 
     @Override
     public void delete() {
-        UndoManager.capture();
         ExpressionParameter exprParameter = getExpressionParameter();
         if (exprParameter != null) {
-            getExpressionParameter().setExpression(null);
+            UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    exprParameter.setExpression(null);
+                }
+                @Override
+                public void revert() {
+                    exprParameter.setExpression(ExpressionBlock.this);
+                }
+            });
         }
     }
 

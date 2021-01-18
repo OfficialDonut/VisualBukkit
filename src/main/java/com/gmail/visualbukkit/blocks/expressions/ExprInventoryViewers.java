@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 @Description("The viewers of an inventory")
 public class ExprInventoryViewers extends ExpressionBlock<List> {
 

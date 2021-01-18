@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.blocks.structures.StructProcedure;
 import java.util.List;
 
 @Description("The arguments of a procedure")
+@SuppressWarnings("rawtypes")
 public class ExprProcedureArguments extends ExpressionBlock<List> {
 
     public ExprProcedureArguments() {

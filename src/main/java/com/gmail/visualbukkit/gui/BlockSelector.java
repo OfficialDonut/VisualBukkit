@@ -39,8 +39,17 @@ public class BlockSelector extends TabPane {
         });
 
         setOnDragDropped(e -> {
-            UndoManager.capture();
-            ((StatementBlock) e.getGestureSource()).disconnect();
+            UndoManager.run(new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction disconnectAction;
+                @Override
+                public void run() {
+                    disconnectAction = ((StatementBlock) e.getGestureSource()).disconnect();
+                }
+                @Override
+                public void revert() {
+                    disconnectAction.revert();
+                }
+            });
             e.setDropCompleted(true);
             e.consume();
         });

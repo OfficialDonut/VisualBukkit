@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 @Description("A list of objects")
+@SuppressWarnings("rawtypes")
 public class ExprNewList extends ExpressionBlock<List> {
 
     private int size = -1;

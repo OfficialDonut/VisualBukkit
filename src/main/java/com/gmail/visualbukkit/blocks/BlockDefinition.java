@@ -29,19 +29,17 @@ public abstract class BlockDefinition<T extends CodeBlock> implements Comparable
                 "No description provided";
     }
 
-    public T createBlock() {
+    public T createBlock(JSONObject obj) {
         try {
-            return constructor.newInstance();
+            T block = constructor.newInstance();
+            if (obj != null) {
+                block.deserialize(obj);
+            }
+            return block;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             NotificationManager.displayException("Failed to create block", e);
             return null;
         }
-    }
-
-    public T createBlock(JSONObject obj) {
-        T block = createBlock();
-        block.deserialize(obj);
-        return block;
     }
 
     @Override

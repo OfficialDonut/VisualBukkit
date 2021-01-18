@@ -7,6 +7,7 @@ import org.bukkit.World;
 import java.util.List;
 
 @Description("The entities in a world")
+@SuppressWarnings("rawtypes")
 public class ExprEntitiesInWorld extends ExpressionBlock<List> {
 
     public ExprEntitiesInWorld() {

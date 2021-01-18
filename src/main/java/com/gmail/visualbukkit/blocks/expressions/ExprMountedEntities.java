@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import java.util.List;
 
 @Description("The entities riding an entity")
+@SuppressWarnings("rawtypes")
 public class ExprMountedEntities extends ExpressionBlock<List> {
 
     public ExprMountedEntities() {

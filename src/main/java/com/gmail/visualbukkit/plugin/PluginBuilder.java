@@ -25,7 +25,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.maven.shared.invoker.*;
+import org.apache.maven.shared.invoker.DefaultInvocationRequest;
+import org.apache.maven.shared.invoker.DefaultInvoker;
+import org.apache.maven.shared.invoker.InvocationRequest;
+import org.apache.maven.shared.invoker.Invoker;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -33,12 +36,14 @@ import org.slf4j.impl.SimpleLogger;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -75,10 +80,11 @@ public class PluginBuilder {
         MAIN_CLASS_SOURCE = mainClassSource;
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     public static void build(Project project) {
         try {
             project.save();
-        } catch (IOException ignored) {};
+        } catch (IOException ignored) {}
         buildWindow.prepare(project);
         buildWindow.show();
         buildWindow.println("Building plugin...");
@@ -386,10 +392,6 @@ public class PluginBuilder {
                 close();
                 PluginBuilder.build(project);
             });
-        }
-
-        public void print(String string) {
-            Platform.runLater(() -> textArea.appendText(string));
         }
 
         public void println(String string) {

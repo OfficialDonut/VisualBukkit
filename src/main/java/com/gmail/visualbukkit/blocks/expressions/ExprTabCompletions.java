@@ -7,6 +7,7 @@ import org.bukkit.event.server.TabCompleteEvent;
 import java.util.List;
 
 @Description("The tab completions in a TabCompleteEvent (mutable list)")
+@SuppressWarnings("rawtypes")
 public class ExprTabCompletions extends ExpressionBlock<List> {
 
     public ExprTabCompletions() {

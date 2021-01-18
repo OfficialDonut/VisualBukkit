@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 @Description("The item flags of an item")
+@SuppressWarnings("rawtypes")
 public class ExprItemFlags extends ExpressionBlock<List> {
 
     public ExprItemFlags() {

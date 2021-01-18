@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.blocks.structures.StructCommand;
 import java.util.List;
 
 @Description("The arguments of a command")
+@SuppressWarnings("rawtypes")
 public class ExprCommandArguments extends ExpressionBlock<List> {
 
     public ExprCommandArguments() {

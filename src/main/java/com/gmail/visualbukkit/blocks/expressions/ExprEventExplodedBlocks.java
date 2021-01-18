@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import java.util.List;
 
 @Description("The blocks that will be removed in a BlockExplodeEvent or EntityExplodeEvent (mutable list)")
+@SuppressWarnings("rawtypes")
 public class ExprEventExplodedBlocks extends ExpressionBlock<List> {
 
     public ExprEventExplodedBlocks() {

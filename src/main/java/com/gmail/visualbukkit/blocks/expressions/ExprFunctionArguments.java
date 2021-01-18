@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.blocks.structures.StructFunction;
 import java.util.List;
 
 @Description("The arguments of a function")
+@SuppressWarnings("rawtypes")
 public class ExprFunctionArguments extends ExpressionBlock<List> {
 
     public ExprFunctionArguments() {

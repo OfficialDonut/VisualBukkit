@@ -11,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import java.util.List;
 
 @Description("All values of a type")
+@SuppressWarnings("rawtypes")
 public class ExprTypeValues extends ExpressionBlock<List> {
 
     public ExprTypeValues() {

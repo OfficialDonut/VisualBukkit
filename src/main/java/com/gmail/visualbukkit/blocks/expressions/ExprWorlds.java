@@ -6,6 +6,7 @@ import com.gmail.visualbukkit.blocks.annotations.Description;
 import java.util.List;
 
 @Description("All worlds on the server")
+@SuppressWarnings("rawtypes")
 public class ExprWorlds extends ExpressionBlock<List> {
 
     public ExprWorlds() {

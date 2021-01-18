@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.List;
 
 @Description("The files in a directory")
+@SuppressWarnings("rawtypes")
 public class ExprDirectoryFiles extends ExpressionBlock<List> {
 
     public ExprDirectoryFiles() {

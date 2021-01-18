@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.List;
 
 @Description("The contents of an inventory")
+@SuppressWarnings("rawtypes")
 public class ExprInventoryContents extends ExpressionBlock<List> {
 
     public ExprInventoryContents() {
