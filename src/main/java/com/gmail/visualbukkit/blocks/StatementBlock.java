@@ -17,10 +17,9 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.TransferMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -81,7 +80,8 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
+                Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
+                dragboard.setDragView(image, Math.min(image.getWidth(), e.getX()), Math.min(image.getHeight(), e.getY()));
                 ClipboardContent content = new ClipboardContent();
                 content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
                 dragboard.setContent(content);
@@ -105,13 +105,24 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         });
 
         nextStatementIndicator.setOnDragDropped(e -> {
-            UndoManager.capture();
             Object source = e.getGestureSource();
             StatementBlock block = source instanceof StatementLabel ?
                     ((StatementLabel) source).getStatement().createBlock(null) :
                     (StatementBlock) source;
-            connectNext(block);
-            block.update();
+            UndoManager.run(new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction disconnectAction;
+                UndoManager.RevertableAction connectAction;
+                @Override
+                public void run() {
+                    disconnectAction = block.disconnect();
+                    connectAction = connectNext(block);
+                }
+                @Override
+                public void revert() {
+                    connectAction.revert();
+                    disconnectAction.revert();
+                }
+            });
             e.setDropCompleted(true);
             e.consume();
         });
@@ -169,16 +180,9 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         MenuItem copyStackItem = new MenuItem("Copy Stack");
         MenuItem cutStackItem = new MenuItem("Cut Stack");
         MenuItem deleteStackItem = new MenuItem("Delete Stack");
-        copyStackItem.setOnAction(e -> CopyPasteManager.copyStack(this));
-        cutStackItem.setOnAction(e -> {
-            UndoManager.capture();
-            CopyPasteManager.copyStack(this);
-            disconnect();
-        });
-        deleteStackItem.setOnAction(e -> {
-            UndoManager.capture();
-            disconnect();
-        });
+        copyStackItem.setOnAction(e -> copyStack());
+        cutStackItem.setOnAction(e -> cutStack());
+        deleteStackItem.setOnAction(e -> deleteStack());
 
         contextMenu.getItems().addAll(
                 copyItem, cutItem, deleteItem, new SeparatorMenuItem(),
@@ -291,47 +295,147 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         }
     }
 
-    public void connectNext(StatementBlock block) {
-        block.disconnect();
-        if (hasNext()) {
-            block.getLast().connectNext(next);
-        }
-        nextStatementPane.getChildren().add(block);
-        block.relocate(0, 0);
-        next = block;
-        block.previous = this;
+    public UndoManager.RevertableAction connectNext(StatementBlock block) {
+        StatementBlock nextStatement = next;
+        UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+            @Override
+            public void run() {
+                if (nextStatement != null) {
+                    block.getLast().connectNext(nextStatement);
+                }
+                nextStatementPane.getChildren().add(block);
+                block.relocate(0, 0);
+                block.previous = StatementBlock.this;
+                next = block;
+                block.update();
+            }
+            @Override
+            public void revert() {
+                block.disconnect();
+                if (nextStatement != null) {
+                    nextStatement.disconnect();
+                    connectNext(nextStatement);
+                }
+            }
+        };
+        action.run();
+        return action;
     }
 
-    public void disconnect() {
+    public UndoManager.RevertableAction disconnect() {
         if (hasPrevious()) {
-            previous.nextStatementPane.getChildren().clear();
-            previous.next = null;
-            previous = null;
-        } else if (getParent() != null) {
-            if (getParent() instanceof Pane) {
-                ((Pane) getParent()).getChildren().remove(this);
-            } else {
-                throw new IllegalStateException();
+            StatementBlock previousStatement = previous;
+            UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    previous.nextStatementPane.getChildren().clear();
+                    previous.next = null;
+                    previous = null;
+                }
+                @Override
+                public void revert() {
+                    previousStatement.connectNext(StatementBlock.this);
+                }
+            };
+            action.run();
+            return action;
+        } else {
+            Parent parent = getParent();
+            if (parent != null) {
+                double x = getLayoutX();
+                double y = getLayoutY();
+                UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+                    @Override
+                    public void run() {
+                        ((Pane) parent).getChildren().remove(StatementBlock.this);
+                    }
+                    @Override
+                    public void revert() {
+                        ((Pane) parent).getChildren().add(StatementBlock.this);
+                        relocate(x, y);
+                        StatementBlock.this.update();
+                    }
+                };
+                action.run();
+                return action;
             }
+            return UndoManager.EMPTY_ACTION;
         }
     }
 
     @Override
     public void delete() {
-        UndoManager.capture();
-        Parent currentParent = getParent();
-        StatementBlock currentPrevious = previous;
-        disconnect();
-        if (currentPrevious != null) {
-            if (next != null) {
-                currentPrevious.connectNext(next);
+        if (previous != null) {
+            StatementBlock previousStatement = previous;
+            StatementBlock nextStatement = next;
+            UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    disconnect();
+                    if (nextStatement != null) {
+                        nextStatement.disconnect();
+                        previousStatement.connectNext(nextStatement);
+                    }
+                }
+                @Override
+                public void revert() {
+                    if (nextStatement != null) {
+                        nextStatement.disconnect();
+                        connectNext(nextStatement);
+                    }
+                    previousStatement.connectNext(StatementBlock.this);
+                }
+            });
+        } else {
+            Pane parent = (Pane) getParent();
+            if (parent != null) {
+                StatementBlock nextStatement = next;
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    UndoManager.RevertableAction disconnectAction;
+                    @Override
+                    public void run() {
+                        disconnectAction = disconnect();
+                        if (nextStatement != null) {
+                            nextStatement.disconnect();
+                            parent.getChildren().add(nextStatement);
+                            nextStatement.relocate(getLayoutX(), getLayoutY());
+                        }
+                    }
+
+                    @Override
+                    public void revert() {
+                        if (nextStatement != null) {
+                            nextStatement.disconnect();
+                            connectNext(nextStatement);
+                        }
+                        disconnectAction.revert();
+                    }
+                });
             }
-        } else if (next != null && currentParent instanceof Pane) {
-            StatementBlock next = this.next;
-            next.disconnect();
-            ((Pane) currentParent).getChildren().add(next);
-            next.relocate(getLayoutX(), getLayoutY());
         }
+    }
+
+    public void copyStack() {
+        CopyPasteManager.copyStack(this);
+    }
+
+    public void cutStack() {
+        copyStack();
+        deleteStack();
+    }
+
+    public void deleteStack() {
+        UndoManager.run(new UndoManager.RevertableAction() {
+            UndoManager.RevertableAction disconnectAction;
+            @Override
+            public void run() {
+                disconnectAction = disconnect();
+            }
+            @Override
+            public void revert() {
+                disconnectAction.revert();
+            }
+        });
     }
 
     @Override

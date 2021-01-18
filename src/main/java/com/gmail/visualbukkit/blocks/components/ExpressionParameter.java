@@ -85,9 +85,17 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         MenuItem pasteItem = new MenuItem("Paste");
         pasteItem.setOnAction(e -> {
             if (!pasteItem.isDisable()) {
-                UndoManager.capture();
-                getChildren().setAll(expression = (ExpressionBlock<?>) CopyPasteManager.paste());
-                getStatement().update();
+                ExpressionBlock<?> expr = (ExpressionBlock<?>) CopyPasteManager.paste();
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    @Override
+                    public void run() {
+                        setExpression(expr);
+                    }
+                    @Override
+                    public void revert() {
+                        setExpression(null);
+                    }
+                });
             }
         });
 
@@ -101,31 +109,55 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         if (returnType == String.class) {
             MenuItem stringItem = new MenuItem("Insert String");
             contextMenu.getItems().add(stringItem);
-            stringItem.setOnAction(e -> {
-                UndoManager.capture();
-                setExpression(new ExprString());
-            });
+            stringItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    setExpression(new ExprString());
+                }
+                @Override
+                public void revert() {
+                    setExpression(null);
+                }
+            }));
         } else if (returnType == boolean.class) {
             MenuItem booleanItem = new MenuItem("Insert Boolean");
             contextMenu.getItems().add(booleanItem);
-            booleanItem.setOnAction(e -> {
-                UndoManager.capture();
-                setExpression(new ExprBoolean());
-            });
+            booleanItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    setExpression(new ExprBoolean());
+                }
+                @Override
+                public void revert() {
+                    setExpression(null);
+                }
+            }));
         } else if (returnType == List.class) {
             MenuItem newListItem = new MenuItem("Insert New List");
             contextMenu.getItems().add(newListItem);
-            newListItem.setOnAction(e -> {
-                UndoManager.capture();
-                setExpression(new ExprNewList());
-            });
+            newListItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    setExpression(new ExprNewList());
+                }
+                @Override
+                public void revert() {
+                    setExpression(null);
+                }
+            }));
         } else if (TypeHandler.isNumber(returnType)) {
             MenuItem numberItem = new MenuItem("Insert Number");
             contextMenu.getItems().add(numberItem);
-            numberItem.setOnAction(e -> {
-                UndoManager.capture();
-                setExpression(new ExprNumber());
-            });
+            numberItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    setExpression(new ExprNumber());
+                }
+                @Override
+                public void revert() {
+                    setExpression(null);
+                }
+            }));
         }
 
         setOnContextMenuRequested(e -> {
@@ -210,10 +242,17 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
                 if (def != null) {
                     VisualBukkit.getInstance().getElementInspector().inspect(this);
                     if (e.getClickCount() == 2) {
-                        UndoManager.capture();
-                        setExpression(def.createBlock(null));
-                        getStatement().update();
-                        popOver.hide();
+                        UndoManager.run(new UndoManager.RevertableAction() {
+                            @Override
+                            public void run() {
+                                setExpression(def.createBlock(null));
+                                popOver.hide();
+                            }
+                            @Override
+                            public void revert() {
+                                setExpression(null);
+                            }
+                        });
                     }
                 }
             });

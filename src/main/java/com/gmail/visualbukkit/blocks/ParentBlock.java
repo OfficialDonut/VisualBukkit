@@ -6,6 +6,8 @@ import com.gmail.visualbukkit.gui.UndoManager;
 import javafx.geometry.Insets;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -40,7 +42,8 @@ public abstract class ParentBlock extends StatementBlock {
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
+                Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
+                dragboard.setDragView(image, Math.min(image.getWidth(), e.getX()), Math.min(image.getHeight(), e.getY()));
                 ClipboardContent content = new ClipboardContent();
                 content.put(BlockCanvas.POINT, new Point2D.Double(e.getX(), e.getY()));
                 dragboard.setContent(content);
@@ -67,13 +70,24 @@ public abstract class ParentBlock extends StatementBlock {
         });
 
         childIndicator.setOnDragDropped(e -> {
-            UndoManager.capture();
             Object source = e.getGestureSource();
             StatementBlock block = source instanceof StatementLabel ?
                     ((StatementLabel) source).getStatement().createBlock(null) :
                     (StatementBlock) source;
-            connectChild(block);
-            block.update();
+            UndoManager.run(new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction disconnectAction;
+                UndoManager.RevertableAction connectAction;
+                @Override
+                public void run() {
+                    disconnectAction = block.disconnect();
+                    connectAction = connectChild(block);
+                }
+                @Override
+                public void revert() {
+                    connectAction.revert();
+                    disconnectAction.revert();
+                }
+            });
             e.setDropCompleted(true);
             e.consume();
         });
@@ -191,12 +205,40 @@ public abstract class ParentBlock extends StatementBlock {
         }
     }
 
-    public void connectChild(StatementBlock block) {
-        block.disconnect();
-        if (hasChild()) {
-            block.getLast().connectNext(getChild());
+    public UndoManager.RevertableAction connectChild(StatementBlock block) {
+        StatementBlock child = getChild();
+        if (child != null) {
+            UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction connectAction1;
+                UndoManager.RevertableAction connectAction2;
+                @Override
+                public void run() {
+                    connectAction1 = block.getLast().connectNext(child);
+                    connectAction2 = childConnector.connectNext(block);
+                }
+                @Override
+                public void revert() {
+                    connectAction2.revert();
+                    connectAction1.revert();
+                }
+            };
+            action.run();
+            return action;
+        } else {
+            UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction connectAction;
+                @Override
+                public void run() {
+                    connectAction = childConnector.connectNext(block);
+                }
+                @Override
+                public void revert() {
+                    connectAction.revert();
+                }
+            };
+            action.run();
+            return action;
         }
-        childConnector.connectNext(block);
     }
 
     public boolean hasChild() {

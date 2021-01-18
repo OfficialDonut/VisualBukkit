@@ -138,7 +138,7 @@ public class VisualBukkit extends Application {
         sideSplitPane.setDividerPositions(0.5);
         ProjectManager.openLast();
 
-        checkForUpdate();
+        Platform.runLater(this::checkForUpdate);
     }
 
     private MenuBar createMenuBar() {

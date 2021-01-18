@@ -52,21 +52,54 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
         });
 
         setOnDragDropped(e -> {
-            UndoManager.capture();
             Object source = e.getGestureSource();
-            StatementBlock block;
             if (source instanceof StatementLabel) {
-                block = ((StatementLabel) source).getStatement().createBlock(null);
-                add(block, e.getScreenX(), e.getScreenY());
+                StatementBlock block = ((StatementLabel) source).getStatement().createBlock(null);
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    @Override
+                    public void run() {
+                        add(block, e.getScreenX(), e.getScreenY());
+                        block.update();
+                    }
+                    @Override
+                    public void revert() {
+                        innerPane.getChildren().remove(block);
+                    }
+                });
             } else {
-                block = (StatementBlock) source;
-                block.disconnect();
-                if (!innerPane.equals(block.getParent())) {
-                    java.awt.geom.Point2D.Double point = (java.awt.geom.Point2D.Double) e.getDragboard().getContent(POINT);
-                    add(block, e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
+                StatementBlock block = (StatementBlock) source;
+                java.awt.geom.Point2D.Double point = (java.awt.geom.Point2D.Double) e.getDragboard().getContent(POINT);
+                if (innerPane.equals(block.getParent())) {
+                    double x = block.getLayoutX();
+                    double y = block.getLayoutY();
+                    UndoManager.run(new UndoManager.RevertableAction() {
+                        @Override
+                        public void run() {
+                            Point2D loc = screenToLocal(e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
+                            block.relocate(loc.getX(), loc.getY());
+                        }
+                        @Override
+                        public void revert() {
+                            block.relocate(x, y);
+                        }
+                    });
+                } else {
+                    UndoManager.run(new UndoManager.RevertableAction() {
+                        UndoManager.RevertableAction disconnectAction;
+                        @Override
+                        public void run() {
+                            disconnectAction = block.disconnect();
+                            add(block, e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
+                            block.update();
+                        }
+                        @Override
+                        public void revert() {
+                            innerPane.getChildren().remove(block);
+                            disconnectAction.revert();
+                        }
+                    });
                 }
             }
-            block.update();
             e.setDropCompleted(true);
             e.consume();
         });
@@ -126,10 +159,18 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                 } else if (e.getCode() == KeyCode.V) {
                     if (CopyPasteManager.peek() instanceof StatementDefinition) {
                         if (contains(screenToLocal(new Point2D(mouseX, mouseY)))) {
-                            UndoManager.capture();
                             StatementBlock block = CopyPasteManager.pasteStack();
-                            add(block, mouseX, mouseY);
-                            block.update();
+                            UndoManager.run(new UndoManager.RevertableAction() {
+                                @Override
+                                public void run() {
+                                    add(block, mouseX, mouseY);
+                                    block.update();
+                                }
+                                @Override
+                                public void revert() {
+                                    innerPane.getChildren().remove(block);
+                                }
+                            });
                         }
                     }
                 }
@@ -146,21 +187,48 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
 
         pasteItem.setOnAction(e -> {
             if (!pasteItem.isDisable()) {
-                UndoManager.capture();
                 StatementBlock block = CopyPasteManager.pasteStack();
-                add(block, contextMenu.getX(), contextMenu.getY());
-                block.update();
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    @Override
+                    public void run() {
+                        add(block, contextMenu.getX(), contextMenu.getY());
+                        block.update();
+                    }
+                    @Override
+                    public void revert() {
+                        innerPane.getChildren().remove(block);
+                    }
+                });
             }
         });
 
         organizeItem.setOnAction(e -> {
-            UndoManager.capture();
-            organize();
+            JSONObject unorganizedState = serialize();
+            UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    organize();
+                }
+                @Override
+                public void revert() {
+                    clear();
+                    deserialize(unorganizedState);
+                }
+            });
         });
 
         clearItem.setOnAction(e -> {
-            UndoManager.capture();
-            clear();
+            JSONObject unclearedState = serialize();
+            UndoManager.run(new UndoManager.RevertableAction() {
+                @Override
+                public void run() {
+                    clear();
+                }
+                @Override
+                public void revert() {
+                    deserialize(unclearedState);
+                }
+            });
         });
 
         renameItem.setOnAction(e -> ProjectManager.getCurrentProject().promptRenameCanvas(this));
@@ -175,10 +243,18 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                 DataFile dataFile = new DataFile(file.toPath());
                 StatementDefinition<?> statement = BlockRegistry.getStatement(dataFile.getJson().optString("="));
                 if (statement != null) {
-                    UndoManager.capture();
                     StatementBlock block = statement.createBlock(dataFile.getJson());
-                    add(block, contextMenu.getX(), contextMenu.getY());
-                    block.update();
+                    UndoManager.run(new UndoManager.RevertableAction() {
+                        @Override
+                        public void run() {
+                            add(block, contextMenu.getX(), contextMenu.getY());
+                            block.update();
+                        }
+                        @Override
+                        public void revert() {
+                            innerPane.getChildren().remove(block);
+                        }
+                    });
                 } else {
                     NotificationManager.displayError("Import failed", "Failed to import block");
                 }

@@ -21,10 +21,23 @@ public abstract class SimpleVariableBlock extends StatementBlock {
         });
         pasteVarItem.setOnAction(e -> {
             if (!pasteVarItem.isDisable()) {
-                UndoManager.capture();
                 ExprSimpleVariable expr = (ExprSimpleVariable) CopyPasteManager.paste();
-                ((ChoiceParameter) parameters.get(0)).setValue(expr.parameters.get(0).toJava());
-                ((StringLiteralParameter) parameters.get(1)).setText(((StringLiteralParameter) expr.parameters.get(1)).getText());
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    String arg0;
+                    String arg1;
+                    @Override
+                    public void run() {
+                        arg0 = arg(0);
+                        arg1 = arg(1);
+                        ((ChoiceParameter) parameters.get(0)).setValue(expr.parameters.get(0).toJava());
+                        ((StringLiteralParameter) parameters.get(1)).setText(expr.parameters.get(1).toJava());
+                    }
+                    @Override
+                    public void revert() {
+                        ((ChoiceParameter) parameters.get(0)).setValue(arg0);
+                        ((StringLiteralParameter) parameters.get(1)).setText(arg1);
+                    }
+                });
             }
         });
         contextMenu.getItems().addAll(new SeparatorMenuItem(), copyVarItem, pasteVarItem);
