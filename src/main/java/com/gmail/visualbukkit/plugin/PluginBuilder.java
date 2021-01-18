@@ -1,20 +1,25 @@
 package com.gmail.visualbukkit.plugin;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.blocks.BlockCanvas;
+import com.gmail.visualbukkit.blocks.CodeBlock;
+import com.gmail.visualbukkit.blocks.structures.StructCommand;
+import com.gmail.visualbukkit.gui.NotificationManager;
+import com.gmail.visualbukkit.util.CenteredHBox;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
+import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javassist.ClassPool;
+import javassist.CtClass;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -30,27 +35,17 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 import org.slf4j.impl.SimpleLogger;
 import org.zeroturnaround.zip.ZipUtil;
 
-import com.gmail.visualbukkit.VisualBukkit;
-import com.gmail.visualbukkit.blocks.BlockCanvas;
-import com.gmail.visualbukkit.blocks.CodeBlock;
-import com.gmail.visualbukkit.blocks.structures.StructCommand;
-import com.gmail.visualbukkit.gui.NotificationManager;
-import com.gmail.visualbukkit.util.CenteredHBox;
-import com.google.common.io.MoreFiles;
-import com.google.common.io.RecursiveDeleteOption;
-
-import javafx.application.Platform;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javassist.ClassPool;
-import javassist.CtClass;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class PluginBuilder {
 

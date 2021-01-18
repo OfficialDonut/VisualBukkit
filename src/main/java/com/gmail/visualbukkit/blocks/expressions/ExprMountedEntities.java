@@ -1,11 +1,10 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import java.util.List;
-
-import org.bukkit.entity.Entity;
-
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+import org.bukkit.entity.Entity;
+
+import java.util.List;
 
 @Description("The entities riding an entity")
 @SuppressWarnings("rawtypes")

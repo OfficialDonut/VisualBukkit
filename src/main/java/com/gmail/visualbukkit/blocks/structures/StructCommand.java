@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.structures;
 
-import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.StructureBlock;
+import com.gmail.visualbukkit.blocks.annotations.Description;
 import com.gmail.visualbukkit.blocks.components.InputParameter;
 import com.gmail.visualbukkit.blocks.components.StringLiteralParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;

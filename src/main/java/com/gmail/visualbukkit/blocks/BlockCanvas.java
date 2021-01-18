@@ -9,7 +9,7 @@ import com.gmail.visualbukkit.plugin.ProjectManager;
 import com.gmail.visualbukkit.util.DataFile;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyCode;

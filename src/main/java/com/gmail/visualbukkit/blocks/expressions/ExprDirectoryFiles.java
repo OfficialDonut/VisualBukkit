@@ -1,10 +1,10 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import java.io.File;
-import java.util.List;
-
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+
+import java.io.File;
+import java.util.List;
 
 @Description("The files in a directory")
 @SuppressWarnings("rawtypes")

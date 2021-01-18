@@ -1,11 +1,10 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import java.util.List;
-
-import org.bukkit.event.entity.EntityDeathEvent;
-
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+import org.bukkit.event.entity.EntityDeathEvent;
+
+import java.util.List;
 
 @Description("The items dropped in an EntityDeathEvent (mutable list)")
 @SuppressWarnings("rawtypes")

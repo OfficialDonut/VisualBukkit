@@ -1,11 +1,10 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import java.util.List;
-
-import org.bukkit.boss.BossBar;
-
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+import org.bukkit.boss.BossBar;
+
+import java.util.List;
 
 @SuppressWarnings("rawtypes")
 @Description("The players viewing a boss bar")

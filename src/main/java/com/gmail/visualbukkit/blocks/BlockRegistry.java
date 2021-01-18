@@ -1,15 +1,14 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkit;
+import com.gmail.visualbukkit.gui.NotificationManager;
+import org.reflections.Reflections;
+
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.reflections.Reflections;
-
-import com.gmail.visualbukkit.VisualBukkit;
-import com.gmail.visualbukkit.gui.NotificationManager;
 
 public class BlockRegistry {
 

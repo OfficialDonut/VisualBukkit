@@ -1,11 +1,10 @@
 package com.gmail.visualbukkit.blocks.expressions;
 
-import java.util.List;
-
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.util.List;
 
 @Description("The message recipients in an AsyncPlayerChatEvent")
 @SuppressWarnings("rawtypes")
