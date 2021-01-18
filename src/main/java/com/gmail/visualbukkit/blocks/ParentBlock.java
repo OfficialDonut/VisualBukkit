@@ -210,10 +210,12 @@ public abstract class ParentBlock extends StatementBlock {
         UndoManager.RevertableAction action;
         if (child != null) {
             action = new UndoManager.RevertableAction() {
+                UndoManager.RevertableAction disconnectAction;
                 UndoManager.RevertableAction connectAction1;
                 UndoManager.RevertableAction connectAction2;
                 @Override
                 public void run() {
+                    disconnectAction = child.disconnect();
                     connectAction1 = block.getLast().connectNext(child);
                     connectAction2 = childConnector.connectNext(block);
                 }
@@ -221,6 +223,7 @@ public abstract class ParentBlock extends StatementBlock {
                 public void revert() {
                     connectAction2.revert();
                     connectAction1.revert();
+                    disconnectAction.revert();
                 }
             };
         } else {
