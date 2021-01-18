@@ -80,10 +80,11 @@ public class PluginBuilder {
         MAIN_CLASS_SOURCE = mainClassSource;
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     public static void build(Project project) {
         try {
             project.save();
-        } catch (IOException ignored) {};
+        } catch (IOException ignored) {}
         buildWindow.prepare(project);
         buildWindow.show();
         buildWindow.println("Building plugin...");

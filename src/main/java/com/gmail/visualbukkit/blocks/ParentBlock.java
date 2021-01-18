@@ -207,8 +207,9 @@ public abstract class ParentBlock extends StatementBlock {
 
     public UndoManager.RevertableAction connectChild(StatementBlock block) {
         StatementBlock child = getChild();
+        UndoManager.RevertableAction action;
         if (child != null) {
-            UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+            action = new UndoManager.RevertableAction() {
                 UndoManager.RevertableAction connectAction1;
                 UndoManager.RevertableAction connectAction2;
                 @Override
@@ -222,10 +223,8 @@ public abstract class ParentBlock extends StatementBlock {
                     connectAction1.revert();
                 }
             };
-            action.run();
-            return action;
         } else {
-            UndoManager.RevertableAction action = new UndoManager.RevertableAction() {
+            action = new UndoManager.RevertableAction() {
                 UndoManager.RevertableAction connectAction;
                 @Override
                 public void run() {
@@ -236,9 +235,9 @@ public abstract class ParentBlock extends StatementBlock {
                     connectAction.revert();
                 }
             };
-            action.run();
-            return action;
         }
+        action.run();
+        return action;
     }
 
     public boolean hasChild() {
