@@ -11,6 +11,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -156,7 +157,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                     zoom(1.15);
                 } else if (e.getCode() == KeyCode.MINUS) {
                     zoom(0.85);
-                } else if (e.getCode() == KeyCode.V) {
+                } else if (e.getCode() == KeyCode.V && !(VisualBukkit.getInstance().getScene().getFocusOwner() instanceof TextField)) {
                     if (CopyPasteManager.peek() instanceof StatementDefinition) {
                         if (contains(screenToLocal(new Point2D(mouseX, mouseY)))) {
                             StatementBlock block = CopyPasteManager.pasteStack();
