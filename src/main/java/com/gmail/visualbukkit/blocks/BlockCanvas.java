@@ -76,7 +76,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                     UndoManager.run(new UndoManager.RevertableAction() {
                         @Override
                         public void run() {
-                            Point2D loc = screenToLocal(e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
+                            Point2D loc = innerPane.screenToLocal(e.getScreenX() - innerPane.getScaleX() * point.getX(), e.getScreenY() - innerPane.getScaleY() * point.getY());
                             block.relocate(loc.getX(), loc.getY());
                         }
                         @Override
@@ -90,7 +90,7 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                         @Override
                         public void run() {
                             disconnectAction = block.disconnect();
-                            add(block, e.getScreenX() - point.getX(), e.getScreenY() - point.getY());
+                            add(block, e.getScreenX() - innerPane.getScaleX() * point.getX(), e.getScreenY() - innerPane.getScaleY() * point.getY());
                             block.update();
                         }
                         @Override

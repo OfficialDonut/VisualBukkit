@@ -14,7 +14,7 @@ import org.bukkit.util.*;
 public class PluginMain extends JavaPlugin implements Listener {
 
     private static PluginMain instance;
-    private Object localVariableScope = new Object();
+    private static Object localVariableScope = new Object();
 
     public void onEnable() {
         instance = this;
