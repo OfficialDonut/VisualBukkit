@@ -32,7 +32,7 @@
             <artifactId>discord-rpc</artifactId>
             <version>1.6.2</version>
         </dependency>
-
+		
         <dependency>
             <groupId>com.sibvisions.external.jvxfx</groupId>
             <artifactId>dndtabpane</artifactId>
@@ -104,6 +104,18 @@
             <artifactId>zt-zip</artifactId>
             <version>1.14</version>
         </dependency>
+        
+         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>15</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>15</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -148,6 +160,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+            	<groupId>org.openjfx</groupId>
+            	<artifactId>javafx-maven-plugin</artifactId>
+            	<version>0.0.5</version>
+            	<configuration>
+            		<mainClass>com.gmail.visualbukkit.VisualBukkitLauncher</mainClass>
+            	</configuration>
             </plugin>
         </plugins>
     </build>
