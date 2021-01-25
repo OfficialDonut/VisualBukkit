@@ -21,6 +21,7 @@ public class StructProcedure extends StructureBlock {
         MethodSource<JavaClassSource> procedureMethod = context.getMainClass().getMethod("procedure", String.class, List.class);
         procedureMethod.setBody(
                 "if (procedure.equalsIgnoreCase(" + arg(0) + ")) {" +
+                "Object localVariableScope = new Object();" +
                 getChildJava() +
                 "}" +
                 procedureMethod.getBody());

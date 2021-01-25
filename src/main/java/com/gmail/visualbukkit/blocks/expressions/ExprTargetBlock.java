@@ -16,6 +16,6 @@ public class ExprTargetBlock extends ExpressionBlock<Block> {
     @Override
     public String toJava() {
         String mode = arg(2).equals("ignoring fluids") ? "NEVER" : arg(2).equals("including fluids") ? "ALWAYS" : "SOURCE_ONLY";
-        return arg(0) + ".getTargetBlockExact(" + arg(1) + "," + mode + ")";
+        return arg(0) + ".getTargetBlockExact(" + arg(1) + ", FluidCollisionMode." + mode + ")";
     }
 }

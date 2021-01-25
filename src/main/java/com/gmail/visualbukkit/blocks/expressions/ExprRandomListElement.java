@@ -14,6 +14,6 @@ public class ExprRandomListElement extends ExpressionBlock<Object> {
 
     @Override
     public String toJava() {
-        return arg(0) + ".get(java.util.concurrent.ThreadLocalRandom.current().nextInt(" + arg(0) + ".size()));";
+        return arg(0) + ".get(java.util.concurrent.ThreadLocalRandom.current().nextInt(" + arg(0) + ".size()))";
     }
 }

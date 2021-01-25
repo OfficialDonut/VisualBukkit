@@ -53,6 +53,26 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPane;
+import org.eclipse.fx.ui.controls.tabpane.DndTabPaneFactory;
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 public class VisualBukkit extends Application {
 
     private static String version = "v" + VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
@@ -88,6 +108,8 @@ public class VisualBukkit extends Application {
         logFileHandler.setFormatter(new SimpleFormatter());
         logger.addHandler(logFileHandler);
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> NotificationManager.displayException("An exception occurred", e)));
+        DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
         Platform.runLater(this::load);
     }
 
@@ -97,6 +119,7 @@ public class VisualBukkit extends Application {
             save(false);
         }
         logFileHandler.close();
+        DiscordRPC.discordShutdown();
     }
 
     private void load() {
@@ -146,7 +169,7 @@ public class VisualBukkit extends Application {
         sideSplitPane.setDividerPositions(0.5);
         ProjectManager.openLast();
 
-        checkForUpdate();
+        Platform.runLater(this::checkForUpdate);
     }
 
     private MenuBar createMenuBar() {
