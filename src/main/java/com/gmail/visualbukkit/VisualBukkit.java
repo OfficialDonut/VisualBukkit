@@ -28,6 +28,7 @@ import com.gmail.visualbukkit.plugin.PluginBuilder;
 import com.gmail.visualbukkit.plugin.ProjectManager;
 import com.gmail.visualbukkit.util.AutoSaver;
 import com.gmail.visualbukkit.util.DataFile;
+import com.gmail.visualbukkit.util.MasterText;
 import com.google.common.io.CharStreams;
 
 import javafx.application.Application;
@@ -121,7 +122,7 @@ public class VisualBukkit extends Application {
         sideSplitPane.setOrientation(Orientation.VERTICAL);
         sideSplitPane.getItems().addAll(elementInspector, projectView);
         splitPane.getItems().addAll(blockSelector, canvasPane, sideSplitPane);
-
+        
         rootPane.setCenter(splitPane);
         rootPane.setTop(createMenuBar());
 
@@ -131,7 +132,8 @@ public class VisualBukkit extends Application {
                 e.consume();
             }
         });
-
+        
+        new MasterText();
         ExtensionManager.init();
         BlockRegistry.registerBlocks("com.gmail.visualbukkit.blocks");
         blockSelector.loadFavorites();
