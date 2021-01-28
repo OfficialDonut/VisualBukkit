@@ -26,6 +26,7 @@ import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class ExpressionParameter extends CenteredHBox implements BlockParameter {
 
@@ -78,6 +79,16 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
                         PopOver.ArrowLocation.BOTTOM_LEFT :
                         PopOver.ArrowLocation.TOP_LEFT);
                 popOver.show(this);
+            } else if (e.getButton() == MouseButton.MIDDLE && !popOver.isShowing()) {
+                if (returnType == String.class) {
+                    insert(ExprString::new);
+                } else if (returnType == boolean.class) {
+                    insert(ExprBoolean::new);
+                } else if (returnType == List.class) {
+                    insert(ExprNewList::new);
+                } else if (TypeHandler.isNumber(returnType)) {
+                    insert(ExprNumber::new);
+                }
             }
             e.consume();
         });
@@ -109,55 +120,19 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         if (returnType == String.class) {
             MenuItem stringItem = new MenuItem("Insert String");
             contextMenu.getItems().add(stringItem);
-            stringItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
-                @Override
-                public void run() {
-                    setExpression(new ExprString());
-                }
-                @Override
-                public void revert() {
-                    setExpression(null);
-                }
-            }));
+            stringItem.setOnAction(e -> insert(ExprString::new));
         } else if (returnType == boolean.class) {
             MenuItem booleanItem = new MenuItem("Insert Boolean");
             contextMenu.getItems().add(booleanItem);
-            booleanItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
-                @Override
-                public void run() {
-                    setExpression(new ExprBoolean());
-                }
-                @Override
-                public void revert() {
-                    setExpression(null);
-                }
-            }));
+            booleanItem.setOnAction(e -> insert(ExprBoolean::new));
         } else if (returnType == List.class) {
             MenuItem newListItem = new MenuItem("Insert New List");
             contextMenu.getItems().add(newListItem);
-            newListItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
-                @Override
-                public void run() {
-                    setExpression(new ExprNewList());
-                }
-                @Override
-                public void revert() {
-                    setExpression(null);
-                }
-            }));
+            newListItem.setOnAction(e -> insert(ExprNewList::new));
         } else if (TypeHandler.isNumber(returnType)) {
             MenuItem numberItem = new MenuItem("Insert Number");
             contextMenu.getItems().add(numberItem);
-            numberItem.setOnAction(e -> UndoManager.run(new UndoManager.RevertableAction() {
-                @Override
-                public void run() {
-                    setExpression(new ExprNumber());
-                }
-                @Override
-                public void revert() {
-                    setExpression(null);
-                }
-            }));
+            numberItem.setOnAction(e -> insert(ExprNumber::new));
         }
 
         setOnContextMenuRequested(e -> {
@@ -232,6 +207,19 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
 
     public ExpressionBlock<?> getExpression() {
         return expression;
+    }
+
+    private void insert(Supplier<ExpressionBlock<?>> expressionSupplier) {
+        UndoManager.run(new UndoManager.RevertableAction() {
+            @Override
+            public void run() {
+                setExpression(expressionSupplier.get());
+            }
+            @Override
+            public void revert() {
+                setExpression(null);
+            }
+        });
     }
 
     private class ExpressionCell extends ListCell<ExpressionDefinition<?>> implements ElementInspector.Inspectable {
