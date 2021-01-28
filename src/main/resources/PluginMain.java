@@ -54,6 +54,18 @@ public class PluginMain extends JavaPlugin implements Listener {
         return string != null ? ChatColor.translateAlternateColorCodes('&', string) : null;
     }
 
+    public static void createResourceFile(String path) {
+        Path file = getInstance().getDataFolder().toPath().resolve(path);
+        if (Files.notExists(file)) {
+            try (InputStream inputStream = PluginMain.class.getResourceAsStream("/" + path)) {
+                Files.createDirectories(file.getParent());
+                Files.copy(inputStream, file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static PluginMain getInstance() {
         return instance;
     }
