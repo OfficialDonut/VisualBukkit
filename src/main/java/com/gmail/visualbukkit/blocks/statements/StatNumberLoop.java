@@ -15,8 +15,10 @@ public class StatNumberLoop extends ParentBlock {
 
     @Override
     public String toJava() {
-        String indexVar = "loopNumber" + getNestedLoops(this);
+        int nestedLoops = getNestedLoops(this);
+        String indexVar = "_loopNumber" + nestedLoops;
         return "for (int " + indexVar + "=0;" + indexVar + "<" + arg(0) + ";" + indexVar + "++) {" +
+                "int loopNumber" + nestedLoops + " = " + indexVar + ";" +
                 getChildJava() +
                 "}";
     }
