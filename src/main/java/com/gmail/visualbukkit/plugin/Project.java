@@ -39,7 +39,17 @@ public class Project implements Comparable<Project> {
 
     public Project(String name) {
         this.name = name;
-        initFiles();
+        folder = ProjectManager.getProjectsFolder().resolve(name);
+        canvasFolder = folder.resolve("Canvases");
+        resourceFolder = folder.resolve("Resource Files");
+        dataFile = new DataFile(folder.resolve("data.json"));
+
+        try {
+            Files.createDirectories(canvasFolder);
+            Files.createDirectories(resourceFolder);
+        } catch (IOException e) {
+            NotificationManager.displayException("Failed to create project folder", e);
+        }
 
         JSONObject obj = dataFile.getJson();
         pluginName = obj.optString("plugin-name", "");
@@ -67,20 +77,6 @@ public class Project implements Comparable<Project> {
         }
     }
 
-    private void initFiles() {
-        folder = ProjectManager.getProjectsFolder().resolve(name);
-        canvasFolder = folder.resolve("Canvases");
-        resourceFolder = folder.resolve("Resource Files");
-        dataFile = new DataFile(folder.resolve("data.json"));
-
-        try {
-            Files.createDirectories(canvasFolder);
-            Files.createDirectories(resourceFolder);
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to create project folder", e);
-        }
-    }
-
     public void openResourceFolder() {
         try {
             Desktop.getDesktop().browse(resourceFolder.toUri());
@@ -105,9 +101,9 @@ public class Project implements Comparable<Project> {
                 promptRename();
             } else {
                 try {
+                    save();
                     Files.move(folder, folder.resolveSibling(newName));
-                    name = newName;
-                    initFiles();
+                    ProjectManager.open(newName, false);
                     NotificationManager.displayMessage("Renamed project", "Successfully renamed project");
                 } catch (IOException e) {
                     NotificationManager.displayException("Failed to rename project", e);

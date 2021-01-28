@@ -36,19 +36,19 @@ public class ProjectManager {
             promptCreateProject(false);
         } else {
             String lastProject = VisualBukkit.getDataFile().getJson().optString("last-project");
-            open(projects.contains(lastProject) ? lastProject : projects.iterator().next());
+            open(projects.contains(lastProject) ? lastProject : projects.iterator().next(), true);
         }
     }
 
-    public static void open(String projectName) {
-        Project project = new Project(projectName);
-        try {
-            if (currentProject != null) {
+    public static void open(String projectName, boolean saveCurrent) {
+        if (saveCurrent && currentProject != null) {
+            try {
                 currentProject.save();
+            } catch (IOException e) {
+                NotificationManager.displayException("Failed to save project", e);
             }
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to save project", e);
         }
+        Project project = new Project(projectName);
         VisualBukkit.getInstance().getProjectView().show(project);
         TabPane canvasPane = VisualBukkit.getInstance().getCanvasPane();
         canvasPane.getTabs().clear();
@@ -83,7 +83,7 @@ public class ProjectManager {
             NotificationManager.displayError("Invalid project name", "Project name must be alphanumeric");
             promptCreateProject(canCancel);
         } else {
-            open(name);
+            open(name, true);
             NotificationManager.displayMessage("Created project", "Successfully created project");
         }
     }
@@ -96,7 +96,7 @@ public class ProjectManager {
         openProjectDialog.setHeaderText(null);
         openProjectDialog.setGraphic(null);
         openProjectDialog.showAndWait().ifPresent(project -> {
-            open(project);
+            open(project, true);
             NotificationManager.displayMessage("Opened project", "Successfully opened project");
         });
     }
@@ -119,7 +119,7 @@ public class ProjectManager {
                     if (projects.isEmpty()) {
                         promptCreateProject(false);
                     } else {
-                        open(projects.iterator().next());
+                        open(projects.iterator().next(), true);
                     }
                 }
             } catch (IOException e) {
@@ -152,7 +152,7 @@ public class ProjectManager {
             File zipFile = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
             if (zipFile != null) {
                 ZipUtil.unpack(zipFile, projectsFolder.resolve(name).toFile());
-                open(name);
+                open(name, true);
                 NotificationManager.displayMessage("Imported project", "Successfully imported project");
             }
         }
