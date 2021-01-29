@@ -2,11 +2,13 @@ package com.gmail.visualbukkit.blocks.statements;
 
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.annotations.Description;
+import com.gmail.visualbukkit.blocks.annotations.Name;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-@Description("Registers a crafting recipe")
+@Name("Register Shaped Recipe")
+@Description("Registers a shaped recipe")
 public class StatRegisterCraftingRecipe extends StatementBlock {
 
     public StatRegisterCraftingRecipe() {
