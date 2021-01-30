@@ -9,7 +9,6 @@ import com.gmail.visualbukkit.blocks.minescape.MinescapeType;
 @Description("Runs code if a condition is true")
 public class StatIfStatement extends ParentBlock {
 
-
     public StatIfStatement() {
         init("if ", MinescapeType.class);
     }

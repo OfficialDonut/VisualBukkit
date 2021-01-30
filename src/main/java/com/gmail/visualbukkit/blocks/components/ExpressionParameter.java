@@ -41,7 +41,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         FilteredList<ExpressionDefinition<?>> expressions = expressionCache.computeIfAbsent(returnType, k -> {
             Set<ExpressionDefinition<?>> set = new TreeSet<>();
             for (ExpressionDefinition<?> expression : BlockRegistry.getExpressions()) {
-                if (TypeHandler.canConvert(expression.getReturnType(), returnType)) {
+                if(returnType.isAssignableFrom(expression.getReturnType())){
                     set.add(expression);
                 }
             }

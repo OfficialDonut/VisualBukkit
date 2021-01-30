@@ -24,6 +24,9 @@ public class ExprQuestValue extends ExpressionBlock<MinescapeType> {
     }
 
     private void setQuestChoiceItems(){
+        if (questChoice.getValue() == null || questChoice.getValue().isEmpty()) {
+            return;
+        }
         valueChoice.setItems(FXCollections.observableArrayList(QuestChoiceParameter.getChoiceParameter(questChoice.getValue())));
         update();
     }

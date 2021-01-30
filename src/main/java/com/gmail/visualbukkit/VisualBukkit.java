@@ -78,8 +78,8 @@ public class VisualBukkit extends Application {
         logFileHandler.setFormatter(new SimpleFormatter());
         logger.addHandler(logFileHandler);
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> NotificationManager.displayException("An exception occurred", e)));
-        DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
-        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
+        //DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
+        //DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
         Platform.runLater(this::load);
     }
 
