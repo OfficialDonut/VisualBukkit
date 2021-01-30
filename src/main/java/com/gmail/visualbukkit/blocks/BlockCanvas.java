@@ -159,7 +159,8 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
                     zoom(0.85);
                 } else if (e.getCode() == KeyCode.V && !(VisualBukkit.getInstance().getScene().getFocusOwner() instanceof TextField)) {
                     if (CopyPasteManager.peek() instanceof StatementDefinition) {
-                        if (contains(screenToLocal(new Point2D(mouseX, mouseY)))) {
+                        Point2D point = screenToLocal(new Point2D(mouseX, mouseY));
+                        if (point != null && contains(point)) {
                             StatementBlock block = CopyPasteManager.pasteStack();
                             UndoManager.run(new UndoManager.RevertableAction() {
                                 @Override
