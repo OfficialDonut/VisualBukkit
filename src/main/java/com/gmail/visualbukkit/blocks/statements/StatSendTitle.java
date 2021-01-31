@@ -21,6 +21,6 @@ public class StatSendTitle extends StatementBlock {
 
     @Override
     public String toJava() {
-        return arg(2) + ".sendTitle(" + arg(0) + "," + arg(1) + "," + arg(3) + "," + arg(4) + "," + arg(5) + ");";
+        return arg(2) + ".sendTitle(PluginMain.color(" + arg(0) + "),PluginMain.color(" + arg(1) + ")," + arg(3) + "," + arg(4) + "," + arg(5) + ");";
     }
 }

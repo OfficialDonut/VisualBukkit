@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PluginBuilder {
 
@@ -106,7 +107,6 @@ public class PluginBuilder {
             Path mainDir = buildDir.resolve("src").resolve("main");
             Path packageDir = mainDir.resolve("java").resolve("vb").resolve("$" + name.toLowerCase());
             Path resourcesDir = mainDir.resolve("resources");
-            Path resourceFilesDir = resourcesDir.resolve("files");
 
             try {
                 buildWindow.println("Generating build directory...");
@@ -114,34 +114,26 @@ public class PluginBuilder {
                     MoreFiles.deleteRecursively(buildDir, RecursiveDeleteOption.ALLOW_INSECURE);
                 }
                 Files.createDirectories(packageDir);
-                Files.createDirectories(resourceFilesDir);
+                Files.createDirectories(resourcesDir);
 
                 JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, MAIN_CLASS_SOURCE);
                 mainClass.setPackage(packageName);
 
-                File[] resourceFiles = project.getResourceFolder().toFile().listFiles();
-                if (resourceFiles != null && resourceFiles.length > 0) {
+                if (Files.list(project.getResourceFolder()).findAny().isPresent()) {
                     buildWindow.println("Copying resource files...");
-                    MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
-                    for (File file : resourceFiles) {
-                        if (file.isFile()) {
-                            String fileName = StringEscapeUtils.escapeJava(file.getName());
-                            String fileString = "new File(getDataFolder(), \"" + fileName + "\")";
-                            if (!fileName.equals("config.yml")) {
-                                Files.copy(file.toPath(), resourceFilesDir.resolve(file.getName()));
-                                enableMethod.setBody(enableMethod.getBody() +
-                                        "if (!" + fileString + ".exists()) {" +
-                                        "try {" +
-                                        "Files.copy(getClass().getResourceAsStream(\"/files/" + fileName + "\"), " + fileString + ".toPath());" +
-                                        "} catch (IOException e) { e.printStackTrace(); }}");
-                            } else {
-                                Files.copy(file.toPath(), resourcesDir.resolve(file.getName()));
-                                enableMethod.setBody(enableMethod.getBody() + "saveDefaultConfig();");
-                            }
+                    try (Stream<Path> pathStream = Files.walk(project.getResourceFolder())) {
+                        for (Path path : pathStream.filter(Files::isRegularFile).collect(Collectors.toSet())) {
+                            Path relativePath = project.getResourceFolder().relativize(path);
+                            Path resourceDirPath = resourcesDir.resolve(relativePath);
+                            Files.createDirectories(resourceDirPath.getParent());
+                            Files.copy(path, resourceDirPath);
+                            String filePath = StringEscapeUtils.escapeJava(relativePath.toString().replace("\\", "/"));
+                            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+                            enableMethod.setBody(enableMethod.getBody() + (filePath.equals("config.yml") ?
+                                    "saveDefaultConfig();" :
+                                    ("PluginMain.createResourceFile(\"" + filePath + "\");")));
                         }
                     }
-                } else {
-                    Files.delete(resourceFilesDir);
                 }
 
                 buildWindow.println("Generating source code...");
