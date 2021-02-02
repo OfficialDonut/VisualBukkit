@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 @Category(Category.STRUCTURES)
-@BlockColor("#c686f0ff")
+@BlockColor("#b460ebff")
 public abstract class StructureBlock extends StatementBlock {
 
     public StructureBlock() {

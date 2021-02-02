@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@BlockColor("#90ee90ff")
+@BlockColor("#00E69Aff")
 public abstract class StatementBlock extends VBox implements CodeBlock, ElementInspector.Inspectable {
 
     protected List<BlockParameter> parameters = new ArrayList<>();

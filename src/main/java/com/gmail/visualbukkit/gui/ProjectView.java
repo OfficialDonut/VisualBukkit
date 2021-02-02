@@ -28,9 +28,9 @@ public class ProjectView extends ScrollPane {
             }
         });
 
-        Button addCanvasButton = new Button("Add Canvas");
-        Button resourceFilesButton = new Button("Resource Files");
-        Button buildButton = new Button("Build Plugin");
+        Button addCanvasButton = new Button("➕  Add Canvas");
+        Button resourceFilesButton = new Button("\uD83D\uDCC1 Resource Files");
+        Button buildButton = new Button("\uD83D\uDD28 Build Plugin");
 
         addCanvasButton.setOnAction(e -> ProjectManager.getCurrentProject().promptAddCanvas());
         resourceFilesButton.setOnAction(e -> ProjectManager.getCurrentProject().openResourceFolder());
@@ -38,6 +38,7 @@ public class ProjectView extends ScrollPane {
 
         addCanvasButton.prefWidthProperty().bind(resourceFilesButton.widthProperty());
         buildButton.prefWidthProperty().bind(resourceFilesButton.widthProperty());
+        buildButton.setStyle("-fx-border-color: #00E69A; -fx-text-fill: #00E69A; -fx-font-weight: bold");
 
         Label titleLabel = new Label("Plugin Information");
         titleLabel.setUnderline(true);

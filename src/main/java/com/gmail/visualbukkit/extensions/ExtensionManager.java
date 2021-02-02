@@ -148,9 +148,9 @@ public class ExtensionManager {
                 }
             });
 
-            Button installButton = new Button("Install");
-            Button uninstallButton = new Button("Uninstall");
-            Button closeButton = new Button("Close");
+            Button installButton = new Button("\uD83D\uDCE5 Install");
+            Button uninstallButton = new Button("\uD83D\uDCE4 Uninstall");
+            Button closeButton = new Button("❌ Close");
             closeButton.setOnAction(e -> close());
             CenteredHBox buttonBox = new CenteredHBox(10, installButton, uninstallButton, closeButton);
             buttonBox.setPadding(new Insets(5));

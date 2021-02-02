@@ -348,14 +348,14 @@ public class PluginBuilder {
     private static class BuildWindow extends Stage {
 
         private TextArea textArea = new TextArea();
-        private Button openDirButton = new Button("Open Build Directory");
-        private Button rebuildButton = new Button("Rebuild");
+        private Button openDirButton = new Button("\uD83D\uDCC2 Open Build Directory");
+        private Button rebuildButton = new Button("\uD83D\uDD04 Rebuild");
 
         public BuildWindow() {
             textArea.setEditable(false);
             textArea.setWrapText(true);
 
-            Button closeButton = new Button("Close");
+            Button closeButton = new Button("❌ Close");
             closeButton.setOnAction(e -> close());
 
             HBox buttonBox = new CenteredHBox(10, openDirButton, rebuildButton, closeButton);
