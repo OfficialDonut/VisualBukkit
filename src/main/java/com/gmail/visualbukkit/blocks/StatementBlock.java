@@ -28,6 +28,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.awt.geom.Point2D;
 import java.io.File;
@@ -160,25 +162,9 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         MenuItem copyItem = new MenuItem("Copy");
         MenuItem cutItem = new MenuItem("Cut");
         MenuItem deleteItem = new MenuItem("Delete");
-        MenuItem exportItem = new MenuItem("Export");
         copyItem.setOnAction(e -> copy());
         cutItem.setOnAction(e -> cut());
         deleteItem.setOnAction(e -> delete());
-        exportItem.setOnAction(e -> {
-            DirectoryChooser directoryChooser = new DirectoryChooser();
-            File outputDir = directoryChooser.showDialog(VisualBukkit.getInstance().getPrimaryStage());
-            if (outputDir != null) {
-                DataFile dataFile = new DataFile(new File(outputDir, UUID.randomUUID() + ".json").toPath());
-                try {
-                    dataFile.setJson(serialize());
-                    dataFile.getJson().put("=", BlockRegistry.getIdentifier(this));
-                    dataFile.save();
-                    NotificationManager.displayMessage("Exported block", "Successfully exported block\n(" + outputDir + ")");
-                } catch (IOException ex) {
-                    NotificationManager.displayException("Failed to export block", ex);
-                }
-            }
-        });
 
         MenuItem copyStackItem = new MenuItem("Copy Stack");
         MenuItem cutStackItem = new MenuItem("Cut Stack");
@@ -187,9 +173,30 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
         cutStackItem.setOnAction(e -> cutStack());
         deleteStackItem.setOnAction(e -> deleteStack());
 
+        MenuItem exportItem = new MenuItem("Export");
+        MenuItem exportStackItem = new MenuItem("Export Stack");
+        exportItem.setOnAction(e -> {
+            JSONObject obj = serialize();
+            obj.put("=", BlockRegistry.getIdentifier(this));
+            JSONArray array = new JSONArray();
+            array.put(obj);
+            export(array);
+        });
+        exportStackItem.setOnAction(e -> {
+            JSONArray array = new JSONArray();
+            StatementBlock block = this;
+            while (block != null) {
+                JSONObject obj = block.serialize();
+                obj.put("=", BlockRegistry.getIdentifier(block));
+                array.put(obj);
+                block = block.next;
+            }
+            export(array);
+        });
+
         contextMenu.getItems().addAll(
-                copyItem, cutItem, deleteItem, new SeparatorMenuItem(),
-                copyStackItem, cutStackItem, deleteStackItem, new SeparatorMenuItem(), exportItem);
+                copyItem, cutItem, deleteItem, exportItem, new SeparatorMenuItem(),
+                copyStackItem, cutStackItem, deleteStackItem, exportStackItem);
         syntaxBox.setOnContextMenuRequested(e -> ContextMenuManager.show(this, contextMenu, e));
     }
 
@@ -439,6 +446,23 @@ public abstract class StatementBlock extends VBox implements CodeBlock, ElementI
                 disconnectAction.revert();
             }
         });
+    }
+
+    private void export(JSONArray array) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File outputDir = directoryChooser.showDialog(VisualBukkit.getInstance().getPrimaryStage());
+        if (outputDir != null) {
+            DataFile dataFile = new DataFile(new File(outputDir, UUID.randomUUID() + ".json").toPath());
+            try {
+                JSONObject obj = new JSONObject();
+                obj.put("blocks", array);
+                dataFile.setJson(obj);
+                dataFile.save();
+                NotificationManager.displayMessage("Exported block", "Successfully exported block\n(" + outputDir + ")");
+            } catch (IOException ex) {
+                NotificationManager.displayException("Failed to export block", ex);
+            }
+        }
     }
 
     @Override

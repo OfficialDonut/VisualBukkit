@@ -243,24 +243,29 @@ public class BlockCanvas extends Pane implements Comparable<BlockCanvas> {
             File file = fileChooser.showOpenDialog(VisualBukkit.getInstance().getPrimaryStage());
             if (file != null) {
                 DataFile dataFile = new DataFile(file.toPath());
-                StatementDefinition<?> statement = BlockRegistry.getStatement(dataFile.getJson().optString("="));
-                if (statement != null) {
-                    StatementBlock block = statement.createBlock(dataFile.getJson());
-                    UndoManager.run(new UndoManager.RevertableAction() {
-                        @Override
-                        public void run() {
-                            add(block, contextMenu.getX(), contextMenu.getY());
-                            block.update();
+                JSONArray blockArray = dataFile.getJson().optJSONArray("blocks");
+                if (blockArray != null) {
+                    StatementBlock lastStatement = null;
+                    for (Object o : blockArray) {
+                        if (o instanceof JSONObject) {
+                            JSONObject obj = (JSONObject) o;
+                            StatementDefinition<?> statement = BlockRegistry.getStatement(obj.optString("="));
+                            if (statement != null) {
+                                StatementBlock block = statement.createBlock(obj);
+                                if (lastStatement != null) {
+                                    lastStatement.connectNext(block);
+                                } else {
+                                    add(block, contextMenu.getX(), contextMenu.getY());
+                                }
+                                block.update();
+                                lastStatement = block;
+                            }
                         }
-                        @Override
-                        public void revert() {
-                            innerPane.getChildren().remove(block);
-                        }
-                    });
+                    }
+                    NotificationManager.displayMessage("Imported block", "Successfully imported block");
                 } else {
-                    NotificationManager.displayError("Import failed", "Failed to import block");
+                    NotificationManager.displayMessage("Import failed", "Failed to import block");
                 }
-                NotificationManager.displayMessage("Imported block", "Successfully imported block");
             }
         });
 
