@@ -211,7 +211,7 @@ public abstract class ExpressionBlock<T> extends CenteredHBox implements CodeBlo
     @Override
     public PropertyGridPane createInspectorPane() {
         PropertyGridPane gridPane = CodeBlock.super.createInspectorPane();
-        gridPane.addProperty("Return type", TypeHandler.getUserFriendlyName(getDefinition().getReturnType()));
+        gridPane.addProperty("Return Type", TypeHandler.getUserFriendlyName(getDefinition().getReturnType()));
         return gridPane;
     }
 

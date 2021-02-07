@@ -84,6 +84,9 @@ public class TypeHandler {
         if (to == String.class) {
             return "String.valueOf(" + src + ")";
         }
+        if (from == OfflinePlayer.class && to == Player.class) {
+            return src + ".getPlayer()";
+        }
         if (isPrimitiveNumber(from) && isPrimitiveNumber(to)) {
             return "((" + to.getSimpleName() + ")" + src + ")";
         }

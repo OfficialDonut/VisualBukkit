@@ -8,8 +8,12 @@ import com.gmail.visualbukkit.plugin.BuildContext;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
+import java.util.regex.Pattern;
+
 @Description("Defines a command")
 public class StructCommand extends StructureBlock {
+
+    private final static Pattern WHITE_SPACE_PATTERN = Pattern.compile("\\S*");
 
     private StringLiteralParameter name = new StringLiteralParameter();
     private InputParameter aliases = new InputParameter();
@@ -23,6 +27,11 @@ public class StructCommand extends StructureBlock {
         initLine("description: ", description);
         initLine("permission:  ", permission);
         initLine("perm-message:", permissionMessage);
+        name.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!WHITE_SPACE_PATTERN.matcher(newValue).matches()) {
+                name.setText(oldValue);
+            }
+        }));
     }
 
     @Override

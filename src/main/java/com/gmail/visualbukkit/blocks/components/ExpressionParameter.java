@@ -55,7 +55,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
         TextField searchField = new TextField();
         CenteredHBox searchBox = new CenteredHBox(5, new Text("Search:"), searchField);
         searchBox.setPadding(new Insets(3));
-        searchField.setPrefWidth(200);
+        searchField.setStyle("-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 0; -fx-border-width: 0 0 2 0; -fx-pref-width: 200;");
         searchField.textProperty().addListener((observable, oldValue, newValue) -> expressions.setPredicate(expression -> expression.getName().toLowerCase().contains(searchField.getText().toLowerCase())));
 
         ListView<ExpressionDefinition<?>> listView = new ListView<>(expressions);
