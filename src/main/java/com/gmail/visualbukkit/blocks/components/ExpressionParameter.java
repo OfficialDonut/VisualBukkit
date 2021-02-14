@@ -257,7 +257,7 @@ public class ExpressionParameter extends CenteredHBox implements BlockParameter 
             PropertyGridPane gridPane = new PropertyGridPane();
             gridPane.addProperty("Name", getItem().getName());
             gridPane.addProperty("Description", getItem().getDescription());
-            gridPane.addProperty("Return type", TypeHandler.getUserFriendlyName(returnType));
+            gridPane.addProperty("Return Type", TypeHandler.getUserFriendlyName(getItem().getReturnType()));
             return gridPane;
         }
     }

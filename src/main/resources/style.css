@@ -69,14 +69,6 @@
     -fx-background: gray;
 }
 
-.tab:focused {
-    -fx-background-color: #3F51B5;
-}
-
-.tab:hover {
-    -fx-background-color: rgb(50,50,50);
-}
-
 .tab-pane .tab {
     -fx-border-color: -fx-control-inner-background;
     -fx-faint-focus-color: transparent;
