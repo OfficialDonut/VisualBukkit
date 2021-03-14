@@ -13,7 +13,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class StatementSelector extends TabPane {
 

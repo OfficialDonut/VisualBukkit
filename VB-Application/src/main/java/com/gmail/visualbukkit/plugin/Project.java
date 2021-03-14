@@ -1,8 +1,8 @@
 package com.gmail.visualbukkit.plugin;
 
+import com.gmail.visualbukkit.DataFile;
 import com.gmail.visualbukkit.SettingsManager;
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.DataFile;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.gui.NotificationManager;
