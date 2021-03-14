@@ -1,15 +1,15 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
 import javafx.event.Event;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import org.controlsfx.control.SearchableComboBox;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public class ChoiceParameter extends SearchableComboBox<String> implements BlockParameter {
+public class ChoiceParameter extends ComboBox<String> implements BlockParameter {
 
     public ChoiceParameter(String... choices) {
         this(Arrays.asList(choices));

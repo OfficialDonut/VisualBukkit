@@ -256,14 +256,14 @@ public class PluginBuilder {
 
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
         StringBuilder pluginYml = new StringBuilder();
-        pluginYml.append("name: ").append(pluginName).append('\n');
-        pluginYml.append("version: ").append(version).append('\n');
-        pluginYml.append("main: ").append(mainClassName).append('\n');
+        pluginYml.append("name: '").append(pluginName).append("'\n");
+        pluginYml.append("version: '").append(version).append("'\n");
+        pluginYml.append("main: '").append(mainClassName).append("'\n");
         if (!project.getAuthor().isBlank()) {
-            pluginYml.append("author: ").append(project.getAuthor()).append('\n');
+            pluginYml.append("author: '").append(project.getAuthor()).append("'\n");
         }
         if (!project.getDescription().isBlank()) {
-            pluginYml.append("description: ").append(project.getDescription()).append('\n');
+            pluginYml.append("description: '").append(project.getDescription()).append("'\n");
         }
         if (!project.getDependencies().isBlank()) {
             pluginYml.append("depend: [").append(project.getDependencies()).append("]\n");
@@ -279,16 +279,16 @@ public class PluginBuilder {
                 if (!name.isBlank()) {
                     pluginYml.append("  ").append(name).append(":\n");
                     if (!pluginComponent.arg(1).isBlank()) {
-                        pluginYml.append("    description: ").append(pluginComponent.arg(1).isBlank()).append('\n');
+                        pluginYml.append("    description: '").append(pluginComponent.arg(1).isBlank()).append("'\n");
                     }
                     if (!pluginComponent.arg(2).isBlank()) {
                         pluginYml.append("    aliases: [").append(pluginComponent.arg(2).isBlank()).append("]\n");
                     }
                     if (!pluginComponent.arg(3).isBlank()) {
-                        pluginYml.append("    permission: ").append(pluginComponent.arg(3).isBlank()).append('\n');
+                        pluginYml.append("    permission: '").append(pluginComponent.arg(3).isBlank()).append("'\n");
                     }
                     if (!pluginComponent.arg(4).isBlank()) {
-                        pluginYml.append("    permission-message: ").append(pluginComponent.arg(4).isBlank()).append('\n');
+                        pluginYml.append("    permission-message: '").append(pluginComponent.arg(4).isBlank()).append("'\n");
                     }
                 }
             }

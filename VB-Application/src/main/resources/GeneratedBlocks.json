@@ -713,6 +713,14 @@
     "return": "org.bukkit.entity.Entity"
   },
   {
+    "id": "046b8c3da19e5ae02086456e32a40267",
+    "class": "org.bukkit.event.player.PlayerChannelEvent",
+    "parameters": [
+      "org.bukkit.entity.Player",
+      "java.lang.String"
+    ]
+  },
+  {
     "static": true,
     "field": "ENTITY_POLAR_BEAR_WARNING",
     "id": "046e1041f2b59d212d41290d9c22b496",
@@ -2526,6 +2534,11 @@
     "id": "114fcf6fe0adab4f43f0a6ad5c3c0fb1",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "id": "1154c4c979f4a181f709a3af40dce5e9",
+    "class": "org.bukkit.event.inventory.InventoryInteractEvent",
+    "parameters": ["org.bukkit.inventory.InventoryView"]
   },
   {
     "static": true,
@@ -5018,10 +5031,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "id": "21d0bbfdb1febda5924fa8c3c4b6dc96",
-    "event": "org.bukkit.event.world.WorldEvent"
-  },
-  {
     "static": true,
     "field": "BLOCK_NETHER_ORE_STEP",
     "id": "21d129938faa3aeab0cf98ef1b53555c",
@@ -5744,6 +5753,11 @@
     "return": "org.bukkit.entity.Pose"
   },
   {
+    "id": "26025797f9d55e71684932c0c756a1bc",
+    "class": "org.bukkit.event.entity.EntityEvent",
+    "parameters": ["org.bukkit.entity.Entity"]
+  },
+  {
     "method": "setCancelled",
     "id": "26226e4651176e71af6e2bdd8ec6bc76",
     "class": "org.bukkit.event.world.StructureGrowEvent",
@@ -6273,6 +6287,11 @@
     "class": "org.bukkit.WorldCreator",
     "parameters": ["org.bukkit.generator.ChunkGenerator"],
     "return": "org.bukkit.WorldCreator"
+  },
+  {
+    "id": "2a52866fd397506503677caa70d66ab0",
+    "class": "org.bukkit.event.world.WorldEvent",
+    "parameters": ["org.bukkit.World"]
   },
   {
     "static": true,
@@ -11191,10 +11210,6 @@
     ]
   },
   {
-    "id": "4c6cfc6be0c82b45984aadaf538fcebf",
-    "event": "org.bukkit.event.player.PlayerEvent"
-  },
-  {
     "method": "setCancelled",
     "id": "4c6def77b45f7d4a15bad8e4ff599d82",
     "class": "org.bukkit.event.entity.SheepDyeWoolEvent",
@@ -12490,10 +12505,6 @@
     "id": "561636727f4de6813893678779bd9419",
     "class": "org.bukkit.entity.EntityType",
     "return": "org.bukkit.entity.EntityType"
-  },
-  {
-    "id": "56214a827fe4858fbf96e45235fce92e",
-    "event": "org.bukkit.event.entity.EntityEvent"
   },
   {
     "method": "isGliding",
@@ -15467,10 +15478,6 @@
     "id": "67f5e04ca0fab2f9f5d20bced6aa0e1e",
     "class": "org.bukkit.DyeColor",
     "return": "org.bukkit.Color"
-  },
-  {
-    "id": "67f785659dba31f6f5623fabd4085159",
-    "event": "org.bukkit.event.player.PlayerChannelEvent"
   },
   {
     "method": "getProjectile",
@@ -20828,10 +20835,6 @@
     "return": "double"
   },
   {
-    "id": "8dcfa17dedc03d2a29787595f093d061",
-    "event": "org.bukkit.event.player.PlayerBucketEvent"
-  },
-  {
     "method": "getMerchant",
     "id": "8dd1a26c0f11423d787049d045116c38",
     "class": "org.bukkit.event.inventory.TradeSelectEvent",
@@ -20874,6 +20877,11 @@
     "id": "8df362c58bdac53d3a8ca212d5369f6c",
     "class": "org.bukkit.TreeSpecies",
     "return": "org.bukkit.TreeSpecies"
+  },
+  {
+    "id": "8e0b6cdae354de965caffccccf6f09e0",
+    "class": "org.bukkit.event.player.PlayerEvent",
+    "parameters": ["org.bukkit.entity.Player"]
   },
   {
     "static": true,
@@ -22447,10 +22455,6 @@
     "id": "9830f87f01783fa52aad2bf997118a07",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "id": "98326bded31bd477a3bee482dd3dc667",
-    "event": "org.bukkit.event.block.BlockPistonEvent"
   },
   {
     "static": true,
@@ -24307,6 +24311,11 @@
     "id": "a430750a1a0dcb2a3e0fdfe644f87f81",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "id": "a4350bcb1e0f217425bb537f711ffdfb",
+    "class": "org.bukkit.event.block.BlockEvent",
+    "parameters": ["org.bukkit.block.Block"]
   },
   {
     "static": true,
@@ -28642,6 +28651,14 @@
     "return": "java.lang.String"
   },
   {
+    "id": "c1e75b23c9c93cae16e8e8d4d9ff8111",
+    "class": "org.bukkit.event.block.BlockPistonEvent",
+    "parameters": [
+      "org.bukkit.block.Block",
+      "org.bukkit.block.BlockFace"
+    ]
+  },
+  {
     "method": "setInstaBreak",
     "id": "c1e7dbd033f581b621bc830edcde5863",
     "class": "org.bukkit.event.block.BlockDamageEvent",
@@ -29042,6 +29059,18 @@
     "id": "c4950f3c512027cc0ed9671298a26bc4",
     "class": "org.bukkit.event.block.BlockExplodeEvent",
     "parameters": ["boolean"]
+  },
+  {
+    "id": "c4a2b8023e57f538ac58d7216ff8bb5d",
+    "class": "org.bukkit.event.player.PlayerBucketEvent",
+    "parameters": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.block.Block",
+      "org.bukkit.block.Block",
+      "org.bukkit.block.BlockFace",
+      "org.bukkit.Material",
+      "org.bukkit.inventory.ItemStack"
+    ]
   },
   {
     "static": true,
@@ -30749,10 +30778,6 @@
     "return": "org.bukkit.TreeType"
   },
   {
-    "id": "d168a68954368d9858c28fa43a597abb",
-    "event": "org.bukkit.event.inventory.InventoryInteractEvent"
-  },
-  {
     "method": "replaceFirst",
     "id": "d17d11af068d90d77eb731de54f833b3",
     "class": "java.lang.String",
@@ -31870,10 +31895,6 @@
     "id": "d8e9656261b6299f7f75f9eae58b4b66",
     "class": "org.bukkit.event.entity.StriderTemperatureChangeEvent",
     "return": "org.bukkit.event.HandlerList"
-  },
-  {
-    "id": "d8eaef93a46df88e56a77bbf006ca24b",
-    "event": "org.bukkit.event.world.ChunkEvent"
   },
   {
     "method": "setFallDistance",
@@ -37078,10 +37099,6 @@
       "float",
       "float"
     ]
-  },
-  {
-    "id": "fdcd7922af141c0374d6acdd8e24b54d",
-    "event": "org.bukkit.event.block.BlockEvent"
   },
   {
     "method": "getInhabitedTime",

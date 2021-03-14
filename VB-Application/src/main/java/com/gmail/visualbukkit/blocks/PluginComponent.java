@@ -36,7 +36,6 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
             VBox content = new VBox(this, spacer);
             content.getStyleClass().add("plugin-component-pane");
             ScrollPane scrollPane = new ScrollPane(content);
-            scrollPane.setPannable(true);
             tab = new Tab(pluginComponent.getTitle(), scrollPane);
 
             MenuItem collapseAllItem = new MenuItem(VisualBukkitApp.getString("context_menu.collapse_all"));

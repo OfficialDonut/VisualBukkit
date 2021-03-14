@@ -88,7 +88,7 @@ public class BlockGenerator {
     }
 
     public void generate(Class<?> clazz) {
-        if (eventClass.isAssignableFrom(clazz)) {
+        if (eventClass.isAssignableFrom(clazz) && !Modifier.isAbstract(clazz.getModifiers())) {
             String id = hash(clazz.toString());
             if (!blockMap.containsKey(id)) {
                 JSONObject json = new JSONObject();
@@ -96,6 +96,9 @@ public class BlockGenerator {
                 json.put("event", clazz.getName());
                 json.putOpt("plugin-module", pluginModule);
                 blockMap.put(id, json);
+            }
+            if (category != null) {
+                langMap.putIfAbsent(id + ".category", category);
             }
         } else {
             for (Constructor<?> constructor : clazz.getConstructors()) {
@@ -166,7 +169,7 @@ public class BlockGenerator {
         for (Class<?> parameterClass : executable.getParameterTypes()) {
             json.append("parameters", parameterClass.getName());
         }
-        if (!Modifier.isStatic(executable.getModifiers()) || executable.getParameterCount() > 0) {
+        if (executable.getParameterCount() > 0 || (!Modifier.isStatic(executable.getModifiers()) && !eventClass.isAssignableFrom(executable.getDeclaringClass()))) {
             langMap.computeIfAbsent(id + ".parameters", k -> getParameterNames(executable));
         }
         return json;

@@ -92,7 +92,7 @@
 
 .expression-block {
     -fx-background-color: orange;
-    -fx-background-radius: 11;
+    -fx-background-radius: 10;
     -fx-border-radius: 10;
 }
 
@@ -102,7 +102,8 @@
 
 .expression-parameter > .button {
     -fx-background-color: derive(pink, -15%);
-    -fx-background-radius: 11;
+    -fx-background-insets: 1;
+    -fx-background-radius: 10;
     -fx-border-color: black;
     -fx-border-radius: 10;
     -fx-padding: 3;
@@ -242,7 +243,8 @@
 
 .statement-label {
     -fx-background-color: rgb(0, 230, 154);
-    -fx-background-radius: 6;
+    -fx-background-insets: 1;
+    -fx-background-radius: 5;
     -fx-border-color: black;
     -fx-border-radius: 5;
     -fx-padding: 5;

@@ -119,8 +119,12 @@ public class BlockRegistry {
         return Collections.unmodifiableSet(expressions);
     }
 
-    public static String getString(BlockDefinition<?> definition, String key, String def) {
-        key = definition.getID() + "." + key;
+    public static String getString(String id, String key, String def) {
+        key = id + "." + key;
         return currentResourceBundle != null && currentResourceBundle.containsKey(key) ? currentResourceBundle.getString(key) : def;
+    }
+
+    public static String getString(BlockDefinition<?> definition, String key, String def) {
+        return getString(definition.getID(), key, def);
     }
 }

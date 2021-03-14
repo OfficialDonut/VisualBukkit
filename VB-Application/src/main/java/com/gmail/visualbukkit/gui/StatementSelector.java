@@ -114,15 +114,13 @@ public class StatementSelector extends TabPane {
         categories.put(category, labelBox);
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (labelBox.getParent() != null) {
-                String search = searchField.getText().toLowerCase();
-                for (Node node : labelBox.getChildren()) {
-                    if (node instanceof StatementLabel) {
-                        StatementLabel label = (StatementLabel) node;
-                        boolean state = label.getText().toLowerCase().contains(search);
-                        label.setVisible(state);
-                        label.setManaged(state);
-                    }
+            String search = searchField.getText().toLowerCase();
+            for (Node node : labelBox.getChildren()) {
+                if (node instanceof StatementLabel) {
+                    StatementLabel label = (StatementLabel) node;
+                    boolean state = label.getText().toLowerCase().contains(search);
+                    label.setVisible(state);
+                    label.setManaged(state);
                 }
             }
         });

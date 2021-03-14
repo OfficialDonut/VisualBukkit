@@ -304,7 +304,7 @@ public class VisualBukkitApp extends Application {
     }
 
     public boolean checkForUpdate() {
-        try (InputStream inputStream = new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/version").openStream()) {
+        try (InputStream inputStream = new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/VB-Application/version").openStream()) {
             String latestVersion = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
             if (!VERSION.equals(latestVersion)) {
                 ButtonType viewButton = new ButtonType(getString("button.view_update"));
