@@ -1,0 +1,33 @@
+.button-bar {
+    -fx-border-color: lightgray transparent transparent transparent;
+    -fx-border-width: 3 0 0 0;
+}
+
+.extension-info-grid .button:hover {
+    -fx-background-color: rgb(225, 225, 225);
+}
+
+.list-view {
+    -fx-border-color: black transparent transparent transparent;
+}
+
+.log-display {
+    -fx-border-color: lightgray;
+    -fx-faint-focus-color: -fx-base;
+    -fx-focus-color: -fx-base;
+    -fx-font-family: "JetBrains Mono Medium";
+}
+
+.tab-pane .tab {
+    -fx-border-color: lightgray;
+}
+
+.text-field {
+    -fx-border-color: black;
+    -fx-border-radius: 2;
+    -fx-control-inner-background: white;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-padding: 2 2 2 4;
+    -fx-text-fill: black;
+}

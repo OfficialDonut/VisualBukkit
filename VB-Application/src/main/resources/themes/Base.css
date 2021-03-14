@@ -1,0 +1,278 @@
+@font-face {
+    src: url("/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+    src: url("/fonts/JetBrainsMono-Medium.ttf");
+}
+
+@font-face {
+    src: url("/fonts/Roboto-Regular.ttf");
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-focus-traversable: false;
+    -fx-padding: 0;
+}
+
+.button:hover {
+    -fx-opacity: 75%;
+}
+
+.button:pressed {
+    -fx-opacity: 50%;
+}
+
+.button-bar {
+    -fx-padding: 15;
+    -fx-spacing: 25;
+}
+
+.code-block {
+    -fx-border-color: black;
+    -fx-font-family: "JetBrains Mono Medium";
+    -fx-padding: 8;
+    -fx-spacing: 8;
+}
+
+.code-block:invalid {
+    -fx-background-color: red !important;
+}
+
+.code-block:selected {
+    -fx-border-color: yellow;
+    -fx-border-width: 2;
+}
+
+.code-block > .hbox {
+    -fx-spacing: 10;
+}
+
+.code-block .label {
+    -fx-text-fill: black;
+}
+
+.code-block-header {
+    -fx-font-family: "JetBrains Mono";
+}
+
+.combo-box {
+    -fx-pref-width: 125;
+}
+
+.combo-box > .arrow-button {
+    -fx-padding: 0 5 0 0;
+}
+
+.combo-box > .list-cell {
+    -fx-padding: 2 2 2 5;
+}
+
+.container-block {
+    -fx-background-color: lightblue;
+    -fx-padding: 8 8 25 8;
+}
+
+.container-block:hover {
+    -fx-cursor: hand;
+}
+
+.container-block:nested {
+    -fx-background-color: cornflowerblue;
+}
+
+.context-menu {
+    -fx-padding: 1;
+}
+
+.expr-number > .text-field {
+    -fx-control-inner-background: beige;
+}
+
+.expression-block {
+    -fx-background-color: orange;
+    -fx-background-radius: 11;
+    -fx-border-radius: 10;
+}
+
+.expression-block:nested {
+    -fx-background-color: derive(orange, 50%);
+}
+
+.expression-parameter > .button {
+    -fx-background-color: derive(pink, -15%);
+    -fx-background-radius: 11;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-padding: 3;
+    -fx-text-fill: black;
+}
+
+.expression-parameter > .button:hover {
+    -fx-background-color: pink;
+}
+
+.extension-info-grid {
+    -fx-hgap: 10;
+    -fx-padding: 15;
+    -fx-vgap: 15;
+}
+
+.extension-info-grid .button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: red;
+    -fx-padding: 8;
+    -fx-text-fill: red;
+}
+
+.hbox {
+    -fx-alignment: center-left;
+    -fx-spacing: 5;
+}
+
+.label {
+    -fx-wrap-text: true;
+}
+
+.list-view {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-focus-traversable: false;
+    -fx-padding: 0;
+}
+
+.menu-item {
+    -fx-focus-traversable: false;
+}
+
+.menu-item:hover {
+    -fx-background-color: -fx-accent;
+}
+
+.menu-item > .label {
+    -fx-font-family: "Roboto";
+}
+
+.plugin-component-block {
+    -fx-background-color: rgb(180, 96, 235);
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-radius: 10 10 0 0;
+}
+
+.plugin-component-pane {
+    -fx-padding: 15;
+}
+
+.plugin-settings-grid {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-hgap: 10;
+    -fx-padding: 15;
+    -fx-vgap: 10;
+}
+
+.popover {
+    -fx-pref-width: 400;
+}
+
+.popover .hbox {
+    -fx-padding: 5;
+    -fx-spacing: 5;
+}
+
+.popover .hbox > .label {
+    -fx-text-fill: black;
+}
+
+.popover .hbox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-width: 175;
+}
+
+.popover > .list-view {
+    -fx-border-color: black;
+}
+
+.root {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.separator {
+    -fx-background: gray;
+}
+
+.simple-local-variable {
+    -fx-control-inner-background: yellow !important;
+}
+
+.splash-screen {
+    -fx-alignment: center;
+    -fx-padding: 15;
+    -fx-spacing: 15;
+}
+
+.splash-screen .label {
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-size: 48;
+}
+
+.statement-block {
+    -fx-background-color: rgb(0, 230, 154);
+}
+
+.statement-block:hover {
+    -fx-cursor: hand;
+}
+
+.statement-connector {
+    -fx-background-color: yellow;
+}
+
+.statement-label {
+    -fx-background-color: rgb(0, 230, 154);
+    -fx-background-radius: 6;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-text-fill: black;
+}
+
+.statement-label:hover {
+    -fx-cursor: hand;
+}
+
+.statement-selector {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.tab-pane .tab {
+    -fx-background-color: -fx-background;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-control-inner-background;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+.tooltip {
+    -fx-background-radius: 5;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+}
