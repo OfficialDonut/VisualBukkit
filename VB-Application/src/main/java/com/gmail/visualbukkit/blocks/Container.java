@@ -2,15 +2,10 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
-import javafx.collections.ListChangeListener;
 import javafx.css.PseudoClass;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,59 +19,17 @@ public abstract class Container extends Statement {
 
     public static abstract class Block extends Statement.Block {
 
-        private VBox childPlaceholder = new VBox();
-        private VBox childHolder = new VBox();
-        private ChildConnector childConnector = new ChildConnector(this, childHolder);
+        private ChildConnector childConnector = new ChildConnector(this);
 
         public Block(Container container, BlockParameter... parameters) {
             super(container, parameters);
 
-            VBox childBox = new VBox(childPlaceholder, childConnector, childHolder);
-            childBox.setStyle("-fx-background-color: -fx-background;");
-            childPlaceholder.setStyle("-fx-background-color: -fx-background;");
-            childPlaceholder.setPrefHeight(childConnector.getMaxHeight() - 1);
-            getSyntaxBox().getChildren().addAll(new Separator(), childBox);
+            getSyntaxBox().getChildren().addAll(new Separator(), childConnector);
             getSyntaxBox().getStyleClass().remove("statement-block");
             getSyntaxBox().getStyleClass().add("container-block");
 
             getSyntaxBox().addEventHandler(MouseEvent.DRAG_DETECTED, e -> childConnector.setAcceptingConnections(false));
             addEventHandler(DragEvent.DRAG_DONE, e -> childConnector.setAcceptingConnections(true));
-
-            childHolder.getChildren().addListener((ListChangeListener<Node>) change -> childPlaceholder.setPrefHeight(childHolder.getChildren().isEmpty() ? childConnector.getMaxHeight() - 1 : 0));
-
-            childConnector.prefHeightProperty().addListener((o, oldValue, newValue) -> {
-                if (!childConnector.hasConnection()) {
-                    childPlaceholder.setPrefHeight(newValue.doubleValue() == 0 ? childConnector.getMaxHeight() - 1 : 0);
-                }
-            });
-
-            getSyntaxBox().setOnDragOver(e -> {
-                if (getPrevious().isAcceptingConnections()) {
-                    Bounds bounds = getPrevious().localToScreen(getPrevious().getBoundsInLocal());
-                    if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                        double deltaY = e.getScreenY() - bounds.getMinY();
-                        if (deltaY > 0 && deltaY < getPrevious().getMaxHeight()) {
-                            getPrevious().show();
-                        }
-                    }
-                }
-                if (childConnector.hasConnection()) {
-                    StatementConnector connector = childConnector.getConnected().getLast().getNext();
-                    if (connector.isAcceptingConnections()) {
-                        Bounds bounds = connector.localToScreen(connector.getBoundsInLocal());
-                        if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                            double deltaY = e.getScreenY() - bounds.getMinY();
-                            if (deltaY > 0 && deltaY < connector.getMaxHeight()) {
-                                connector.show();
-                            }
-                        }
-                    }
-                } else if (childConnector.isAcceptingConnections()
-                        && childConnector.getPrefHeight() == 0
-                        && childPlaceholder.localToScreen(childPlaceholder.getBoundsInLocal()).contains(e.getScreenX(), e.getScreenY())) {
-                    childConnector.show();
-                }
-            });
         }
 
         @Override
@@ -154,6 +107,15 @@ public abstract class Container extends Statement {
             }
         }
 
+        @Override
+        protected void setAcceptingConnections(boolean state) {
+            super.setAcceptingConnections(state);
+            childConnector.setAcceptingConnections(state);
+            if (childConnector.hasConnection()) {
+                childConnector.getConnected().setAcceptingConnections(state);
+            }
+        }
+
         public ChildConnector getChildConnector() {
             return childConnector;
         }
@@ -161,8 +123,8 @@ public abstract class Container extends Statement {
 
     public static class ChildConnector extends StatementConnector {
 
-        public ChildConnector(CodeBlock<?> owner, Pane blockHolder) {
-            super(owner, blockHolder);
+        public ChildConnector(CodeBlock<?> owner) {
+            super(owner);
         }
     }
 }

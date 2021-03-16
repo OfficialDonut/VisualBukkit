@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.Container;
-import com.gmail.visualbukkit.blocks.parameters.BinaryChoiceParameter;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
 public class StatElseIfStatement extends Container {
@@ -14,7 +14,7 @@ public class StatElseIfStatement extends Container {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(boolean.class), new BinaryChoiceParameter("false", "true")) {
+        return new Block(this, new ExpressionParameter(boolean.class), new ChoiceParameter("false", "true")) {
             @Override
             public void update() {
                 super.update();

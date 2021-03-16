@@ -16,6 +16,11 @@
     -fx-padding: 0;
 }
 
+.button-bar {
+    -fx-alignment: center-left;
+    -fx-border-width: 3 0 0 0;
+}
+
 .button:hover {
     -fx-opacity: 75%;
 }
@@ -71,7 +76,7 @@
 
 .container-block {
     -fx-background-color: lightblue;
-    -fx-padding: 8 8 25 8;
+    -fx-padding: 8 8 8 8;
 }
 
 .container-block:hover {
@@ -239,6 +244,12 @@
 
 .statement-connector {
     -fx-background-color: yellow;
+    -fx-max-height: 12;
+    -fx-min-height: 12;
+}
+
+.statement-connector:hidden {
+    -fx-background-color: transparent;
 }
 
 .statement-label {

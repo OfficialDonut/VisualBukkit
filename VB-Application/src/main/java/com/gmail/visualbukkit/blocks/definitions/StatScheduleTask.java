@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Container;
-import com.gmail.visualbukkit.blocks.parameters.BinaryChoiceParameter;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 
@@ -21,7 +21,7 @@ public class StatScheduleTask extends Container {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new BinaryChoiceParameter("sync", "async"), new BinaryChoiceParameter("false", "true"), new ExpressionParameter(long.class)) {
+        return new Block(this, new ChoiceParameter("sync", "async"), new ChoiceParameter("false", "true"), new ExpressionParameter(long.class)) {
 
             private String id = UUID.randomUUID().toString().replace("-", "");
             private Set<String> variables;

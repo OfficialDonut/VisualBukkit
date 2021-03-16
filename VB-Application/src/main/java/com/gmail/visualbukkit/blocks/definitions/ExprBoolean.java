@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Expression;
-import com.gmail.visualbukkit.blocks.parameters.BinaryChoiceParameter;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 
 public class ExprBoolean extends Expression {
 
@@ -11,7 +11,7 @@ public class ExprBoolean extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new BinaryChoiceParameter("true", "false")) {
+        return new Block(this, new ChoiceParameter("true", "false")) {
             @Override
             public String toJava() {
                 return arg(0);

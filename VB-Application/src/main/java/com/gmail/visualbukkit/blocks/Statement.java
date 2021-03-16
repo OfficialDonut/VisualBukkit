@@ -8,7 +8,6 @@ import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Bounds;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +20,6 @@ import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
@@ -39,8 +37,7 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
         private static final Image EXPAND_IMAGE = new Image(Statement.class.getResourceAsStream("/images/expand.png"));
 
         private BooleanProperty collapsed = new SimpleBooleanProperty(false);
-        private VBox statementHolder = new VBox();
-        private StatementConnector next = new StatementConnector(this, statementHolder);
+        private StatementConnector next = new StatementConnector(this);
         private StatementConnector previous;
 
         public Block(Statement statement, BlockParameter... parameters) {
@@ -96,20 +93,8 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
                 pasteAfterItem.setDisable(state);
             });
 
-            getChildren().addAll(next, statementHolder);
+            getChildren().add(next);
             getSyntaxBox().getStyleClass().add("statement-block");
-
-            getSyntaxBox().setOnDragOver(e -> {
-                if (previous.isAcceptingConnections()) {
-                    Bounds bounds = previous.localToScreen(previous.getBoundsInLocal());
-                    if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                        double deltaY = e.getScreenY() - bounds.getMinY();
-                        if (deltaY > 0 && deltaY < previous.getMaxHeight()) {
-                            previous.show();
-                        }
-                    }
-                }
-            });
 
             getSyntaxBox().setOnDragDetected(e -> {
                 if (e.getButton() == MouseButton.PRIMARY) {
@@ -122,14 +107,14 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
                     content.put(StatementConnector.POINT_DATA_FORMAT, new Point2D.Double(e.getX(), e.getY()));
                     dragboard.setContent(content);
                     setOpacity(0.5);
-                    next.setAcceptingConnections(false);
+                    setAcceptingConnections(false);
                 }
                 e.consume();
             });
 
             setOnDragDone(e -> {
                 setOpacity(1);
-                next.setAcceptingConnections(true);
+                setAcceptingConnections(true);
                 e.consume();
             });
         }
@@ -236,6 +221,13 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
             super.deserialize(json);
             if (json.optBoolean("collapsed")) {
                 collapsed.set(true);
+            }
+        }
+
+        protected void setAcceptingConnections(boolean state) {
+            next.setAcceptingConnections(state);
+            if (next.hasConnection()) {
+                next.getConnected().setAcceptingConnections(state);
             }
         }
 

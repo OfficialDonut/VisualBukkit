@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Container;
-import com.gmail.visualbukkit.blocks.parameters.BinaryChoiceParameter;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
 public class StatIfStatement extends Container {
@@ -12,7 +12,7 @@ public class StatIfStatement extends Container {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(boolean.class), new BinaryChoiceParameter("false", "true")) {
+        return new Block(this, new ExpressionParameter(boolean.class), new ChoiceParameter("false", "true")) {
             @Override
             public String toJava() {
                 return arg(1).equals("false") ?

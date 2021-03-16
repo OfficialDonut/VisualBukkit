@@ -4,7 +4,6 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.collections.ListChangeListener;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -21,8 +20,7 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
 
     public static abstract class Block extends CodeBlock<PluginComponent> {
 
-        private VBox statementHolder = new VBox();
-        private StatementConnector next = new StatementConnector(this, statementHolder);
+        private StatementConnector next = new StatementConnector(this);
         private Tab tab;
 
         public Block(PluginComponent pluginComponent, BlockParameter... parameters) {
@@ -47,11 +45,11 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
             getContextMenu().getItems().addAll(collapseAllItem, expandAllItem, new SeparatorMenuItem(), pasteAfterItem);
             getContextMenu().setOnShowing(e -> pasteAfterItem.setDisable(!(CopyPasteManager.peek() instanceof Statement)));
 
-            getChildren().addAll(next, statementHolder);
+            getChildren().add(next);
             getSyntaxBox().getStyleClass().add("plugin-component-block");
 
-            statementHolder.getChildren().addListener((ListChangeListener<? super Node>)  change -> {
-                boolean state = statementHolder.getChildren().isEmpty();
+            next.getStatementHolder().getChildren().addListener((ListChangeListener<? super Node>)  change -> {
+                boolean state = next.getStatementHolder().getChildren().isEmpty();
                 collapseAllItem.setDisable(state);
                 expandAllItem.setDisable(state);
             });
@@ -59,20 +57,6 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
             scrollPane.setOnMouseClicked(e -> {
                 if (e.getButton() == MouseButton.PRIMARY && CodeBlock.currentSelected != null) {
                     CodeBlock.currentSelected.unselect();
-                }
-                e.consume();
-            });
-
-            content.setOnDragOver(e -> {
-                StatementConnector connector = next.hasConnection() ? next.getConnected().getLast().getNext() : next;
-                if (connector.isAcceptingConnections()) {
-                    Bounds bounds = connector.localToScreen(connector.getBoundsInLocal());
-                    if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                        double deltaY = e.getScreenY() - bounds.getMinY();
-                        if (deltaY > 0 && deltaY < connector.getMaxHeight()) {
-                            connector.show();
-                        }
-                    }
                 }
                 e.consume();
             });

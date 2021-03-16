@@ -1,33 +1,49 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.gui.SoundManager;
+import javafx.css.PseudoClass;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
-public class StatementConnector extends HBox {
+public class StatementConnector extends StackPane {
 
     public static final DataFormat POINT_DATA_FORMAT = new DataFormat("geom/Point2D");
-    private static StatementConnector currentlyShown;
+    private static final PseudoClass HIDDEN_STYLE_CLASS = PseudoClass.getPseudoClass("hidden");
 
     private CodeBlock<?> owner;
-    private Pane blockHolder;
     private Statement.Block connected;
+    private VBox placementIndicator = new VBox();
+    private VBox statementHolder = new VBox();
     private boolean acceptingConnections = true;
 
-    public StatementConnector(CodeBlock<?> owner, Pane blockHolder) {
+    public StatementConnector(CodeBlock<?> owner) {
         this.owner = owner;
-        this.blockHolder = blockHolder;
 
-        getStyleClass().add("statement-connector");
+        setAlignment(Pos.TOP_LEFT);
+        getChildren().addAll(statementHolder, placementIndicator);
 
-        setPrefHeight(0);
-        setMaxHeight(25);
-        setOnMouseEntered(e -> setPrefHeight(0));
-        setOnDragExited(e -> setPrefHeight(0));
+        placementIndicator.getStyleClass().add("statement-connector");
+        placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, true);
 
-        setOnDragOver(e -> {
+        placementIndicator.setOnDragEntered(e -> {
+            if (isAcceptingConnections()) {
+                placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, false);
+                statementHolder.setPadding(new Insets(placementIndicator.getHeight(), 0, 0, 0));
+            }
+            e.consume();
+        });
+
+        placementIndicator.setOnDragExited(e -> {
+            placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, true);
+            statementHolder.setPadding(Insets.EMPTY);
+            e.consume();
+        });
+
+        placementIndicator.setOnDragOver(e -> {
             Object source = e.getGestureSource();
             if (acceptingConnections && (source instanceof StatementLabel || source instanceof Statement.Block)) {
                 e.acceptTransferModes(TransferMode.ANY);
@@ -35,7 +51,7 @@ public class StatementConnector extends HBox {
             e.consume();
         });
 
-        setOnDragDropped(e -> {
+        placementIndicator.setOnDragDropped(e -> {
             Object source = e.getGestureSource();
             Statement.Block block = source instanceof StatementLabel ?
                     ((StatementLabel) source).getStatement().createBlock() :
@@ -44,6 +60,20 @@ public class StatementConnector extends HBox {
             e.setDropCompleted(true);
             e.consume();
             SoundManager.SNAP.play();
+        });
+
+        placementIndicator.setOnDragDetected(e -> {
+            if (hasConnection()) {
+                connected.getSyntaxBox().getOnDragDetected().handle(e);
+            }
+            e.consume();
+        });
+
+        placementIndicator.setOnContextMenuRequested(e -> {
+            if (hasConnection()) {
+                connected.getSyntaxBox().getOnContextMenuRequested().handle(e);
+            }
+            e.consume();
         });
     }
 
@@ -64,7 +94,7 @@ public class StatementConnector extends HBox {
                 disconnectOld.run();
                 connected = block;
                 connected.setPrevious(StatementConnector.this);
-                blockHolder.getChildren().add(connected);
+                statementHolder.getChildren().add(connected);
                 if (oldConnected != null) {
                     connectOldToNew = connected.getLast().getNext().connect(oldConnected);
                     connectOldToNew.run();
@@ -77,7 +107,7 @@ public class StatementConnector extends HBox {
                 connectOldToNew.revert();
                 connected.setPrevious(null);
                 connected = null;
-                blockHolder.getChildren().clear();
+                statementHolder.getChildren().clear();
                 disconnectOld.revert();
                 disconnectNew.revert();
             }
@@ -94,30 +124,19 @@ public class StatementConnector extends HBox {
             public void run() {
                 connected.setPrevious(null);
                 connected = null;
-                blockHolder.getChildren().clear();
+                statementHolder.getChildren().clear();
             }
             @Override
             public void revert() {
                 connected = oldConnected;
                 connected.setPrevious(StatementConnector.this);
-                blockHolder.getChildren().add(connected);
+                statementHolder.getChildren().add(connected);
             }
         };
     }
 
-    protected void show() {
-        if (currentlyShown != null) {
-            currentlyShown.setPrefHeight(0);
-        }
-        currentlyShown = this;
-        setPrefHeight(getMaxHeight());
-    }
-
     protected void setAcceptingConnections(boolean acceptingConnections) {
         this.acceptingConnections = acceptingConnections;
-        if (hasConnection()) {
-            connected.getNext().setAcceptingConnections(acceptingConnections);
-        }
     }
 
     public boolean isAcceptingConnections() {
@@ -134,5 +153,13 @@ public class StatementConnector extends HBox {
 
     public CodeBlock<?> getOwner() {
         return owner;
+    }
+
+    public VBox getPlacementIndicator() {
+        return placementIndicator;
+    }
+
+    public VBox getStatementHolder() {
+        return statementHolder;
     }
 }

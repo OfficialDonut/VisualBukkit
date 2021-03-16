@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Statement;
-import com.gmail.visualbukkit.blocks.parameters.BinaryChoiceParameter;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
@@ -17,7 +17,7 @@ public class StatSetComplexVariable extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new BinaryChoiceParameter("global", "persistent"), new StringLiteralParameter(), new ExpressionParameter(List.class), new ExpressionParameter(Object.class)) {
+        return new Block(this, new ChoiceParameter("global", "persistent"), new StringLiteralParameter(), new ExpressionParameter(List.class), new ExpressionParameter(Object.class)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
