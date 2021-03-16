@@ -79,10 +79,6 @@
     -fx-padding: 8 8 8 8;
 }
 
-.container-block:hover {
-    -fx-cursor: hand;
-}
-
 .container-block:nested {
     -fx-background-color: cornflowerblue;
 }
@@ -238,18 +234,17 @@
     -fx-background-color: rgb(0, 230, 154);
 }
 
-.statement-block:hover {
-    -fx-cursor: hand;
-}
-
 .statement-connector {
     -fx-background-color: yellow;
+    -fx-border-color: black;
+    -fx-border-width: 0 1 0 1;
     -fx-max-height: 12;
     -fx-min-height: 12;
 }
 
 .statement-connector:hidden {
     -fx-background-color: transparent;
+    -fx-border-width: 0;
 }
 
 .statement-label {

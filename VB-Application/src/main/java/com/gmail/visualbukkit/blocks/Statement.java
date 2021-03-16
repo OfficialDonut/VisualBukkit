@@ -23,8 +23,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
-import java.awt.geom.Point2D;
-
 public abstract class Statement extends BlockDefinition<Statement.Block> {
 
     public Statement(String id) {
@@ -46,9 +44,6 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
             if (parameters.length > 0) {
                 Button toggleCollapseButton = new Button();
                 toggleCollapseButton.setOnAction(e -> {
-                    if (currentContextMenu != null) {
-                        currentContextMenu.hide();
-                    }
                     collapsedProperty().set(!isCollapsed());
                     SoundManager.WHOOSH.play();
                 });
@@ -102,9 +97,9 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
                     SnapshotParameters snapshotParameters = new SnapshotParameters();
                     snapshotParameters.setFill(Color.TRANSPARENT);
                     Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
-                    dragboard.setDragView(image, Math.min(image.getWidth(), e.getX()), Math.min(image.getHeight(), e.getY()));
+                    dragboard.setDragView(image, -1, -1);
                     ClipboardContent content = new ClipboardContent();
-                    content.put(StatementConnector.POINT_DATA_FORMAT, new Point2D.Double(e.getX(), e.getY()));
+                    content.putString("");
                     dragboard.setContent(content);
                     setOpacity(0.5);
                     setAcceptingConnections(false);

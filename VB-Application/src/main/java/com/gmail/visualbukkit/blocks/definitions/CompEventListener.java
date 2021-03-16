@@ -113,9 +113,6 @@ public class CompEventListener extends PluginComponent {
                 if (e.getButton() == MouseButton.PRIMARY && !selector.isShowing()) {
                     selector.show(eventChoice);
                 }
-                if (CodeBlock.currentContextMenu != null) {
-                    CodeBlock.currentContextMenu.hide();
-                }
                 e.consume();
             });
         }

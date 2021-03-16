@@ -27,7 +27,6 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
 
     private static final PseudoClass INVALID_STYLE_CLASS = PseudoClass.getPseudoClass("invalid");
     private static final PseudoClass SELECTED_STYLE_CLASS = PseudoClass.getPseudoClass("selected");
-    public static ContextMenu currentContextMenu;
     public static CodeBlock<?> currentSelected;
 
     private final T definition;
@@ -49,14 +48,12 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         });
 
         getSyntaxBox().setOnContextMenuRequested(e -> {
-            (currentContextMenu = contextMenu).show(getSyntaxBox(), e.getScreenX(), e.getScreenY());
+            contextMenu.show(VisualBukkitApp.getInstance().getScene().getWindow(), e.getScreenX(), e.getScreenY());
+            VisualBukkitApp.getInstance().getScene().getWindow().requestFocus();
             e.consume();
         });
 
         getSyntaxBox().setOnMouseClicked(e -> {
-            if (currentContextMenu != null) {
-                currentContextMenu.hide();
-            }
             if (e.getButton() == MouseButton.PRIMARY) {
                 if (currentSelected != this) {
                     select();

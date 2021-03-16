@@ -4,14 +4,12 @@ import com.gmail.visualbukkit.gui.SoundManager;
 import javafx.css.PseudoClass;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class StatementConnector extends StackPane {
 
-    public static final DataFormat POINT_DATA_FORMAT = new DataFormat("geom/Point2D");
     private static final PseudoClass HIDDEN_STYLE_CLASS = PseudoClass.getPseudoClass("hidden");
 
     private CodeBlock<?> owner;

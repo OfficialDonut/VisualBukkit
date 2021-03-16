@@ -8,8 +8,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 
-import java.awt.geom.Point2D;
-
 public class StatementLabel extends Label {
 
     private Statement statement;
@@ -25,9 +23,9 @@ public class StatementLabel extends Label {
                 Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                 SnapshotParameters snapshotParameters = new SnapshotParameters();
                 snapshotParameters.setFill(Color.TRANSPARENT);
-                dragboard.setDragView(snapshot(snapshotParameters, null), e.getX(), e.getY());
+                dragboard.setDragView(snapshot(snapshotParameters, null), -1, -1);
                 ClipboardContent content = new ClipboardContent();
-                content.put(StatementConnector.POINT_DATA_FORMAT, new Point2D.Double(e.getX(), e.getY()));
+                content.putString("");
                 dragboard.setContent(content);
                 e.consume();
             }

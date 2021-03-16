@@ -89,9 +89,6 @@ public class ExpressionParameter extends VBox implements BlockParameter {
                         PopOver.ArrowLocation.BOTTOM_LEFT :
                         PopOver.ArrowLocation.TOP_LEFT);
                 selector.show(this);
-                if (CodeBlock.currentContextMenu != null) {
-                    CodeBlock.currentContextMenu.hide();
-                }
             }
         });
 
@@ -126,9 +123,6 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         contextMenu.setOnShowing(e -> {
             selector.hide();
             pasteItem.setDisable(!(CopyPasteManager.peek() instanceof Expression) || !TypeHandler.canConvert(((Expression) CopyPasteManager.peek()).getReturnType(), type));
-            if (CodeBlock.currentContextMenu != null) {
-                CodeBlock.currentContextMenu.hide();
-            }
         });
     }
 
