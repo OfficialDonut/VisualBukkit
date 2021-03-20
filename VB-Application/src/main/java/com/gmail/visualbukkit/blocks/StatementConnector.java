@@ -1,16 +1,17 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.gui.SoundManager;
-import javafx.css.PseudoClass;
-import javafx.geometry.Insets;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.robot.Robot;
+import javafx.util.Duration;
 
-public class StatementConnector extends StackPane {
+public class StatementConnector extends VBox {
 
-    private static final PseudoClass HIDDEN_STYLE_CLASS = PseudoClass.getPseudoClass("hidden");
+    private static StatementConnector currentConnector;
 
     private CodeBlock<?> owner;
     private Statement.Block connected;
@@ -18,28 +19,25 @@ public class StatementConnector extends StackPane {
     private VBox statementHolder = new VBox();
     private boolean acceptingConnections = true;
 
+    static {
+        Robot robot = new Robot();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+            if (currentConnector != null && !currentConnector.placementIndicator.localToScreen(currentConnector.placementIndicator.getBoundsInLocal()).contains(robot.getMousePosition())) {
+                currentConnector.hideIndicator();
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
     public StatementConnector(CodeBlock<?> owner) {
         this.owner = owner;
 
         setAlignment(Pos.TOP_LEFT);
-        getChildren().addAll(statementHolder, placementIndicator);
+        getChildren().addAll(placementIndicator, statementHolder);
 
         placementIndicator.getStyleClass().add("statement-connector");
-        placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, true);
-
-        placementIndicator.setOnDragEntered(e -> {
-            if (isAcceptingConnections()) {
-                placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, false);
-                statementHolder.setPadding(new Insets(placementIndicator.getHeight(), 0, 0, 0));
-            }
-            e.consume();
-        });
-
-        placementIndicator.setOnDragExited(e -> {
-            placementIndicator.pseudoClassStateChanged(HIDDEN_STYLE_CLASS, true);
-            statementHolder.setPadding(Insets.EMPTY);
-            e.consume();
-        });
+        placementIndicator.setPrefHeight(0);
 
         placementIndicator.setOnDragOver(e -> {
             Object source = e.getGestureSource();
@@ -55,24 +53,26 @@ public class StatementConnector extends StackPane {
                     ((StatementLabel) source).getStatement().createBlock() :
                     (Statement.Block) source;
             UndoManager.run(connect(block));
+            hideIndicator();
             e.setDropCompleted(true);
             e.consume();
             SoundManager.SNAP.play();
         });
+    }
 
-        placementIndicator.setOnDragDetected(e -> {
-            if (hasConnection()) {
-                connected.getSyntaxBox().getOnDragDetected().handle(e);
+    public void showIndicator() {
+        if (currentConnector != this && isAcceptingConnections()) {
+            if (currentConnector != null) {
+                currentConnector.hideIndicator();
             }
-            e.consume();
-        });
+            placementIndicator.setPrefHeight(25);
+            currentConnector = this;
+        }
+    }
 
-        placementIndicator.setOnContextMenuRequested(e -> {
-            if (hasConnection()) {
-                connected.getSyntaxBox().getOnContextMenuRequested().handle(e);
-            }
-            e.consume();
-        });
+    public void hideIndicator() {
+        currentConnector = null;
+        placementIndicator.setPrefHeight(0);
     }
 
     public UndoManager.RevertableAction connect(Statement.Block block) {

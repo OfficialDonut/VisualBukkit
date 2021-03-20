@@ -8,6 +8,7 @@ import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Bounds;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -103,6 +104,17 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
                     dragboard.setContent(content);
                     setOpacity(0.5);
                     setAcceptingConnections(false);
+                }
+                e.consume();
+            });
+
+            getSyntaxBox().setOnDragOver(e -> {
+                Bounds bounds = getSyntaxBox().localToScreen(getSyntaxBox().getBoundsInLocal());
+                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
+                    double deltaY = e.getScreenY() - bounds.getMinY();
+                    if (deltaY > 0 && deltaY < previous.getPlacementIndicator().getMaxHeight()) {
+                        previous.showIndicator();
+                    }
                 }
                 e.consume();
             });

@@ -1,8 +1,11 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.css.PseudoClass;
+import javafx.geometry.Bounds;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,12 +27,44 @@ public abstract class Container extends Statement {
         public Block(Container container, BlockParameter... parameters) {
             super(container, parameters);
 
+            MenuItem pasteInsideItem = new MenuItem(VisualBukkitApp.getString("context_menu.paste_inside"));
+            pasteInsideItem.disableProperty().bind(getContextMenu().getItems().get(getContextMenu().getItems().size() - 1).disableProperty());
+            pasteInsideItem.setOnAction(e -> UndoManager.run(pasteInside()));
+            getContextMenu().getItems().add(pasteInsideItem);
+
             getSyntaxBox().getChildren().addAll(new Separator(), childConnector);
             getSyntaxBox().getStyleClass().remove("statement-block");
             getSyntaxBox().getStyleClass().add("container-block");
 
             getSyntaxBox().addEventHandler(MouseEvent.DRAG_DETECTED, e -> childConnector.setAcceptingConnections(false));
             addEventHandler(DragEvent.DRAG_DONE, e -> childConnector.setAcceptingConnections(true));
+
+            getSyntaxBox().addEventHandler(DragEvent.DRAG_OVER, e -> {
+                Bounds bounds = childConnector.localToScreen(childConnector.getBoundsInLocal());
+                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
+                    double deltaY = e.getScreenY() - bounds.getMinY();
+                    if (deltaY > 0 && deltaY < childConnector.getPlacementIndicator().getMaxHeight()) {
+                        childConnector.showIndicator();
+                        e.consume();
+                        return;
+                    }
+                }
+                if (childConnector.hasConnection()) {
+                    bounds = childConnector.localToScreen(childConnector.getBoundsInLocal());
+                    if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
+                        StatementConnector connector = childConnector.getConnected().getLast().getNext();
+                        double deltaY = e.getScreenY() - bounds.getMaxY();
+                        if (deltaY > 0 && deltaY < connector.getPlacementIndicator().getMaxHeight()) {
+                            connector.showIndicator();
+                        }
+                    }
+                }
+                e.consume();
+            });
+        }
+
+        public UndoManager.RevertableAction pasteInside() {
+            return childConnector.connect(CopyPasteManager.pasteStatement());
         }
 
         @Override

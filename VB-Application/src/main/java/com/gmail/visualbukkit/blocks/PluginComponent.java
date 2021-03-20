@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.collections.ListChangeListener;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -57,6 +58,17 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
             scrollPane.setOnMouseClicked(e -> {
                 if (e.getButton() == MouseButton.PRIMARY && CodeBlock.currentSelected != null) {
                     CodeBlock.currentSelected.unselect();
+                }
+                e.consume();
+            });
+
+            content.setOnDragOver(e -> {
+                Bounds bounds = localToScreen(getBoundsInLocal());
+                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
+                    double deltaY = e.getScreenY() - bounds.getMaxY();
+                    if (deltaY > 0 && deltaY < next.getPlacementIndicator().getMaxHeight()) {
+                        (next.hasConnection() ? next.getConnected().getLast().getNext() : next).showIndicator();
+                    }
                 }
                 e.consume();
             });
