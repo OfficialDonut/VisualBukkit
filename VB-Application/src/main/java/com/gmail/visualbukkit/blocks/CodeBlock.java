@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.definitions.CompEventListener;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
+import com.gmail.visualbukkit.gui.NotificationManager;
 import com.gmail.visualbukkit.gui.StyleableHBox;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.css.PseudoClass;
@@ -10,13 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-import org.bukkit.event.Event;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -33,7 +31,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     private List<BlockParameter> parameters = new ArrayList<>();
     private VBox syntaxBox = new VBox();
     private ContextMenu contextMenu = new ContextMenu();
-    private Tooltip invalidTooltip;
+    private String invalidReason;
 
     public CodeBlock(T definition) {
         this.definition = definition;
@@ -105,6 +103,9 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         }
         currentSelected = this;
         syntaxBox.pseudoClassStateChanged(SELECTED_STYLE_CLASS, true);
+        if (invalidReason != null) {
+            NotificationManager.displayMessage(VisualBukkitApp.getString("message.invalid_block.title"), invalidReason);
+        }
     }
 
     public void unselect() {
@@ -116,26 +117,22 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
 
     protected void setValid() {
         syntaxBox.pseudoClassStateChanged(INVALID_STYLE_CLASS, false);
-        if (invalidTooltip != null) {
-            Tooltip.uninstall(syntaxBox, invalidTooltip);
-        }
+        invalidReason = null;
     }
 
     protected void setInvalid(String reason) {
         syntaxBox.pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        Tooltip tooltip = new Tooltip(reason);
-        tooltip.setShowDelay(Duration.millis(250));
-        Tooltip.install(syntaxBox, invalidTooltip = tooltip);
+        invalidReason = reason;
     }
 
-    protected void checkForPluginComponent(Class<? extends PluginComponent> clazz) {
+    protected void checkForPluginComponent(Class<?> clazz) {
         PluginComponent component = getPluginComponentBlock().getDefinition();
         if (!clazz.isAssignableFrom(component.getClass())) {
             setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), component.getTitle()));
         }
     }
 
-    protected void checkForEvent(Class<? extends Event> clazz) {
+    protected void checkForEvent(Class<?> clazz) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (!(block instanceof CompEventListener.EventBlock) || !clazz.isAssignableFrom(((CompEventListener.EventBlock) block).getEvent())) {
             setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), clazz.getSimpleName()));
@@ -150,7 +147,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
                     return;
                 }
             }
-            parent = getParent();
+            parent = parent.getParent();
         }
         setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), BlockRegistry.getStatement(containerID)));
     }

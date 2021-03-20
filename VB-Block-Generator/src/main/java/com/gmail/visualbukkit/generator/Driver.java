@@ -25,7 +25,7 @@ public class Driver {
 
         System.out.println("Reading script file...");
         List<String> lines = Files.readAllLines(script);
-        lines.removeIf(String::isBlank);
+        lines.removeIf(String::isEmpty);
 
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i).trim();

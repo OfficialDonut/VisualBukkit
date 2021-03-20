@@ -2,7 +2,6 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.CodeBlock;
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.gui.StyleableHBox;

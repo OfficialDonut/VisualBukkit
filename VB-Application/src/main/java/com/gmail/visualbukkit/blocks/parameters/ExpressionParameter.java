@@ -155,6 +155,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         return new UndoManager.RevertableAction() {
             @Override
             public void run() {
+                expression = null;
                 getChildren().setAll(button);
             }
             @Override

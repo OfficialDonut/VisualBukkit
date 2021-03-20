@@ -41,7 +41,7 @@ public class BlockGenerator {
         this.langFile = langFile;
 
         if (Files.exists(blocksFile)) {
-            for (Object obj : new JSONArray(Files.readString(blocksFile))) {
+            for (Object obj : new JSONArray(String.join("\n", Files.readAllLines(blocksFile)))) {
                 JSONObject json = (JSONObject) obj;
                 blockMap.put(json.getString("id"), json);
             }
@@ -66,8 +66,8 @@ public class BlockGenerator {
         StringJoiner langString = new StringJoiner("\n");
         langMap.forEach((key, value) -> langString.add(key + "=" + value));
 
-        Files.writeString(blocksFile, blockArray.toString(2));
-        Files.writeString(langFile, langString.toString());
+        Files.write(blocksFile, blockArray.toString(2).getBytes(StandardCharsets.UTF_8));
+        Files.write(langFile, langString.toString().getBytes(StandardCharsets.UTF_8));
     }
 
     @SuppressWarnings("UnstableApiUsage")
