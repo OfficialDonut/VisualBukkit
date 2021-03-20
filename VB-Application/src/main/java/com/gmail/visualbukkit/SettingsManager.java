@@ -1,17 +1,27 @@
 package com.gmail.visualbukkit;
 
+import com.google.common.io.MoreFiles;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.scene.Parent;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SettingsManager extends Menu {
 
     private static final SettingsManager instance = new SettingsManager();
 
+    private final Map<String, String> themes = new TreeMap<>();
     private final StringProperty theme = new SimpleStringProperty();
     private final IntegerProperty fontSize = new SimpleIntegerProperty();
     private final BooleanProperty sounds = new SimpleBooleanProperty();
@@ -21,7 +31,8 @@ public class SettingsManager extends Menu {
         super(VisualBukkitApp.getString("menu.settings"));
     }
 
-    public void loadSettings(DataFile dataFile) {
+    @SuppressWarnings("UnstableApiUsage")
+    public void loadSettings(DataFile dataFile) throws IOException {
         Menu themeMenu = new Menu(VisualBukkitApp.getString("menu.theme"));
         Menu fontSizeMenu = new Menu(VisualBukkitApp.getString("menu.font_size"));
         Menu soundsMenu = new Menu(VisualBukkitApp.getString("menu.sounds"));
@@ -33,12 +44,28 @@ public class SettingsManager extends Menu {
         int selectedFontSize = json.optInt("settings.font-size", 14);
         int selectedAutosaveTime = json.optInt("settings.autosave", -1);
 
+        themes.put("Dark", "/themes/Dark.css");
+        themes.put("Light", "/themes/Light.css");
+        Path themeDir = VisualBukkitApp.getInstance().getDataDir().resolve("Themes");
+        if (Files.exists(themeDir)) {
+            try (DirectoryStream<Path> pathStream = Files.newDirectoryStream(themeDir, p -> p.toString().endsWith(".css"))) {
+                for (Path path : pathStream) {
+                    themes.put(MoreFiles.getNameWithoutExtension(path), path.toUri().toString());
+                }
+            }
+        }
+
+        Menu selectThemeMenu = new Menu(VisualBukkitApp.getString("menu.select_theme"));
+        MenuItem openThemeDirItem = new MenuItem(VisualBukkitApp.getString("menu_item.theme_directory"));
+        openThemeDirItem.setOnAction(e -> VisualBukkitApp.getInstance().openDirectory(themeDir));
+        themeMenu.getItems().addAll(selectThemeMenu, openThemeDirItem);
+
         ToggleGroup themeGroup = new ToggleGroup();
-        for (String s : new String[]{"Dark", "Light"}) {
+        for (String s : themes.keySet()) {
             RadioMenuItem themeItem = new RadioMenuItem(s);
             themeItem.setOnAction(e -> theme.set(s));
             themeGroup.getToggles().add(themeItem);
-            themeMenu.getItems().add(themeItem);
+            selectThemeMenu.getItems().add(themeItem);
             if (getTheme() == null || s.equals(selectedTheme)) {
                 theme.set(s);
                 themeItem.setSelected(true);
@@ -93,8 +120,8 @@ public class SettingsManager extends Menu {
     }
 
     public void bindStyle(Parent parent) {
-        theme.addListener((o, oldValue, newTheme) -> parent.getStylesheets().setAll("/themes/Base.css", "/themes/" + newTheme + ".css"));
-        parent.getStylesheets().setAll("/themes/Base.css", "/themes/" + getTheme() + ".css");
+        theme.addListener((o, oldValue, newTheme) -> parent.getStylesheets().setAll("/themes/Base.css", themes.get(newTheme)));
+        parent.getStylesheets().setAll("/themes/Base.css", themes.get(getTheme()));
         parent.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize));
     }
 

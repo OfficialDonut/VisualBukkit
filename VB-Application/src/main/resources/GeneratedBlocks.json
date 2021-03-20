@@ -3043,11 +3043,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "id": "13b3e6cd9ca8390405515e6cbc714c84",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"]
-  },
-  {
     "static": true,
     "field": "ENTITY_PLAYER_SMALL_FALL",
     "id": "13ba6305c6043edd48b35f9dbc8eec0a",
@@ -3487,11 +3482,6 @@
     "id": "164efaa937aa361ffda0224cf7b88d79",
     "class": "org.bukkit.event.inventory.InventoryType$SlotType",
     "return": "org.bukkit.event.inventory.InventoryType$SlotType"
-  },
-  {
-    "id": "1655eeceb3053a2f4a3c32be5a40911b",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.StringBuilder"]
   },
   {
     "method": "isLeftClick",
@@ -5350,10 +5340,6 @@
     "parameters": ["org.bukkit.util.BlockVector"]
   },
   {
-    "id": "227b5544a7de26e2b156c619c36138d6",
-    "class": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "ENTITY_PILLAGER_AMBIENT",
     "id": "228306aa6eeee8fa2a2b8b84851abb2b",
@@ -6985,12 +6971,6 @@
     "id": "2c7ecf38d6941db498ed813f0257e312",
     "class": "org.bukkit.event.world.PortalCreateEvent$CreateReason",
     "return": "org.bukkit.event.world.PortalCreateEvent$CreateReason"
-  },
-  {
-    "method": "intern",
-    "id": "2c81afff1f9a46b78c36c61832c11a8d",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
   },
   {
     "method": "isGliding",
@@ -10359,15 +10339,6 @@
     "parameters": ["float"]
   },
   {
-    "id": "44084d5c4cb7614e54e41bd741d2918c",
-    "class": "java.lang.String",
-    "parameters": [
-      "[I",
-      "int",
-      "int"
-    ]
-  },
-  {
     "method": "getOldAmount",
     "id": "441723f9045130fea257b65e7daba678",
     "class": "org.bukkit.event.entity.ArrowBodyCountChangeEvent",
@@ -10555,11 +10526,6 @@
     "id": "44fa640fdda43af6ee582731a125c069",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "id": "4501456e7baea79fd069b1f6023491d3",
-    "class": "java.lang.String",
-    "parameters": ["[B"]
   },
   {
     "static": true,
@@ -11900,14 +11866,6 @@
     "id": "4e3ce2113f1e0b064ffa49283c9a7579",
     "class": "org.bukkit.entity.TropicalFish",
     "return": "org.bukkit.entity.TropicalFish$Pattern"
-  },
-  {
-    "id": "4e4bdba0a1582c4b2aca697f8b474ec7",
-    "class": "java.lang.String",
-    "parameters": [
-      "[B",
-      "java.lang.String"
-    ]
   },
   {
     "method": "getChoiceList",
@@ -17803,15 +17761,6 @@
     "return": "org.bukkit.block.Biome"
   },
   {
-    "id": "7490cbd386aad4a1ea723bd4b9497f82",
-    "class": "java.lang.String",
-    "parameters": [
-      "[B",
-      "int",
-      "int"
-    ]
-  },
-  {
     "static": true,
     "field": "BLOCK_NETHERITE_BLOCK_PLACE",
     "id": "7490d7c9b2de0994bb1e5dd1b17652e5",
@@ -20635,16 +20584,6 @@
     "return": "int"
   },
   {
-    "id": "8736c40265b8686066eb2bdba9ae4250",
-    "class": "java.lang.String",
-    "parameters": [
-      "[B",
-      "int",
-      "int",
-      "java.lang.String"
-    ]
-  },
-  {
     "method": "setWeatherDuration",
     "id": "87378966fb38ac43d9a245f100ac725e",
     "class": "org.bukkit.World",
@@ -21410,14 +21349,6 @@
     "id": "8c4c057edef71dc77ad944981e38c1f2",
     "class": "org.bukkit.entity.Parrot$Variant",
     "return": "org.bukkit.entity.Parrot$Variant"
-  },
-  {
-    "id": "8c5218f94b3de0c3fa9778f0ec4eb699",
-    "class": "java.lang.String",
-    "parameters": [
-      "[B",
-      "java.nio.charset.Charset"
-    ]
   },
   {
     "method": "getCursor",
@@ -22268,15 +22199,6 @@
     "id": "919acbc203ba68894b254a7a051b7671",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "id": "91aac82484a1b9a8fc2b55e0177462fc",
-    "class": "java.lang.String",
-    "parameters": [
-      "[C",
-      "int",
-      "int"
-    ]
   },
   {
     "static": true,
@@ -23867,11 +23789,6 @@
       "org.bukkit.Location",
       "org.bukkit.block.data.BlockData"
     ]
-  },
-  {
-    "id": "9c3c34becf65b4547bb8442795e7f4f7",
-    "class": "java.lang.String",
-    "parameters": ["[C"]
   },
   {
     "static": true,
@@ -29157,16 +29074,6 @@
     "id": "bded052f9dc99549c33c3e226c007a36",
     "class": "org.bukkit.World",
     "parameters": ["boolean"]
-  },
-  {
-    "id": "bdfcc1c39066895eb24c91166d469be6",
-    "class": "java.lang.String",
-    "parameters": [
-      "[B",
-      "int",
-      "int",
-      "java.nio.charset.Charset"
-    ]
   },
   {
     "method": "setCanSeeFriendlyInvisibles",
@@ -38760,11 +38667,6 @@
     "id": "fefbfde7094b8820ae4ec536b8cba2c0",
     "class": "org.bukkit.inventory.Merchant",
     "return": "int"
-  },
-  {
-    "id": "ff0271fcf0d24716767b59ba5889b693",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.StringBuffer"]
   },
   {
     "static": true,
