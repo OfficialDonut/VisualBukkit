@@ -24,7 +24,6 @@ public class NotificationManager {
     }
 
     public static void displayMessage(String title, String message) {
-        log(message);
         Notifications.create()
                 .owner(VisualBukkitApp.getInstance().getPrimaryStage())
                 .darkStyle()
@@ -35,8 +34,6 @@ public class NotificationManager {
     }
 
     public static void displayError(String title, String message) {
-        System.out.println("[" + LocalTime.now().format(TIME_FORMATTER) + " WARN] " + message);
-        Toolkit.getDefaultToolkit().beep();
         Notifications.create()
                 .owner(VisualBukkitApp.getInstance().getPrimaryStage())
                 .darkStyle()

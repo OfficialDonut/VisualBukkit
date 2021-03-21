@@ -104,7 +104,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         currentSelected = this;
         syntaxBox.pseudoClassStateChanged(SELECTED_STYLE_CLASS, true);
         if (invalidReason != null) {
-            NotificationManager.displayMessage(VisualBukkitApp.getString("message.invalid_block.title"), invalidReason);
+            NotificationManager.displayError(VisualBukkitApp.getString("message.invalid_block.title"), invalidReason);
         }
     }
 
@@ -125,10 +125,9 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         invalidReason = reason;
     }
 
-    protected void checkForPluginComponent(Class<?> clazz) {
-        PluginComponent component = getPluginComponentBlock().getDefinition();
-        if (!clazz.isAssignableFrom(component.getClass())) {
-            setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), component.getTitle()));
+    protected void checkForPluginComponent(String componentID) {
+        if (!getPluginComponentBlock().getDefinition().getID().equals(componentID)) {
+            setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), BlockRegistry.getPluginComponent(componentID).getTitle()));
         }
     }
 

@@ -1482,8 +1482,7 @@
     "method": "broadcastMessage",
     "id": "09cc31a7ff14a02c2e17ee5e7a48aec4",
     "class": "org.bukkit.Bukkit",
-    "parameters": ["java.lang.String"],
-    "return": "int"
+    "parameters": ["java.lang.String"]
   },
   {
     "static": true,
@@ -14929,8 +14928,7 @@
     "parameters": [
       "java.lang.String",
       "java.lang.String"
-    ],
-    "return": "int"
+    ]
   },
   {
     "static": true,
