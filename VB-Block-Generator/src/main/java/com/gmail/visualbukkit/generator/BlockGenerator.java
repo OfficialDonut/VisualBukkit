@@ -21,6 +21,7 @@ public class BlockGenerator {
     private Path blocksFile;
     private Path langFile;
 
+    private Map<Class<?>, String> classNames = new HashMap<>();
     private Set<String> blacklist = new HashSet<>();
     private String category;
     private String pluginModule;
@@ -102,12 +103,12 @@ public class BlockGenerator {
             }
         } else {
             for (Constructor<?> constructor : clazz.getConstructors()) {
-                if (Modifier.isPublic(constructor.getModifiers()) && !constructor.isAnnotationPresent(Deprecated.class) && !blacklist.contains(constructor.toString())) {
+                if (Modifier.isPublic(constructor.getModifiers()) && !constructor.isAnnotationPresent(Deprecated.class) && !blacklist.contains(constructor.toString()) && !blacklist.contains(constructor.getName())) {
                     String id = hash(constructor.toString());
                     if (!blockMap.containsKey(id)) {
                         blockMap.put(id, generate(constructor, id));
                     }
-                    langMap.putIfAbsent(id + ".title", "New " + clazz.getSimpleName());
+                    langMap.putIfAbsent(id + ".title", "New " + getClassName(clazz));
                     if (category != null) {
                         langMap.putIfAbsent(id + ".category", category);
                     }
@@ -129,7 +130,7 @@ public class BlockGenerator {
                     }
                     blockMap.put(id, json);
                 }
-                langMap.putIfAbsent(id + ".title", clazz.getSimpleName() + "_" + method.getName());
+                langMap.putIfAbsent(id + ".title", "[" + getClassName(clazz) + "] " + formatLowerCamelCase(method.getName()));
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
@@ -149,11 +150,11 @@ public class BlockGenerator {
                     if (Modifier.isStatic(field.getModifiers())) {
                         json.put("static", true);
                     } else {
-                        langMap.computeIfAbsent(id + ".parameters", k -> clazz.getSimpleName());
+                        langMap.computeIfAbsent(id + ".parameters", k -> getClassName(clazz));
                     }
                     blockMap.put(id, json);
                 }
-                langMap.putIfAbsent(id + ".title", clazz.getSimpleName() + "_" + field.getName());
+                langMap.putIfAbsent(id + ".title", "[" + getClassName(clazz) + "] " + field.getName());
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
@@ -175,9 +176,47 @@ public class BlockGenerator {
         return json;
     }
 
+    private String getParameterNames(Executable executable) {
+        StringJoiner joiner = new StringJoiner(",");
+        if (!(executable instanceof Constructor) && !Modifier.isStatic(executable.getModifiers()) && !eventClass.isAssignableFrom(executable.getDeclaringClass())) {
+            joiner.add(getClassName(executable.getDeclaringClass()));
+        }
+        for (Parameter parameter : executable.getParameters()) {
+            joiner.add(formatLowerCamelCase(parameter.getName()));
+        }
+        return joiner.toString();
+    }
+
+    private String getClassName(Class<?> clazz) {
+        return eventClass.isAssignableFrom(clazz) ? clazz.getSimpleName() : classNames.computeIfAbsent(clazz, k -> formatUpperCamelCase(k.getSimpleName()));
+    }
+
+    private String formatUpperCamelCase(String str) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            builder.append(c);
+            if (i + 1 < str.length()
+                    && Character.isUpperCase(str.charAt(i + 1))
+                    && (Character.isLowerCase(c)
+                    || (i + 2 < str.length() && Character.isLowerCase(str.charAt(i + 2))))) {
+                builder.append(' ');
+            }
+        }
+        return builder.toString();
+    }
+
+    private String formatLowerCamelCase(String str) {
+        return formatUpperCamelCase(Character.toUpperCase(str.charAt(0)) + str.substring(1));
+    }
+
     public void reset() {
         category = null;
         pluginModule = null;
+    }
+
+    public void addAlias(Class<?> clazz, String alias) {
+        classNames.put(clazz, alias);
     }
 
     public void addToBlackList(String string) {
@@ -190,17 +229,6 @@ public class BlockGenerator {
 
     public void setPluginModule(String pluginModule) {
         this.pluginModule = pluginModule;
-    }
-
-    private static String getParameterNames(Executable executable) {
-        StringJoiner joiner = new StringJoiner(",");
-        if (!Modifier.isStatic(executable.getModifiers()) && !eventClass.isAssignableFrom(executable.getDeclaringClass())) {
-            joiner.add(executable.getDeclaringClass().getSimpleName());
-        }
-        for (Parameter parameter : executable.getParameters()) {
-            joiner.add(parameter.getName());
-        }
-        return joiner.toString();
     }
 
     @SuppressWarnings("UnstableApiUsage")

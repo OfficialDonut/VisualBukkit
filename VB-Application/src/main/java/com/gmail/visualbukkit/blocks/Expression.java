@@ -100,6 +100,6 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
 
     @Override
     public String toString() {
-        return super.toString() + " (" + TypeHandler.getUserFriendlyName(returnType) + ")";
+        return super.toString() + " → (" + TypeHandler.getUserFriendlyName(returnType) + ")";
     }
 }

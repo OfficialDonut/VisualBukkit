@@ -35,9 +35,10 @@ public class Driver {
                 generator.setPluginModule(line.substring(line.indexOf(' ') + 1));
             } else if (line.equals("#reset")) {
                 generator.reset();
-            } else if (line.equals("#class") || line.equals("#package") || line.equals("#blacklist")) {
+            } else if (line.equals("#class") || line.equals("#package") || line.equals("#alias") || line.equals("#blacklist")) {
                 boolean isClass = line.equals("#class");
                 boolean isPackage = line.equals("#package");
+                boolean isAlias = line.equals("#alias");
                 for (i++; i < lines.size(); i++) {
                     line = lines.get(i).trim();
                     if (line.startsWith("#")) {
@@ -50,6 +51,9 @@ public class Driver {
                     } else if (isPackage) {
                         System.out.println("Generating blocks for package: " + line);
                         generator.generate(line);
+                    } else if (isAlias) {
+                        String[] arr = line.split("=");
+                        generator.addAlias(Class.forName(arr[0]), arr[1]);
                     } else {
                         generator.addToBlackList(line);
                     }
@@ -75,6 +79,12 @@ public class Driver {
         System.out.println();
         System.out.println("\t#reset");
         System.out.println("\t\tReset the values of #category, #plugin-module");
+        System.out.println();
+        System.out.println("\t#alias");
+        System.out.println("\t<name.of.Class1=Class1 Alias>");
+        System.out.println("\t<name.of.Class2=Class2 Alias>");
+        System.out.println("\t<...>");
+        System.out.println("\t\tDefines class aliases");
         System.out.println();
         System.out.println("\t#blacklist");
         System.out.println("\t<blacklisted item 1>");
