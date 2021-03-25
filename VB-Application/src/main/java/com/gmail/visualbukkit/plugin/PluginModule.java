@@ -20,12 +20,24 @@ public abstract class PluginModule {
         return pluginModules.get(moduleID);
     }
 
+    public static final PluginModule GUI = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.addUtilClass(PluginBuilder.getUtilClass("GUIClickEvent"));
+            buildContext.addUtilClass(PluginBuilder.getUtilClass("GUIIdentifier"));
+            buildContext.addUtilClass(PluginBuilder.getUtilClass("GUIManager"));
+            buildContext.getMainClass().addMethod("@EventHandler\npublic void onGUIClick(GUIClickEvent event) throws Exception {}");
+            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
+            enableMethod.setBody(enableMethod.getBody() + "getServer().getPluginManager().registerEvents(GUIManager.getInstance(), this);");
+        }
+    };
+
     public static final PluginModule VARIABLES = new PluginModule() {
         @Override
-        public void prepareBuild(BuildContext context) {
-            context.addUtilClass(PluginBuilder.getUtilClass("VariableManager"));
-            MethodSource<JavaClassSource> enableMethod = context.getMainClass().getMethod("onEnable");
-            MethodSource<JavaClassSource> disableMethod = context.getMainClass().getMethod("onDisable");
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.addUtilClass(PluginBuilder.getUtilClass("VariableManager"));
+            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
+            MethodSource<JavaClassSource> disableMethod = buildContext.getMainClass().getMethod("onDisable");
             enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
             disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
         }

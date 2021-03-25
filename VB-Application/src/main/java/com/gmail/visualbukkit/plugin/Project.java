@@ -105,7 +105,7 @@ public class Project {
             }
         }
         int openTabIndex = json.optInt("open-tab");
-        if (openTabIndex > 0 && openTabIndex < pluginComponentTabPane.getTabs().size()) {
+        if (openTabIndex >= 0 && openTabIndex < pluginComponentTabPane.getTabs().size()) {
             pluginComponentTabPane.getSelectionModel().select(openTabIndex);
         }
     }

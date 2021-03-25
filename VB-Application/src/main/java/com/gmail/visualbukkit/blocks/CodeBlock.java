@@ -104,7 +104,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         currentSelected = this;
         syntaxBox.pseudoClassStateChanged(SELECTED_STYLE_CLASS, true);
         if (invalidReason != null) {
-            NotificationManager.displayError(VisualBukkitApp.getString("message.invalid_block.title"), invalidReason);
+            NotificationManager.displayError(VisualBukkitApp.getString("error.invalid_block"), invalidReason);
         }
     }
 
@@ -126,15 +126,16 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     }
 
     protected void checkForPluginComponent(String componentID) {
-        if (!getPluginComponentBlock().getDefinition().getID().equals(componentID)) {
-            setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), BlockRegistry.getPluginComponent(componentID).getTitle()));
+        PluginComponent.Block block = getPluginComponentBlock();
+        if (block == null || !block.getDefinition().getID().equals(componentID)) {
+            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getPluginComponent(componentID).getTitle()));
         }
     }
 
     protected void checkForEvent(Class<?> clazz) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (!(block instanceof CompEventListener.EventBlock) || !clazz.isAssignableFrom(((CompEventListener.EventBlock) block).getEvent())) {
-            setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), clazz.getSimpleName()));
+            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), clazz.getSimpleName()));
         }
     }
 
@@ -148,7 +149,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
             }
             parent = parent.getParent();
         }
-        setInvalid(String.format(VisualBukkitApp.getString("tooltip.invalid_placement"), BlockRegistry.getStatement(containerID)));
+        setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getStatement(containerID)));
     }
 
     public void update() {

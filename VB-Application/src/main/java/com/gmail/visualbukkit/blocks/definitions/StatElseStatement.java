@@ -19,7 +19,7 @@ public class StatElseStatement extends Container {
                 super.update();
                 BlockDefinition<?> previous = getPrevious().getOwner().getDefinition();
                 if (getPrevious() instanceof Container.ChildConnector || (!(previous instanceof StatIfStatement) && !(previous instanceof StatElseIfStatement))) {
-                    setInvalid(VisualBukkitApp.getString("tooltip.invalid_else"));
+                    setInvalid(VisualBukkitApp.getString("error.invalid_else"));
                 }
             }
 
