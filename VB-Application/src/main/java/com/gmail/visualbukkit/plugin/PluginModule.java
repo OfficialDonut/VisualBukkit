@@ -20,6 +20,18 @@ public abstract class PluginModule {
         return pluginModules.get(moduleID);
     }
 
+    public static final PluginModule DATABASE = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext context) {
+            context.addUtilClass(PluginBuilder.getUtilClass("DatabaseManager"));
+            context.getMainClass().addImport("java.sql.*");
+            context.addMavenDependency(
+                    "<groupId>com.zaxxer</groupId>\n" +
+                    "<artifactId>HikariCP</artifactId>\n" +
+                    "<version>3.4.5</version>\n");
+        }
+    };
+
     public static final PluginModule GUI = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext buildContext) {

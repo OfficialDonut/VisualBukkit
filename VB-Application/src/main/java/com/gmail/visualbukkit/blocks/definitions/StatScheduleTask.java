@@ -8,11 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StatScheduleTask extends Container {
-
-    private static final Pattern VAR_PATTERN = Pattern.compile("\\$[a-z0-9]{32}");
 
     public StatScheduleTask() {
         super("stat-schedule-task");
@@ -25,8 +22,8 @@ public class StatScheduleTask extends Container {
             public String toJava() {
                 String childJava = getChildJava();
                 Set<String> variables = new HashSet<>();
+                Matcher matcher = ExprSimpleLocalVariable.VAR_PATTERN.matcher(childJava);
 
-                Matcher matcher = VAR_PATTERN.matcher(childJava);
                 while (matcher.find()) {
                     variables.add(matcher.group());
                 }

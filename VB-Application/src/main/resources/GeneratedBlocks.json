@@ -142,12 +142,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "method": "clone",
-    "id": "00a9d78b4607da7710944f4552f131a5",
-    "class": "org.bukkit.inventory.meta.LeatherArmorMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "method": "setItemStack",
     "id": "00b34795d994209d5a35d74e0e958d02",
     "class": "org.bukkit.event.player.PlayerBucketEvent",
@@ -2164,12 +2158,6 @@
       "org.bukkit.event.entity.EntityDamageEvent$DamageModifier",
       "double"
     ]
-  },
-  {
-    "method": "clone",
-    "id": "0b8350e1031b253c06ea493510641edf",
-    "class": "org.bukkit.inventory.meta.TropicalFishBucketMeta",
-    "return": "java.lang.Object"
   },
   {
     "method": "divide",
@@ -5235,12 +5223,6 @@
     ]
   },
   {
-    "method": "clone",
-    "id": "1b83a13109ad6c45300ecf92849a3a53",
-    "class": "org.bukkit.inventory.meta.FireworkMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "method": "setSize",
     "id": "1b8675972f528bb6b609b3b22a1e7bc4",
     "class": "org.bukkit.entity.Phantom",
@@ -6177,12 +6159,6 @@
     "id": "20f2751cc3f0ed830174df08e0b25ccc",
     "class": "org.bukkit.scoreboard.Scoreboard",
     "return": "java.util.Set"
-  },
-  {
-    "method": "clone",
-    "id": "210d7f4ea7a28599d3728eb5233d8511",
-    "class": "org.bukkit.inventory.RecipeChoice$MaterialChoice",
-    "return": "org.bukkit.inventory.RecipeChoice"
   },
   {
     "static": true,
@@ -9035,12 +9011,6 @@
     "return": "boolean"
   },
   {
-    "method": "clone",
-    "id": "30fe45cbe2db646d6ea729a17c2bc26c",
-    "class": "org.bukkit.inventory.RecipeChoice",
-    "return": "java.lang.Object"
-  },
-  {
     "method": "setBedSpawnLocation",
     "id": "3107d737f9f843d4012fb836a2f837c8",
     "class": "org.bukkit.entity.Player",
@@ -9968,12 +9938,6 @@
     "return": "boolean"
   },
   {
-    "method": "clone",
-    "id": "3669145254fc81ef18349f67909db579",
-    "class": "org.bukkit.inventory.meta.CompassMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "LIGHTNING",
     "id": "366f1da22720f9eae22351d9f81299cf",
@@ -10070,12 +10034,6 @@
     "id": "36d2c5b409f18c9c213c9477b9af595f",
     "class": "org.bukkit.event.block.BlockIgniteEvent",
     "return": "org.bukkit.entity.Entity"
-  },
-  {
-    "method": "clone",
-    "id": "36da5a0ade385d46b6cbe4c021d635da",
-    "class": "org.bukkit.inventory.meta.FireworkEffectMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
   },
   {
     "static": true,
@@ -13274,12 +13232,6 @@
     "id": "48d356d86848f424a18b92d3f86609fb",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "clone",
-    "id": "48d4befde6dd90f40e14a8aff7c10d7e",
-    "class": "org.bukkit.inventory.meta.CompassMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
   },
   {
     "method": "setInput",
@@ -16580,12 +16532,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "clone",
-    "id": "5c43a311c6e873e5c1f65d2df4c60df0",
-    "class": "org.bukkit.inventory.meta.SuspiciousStewMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "static": true,
     "field": "ALWAYS",
     "id": "5c56221c700f831279ff755cac4c3b2d",
@@ -16659,12 +16605,6 @@
     "id": "5cb6962d3edeed56782a6d728a3dea43",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "clone",
-    "id": "5cc93e92f90866aea206a01b582cb1a1",
-    "class": "org.bukkit.util.Vector",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -19331,12 +19271,6 @@
     "return": "org.bukkit.Statistic"
   },
   {
-    "method": "clone",
-    "id": "69a91986e800eed4151e0bdb89afadaf",
-    "class": "org.bukkit.inventory.meta.BookMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "method": "isScoreSet",
     "id": "69aaf2c2e414845006b6139591fcd2ed",
     "class": "org.bukkit.scoreboard.Score",
@@ -19961,12 +19895,6 @@
     "parameters": ["double"]
   },
   {
-    "method": "clone",
-    "id": "6d41fbaecaf2de71f18508364465c2fd",
-    "class": "org.bukkit.inventory.meta.KnowledgeBookMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "method": "setPlayerTime",
     "id": "6d45d22c92f3f1ef79312a3a0d6d420e",
     "class": "org.bukkit.entity.Player",
@@ -20522,12 +20450,6 @@
     "id": "70a2b4cec080138592eb47058ad094d7",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "clone",
-    "id": "70b5a4f6e59e6169a7495b7a9b2ab025",
-    "class": "org.bukkit.inventory.meta.MapMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
   },
   {
     "static": true,
@@ -21375,12 +21297,6 @@
     "id": "7581e40b3af5f5846a23a4637b71cf55",
     "class": "org.bukkit.event.player.PlayerTeleportEvent$TeleportCause",
     "return": "org.bukkit.event.player.PlayerTeleportEvent$TeleportCause"
-  },
-  {
-    "method": "clone",
-    "id": "75a49f2b418f9de2a1c585aededed1b7",
-    "class": "org.bukkit.inventory.meta.KnowledgeBookMeta",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -22899,23 +22815,11 @@
     "return": "org.bukkit.entity.Entity"
   },
   {
-    "method": "clone",
-    "id": "7dae2f9935e57f2e81cc3c6d07516e97",
-    "class": "org.bukkit.inventory.meta.SpawnEggMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "static": true,
     "field": "FENCE_GATE_TOGGLE",
     "id": "7db5c9e8b0499fcead47588b5aa76dbc",
     "class": "org.bukkit.Effect",
     "return": "org.bukkit.Effect"
-  },
-  {
-    "method": "clone",
-    "id": "7dbb202c425a054609d097e66afeac35",
-    "class": "org.bukkit.inventory.meta.SpawnEggMeta",
-    "return": "java.lang.Object"
   },
   {
     "method": "getVelocity",
@@ -26463,12 +26367,6 @@
     "return": "org.bukkit.inventory.ItemStack"
   },
   {
-    "method": "clone",
-    "id": "90bfd81b4d8d7d4e548c756da95f2f46",
-    "class": "org.bukkit.inventory.meta.MapMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "CONFUSION",
     "id": "90c82462e782ab9e0f81b1a951110673",
@@ -26934,12 +26832,6 @@
     "id": "934e8fe4788ddee18349fc8ae867e543",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "clone",
-    "id": "935a95df43fc29527204e395fcbc8dd8",
-    "class": "org.bukkit.inventory.RecipeChoice$MaterialChoice",
-    "return": "java.lang.Object"
   },
   {
     "method": "setJoinMessage",
@@ -27642,12 +27534,6 @@
     "id": "973d2d7dd852bd17ea0979a6b095c824",
     "class": "org.bukkit.inventory.meta.ItemMeta",
     "return": "java.util.Set"
-  },
-  {
-    "method": "clone",
-    "id": "973ffae41f67b7bc183ebdd896e465d5",
-    "class": "org.bukkit.inventory.meta.Repairable",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -28392,12 +28278,6 @@
     "id": "9b4891cf551e15303271693ce5625cee",
     "class": "org.bukkit.event.enchantment.EnchantItemEvent",
     "return": "boolean"
-  },
-  {
-    "method": "clone",
-    "id": "9b61dacfeb6d67389e507959e88ae3c5",
-    "class": "org.bukkit.inventory.meta.PotionMeta",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -29229,12 +29109,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "method": "clone",
-    "id": "9f8f9ee6360d4df8386390ede0e2b150",
-    "class": "org.bukkit.inventory.meta.TropicalFishBucketMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "method": "setHelmetDropChance",
     "id": "9f92e25f3a1f8cbb31a67aaa11a6812e",
     "class": "org.bukkit.inventory.EntityEquipment",
@@ -29519,12 +29393,6 @@
     "id": "a0f83107b012383504d5071a7929cb3c",
     "class": "org.bukkit.Particle",
     "return": "org.bukkit.Particle"
-  },
-  {
-    "method": "clone",
-    "id": "a1094117806ba737be11d5cfa0d00b44",
-    "class": "org.bukkit.inventory.meta.ItemMeta",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -30041,12 +29909,6 @@
     "return": "org.bukkit.entity.TropicalFish$Pattern"
   },
   {
-    "method": "clone",
-    "id": "a39fb1d8ad42544fca1098cece57eac5",
-    "class": "org.bukkit.inventory.meta.SuspiciousStewMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "AMBIENT",
     "id": "a3bf7c0a46f7493e983bc59e9b30a470",
@@ -30263,12 +30125,6 @@
     "id": "a4f842be1ebf85025ab90c67ea419f4e",
     "class": "org.bukkit.block.Beehive",
     "parameters": ["org.bukkit.Location"]
-  },
-  {
-    "method": "clone",
-    "id": "a5066fb246e10caaaab8f5f7104275f0",
-    "class": "org.bukkit.inventory.meta.Damageable",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -32894,12 +32750,6 @@
     "parameters": ["double"]
   },
   {
-    "method": "clone",
-    "id": "b2debd074c58778457c22fda3cde1166",
-    "class": "org.bukkit.inventory.meta.EnchantmentStorageMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "static": true,
     "method": "getAdvancement",
     "id": "b2e4f119707e58f6a5ecd4cce3f7ea9a",
@@ -35308,12 +35158,6 @@
     "return": "org.bukkit.inventory.MerchantRecipe"
   },
   {
-    "method": "clone",
-    "id": "bff67fe01338bcd8c56b95302815f096",
-    "class": "org.bukkit.inventory.meta.FireworkEffectMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "SOUL_TORCH",
     "id": "bffc7b9f9b311f16a384876452a8b2eb",
@@ -36027,12 +35871,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "method": "clone",
-    "id": "c4283d4816bcd3c2145ea23108381b91",
-    "class": "org.bukkit.inventory.meta.SkullMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "static": true,
     "field": "TUBE_CORAL",
     "id": "c42cf270780897c871a5225cbca53bc7",
@@ -36568,12 +36406,6 @@
     "id": "c7a370fcfef242a73477f59993c89e98",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "clone",
-    "id": "c7ae92962038465c3cc02ef53994c066",
-    "class": "org.bukkit.inventory.meta.SkullMeta",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -37533,12 +37365,6 @@
     "id": "cd18e16d720a2d685f1cce98190abdca",
     "class": "org.bukkit.entity.Player",
     "return": "boolean"
-  },
-  {
-    "method": "clone",
-    "id": "cd2dac05c846a340afa267a0be29af52",
-    "class": "org.bukkit.inventory.meta.PotionMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
   },
   {
     "method": "getSource",
@@ -39909,12 +39735,6 @@
     "return": "[Lorg.bukkit.entity.AbstractArrow$PickupStatus;"
   },
   {
-    "method": "clone",
-    "id": "da838c8460cf4b1c03985f192b4926da",
-    "class": "org.bukkit.inventory.meta.FireworkMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "method": "spawnParticle",
     "id": "da9092a3587aa9e064593e2ed0896d61",
     "class": "org.bukkit.World",
@@ -40548,12 +40368,6 @@
     "id": "de412ecf8dea99ddd7df2a43ab241ed6",
     "class": "org.bukkit.event.inventory.ClickType",
     "return": "org.bukkit.event.inventory.ClickType"
-  },
-  {
-    "method": "clone",
-    "id": "de48fdcf5eb95e3dc5cf1281d7b6faad",
-    "class": "org.bukkit.inventory.ItemStack",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -42508,12 +42322,6 @@
     "parameters": ["int"]
   },
   {
-    "method": "clone",
-    "id": "e957f89cfbdc974c64ccae1916fa35ea",
-    "class": "org.bukkit.inventory.meta.LeatherArmorMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "ENTITY_MOOSHROOM_EAT",
     "id": "e95eb55cc9c4ba5ecfa158d3842c3f32",
@@ -43241,12 +43049,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "clone",
-    "id": "ed1cb9629c388b0fd519824de1914ad3",
-    "class": "org.bukkit.inventory.meta.EnchantmentStorageMeta",
-    "return": "java.lang.Object"
-  },
-  {
     "static": true,
     "field": "BLACK",
     "id": "ed1d033b2d8e67895f8ad07ca3fb68d6",
@@ -43825,12 +43627,6 @@
     "return": "org.bukkit.entity.ArmorStand$LockType"
   },
   {
-    "method": "clone",
-    "id": "f1164696d5dee61bf137b1f2cc380893",
-    "class": "org.bukkit.inventory.meta.BookMeta",
-    "return": "org.bukkit.inventory.meta.ItemMeta"
-  },
-  {
     "method": "isSolid",
     "id": "f11adcc7777e3641dd61bed9f860f1d5",
     "class": "org.bukkit.Material",
@@ -43931,12 +43727,6 @@
     "id": "f1ac04094d00b0f7392e7901d1b0b23e",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "clone",
-    "id": "f1b7de41c5aad90f52fbba850e3e5d9c",
-    "class": "org.bukkit.util.BoundingBox",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -45771,12 +45561,6 @@
     "id": "fbfe9a10b0afcbe9facc27278960ae31",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "clone",
-    "id": "fc15b634cf9c96753d089c6fbd1b645d",
-    "class": "org.bukkit.Location",
-    "return": "java.lang.Object"
   },
   {
     "static": true,
