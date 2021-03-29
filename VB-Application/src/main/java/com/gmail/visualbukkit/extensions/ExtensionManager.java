@@ -26,19 +26,11 @@ public class ExtensionManager {
 
     private static Path extensionsDir = VisualBukkitApp.getInstance().getDataDir().resolve("Extensions");
     private static Path installDir = extensionsDir.resolve("Install");
-    private static Path uninstallFile = extensionsDir.resolve("uninstall.txt");
     private static Map<VisualBukkitExtension, Path> extensions = new HashMap<>();
     private static ExtensionViewer extensionViewer = new ExtensionViewer();
 
-    public static void loadExtensions() throws Exception {
+    public static void loadExtensions() throws IOException {
         Files.createDirectories(extensionsDir);
-
-        if (Files.exists(uninstallFile)) {
-            for (String fileName : Files.readAllLines(uninstallFile)) {
-                Files.deleteIfExists(extensionsDir.resolve(fileName));
-            }
-            Files.delete(uninstallFile);
-        }
 
         Set<Path> installSet = new HashSet<>();
         if (Files.exists(installDir)) {
@@ -77,10 +69,14 @@ public class ExtensionManager {
         }
 
         for (Map.Entry<String, Path> entry : loadMap.entrySet()) {
-            URLClassLoader classLoader = new URLClassLoader(new URL[]{entry.getValue().toUri().toURL()});
-            Class<?> mainClass = Class.forName(entry.getKey(), true, classLoader);
-            if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
-                extensions.put((VisualBukkitExtension) mainClass.getConstructor().newInstance(), entry.getValue());
+            try (URLClassLoader classLoader = new URLClassLoader(new URL[]{entry.getValue().toUri().toURL()})) {
+                Class<?> mainClass = Class.forName(entry.getKey(), true, classLoader);
+                if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
+                    extensions.put((VisualBukkitExtension) mainClass.getConstructor().newInstance(), entry.getValue());
+                }
+            } catch (Exception e) {
+                NotificationManager.displayException("Failed to load extension: " + entry.getValue().getFileName() + "\nIt will be uninstalled.", e);
+                Files.delete(entry.getValue());
             }
         }
     }
@@ -125,12 +121,7 @@ public class ExtensionManager {
                             alert.showAndWait().ifPresent(buttonType -> {
                                 if (buttonType == ButtonType.OK) {
                                     try {
-                                        Files.createDirectories(extensionsDir);
-                                        if (Files.notExists(uninstallFile)) {
-                                            Files.createFile(uninstallFile);
-                                        }
-                                        Files.writeString(uninstallFile, extensions.get(k).getFileName().toString(), StandardOpenOption.APPEND);
-                                        extensions.remove(k);
+                                        Files.delete(extensions.remove(k));
                                         open();
                                         NotificationManager.displayMessage(VisualBukkitApp.getString("message.uninstalled_extension.title"), VisualBukkitApp.getString("message.uninstalled_extension.content"));
                                     } catch (IOException ex) {

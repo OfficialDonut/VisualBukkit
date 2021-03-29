@@ -125,24 +125,18 @@ public class VisualBukkitApp extends Application {
         splashScreen.show();
 
         Platform.runLater(() -> {
-            try {
-                ExtensionManager.loadExtensions();
-            } catch (Exception e) {
-                NotificationManager.displayException("Failed to load extensions", e);
-                Platform.exit();
-            }
-
             try (InputStream inputStream = VisualBukkitApp.class.getResourceAsStream("/GeneratedBlocks.json")) {
                 JSONArray blockArray = new JSONArray(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
                 BlockRegistry.register(blockArray, VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.GeneratedBlocks"));
                 BlockRegistry.register("com.gmail.visualbukkit.blocks.definitions", VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.CustomBlocks"));
-                statementSelector = new StatementSelector(BlockRegistry.getStatements());
+                ExtensionManager.loadExtensions();
             } catch (IOException e) {
                 NotificationManager.displayException("Failed to load blocks", e);
                 Platform.exit();
             }
 
             TypeHandler.registerResourceBundle(ResourceBundle.getBundle("lang.Types"));
+            statementSelector = new StatementSelector(BlockRegistry.getStatements());
 
             AutoSaver.getInstance().setTime(SettingsManager.getInstance().getAutosaveTime());
             scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
@@ -168,7 +162,7 @@ public class VisualBukkitApp extends Application {
             SettingsManager.getInstance().bindStyle(rootPane);
             splashScreen.close();
             primaryStage.show();
-            splitPane.setDividerPosition(0, 0.2);
+            splitPane.setDividerPosition(0, 0.25);
             NotificationManager.log("Finished loading.");
             ProjectManager.openLast();
             Platform.runLater(this::checkForUpdate);

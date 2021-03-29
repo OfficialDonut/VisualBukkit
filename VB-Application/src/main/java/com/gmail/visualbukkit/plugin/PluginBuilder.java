@@ -169,88 +169,20 @@ public class PluginBuilder {
     }
 
     private static String createPom(String artifactId, String version, BuildContext buildContext) {
-        String repositories = buildContext.getMavenRepositories().stream().map(s -> "<repository>\n" + s + "</repository>").collect(Collectors.joining("\n"));
-        String dependencies = buildContext.getMavenDependencies().stream().map(s -> "<dependency>\n" + s + "</dependency>").collect(Collectors.joining("\n"));
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n" +
-                "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-                "         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n" +
-                "    <modelVersion>4.0.0</modelVersion>\n" +
-                "\n" +
-                "    <groupId>vb</groupId>\n" +
-                "    <artifactId>" + artifactId + "</artifactId>\n" +
-                "    <version>" + version + "</version>\n" +
-                "\n" +
-                "    <properties>\n" +
-                "        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n" +
-                "        <maven.compiler.source>1.8</maven.compiler.source>\n" +
-                "        <maven.compiler.target>1.8</maven.compiler.target>\n" +
-                "    </properties>\n" +
-                "\n" +
-                "    <repositories>\n" +
-                "        <repository>\n" +
-                "            <id>spigot-repo</id>\n" +
-                "            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>\n" +
-                "        </repository>\n" +
-                "        <repository>\n" +
-                "           <id>jitpack.io</id>\n" +
-                "           <url>https://jitpack.io</url>\n" +
-                "        </repository>\n" +
-                repositories +
-                "    </repositories>\n" +
-                "\n" +
-                "    <dependencies>\n" +
-                (buildContext.getJarDependencies().isEmpty() ? "" : IntStream.rangeClosed(1, buildContext.getJarDependencies().size()).mapToObj(i ->
-                "        <dependency>\n" +
-                "            <groupId>com.gmail.visualbukkit</groupId>\n" +
-                "            <artifactId>depend-" + i + "</artifactId>\n" +
-                "            <version>0</version>\n" +
-                "            <scope>system</scope>\n" +
-                "            <systemPath>${pom.basedir}/depend/depend-" + i + ".jar</systemPath>\n" +
-                "        </dependency>\n\n").collect(Collectors.joining())) +
-                "        <dependency>\n" +
-                "            <groupId>org.spigotmc</groupId>\n" +
-                "            <artifactId>spigot-api</artifactId>\n" +
-                "            <version>1.16.5-R0.1-SNAPSHOT</version>\n" +
-                "            <scope>provided</scope>\n" +
-                "        </dependency>\n" +
-                dependencies +
-                "    </dependencies>\n" +
-                "\n" +
-                "    <build>\n" +
-                "        <plugins>\n" +
-                "            <plugin>\n" +
-                "                <artifactId>maven-compiler-plugin</artifactId>\n" +
-                "                <version>3.8.0</version>\n" +
-                "                <configuration>\n" +
-                "                    <compilerId>eclipse</compilerId>\n" +
-                "                </configuration>\n" +
-                "                <dependencies>\n" +
-                "                    <dependency>\n" +
-                "                        <groupId>org.codehaus.plexus</groupId>\n" +
-                "                        <artifactId>plexus-compiler-eclipse</artifactId>\n" +
-                "                        <version>2.8.8</version>\n" +
-                "                    </dependency>\n" +
-                "                </dependencies>\n" +
-                "            </plugin>\n" +
-                "\n" +
-                "            <plugin>\n" +
-                "                <groupId>org.apache.maven.plugins</groupId>\n" +
-                "                <artifactId>maven-shade-plugin</artifactId>\n" +
-                "                <version>3.2.1</version>\n" +
-                "                <executions>\n" +
-                "                    <execution>\n" +
-                "                        <phase>package</phase>\n" +
-                "                        <goals>\n" +
-                "                            <goal>shade</goal>\n" +
-                "                        </goals>\n" +
-                "                    </execution>\n" +
-                "                </executions>\n" +
-                "            </plugin>\n" +
-                "        </plugins>\n" +
-                "    </build>" +
-                "\n" +
-                "</project>";
+        return POM_STRING
+                .replace("{ARTIFACT_ID}", artifactId)
+                .replace("{VERSION}", version)
+                .replace("{REPOSITORIES}", buildContext.getMavenRepositories().stream().map(s -> "<repository>\n" + s + "</repository>").collect(Collectors.joining("\n")))
+                .replace("{DEPENDENCIES}",
+                        buildContext.getMavenDependencies().stream().map(s -> "<dependency>\n" + s + "</dependency>\n").collect(Collectors.joining()) +
+                        IntStream.rangeClosed(1, buildContext.getJarDependencies().size()).mapToObj(i ->
+                        "        <dependency>\n" +
+                        "            <groupId>com.gmail.visualbukkit</groupId>\n" +
+                        "            <artifactId>depend-" + i + "</artifactId>\n" +
+                        "            <version>0</version>\n" +
+                        "            <scope>system</scope>\n" +
+                        "            <systemPath>${pom.basedir}/depend/depend-" + i + ".jar</systemPath>\n" +
+                        "        </dependency>\n").collect(Collectors.joining()));
     }
 
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
@@ -304,4 +236,78 @@ public class PluginBuilder {
             }
         }));
     }
+
+    private static String POM_STRING =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n" +
+            "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+            "         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n" +
+            "    <modelVersion>4.0.0</modelVersion>\n" +
+            "\n" +
+            "    <groupId>vb</groupId>\n" +
+            "    <artifactId>{ARTIFACT_ID}</artifactId>\n" +
+            "    <version>{VERSION}</version>\n" +
+            "\n" +
+            "    <properties>\n" +
+            "        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n" +
+            "        <maven.compiler.source>1.8</maven.compiler.source>\n" +
+            "        <maven.compiler.target>1.8</maven.compiler.target>\n" +
+            "    </properties>\n" +
+            "\n" +
+            "    <repositories>\n" +
+            "        <repository>\n" +
+            "            <id>spigot-repo</id>\n" +
+            "            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>\n" +
+            "        </repository>\n" +
+            "        <repository>\n" +
+            "           <id>jitpack.io</id>\n" +
+            "           <url>https://jitpack.io</url>\n" +
+            "        </repository>\n" +
+            "{REPOSITORIES}" +
+            "    </repositories>\n" +
+            "\n" +
+            "    <dependencies>\n" +
+            "        <dependency>\n" +
+            "            <groupId>org.spigotmc</groupId>\n" +
+            "            <artifactId>spigot-api</artifactId>\n" +
+            "            <version>1.16.5-R0.1-SNAPSHOT</version>\n" +
+            "            <scope>provided</scope>\n" +
+            "        </dependency>\n" +
+            "{DEPENDENCIES}" +
+            "    </dependencies>\n" +
+            "\n" +
+            "    <build>\n" +
+            "        <plugins>\n" +
+            "            <plugin>\n" +
+            "                <artifactId>maven-compiler-plugin</artifactId>\n" +
+            "                <version>3.8.0</version>\n" +
+            "                <configuration>\n" +
+            "                    <compilerId>eclipse</compilerId>\n" +
+            "                </configuration>\n" +
+            "                <dependencies>\n" +
+            "                    <dependency>\n" +
+            "                        <groupId>org.codehaus.plexus</groupId>\n" +
+            "                        <artifactId>plexus-compiler-eclipse</artifactId>\n" +
+            "                        <version>2.8.8</version>\n" +
+            "                    </dependency>\n" +
+            "                </dependencies>\n" +
+            "            </plugin>\n" +
+            "\n" +
+            "            <plugin>\n" +
+            "                <groupId>org.apache.maven.plugins</groupId>\n" +
+            "                <artifactId>maven-shade-plugin</artifactId>\n" +
+            "                <version>3.2.1</version>\n" +
+            "                <executions>\n" +
+            "                    <execution>\n" +
+            "                        <phase>package</phase>\n" +
+            "                        <goals>\n" +
+            "                            <goal>shade</goal>\n" +
+            "                        </goals>\n" +
+            "                    </execution>\n" +
+            "                </executions>\n" +
+            "            </plugin>\n" +
+            "        </plugins>\n" +
+            "    </build>" +
+            "\n" +
+            "</project>";
 }

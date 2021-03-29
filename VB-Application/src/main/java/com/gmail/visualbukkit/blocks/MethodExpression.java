@@ -40,11 +40,10 @@ public class MethodExpression extends Expression {
     public Block createBlock() {
         return new Block(this, parameterTypes.stream().map(ExpressionParameter::new).toArray(ExpressionParameter[]::new)) {
             @Override
-            @SuppressWarnings("unchecked")
             public void update() {
                 super.update();
                 if (Event.class.isAssignableFrom(clazz)) {
-                    checkForEvent((Class<? extends Event>) clazz);
+                    checkForEvent(clazz);
                 }
             }
 
