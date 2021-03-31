@@ -33,6 +33,8 @@ public class Driver {
                 generator.setCategory(line.substring(line.indexOf(' ') + 1));
             } else if (line.startsWith("#plugin-module ")) {
                 generator.setPluginModule(line.substring(line.indexOf(' ') + 1));
+            } else if (line.equals("include-deprecated")) {
+                generator.setIncludeDeprecated(true);
             } else if (line.equals("#reset")) {
                 generator.reset();
             } else if (line.equals("#class") || line.equals("#package") || line.equals("#alias") || line.equals("#blacklist")) {
@@ -47,10 +49,10 @@ public class Driver {
                     }
                     if (isClass) {
                         System.out.println("Generating blocks for class: " + line);
-                        generator.generate(Class.forName(line));
+                        generator.generateClass(Class.forName(line));
                     } else if (isPackage) {
                         System.out.println("Generating blocks for package: " + line);
-                        generator.generate(line);
+                        generator.generatePackage(line);
                     } else if (isAlias) {
                         String[] arr = line.split("=");
                         generator.addAlias(Class.forName(arr[0]), arr[1]);
@@ -77,8 +79,11 @@ public class Driver {
         System.out.println("\t#plugin-module <module name>");
         System.out.println("\t\tThe plugin module required for the blocks");
         System.out.println();
+        System.out.println("\t#include-deprecated");
+        System.out.println("\t\tGenerate blocks for deprecated classes/methods");
+        System.out.println();
         System.out.println("\t#reset");
-        System.out.println("\t\tReset the values of #category, #plugin-module");
+        System.out.println("\t\tReset the values of #category, #plugin-module, #include-deprecated");
         System.out.println();
         System.out.println("\t#alias");
         System.out.println("\t<name.of.Class1=Class1 Alias>");

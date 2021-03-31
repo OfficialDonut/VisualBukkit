@@ -1,11 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 
 public class ExprLoopValue extends Expression {
 
     public ExprLoopValue() {
-        super("expr-loop-value", int.class);
+        super("expr-loop-value", ClassInfo.OBJECT);
     }
 
     @Override

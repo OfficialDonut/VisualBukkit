@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
@@ -14,7 +15,7 @@ public class ExprSimpleLocalVariable extends Expression {
     protected static final Pattern VAR_PATTERN = Pattern.compile("\\$[a-z0-9]{32}");
 
     public ExprSimpleLocalVariable() {
-        super("expr-simple-local-variable", Object.class);
+        super("expr-simple-local-variable", ClassInfo.OBJECT);
     }
 
     @Override

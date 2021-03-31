@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
@@ -13,7 +14,7 @@ public class StatInitializeDatabase extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(String.class), new ExpressionParameter(String.class), new ExpressionParameter(String.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.entity.Player;
 
 public class ExprGUIPlayer extends Expression {
 
     public ExprGUIPlayer() {
-        super("expr-gui-player", Player.class);
+        super("expr-gui-player", ClassInfo.of("org.bukkit.entity.Player"));
     }
 
     @Override

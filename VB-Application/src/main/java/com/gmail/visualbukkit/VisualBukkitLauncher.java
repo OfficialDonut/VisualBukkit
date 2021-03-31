@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit;
 
 import javafx.application.Application;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.swing.*;
 

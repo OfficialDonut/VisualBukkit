@@ -1,12 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 
-public class ExprBoolean extends Expression {
+public class ExprNewBoolean extends Expression {
 
-    public ExprBoolean() {
-        super("expr-boolean", boolean.class);
+    public ExprNewBoolean() {
+        super("expr-new-boolean", ClassInfo.BOOLEAN);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.gmail.visualbukkit.extensions.vault;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.plugin.BuildContext;
-import net.milkbowl.vault.permission.Permission;
 
 public class ExprVaultPermission extends Expression {
 
     public ExprVaultPermission() {
-        super("expr-vault-permission", Permission.class);
+        super("expr-vault-permission", ClassInfo.of("net.milkbowl.vault.permission.Permission"));
     }
 
     @Override

@@ -13,18 +13,16 @@ import java.util.StringJoiner;
 
 public class ConstructorExpression extends Expression {
 
-    private Class<?> clazz;
-    private PluginModule pluginModule;
-    private List<Class<?>> parameterTypes = new ArrayList<>();
+    private JSONObject json;
+    private List<ClassInfo> parameterTypes = new ArrayList<>();
 
     public ConstructorExpression(JSONObject json) {
-        super(json.getString("id"), BlockRegistry.getClass(json.getString("class")));
-        clazz = BlockRegistry.getClass(json.getString("class"));
-        pluginModule = PluginModule.get(json.optString("plugin-module"));
+        super(json.getString("id"), ClassInfo.of(json.getString("class")));
+        this.json = json;
         JSONArray parameterArray = json.optJSONArray("parameters");
         if (parameterArray != null) {
             for (Object obj : parameterArray) {
-                parameterTypes.add(BlockRegistry.getClass((String) obj));
+                parameterTypes.add(ClassInfo.of((String) obj));
             }
         }
     }
@@ -35,6 +33,7 @@ public class ConstructorExpression extends Expression {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
+                PluginModule pluginModule = PluginModule.get(json.optString("plugin-module"));
                 if (pluginModule != null) {
                     buildContext.addPluginModule(pluginModule);
                 }
@@ -46,7 +45,7 @@ public class ConstructorExpression extends Expression {
                 for (BlockParameter parameter : getParameters()) {
                     parameterJoiner.add(parameter.toJava());
                 }
-                return "new " + clazz.getCanonicalName() + "(" + parameterJoiner + ")";
+                return "new " + ClassInfo.of(json.getString("class")).getCanonicalClassName() + "(" + parameterJoiner + ")";
             }
         };
     }

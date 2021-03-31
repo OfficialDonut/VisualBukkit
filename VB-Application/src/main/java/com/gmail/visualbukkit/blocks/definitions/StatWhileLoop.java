@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Container;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
@@ -13,7 +14,7 @@ public class StatWhileLoop extends Container {
 
     @Override
     public Statement.Block createBlock() {
-        return new Block(this, new ExpressionParameter(boolean.class), new ChoiceParameter("false", "true")) {
+        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ChoiceParameter("false", "true")) {
             @Override
             public String toJava() {
                 return arg(1).equals("false") ?

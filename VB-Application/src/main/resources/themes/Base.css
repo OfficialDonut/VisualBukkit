@@ -59,11 +59,12 @@
 }
 
 .code-block-header {
+    -fx-alignment: center-left;
     -fx-font-family: "JetBrains Mono";
 }
 
 .combo-box {
-    -fx-pref-width: 125;
+    -fx-pref-width: 150;
 }
 
 .combo-box > .arrow-button {
@@ -176,7 +177,7 @@
 }
 
 .popover {
-    -fx-pref-width: 400;
+    -fx-pref-width: 500;
 }
 
 .popover .hbox {

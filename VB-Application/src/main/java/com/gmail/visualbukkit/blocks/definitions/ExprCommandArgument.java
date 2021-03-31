@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
@@ -7,12 +8,12 @@ import com.gmail.visualbukkit.plugin.BuildContext;
 public class ExprCommandArgument extends Expression {
 
     public ExprCommandArgument() {
-        super("expr-command-argument", String.class);
+        super("expr-command-argument", ClassInfo.STRING);
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(int.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
             @Override
             public void update() {
                 super.update();

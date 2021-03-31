@@ -1,17 +1,18 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
 public class ExprFunctionArgument extends Expression {
 
     public ExprFunctionArgument() {
-        super("expr-function-argument", Object.class);
+        super("expr-function-argument", ClassInfo.OBJECT);
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(int.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
             @Override
             public void update() {
                 super.update();

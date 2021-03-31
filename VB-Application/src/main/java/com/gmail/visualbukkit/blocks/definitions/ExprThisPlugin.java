@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class ExprThisPlugin extends Expression {
 
     public ExprThisPlugin() {
-        super("expr-this-plugin", JavaPlugin.class);
+        super("expr-this-plugin", ClassInfo.of("org.bukkit.plugin.java.JavaPlugin"));
     }
 
     @Override

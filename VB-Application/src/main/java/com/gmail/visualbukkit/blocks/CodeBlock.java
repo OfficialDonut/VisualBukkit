@@ -85,8 +85,12 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     }
 
     public void addParameterLines(BlockParameter... parameters) {
+        addParameterLines(definition.getParameterNames(), parameters);
+    }
+
+    public void addParameterLines(String[] parameterNames, BlockParameter[] parameters) {
         for (int i = 0; i < parameters.length; i++) {
-            addParameterLine(definition.getParameterNames()[i], parameters[i]);
+            addParameterLine(parameterNames[i], parameters[i]);
         }
     }
 
@@ -132,10 +136,10 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         }
     }
 
-    protected void checkForEvent(Class<?> clazz) {
+    protected void checkForEvent(ClassInfo event) {
         PluginComponent.Block block = getPluginComponentBlock();
-        if (!(block instanceof CompEventListener.EventBlock) || !clazz.isAssignableFrom(((CompEventListener.EventBlock) block).getEvent())) {
-            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), clazz.getSimpleName()));
+        if (!(block instanceof CompEventListener.EventBlock) || !event.equals(((CompEventListener.EventBlock) block).getEvent())) {
+            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), event.getDisplayClassName()));
         }
     }
 

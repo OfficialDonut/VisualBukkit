@@ -1,38 +1,27 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FieldExpression extends Expression {
 
-    private Class<?> clazz;
-    private String field;
-    private boolean isStatic;
-    private PluginModule pluginModule;
-    private List<Class<?>> parameterTypes = new ArrayList<>();
+    private JSONObject json;
 
     public FieldExpression(JSONObject json) {
-        super(json.getString("id"), BlockRegistry.getClass(json.getString("return")));
-        clazz = BlockRegistry.getClass(json.getString("class"));
-        field = json.getString("field");
-        pluginModule = PluginModule.get(json.optString("plugin-module"));
-        isStatic = json.optBoolean("static");
-        if (!isStatic) {
-            parameterTypes.add(clazz);
-        }
+        super(json.getString("id"), ClassInfo.of(json.getString("return")).isArrayOrCollection() ? ClassInfo.of(List.class) : ClassInfo.of(json.getString("return")));
+        this.json = json;
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, parameterTypes.stream().map(ExpressionParameter::new).toArray(ExpressionParameter[]::new)) {
+        return new Block(this) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
+                PluginModule pluginModule = PluginModule.get(json.optString("plugin-module"));
                 if (pluginModule != null) {
                     buildContext.addPluginModule(pluginModule);
                 }
@@ -40,8 +29,9 @@ public class FieldExpression extends Expression {
 
             @Override
             public String toJava() {
-                String java = (isStatic ? clazz.getCanonicalName() : arg(0)) + "." + field;
-                return TypeHandler.isCollection(getReturnType()) && !List.class.isAssignableFrom(getReturnType()) ? "PluginMain.createList(" + java + ")" : java;
+                String java = (json.optBoolean("static") ? ClassInfo.of(json.getString("class")).getCanonicalClassName() : arg(0)) + "." + json.getString("field");
+                ClassInfo classInfo = ClassInfo.of(json.getString("return"));
+                return classInfo.isArrayOrCollection() && (classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz())) ? "PluginMain.createList(" + java + ")" : java;
             }
         };
     }

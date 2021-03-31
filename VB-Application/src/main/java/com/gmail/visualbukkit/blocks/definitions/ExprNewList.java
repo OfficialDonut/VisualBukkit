@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -9,13 +10,12 @@ import javafx.scene.Node;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.StringJoiner;
 
 public class ExprNewList extends Expression {
 
     public ExprNewList() {
-        super("expr-new-list", List.class);
+        super("expr-new-list", ClassInfo.LIST);
     }
 
     @Override
@@ -25,13 +25,13 @@ public class ExprNewList extends Expression {
             public String toJava() {
                 int size = getParameters().size();
                 if (size == 0) {
-                    return "new ArrayList()";
+                    return "new ArrayList<>()";
                 }
                 StringJoiner joiner = new StringJoiner(",");
                 for (BlockParameter parameter : getParameters()) {
                     joiner.add(parameter.toJava());
                 }
-                return "new ArrayList(Arrays.asList(" + joiner + "))";
+                return "new ArrayList<>(Arrays.asList(" + joiner + "))";
             }
         };
 
@@ -59,7 +59,7 @@ public class ExprNewList extends Expression {
     private void increaseSize(Block block) {
         int size = block.getParameters().size();
         if (size < 10) {
-            block.addParameterLine(size + ")", new ExpressionParameter(Object.class));
+            block.addParameterLine(size + ")", new ExpressionParameter(ClassInfo.OBJECT));
         }
     }
 

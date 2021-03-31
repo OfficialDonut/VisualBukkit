@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.inventory.ItemStack;
 
 public class ExprGUIClickedItem extends Expression {
 
     public ExprGUIClickedItem() {
-        super("expr-gui-clicked-item", ItemStack.class);
+        super("expr-gui-clicked-item", ClassInfo.of("org.bukkit.inventory.ItemStack"));
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
-import org.bukkit.event.Event;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,25 +12,16 @@ import java.util.StringJoiner;
 
 public class MethodExpression extends Expression {
 
-    private Class<?> clazz;
-    private String method;
-    private boolean isStatic;
-    private PluginModule pluginModule;
-    private List<Class<?>> parameterTypes = new ArrayList<>();
+    private JSONObject json;
+    private List<ClassInfo> parameterTypes = new ArrayList<>();
 
     public MethodExpression(JSONObject json) {
-        super(json.getString("id"), BlockRegistry.getClass(json.getString("return")));
-        clazz = BlockRegistry.getClass(json.getString("class"));
-        method = json.getString("method");
-        pluginModule = PluginModule.get(json.optString("plugin-module"));
-        isStatic = json.optBoolean("static");
-        if (!isStatic && !Event.class.isAssignableFrom(clazz)) {
-            parameterTypes.add(clazz);
-        }
+        super(json.getString("id"), ClassInfo.of(json.getString("return")).isArrayOrCollection() ? ClassInfo.of(List.class) : ClassInfo.of(json.getString("return")));
+        this.json = json;
         JSONArray parameterArray = json.optJSONArray("parameters");
         if (parameterArray != null) {
             for (Object obj : parameterArray) {
-                parameterTypes.add(BlockRegistry.getClass((String) obj));
+                parameterTypes.add(ClassInfo.of((String) obj));
             }
         }
     }
@@ -42,14 +32,15 @@ public class MethodExpression extends Expression {
             @Override
             public void update() {
                 super.update();
-                if (Event.class.isAssignableFrom(clazz)) {
-                    checkForEvent(clazz);
+                if (json.optBoolean("event-method")) {
+                    checkForEvent(ClassInfo.of(json.getString("class")));
                 }
             }
 
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
+                PluginModule pluginModule = PluginModule.get(json.optString("plugin-module"));
                 if (pluginModule != null) {
                     buildContext.addPluginModule(pluginModule);
                 }
@@ -58,19 +49,20 @@ public class MethodExpression extends Expression {
             @Override
             public String toJava() {
                 StringJoiner parameterJoiner = new StringJoiner(",");
-                for (int i = isStatic || Event.class.isAssignableFrom(clazz) ? 0 : 1; i < parameterTypes.size(); i++) {
+                for (int i = json.optBoolean("static") || json.optBoolean("event-method") ? 0 : 1; i < parameterTypes.size(); i++) {
                     parameterJoiner.add(arg(i));
                 }
                 String java;
-                if (isStatic) {
-                    java = clazz.getCanonicalName();
-                } else if (Event.class.isAssignableFrom(clazz)) {
+                if (json.optBoolean("static")) {
+                    java = ClassInfo.of(json.getString("class")).getCanonicalClassName();
+                } else if (json.optBoolean("event-method")) {
                     java = "event";
                 } else {
                     java = arg(0);
                 }
-                java += "." + method + "(" + parameterJoiner + ")";
-                return TypeHandler.isCollection(getReturnType()) && !List.class.isAssignableFrom(getReturnType()) ? "PluginMain.createList(" + java + ")" : java;
+                java += "." + json.getString("method") + "(" + parameterJoiner + ")";
+                ClassInfo classInfo = ClassInfo.of(json.getString("return"));
+                return classInfo.isArrayOrCollection() && (classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz())) ? "PluginMain.createList(" + java + ")" : java;
             }
         };
     }

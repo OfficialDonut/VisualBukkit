@@ -1,12 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 
-public class ExprString extends Expression {
+public class ExprNewString extends Expression {
 
-    public ExprString() {
-        super("expr-string", String.class);
+    public ExprNewString() {
+        super("expr-new-string", ClassInfo.STRING);
     }
 
     @Override

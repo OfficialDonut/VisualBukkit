@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
@@ -13,7 +14,7 @@ public class StatSetSQLParameter extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(PreparedStatement.class), new ExpressionParameter(int.class), new ExpressionParameter(Object.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of(PreparedStatement.class)), new ExpressionParameter(ClassInfo.INT), new ExpressionParameter(ClassInfo.OBJECT)) {
             @Override
             public void update() {
                 super.update();

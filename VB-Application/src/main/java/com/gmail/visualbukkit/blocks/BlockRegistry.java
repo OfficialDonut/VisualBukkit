@@ -11,7 +11,6 @@ import java.util.*;
 
 public class BlockRegistry {
 
-    private final static Map<String, Class<?>> classCache = new HashMap<>();
     private final static Map<String, PluginComponent> pluginComponentMap = new HashMap<>();
     private final static Map<String, Statement> statementMap = new HashMap<>();
     private final static Map<String, Expression> expressionMap = new HashMap<>();
@@ -19,11 +18,9 @@ public class BlockRegistry {
     private final static Set<Statement> statements = new TreeSet<>();
     private final static Set<Expression> expressions = new TreeSet<>();
 
-    private static ClassLoader currentClassLoader;
     private static ResourceBundle currentResourceBundle;
 
-    public static void register(JSONArray array, ClassLoader classLoader, ResourceBundle resourceBundle) {
-        currentClassLoader = classLoader;
+    public static void register(JSONArray array, ResourceBundle resourceBundle) {
         currentResourceBundle = resourceBundle;
         for (Object obj : array) {
             if (obj instanceof JSONObject) {
@@ -47,7 +44,6 @@ public class BlockRegistry {
 
     @SuppressWarnings("UnstableApiUsage")
     public static void register(String packageName, ClassLoader classLoader, ResourceBundle resourceBundle) {
-        currentClassLoader = classLoader;
         currentResourceBundle = resourceBundle;
         try {
             for (ClassPath.ClassInfo classInfo : ClassPath.from(classLoader).getTopLevelClasses(packageName)) {
@@ -71,27 +67,6 @@ public class BlockRegistry {
         } else if (definition instanceof Expression) {
             expressionMap.put(definition.getID(), (Expression) definition);
             expressions.add((Expression) definition);
-        }
-    }
-
-    public static Class<?> getClass(String className) {
-        switch (className) {
-            case "boolean": return boolean.class;
-            case "byte": return byte.class;
-            case "char": return char.class;
-            case "double": return double.class;
-            case "float": return float.class;
-            case "int": return int.class;
-            case "long": return long.class;
-            case "short": return short.class;
-            default:
-                return classCache.computeIfAbsent(className, k -> {
-                    try {
-                        return Class.forName(k, false, currentClassLoader);
-                    } catch (Exception e) {
-                        throw new IllegalStateException();
-                    }
-                });
         }
     }
 

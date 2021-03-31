@@ -1,6 +1,7 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.TypeHandler;
 import com.gmail.visualbukkit.blocks.UndoManager;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
@@ -30,7 +31,7 @@ import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.json.JSONArray;
 
 import java.awt.*;
@@ -126,17 +127,16 @@ public class VisualBukkitApp extends Application {
 
         Platform.runLater(() -> {
             try (InputStream inputStream = VisualBukkitApp.class.getResourceAsStream("/GeneratedBlocks.json")) {
+                TypeHandler.registerClassNames(ResourceBundle.getBundle("lang.Types"));
                 JSONArray blockArray = new JSONArray(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-                BlockRegistry.register(blockArray, VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.GeneratedBlocks"));
+                BlockRegistry.register(blockArray, ResourceBundle.getBundle("lang.GeneratedBlocks"));
                 BlockRegistry.register("com.gmail.visualbukkit.blocks.definitions", VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.CustomBlocks"));
                 ExtensionManager.loadExtensions();
+                statementSelector = new StatementSelector(BlockRegistry.getStatements());
             } catch (IOException e) {
                 NotificationManager.displayException("Failed to load blocks", e);
                 Platform.exit();
             }
-
-            TypeHandler.registerResourceBundle(ResourceBundle.getBundle("lang.Types"));
-            statementSelector = new StatementSelector(BlockRegistry.getStatements());
 
             AutoSaver.getInstance().setTime(SettingsManager.getInstance().getAutosaveTime());
             scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {

@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.inventory.InventoryView;
 
 public class ExprGUIClickedInventoryView extends Expression {
 
     public ExprGUIClickedInventoryView() {
-        super("expr-gui-clicked-inventory-view", InventoryView.class);
+        super("expr-gui-clicked-inventory-view", ClassInfo.of("org.bukkit.inventory.InventoryView"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.extensions.bstats;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
@@ -12,7 +13,7 @@ public class StatConnectBstats extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(int.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
 
             @Override
             public void prepareBuild(BuildContext buildContext) {

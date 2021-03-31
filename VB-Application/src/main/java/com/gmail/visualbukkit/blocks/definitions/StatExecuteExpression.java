@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
@@ -11,10 +12,10 @@ public class StatExecuteExpression extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(Object.class)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.OBJECT)) {
             @Override
             public String toJava() {
-                return arg(0) + ";";
+                return "Object " + ExprSimpleLocalVariable.getRandomVariable() + " = " + arg(0) + ";";
             }
         };
     }

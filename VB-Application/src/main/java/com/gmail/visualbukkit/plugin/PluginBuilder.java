@@ -8,8 +8,8 @@ import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.maven.shared.invoker.*;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
@@ -84,7 +84,7 @@ public class PluginBuilder {
             Path buildDir = project.getBuildDir();
             Path mainDir = buildDir.resolve("src").resolve("main");
             Path packageDir = mainDir.resolve("java").resolve("vb").resolve("$" + name.toLowerCase());
-            Path resourcesDir = mainDir.resolve("resources");;
+            Path resourcesDir = mainDir.resolve("resources");
 
             try {
                 System.out.println("Generating build directory...");

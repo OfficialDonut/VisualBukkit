@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
@@ -16,7 +17,7 @@ public class CompCreateGUI extends PluginComponent {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new StringLiteralParameter(), new ExpressionParameter(String.class), new ExpressionParameter(int.class)) {
+        return new Block(this, new StringLiteralParameter(), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.INT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.gui.StyleableHBox;
@@ -16,8 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
-import org.bukkit.event.Event;
-import org.bukkit.event.EventPriority;
+import org.apache.commons.lang3.ClassUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
@@ -26,8 +26,8 @@ import java.util.function.Predicate;
 
 public class CompEventListener extends PluginComponent {
 
-    private static String[] priorities = Arrays.stream(EventPriority.values()).map(Enum::name).sorted().toArray(String[]::new);
-    private static Map<String, Class<? extends Event>> events = new HashMap<>();
+    private static String[] priorities = {"HIGH", "HIGHEST", "LOW", "LOWEST", "MONITOR", "NORMAL"};
+    private static Map<String, ClassInfo> events = new HashMap<>();
     private static Map<String, String> eventCategories = new HashMap<>();
     private static Map<String, PluginModule> eventModules = new HashMap<>();
     private static Set<String> eventNames = new TreeSet<>();
@@ -36,22 +36,21 @@ public class CompEventListener extends PluginComponent {
         super("comp-event-listener");
     }
 
-    @SuppressWarnings("unchecked")
     public static void registerEvent(JSONObject json) {
-        Class<? extends Event> event = (Class<? extends Event>) BlockRegistry.getClass(json.getString("event"));
+        ClassInfo event = ClassInfo.of(json.getString("event"));
         String category = BlockRegistry.getString(json.getString("id"), "category", null);
         PluginModule module = PluginModule.get(json.optString("plugin-module"));
         registerEvent(event, category, module);
     }
 
-    public static void registerEvent(Class<? extends Event> event, String category, PluginModule module) {
-        events.put(event.getSimpleName(), event);
-        eventNames.add(event.getSimpleName());
+    public static void registerEvent(ClassInfo event, String category, PluginModule module) {
+        events.put(event.getDisplayClassName(), event);
+        eventNames.add(event.getDisplayClassName());
         if (category != null) {
-            eventCategories.put(event.getSimpleName(), category);
+            eventCategories.put(event.getDisplayClassName(), category);
         }
         if (module != null) {
-            eventModules.put(event.getSimpleName(), module);
+            eventModules.put(event.getDisplayClassName(), module);
         }
     }
 
@@ -126,13 +125,13 @@ public class CompEventListener extends PluginComponent {
             buildContext.getMetaData().increment("event-number");
             buildContext.getMainClass().addMethod(
                     "@EventHandler(priority=EventPriority." + arg(1) + ")" +
-                    "public void on" + event + buildContext.getMetaData().getInt("event-number") + "(" + getEvent().getCanonicalName() + " event) throws Exception {" +
+                    "public void on" + event + buildContext.getMetaData().getInt("event-number") + "(" + getEvent().getCanonicalClassName() + " event) throws Exception {" +
                     buildContext.getLocalVariableDeclarations() +
                     getChildJava() +
                     "}");
         }
 
-        public Class<? extends Event> getEvent() {
+        public ClassInfo getEvent() {
             return events.get(arg(0));
         }
     }

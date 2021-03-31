@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
@@ -16,7 +17,7 @@ public class StatAddToSimpleVariable extends Statement {
         InputParameter inputParameter = new InputParameter();
         inputParameter.getStyleClass().add("simple-local-variable");
 
-        return new Block(this, inputParameter, new ExpressionParameter(double.class)) {
+        return new Block(this, inputParameter, new ExpressionParameter(ClassInfo.DOUBLE)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

@@ -17,11 +17,11 @@ public class VaultExtension extends VisualBukkitExtension {
 
     public VaultExtension() throws IOException {
         PluginModule.register("Vault", VAULT_MODULE);
-        TypeHandler.registerResourceBundle(ResourceBundle.getBundle("VaultTypes"));
+        TypeHandler.registerClassNames(ResourceBundle.getBundle("VaultTypes"));
         BlockRegistry.register("com.gmail.visualbukkit.extensions.vault", VaultExtension.class.getClassLoader(), ResourceBundle.getBundle("VaultCustomBlocks"));
         try (InputStream inputStream = VaultExtension.class.getResourceAsStream("/VaultGeneratedBlocks.json")) {
             JSONArray jsonArray = new JSONArray(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-            BlockRegistry.register(jsonArray, VaultExtension.class.getClassLoader(), ResourceBundle.getBundle("VaultGeneratedBlocks"));
+            BlockRegistry.register(jsonArray, ResourceBundle.getBundle("VaultGeneratedBlocks"));
         }
     }
 

@@ -1,13 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-
-import java.util.List;
 
 public class ExprFunctionArguments extends Expression {
 
     public ExprFunctionArguments() {
-        super("expr-function-arguments", List.class);
+        super("expr-function-arguments", ClassInfo.LIST);
     }
 
     @Override

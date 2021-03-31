@@ -21,16 +21,16 @@ import java.util.function.Predicate;
 
 public class ExpressionParameter extends VBox implements BlockParameter {
 
-    private static Map<Class<?>, PopOver> expressionSelectors = new HashMap<>();
+    private static Map<ClassInfo, PopOver> expressionSelectors = new HashMap<>();
     private static ExpressionParameter currentExpressionParameter;
 
-    private Class<?> type;
+    private ClassInfo type;
     private Expression.Block expression;
     private Button button;
 
-    public ExpressionParameter(Class<?> type) {
+    public ExpressionParameter(ClassInfo type) {
         this.type = type;
-        button = new Button("<" + TypeHandler.getUserFriendlyName(type) + ">");
+        button = new Button("<" + type.getDisplayClassName() + ">");
 
         getChildren().add(button);
         getStyleClass().add("expression-parameter");
@@ -39,14 +39,14 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             ObservableList<Expression> expressions = FXCollections.observableArrayList();
             TreeSet<String> categories = new TreeSet<>();
 
+            int i = 0;
             for (Expression expr : BlockRegistry.getExpressions()) {
-                if (TypeHandler.canConvert(expr.getReturnType(), type)) {
-                    expressions.add(expr);
-                    if (expr.getCategory() != null) {
-                        categories.add(expr.getCategory());
-                    }
+                expressions.add(expr.getReturnType().getDisplayClassName().equals(type.getDisplayClassName()) ? i++ : expressions.size(), expr);
+                if (expr.getCategory() != null) {
+                    categories.add(expr.getCategory());
                 }
             }
+            expressions.add(i, new ListSeparatorExpression());
 
             FilteredList<Expression> expressionList = new FilteredList<>(expressions);
             ListView<Expression> listView = new ListView<>(expressionList);
@@ -57,8 +57,9 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             categoryBox.getItems().addAll(categories);
 
             Predicate<Expression> filter = expr ->
-                    expr.getTitle().toLowerCase().contains(searchField.getText().toLowerCase())
-                    && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(expr.getCategory()));
+                    expr instanceof ListSeparatorExpression ||
+                    (expr.toString().toLowerCase().contains(searchField.getText().toLowerCase())
+                    && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(expr.getCategory())));
 
             searchField.textProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));
             categoryBox.valueProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));
@@ -74,7 +75,9 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             listView.setPlaceholder(new Label(VisualBukkitApp.getString("label.empty_list")));
             listView.getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
                 if (newValue != null && currentExpressionParameter != null) {
-                    UndoManager.run(currentExpressionParameter.setExpression(newValue.createBlock()));
+                    if (!(newValue instanceof ListSeparatorExpression)) {
+                        UndoManager.run(currentExpressionParameter.setExpression(newValue.createBlock()));
+                    }
                     popOver.hide();
                 }
             });
@@ -95,21 +98,21 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         ContextMenu contextMenu = new ContextMenu();
         button.setContextMenu(contextMenu);
 
-        if (type == boolean.class) {
+        if (type.getClazz() == boolean.class) {
             MenuItem booleanItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_boolean"));
             MenuItem equalsItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_equals"));
             contextMenu.getItems().addAll(booleanItem, equalsItem);
             booleanItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean").createBlock())));
             equalsItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-is-equal").createBlock())));
-        } else if (type == String.class) {
+        } else if (type.getClazz() == String.class) {
             MenuItem stringItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_string"));
             contextMenu.getItems().add(stringItem);
             stringItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-string").createBlock())));
-        } else if (type == List.class) {
+        } else if (type.getClazz() == List.class) {
             MenuItem newListItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_list"));
             contextMenu.getItems().add(newListItem);
             newListItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-list").createBlock())));
-        } else if (TypeHandler.isNumber(type)) {
+        } else if (type.isNumber()) {
             MenuItem numberItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_number"));
             contextMenu.getItems().add(numberItem);
             numberItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-number").createBlock())));
@@ -122,7 +125,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
         contextMenu.setOnShowing(e -> {
             selector.hide();
-            pasteItem.setDisable(!(CopyPasteManager.peek() instanceof Expression) || !TypeHandler.canConvert(((Expression) CopyPasteManager.peek()).getReturnType(), type));
+            pasteItem.setDisable(!(CopyPasteManager.peek() instanceof Expression));
         });
     }
 
@@ -182,9 +185,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
     @Override
     public String toJava() {
-        return expression != null ?
-                TypeHandler.convert(expression.getDefinition().getReturnType(), type, expression.toJava()) :
-                "((" + type.getCanonicalName() + ")" + (type.isPrimitive() ? "(Object) null" : "null") + ")";
+        return expression != null ? expression.getDefinition().getReturnType().convert(expression.toJava(), type) : ClassInfo.VOID.convert("null", type);
     }
 
     @Override
@@ -203,11 +204,28 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         }
     }
 
-    public Class<?> getType() {
+    public ClassInfo getType() {
         return type;
     }
 
     public Expression.Block getExpression() {
         return expression;
+    }
+
+    private static class ListSeparatorExpression extends Expression {
+
+        public ListSeparatorExpression() {
+            super(null, null);
+        }
+
+        @Override
+        public Block createBlock() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public String toString() {
+            return "==================================================";
+        }
     }
 }

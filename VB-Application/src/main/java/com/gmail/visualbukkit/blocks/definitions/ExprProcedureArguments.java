@@ -1,13 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-
-import java.util.List;
 
 public class ExprProcedureArguments extends Expression {
 
     public ExprProcedureArguments() {
-        super("expr-procedure-arguments", List.class);
+        super("expr-procedure-arguments", ClassInfo.LIST);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 
@@ -10,7 +11,7 @@ public class ExprNumber extends Expression {
     private static final Pattern NUM_PATTERN = Pattern.compile("-?\\d*\\.?\\d*");
 
     public ExprNumber() {
-        super("expr-number", double.class);
+        super("expr-number", ClassInfo.DOUBLE);
     }
 
     @Override

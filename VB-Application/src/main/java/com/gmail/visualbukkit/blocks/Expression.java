@@ -15,14 +15,14 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
 
     private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
 
-    private final Class<?> returnType;
+    private final ClassInfo returnType;
 
-    public Expression(String id, Class<?> returnType) {
+    public Expression(String id, ClassInfo returnType) {
         super(id);
         this.returnType = returnType;
     }
 
-    public final Class<?> getReturnType() {
+    public final ClassInfo getReturnType() {
         return returnType;
     }
 
@@ -100,6 +100,6 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
 
     @Override
     public String toString() {
-        return super.toString() + " → (" + TypeHandler.getUserFriendlyName(returnType) + ")";
+        return super.toString() + " → (" + returnType.getDisplayClassName() + ")";
     }
 }

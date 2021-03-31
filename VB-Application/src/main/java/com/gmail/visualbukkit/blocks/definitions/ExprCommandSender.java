@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.command.CommandSender;
 
 public class ExprCommandSender extends Expression {
 
     public ExprCommandSender() {
-        super("expr-command-sender", CommandSender.class);
+        super("expr-command-sender", ClassInfo.of("org.bukkit.command.CommandSender"));
     }
 
     @Override

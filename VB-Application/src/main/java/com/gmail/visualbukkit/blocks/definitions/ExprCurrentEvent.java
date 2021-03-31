@@ -1,12 +1,12 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import org.bukkit.event.Event;
 
 public class ExprCurrentEvent extends Expression {
 
     public ExprCurrentEvent() {
-        super("expr-current-event", Event.class);
+        super("expr-current-event", ClassInfo.of("org.bukkit.event.Event"));
     }
 
     @Override

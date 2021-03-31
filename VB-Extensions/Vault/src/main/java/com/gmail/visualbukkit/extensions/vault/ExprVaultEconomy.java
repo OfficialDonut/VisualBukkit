@@ -1,13 +1,13 @@
 package com.gmail.visualbukkit.extensions.vault;
 
+import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.plugin.BuildContext;
-import net.milkbowl.vault.economy.Economy;
 
 public class ExprVaultEconomy extends Expression {
 
     public ExprVaultEconomy() {
-        super("expr-vault-economy", Economy.class);
+        super("expr-vault-economy", ClassInfo.of("net.milkbowl.vault.economy.Economy"));
     }
 
     @Override
