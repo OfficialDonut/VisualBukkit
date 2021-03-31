@@ -4,10 +4,10 @@ import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 
-public class ExprNewBoolean extends Expression {
+public class ExprBoolean extends Expression {
 
-    public ExprNewBoolean() {
-        super("expr-new-boolean", ClassInfo.BOOLEAN);
+    public ExprBoolean() {
+        super("expr-boolean", ClassInfo.BOOLEAN);
     }
 
     @Override

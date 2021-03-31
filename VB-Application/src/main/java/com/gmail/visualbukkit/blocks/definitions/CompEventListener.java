@@ -17,7 +17,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
-import org.apache.commons.lang3.ClassUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 

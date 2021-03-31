@@ -12,10 +12,14 @@ public class ClassInfo {
     public static final ClassInfo STRING = ClassInfo.of(String.class);
     public static final ClassInfo LIST = ClassInfo.of(List.class);
     public static final ClassInfo VOID = ClassInfo.of(void.class);
+    public static final ClassInfo BYTE = ClassInfo.of(byte.class);
+    public static final ClassInfo SHORT = ClassInfo.of(short.class);
     public static final ClassInfo INT = ClassInfo.of(int.class);
     public static final ClassInfo LONG = ClassInfo.of(long.class);
+    public static final ClassInfo FLOAT = ClassInfo.of(float.class);
     public static final ClassInfo DOUBLE = ClassInfo.of(double.class);
     public static final ClassInfo BOOLEAN = ClassInfo.of(boolean.class);
+    public static final ClassInfo CHAR = ClassInfo.of(char.class);
 
     private Class<?> clazz;
     private String canonicalClassName;

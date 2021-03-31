@@ -6,10 +6,13 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
 
 public abstract class Expression extends BlockDefinition<Expression.Block> {
 
@@ -48,6 +51,20 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
             cutItem.setOnAction(e -> UndoManager.run(cut()));
             deleteItem.setOnAction(e -> UndoManager.run(delete()));
             getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem);
+
+            getSyntaxBox().setOnDragDetected(e -> {
+                if (e.getButton() == MouseButton.PRIMARY) {
+                    Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
+                    SnapshotParameters snapshotParameters = new SnapshotParameters();
+                    snapshotParameters.setFill(Color.TRANSPARENT);
+                    Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
+                    dragboard.setDragView(image, -1, -1);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString("");
+                    dragboard.setContent(content);
+                }
+                e.consume();
+            });
         }
 
         @Override

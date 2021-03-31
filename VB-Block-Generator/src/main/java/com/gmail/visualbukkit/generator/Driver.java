@@ -33,7 +33,7 @@ public class Driver {
                 generator.setCategory(line.substring(line.indexOf(' ') + 1));
             } else if (line.startsWith("#plugin-module ")) {
                 generator.setPluginModule(line.substring(line.indexOf(' ') + 1));
-            } else if (line.equals("include-deprecated")) {
+            } else if (line.equals("#include-deprecated")) {
                 generator.setIncludeDeprecated(true);
             } else if (line.equals("#reset")) {
                 generator.reset();

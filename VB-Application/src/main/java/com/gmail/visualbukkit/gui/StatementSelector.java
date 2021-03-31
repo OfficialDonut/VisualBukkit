@@ -2,10 +2,7 @@ package com.gmail.visualbukkit.gui;
 
 import com.gmail.visualbukkit.DataFile;
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.Statement;
-import com.gmail.visualbukkit.blocks.StatementLabel;
-import com.gmail.visualbukkit.blocks.UndoManager;
+import com.gmail.visualbukkit.blocks.*;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -76,14 +73,16 @@ public class StatementSelector extends TabPane {
 
         setOnDragOver(e -> {
             Object source = e.getGestureSource();
-            if (source instanceof Statement.Block) {
+            if (source instanceof Statement.Block || source instanceof Expression.Block) {
                 e.acceptTransferModes(TransferMode.ANY);
             }
             e.consume();
         });
 
         setOnDragDropped(e -> {
-            UndoManager.run(((Statement.Block) e.getGestureSource()).getPrevious().disconnect());
+            UndoManager.run(e.getGestureSource() instanceof Statement.Block ?
+                    ((Statement.Block) e.getGestureSource()).getPrevious().disconnect() :
+                    ((Expression.Block) e.getGestureSource()).getExpressionParameter().clear());
             e.setDropCompleted(true);
             e.consume();
         });

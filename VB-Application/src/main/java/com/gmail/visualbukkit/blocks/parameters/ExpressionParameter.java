@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks.parameters;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.*;
+import com.gmail.visualbukkit.gui.SoundManager;
 import com.gmail.visualbukkit.gui.StyleableHBox;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
@@ -58,7 +60,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
             Predicate<Expression> filter = expr ->
                     expr instanceof ListSeparatorExpression ||
-                    (expr.toString().toLowerCase().contains(searchField.getText().toLowerCase())
+                    (expr.getTitle().toLowerCase().contains(searchField.getText().toLowerCase())
                     && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(expr.getCategory())));
 
             searchField.textProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));
@@ -127,6 +129,25 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             selector.hide();
             pasteItem.setDisable(!(CopyPasteManager.peek() instanceof Expression));
         });
+
+        setOnDragOver(e -> {
+            if (expression == null) {
+                Object source = e.getGestureSource();
+                if (source instanceof Expression.Block) {
+                    e.acceptTransferModes(TransferMode.ANY);
+                }
+            }
+            e.consume();
+        });
+
+        setOnDragDropped(e -> {
+            Object source = e.getGestureSource();
+            Expression.Block block = (Expression.Block) source;
+            UndoManager.run(setExpression(block));
+            e.setDropCompleted(true);
+            e.consume();
+            SoundManager.SNAP.play();
+        });
     }
 
     public UndoManager.RevertableAction setExpression(Expression.Block newExpression) {
@@ -134,10 +155,12 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             return clear();
         }
         UndoManager.RevertableAction clearAction = clear();
+        UndoManager.RevertableAction disconnectNew = newExpression.getExpressionParameter() != null ? newExpression.getExpressionParameter().clear() : UndoManager.EMPTY_ACTION;
         return new UndoManager.RevertableAction() {
             @Override
             public void run() {
                 clearAction.run();
+                disconnectNew.run();
                 expression = newExpression;
                 getChildren().setAll(newExpression);
             }
@@ -145,6 +168,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             public void revert() {
                 expression = null;
                 getChildren().setAll(button);
+                disconnectNew.revert();
                 clearAction.revert();
             }
         };
