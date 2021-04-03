@@ -15,10 +15,7 @@ import javafx.scene.layout.VBox;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class ExpressionParameter extends VBox implements BlockParameter {
@@ -42,10 +39,13 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             TreeSet<String> categories = new TreeSet<>();
 
             int i = 0;
+            Set<String> exprTitles = new HashSet<>();
             for (Expression expr : BlockRegistry.getExpressions()) {
-                expressions.add(expr.getReturnType().getDisplayClassName().equals(type.getDisplayClassName()) ? i++ : expressions.size(), expr);
-                if (expr.getCategory() != null) {
-                    categories.add(expr.getCategory());
+                if (exprTitles.add(expr.getTitle())) {
+                    expressions.add(expr.getReturnType().getDisplayClassName().equals(type.getDisplayClassName()) ? i++ : expressions.size(), expr);
+                    if (expr.getCategory() != null) {
+                        categories.add(expr.getCategory());
+                    }
                 }
             }
             expressions.add(i, new ListSeparatorExpression());

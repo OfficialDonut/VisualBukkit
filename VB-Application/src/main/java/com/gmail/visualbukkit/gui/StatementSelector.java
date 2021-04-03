@@ -10,10 +10,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class StatementSelector extends TabPane {
 
@@ -45,13 +42,13 @@ public class StatementSelector extends TabPane {
             }
         });
 
-        String allCategory = VisualBukkitApp.getString("label.all");
-        createCategory(allCategory);
-
+        Set<String> statementTitles = new HashSet<>();
         for (Statement statement : statements) {
-            add(statement, allCategory);
-            if (statement.getCategory() != null) {
-                add(statement, statement.getCategory());
+            if (statementTitles.add(statement.getTitle())) {
+                add(statement, VisualBukkitApp.getString("label.all"));
+                if (statement.getCategory() != null) {
+                    add(statement, statement.getCategory());
+                }
             }
         }
 
