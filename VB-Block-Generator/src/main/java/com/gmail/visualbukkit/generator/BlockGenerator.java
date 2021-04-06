@@ -132,7 +132,7 @@ public class BlockGenerator {
                         json.put("static", true);
                     } else {
                         json.append("parameters", field.getDeclaringClass().getName());
-                        langMap.computeIfAbsent(id + ".parameters", k -> formatUpperCamelCase(getDisplayClassName(field.getDeclaringClass())));
+                        langMap.computeIfAbsent(id + ".parameters", k -> getDisplayClassName(field.getDeclaringClass()));
                     }
                     blockMap.put(id, json);
                 }
@@ -208,7 +208,7 @@ public class BlockGenerator {
             langMap.computeIfAbsent(id + ".parameters", k -> {
                 StringJoiner joiner = new StringJoiner(",");
                 if (isInstanceMethod) {
-                    joiner.add(formatUpperCamelCase(getDisplayClassName(executable.getDeclaringClass())));
+                    joiner.add(getDisplayClassName(executable.getDeclaringClass()));
                 }
                 for (Parameter parameter : executable.getParameters()) {
                     joiner.add(formatLowerCamelCase(parameter.getName()));
@@ -223,7 +223,8 @@ public class BlockGenerator {
         return classNames.computeIfAbsent(clazz, ClassUtils::getShortClassName);
     }
 
-    private String formatUpperCamelCase(String str) {
+    private String formatLowerCamelCase(String str) {
+        str = Character.toUpperCase(str.charAt(0)) + str.substring(1);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
@@ -236,10 +237,6 @@ public class BlockGenerator {
             }
         }
         return builder.toString();
-    }
-
-    private String formatLowerCamelCase(String str) {
-        return formatUpperCamelCase(Character.toUpperCase(str.charAt(0)) + str.substring(1));
     }
 
     public void reset() {

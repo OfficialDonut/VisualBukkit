@@ -109,7 +109,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
         } else if (type.getClazz() == String.class) {
             MenuItem stringItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_string"));
             contextMenu.getItems().add(stringItem);
-            stringItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-string").createBlock())));
+            stringItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-string").createBlock())));
         } else if (type.getClazz() == List.class) {
             MenuItem newListItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_list"));
             contextMenu.getItems().add(newListItem);

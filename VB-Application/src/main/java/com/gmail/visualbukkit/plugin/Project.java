@@ -20,7 +20,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
-import org.controlsfx.control.SearchableComboBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -179,7 +178,7 @@ public class Project {
     }
 
     public void promptAddPluginComponent() {
-        SearchableComboBox<PluginComponent> comboBox = new SearchableComboBox<>();
+        ComboBox<PluginComponent> comboBox = new ComboBox<>();
         comboBox.getItems().addAll(BlockRegistry.getPluginComponents());
         HBox content = new HBox(5, new Label(VisualBukkitApp.getString("dialog.add_component.content")), comboBox);
         content.setAlignment(Pos.CENTER_LEFT);

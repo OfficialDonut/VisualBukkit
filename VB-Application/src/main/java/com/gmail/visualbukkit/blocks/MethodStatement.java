@@ -4,22 +4,19 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
+import com.google.common.collect.TreeMultimap;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class MethodStatement extends Statement {
 
-    private static SetMultimap<String, MethodStatement> methodStatements = HashMultimap.create();
+    private static SetMultimap<String, MethodStatement> methodStatements = TreeMultimap.create(Comparator.naturalOrder(), Comparator.comparing(o -> o.parameterTypesString));;
 
     private JSONObject json;
     private String parameterTypesString;
@@ -37,7 +34,7 @@ public class MethodStatement extends Statement {
                 parameterJoiner.add(type.getDisplayClassName());
             }
         }
-        parameterTypesString = parameterJoiner.toString();
+        parameterTypesString = parameterJoiner.length() == 0 ? VisualBukkitApp.getString("context_menu.no_parameters") : parameterJoiner.toString();
         methodStatements.put(getTitle(), this);
     }
 

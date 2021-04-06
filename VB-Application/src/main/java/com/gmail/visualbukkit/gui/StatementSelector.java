@@ -15,14 +15,14 @@ import java.util.*;
 public class StatementSelector extends TabPane {
 
     private Map<String, VBox> categories = new HashMap<>();
-    private Set<Statement> favoriteStatements = new TreeSet<>();
+    private Set<Statement> pinnedStatements = new TreeSet<>();
     private TextField searchField = new TextField();
-    private TreeNode favoriteTree = new TreeNode(VisualBukkitApp.getString("label.favorite_blocks"));
+    private TreeNode pinnedTree = new TreeNode(VisualBukkitApp.getString("label.pinned_blocks"));
 
     public StatementSelector(Set<Statement> statements) {
         Label categoryLabel = new Label();
         categoryLabel.setUnderline(true);
-        VBox headerBox = new VBox(categoryLabel, new StyleableHBox(new Label(VisualBukkitApp.getString("label.search")), searchField), favoriteTree);
+        VBox headerBox = new VBox(categoryLabel, new StyleableHBox(new Label(VisualBukkitApp.getString("label.search")), searchField), pinnedTree);
         headerBox.getStyleClass().add("statement-selector");
 
         VBox content = new VBox();
@@ -52,18 +52,18 @@ public class StatementSelector extends TabPane {
             }
         }
 
-        JSONArray favoriteArray = VisualBukkitApp.getInstance().getDataFile().getJson().optJSONArray("favorite-statements");
-        if (favoriteArray != null) {
-            for (Object obj : favoriteArray) {
+        JSONArray pinnedArray = VisualBukkitApp.getInstance().getDataFile().getJson().optJSONArray("pinned-statements");
+        if (pinnedArray != null) {
+            for (Object obj : pinnedArray) {
                 if (obj instanceof String) {
                     Statement statement = BlockRegistry.getStatement((String) obj);
                     if (statement != null) {
-                        favoriteStatements.add(statement);
+                        pinnedStatements.add(statement);
                     }
                 }
             }
         }
-        updateFavorites();
+        updatePinned();
 
         setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         setSide(Side.LEFT);
@@ -87,22 +87,22 @@ public class StatementSelector extends TabPane {
         getSelectionModel().selectFirst();
     }
 
-    public void saveFavorites(DataFile dataFile) {
-        for (Statement statement : favoriteStatements) {
-            dataFile.getJson().append("favorite-statements", statement.getID());
+    public void savePinned(DataFile dataFile) {
+        for (Statement statement : pinnedStatements) {
+            dataFile.getJson().append("pinned-statements", statement.getID());
         }
     }
 
-    private void updateFavorites() {
-        favoriteTree.clear();
-        for (Statement statement : favoriteStatements) {
+    private void updatePinned() {
+        pinnedTree.clear();
+        for (Statement statement : pinnedStatements) {
             StatementLabel label = new StatementLabel(statement);
-            favoriteTree.add(label);
-            MenuItem removeItem = new MenuItem(VisualBukkitApp.getString("context_menu.remove_favorite"));
+            pinnedTree.add(label);
+            MenuItem removeItem = new MenuItem(VisualBukkitApp.getString("context_menu.unpin"));
             label.setContextMenu(new ContextMenu(removeItem));
             removeItem.setOnAction(e -> {
-                favoriteStatements.remove(statement);
-                updateFavorites();
+                pinnedStatements.remove(statement);
+                updatePinned();
             });
         }
     }
@@ -135,11 +135,11 @@ public class StatementSelector extends TabPane {
             createCategory(category);
         }
         categories.get(category).getChildren().add(label);
-        MenuItem favoriteItem = new MenuItem(VisualBukkitApp.getString("context_menu.favorite"));
-        label.setContextMenu(new ContextMenu(favoriteItem));
-        favoriteItem.setOnAction(e -> {
-            favoriteStatements.add(statement);
-            updateFavorites();
+        MenuItem pinItem = new MenuItem(VisualBukkitApp.getString("context_menu.pin"));
+        label.setContextMenu(new ContextMenu(pinItem));
+        pinItem.setOnAction(e -> {
+            pinnedStatements.add(statement);
+            updatePinned();
         });
     }
 }

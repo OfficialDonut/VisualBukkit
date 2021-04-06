@@ -44,13 +44,31 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
                 getSyntaxBox().getStyleClass().add("expression-block");
             }
 
+            MenuItem addStringItem = new MenuItem(VisualBukkitApp.getString("context_menu.add_string"));
+            addStringItem.setOnAction(e -> {
+                ExpressionParameter exprParameter = getExpressionParameter();
+                UndoManager.run(new UndoManager.RevertableAction() {
+                    @Override
+                    public void run() {
+                        Block combineStringsBlock = BlockRegistry.getExpression("expr-combine-strings").createBlock();
+                        exprParameter.setExpression(combineStringsBlock).run();
+                        (((ExpressionParameter) combineStringsBlock.getParameters().get(0)).setExpression(Block.this)).run();
+                    }
+                    @Override
+                    public void revert() {
+                        exprParameter.setExpression(Block.this).run();
+                    }
+                });
+            });
+
             MenuItem copyItem = new MenuItem(VisualBukkitApp.getString("context_menu.copy"));
             MenuItem cutItem = new MenuItem(VisualBukkitApp.getString("context_menu.cut"));
             MenuItem deleteItem = new MenuItem(VisualBukkitApp.getString("context_menu.delete"));
             copyItem.setOnAction(e -> copy());
             cutItem.setOnAction(e -> UndoManager.run(cut()));
             deleteItem.setOnAction(e -> UndoManager.run(delete()));
-            getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem);
+            getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, addStringItem);
+            getContextMenu().setOnShowing(e -> addStringItem.setVisible(getExpressionParameter().getType().getClazz() == String.class || getDefinition().returnType.getClazz() == String.class));
 
             getSyntaxBox().setOnDragDetected(e -> {
                 if (e.getButton() == MouseButton.PRIMARY) {

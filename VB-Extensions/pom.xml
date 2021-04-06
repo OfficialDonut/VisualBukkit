@@ -16,6 +16,7 @@
     <modules>
         <module>bStats</module>
         <module>Vault</module>
+        <module>PlaceholderAPI</module>
     </modules>
 
     <dependencies>

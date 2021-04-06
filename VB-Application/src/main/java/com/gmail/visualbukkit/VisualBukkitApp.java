@@ -1,7 +1,6 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.TypeHandler;
 import com.gmail.visualbukkit.blocks.UndoManager;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
@@ -304,7 +303,7 @@ public class VisualBukkitApp extends Application {
         dataFile.clear();
         SettingsManager.getInstance().saveSettings(dataFile);
         if (statementSelector != null) {
-            statementSelector.saveFavorites(dataFile);
+            statementSelector.savePinned(dataFile);
         }
         dataFile.save();
     }

@@ -91,24 +91,6 @@
     ]
   },
   {
-    "id": "0aee736aff0d26881c9bf9efc38c6ee2",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": ["net.milkbowl.vault.permission.Permission"]
-  },
-  {
-    "method": "setPlayerSuffix",
-    "id": "0b42777d77da3d77242cd0e973112c57",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ]
-  },
-  {
     "method": "setPlayerInfoInteger",
     "id": "0c0494d5c55527abf5bd8026fd5621a1",
     "plugin-module": "Vault",
@@ -134,31 +116,6 @@
     "return": "java.lang.String"
   },
   {
-    "method": "depositPlayer",
-    "id": "127939e14a7d7d2c58d53c9b8ce5ff92",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "setPlayerInfoBoolean",
-    "id": "13b7d488d718f43ea20485af0ff6a433",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "boolean"
-    ]
-  },
-  {
     "static": true,
     "method": "values",
     "id": "146527792f888e3a4d141107c917259e",
@@ -173,19 +130,6 @@
     "class": "net.milkbowl.vault.chat.Chat",
     "parameters": ["net.milkbowl.vault.chat.Chat"],
     "return": "java.lang.String"
-  },
-  {
-    "method": "playerRemoveGroup",
-    "id": "15c352fc1ace7e504fb8e38546a9eb28",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   },
   {
     "method": "currencyNamePlural",
@@ -249,20 +193,6 @@
     ]
   },
   {
-    "method": "getPlayerInfoBoolean",
-    "id": "1ad33daf44f16c68f6e0481626dfd0f3",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "boolean"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getPlayerGroups",
     "id": "1c24925db1b29b1f4f8eece951380f52",
     "plugin-module": "Vault",
@@ -272,19 +202,6 @@
       "org.bukkit.entity.Player"
     ],
     "return": "[Ljava.lang.String;"
-  },
-  {
-    "method": "setPlayerInfoDouble",
-    "id": "1d9ae432677993114fde6e2da4e7a79e",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ]
   },
   {
     "method": "currencyNameSingular",
@@ -304,20 +221,6 @@
       "org.bukkit.entity.Player"
     ],
     "return": "java.lang.String"
-  },
-  {
-    "method": "getPlayerInfoInteger",
-    "id": "1f18111353425fb5decd30d5095c8c99",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "method": "groupRemove",
@@ -376,19 +279,6 @@
     "parameters": [
       "net.milkbowl.vault.permission.Permission",
       "org.bukkit.entity.Player",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "playerHas",
-    "id": "2665a3784f50aecc6c9241738546d6d9",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
       "java.lang.String"
     ],
     "return": "boolean"
@@ -461,19 +351,6 @@
     "return": "boolean"
   },
   {
-    "method": "has",
-    "id": "2c45b0da27f86f803e5fa8f9d66ee30f",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "groupAdd",
     "id": "2db92295e8614d4537c9ca62fc881b20",
     "plugin-module": "Vault",
@@ -536,20 +413,6 @@
     "return": "java.lang.String"
   },
   {
-    "method": "getPlayerInfoString",
-    "id": "30d476e5fbaa2b51934dbb266e10c64c",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "setPlayerSuffix",
     "id": "341ce7d7bd8d8a696a81f6ea8078a695",
     "plugin-module": "Vault",
@@ -559,18 +422,6 @@
       "org.bukkit.entity.Player",
       "java.lang.String"
     ]
-  },
-  {
-    "method": "getPlayerPrefix",
-    "id": "351dd904e96386a52f4bb698b1fc2664",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "getGroupInfoInteger",
@@ -611,18 +462,6 @@
     "return": "java.lang.String"
   },
   {
-    "method": "getPlayerPrefix",
-    "id": "3ada9da9a8125134a669ff30834184ae",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "hasAccount",
     "id": "3b16199468bb7205d199581fb839e6df",
     "plugin-module": "Vault",
@@ -646,30 +485,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
-    "method": "getPrimaryGroup",
-    "id": "404ea4ae4cafe48249cec109838e46da",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "getPrimaryGroup",
-    "id": "423fa249691cb88c16855e5e38d00a4f",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "setGroupInfoDouble",
     "id": "43258ed112d2228d8e48354e8fe7bf02",
     "plugin-module": "Vault",
@@ -689,31 +504,6 @@
     "class": "net.milkbowl.vault.permission.Permission",
     "parameters": ["net.milkbowl.vault.permission.Permission"],
     "return": "boolean"
-  },
-  {
-    "method": "setPlayerInfoString",
-    "id": "46499ead33deda9a8079b1eb5c5013cf",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ]
-  },
-  {
-    "method": "isBankMember",
-    "id": "466adf56022ce6e683b7d5b3a349e77a",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
     "id": "4ac564ab2a192f072ad0bd7a847ca995",
@@ -753,74 +543,11 @@
     ]
   },
   {
-    "method": "playerAddGroup",
-    "id": "4f6ebb43ec8aee710c30f82d4b16224c",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "isEnabled",
     "id": "509b76752c7301f122bc8b6c5744c7cf",
     "plugin-module": "Vault",
     "class": "net.milkbowl.vault.chat.Chat",
     "parameters": ["net.milkbowl.vault.chat.Chat"],
-    "return": "boolean"
-  },
-  {
-    "method": "getPlayerGroups",
-    "id": "50e22381b6699431627b8d8c98fc6a4b",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "[Ljava.lang.String;"
-  },
-  {
-    "method": "setPlayerInfoDouble",
-    "id": "515112747b260ec9d9e300675168b829",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ]
-  },
-  {
-    "method": "isBankOwner",
-    "id": "56fb32f738479c62879b51f614c6ce0e",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "playerAdd",
-    "id": "5a405ff5f337960b15128723a7a2788a",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
     "return": "boolean"
   },
   {
@@ -834,18 +561,6 @@
       "java.lang.String"
     ],
     "return": "java.lang.String"
-  },
-  {
-    "method": "setPlayerPrefix",
-    "id": "5ee55163b930cf24bd1817f8cde9eb8a",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ]
   },
   {
     "method": "getGroupInfoBoolean",
@@ -862,19 +577,6 @@
     "return": "boolean"
   },
   {
-    "method": "playerRemove",
-    "id": "60b1c5b4ddccd7411ac5a59bae8150e1",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getPlayerGroups",
     "id": "612634666457f49dca05019da3782b3d",
     "plugin-module": "Vault",
@@ -884,18 +586,6 @@
       "org.bukkit.entity.Player"
     ],
     "return": "[Ljava.lang.String;"
-  },
-  {
-    "method": "getPrimaryGroup",
-    "id": "61af4aa8e9bf9b12768c42b4e4980827",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "playerInGroup",
@@ -919,17 +609,6 @@
     "return": "boolean"
   },
   {
-    "method": "createPlayerAccount",
-    "id": "632ee6999b353831a0ecb1f11111e3da",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setPlayerInfoString",
     "id": "64e3bb4eab11eeec094de875717d41a8",
     "plugin-module": "Vault",
@@ -949,19 +628,6 @@
     "class": "net.milkbowl.vault.economy.Economy",
     "parameters": ["net.milkbowl.vault.economy.Economy"],
     "return": "java.util.List"
-  },
-  {
-    "method": "setPlayerInfoBoolean",
-    "id": "66ef08fd7f4c2e8dd7e19765fbd5b278",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "boolean"
-    ]
   },
   {
     "method": "setPlayerInfoDouble",
@@ -988,20 +654,6 @@
       "java.lang.String"
     ],
     "return": "boolean"
-  },
-  {
-    "method": "getPlayerInfoString",
-    "id": "686d90188a33748af9f3e3f67621a264",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "getPlayerInfoBoolean",
@@ -1075,19 +727,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse$ResponseType"
   },
   {
-    "method": "depositPlayer",
-    "id": "7a6b024e76345587105339c2a748b2a6",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
     "method": "getPlayerPrefix",
     "id": "7d111d54885dc64fce8209e36306c7a4",
     "plugin-module": "Vault",
@@ -1112,18 +751,6 @@
     "return": "java.lang.String"
   },
   {
-    "method": "getPlayerGroups",
-    "id": "85b3a1529373703ccec23abf79325214",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
-    "return": "[Ljava.lang.String;"
-  },
-  {
     "method": "bankHas",
     "id": "86ab124cceb9ba76e05fb397facada9d",
     "plugin-module": "Vault",
@@ -1134,20 +761,6 @@
       "double"
     ],
     "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "getPlayerInfoDouble",
-    "id": "86d2a3ba5ea4b16a057681a0e1a6eefe",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "double"
   },
   {
     "method": "isEnabled",
@@ -1180,33 +793,6 @@
     "return": "double"
   },
   {
-    "method": "getPlayerInfoDouble",
-    "id": "8d2235f4238df2d0359915f9f750ac5e",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "double"
-  },
-  {
-    "method": "setPlayerInfoInteger",
-    "id": "8dd12048b2b5a4ef8b2e14940fd1b788",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ]
-  },
-  {
     "method": "getPlayerInfoInteger",
     "id": "912438843184249a9d56df5117e2edf8",
     "plugin-module": "Vault",
@@ -1234,19 +820,6 @@
     "return": "boolean"
   },
   {
-    "method": "playerRemoveGroup",
-    "id": "951937fba8c3d3fc479081e366e4fb2c",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getPlayerInfoString",
     "id": "951f30d87da8c5645a5f92dc0cae56d5",
     "plugin-module": "Vault",
@@ -1259,19 +832,6 @@
       "java.lang.String"
     ],
     "return": "java.lang.String"
-  },
-  {
-    "method": "playerAddGroup",
-    "id": "951f7f2006e5d844bfd068e044f50a7f",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   },
   {
     "method": "groupHas",
@@ -1287,19 +847,6 @@
     "return": "boolean"
   },
   {
-    "method": "playerInGroup",
-    "id": "955ef0be840147fac91d2aaef67ab51a",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setPlayerPrefix",
     "id": "95f783c17b91b5f80176ec909ed0c4a7",
     "plugin-module": "Vault",
@@ -1309,18 +856,6 @@
       "org.bukkit.entity.Player",
       "java.lang.String"
     ]
-  },
-  {
-    "method": "getPlayerSuffix",
-    "id": "961e79fb8d7ce26daaaed413598b0a4e",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "getPrimaryGroup",
@@ -1359,19 +894,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
-    "method": "playerHas",
-    "id": "9bf8d2dc3ca5532c8402b1ac431a8052",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getGroupInfoBoolean",
     "id": "9c62210ea8be02db046bfbc1463e7bbe",
     "plugin-module": "Vault",
@@ -1386,31 +908,6 @@
     "return": "boolean"
   },
   {
-    "method": "withdrawPlayer",
-    "id": "9f4b0be9c79890273b805cc9ea54493b",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "getPlayerGroups",
-    "id": "9f5f95c79aa061e86f6458a012cb2041",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "[Ljava.lang.String;"
-  },
-  {
     "method": "setGroupInfoBoolean",
     "id": "a0cbdfecc9ede1f963a289555e94380b",
     "plugin-module": "Vault",
@@ -1422,19 +919,6 @@
       "java.lang.String",
       "boolean"
     ]
-  },
-  {
-    "method": "playerInGroup",
-    "id": "a383540e7ebfa86c7e5a5cbc1432f8df",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   },
   {
     "method": "getPlayerGroups",
@@ -1518,18 +1002,6 @@
     ]
   },
   {
-    "method": "has",
-    "id": "ad7076f446203777a394ecc69388fbb8",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setPlayerInfoInteger",
     "id": "ad9687192b1b5b295f9cfd75144ee073",
     "plugin-module": "Vault",
@@ -1608,31 +1080,6 @@
     "return": "boolean"
   },
   {
-    "method": "hasAccount",
-    "id": "b59b7dbc1c7b2d4290f46691a5b5adb6",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "setPlayerInfoString",
-    "id": "b5d906bc244c1b78244daa421d66f762",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ]
-  },
-  {
     "static": true,
     "field": "FAILURE",
     "id": "b7a20bd75cfd80a31e15a0df435fcbcb",
@@ -1675,18 +1122,6 @@
       "java.lang.String"
     ],
     "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "getPlayerSuffix",
-    "id": "ba11fc665daf5beaf5ba3c6c83ae3927",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "playerInGroup",
@@ -1751,74 +1186,12 @@
   },
   {
     "method": "has",
-    "id": "be0221b9d842417d1c43a751236fd0ad",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "has",
     "id": "be896d9ea419165c9cebf6ba106571ef",
     "plugin-module": "Vault",
     "class": "net.milkbowl.vault.permission.Permission",
     "parameters": [
       "net.milkbowl.vault.permission.Permission",
       "org.bukkit.entity.Player",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "setPlayerPrefix",
-    "id": "beca042ffdb3e68e75bba3a8cd4e2dc2",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ]
-  },
-  {
-    "method": "playerInGroup",
-    "id": "bee10b9115e85b96e662a9e8a7da84c0",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "withdrawPlayer",
-    "id": "bf20c32b9a1e706e8effbe0eb805aa2e",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
-  },
-  {
-    "method": "createPlayerAccount",
-    "id": "c000474e97217ea53c085bcf636fa76c",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
       "java.lang.String"
     ],
     "return": "boolean"
@@ -1848,19 +1221,6 @@
     ]
   },
   {
-    "method": "playerRemove",
-    "id": "c42a85e8661154463748ade65ae297d7",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getPrimaryGroup",
     "id": "c453d168849ad68e3d9308f79ad569ed",
     "plugin-module": "Vault",
@@ -1885,11 +1245,6 @@
       "double"
     ],
     "return": "double"
-  },
-  {
-    "id": "c7baf3cfb5b59a96670aaf96528babf9",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission"
   },
   {
     "method": "playerAddTransient",
@@ -1917,18 +1272,6 @@
     "plugin-module": "Vault",
     "class": "net.milkbowl.vault.chat.Chat",
     "parameters": ["net.milkbowl.vault.chat.Chat"],
-    "return": "[Ljava.lang.String;"
-  },
-  {
-    "method": "getPlayerGroups",
-    "id": "d22509aedd01685cebe2978746ab1b6b",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
     "return": "[Ljava.lang.String;"
   },
   {
@@ -1997,19 +1340,6 @@
     ]
   },
   {
-    "method": "playerAdd",
-    "id": "d99366a59f7cfbc1839490a9b81038c5",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "playerRemoveTransient",
     "id": "da4adfef8778128871d8bd1c7c7d1864",
     "plugin-module": "Vault",
@@ -2032,31 +1362,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse$ResponseType"
   },
   {
-    "method": "hasAccount",
-    "id": "dbbfd15c8168abe9130967025ec38b38",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "getPlayerInfoInteger",
-    "id": "df6be7243cd39765d434610759780c65",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
     "method": "playerAddTransient",
     "id": "df9895411fbf958d8b89b935cc5b250c",
     "plugin-module": "Vault",
@@ -2067,30 +1372,6 @@
       "java.lang.String"
     ],
     "return": "boolean"
-  },
-  {
-    "method": "setPlayerSuffix",
-    "id": "e2574f9044483178fb5b5e78035ad293",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ]
-  },
-  {
-    "method": "createBank",
-    "id": "e4feda5778ef8f5d9dda3cb607cd233d",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
     "method": "depositPlayer",
@@ -2106,17 +1387,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
-    "method": "getBalance",
-    "id": "e554d5a39da9bc7975afe2cf42b92f55",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String"
-    ],
-    "return": "double"
-  },
-  {
     "method": "setPlayerInfoString",
     "id": "e622832bdbbaacff6478e86f0216793b",
     "plugin-module": "Vault",
@@ -2129,32 +1399,6 @@
     ]
   },
   {
-    "method": "has",
-    "id": "e6f32ad58f9ff20c238f33ac9134189b",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String",
-      "double"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "setPlayerInfoInteger",
-    "id": "e7f9a68528d2c4447bb1d2f860f56cf5",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ]
-  },
-  {
     "method": "playerInGroup",
     "id": "ea204fcf56845b2f68e52fb28613e1fe",
     "plugin-module": "Vault",
@@ -2163,20 +1407,6 @@
       "net.milkbowl.vault.permission.Permission",
       "org.bukkit.entity.Player",
       "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "getPlayerInfoBoolean",
-    "id": "eff1ae6085dd90f5cbf6ba7487b8c7b7",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String",
-      "boolean"
     ],
     "return": "boolean"
   },
@@ -2277,18 +1507,6 @@
     "return": "net.milkbowl.vault.economy.EconomyResponse"
   },
   {
-    "method": "getPrimaryGroup",
-    "id": "f8d046557418d8df88e694156a95f5a6",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.permission.Permission",
-    "parameters": [
-      "net.milkbowl.vault.permission.Permission",
-      "org.bukkit.World",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "hasAccount",
     "id": "f9216f66417432283e89e13c859bd794",
     "plugin-module": "Vault",
@@ -2322,30 +1540,5 @@
       "org.bukkit.entity.Player"
     ],
     "return": "java.lang.String"
-  },
-  {
-    "method": "getBalance",
-    "id": "fd5a8714b4ebf9f827397716d1f0043f",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.economy.Economy",
-    "parameters": [
-      "net.milkbowl.vault.economy.Economy",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "double"
-  },
-  {
-    "method": "playerInGroup",
-    "id": "fea49f3b31558187ee9d859a5688b92b",
-    "plugin-module": "Vault",
-    "class": "net.milkbowl.vault.chat.Chat",
-    "parameters": [
-      "net.milkbowl.vault.chat.Chat",
-      "org.bukkit.World",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   }
 ]

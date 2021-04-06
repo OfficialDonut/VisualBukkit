@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.plugin.ProjectManager;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -25,7 +26,7 @@ public class UndoManager {
 
     static {
         VisualBukkitApp.getInstance().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            if (e.isShortcutDown() && e.getCode() == KeyCode.Z) {
+            if (e.isShortcutDown() && e.getCode() == KeyCode.Z && !(VisualBukkitApp.getInstance().getScene().getFocusOwner() instanceof TextField)) {
                 if (e.isShiftDown()) {
                     redo();
                 } else {
