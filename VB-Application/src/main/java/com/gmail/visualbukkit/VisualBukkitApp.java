@@ -125,10 +125,13 @@ public class VisualBukkitApp extends Application {
         splashScreen.show();
 
         Platform.runLater(() -> {
-            try (InputStream inputStream = VisualBukkitApp.class.getResourceAsStream("/GeneratedBlocks.json")) {
+            try (InputStream javaBlocksStream = VisualBukkitApp.class.getResourceAsStream("/blocks/JavaBlocks.json");
+                 InputStream bukkitBlocksStream = VisualBukkitApp.class.getResourceAsStream("/blocks/BukkitBlocks.json")) {
                 TypeHandler.registerClassNames(ResourceBundle.getBundle("lang.Types"));
-                JSONArray blockArray = new JSONArray(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-                BlockRegistry.register(blockArray, ResourceBundle.getBundle("lang.GeneratedBlocks"));
+                JSONArray javaBlockArray = new JSONArray(IOUtils.toString(javaBlocksStream, StandardCharsets.UTF_8));
+                JSONArray bukkitBlockArray = new JSONArray(IOUtils.toString(bukkitBlocksStream, StandardCharsets.UTF_8));
+                BlockRegistry.register(javaBlockArray, ResourceBundle.getBundle("lang.JavaBlocks"));
+                BlockRegistry.register(bukkitBlockArray, ResourceBundle.getBundle("lang.BukkitBlocks"));
                 BlockRegistry.register("com.gmail.visualbukkit.blocks.definitions", VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.CustomBlocks"));
                 ExtensionManager.loadExtensions();
                 statementSelector = new StatementSelector(BlockRegistry.getStatements());

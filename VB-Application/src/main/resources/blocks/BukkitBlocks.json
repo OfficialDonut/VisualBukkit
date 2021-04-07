@@ -759,13 +759,6 @@
     "return": "org.bukkit.StructureType"
   },
   {
-    "method": "toLowerCase",
-    "id": "035b899e594db4384ca2a3ae721ef11c",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "method": "getRecipe",
     "id": "0363ffbb0512e95bb30a681ad914940c",
@@ -3959,16 +3952,6 @@
     ]
   },
   {
-    "method": "lastIndexOf",
-    "id": "11cd6347ec9bf622bee6a48207b40b32",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
     "static": true,
     "field": "DRAGON_FIREBALL",
     "id": "11cdec8f1ed1c5f2977365203e964c7c",
@@ -4049,16 +4032,6 @@
     "event-method": true,
     "class": "org.bukkit.event.inventory.InventoryClickEvent",
     "return": "boolean"
-  },
-  {
-    "method": "concat",
-    "id": "1251a50d03bf7eb42f6236f267328e6a",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "midpoint",
@@ -4693,13 +4666,6 @@
       "java.lang.Iterable"
     ],
     "return": "org.bukkit.FireworkEffect$Builder"
-  },
-  {
-    "method": "isEmpty",
-    "id": "14d0b64796778dd01f98780c19ac926f",
-    "class": "java.util.List",
-    "parameters": ["java.util.List"],
-    "return": "boolean"
   },
   {
     "method": "getYaw",
@@ -6491,16 +6457,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "indexOf",
-    "id": "1c1fe8fdbce65d175ecd464c19a7967a",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
-  },
-  {
     "method": "setShort",
     "id": "1c2d4bea3f69dc425095886f4bc68050",
     "class": "org.bukkit.block.data.type.PistonHead",
@@ -7004,17 +6960,6 @@
     "id": "1ed930bfd0bf09d60e4f5d657799a0b6",
     "class": "org.bukkit.EntityEffect",
     "return": "org.bukkit.EntityEffect"
-  },
-  {
-    "method": "split",
-    "id": "1eea18c62e05b7b650be09a5fcad6f7c",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "[Ljava.lang.String;"
   },
   {
     "method": "build",
@@ -8546,16 +8491,6 @@
     "id": "26741dc72893c3e4b551ffe3bf4d329c",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "get",
-    "id": "26746ae0a079413fc050cee66cca27c3",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int"
-    ],
-    "return": "java.lang.Object"
   },
   {
     "static": true,
@@ -10341,16 +10276,6 @@
     "return": "boolean"
   },
   {
-    "method": "addAll",
-    "id": "2ecfe3e800db3fc08969ea122f769779",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
-  },
-  {
     "static": true,
     "field": "VILLAGE_CARTOGRAPHER",
     "id": "2ed08cb71c31aabfc7e0d0e3b4cdc2f3",
@@ -11950,16 +11875,6 @@
     "return": "boolean"
   },
   {
-    "method": "indexOf",
-    "id": "36968b1413180119531232e9041ed311",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "int"
-  },
-  {
     "method": "openMerchant",
     "id": "36990462dcdd3f3f9c788984eedbcf19",
     "class": "org.bukkit.entity.HumanEntity",
@@ -12004,13 +11919,6 @@
     "id": "36c9899e7311c061768efcde0c0aebe6",
     "class": "org.bukkit.inventory.meta.SuspiciousStewMeta",
     "parameters": ["org.bukkit.inventory.meta.SuspiciousStewMeta"],
-    "return": "boolean"
-  },
-  {
-    "method": "isEmpty",
-    "id": "36d28b2e92381010f018d562e1597169",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
     "return": "boolean"
   },
   {
@@ -12125,16 +12033,6 @@
     "event-method": true,
     "class": "org.bukkit.event.world.ChunkUnloadEvent",
     "return": "boolean"
-  },
-  {
-    "method": "compareTo",
-    "id": "37693ca93f702b8a8074975e8e07ce95",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
   },
   {
     "id": "3774865ec0800da5c5c07a3b17609a17",
@@ -12505,18 +12403,6 @@
     "event-method": true,
     "class": "org.bukkit.event.player.PlayerBedEnterEvent",
     "return": "org.bukkit.block.Block"
-  },
-  {
-    "static": true,
-    "method": "format",
-    "id": "38e1034ba5eee18bb6d3240c01f7a6fa",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.util.Locale",
-      "java.lang.String",
-      "[Ljava.lang.Object;"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "hasParticles",
@@ -13125,6 +13011,15 @@
     "return": "org.bukkit.World"
   },
   {
+    "id": "3be380ed8c401e0c631024baefc5bebf",
+    "class": "org.bukkit.util.Vector",
+    "parameters": [
+      "float",
+      "float",
+      "float"
+    ]
+  },
+  {
     "static": true,
     "field": "CARTOGRAPHER",
     "id": "3beb3278991011db4bb0d3cb7caca53a",
@@ -13616,17 +13511,6 @@
     "return": "org.bukkit.block.data.type.RedstoneWire$Connection"
   },
   {
-    "method": "replace",
-    "id": "3e67e46a7e7cd75ca2064593910e0697",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "char",
-      "char"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "FEET",
     "id": "3e6c6c59d4e6e1463cb621c9a501ef38",
@@ -13847,16 +13731,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "toLowerCase",
-    "id": "3f56b5573024cdd78b1789c2ddd90a8f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.util.Locale"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "isFormat",
     "id": "3f5727517c868a5f682e969c511ab1ab",
     "class": "org.bukkit.ChatColor",
@@ -13924,17 +13798,6 @@
       "org.bukkit.entity.AreaEffectCloud",
       "org.bukkit.projectiles.ProjectileSource"
     ]
-  },
-  {
-    "method": "set",
-    "id": "3fa20a5c9e8e0b8e90f3e2ced0567dfb",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "java.lang.Object"
-    ],
-    "return": "java.lang.Object"
   },
   {
     "method": "getSize",
@@ -14177,16 +14040,6 @@
     "return": "float"
   },
   {
-    "method": "containsAll",
-    "id": "40ae3a374c37b1a21d41428da968fe42",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "isPlugin",
     "id": "40b03a66b93734822a7c402cdf302ce9",
     "event-method": true,
@@ -14315,16 +14168,6 @@
     "id": "414d0e7936350c499f1cb67b13d6607f",
     "class": "org.bukkit.entity.Villager$Profession",
     "return": "org.bukkit.entity.Villager$Profession"
-  },
-  {
-    "method": "split",
-    "id": "415258fbe1a020d60adec801248a34e2",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "[Ljava.lang.String;"
   },
   {
     "method": "setCancelled",
@@ -15458,13 +15301,6 @@
   {
     "id": "469284b5543605f35f2f1b6267592f58",
     "event": "org.bukkit.event.player.PlayerInteractEvent"
-  },
-  {
-    "method": "trim",
-    "id": "46a941793c367239f3b4d09983248e43",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
   },
   {
     "static": true,
@@ -16678,17 +16514,6 @@
   {
     "id": "4cb76b81a19a1215c9cedc5111f67716",
     "event": "org.bukkit.event.player.PlayerResourcePackStatusEvent"
-  },
-  {
-    "static": true,
-    "method": "join",
-    "id": "4cbec66fa5c4cbc52a442dc973a55fa6",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.CharSequence",
-      "[Ljava.lang.CharSequence;"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "getBlockClicked",
@@ -18248,17 +18073,6 @@
     "return": "int"
   },
   {
-    "method": "lastIndexOf",
-    "id": "54014290a60efd6bd1d6ffb93979f22e",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
     "method": "getEggs",
     "id": "5407707ee3ea575500bcf142ae6aee77",
     "class": "org.bukkit.block.data.type.TurtleEgg",
@@ -19318,16 +19132,6 @@
     "parameters": ["org.bukkit.boss.BossBar"]
   },
   {
-    "method": "indexOf",
-    "id": "5926bf4115a667769386d32dcfe8bd2b",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
     "method": "getEntityCount",
     "id": "592d32c1f053236a14a1dc1057469bc3",
     "class": "org.bukkit.block.EntityBlockStorage",
@@ -19705,19 +19509,6 @@
     "return": "org.bukkit.scoreboard.Scoreboard"
   },
   {
-    "method": "regionMatches",
-    "id": "5aa7294326783484aa3030ad47954a52",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "boolean"
-  },
-  {
     "static": true,
     "field": "FIRE_DAMAGE",
     "id": "5abfafff2a421ca04b9d8d795c109c95",
@@ -19966,16 +19757,6 @@
     "class": "org.bukkit.entity.AbstractArrow",
     "parameters": ["org.bukkit.entity.AbstractArrow"],
     "return": "int"
-  },
-  {
-    "method": "contentEquals",
-    "id": "5c2cc0d94fbb30dc1958f5a39e72f37b",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.StringBuffer"
-    ],
-    "return": "boolean"
   },
   {
     "static": true,
@@ -21806,16 +21587,6 @@
     "parameters": ["boolean"]
   },
   {
-    "method": "endsWith",
-    "id": "63d4a93e2ec335248b8f73a1ec1d98b6",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "getAttribute",
     "id": "63dca24592deec70db01d284a1a901c9",
     "class": "org.bukkit.attribute.AttributeInstance",
@@ -22392,17 +22163,6 @@
     "id": "669f0584960cd9fcbdb5c7a2d3e3f80c",
     "class": "org.bukkit.loot.LootTables",
     "return": "org.bukkit.loot.LootTables"
-  },
-  {
-    "method": "startsWith",
-    "id": "66a569b38929e8d374d5bf772cac6e11",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "boolean"
   },
   {
     "method": "isAutoSave",
@@ -23237,17 +22997,6 @@
     "id": "69ad3e4d0136acb51a3bfb97f7bd2f05",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "indexOf",
-    "id": "69ae35294681e1dd8f2399b239e63946",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "static": true,
@@ -24542,16 +24291,6 @@
     "id": "700f8732de71b78bc78c0b9df26ee270",
     "class": "org.bukkit.inventory.InventoryView$Property",
     "return": "org.bukkit.inventory.InventoryView$Property"
-  },
-  {
-    "method": "lastIndexOf",
-    "id": "70315c3fa5795ff3e3c4258ad7dbf669",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
   },
   {
     "static": true,
@@ -25956,16 +25695,6 @@
     "parameters": ["java.util.Map"]
   },
   {
-    "method": "lastIndexOf",
-    "id": "76e348df61eea969c7b7b9e2f12086b4",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "int"
-  },
-  {
     "method": "getType",
     "id": "76f7b63265f271d9dbe71789d0947b5f",
     "class": "org.bukkit.block.Block",
@@ -27146,17 +26875,6 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
-    "method": "subSequence",
-    "id": "7bd14ded7144d49c97078043331018c0",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "java.lang.CharSequence"
-  },
-  {
     "method": "getArmorContents",
     "id": "7bd3189ea2666563a2513178d4cca7e0",
     "class": "org.bukkit.inventory.PlayerInventory",
@@ -27606,16 +27324,6 @@
     "return": "org.bukkit.util.Vector"
   },
   {
-    "method": "add",
-    "id": "7dec0c874e91003e6b8344a53c37fadf",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
-  },
-  {
     "static": true,
     "field": "DARK_OAK_SIGN",
     "id": "7dfd621f688bb4c21adddc148db18d48",
@@ -27900,20 +27608,6 @@
     "return": "int"
   },
   {
-    "method": "regionMatches",
-    "id": "7f84935e865b4c465a0c7825328b359d",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "boolean",
-      "int",
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setArmor",
     "id": "7f8f3383e903160973483ba10037f0fc",
     "class": "org.bukkit.inventory.HorseInventory",
@@ -27938,17 +27632,6 @@
     "id": "7f94fcd3a99a9f9cbd5f635ce13f7571",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "static": true,
-    "method": "join",
-    "id": "7f96b1cfe27680621e194a4c622766df",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.CharSequence",
-      "java.lang.Iterable"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "hasLodestone",
@@ -28843,12 +28526,6 @@
     "return": "boolean"
   },
   {
-    "method": "clear",
-    "id": "83253bab8a6fa7cf8aec61cca61351d4",
-    "class": "java.util.List",
-    "parameters": ["java.util.List"]
-  },
-  {
     "static": true,
     "field": "STRAY_SPAWN_EGG",
     "id": "832e68f26e632760fa2fc99b46b9b6f0",
@@ -29428,13 +29105,6 @@
     "id": "8599e3f339c39840cecf55e07c0c1b2a",
     "class": "org.bukkit.Effect",
     "return": "org.bukkit.Effect"
-  },
-  {
-    "method": "toCharArray",
-    "id": "85a1f23f3073b626d55025bce5f5b97d",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "[C"
   },
   {
     "static": true,
@@ -32224,17 +31894,6 @@
     "parameters": ["org.bukkit.Location"]
   },
   {
-    "method": "addAll",
-    "id": "92d0e0cd25e6f606c937ef46f6fb257b",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setEffect",
     "id": "92d33d23a92665619fb7624d5735a7f3",
     "class": "org.bukkit.inventory.meta.FireworkEffectMeta",
@@ -33040,16 +32699,6 @@
     "id": "96a787dd066ab7a2267f84da65778b17",
     "class": "org.bukkit.block.Biome",
     "return": "org.bukkit.block.Biome"
-  },
-  {
-    "method": "contains",
-    "id": "96b9c981cef7dbccd5114b0aed99c450",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence"
-    ],
-    "return": "boolean"
   },
   {
     "id": "96c3588d704111881326e29ea2f0749e",
@@ -34109,16 +33758,6 @@
     "return": "org.bukkit.Particle"
   },
   {
-    "method": "matches",
-    "id": "9b65a2265a007fd58c68dace7397123f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
     "static": true,
     "field": "TICKS_FOR_CURRENT_FUEL",
     "id": "9b6fa406f49876b2a08e65023eba90ac",
@@ -34384,17 +34023,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "replace",
-    "id": "9cb27c8761a5fdbba34cb6f6cf4e68ee",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence",
-      "java.lang.CharSequence"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "TRIANGLE_BOTTOM",
     "id": "9cb781ae4f2853084fafb83b2f84b322",
@@ -34619,16 +34247,6 @@
     "id": "9ddcf126eb483fd8c574e4d7d51cec7a",
     "class": "org.bukkit.event.entity.EntityTargetEvent$TargetReason",
     "return": "org.bukkit.event.entity.EntityTargetEvent$TargetReason"
-  },
-  {
-    "method": "compareTo",
-    "id": "9debbc1caf9bb62b9cd72446f6128b86",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.Object"
-    ],
-    "return": "int"
   },
   {
     "method": "getMemory",
@@ -36179,17 +35797,6 @@
     "id": "a431f2825cc1734b4373edd8c5727f1d",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "method": "format",
-    "id": "a4445b2a7096711ef11b03a49f8ba1f7",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "[Ljava.lang.Object;"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "getName",
@@ -37933,17 +37540,6 @@
     "return": "org.bukkit.event.inventory.InventoryAction"
   },
   {
-    "method": "replaceAll",
-    "id": "ac2263a8e21050bf0d662a1be58d0f70",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "UNLUCK",
     "id": "ac26060b19c6e6100e36fa569fb1e244",
@@ -39511,13 +39107,6 @@
     "return": "org.bukkit.entity.EnderDragon$Phase"
   },
   {
-    "method": "size",
-    "id": "b3447abec14dd4ab0295c30a9fdd45a3",
-    "class": "java.util.List",
-    "parameters": ["java.util.List"],
-    "return": "int"
-  },
-  {
     "static": true,
     "field": "BLOCK_NETHER_SPROUTS_FALL",
     "id": "b35a5b386ade9336d64dbc5872fab140",
@@ -39646,16 +39235,6 @@
     "id": "b3e29d9eca9ec7a8909868bd97426449",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "remove",
-    "id": "b3e43a8300e1c4ef271ce53572d558b9",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int"
-    ],
-    "return": "java.lang.Object"
   },
   {
     "method": "matches",
@@ -40988,13 +40567,6 @@
     "return": "org.bukkit.potion.PotionEffect"
   },
   {
-    "method": "length",
-    "id": "b9f848b15c7978a6ecbae0659dc86d9e",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "int"
-  },
-  {
     "method": "union",
     "id": "b9fd514be39f034e780f68e05ab2338f",
     "class": "org.bukkit.util.BoundingBox",
@@ -41112,16 +40684,6 @@
     "parameters": [
       "org.bukkit.block.Furnace",
       "short"
-    ]
-  },
-  {
-    "method": "add",
-    "id": "babd2d60e7a98178a62f6059c0500a8e",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "java.lang.Object"
     ]
   },
   {
@@ -42796,16 +42358,6 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "toUpperCase",
-    "id": "c28eb7496f7dc934d2a3e3a3be255566",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.util.Locale"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "EMERALD_ORE",
     "id": "c296238cacff42f34a8aa45a14e4f95c",
@@ -42912,16 +42464,6 @@
     "class": "org.bukkit.permissions.ServerOperator",
     "parameters": ["org.bukkit.permissions.ServerOperator"],
     "return": "boolean"
-  },
-  {
-    "method": "charAt",
-    "id": "c31a14894276f70b40834edf18e5b252",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "char"
   },
   {
     "static": true,
@@ -43071,17 +42613,6 @@
     "id": "c387db9c2a00b5c559685f9a34f22a63",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "substring",
-    "id": "c38ef61b8cdace3b53e77c78b2ad16d0",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "java.lang.String"
   },
   {
     "static": true,
@@ -43767,13 +43298,6 @@
     "return": "org.bukkit.entity.Villager$Type"
   },
   {
-    "method": "toUpperCase",
-    "id": "c79707c17cfadb8b30b134dfbe5f6fcd",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "RAIL",
     "id": "c79b4ff4535b05408c02977fdd1c7782",
@@ -44300,16 +43824,6 @@
     "return": "boolean"
   },
   {
-    "method": "substring",
-    "id": "ca21a3fc2f17df5b6559799cd356dc14",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "static": true,
     "field": "BLOCK_GRASS_FALL",
     "id": "ca28c59ae7d1964a035f5adac469272e",
@@ -44577,16 +44091,6 @@
     ]
   },
   {
-    "method": "contains",
-    "id": "cb865ff726ddb2629f4726c8af47f326",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "setImmuneToZombification",
     "id": "cb8cef54b2d35292e9604b4827ad6f35",
     "class": "org.bukkit.entity.PiglinAbstract",
@@ -44653,16 +44157,6 @@
   {
     "id": "cc0a658305ccf791bde8214074a7a48d",
     "event": "org.bukkit.event.entity.FireworkExplodeEvent"
-  },
-  {
-    "method": "contentEquals",
-    "id": "cc0c9b9674637d17a1424e3ea43a987f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence"
-    ],
-    "return": "boolean"
   },
   {
     "static": true,
@@ -45722,17 +45216,6 @@
     "id": "d15ce3ede22ef9fade6afbcde620b950",
     "class": "org.bukkit.TreeType",
     "return": "org.bukkit.TreeType"
-  },
-  {
-    "method": "replaceFirst",
-    "id": "d17d11af068d90d77eb731de54f833b3",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
   },
   {
     "static": true,
@@ -48956,17 +48439,6 @@
     "return": "org.bukkit.Statistic"
   },
   {
-    "method": "subList",
-    "id": "dfdd886a386581ab59103914eaba4303",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "int"
-    ],
-    "return": "java.util.List"
-  },
-  {
     "method": "setSpawnFlags",
     "id": "dfe514396c1c9f0fdbea4989ea617d94",
     "class": "org.bukkit.World",
@@ -49723,16 +49195,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "method": "remove",
-    "id": "e3737dc3a5274d6f37c07020acd11c4d",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
-  },
-  {
     "static": true,
     "field": "AMBIENT_NETHER_WASTES_MOOD",
     "id": "e37a9262f141266e4b1a8150a556e1fa",
@@ -49787,16 +49249,6 @@
     "event-method": true,
     "class": "org.bukkit.event.inventory.InventoryInteractEvent",
     "parameters": ["org.bukkit.event.Event$Result"]
-  },
-  {
-    "method": "startsWith",
-    "id": "e3e3f0598c0e2812b1a4275de995be81",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   },
   {
     "static": true,
@@ -50051,17 +49503,6 @@
   {
     "id": "e5390f46ff4b5f259eb6d0c9d60f1b0c",
     "event": "org.bukkit.event.player.PlayerSwapHandItemsEvent"
-  },
-  {
-    "method": "lastIndexOf",
-    "id": "e53bdd482676aed6bba48e6eb312eaeb",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "method": "clone",
@@ -50564,17 +50005,6 @@
       "org.bukkit.entity.Player",
       "float"
     ]
-  },
-  {
-    "method": "indexOf",
-    "id": "e7816a0a62fbe4beb86a9f3e89c57d1c",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "static": true,
@@ -52872,16 +52302,6 @@
     "return": "boolean"
   },
   {
-    "method": "compareToIgnoreCase",
-    "id": "f2a2b3d914f95b06df5a90be92e79abf",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
-  },
-  {
     "method": "hasBottle",
     "id": "f2aefc2f20e700f50b0e5fd0a412ec58",
     "class": "org.bukkit.block.data.type.BrewingStand",
@@ -53686,16 +53106,6 @@
     "id": "f63ae37feffaf69a46de74cc5d27fa69",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "removeAll",
-    "id": "f65cbe1f452e54ef001cd0e0d050255c",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
   },
   {
     "method": "getSaturation",
@@ -54615,6 +54025,15 @@
     "return": "org.bukkit.entity.EntityType"
   },
   {
+    "id": "fae572951570d86f3674ab87f6a60b0f",
+    "class": "org.bukkit.util.Vector",
+    "parameters": [
+      "int",
+      "int",
+      "int"
+    ]
+  },
+  {
     "id": "faeb7c9868dca091257565fa0fdcb60a",
     "event": "org.bukkit.event.vehicle.VehicleDamageEvent"
   },
@@ -54709,16 +54128,6 @@
     "id": "fb43b83cd4ef8cf2c069e4d697af47ed",
     "class": "org.bukkit.event.entity.EntityTargetEvent$TargetReason",
     "return": "org.bukkit.event.entity.EntityTargetEvent$TargetReason"
-  },
-  {
-    "method": "equalsIgnoreCase",
-    "id": "fb463ebbd4bb3fb63079d8fe58477b93",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
   },
   {
     "static": true,

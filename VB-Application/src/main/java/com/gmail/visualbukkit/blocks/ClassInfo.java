@@ -69,7 +69,7 @@ public class ClassInfo {
         if (clazz == String.class && classInfo.clazz == char.class) {
             return src + ".charAt(0)";
         }
-        if (Collection.class.isAssignableFrom(clazz) && classInfo.isArray()) {
+        if (clazz != null && Collection.class.isAssignableFrom(clazz) && classInfo.isArray()) {
             return src + ".toArray(new " + classInfo.canonicalClassName + "{})";
         }
         if (isPrimitiveNumber() && classInfo.clazz == Number.class) {
@@ -78,7 +78,7 @@ public class ClassInfo {
         if (isPrimitiveNumber() && classInfo.isNumber()) {
             return convert("((" + ClassUtils.wrapperToPrimitive(classInfo.clazz) + ")" + src, classInfo);
         }
-        if (Number.class.isAssignableFrom(clazz) && classInfo.isPrimitiveNumber()) {
+        if (clazz != null && Number.class.isAssignableFrom(clazz) && classInfo.isPrimitiveNumber()) {
             return src + "." + classInfo.canonicalClassName + "Value()";
         }
         return "((" + classInfo.canonicalClassName + ") (Object)" + src + ")";
