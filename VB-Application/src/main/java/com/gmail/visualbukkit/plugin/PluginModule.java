@@ -44,6 +44,13 @@ public abstract class PluginModule {
         }
     };
 
+    public static final PluginModule REFLECTION_UTIL = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.getUtilClasses().add(PluginBuilder.getUtilClass("ReflectionUtil"));
+        }
+    };
+
     public static final PluginModule VARIABLES = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext buildContext) {

@@ -36,17 +36,22 @@ public class StatScheduleTask extends Container {
                     childJava = childJava.replace(variable, finalVar);
                 }
 
-                String runnable = "() -> {try {" + childJava + "} catch (Exception e) { e.printStackTrace(); }}";
+                String method;
 
                 if (arg(1).equals("false")) {
-                    return finalVarDeclarations + "Bukkit.getScheduler()." +
-                            ((arg(0).equals("sync") ? "runTaskLater" : "runTaskLaterAsynchronously")) +
-                            "(PluginMain.getInstance()," + runnable + "," + arg(2) + ");";
+                    method = ((arg(0).equals("sync") ? "runTaskLater" : "runTaskLaterAsynchronously")) +
+                            "(PluginMain.getInstance()," + arg(2) + ");";
                 } else {
-                    return finalVarDeclarations + "Bukkit.getScheduler()." +
-                            ((arg(0).equals("sync") ? "runTaskTimer" : "runTaskTimerAsynchronously")) +
-                            "(PluginMain.getInstance()," + runnable + ",0," + arg(2) + ");";
+                    method = ((arg(0).equals("sync") ? "runTaskTimer" : "runTaskTimerAsynchronously")) +
+                            "(PluginMain.getInstance(),0," + arg(2) + ");";
                 }
+
+                return finalVarDeclarations +
+                        "new org.bukkit.scheduler.BukkitRunnable() {" +
+                        "public void run() {" +
+                        "try {" +
+                        getChildJava() +
+                        "} catch (Exception ex) { ex.printStackTrace(); }}}." + method;
             }
         };
     }

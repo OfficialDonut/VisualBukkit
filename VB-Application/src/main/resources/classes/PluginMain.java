@@ -25,14 +25,14 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
-    public static void procedure(String procedure, List<?> procedureArgs) throws Exception {}
+    public static void procedure(String procedure, List procedureArgs) throws Exception {}
 
-    public static Object function(String function, List<?> functionArgs) throws Exception {
+    public static Object function(String function, List functionArgs) throws Exception {
         return null;
     }
 
-    public static List<Object> createList(Object obj) {
-        List<Object> list = new ArrayList<>();
+    public static List createList(Object obj) {
+        List list = new ArrayList<>();
         if (obj.getClass().isArray()) {
             int length = java.lang.reflect.Array.getLength(obj);
             for (int i = 0; i < length; i++) {

@@ -129,31 +129,36 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         invalidReason = reason;
     }
 
-    protected void checkForPluginComponent(String componentID) {
+    protected boolean checkForPluginComponent(String componentID) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (block == null || !block.getDefinition().getID().equals(componentID)) {
             setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getPluginComponent(componentID).getTitle()));
+            return false;
         }
+        return true;
     }
 
-    protected void checkForEvent(ClassInfo event) {
+    protected boolean checkForEvent(ClassInfo event) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (!(block instanceof CompEventListener.EventBlock) || !event.equals(((CompEventListener.EventBlock) block).getEvent())) {
             setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), event.getDisplayClassName()));
+            return false;
         }
+        return true;
     }
 
-    protected void checkForContainer(String containerID) {
+    protected boolean checkForContainer(String containerID) {
         Parent parent = getParent();
         while (parent != null) {
             if (parent instanceof Container.ChildConnector) {
                 if ((((Container.ChildConnector) parent).getOwner().getDefinition().getID().equals(containerID))) {
-                    return;
+                    return true;
                 }
             }
             parent = parent.getParent();
         }
         setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getStatement(containerID)));
+        return false;
     }
 
     public void update() {
