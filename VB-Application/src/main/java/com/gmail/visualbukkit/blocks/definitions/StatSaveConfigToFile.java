@@ -12,7 +12,7 @@ public class StatSaveConfigToFile extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.Configuration")), new ExpressionParameter(ClassInfo.of("java.io.File"))) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.ConfigurationSection")), new ExpressionParameter(ClassInfo.of("java.io.File"))) {
             @Override
             public String toJava() {
                 return "((org.bukkit.configuration.file.FileConfiguration)" + arg(0) + ").save(" + arg(1) + ");";

@@ -5,6 +5,8 @@ import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
+import java.io.File;
+
 public class StatWriteToFile extends Statement {
 
     public StatWriteToFile() {
@@ -13,7 +15,7 @@ public class StatWriteToFile extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("java.io.File")), new ExpressionParameter(ClassInfo.STRING), new ChoiceParameter("WRITE", "APPEND")) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class)), new ExpressionParameter(ClassInfo.STRING), new ChoiceParameter("WRITE", "APPEND")) {
             @Override
             public String toJava() {
                 return "java.nio.file.Files.write(" + arg(0) + ".toPath()," +

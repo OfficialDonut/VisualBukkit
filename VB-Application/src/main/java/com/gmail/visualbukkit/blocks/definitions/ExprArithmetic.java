@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.gui.IconButton;
 import com.gmail.visualbukkit.gui.StyleableHBox;
@@ -9,10 +10,25 @@ import javafx.scene.Node;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class ExprCombineStrings extends Expression {
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.BiFunction;
 
-    public ExprCombineStrings() {
-        super("expr-combine-strings", ClassInfo.STRING);
+public class ExprArithmetic extends Expression {
+
+    private static Map<String, BiFunction<String, String, String>> functions = new TreeMap<>();
+
+    static {
+        functions.put("addition", (s1, s2) -> "(" + s1 + "+" + s2 + ")");
+        functions.put("division", (s1, s2) -> "(" + s1 + "/" + s2 + ")");
+        functions.put("exponentiation", (s1, s2) -> "Math.pow(" + s1 + "," + s2 + ")");
+        functions.put("modulo", (s1, s2) -> "(" + s1 + "%" + s2 + ")");
+        functions.put("multiplication", (s1, s2) -> "(" + s1 + "*" + s2 + ")");
+        functions.put("subtraction", (s1, s2) -> "(" + s1 + "-" + s2 + ")");
+    }
+
+    public ExprArithmetic() {
+        super("expr-arithmetic", ClassInfo.DOUBLE);
     }
 
     @Override
@@ -20,9 +36,10 @@ public class ExprCombineStrings extends Expression {
         Block block = new Block(this) {
             @Override
             public String toJava() {
-                String java = "(" + arg(0) + "+" + arg(1) + ")";
-                for (int i = 2; i < getParameters().size(); i++) {
-                    java = "(" + java + "+" + arg(i) + ")";
+                BiFunction<String, String, String> function = functions.get(arg(0));
+                String java = function.apply(arg(1), arg(2));
+                for (int i = 3; i < getParameters().size(); i++) {
+                    java = function.apply(java, arg(i));
                 }
                 return java;
             }
@@ -32,6 +49,7 @@ public class ExprCombineStrings extends Expression {
         IconButton decreaseSizeButton = new IconButton("minus", null, e -> decreaseSize(block));
         Node titleNode = block.getSyntaxBox().getChildren().remove(0);
         block.getSyntaxBox().getChildren().add(new StyleableHBox(titleNode, increaseSizeButton, decreaseSizeButton));
+        block.addParameterLines(new ChoiceParameter(functions.keySet()));
         increaseSize(block);
         increaseSize(block);
 
@@ -43,7 +61,7 @@ public class ExprCombineStrings extends Expression {
         Block block = createBlock();
         JSONArray parameterArray = json.optJSONArray("parameters");
         if (parameterArray != null) {
-            for (int i = 2; i < parameterArray.length(); i++) {
+            for (int i = 3; i < parameterArray.length(); i++) {
                 increaseSize(block);
             }
         }
@@ -52,17 +70,17 @@ public class ExprCombineStrings extends Expression {
     }
 
     private void increaseSize(Block block) {
-        int size = block.getParameters().size();
+        int size = block.getParameters().size() - 1;
         if (size < 10) {
-            block.addParameterLine(size + ")", new ExpressionParameter(ClassInfo.STRING));
+            block.addParameterLine(size + ")", new ExpressionParameter(ClassInfo.DOUBLE));
         }
     }
 
     private void decreaseSize(Block block) {
-        int size = block.getParameters().size();
+        int size = block.getParameters().size() - 1;
         if (size > 2) {
-            block.getParameters().remove(size - 1);
-            block.getSyntaxBox().getChildren().remove(size);
+            block.getParameters().remove(size);
+            block.getSyntaxBox().getChildren().remove(size + 1);
         }
     }
 }

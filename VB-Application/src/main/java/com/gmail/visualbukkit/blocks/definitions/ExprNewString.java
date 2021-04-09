@@ -12,11 +12,18 @@ public class ExprNewString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new StringLiteralParameter()) {
+        Block block = new Block(this) {
             @Override
             public String toJava() {
                 return "ChatColor.translateAlternateColorCodes('&'," + arg(0) + ")";
             }
         };
+
+        StringLiteralParameter parameter = new StringLiteralParameter();
+        block.getParameters().add(parameter);
+        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getSyntaxBox().getStyleClass().clear();
+
+        return block;
     }
 }

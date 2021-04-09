@@ -4,7 +4,6 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import javafx.css.PseudoClass;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -34,15 +33,9 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
         public Block(Expression expression, BlockParameter... parameters) {
             super(expression);
 
-            if (parameters.length == 1 && !(parameters[0] instanceof ExpressionParameter)) {
-                getParameters().add(parameters[0]);
-                getSyntaxBox().getChildren().add(0, (Node) parameters[0]);
-                getSyntaxBox().getStyleClass().clear();
-            } else {
-                addHeaderNode(new Label(expression.getTitle()));
-                addParameterLines(parameters);
-                getSyntaxBox().getStyleClass().add("expression-block");
-            }
+            addHeaderNode(new Label(expression.getTitle()));
+            addParameterLines(parameters);
+            getSyntaxBox().getStyleClass().add("expression-block");
 
             MenuItem addStringItem = new MenuItem(VisualBukkitApp.getString("context_menu.add_string"));
             addStringItem.setOnAction(e -> {
@@ -69,6 +62,27 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
             deleteItem.setOnAction(e -> UndoManager.run(delete()));
             getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, addStringItem);
             getContextMenu().setOnShowing(e -> addStringItem.setVisible(getExpressionParameter().getType().getClazz() == String.class || getDefinition().returnType.getClazz() == String.class));
+
+            if (getDefinition().getReturnType().getClazz() == boolean.class) {
+                MenuItem negateBooleanItem = new MenuItem(VisualBukkitApp.getString("context_menu.negate_boolean"));
+                getContextMenu().getItems().add(negateBooleanItem);
+                negateBooleanItem.setOnAction(e -> {
+                    ExpressionParameter exprParameter = getExpressionParameter();
+                    UndoManager.run(new UndoManager.RevertableAction() {
+                        @Override
+                        public void run() {
+                            Block negateBooleanBlock = BlockRegistry.getExpression("expr-negate-boolean").createBlock();
+                            exprParameter.setExpression(negateBooleanBlock).run();
+                            (((ExpressionParameter) negateBooleanBlock.getParameters().get(0)).setExpression(Block.this)).run();
+                        }
+
+                        @Override
+                        public void revert() {
+                            exprParameter.setExpression(Block.this).run();
+                        }
+                    });
+                });
+            }
 
             getSyntaxBox().setOnDragDetected(e -> {
                 if (e.getButton() == MouseButton.PRIMARY) {

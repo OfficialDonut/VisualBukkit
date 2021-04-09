@@ -12,7 +12,7 @@ public class StatSetConfigValue extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.Configuration")), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.ConfigurationSection")), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.OBJECT)) {
             @Override
             public String toJava() {
                 return arg(0) + ".set(" + arg(1) + "," + arg(2) + ");";

@@ -23,7 +23,7 @@ public class ExprNumber extends Expression {
             }
         });
 
-        Block block = new Block(this, input) {
+        Block block = new Block(this) {
             @Override
             public String toJava() {
                 String number = arg(0);
@@ -36,7 +36,9 @@ public class ExprNumber extends Expression {
             }
         };
 
-        block.getSyntaxBox().getStyleClass().add("expr-number");
+        block.getParameters().add(input);
+        block.getSyntaxBox().getChildren().set(0, input);
+        block.getSyntaxBox().getStyleClass().setAll("expr-number");
 
         return block;
     }
