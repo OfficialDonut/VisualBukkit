@@ -1,6 +1,7 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.google.common.base.Strings;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
 public abstract class BlockDefinition<T extends CodeBlock<?>> implements Comparable<BlockDefinition<?>> {
@@ -50,7 +51,7 @@ public abstract class BlockDefinition<T extends CodeBlock<?>> implements Compara
         if (equals(definition)) {
             return 0;
         }
-        int i = title.toLowerCase().compareTo(definition.title.toLowerCase());
+        int i = StringUtils.compareIgnoreCase(title, definition.title);
         return i == 0 ? id.compareTo(definition.id) : i;
     }
 

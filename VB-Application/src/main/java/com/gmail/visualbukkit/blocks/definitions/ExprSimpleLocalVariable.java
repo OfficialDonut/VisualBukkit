@@ -20,10 +20,7 @@ public class ExprSimpleLocalVariable extends Expression {
 
     @Override
     public Block createBlock() {
-        InputParameter inputParameter = new InputParameter();
-        inputParameter.getStyleClass().add("simple-local-variable");
-
-        return new Block(this, inputParameter) {
+        Block block = new Block(this) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -35,6 +32,14 @@ public class ExprSimpleLocalVariable extends Expression {
                 return getVariable(arg(0));
             }
         };
+
+        InputParameter inputParameter = new InputParameter();
+        inputParameter.getStyleClass().add("simple-local-variable");
+        block.getParameters().add(inputParameter);
+        block.getSyntaxBox().getChildren().set(0, inputParameter);
+        block.getSyntaxBox().getStyleClass().clear();
+
+        return block;
     }
 
     @SuppressWarnings("UnstableApiUsage")

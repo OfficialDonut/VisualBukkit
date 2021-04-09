@@ -2103,7 +2103,8 @@
     "method": "broadcastMessage",
     "id": "09cc31a7ff14a02c2e17ee5e7a48aec4",
     "class": "org.bukkit.Bukkit",
-    "parameters": ["java.lang.String"]
+    "parameters": ["java.lang.String"],
+    "return": "int"
   },
   {
     "static": true,
@@ -21288,7 +21289,8 @@
     "parameters": [
       "java.lang.String",
       "java.lang.String"
-    ]
+    ],
+    "return": "int"
   },
   {
     "static": true,
@@ -34368,17 +34370,6 @@
       "int"
     ],
     "return": "org.bukkit.block.banner.Pattern"
-  },
-  {
-    "method": "launchProjectile",
-    "id": "9e734fd4ca3069e8f1a556e84e18f28b",
-    "class": "org.bukkit.projectiles.ProjectileSource",
-    "parameters": [
-      "org.bukkit.projectiles.ProjectileSource",
-      "java.lang.Class",
-      "org.bukkit.util.Vector"
-    ],
-    "return": "org.bukkit.entity.Projectile"
   },
   {
     "static": true,
@@ -52806,16 +52797,6 @@
     "id": "f50c86e3acde5fb57a1856781278223a",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "method": "launchProjectile",
-    "id": "f51f25ec978504cb1c5599dc4e95b84b",
-    "class": "org.bukkit.projectiles.ProjectileSource",
-    "parameters": [
-      "org.bukkit.projectiles.ProjectileSource",
-      "java.lang.Class"
-    ],
-    "return": "org.bukkit.entity.Projectile"
   },
   {
     "method": "setHeadPose",

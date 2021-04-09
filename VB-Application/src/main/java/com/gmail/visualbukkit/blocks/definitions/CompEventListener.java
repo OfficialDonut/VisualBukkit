@@ -17,6 +17,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
@@ -77,7 +78,7 @@ public class CompEventListener extends PluginComponent {
             categoryBox.getItems().addAll(categories);
 
             Predicate<String> filter = event ->
-                    event.toLowerCase().contains(searchField.getText().toLowerCase())
+                    StringUtils.containsIgnoreCase(event, searchField.getText())
                     && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(eventCategories.get(event)));
 
             searchField.textProperty().addListener((o, oldValue, newValue) -> eventList.setPredicate(filter::test));

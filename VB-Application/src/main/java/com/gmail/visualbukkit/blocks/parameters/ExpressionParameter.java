@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
@@ -60,7 +61,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
             Predicate<Expression> filter = expr ->
                     expr instanceof ListSeparatorExpression ||
-                    (expr.getTitle().toLowerCase().contains(searchField.getText().toLowerCase())
+                    (StringUtils.containsIgnoreCase(expr.getTitle(), searchField.getText())
                     && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(expr.getCategory())));
 
             searchField.textProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));

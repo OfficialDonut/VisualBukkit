@@ -210,6 +210,8 @@ public class Project {
                     pluginComponentTabPane.getTabs().add(index, tab);
                     pluginComponentTabPane.getSelectionModel().select(tab);
                 });
+            } else {
+                pluginComponents.remove(tab);
             }
         });
         pluginComponents.put(tab, block);

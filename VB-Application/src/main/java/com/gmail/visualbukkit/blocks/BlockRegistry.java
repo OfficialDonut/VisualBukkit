@@ -28,9 +28,8 @@ public class BlockRegistry {
                 if (json.has("method")) {
                     if (json.has("return")) {
                         register(new MethodExpression(json));
-                    } else {
-                        register(new MethodStatement(json));
                     }
+                    register(new MethodStatement(json));
                 } else if (json.has("field")) {
                     register(new FieldExpression(json));
                 } else if (json.has("class")) {

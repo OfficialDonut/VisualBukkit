@@ -186,10 +186,7 @@ public class PluginBuilder {
     }
 
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
-        StringBuilder pluginYml = new StringBuilder();
-        pluginYml.append("name: '").append(pluginName).append("'\n");
-        pluginYml.append("version: '").append(version).append("'\n");
-        pluginYml.append("main: '").append(mainClassName).append("'\n");
+        StringBuilder pluginYml = new StringBuilder(YML_STRING.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
         if (!project.getAuthor().isBlank()) {
             pluginYml.append("author: '").append(project.getAuthor()).append("'\n");
         }
@@ -202,29 +199,28 @@ public class PluginBuilder {
         if (!project.getSoftDependencies().isBlank()) {
             pluginYml.append("softdepend: [").append(project.getSoftDependencies()).append("]\n");
         }
-        pluginYml.append("api-version: 1.13\n");
-        pluginYml.append("commands:\n");
+        StringBuilder commandsBuilder = new StringBuilder("commands:\n");
+        StringBuilder permissionsBuilder = new StringBuilder("permissions:\n");
         for (PluginComponent.Block pluginComponent : project.getPluginComponents()) {
-            if (pluginComponent.getDefinition() instanceof CompCommand) {
-                String name = pluginComponent.arg(0);
-                if (!name.isBlank()) {
-                    pluginYml.append("  ").append(name).append(":\n");
-                    if (!pluginComponent.arg(1).isBlank()) {
-                        pluginYml.append("    description: '").append(pluginComponent.arg(1).isBlank()).append("'\n");
-                    }
-                    if (!pluginComponent.arg(2).isBlank()) {
-                        pluginYml.append("    aliases: [").append(pluginComponent.arg(2).isBlank()).append("]\n");
-                    }
-                    if (!pluginComponent.arg(3).isBlank()) {
-                        pluginYml.append("    permission: '").append(pluginComponent.arg(3).isBlank()).append("'\n");
-                    }
-                    if (!pluginComponent.arg(4).isBlank()) {
-                        pluginYml.append("    permission-message: '").append(pluginComponent.arg(4).isBlank()).append("'\n");
-                    }
+            if (pluginComponent.getDefinition() instanceof CompCommand && !pluginComponent.arg(0).isBlank()) {
+                commandsBuilder.append("  ").append(pluginComponent.arg(0)).append(":\n");
+                if (!pluginComponent.arg(1).isBlank()) {
+                    commandsBuilder.append("    description: '").append(pluginComponent.arg(1)).append("'\n");
+                }
+                if (!pluginComponent.arg(2).isBlank()) {
+                    commandsBuilder.append("    aliases: [").append(pluginComponent.arg(2)).append("]\n");
+                }
+                if (!pluginComponent.arg(3).isBlank()) {
+                    commandsBuilder.append("    permission: '").append(pluginComponent.arg(3)).append("'\n");
+                    permissionsBuilder.append("  ").append(pluginComponent.arg(3)).append(":\n");
+                    permissionsBuilder.append("    default: op\n");
+                }
+                if (!pluginComponent.arg(4).isBlank()) {
+                    commandsBuilder.append("    permission-message: '").append(pluginComponent.arg(4)).append("'\n");
                 }
             }
         }
-        return pluginYml.toString();
+        return pluginYml.append(commandsBuilder).append(permissionsBuilder).toString();
     }
 
     public static JavaClassSource getUtilClass(String clazz) {
@@ -310,4 +306,10 @@ public class PluginBuilder {
             "    </build>" +
             "\n" +
             "</project>";
+
+    private static String YML_STRING =
+            "name: '{NAME}'\n" +
+            "version: '{VERSION}'\n" +
+            "main: '{MAIN_CLASS}'\n" +
+            "api-version: 1.13\n";
 }

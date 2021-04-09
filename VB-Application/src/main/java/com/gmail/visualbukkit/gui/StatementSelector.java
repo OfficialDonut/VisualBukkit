@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 
 import java.util.*;
@@ -18,6 +19,7 @@ public class StatementSelector extends TabPane {
     private Set<Statement> pinnedStatements = new TreeSet<>();
     private TextField searchField = new TextField();
     private TreeNode pinnedTree = new TreeNode(VisualBukkitApp.getString("label.pinned_blocks"));
+    private VBox currentCategory;
 
     public StatementSelector(Set<Statement> statements) {
         Label categoryLabel = new Label();
@@ -30,11 +32,18 @@ public class StatementSelector extends TabPane {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (currentCategory != null) {
+                filterSearch(currentCategory);
+            }
+        });
+
         getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
             if (newValue != null) {
                 categoryLabel.setText(newValue.getText());
                 content.getChildren().clear();
-                content.getChildren().addAll(headerBox, new Separator(), categories.get(newValue.getText()));
+                content.getChildren().addAll(headerBox, new Separator(), currentCategory = categories.get(newValue.getText()));
+                filterSearch(currentCategory);
                 if (oldValue != null) {
                     oldValue.setContent(null);
                 }
@@ -111,22 +120,18 @@ public class StatementSelector extends TabPane {
         VBox labelBox = new VBox();
         labelBox.getStyleClass().add("statement-selector");
         categories.put(category, labelBox);
-
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String search = searchField.getText().toLowerCase();
-            for (Node node : labelBox.getChildren()) {
-                if (node instanceof StatementLabel) {
-                    StatementLabel label = (StatementLabel) node;
-                    boolean state = label.getText().toLowerCase().contains(search);
-                    label.setVisible(state);
-                    label.setManaged(state);
-                }
-            }
-        });
-
         int i = 0;
         for (; i < getTabs().size() && category.compareTo(getTabs().get(i).getText()) > 0; i++);
         getTabs().add(i, new Tab(category));
+    }
+
+    private void filterSearch(VBox labelBox) {
+        for (Node node : labelBox.getChildren()) {
+            StatementLabel label = (StatementLabel) node;
+            boolean state = StringUtils.containsIgnoreCase(label.getText(), searchField.getText());
+            label.setVisible(state);
+            label.setManaged(state);
+        }
     }
 
     private void add(Statement statement, String category) {

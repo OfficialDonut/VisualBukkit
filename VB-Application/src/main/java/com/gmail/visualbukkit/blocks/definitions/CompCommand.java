@@ -2,9 +2,9 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
-import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.beans.binding.Bindings;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
@@ -20,7 +20,7 @@ public class CompCommand extends PluginComponent {
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter nameParameter = new StringLiteralParameter();
+        InputParameter nameParameter = new InputParameter();
         nameParameter.textProperty().addListener(((o, oldValue, newValue) -> {
             if (!WHITE_SPACE_PATTERN.matcher(newValue).matches()) {
                 nameParameter.setText(oldValue);
@@ -33,7 +33,7 @@ public class CompCommand extends PluginComponent {
                 super.prepareBuild(buildContext);
                 MethodSource<JavaClassSource> commandMethod = buildContext.getMainClass().getMethod("onCommand", "CommandSender", "Command", "String", "String[]");
                 commandMethod.setBody(
-                        "if (command.getName().equalsIgnoreCase(" + arg(0) + ")) {" +
+                        "if (command.getName().equalsIgnoreCase(\"" + StringEscapeUtils.escapeJava(arg(0)) + "\")) {" +
                         buildContext.getLocalVariableDeclarations() +
                         "try {" +
                         getChildJava() +
