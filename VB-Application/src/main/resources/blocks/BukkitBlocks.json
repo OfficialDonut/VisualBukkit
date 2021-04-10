@@ -12996,15 +12996,6 @@
     "return": "org.bukkit.World"
   },
   {
-    "id": "3be380ed8c401e0c631024baefc5bebf",
-    "class": "org.bukkit.util.Vector",
-    "parameters": [
-      "float",
-      "float",
-      "float"
-    ]
-  },
-  {
     "static": true,
     "field": "CARTOGRAPHER",
     "id": "3beb3278991011db4bb0d3cb7caca53a",
@@ -53878,15 +53869,6 @@
     "id": "fae3927155ba8f28542dcd495c094360",
     "class": "org.bukkit.entity.EntityType",
     "return": "org.bukkit.entity.EntityType"
-  },
-  {
-    "id": "fae572951570d86f3674ab87f6a60b0f",
-    "class": "org.bukkit.util.Vector",
-    "parameters": [
-      "int",
-      "int",
-      "int"
-    ]
   },
   {
     "id": "faeb7c9868dca091257565fa0fdcb60a",
