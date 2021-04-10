@@ -2277,7 +2277,8 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "org.bukkit.inventory.ItemStack"
-    ]
+    ],
+    "return": "java.util.Map"
   },
   {
     "static": true,
@@ -12207,8 +12208,9 @@
     "class": "org.bukkit.inventory.Inventory",
     "parameters": [
       "org.bukkit.inventory.Inventory",
-      "[Lorg.bukkit.inventory.ItemStack;"
-    ]
+      "org.bukkit.inventory.ItemStack"
+    ],
+    "return": "java.util.Map"
   },
   {
     "static": true,
@@ -35593,7 +35595,8 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "org.bukkit.Material"
-    ]
+    ],
+    "return": "java.util.Map"
   },
   {
     "method": "isConverting",
@@ -37134,7 +37137,8 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "org.bukkit.inventory.ItemStack"
-    ]
+    ],
+    "return": "java.util.Map"
   },
   {
     "static": true,
