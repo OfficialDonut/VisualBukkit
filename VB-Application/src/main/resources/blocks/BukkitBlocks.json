@@ -2277,8 +2277,7 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "org.bukkit.inventory.ItemStack"
-    ],
-    "return": "java.util.HashMap"
+    ]
   },
   {
     "static": true,
@@ -11181,20 +11180,6 @@
     ]
   },
   {
-    "method": "getNearbyEntities",
-    "id": "3371a84a7c55df7e97061e7810509475",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "double",
-      "double",
-      "double",
-      "java.util.function.Predicate"
-    ],
-    "return": "java.util.Collection"
-  },
-  {
     "method": "getOldEffect",
     "id": "3376f2095532ecd0dd8f286cad82efd0",
     "event-method": true,
@@ -12223,8 +12208,7 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "[Lorg.bukkit.inventory.ItemStack;"
-    ],
-    "return": "java.util.HashMap"
+    ]
   },
   {
     "static": true,
@@ -17828,19 +17812,6 @@
     "parameters": ["java.lang.String"]
   },
   {
-    "method": "rayTraceEntities",
-    "id": "530c356e72699cfca063baecf401ae49",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "org.bukkit.util.Vector",
-      "double",
-      "java.util.function.Predicate"
-    ],
-    "return": "org.bukkit.util.RayTraceResult"
-  },
-  {
     "method": "getKey",
     "id": "530e0023aeefb5648bf6325824719374",
     "class": "org.bukkit.Statistic",
@@ -21796,22 +21767,6 @@
     "id": "64bd633ce3bc891baaa15b4d71565572",
     "class": "org.bukkit.block.banner.PatternType",
     "return": "org.bukkit.block.banner.PatternType"
-  },
-  {
-    "method": "rayTrace",
-    "id": "64c4843a7f9acb76c810f37388f1dc4b",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "org.bukkit.util.Vector",
-      "double",
-      "org.bukkit.FluidCollisionMode",
-      "boolean",
-      "double",
-      "java.util.function.Predicate"
-    ],
-    "return": "org.bukkit.util.RayTraceResult"
   },
   {
     "static": true,
@@ -27106,16 +27061,6 @@
     "id": "7cf0cf86253fb2920cc471c61eedfdd9",
     "class": "org.bukkit.block.data.type.Jigsaw$Orientation",
     "return": "org.bukkit.block.data.type.Jigsaw$Orientation"
-  },
-  {
-    "method": "forEach",
-    "id": "7cfac96fb78a23a6f926840d78894cd6",
-    "event-method": true,
-    "class": "java.lang.Iterable",
-    "parameters": [
-      "java.lang.Iterable",
-      "java.util.function.Consumer"
-    ]
   },
   {
     "static": true,
@@ -35657,8 +35602,7 @@
     "parameters": [
       "org.bukkit.inventory.Inventory",
       "org.bukkit.Material"
-    ],
-    "return": "java.util.HashMap"
+    ]
   },
   {
     "method": "isConverting",
@@ -37198,9 +37142,8 @@
     "class": "org.bukkit.inventory.Inventory",
     "parameters": [
       "org.bukkit.inventory.Inventory",
-      "[Lorg.bukkit.inventory.ItemStack;"
-    ],
-    "return": "java.util.HashMap"
+      "org.bukkit.inventory.ItemStack"
+    ]
   },
   {
     "static": true,
@@ -42622,20 +42565,6 @@
     ]
   },
   {
-    "method": "rayTraceEntities",
-    "id": "c39e129ddb4c55968dac7f28b166df35",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "org.bukkit.util.Vector",
-      "double",
-      "double",
-      "java.util.function.Predicate"
-    ],
-    "return": "org.bukkit.util.RayTraceResult"
-  },
-  {
     "static": true,
     "field": "Z",
     "id": "c3ad027efac837c0faffd12578c3e40e",
@@ -43376,17 +43305,6 @@
     "class": "org.bukkit.util.Vector",
     "parameters": ["org.bukkit.util.Vector"],
     "return": "double"
-  },
-  {
-    "static": true,
-    "method": "createBlockData",
-    "id": "c7f653d553e96c82aeb3dd1f84283058",
-    "class": "org.bukkit.Bukkit",
-    "parameters": [
-      "org.bukkit.Material",
-      "java.util.function.Consumer"
-    ],
-    "return": "org.bukkit.block.data.BlockData"
   },
   {
     "method": "getPages",
@@ -44324,16 +44242,6 @@
       "org.bukkit.entity.Entity"
     ],
     "return": "boolean"
-  },
-  {
-    "method": "createBlockData",
-    "id": "ccaa714a9b8ac86ff701508dd6bd4c77",
-    "class": "org.bukkit.Material",
-    "parameters": [
-      "org.bukkit.Material",
-      "java.util.function.Consumer"
-    ],
-    "return": "org.bukkit.block.data.BlockData"
   },
   {
     "method": "setUseBed",
@@ -45407,17 +45315,6 @@
     "event-method": true,
     "class": "org.bukkit.event.inventory.InventoryClickEvent",
     "return": "org.bukkit.inventory.Inventory"
-  },
-  {
-    "static": true,
-    "method": "getTags",
-    "id": "d264132fda3a5e949ffd338bff00740f",
-    "class": "org.bukkit.Bukkit",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.Class"
-    ],
-    "return": "java.lang.Iterable"
   },
   {
     "id": "d26ad84da64b1c7b12d2b6ae22cfd53f",
@@ -50605,18 +50502,6 @@
     "return": "org.bukkit.block.banner.PatternType"
   },
   {
-    "method": "spawn",
-    "id": "ea2691be4d107a3e7346ec7b63847de6",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "java.lang.Class",
-      "org.bukkit.util.Consumer"
-    ],
-    "return": "org.bukkit.entity.Entity"
-  },
-  {
     "method": "getEntity",
     "id": "ea279d5b71304f6aebb4a94fec9665ad",
     "event-method": true,
@@ -51066,17 +50951,6 @@
     "id": "ebf7f8911971d56453a8b24fd52ebd74",
     "class": "org.bukkit.entity.Cat$Type",
     "return": "org.bukkit.entity.Cat$Type"
-  },
-  {
-    "method": "getNearbyEntities",
-    "id": "ec02ed11b6fd675e2ca6f01480cc7cbd",
-    "class": "org.bukkit.World",
-    "parameters": [
-      "org.bukkit.World",
-      "org.bukkit.util.BoundingBox",
-      "java.util.function.Predicate"
-    ],
-    "return": "java.util.Collection"
   },
   {
     "method": "damage",

@@ -7,26 +7,6 @@
     "return": "java.lang.String"
   },
   {
-    "method": "lastIndexOf",
-    "id": "11cd6347ec9bf622bee6a48207b40b32",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
-    "method": "concat",
-    "id": "1251a50d03bf7eb42f6236f267328e6a",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "isEmpty",
     "id": "14d0b64796778dd01f98780c19ac926f",
     "class": "java.util.List",
@@ -42,17 +22,6 @@
       "java.lang.String"
     ],
     "return": "int"
-  },
-  {
-    "method": "split",
-    "id": "1eea18c62e05b7b650be09a5fcad6f7c",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "[Ljava.lang.String;"
   },
   {
     "method": "get",
@@ -100,39 +69,6 @@
       "java.lang.String"
     ],
     "return": "int"
-  },
-  {
-    "static": true,
-    "method": "format",
-    "id": "38e1034ba5eee18bb6d3240c01f7a6fa",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.util.Locale",
-      "java.lang.String",
-      "[Ljava.lang.Object;"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "replace",
-    "id": "3e67e46a7e7cd75ca2064593910e0697",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "char",
-      "char"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "toLowerCase",
-    "id": "3f56b5573024cdd78b1789c2ddd90a8f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.util.Locale"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "set",
@@ -205,29 +141,6 @@
     "return": "int"
   },
   {
-    "method": "regionMatches",
-    "id": "5aa7294326783484aa3030ad47954a52",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "contentEquals",
-    "id": "5c2cc0d94fbb30dc1958f5a39e72f37b",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.StringBuffer"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "endsWith",
     "id": "63d4a93e2ec335248b8f73a1ec1d98b6",
     "class": "java.lang.String",
@@ -280,17 +193,6 @@
     "return": "int"
   },
   {
-    "method": "subSequence",
-    "id": "7bd14ded7144d49c97078043331018c0",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "java.lang.CharSequence"
-  },
-  {
     "method": "add",
     "id": "7dec0c874e91003e6b8344a53c37fadf",
     "class": "java.util.List",
@@ -301,42 +203,10 @@
     "return": "boolean"
   },
   {
-    "method": "regionMatches",
-    "id": "7f84935e865b4c465a0c7825328b359d",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "boolean",
-      "int",
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "boolean"
-  },
-  {
-    "static": true,
-    "method": "join",
-    "id": "7f96b1cfe27680621e194a4c622766df",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.CharSequence",
-      "java.lang.Iterable"
-    ],
-    "return": "java.lang.String"
-  },
-  {
     "method": "clear",
     "id": "83253bab8a6fa7cf8aec61cca61351d4",
     "class": "java.util.List",
     "parameters": ["java.util.List"]
-  },
-  {
-    "method": "toCharArray",
-    "id": "85a1f23f3073b626d55025bce5f5b97d",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "[C"
   },
   {
     "method": "addAll",
@@ -377,27 +247,6 @@
       "java.lang.String",
       "java.lang.CharSequence",
       "java.lang.CharSequence"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "compareTo",
-    "id": "9debbc1caf9bb62b9cd72446f6128b86",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.Object"
-    ],
-    "return": "int"
-  },
-  {
-    "static": true,
-    "method": "format",
-    "id": "a4445b2a7096711ef11b03a49f8ba1f7",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "[Ljava.lang.Object;"
     ],
     "return": "java.lang.String"
   },
@@ -445,16 +294,6 @@
       "int",
       "java.lang.Object"
     ]
-  },
-  {
-    "method": "toUpperCase",
-    "id": "c28eb7496f7dc934d2a3e3a3be255566",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.util.Locale"
-    ],
-    "return": "java.lang.String"
   },
   {
     "method": "charAt",
@@ -505,16 +344,6 @@
     "return": "boolean"
   },
   {
-    "method": "contentEquals",
-    "id": "cc0c9b9674637d17a1424e3ea43a987f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence"
-    ],
-    "return": "boolean"
-  },
-  {
     "method": "replaceFirst",
     "id": "d17d11af068d90d77eb731de54f833b3",
     "class": "java.lang.String",
@@ -555,17 +384,6 @@
       "java.lang.String"
     ],
     "return": "boolean"
-  },
-  {
-    "method": "lastIndexOf",
-    "id": "e53bdd482676aed6bba48e6eb312eaeb",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "method": "indexOf",

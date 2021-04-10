@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit;
 
+import com.gmail.visualbukkit.gui.NotificationManager;
 import com.google.common.io.MoreFiles;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,21 +28,24 @@ public class SettingsManager extends Menu {
     private final IntegerProperty fontSize = new SimpleIntegerProperty();
     private final BooleanProperty sounds = new SimpleBooleanProperty();
     private final IntegerProperty autosaveTime = new SimpleIntegerProperty();
+    private final StringProperty lang = new SimpleStringProperty();
 
     private SettingsManager() {
-        super(VisualBukkitApp.getString("menu.settings"));
+        super("Settings");
     }
 
     @SuppressWarnings("UnstableApiUsage")
     public void loadSettings(DataFile dataFile) throws IOException {
-        Menu themeMenu = new Menu(VisualBukkitApp.getString("menu.theme"));
-        Menu fontSizeMenu = new Menu(VisualBukkitApp.getString("menu.font_size"));
-        Menu soundsMenu = new Menu(VisualBukkitApp.getString("menu.sounds"));
-        Menu autosaveTimeMenu = new Menu(VisualBukkitApp.getString("menu.autosave"));
-        getItems().setAll(themeMenu, fontSizeMenu, soundsMenu, autosaveTimeMenu);
+        Menu themeMenu = new Menu("Theme");
+        Menu fontSizeMenu = new Menu("Font Size");
+        Menu soundsMenu = new Menu("Sounds");
+        Menu autosaveTimeMenu = new Menu("Auto-save");
+        Menu langMenu = new Menu("Language");
+        getItems().setAll(themeMenu, fontSizeMenu, soundsMenu, autosaveTimeMenu, langMenu);
 
         JSONObject json = dataFile.getJson();
         String selectedTheme = json.optString("settings.theme", "Dark");
+        String selectedLang = json.optString("settings.lang", "System Default");
         int selectedFontSize = json.optInt("settings.font-size", 14);
         int selectedAutosaveTime = json.optInt("settings.autosave", -1);
 
@@ -55,8 +60,8 @@ public class SettingsManager extends Menu {
             }
         }
 
-        Menu selectThemeMenu = new Menu(VisualBukkitApp.getString("menu.select_theme"));
-        MenuItem openThemeDirItem = new MenuItem(VisualBukkitApp.getString("menu_item.theme_directory"));
+        Menu selectThemeMenu = new Menu("Select");
+        MenuItem openThemeDirItem = new MenuItem("Open Folder");
         openThemeDirItem.setOnAction(e -> VisualBukkitApp.getInstance().openDirectory(themeDir));
         themeMenu.getItems().addAll(selectThemeMenu, openThemeDirItem);
 
@@ -73,8 +78,8 @@ public class SettingsManager extends Menu {
         }
 
         ToggleGroup soundsGroup = new ToggleGroup();
-        RadioMenuItem enableSoundsItem = new RadioMenuItem(VisualBukkitApp.getString("menu_item.enable_sounds"));
-        RadioMenuItem disableSoundsItem = new RadioMenuItem(VisualBukkitApp.getString("menu_item.disable_sounds"));
+        RadioMenuItem enableSoundsItem = new RadioMenuItem("Enable");
+        RadioMenuItem disableSoundsItem = new RadioMenuItem("Disable");
         enableSoundsItem.setOnAction(e -> sounds.set(true));
         disableSoundsItem.setOnAction(e -> sounds.set(false));
         for (RadioMenuItem soundItem : new RadioMenuItem[]{enableSoundsItem, disableSoundsItem}) {
@@ -98,15 +103,31 @@ public class SettingsManager extends Menu {
 
         ToggleGroup autosaveTimeGroup = new ToggleGroup();
         for (int i : new int[]{5, 10, 15, 20, 25, 30, -1}) {
-            RadioMenuItem timeItem = new RadioMenuItem(i == -1 ?
-                    VisualBukkitApp.getString("menu_item.autosave_never") :
-                    String.format(VisualBukkitApp.getString("menu_item.autosave_time"), i));
+            RadioMenuItem timeItem = new RadioMenuItem(i == -1 ? "Never" : (i + " minutes"));
             timeItem.setOnAction(e -> autosaveTime.set(i));
             autosaveTimeGroup.getToggles().add(timeItem);
             autosaveTimeMenu.getItems().add(timeItem);
             if (getAutosaveTime() == 0 || i == selectedAutosaveTime) {
                 autosaveTime.set(i);
                 timeItem.setSelected(true);
+            }
+        }
+
+        ToggleGroup langGroup = new ToggleGroup();
+        for (String s : new String[]{"System Default", "en-US"}) {
+            RadioMenuItem langItem = new RadioMenuItem(s);
+            langItem.setOnAction(e -> {
+                lang.set(s);
+                NotificationManager.displayMessage(VisualBukkitApp.getString("message.language_change.title"), VisualBukkitApp.getString("message.language_change.content"));
+            });
+            langGroup.getToggles().add(langItem);
+            langMenu.getItems().add(langItem);
+            if (getLang() == null || s.equals(selectedLang)) {
+                lang.set(s);
+                langItem.setSelected(true);
+                if (!s.equals("System Default")) {
+                    Locale.setDefault(Locale.forLanguageTag(s));
+                }
             }
         }
     }
@@ -117,6 +138,7 @@ public class SettingsManager extends Menu {
         data.put("settings.font-size", getFontSize());
         data.put("settings.sounds", getSounds());
         data.put("settings.autosave", getAutosaveTime());
+        data.put("settings.lang", getLang());
     }
 
     public void bindStyle(Parent parent) {
@@ -145,6 +167,10 @@ public class SettingsManager extends Menu {
         return autosaveTime.get();
     }
 
+    public String getLang() {
+        return lang.get();
+    }
+
     public ReadOnlyStringProperty themeProperty() {
         return theme;
     }
@@ -159,5 +185,9 @@ public class SettingsManager extends Menu {
 
     public ReadOnlyIntegerProperty autosaveTimeProperty() {
         return autosaveTime;
+    }
+
+    public StringProperty langProperty() {
+        return lang;
     }
 }
