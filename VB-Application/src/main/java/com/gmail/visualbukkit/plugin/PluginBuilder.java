@@ -94,9 +94,27 @@ public class PluginBuilder {
                 Files.createDirectories(packageDir);
                 Files.createDirectories(resourcesDir);
 
-                System.out.println("Generating source code...");
                 JavaClassSource mainClass = getUtilClass("PluginMain");
                 mainClass.setPackage(packageName);
+
+                if (Files.exists(project.getResourceDir()) && Files.list(project.getResourceDir()).findAny().isPresent()) {
+                    System.out.println("Copying resource files...");
+                    try (Stream<Path> pathStream = Files.walk(project.getResourceDir())) {
+                        for (Path path : pathStream.filter(Files::isRegularFile).collect(Collectors.toSet())) {
+                            Path relativePath = project.getResourceDir().relativize(path);
+                            Path resourceDirPath = resourcesDir.resolve(relativePath);
+                            Files.createDirectories(resourceDirPath.getParent());
+                            Files.copy(path, resourceDirPath);
+                            String filePath = StringEscapeUtils.escapeJava(relativePath.toString().replace("\\", "/"));
+                            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+                            enableMethod.setBody(enableMethod.getBody() + (filePath.equals("config.yml") ?
+                                    "saveDefaultConfig();" :
+                                    ("PluginMain.createResourceFile(\"" + filePath + "\");")));
+                        }
+                    }
+                }
+
+                System.out.println("Generating source code...");
                 BuildContext buildContext = new BuildContext(mainClass);
                 project.getPluginComponents().forEach(component -> component.prepareBuild(buildContext));
                 buildContext.getUtilMethods().forEach(mainClass::addMethod);
@@ -125,23 +143,6 @@ public class PluginBuilder {
                     int i = 1;
                     for (InputStream jarInputStream : jarInputStreams) {
                         FileUtils.copyInputStreamToFile(jarInputStream, dependDir.resolve("depend-" + i++ + ".jar").toFile());
-                    }
-                }
-
-                if (Files.exists(project.getResourceDir()) && Files.list(project.getResourceDir()).findAny().isPresent()) {
-                    System.out.println("Copying resource files...");
-                    try (Stream<Path> pathStream = Files.walk(project.getResourceDir())) {
-                        for (Path path : pathStream.filter(Files::isRegularFile).collect(Collectors.toSet())) {
-                            Path relativePath = project.getResourceDir().relativize(path);
-                            Path resourceDirPath = resourcesDir.resolve(relativePath);
-                            Files.createDirectories(resourceDirPath.getParent());
-                            Files.copy(path, resourceDirPath);
-                            String filePath = StringEscapeUtils.escapeJava(relativePath.toString().replace("\\", "/"));
-                            MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
-                            enableMethod.setBody(enableMethod.getBody() + (filePath.equals("config.yml") ?
-                                    "saveDefaultConfig();" :
-                                    ("PluginMain.createResourceFile(\"" + filePath + "\");")));
-                        }
                     }
                 }
 
