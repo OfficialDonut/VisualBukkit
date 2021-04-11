@@ -12,11 +12,18 @@ public class ExprBoolean extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("true", "false")) {
+        Block block = new Block(this) {
             @Override
             public String toJava() {
                 return arg(0);
             }
         };
+
+        ChoiceParameter parameter = new ChoiceParameter("true", "false");
+        block.getParameters().add(parameter);
+        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getSyntaxBox().getStyleClass().clear();
+
+        return block;
     }
 }

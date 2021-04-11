@@ -106,16 +106,16 @@ public class BlockGenerator {
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
-                generateMethods(clazz.getMethods(), true);
+                generateMethods(clazz, clazz.getMethods(), true);
             }
         } else {
-            generateFields(clazz.getDeclaredFields());
-            generateConstructors(clazz.getDeclaredConstructors());
-            generateMethods(clazz.getDeclaredMethods(), false);
+            generateFields(clazz, clazz.getDeclaredFields());
+            generateConstructors(clazz, clazz.getDeclaredConstructors());
+            generateMethods(clazz, clazz.getDeclaredMethods(), false);
         }
     }
 
-    private void generateFields(Field[] fields) {
+    private void generateFields(Class<?> clazz, Field[] fields) {
         for (Field field : fields) {
             if (Modifier.isPublic(field.getModifiers())
                     && (includeDeprecated || !field.isAnnotationPresent(Deprecated.class))
@@ -124,19 +124,19 @@ public class BlockGenerator {
                 if (!blockMap.containsKey(id)) {
                     JSONObject json = new JSONObject();
                     json.put("id", id);
-                    json.put("class", field.getDeclaringClass().getName());
+                    json.put("class", clazz.getName());
                     json.put("field", field.getName());
                     json.put("return", field.getType().getName());
                     json.putOpt("plugin-module", pluginModule);
                     if (Modifier.isStatic(field.getModifiers())) {
                         json.put("static", true);
                     } else {
-                        json.append("parameters", field.getDeclaringClass().getName());
-                        langMap.computeIfAbsent(id + ".parameters", k -> getDisplayClassName(field.getDeclaringClass()));
+                        json.append("parameters", clazz.getName());
+                        langMap.computeIfAbsent(id + ".parameters", k -> getDisplayClassName(clazz));
                     }
                     blockMap.put(id, json);
                 }
-                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(field.getDeclaringClass()) + "] " + field.getName());
+                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(clazz) + "] " + field.getName());
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
@@ -144,7 +144,7 @@ public class BlockGenerator {
         }
     }
 
-    private void generateConstructors(Constructor<?>[] constructors) {
+    private void generateConstructors(Class<?> clazz, Constructor<?>[] constructors) {
         for (Constructor<?> constructor : constructors) {
             if (Modifier.isPublic(constructor.getModifiers())
                     && (includeDeprecated || !constructor.isAnnotationPresent(Deprecated.class))
@@ -152,9 +152,9 @@ public class BlockGenerator {
                     && !blacklist.contains(constructor.getName())) {
                 String id = hash(constructor.toString());
                 if (!blockMap.containsKey(id)) {
-                    blockMap.put(id, generateExecutable(constructor, id));
+                    blockMap.put(id, generateExecutable(clazz, constructor, id));
                 }
-                langMap.putIfAbsent(id + ".title", "New " + getDisplayClassName(constructor.getDeclaringClass()));
+                langMap.putIfAbsent(id + ".title", "New " + getDisplayClassName(clazz));
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
@@ -162,16 +162,16 @@ public class BlockGenerator {
         }
     }
 
-    private void generateMethods(Method[] methods, boolean isEvent) {
+    private void generateMethods(Class<?> clazz, Method[] methods, boolean isEvent) {
         for (Method method : methods) {
             if (Modifier.isPublic(method.getModifiers())
                     && method.getDeclaringClass() != Object.class
                     && (includeDeprecated || !method.isAnnotationPresent(Deprecated.class))
                     && !blacklist.contains(method.toString())
                     && !blacklist.contains(method.getName())) {
-                String id = hash(method.toString());
+                String id = hash(method.getDeclaringClass() != clazz ? clazz + method.toString() : method.toString());
                 if (!blockMap.containsKey(id)) {
-                    JSONObject json = generateExecutable(method, id);
+                    JSONObject json = generateExecutable(clazz, method, id);
                     json.put("method", method.getName());
                     if (method.getReturnType() != void.class) {
                         json.put("return", method.getReturnType().getName());
@@ -184,7 +184,7 @@ public class BlockGenerator {
                     }
                     blockMap.put(id, json);
                 }
-                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(method.getDeclaringClass()) + "] " + formatLowerCamelCase(method.getName()));
+                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(clazz) + "] " + formatLowerCamelCase(method.getName()));
                 if (category != null) {
                     langMap.putIfAbsent(id + ".category", category);
                 }
@@ -192,14 +192,14 @@ public class BlockGenerator {
         }
     }
 
-    private JSONObject generateExecutable(Executable executable, String id) {
+    private JSONObject generateExecutable(Class<?> clazz, Executable executable, String id) {
         JSONObject json = new JSONObject();
         json.put("id", id);
-        json.put("class", executable.getDeclaringClass().getName());
+        json.put("class", clazz.getName());
         json.putOpt("plugin-module", pluginModule);
-        boolean isInstanceMethod = !Modifier.isStatic(executable.getModifiers()) && !(executable instanceof Constructor) && !eventClass.isAssignableFrom(executable.getDeclaringClass());
+        boolean isInstanceMethod = !Modifier.isStatic(executable.getModifiers()) && !(executable instanceof Constructor) && !eventClass.isAssignableFrom(clazz);
         if (isInstanceMethod) {
-            json.append("parameters", executable.getDeclaringClass().getName());
+            json.append("parameters", clazz.getName());
         }
         for (Class<?> parameterClass : executable.getParameterTypes()) {
             json.append("parameters", parameterClass.getName());
@@ -208,7 +208,7 @@ public class BlockGenerator {
             langMap.computeIfAbsent(id + ".parameters", k -> {
                 StringJoiner joiner = new StringJoiner(",");
                 if (isInstanceMethod) {
-                    joiner.add(getDisplayClassName(executable.getDeclaringClass()));
+                    joiner.add(getDisplayClassName(clazz));
                 }
                 for (Parameter parameter : executable.getParameters()) {
                     joiner.add(formatLowerCamelCase(parameter.getName()));
