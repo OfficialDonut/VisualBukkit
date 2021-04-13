@@ -12,11 +12,18 @@ public class ExprMathConstant extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("pi", "e")) {
+        Block block = new Block(this) {
             @Override
             public String toJava() {
                 return "Math." + arg(0).toUpperCase();
             }
         };
+
+        ChoiceParameter parameter = new ChoiceParameter("pi", "e");
+        block.getParameters().add(parameter);
+        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getSyntaxBox().getStyleClass().clear();
+
+        return block;
     }
 }
