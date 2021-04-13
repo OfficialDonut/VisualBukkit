@@ -131,16 +131,6 @@
     "return": "int"
   },
   {
-    "method": "indexOf",
-    "id": "5926bf4115a667769386d32dcfe8bd2b",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
     "method": "endsWith",
     "id": "63d4a93e2ec335248b8f73a1ec1d98b6",
     "class": "java.lang.String",
@@ -384,17 +374,6 @@
       "java.lang.String"
     ],
     "return": "boolean"
-  },
-  {
-    "method": "indexOf",
-    "id": "e7816a0a62fbe4beb86a9f3e89c57d1c",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "int"
   },
   {
     "method": "compareToIgnoreCase",
