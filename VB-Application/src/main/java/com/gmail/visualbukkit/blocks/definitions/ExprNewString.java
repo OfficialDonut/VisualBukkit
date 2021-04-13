@@ -19,9 +19,9 @@ public class ExprNewString extends Expression {
             }
         };
 
-        StringLiteralParameter parameter = new StringLiteralParameter();
-        block.getParameters().add(parameter);
-        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getHeaderBox().getChildren().clear();
+        block.addToHeader(new StringLiteralParameter());
+        block.getHeaderBox().getStyleClass().clear();
         block.getSyntaxBox().getStyleClass().clear();
 
         return block;

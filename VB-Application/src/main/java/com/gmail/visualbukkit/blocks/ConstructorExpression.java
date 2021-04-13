@@ -3,13 +3,13 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.gui.IconButton;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import com.gmail.visualbukkit.plugin.PluginModule;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.TreeMultimap;
-import javafx.scene.control.Menu;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -63,14 +63,21 @@ public class ConstructorExpression extends Expression {
 
         Set<ConstructorExpression> overloadedConstructors = constructorExpressions.get(getTitle());
         if (overloadedConstructors.size() > 1) {
-            Menu variantMenu = new Menu(VisualBukkitApp.getString("context_menu.select_variant"));
+            ContextMenu variantMenu = new ContextMenu();
             for (ConstructorExpression expression : overloadedConstructors) {
                 MenuItem variantItem = new MenuItem(expression.parameterTypesString);
                 variantMenu.getItems().add(variantItem);
                 variantItem.setOnAction(e -> UndoManager.run(block.getExpressionParameter().setExpression(expression.createBlock())));
             }
-            block.getContextMenu().getItems().add(0, new SeparatorMenuItem());
-            block.getContextMenu().getItems().add(0, variantMenu);
+
+            IconButton variantButton = new IconButton("list", null, null);
+            variantButton.setOnMouseClicked(e -> {
+                variantMenu.show(VisualBukkitApp.getInstance().getScene().getWindow(), e.getScreenX(), e.getScreenY());
+                VisualBukkitApp.getInstance().getScene().getWindow().requestFocus();
+                e.consume();
+            });
+
+            block.addToHeader(variantButton);
         }
 
         return block;

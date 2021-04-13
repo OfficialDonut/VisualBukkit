@@ -29,6 +29,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
 
     private final T definition;
     private List<BlockParameter> parameters = new ArrayList<>();
+    private HBox headerBox = new StyleableHBox();
     private VBox syntaxBox = new VBox();
     private ContextMenu contextMenu = new ContextMenu();
     private String invalidReason;
@@ -36,7 +37,9 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     public CodeBlock(T definition) {
         this.definition = definition;
 
+        headerBox.getStyleClass().add("code-block-header");
         syntaxBox.getStyleClass().add("code-block");
+        syntaxBox.getChildren().add(headerBox);
         getChildren().add(syntaxBox);
 
         parentProperty().addListener((o, oldValue, newValue) -> {
@@ -69,17 +72,18 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         });
     }
 
-    protected void addHeaderNode(Node node) {
-        node.getStyleClass().add("code-block-header");
-        syntaxBox.getChildren().add(0, node);
+    public void addToHeader(Node node) {
+        headerBox.getChildren().add(node);
+        addHeaderParameter(node);
+    }
+
+    private void addHeaderParameter(Node node) {
         if (node instanceof BlockParameter) {
             parameters.add((BlockParameter) node);
         }
         if (node instanceof Parent) {
             for (Node child : ((Parent) node).getChildrenUnmodifiable()) {
-                if (child instanceof BlockParameter) {
-                    parameters.add((BlockParameter) child);
-                }
+                addHeaderParameter(child);
             }
         }
     }
@@ -217,6 +221,10 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
 
     public List<BlockParameter> getParameters() {
         return parameters;
+    }
+
+    public HBox getHeaderBox() {
+        return headerBox;
     }
 
     public VBox getSyntaxBox() {

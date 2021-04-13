@@ -19,9 +19,8 @@ public class ExprMathConstant extends Expression {
             }
         };
 
-        ChoiceParameter parameter = new ChoiceParameter("pi", "e");
-        block.getParameters().add(parameter);
-        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getHeaderBox().getChildren().clear();
+        block.addToHeader(new ChoiceParameter("pi", "e"));
         block.getSyntaxBox().getStyleClass().clear();
 
         return block;

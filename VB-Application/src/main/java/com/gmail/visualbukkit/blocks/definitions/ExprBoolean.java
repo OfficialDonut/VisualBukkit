@@ -19,9 +19,8 @@ public class ExprBoolean extends Expression {
             }
         };
 
-        ChoiceParameter parameter = new ChoiceParameter("true", "false");
-        block.getParameters().add(parameter);
-        block.getSyntaxBox().getChildren().set(0, parameter);
+        block.getHeaderBox().getChildren().clear();
+        block.addToHeader(new ChoiceParameter("true", "false"));
         block.getSyntaxBox().getStyleClass().clear();
 
         return block;

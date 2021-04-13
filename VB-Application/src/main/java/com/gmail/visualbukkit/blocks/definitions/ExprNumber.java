@@ -36,8 +36,9 @@ public class ExprNumber extends Expression {
             }
         };
 
-        block.getParameters().add(input);
-        block.getSyntaxBox().getChildren().set(0, input);
+        block.getHeaderBox().getChildren().clear();
+        block.addToHeader(input);
+        block.getHeaderBox().getStyleClass().clear();
         block.getSyntaxBox().getStyleClass().setAll("expr-number");
 
         return block;

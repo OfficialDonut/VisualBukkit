@@ -33,7 +33,7 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
         public Block(Expression expression, BlockParameter... parameters) {
             super(expression);
 
-            addHeaderNode(new Label(expression.getTitle()));
+            addToHeader(new Label(expression.getTitle()));
             addParameterLines(parameters);
             getSyntaxBox().getStyleClass().add("expression-block");
 

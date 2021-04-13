@@ -3,7 +3,6 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.gui.SoundManager;
-import com.gmail.visualbukkit.gui.StyleableHBox;
 import com.gmail.visualbukkit.plugin.BuildContext;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -42,6 +41,8 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
         public Block(Statement statement, BlockParameter... parameters) {
             super(statement);
 
+            addToHeader(new Label(statement.getTitle()));
+
             if (parameters.length > 0) {
                 Button toggleCollapseButton = new Button();
                 toggleCollapseButton.setOnAction(e -> {
@@ -55,10 +56,9 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
 
                 Region spacer = new Region();
                 HBox.setHgrow(spacer, Priority.ALWAYS);
-                addHeaderNode(new StyleableHBox(new Label(statement.getTitle()), spacer, toggleCollapseButton));
+                addToHeader(spacer);
+                addToHeader(toggleCollapseButton);
                 addParameterLines(parameters);
-            } else {
-                addHeaderNode(new Label(statement.getTitle()));
             }
 
             MenuItem copyItem = new MenuItem(VisualBukkitApp.getString("context_menu.copy"));

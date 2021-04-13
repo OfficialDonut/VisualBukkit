@@ -35,8 +35,9 @@ public class ExprSimpleLocalVariable extends Expression {
 
         InputParameter inputParameter = new InputParameter();
         inputParameter.getStyleClass().add("simple-local-variable");
-        block.getParameters().add(inputParameter);
-        block.getSyntaxBox().getChildren().set(0, inputParameter);
+        block.getHeaderBox().getChildren().clear();
+        block.addToHeader(inputParameter);
+        block.getHeaderBox().getStyleClass().clear();
         block.getSyntaxBox().getStyleClass().clear();
 
         return block;

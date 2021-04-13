@@ -27,7 +27,7 @@ public abstract class PluginComponent extends BlockDefinition<PluginComponent.Bl
         public Block(PluginComponent pluginComponent, BlockParameter... parameters) {
             super(pluginComponent);
 
-            addHeaderNode(new Label(pluginComponent.getTitle()));
+            addToHeader(new Label(pluginComponent.getTitle()));
             addParameterLines(parameters);
 
             Region spacer = new Region();
