@@ -206,10 +206,10 @@ public class PluginBuilder {
             if (pluginComponent.getDefinition() instanceof CompCommand && !pluginComponent.arg(0).isBlank()) {
                 commandsBuilder.append("  ").append(pluginComponent.arg(0)).append(":\n");
                 if (!pluginComponent.arg(1).isBlank()) {
-                    commandsBuilder.append("    description: '").append(pluginComponent.arg(1)).append("'\n");
+                    commandsBuilder.append("    aliases: [").append(pluginComponent.arg(1)).append("]\n");
                 }
                 if (!pluginComponent.arg(2).isBlank()) {
-                    commandsBuilder.append("    aliases: [").append(pluginComponent.arg(2)).append("]\n");
+                    commandsBuilder.append("    description: '").append(pluginComponent.arg(2)).append("'\n");
                 }
                 if (!pluginComponent.arg(3).isBlank()) {
                     commandsBuilder.append("    permission: '").append(pluginComponent.arg(3)).append("'\n");
