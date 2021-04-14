@@ -20,6 +20,14 @@ public abstract class PluginModule {
         return pluginModules.get(moduleID);
     }
 
+    public static final PluginModule BUNGEE = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
+            enableMethod.setBody("Bukkit.getMessenger().registerOutgoingPluginChannel(this, \"BungeeCord\");" + enableMethod.getBody());
+        }
+    };
+
     public static final PluginModule DATABASE = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext context) {
