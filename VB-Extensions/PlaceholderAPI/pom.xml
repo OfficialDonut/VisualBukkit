@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>vb-extensions</artifactId>
-        <version>3.0.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>papi-extension</artifactId>
