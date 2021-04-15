@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -73,6 +75,11 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     }
 
     public void addToHeader(Node node) {
+        if (headerBox.getChildren().size() == 1) {
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            headerBox.getChildren().add(spacer);
+        }
         headerBox.getChildren().add(node);
         addHeaderParameter(node);
     }

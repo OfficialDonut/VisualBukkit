@@ -18,8 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
@@ -53,10 +51,6 @@ public abstract class Statement extends BlockDefinition<Statement.Block> {
                         .when(collapsedProperty())
                         .then(new ImageView(EXPAND_IMAGE))
                         .otherwise(new ImageView(COLLAPSE_IMAGE)));
-
-                Region spacer = new Region();
-                HBox.setHgrow(spacer, Priority.ALWAYS);
-                addToHeader(spacer);
                 addToHeader(toggleCollapseButton);
                 addParameterLines(parameters);
             }
