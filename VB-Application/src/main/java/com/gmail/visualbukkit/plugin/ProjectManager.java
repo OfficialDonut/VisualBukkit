@@ -56,7 +56,6 @@ public class ProjectManager {
         try {
             Project project = new Project(projectsDir.resolve(projectName));
             currentProject.set(project);
-            visualBukkit.getDataFile().getJson().put("last-project", projectName);
             visualBukkit.setPluginComponentTabPane(project.getPluginComponentTabPane());
             DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Developing " + projectName).setStartTimestamps(System.currentTimeMillis()).build());
         } catch (IOException e) {

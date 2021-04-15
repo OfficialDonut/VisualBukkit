@@ -22,7 +22,7 @@ public class AutoSaver {
         if (minutes > 0) {
             timeline = new Timeline(new KeyFrame(Duration.minutes(minutes), e -> {
                 try {
-                    VisualBukkitApp.getInstance().save();
+                    VisualBukkitApp.getInstance().saveCurrentProject();
                 } catch (IOException ignored) {}
             }));
             timeline.setCycleCount(Timeline.INDEFINITE);

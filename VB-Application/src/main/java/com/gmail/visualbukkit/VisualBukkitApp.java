@@ -92,8 +92,17 @@ public class VisualBukkitApp extends Application {
     @Override
     public void stop() throws IOException {
         NotificationManager.log("Shutting down...");
+        dataFile.clear();
+        SettingsManager.getInstance().saveSettings(dataFile);
+        if (ProjectManager.getCurrentProject() != null) {
+            dataFile.getJson().put("last-project", ProjectManager.getCurrentProject().getDir().getFileName());
+        }
+        if (statementSelector != null) {
+            statementSelector.savePinned(dataFile);
+        }
+        dataFile.save();
         if (saveOnExit) {
-            save();
+            saveCurrentProject();
         }
         DiscordRPC.discordShutdown();
         NotificationManager.log("Finished shut down.");
@@ -145,7 +154,7 @@ public class VisualBukkitApp extends Application {
                 if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
                     e.consume();
                     try {
-                        save();
+                        saveCurrentProject();
                         NotificationManager.displayMessage(getString("message.saved.title"), getString("message.saved.content"));
                     } catch (IOException ex) {
                         NotificationManager.displayException("Failed to save", ex);
@@ -195,7 +204,7 @@ public class VisualBukkitApp extends Application {
         exportComponentItem.setOnAction(e -> ProjectManager.getCurrentProject().promptExportComponent());
         saveItem.setOnAction(e -> {
             try {
-                save();
+                saveCurrentProject();
             } catch (IOException ex) {
                 NotificationManager.displayException("Failed to save", ex);
             }
@@ -298,17 +307,11 @@ public class VisualBukkitApp extends Application {
         }
     }
 
-    public void save() throws IOException {
+    public void saveCurrentProject() throws IOException {
         Project currentProject = ProjectManager.getCurrentProject();
         if (currentProject != null) {
             currentProject.save();
         }
-        dataFile.clear();
-        SettingsManager.getInstance().saveSettings(dataFile);
-        if (statementSelector != null) {
-            statementSelector.savePinned(dataFile);
-        }
-        dataFile.save();
     }
 
     public boolean checkForUpdate() {
