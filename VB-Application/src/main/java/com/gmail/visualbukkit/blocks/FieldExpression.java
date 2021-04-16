@@ -31,7 +31,10 @@ public class FieldExpression extends Expression {
             public String toJava() {
                 String java = (json.optBoolean("static") ? ClassInfo.of(json.getString("class")).getCanonicalClassName() : arg(0)) + "." + json.getString("field");
                 ClassInfo classInfo = ClassInfo.of(json.getString("return"));
-                return classInfo.isArrayOrCollection() && (classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz())) ? "PluginMain.createList(" + java + ")" : java;
+                if (classInfo.isArrayOrCollection()) {
+                    return classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz()) ? "PluginMain.createList(" + java + ")" : "((List)" + java + ")";
+                }
+                return java;
             }
         };
     }

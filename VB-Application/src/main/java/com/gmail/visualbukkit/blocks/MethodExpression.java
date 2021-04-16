@@ -74,7 +74,10 @@ public class MethodExpression extends Expression {
                 }
                 java += "." + json.getString("method") + "(" + parameterJoiner + ")";
                 ClassInfo classInfo = ClassInfo.of(json.getString("return"));
-                return classInfo.isArrayOrCollection() && (classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz())) ? "PluginMain.createList(" + java + ")" : java;
+                if (classInfo.isArrayOrCollection()) {
+                    return classInfo.getClazz() == null || !List.class.isAssignableFrom(classInfo.getClazz()) ? "PluginMain.createList(" + java + ")" : "((List)" + java + ")";
+                }
+                return java;
             }
         };
 
