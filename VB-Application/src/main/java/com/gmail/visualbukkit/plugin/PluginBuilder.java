@@ -34,7 +34,6 @@ public class PluginBuilder {
     private static Invoker mavenInvoker = new DefaultInvoker();
     private static List<String> mavenGoals = Arrays.asList("clean", "package");
     private static Map<String, String> utilClassCache = new HashMap<>();
-    private static File javaHome;
 
     static {
         System.setProperty(SimpleLogger.LEVEL_IN_BRACKETS_KEY, "true");
@@ -43,7 +42,6 @@ public class PluginBuilder {
 
         String installDir = System.getProperty("install4j.appDir");
         if (installDir != null) {
-            javaHome = new File(installDir, "jre");
             mavenInvoker.setMavenHome(new File(installDir, "apache-maven"));
         }
     }
@@ -153,9 +151,6 @@ public class PluginBuilder {
                 request.setBaseDirectory(buildDir.toFile());
                 request.setGoals(mavenGoals);
                 request.setBatchMode(true);
-                if (javaHome != null) {
-                    request.setJavaHome(javaHome);
-                }
                 InvocationResult result = mavenInvoker.execute(request);
                 if (result.getExecutionException() != null) {
                     result.getExecutionException().printStackTrace();
