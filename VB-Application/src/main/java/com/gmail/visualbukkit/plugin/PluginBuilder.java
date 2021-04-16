@@ -184,10 +184,10 @@ public class PluginBuilder {
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
         StringBuilder pluginYml = new StringBuilder(YML_STRING.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
         if (!project.getAuthor().isBlank()) {
-            pluginYml.append("author: '").append(project.getAuthor()).append("'\n");
+            pluginYml.append("author: \"").append(project.getAuthor()).append("\"\n");
         }
         if (!project.getDescription().isBlank()) {
-            pluginYml.append("description: '").append(project.getDescription()).append("'\n");
+            pluginYml.append("description: \"").append(project.getDescription()).append("\"\n");
         }
         if (!project.getDependencies().isBlank()) {
             pluginYml.append("depend: [").append(project.getDependencies()).append("]\n");
@@ -204,15 +204,15 @@ public class PluginBuilder {
                     commandsBuilder.append("    aliases: [").append(pluginComponent.arg(1)).append("]\n");
                 }
                 if (!pluginComponent.arg(2).isBlank()) {
-                    commandsBuilder.append("    description: '").append(pluginComponent.arg(2)).append("'\n");
+                    commandsBuilder.append("    description: \"").append(pluginComponent.arg(2)).append("\"\n");
                 }
                 if (!pluginComponent.arg(3).isBlank()) {
-                    commandsBuilder.append("    permission: '").append(pluginComponent.arg(3)).append("'\n");
+                    commandsBuilder.append("    permission: \"").append(pluginComponent.arg(3)).append("\"\n");
                     permissionsBuilder.append("  ").append(pluginComponent.arg(3)).append(":\n");
                     permissionsBuilder.append("    default: op\n");
                 }
                 if (!pluginComponent.arg(4).isBlank()) {
-                    commandsBuilder.append("    permission-message: '").append(pluginComponent.arg(4)).append("'\n");
+                    commandsBuilder.append("    permission-message: \"").append(pluginComponent.arg(4)).append("\"\n");
                 }
             }
         }
@@ -304,8 +304,8 @@ public class PluginBuilder {
             "</project>";
 
     private static String YML_STRING =
-            "name: '{NAME}'\n" +
-            "version: '{VERSION}'\n" +
-            "main: '{MAIN_CLASS}'\n" +
+            "name: \"{NAME}\"\n" +
+            "version: \"{VERSION}\"\n" +
+            "main: \"{MAIN_CLASS}\"\n" +
             "api-version: 1.13\n";
 }
