@@ -274,6 +274,14 @@ public class VisualBukkitApp extends Application {
                     logDisplay.show();
                     PluginBuilder.build(ProjectManager.getCurrentProject());
                 }),
+                new IconButton("jar", getString("tooltip.build_directory"), e -> {
+                    Path dir = ProjectManager.getCurrentProject().getBuildDir().resolve("target");
+                    if (Files.exists(dir)) {
+                        openDirectory(dir);
+                    } else {
+                        NotificationManager.displayError(getString("error.cannot_open_build_dir.title"), getString("error.cannot_open_build_dir.content"));
+                    }
+                }),
                 new IconButton("log", getString("tooltip.log"), e -> logDisplay.show()), spacer, projectLabel);
         buttonBar.getStyleClass().add("button-bar");
         return buttonBar;

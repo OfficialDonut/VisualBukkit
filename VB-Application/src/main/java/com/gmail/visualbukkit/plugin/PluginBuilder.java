@@ -6,6 +6,7 @@ import com.gmail.visualbukkit.blocks.definitions.CompCommand;
 import com.gmail.visualbukkit.gui.NotificationManager;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
+import javafx.application.Platform;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -155,7 +156,7 @@ public class PluginBuilder {
                 if (result.getExecutionException() != null) {
                     result.getExecutionException().printStackTrace();
                 } else if (result.getExitCode() == 0) {
-                    VisualBukkitApp.getInstance().openDirectory(buildDir.resolve("target"));
+                    Platform.runLater(() -> NotificationManager.displayMessage(VisualBukkitApp.getString("message.built_plugin.title"), VisualBukkitApp.getString("message.built_plugin.content")));
                 }
             } catch (Exception e) {
                 System.out.println(ExceptionUtils.getStackTrace(e));
