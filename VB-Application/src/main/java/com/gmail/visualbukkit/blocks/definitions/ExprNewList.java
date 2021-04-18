@@ -25,13 +25,13 @@ public class ExprNewList extends Expression {
             public String toJava() {
                 int size = getParameters().size();
                 if (size == 0) {
-                    return "new ArrayList<>()";
+                    return "new ArrayList()";
                 }
                 StringJoiner joiner = new StringJoiner(",");
                 for (BlockParameter parameter : getParameters()) {
                     joiner.add(parameter.toJava());
                 }
-                return "new ArrayList<>(Arrays.asList(" + joiner + "))";
+                return "new ArrayList(Arrays.asList(" + joiner + "))";
             }
         };
 
