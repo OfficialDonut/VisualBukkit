@@ -70,7 +70,7 @@ public class ClassInfo {
             return src + ".charAt(0)";
         }
         if (clazz != null && Collection.class.isAssignableFrom(clazz) && classInfo.isArray()) {
-            return src + ".toArray(new " + classInfo.canonicalClassName + "{})";
+            return "((" + classInfo.canonicalClassName + ")" + src + ".toArray(new " + classInfo.canonicalClassName + "{}))";
         }
         if (isPrimitiveNumber() && classInfo.clazz == Number.class) {
             return convert(src, ClassInfo.of(ClassUtils.primitiveToWrapper(clazz)));
