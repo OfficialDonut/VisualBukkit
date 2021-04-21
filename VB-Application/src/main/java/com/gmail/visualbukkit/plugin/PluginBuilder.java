@@ -190,6 +190,9 @@ public class PluginBuilder {
         if (!project.getDescription().isBlank()) {
             pluginYml.append("description: \"").append(project.getDescription()).append("\"\n");
         }
+        if (!project.getWebsite().isBlank()) {
+            pluginYml.append("website: \"").append(project.getWebsite()).append("\"\n");
+        }
         if (!project.getDependencies().isBlank()) {
             pluginYml.append("depend: [").append(project.getDependencies()).append("]\n");
         }

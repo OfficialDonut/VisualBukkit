@@ -35,6 +35,7 @@ public class Project {
     private StringProperty version = new SimpleStringProperty();
     private StringProperty author = new SimpleStringProperty();
     private StringProperty description = new SimpleStringProperty();
+    private StringProperty website = new SimpleStringProperty();
     private StringProperty dependencies = new SimpleStringProperty();
     private StringProperty softDependencies = new SimpleStringProperty();
     private Stage pluginSettingsStage = new Stage();
@@ -57,12 +58,14 @@ public class Project {
         TextField verField = new TextField();
         TextField authorField = new TextField();
         TextField descField = new TextField();
+        TextField websiteField = new TextField();
         TextField dependField = new TextField();
         TextField softDependField = new TextField();
         nameField.textProperty().bindBidirectional(name);
         verField.textProperty().bindBidirectional(version);
         authorField.textProperty().bindBidirectional(author);
         descField.textProperty().bindBidirectional(description);
+        websiteField.textProperty().bindBidirectional(website);
         dependField.textProperty().bindBidirectional(dependencies);
         softDependField.textProperty().bindBidirectional(softDependencies);
         nameField.textProperty().addListener((o, oldValue, newValue) -> {
@@ -72,11 +75,11 @@ public class Project {
         });
         GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("plugin-settings-grid");
-        gridPane.addColumn(0,
-                new Label(VisualBukkitApp.getString("label.plugin_name")), new Label(VisualBukkitApp.getString("label.plugin_version")),
-                new Label(VisualBukkitApp.getString("label.plugin_author")), new Label(VisualBukkitApp.getString("label.plugin_description")),
+        gridPane.addColumn(0, new Label(VisualBukkitApp.getString("label.plugin_name")),
+                new Label(VisualBukkitApp.getString("label.plugin_version")), new Label(VisualBukkitApp.getString("label.plugin_author")),
+                new Label(VisualBukkitApp.getString("label.plugin_description")), new Label(VisualBukkitApp.getString("label.plugin_website")),
                 new Label(VisualBukkitApp.getString("label.plugin_depend")), new Label(VisualBukkitApp.getString("label.plugin_soft_depend")));
-        gridPane.addColumn(1, nameField, verField, authorField, descField, dependField, softDependField);
+        gridPane.addColumn(1, nameField, verField, authorField, descField, websiteField, dependField, softDependField);
         SettingsManager.getInstance().bindStyle(gridPane);
         pluginSettingsStage.initModality(Modality.APPLICATION_MODAL);
         pluginSettingsStage.setTitle(VisualBukkitApp.getString("window.plugin_settings"));
@@ -89,6 +92,7 @@ public class Project {
         version.set(json.optString("plugin.version", ""));
         author.set(json.optString("plugin.author", ""));
         description.set(json.optString("plugin.description", ""));
+        website.set(json.optString("plugin.website", ""));
         dependencies.set(json.optString("plugin.dependencies", ""));
         softDependencies.set(json.optString("plugin.soft-dependencies", ""));
         JSONArray componentArray = json.optJSONArray("plugin-components");
@@ -116,6 +120,7 @@ public class Project {
         json.put("plugin.version", getVersion());
         json.put("plugin.author", getAuthor());
         json.put("plugin.description", getDescription());
+        json.put("plugin.website", getWebsite());
         json.put("plugin.dependencies", getDependencies());
         json.put("plugin.soft-dependencies", getSoftDependencies());
         json.put("open-tab", pluginComponentTabPane.getSelectionModel().getSelectedIndex());
@@ -261,6 +266,10 @@ public class Project {
 
     public String getDescription() {
         return description.get();
+    }
+
+    public String getWebsite() {
+        return website.get();
     }
 
     public String getDependencies() {
