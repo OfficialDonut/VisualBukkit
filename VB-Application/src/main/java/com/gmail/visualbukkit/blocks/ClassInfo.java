@@ -81,6 +81,9 @@ public class ClassInfo {
         if (clazz != null && Number.class.isAssignableFrom(clazz) && classInfo.isPrimitiveNumber()) {
             return src + "." + classInfo.canonicalClassName + "Value()";
         }
+        if (clazz == Object.class && classInfo.isPrimitiveNumber()) {
+            return "((Number)" + src + ")." + classInfo.canonicalClassName + "Value()";
+        }
         return "((" + classInfo.canonicalClassName + ") (Object)" + src + ")";
     }
 
