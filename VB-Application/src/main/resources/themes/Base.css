@@ -216,6 +216,10 @@
     -fx-background: gray;
 }
 
+.simple-global-variable {
+    -fx-control-inner-background: derive(yellow, 50%) !important;
+}
+
 .simple-local-variable {
     -fx-control-inner-background: yellow !important;
 }
