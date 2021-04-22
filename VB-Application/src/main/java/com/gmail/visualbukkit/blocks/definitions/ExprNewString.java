@@ -15,7 +15,8 @@ public class ExprNewString extends Expression {
         Block block = new Block(this) {
             @Override
             public String toJava() {
-                return "ChatColor.translateAlternateColorCodes('&'," + arg(0) + ")";
+                String str = arg(0);
+                return str.contains("&") ? "ChatColor.translateAlternateColorCodes('&'," + str + ")" : str;
             }
         };
 
