@@ -7,7 +7,6 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import java.util.regex.Matcher;
 
 public class StatScheduleTask extends Container {
@@ -22,18 +21,20 @@ public class StatScheduleTask extends Container {
             @Override
             public String toJava() {
                 String childJava = getChildJava();
+                StringBuilder tempVarDeclarations = new StringBuilder();
+                StringBuilder finalVarDeclarations = new StringBuilder();
                 Set<String> variables = new HashSet<>();
                 Matcher matcher = ExprSimpleLocalVariable.VAR_PATTERN.matcher(childJava);
 
                 while (matcher.find()) {
-                    variables.add(matcher.group());
-                }
-
-                StringBuilder finalVarDeclarations = new StringBuilder();
-                for (String variable : variables) {
-                    String finalVar = variable.replace("$", "FINAL_" + UUID.randomUUID().toString().replace("-", ""));
-                    finalVarDeclarations.append("Object ").append(finalVar).append(" = ").append(variable).append(";");
-                    childJava = childJava.replace(variable, finalVar);
+                    String variable = matcher.group();
+                    if (variables.add(variable)) {
+                        String tempVar = ExprSimpleLocalVariable.getRandomVariable().replace("$", "TEMP_");
+                        String finalVar = ExprSimpleLocalVariable.getRandomVariable().replace("$", "FINAL_");
+                        tempVarDeclarations.append("Object ").append(tempVar).append(" = ").append(variable).append(";");
+                        finalVarDeclarations.append("Object ").append(finalVar).append(" = ").append(tempVar).append(";");
+                        childJava = childJava.replace(variable, finalVar);
+                    }
                 }
 
                 String method;
@@ -46,11 +47,12 @@ public class StatScheduleTask extends Container {
                             "(PluginMain.getInstance(),0," + arg(2) + ");";
                 }
 
-                return finalVarDeclarations +
+                return tempVarDeclarations +
                         "new org.bukkit.scheduler.BukkitRunnable() {" +
                         "public void run() {" +
                         "try {" +
-                        getChildJava() +
+                        finalVarDeclarations +
+                        childJava +
                         "} catch (Exception ex) { ex.printStackTrace(); }}}." + method;
             }
         };
