@@ -38,8 +38,8 @@ public class ExprNumber extends Expression {
 
         block.getHeaderBox().getChildren().clear();
         block.addToHeader(input);
-        block.getHeaderBox().getStyleClass().clear();
-        block.getSyntaxBox().getStyleClass().setAll("expr-number");
+        block.getSyntaxBox().getStyleClass().clear();
+        block.getHeaderBox().getStyleClass().setAll("expr-number");
 
         return block;
     }
