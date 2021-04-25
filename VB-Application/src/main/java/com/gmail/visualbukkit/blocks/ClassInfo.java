@@ -84,6 +84,9 @@ public class ClassInfo {
         if (clazz == Object.class && classInfo.isPrimitiveNumber()) {
             return "((Number)" + src + ")." + classInfo.canonicalClassName + "Value()";
         }
+        if (clazz == Object.class && classInfo.isArray()) {
+            return "((" + classInfo.canonicalClassName + ") ((List)" + src + ").toArray(new " + classInfo.canonicalClassName + "{}))";
+        }
         return "((" + classInfo.canonicalClassName + ") (Object)" + src + ")";
     }
 
