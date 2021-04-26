@@ -29,7 +29,7 @@ public class StatAddToSimpleGlobalVariable extends Statement {
 
             @Override
             public String toJava() {
-                String varName = ExprSimpleGlobalVariable.getVariable(arg(0));
+                String varName = "PluginMain." + ExprSimpleGlobalVariable.getVariable(arg(0));
                 return varName + " = (" + varName + " instanceof Number ? ((Number)" + varName + ").doubleValue() : 0) + " + arg(1) + ";";
             }
         };

@@ -40,6 +40,6 @@ public class ExprSimpleGlobalVariable extends Expression {
     }
 
     protected static String getVariable(String string) {
-        return ExprSimpleLocalVariable.getVariable("global" + string);
+        return ExprSimpleLocalVariable.getVariable(string).replace("$", "GLOBAL_");
     }
 }

@@ -29,7 +29,7 @@ public class StatSetSimpleGlobalVariable extends Statement {
 
             @Override
             public String toJava() {
-                return ExprSimpleGlobalVariable.getVariable(arg(0)) + " = " + arg(1) + ";";
+                return "PluginMain." + ExprSimpleGlobalVariable.getVariable(arg(0)) + " = " + arg(1) + ";";
             }
         };
     }
