@@ -54,7 +54,7 @@ public class ClassInfo {
     }
 
     public String convert(String src, ClassInfo classInfo) {
-        if (equals(classInfo)) {
+        if (equals(classInfo) || (classInfo.clazz == Object.class && !isPrimitive())) {
             return src;
         }
         if (clazz == void.class) {
@@ -63,7 +63,7 @@ public class ClassInfo {
         if ((isPrimitiveNumber() && classInfo.isPrimitiveNumber()) || (classInfo.isPrimitive() && clazz == ClassUtils.primitiveToWrapper(classInfo.clazz)) || (isPrimitive() && classInfo.clazz == ClassUtils.primitiveToWrapper(clazz))) {
             return "((" + classInfo.canonicalClassName + ")" + src + ")";
         }
-        if (classInfo.clazz == String.class) {
+        if (classInfo.clazz == String.class || classInfo.clazz == CharSequence.class) {
             return "String.valueOf(" + src + ")";
         }
         if (clazz == String.class && classInfo.clazz == char.class) {
