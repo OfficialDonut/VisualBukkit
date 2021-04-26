@@ -37,7 +37,9 @@ public class CompCommand extends PluginComponent {
                         buildContext.getLocalVariableDeclarations() +
                         "try {" +
                         getChildJava() +
-                        "} catch (Exception e) { e.printStackTrace(); }}" +
+                        "} catch (Exception e) { e.printStackTrace(); }" +
+                        "return true;" +
+                        "}" +
                         commandMethod.getBody());
             }
         };
