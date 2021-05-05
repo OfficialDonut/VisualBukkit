@@ -76,7 +76,7 @@ public class ClassInfo {
             return convert(src, ClassInfo.of(ClassUtils.primitiveToWrapper(clazz)));
         }
         if (isPrimitiveNumber() && classInfo.isNumber()) {
-            return convert("((" + ClassUtils.wrapperToPrimitive(classInfo.clazz) + ")" + src, classInfo);
+            return ClassInfo.of(ClassUtils.wrapperToPrimitive(classInfo.clazz)).convert("((" + ClassUtils.wrapperToPrimitive(classInfo.clazz) + ")" + src, classInfo);
         }
         if (clazz != null && Number.class.isAssignableFrom(clazz) && classInfo.isPrimitiveNumber()) {
             return src + "." + classInfo.canonicalClassName + "Value()";
