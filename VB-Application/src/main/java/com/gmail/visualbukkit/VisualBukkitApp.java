@@ -30,7 +30,6 @@ import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.json.JSONArray;
 
 import java.awt.*;
@@ -304,14 +303,14 @@ public class VisualBukkitApp extends Application {
                 return;
             }
         }
-        if (!Desktop.isDesktopSupported() || SystemUtils.IS_OS_UNIX || SystemUtils.IS_OS_LINUX) {
+        try {
+            Desktop.getDesktop().browse(dir.toUri());
+        } catch (Exception e1) {
             try {
                 Runtime.getRuntime().exec(new String[]{"xdg-open", dir.toUri().toString()});
-            } catch (IOException ignored) {
+            } catch (IOException e2) {
                 NotificationManager.displayError("Error", "Action not supported by your OS");
             }
-        } else {
-            openURI(dir.toUri());
         }
     }
 
