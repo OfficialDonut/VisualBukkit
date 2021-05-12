@@ -85,7 +85,7 @@ public class SettingsManager extends Menu {
         }
 
         ToggleGroup langGroup = new ToggleGroup();
-        for (String s : new String[]{"System Default", "en-US"}) {
+        for (String s : new String[]{"System Default", "en-US","简体中文（By 橘子君233）"}) {
             RadioMenuItem langItem = new RadioMenuItem(s);
             langItem.setOnAction(e -> {
                 lang.set(s);
