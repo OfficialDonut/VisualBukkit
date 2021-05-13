@@ -46,7 +46,7 @@ import java.util.ResourceBundle;
 public class VisualBukkitApp extends Application {
 
     public static final String VERSION = String.valueOf(VisualBukkitLauncher.class.getPackage().getSpecificationVersion());
-    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("lang.GUI");
+    private static ResourceBundle resourceBundle;
     private static VisualBukkitApp instance;
 
     private boolean saveOnExit = true;
@@ -73,6 +73,7 @@ public class VisualBukkitApp extends Application {
         dataDir = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
         dataFile = new DataFile(dataDir.resolve("data.json"));
         SettingsManager.getInstance().loadSettings(dataFile);
+        resourceBundle = ResourceBundle.getBundle("lang.GUI");
         logDisplay = new LogDisplay();
         System.setOut(logDisplay.getPrintStream());
         System.setErr(logDisplay.getPrintStream());
