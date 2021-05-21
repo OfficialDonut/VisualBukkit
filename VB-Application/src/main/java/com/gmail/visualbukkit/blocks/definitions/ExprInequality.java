@@ -8,15 +8,20 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprInequality extends Expression {
 
     public ExprInequality() {
-        super("expr-inequality", ClassInfo.BOOLEAN);
+        super("expr-inequality");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("<", "<=", ">", ">="), new ExpressionParameter(ClassInfo.DOUBLE), new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE), new ChoiceParameter("<", "<=", ">", ">="), new ExpressionParameter(ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
-                return "(" + arg(1) + arg(0) + arg(2) + ")";
+                return "(" + arg(0) + " " + arg(1) + " " + arg(2) + ")";
             }
         };
     }

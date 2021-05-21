@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprFileName extends Expression {
 
     public ExprFileName() {
-        super("expr-file-name", ClassInfo.STRING);
+        super("expr-file-name");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

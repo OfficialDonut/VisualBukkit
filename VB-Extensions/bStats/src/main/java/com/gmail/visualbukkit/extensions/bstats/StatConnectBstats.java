@@ -3,14 +3,14 @@ package com.gmail.visualbukkit.extensions.bstats;
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 
 public class StatConnectBstats extends Statement {
 
     public StatConnectBstats() {
-        super("connect-bstats");
+        super("stat-connect-bstats");
     }
 
     @Override

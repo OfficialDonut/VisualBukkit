@@ -8,7 +8,12 @@ import java.io.File;
 public class ExprPluginDirectory extends Expression {
 
     public ExprPluginDirectory() {
-        super("expr-plugin-directory", ClassInfo.of(File.class));
+        super("expr-plugin-directory");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(File.class);
     }
 
     @Override

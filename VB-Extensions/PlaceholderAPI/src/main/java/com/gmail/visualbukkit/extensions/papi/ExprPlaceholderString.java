@@ -3,12 +3,17 @@ package com.gmail.visualbukkit.extensions.papi;
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
 public class ExprPlaceholderString extends Expression {
 
     public ExprPlaceholderString() {
-        super("expr-placeholder-string", ClassInfo.STRING);
+        super("expr-placeholder-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

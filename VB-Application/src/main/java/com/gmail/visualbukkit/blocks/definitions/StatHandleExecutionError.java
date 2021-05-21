@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
-import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.Container;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class StatHandleExecutionError extends Container {
 
@@ -15,14 +15,12 @@ public class StatHandleExecutionError extends Container {
             @Override
             public void update() {
                 super.update();
-                if (getPrevious() instanceof ChildConnector || !(getPrevious().getOwner().getDefinition() instanceof StatAttemptExecution)) {
-                    setInvalid(VisualBukkitApp.getString("error.invalid_handle_error"));
-                }
+                checkForPrevious("stat-attempt-execution");
             }
 
             @Override
             public String toJava() {
-                return "catch (Exception " + ExprSimpleLocalVariable.getRandomVariable() + ") {" + getChildJava() + "}";
+                return "catch (Exception " + RandomStringUtils.randomAlphabetic(16) + ") {" + getChildJava() + "}";
             }
         };
     }

@@ -6,13 +6,13 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class ChoiceParameter extends ComboBox<String> implements BlockParameter {
 
     public ChoiceParameter(String... choices) {
-        this(Arrays.asList(choices));
+        this(List.of(choices));
     }
 
     public ChoiceParameter(Collection<String> choices) {

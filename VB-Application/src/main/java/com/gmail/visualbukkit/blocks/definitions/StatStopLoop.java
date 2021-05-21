@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
-import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.Statement;
+import com.gmail.visualbukkit.ui.LanguageManager;
 
 public class StatStopLoop extends Statement {
 
@@ -18,7 +18,7 @@ public class StatStopLoop extends Statement {
                 if (checkForContainer("stat-list-loop") || checkForContainer("stat-number-loop") || checkForContainer("stat-while-loop")) {
                     setValid();
                 } else {
-                    setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), "Loop"));
+                    setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), "Loop"));
                 }
             }
 

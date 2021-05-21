@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIPOfPlayer extends Expression {
 
     public ExprIPOfPlayer() {
-        super("expr-ip-of-player", ClassInfo.STRING);
+        super("expr-ip-of-player");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

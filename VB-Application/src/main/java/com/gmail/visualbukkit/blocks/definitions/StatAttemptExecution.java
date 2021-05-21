@@ -1,6 +1,9 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Container;
+import com.gmail.visualbukkit.blocks.Statement;
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class StatAttemptExecution extends Container {
 
     public StatAttemptExecution() {
@@ -12,10 +15,11 @@ public class StatAttemptExecution extends Container {
         return new Block(this) {
             @Override
             public String toJava() {
-                if (getNext().hasConnection() && getNext().getConnected().getDefinition().getID().equals("stat-handle-execution-error")) {
+                Statement.Block next = getStatementHolder().getNext(this);
+                if (next != null && next.getDefinition().getID().equals("stat-handle-execution-error")) {
                     return "try {" + getChildJava() + "}";
                 } else {
-                    return "try {" + getChildJava() + "} catch (Exception " + ExprSimpleLocalVariable.getRandomVariable() + ") {}";
+                    return "try {" + getChildJava() + "} catch (Exception " + RandomStringUtils.randomAlphabetic(16) + ") {}";
                 }
             }
         };

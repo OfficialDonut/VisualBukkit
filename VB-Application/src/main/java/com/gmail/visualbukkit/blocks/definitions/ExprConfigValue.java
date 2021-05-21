@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigValue extends Expression {
 
     public ExprConfigValue() {
-        super("expr-config-value", ClassInfo.OBJECT);
+        super("expr-config-value");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

@@ -2,8 +2,9 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import com.gmail.visualbukkit.plugin.PluginModule;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
+import javafx.beans.binding.Bindings;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
@@ -15,7 +16,8 @@ public class CompGUIClickHandler extends PluginComponent {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new StringLiteralParameter()) {
+        StringLiteralParameter nameParameter = new StringLiteralParameter();
+        Block block = new Block(this, nameParameter) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -24,10 +26,17 @@ public class CompGUIClickHandler extends PluginComponent {
                 eventMethod.setBody(eventMethod.getBody() +
                         "if (event.getID().equalsIgnoreCase(" + arg(0) + ")) {" +
                         buildContext.getLocalVariableDeclarations() +
-                        getChildJava() +
+                        toJava() +
                         "return;" +
                         "}");
             }
         };
+
+        block.getTab().textProperty().bind(Bindings
+                .when(nameParameter.textProperty().isNotEmpty())
+                .then(Bindings.concat("GUI Click Handler: ", nameParameter.textProperty()))
+                .otherwise("GUI Click Handler"));
+
+        return block;
     }
 }

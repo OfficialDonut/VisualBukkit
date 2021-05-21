@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprNewConfig extends Expression {
 
     public ExprNewConfig() {
-        super("expr-new-config", ClassInfo.of("org.bukkit.configuration.ConfigurationSection"));
+        super("expr-new-config");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.configuration.ConfigurationSection");
     }
 
     @Override

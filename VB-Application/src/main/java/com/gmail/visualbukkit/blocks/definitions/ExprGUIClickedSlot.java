@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIClickedSlot extends Expression {
 
     public ExprGUIClickedSlot() {
-        super("expr-gui-clicked-slot", ClassInfo.INT);
+        super("expr-gui-clicked-slot");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.INT;
     }
 
     @Override

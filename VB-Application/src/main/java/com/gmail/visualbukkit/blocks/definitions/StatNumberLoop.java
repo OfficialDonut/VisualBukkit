@@ -2,7 +2,6 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Container;
-import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,7 +13,7 @@ public class StatNumberLoop extends Container {
     }
 
     @Override
-    public Statement.Block createBlock() {
+    public Block createBlock() {
         return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
             @Override
             public String toJava() {
@@ -27,14 +26,12 @@ public class StatNumberLoop extends Container {
         };
     }
 
-    public static int getNestedLoops(Node node) {
+    protected static int getNestedLoops(Node node) {
         int loops = 0;
         Parent parent = node.getParent();
         while (parent != null) {
-            if (parent instanceof Container.ChildConnector) {
-                if ((((Container.ChildConnector) parent).getOwner().getDefinition().getID().equals("stat-number-loop"))) {
-                    loops++;
-                }
+            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getID().equals("stat-number-loop")) {
+                loops++;
             }
             parent = parent.getParent();
         }

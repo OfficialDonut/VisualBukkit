@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprUncoloredString extends Expression {
 
     public ExprUncoloredString() {
-        super("expr-uncolored-string", ClassInfo.STRING);
+        super("expr-uncolored-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

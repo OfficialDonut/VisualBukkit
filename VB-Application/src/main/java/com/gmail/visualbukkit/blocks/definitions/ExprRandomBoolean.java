@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprRandomBoolean extends Expression {
 
     public ExprRandomBoolean() {
-        super("expr-random-boolean", ClassInfo.BOOLEAN);
+        super("expr-random-boolean");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

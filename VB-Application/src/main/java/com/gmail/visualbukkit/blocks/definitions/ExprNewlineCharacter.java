@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprNewlineCharacter extends Expression {
 
     public ExprNewlineCharacter() {
-        super("expr-newline-character", ClassInfo.STRING);
+        super("expr-newline-character");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

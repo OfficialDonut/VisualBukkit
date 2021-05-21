@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprIsDirectory extends Expression {
 
     public ExprIsDirectory() {
-        super("expr-is-directory", ClassInfo.BOOLEAN);
+        super("expr-is-directory");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

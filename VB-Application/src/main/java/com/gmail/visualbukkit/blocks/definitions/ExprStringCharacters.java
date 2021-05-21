@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprStringCharacters extends Expression {
 
     public ExprStringCharacters() {
-        super("expr-string-characters", ClassInfo.LIST);
+        super("expr-string-characters");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override
@@ -15,7 +20,7 @@ public class ExprStringCharacters extends Expression {
         return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
             @Override
             public String toJava() {
-                return "PluginMain.createList(" + arg(0) + ".split(\"(?!^)\"))";
+                return "PluginMain.createList(" + arg(0) + ".toCharArray())";
             }
         };
     }

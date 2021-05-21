@@ -5,18 +5,22 @@ import com.gmail.visualbukkit.extensions.VisualBukkitExtension;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class PapiExtension extends VisualBukkitExtension {
 
-    public static String EXPANSION_CLASS;
-    public static String HOOK_CLASS;
+    protected static String EXPANSION_CLASS;
+    protected static String HOOK_CLASS;
 
     public PapiExtension() throws IOException {
-        EXPANSION_CLASS = IOUtils.toString(CompRegisterPlaceholder.class.getResourceAsStream("/PapiExpansion.java"), StandardCharsets.UTF_8);
-        HOOK_CLASS = IOUtils.toString(CompRegisterPlaceholder.class.getResourceAsStream("/PapiHook.java"), StandardCharsets.UTF_8);
-        BlockRegistry.register("com.gmail.visualbukkit.extensions.papi", PapiExtension.class.getClassLoader(), ResourceBundle.getBundle("PapiCustomBlocks"));
+        try (InputStream stream1 = PapiExtension.class.getResourceAsStream("/PapiExpansion.java");
+             InputStream stream2 = PapiExtension.class.getResourceAsStream("/PapiHook.java")) {
+            EXPANSION_CLASS = IOUtils.toString(stream1, StandardCharsets.UTF_8);
+            HOOK_CLASS = IOUtils.toString(stream2, StandardCharsets.UTF_8);
+            BlockRegistry.register(this, "com.gmail.visualbukkit.extensions.papi", ResourceBundle.getBundle("CustomPapiBlocks"));
+        }
     }
 
     @Override
@@ -26,7 +30,7 @@ public class PapiExtension extends VisualBukkitExtension {
 
     @Override
     public String getVersion() {
-        return "1.0.0";
+        return "1.0";
     }
 
     @Override

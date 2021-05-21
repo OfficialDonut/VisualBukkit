@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIClicker extends Expression {
 
     public ExprGUIClicker() {
-        super("expr-gui-clicker", ClassInfo.of("org.bukkit.entity.Player"));
+        super("expr-gui-clicker");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.entity.Player");
     }
 
     @Override

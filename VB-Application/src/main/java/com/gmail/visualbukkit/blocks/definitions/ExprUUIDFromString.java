@@ -9,7 +9,12 @@ import java.util.UUID;
 public class ExprUUIDFromString extends Expression {
 
     public ExprUUIDFromString() {
-        super("expr-uuid-from-string", ClassInfo.of(UUID.class));
+        super("expr-uuid-from-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(UUID.class);
     }
 
     @Override

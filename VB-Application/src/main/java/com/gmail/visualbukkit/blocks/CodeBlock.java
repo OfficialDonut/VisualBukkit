@@ -3,84 +3,69 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.definitions.CompEventListener;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
-import com.gmail.visualbukkit.gui.NotificationManager;
-import com.gmail.visualbukkit.gui.StyleableHBox;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.ui.*;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.PopOver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
+public abstract class CodeBlock extends StyleableVBox {
 
     private static final PseudoClass INVALID_STYLE_CLASS = PseudoClass.getPseudoClass("invalid");
     private static final PseudoClass SELECTED_STYLE_CLASS = PseudoClass.getPseudoClass("selected");
-    public static CodeBlock<?> currentSelected;
 
-    private final T definition;
-    private List<BlockParameter> parameters = new ArrayList<>();
-    private HBox headerBox = new StyleableHBox();
-    private VBox syntaxBox = new VBox();
+    private BlockDefinition definition;
+    private List<BlockParameter> parameters;
+    private HBox header = new StyleableHBox();
+    private VBox body = new StyleableVBox();
     private ContextMenu contextMenu = new ContextMenu();
     private String invalidReason;
 
-    public CodeBlock(T definition) {
+    public CodeBlock(BlockDefinition definition) {
         this.definition = definition;
+        parameters = new ArrayList<>(definition.getParameterNames() != null ? definition.getParameterNames().length : 0);
 
-        headerBox.getStyleClass().add("code-block-header");
-        syntaxBox.getStyleClass().add("code-block");
-        syntaxBox.getChildren().add(headerBox);
-        getChildren().add(syntaxBox);
+        header.getStyleClass().add("code-block-header");
+        body.getStyleClass().add("code-block");
+        body.getChildren().add(header);
+        getChildren().add(body);
 
-        parentProperty().addListener((o, oldValue, newValue) -> {
-            if (newValue != null) {
-                update();
-            }
-        });
-
-        getSyntaxBox().setOnContextMenuRequested(e -> {
-            contextMenu.show(VisualBukkitApp.getInstance().getScene().getWindow(), e.getScreenX(), e.getScreenY());
-            VisualBukkitApp.getInstance().getScene().getWindow().requestFocus();
+        body.setOnContextMenuRequested(e -> {
+            contextMenu.show(VisualBukkitApp.getScene().getWindow(), e.getScreenX(), e.getScreenY());
+            VisualBukkitApp.getScene().getWindow().requestFocus();
             e.consume();
         });
 
-        getSyntaxBox().setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY) {
-                if (currentSelected != this) {
-                    select();
-                } else {
-                    unselect();
-                }
-            }
-            e.consume();
+        IconButton infoButton = new IconButton("help", null, null);
+        infoButton.setOnAction(e -> {
+            PopOver popOver = new PopOver(new Label(definition.getDescription() != null ? definition.getDescription() : LanguageManager.get("tooltip.no_description")));
+            popOver.getStyleClass().add("block-info-popover");
+            popOver.setAnimated(false);
+            popOver.show(infoButton);
         });
 
-        VisualBukkitApp.getInstance().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            if (currentSelected != null && currentSelected.getParent() != null) {
-                currentSelected.handleSelectedAction(e);
-            }
-        });
+        addToHeader(new Label(definition.getTitle()));
+        addToHeader(infoButton);
+
+        SelectionManager.register(this);
     }
 
     public void addToHeader(Node node) {
-        if (headerBox.getChildren().size() == 1) {
-            Region spacer = new Region();
-            HBox.setHgrow(spacer, Priority.ALWAYS);
-            headerBox.getChildren().add(spacer);
+        if (header.getChildren().size() == 1) {
+            header.getChildren().add(new SpacerRegion());
         }
-        headerBox.getChildren().add(node);
+        header.getChildren().add(node);
         addHeaderParameter(node);
     }
 
@@ -95,10 +80,6 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         }
     }
 
-    public void addParameterLines(BlockParameter... parameters) {
-        addParameterLines(definition.getParameterNames(), parameters);
-    }
-
     public void addParameterLines(String[] parameterNames, BlockParameter[] parameters) {
         for (int i = 0; i < parameters.length; i++) {
             addParameterLine(parameterNames[i], parameters[i]);
@@ -106,44 +87,50 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     }
 
     public HBox addParameterLine(String name, BlockParameter parameter) {
-        HBox hBox = new StyleableHBox(new Label(name), (Node) parameter);
-        syntaxBox.getChildren().add(hBox);
+        HBox hBox = new StyleableHBox(new Label(name + ":"), (Node) parameter);
+        body.getChildren().add(hBox);
         parameters.add(parameter);
+        int maxLen = name.length() + 1;
+        for (Node node : body.getChildren()) {
+            if (node instanceof HBox && !node.equals(header)) {
+                Label label = (Label) ((HBox) node).getChildren().get(0);
+                if (label.getText().length() > maxLen) {
+                    maxLen = label.getText().length();
+                } else {
+                    label.setText(String.format("%-" + maxLen + "s", label.getText()));
+                }
+            }
+        }
         return hBox;
     }
 
     public void select() {
-        if (currentSelected != null) {
-            currentSelected.unselect();
-        }
-        currentSelected = this;
-        syntaxBox.pseudoClassStateChanged(SELECTED_STYLE_CLASS, true);
+        body.pseudoClassStateChanged(SELECTED_STYLE_CLASS, true);
         if (invalidReason != null) {
-            NotificationManager.displayError(VisualBukkitApp.getString("error.invalid_block"), invalidReason);
+            NotificationManager.displayError(LanguageManager.get("error.invalid_block.title"), invalidReason);
         }
     }
 
     public void unselect() {
-        currentSelected = null;
-        syntaxBox.pseudoClassStateChanged(SELECTED_STYLE_CLASS, false);
+        body.pseudoClassStateChanged(SELECTED_STYLE_CLASS, false);
     }
 
-    protected void handleSelectedAction(KeyEvent e) {}
+    public abstract void handleSelectedAction(KeyEvent e);
 
-    protected void setValid() {
-        syntaxBox.pseudoClassStateChanged(INVALID_STYLE_CLASS, false);
+    public void setValid() {
+        body.pseudoClassStateChanged(INVALID_STYLE_CLASS, false);
         invalidReason = null;
     }
 
-    protected void setInvalid(String reason) {
-        syntaxBox.pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+    public void setInvalid(String reason) {
+        body.pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
         invalidReason = reason;
     }
 
     protected boolean checkForPluginComponent(String componentID) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (block == null || !block.getDefinition().getID().equals(componentID)) {
-            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getPluginComponent(componentID).getTitle()));
+            setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), BlockRegistry.getPluginComponent(componentID).getTitle()));
             return false;
         }
         return true;
@@ -152,7 +139,7 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     protected boolean checkForEvent(ClassInfo event) {
         PluginComponent.Block block = getPluginComponentBlock();
         if (!(block instanceof CompEventListener.EventBlock) || !event.equals(((CompEventListener.EventBlock) block).getEvent())) {
-            setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), event.getDisplayClassName()));
+            setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), event.getDisplayClassName()));
             return false;
         }
         return true;
@@ -161,14 +148,12 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
     protected boolean checkForContainer(String containerID) {
         Parent parent = getParent();
         while (parent != null) {
-            if (parent instanceof Container.ChildConnector) {
-                if ((((Container.ChildConnector) parent).getOwner().getDefinition().getID().equals(containerID))) {
-                    return true;
-                }
+            if (parent instanceof Statement.Block && ((Statement.Block) parent).getDefinition().getID().equals(containerID)) {
+                return true;
             }
             parent = parent.getParent();
         }
-        setInvalid(String.format(VisualBukkitApp.getString("error.invalid_placement"), BlockRegistry.getStatement(containerID)));
+        setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), BlockRegistry.getStatement(containerID)));
         return false;
     }
 
@@ -207,22 +192,22 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         }
     }
 
-    public String arg(int i) {
-        return parameters.get(i).toJava();
-    }
-
     public PluginComponent.Block getPluginComponentBlock() {
-        Parent node = this;
-        while (node != null) {
-            if (node instanceof PluginComponent.Block) {
-                return (PluginComponent.Block) node;
+        Parent parent = getParent();
+        while (parent != null) {
+            if (parent instanceof PluginComponent.Pane) {
+                return ((PluginComponent.Pane) parent).getBlock();
             }
-            node = node.getParent();
+            parent = parent.getParent();
         }
         return null;
     }
 
-    public final T getDefinition() {
+    public String arg(int i) {
+        return parameters.get(i).toJava();
+    }
+
+    public BlockDefinition getDefinition() {
         return definition;
     }
 
@@ -230,12 +215,12 @@ public abstract class CodeBlock<T extends BlockDefinition<?>> extends VBox {
         return parameters;
     }
 
-    public HBox getHeaderBox() {
-        return headerBox;
+    public HBox getHeader() {
+        return header;
     }
 
-    public VBox getSyntaxBox() {
-        return syntaxBox;
+    public VBox getBody() {
+        return body;
     }
 
     public ContextMenu getContextMenu() {

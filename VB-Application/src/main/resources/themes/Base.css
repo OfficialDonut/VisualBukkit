@@ -10,28 +10,12 @@
     src: url("/fonts/Roboto-Regular.ttf");
 }
 
+.block-info-popover .label {
+    -fx-padding: 10;
+}
+
 .button {
-    -fx-background-color: transparent;
     -fx-focus-traversable: false;
-    -fx-padding: 0;
-}
-
-.button-bar {
-    -fx-alignment: center-left;
-    -fx-border-width: 3 0 0 0;
-}
-
-.button:hover {
-    -fx-opacity: 75%;
-}
-
-.button:pressed {
-    -fx-opacity: 50%;
-}
-
-.button-bar {
-    -fx-padding: 15;
-    -fx-spacing: 25;
 }
 
 .code-block {
@@ -50,20 +34,38 @@
     -fx-border-width: 2;
 }
 
-.code-block > .hbox {
-    -fx-spacing: 10;
+.code-block .button {
+    -fx-background-color: transparent;
+}
+
+.code-block .button:hover {
+    -fx-opacity: 75%;
+}
+
+.code-block .button:pressed {
+    -fx-opacity: 50%;
 }
 
 .code-block .label {
     -fx-text-fill: black;
 }
 
+.code-block .text-field {
+    -fx-control-inner-background: lightgray;
+    -fx-text-fill: black;
+}
+
 .code-block-header {
-    -fx-alignment: center-left;
     -fx-font-family: "JetBrains Mono";
 }
 
+.code-block-header > .button {
+    -fx-padding: 0;
+}
+
 .combo-box {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
     -fx-pref-width: 150;
 }
 
@@ -72,7 +74,7 @@
 }
 
 .combo-box > .list-cell {
-    -fx-padding: 2 2 2 5;
+    -fx-padding: 5;
 }
 
 .container-block {
@@ -88,10 +90,6 @@
     -fx-padding: 1;
 }
 
-.expr-number > .text-field {
-    -fx-control-inner-background: beige;
-}
-
 .expression-block {
     -fx-background-color: orange;
     -fx-background-radius: 10;
@@ -102,8 +100,8 @@
     -fx-background-color: derive(orange, 50%);
 }
 
-.expression-parameter > .button {
-    -fx-background-color: derive(pink, -15%);
+.expression-parameter {
+    -fx-background-color: derive(pink, -15%) !important;
     -fx-background-insets: 1;
     -fx-background-radius: 10;
     -fx-border-color: black;
@@ -112,8 +110,20 @@
     -fx-text-fill: black;
 }
 
-.expression-parameter > .button:hover {
-    -fx-background-color: pink;
+.expression-parameter:hover {
+    -fx-background-color: pink !important;
+}
+
+.expression-selector .hbox {
+    -fx-padding: 5;
+}
+
+.expression-selector .hbox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-width: 200;
 }
 
 .extension-info-grid {
@@ -122,18 +132,22 @@
     -fx-vgap: 15;
 }
 
-.extension-info-grid .button {
-    -fx-background-color: transparent;
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
-    -fx-border-color: red;
-    -fx-padding: 8;
-    -fx-text-fill: red;
-}
-
 .hbox {
     -fx-alignment: center-left;
-    -fx-spacing: 5;
+    -fx-spacing: 10;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.icon-button:hover {
+    -fx-opacity: 75%;
+}
+
+.icon-button:pressed {
+    -fx-opacity: 50%;
 }
 
 .label {
@@ -141,10 +155,11 @@
 }
 
 .list-view {
-    -fx-faint-focus-color: transparent;
-    -fx-focus-color: transparent;
     -fx-focus-traversable: false;
-    -fx-padding: 0;
+}
+
+.log-display {
+    -fx-font-family: "JetBrains Mono Medium" !important;
 }
 
 .menu-item {
@@ -159,6 +174,10 @@
     -fx-font-family: "Roboto";
 }
 
+.number-field {
+    -fx-control-inner-background: beige !important;
+}
+
 .plugin-component-block {
     -fx-background-color: rgb(180, 96, 235);
     -fx-background-radius: 10 10 0 0;
@@ -170,69 +189,44 @@
 }
 
 .plugin-settings-grid {
-    -fx-background-color: -fx-control-inner-background;
     -fx-hgap: 10;
     -fx-padding: 15;
     -fx-vgap: 10;
 }
 
 .popover {
-    -fx-pref-width: 500;
+    -fx-pref-width: 550;
 }
 
-.popover .hbox {
-    -fx-padding: 5;
-    -fx-spacing: 5;
-}
-
-.popover .hbox > .label {
-    -fx-text-fill: black;
-}
-
-.popover .hbox > .text-field {
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-radius: 0;
-    -fx-border-width: 0 0 2 0;
-    -fx-pref-width: 175;
-}
-
-.popover > .list-view {
-    -fx-border-color: black;
+.project-button-bar {
+    -fx-alignment: center-left;
+    -fx-border-width: 3 0 0 0;
+    -fx-padding: 15;
+    -fx-spacing: 20;
 }
 
 .root {
     -fx-font-family: "Roboto";
-    -fx-font-size: 14;
 }
 
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-faint-focus-color: transparent;
-    -fx-focus-color: transparent;
 }
 
 .separator {
     -fx-background: gray;
 }
 
-.simple-global-variable {
+.simple-global-variable-field {
     -fx-control-inner-background: derive(yellow, 50%) !important;
 }
 
-.simple-local-variable {
+.simple-local-variable-field {
     -fx-control-inner-background: yellow !important;
 }
 
-.splash-screen {
-    -fx-alignment: center;
-    -fx-padding: 15;
-    -fx-spacing: 15;
-}
-
-.splash-screen .label {
-    -fx-font-family: "JetBrains Mono";
-    -fx-font-size: 48;
+.simple-persistent-variable-field {
+    -fx-control-inner-background: pink !important;
 }
 
 .statement-block {
@@ -260,6 +254,10 @@
 }
 
 .statement-selector {
+    -fx-spacing: 10;
+}
+
+.statement-selector .vbox {
     -fx-padding: 10;
     -fx-spacing: 10;
 }
@@ -276,9 +274,23 @@
     -fx-padding: 0;
 }
 
+.text-area {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.text-field {
+    -fx-background-radius: 0;
+    -fx-border-color: black;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-padding: 2 2 2 4;
+}
+
 .tooltip {
     -fx-background-radius: 5;
     -fx-border-color: lightgray;
     -fx-border-radius: 5;
+    -fx-font-size: 14;
     -fx-padding: 5;
 }

@@ -1,19 +1,27 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
-import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.blocks.SimpleExpression;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
-public class ExprSimpleGlobalVariable extends Expression {
+public class ExprSimpleGlobalVariable extends SimpleExpression {
 
     public ExprSimpleGlobalVariable() {
-        super("expr-simple-global-variable", ClassInfo.OBJECT);
+        super("expr-simple-global-variable");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override
     public Block createBlock() {
-        Block block = new Block(this) {
+        InputParameter input = new InputParameter();
+        input.getStyleClass().add("simple-global-variable-field");
+
+        return new Block(this, input) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -28,15 +36,6 @@ public class ExprSimpleGlobalVariable extends Expression {
                 return getVariable(arg(0));
             }
         };
-
-        InputParameter inputParameter = new InputParameter();
-        inputParameter.getStyleClass().add("simple-global-variable");
-        block.getHeaderBox().getChildren().clear();
-        block.addToHeader(inputParameter);
-        block.getHeaderBox().getStyleClass().clear();
-        block.getSyntaxBox().getStyleClass().clear();
-
-        return block;
     }
 
     protected static String getVariable(String string) {

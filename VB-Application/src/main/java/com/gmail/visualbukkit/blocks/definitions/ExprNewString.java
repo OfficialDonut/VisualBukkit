@@ -1,30 +1,28 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
-import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.blocks.SimpleExpression;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 
-public class ExprNewString extends Expression {
+public class ExprNewString extends SimpleExpression {
 
     public ExprNewString() {
-        super("expr-new-string", ClassInfo.STRING);
+        super("expr-new-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override
     public Block createBlock() {
-        Block block = new Block(this) {
+        return new Block(this, new StringLiteralParameter()) {
             @Override
             public String toJava() {
                 String str = arg(0);
                 return str.contains("&") ? "ChatColor.translateAlternateColorCodes('&'," + str + ")" : str;
             }
         };
-
-        block.getHeaderBox().getChildren().clear();
-        block.addToHeader(new StringLiteralParameter());
-        block.getHeaderBox().getStyleClass().clear();
-        block.getSyntaxBox().getStyleClass().clear();
-
-        return block;
     }
 }

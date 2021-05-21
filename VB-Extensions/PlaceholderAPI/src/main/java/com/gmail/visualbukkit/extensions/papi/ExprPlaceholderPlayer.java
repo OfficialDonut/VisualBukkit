@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprPlaceholderPlayer extends Expression {
 
     public ExprPlaceholderPlayer() {
-        super("expr-placeholder-player", ClassInfo.of("org.bukkit.entity.Player"));
+        super("expr-placeholder-player");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.entity.Player");
     }
 
     @Override

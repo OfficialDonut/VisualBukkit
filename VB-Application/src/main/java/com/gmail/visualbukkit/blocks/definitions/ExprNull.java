@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprNull extends Expression {
 
     public ExprNull() {
-        super("expr-null", ClassInfo.VOID);
+        super("expr-null");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.VOID;
     }
 
     @Override

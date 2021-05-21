@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprFileLines extends Expression {
 
     public ExprFileLines() {
-        super("expr-file-lines", ClassInfo.LIST);
+        super("expr-file-lines");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override

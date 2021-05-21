@@ -3,12 +3,17 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
 public class ExprNewNamedItem extends Expression {
 
     public ExprNewNamedItem() {
-        super("expr-new-named-item", ClassInfo.of("org.bukkit.inventory.ItemStack"));
+        super("expr-new-named-item");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.inventory.ItemStack");
     }
 
     @Override

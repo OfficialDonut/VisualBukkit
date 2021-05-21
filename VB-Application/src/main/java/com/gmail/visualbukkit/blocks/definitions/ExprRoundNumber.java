@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprRoundNumber extends Expression {
 
     public ExprRoundNumber() {
-        super("expr-round-number", ClassInfo.LONG);
+        super("expr-round-number");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LONG;
     }
 
     @Override

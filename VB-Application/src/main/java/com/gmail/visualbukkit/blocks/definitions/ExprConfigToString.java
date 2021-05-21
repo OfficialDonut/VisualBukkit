@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigToString extends Expression {
 
     public ExprConfigToString() {
-        super("expr-config-to-string", ClassInfo.STRING);
+        super("expr-config-to-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

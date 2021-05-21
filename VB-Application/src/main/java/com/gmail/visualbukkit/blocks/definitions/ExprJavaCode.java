@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 public class ExprJavaCode extends Expression {
 
     public ExprJavaCode() {
-        super("expr-java-code", ClassInfo.OBJECT);
+        super("expr-java-code");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

@@ -2,8 +2,8 @@ package com.gmail.visualbukkit.extensions.papi;
 
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import com.gmail.visualbukkit.plugin.PluginModule;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -25,7 +25,7 @@ public class CompRegisterPlaceholder extends PluginComponent {
                 registerMethod.setBody(registerMethod.getBody() +
                         "papiHook.registerPlaceholder(" + arg(0) + ", placeholderPlayer -> {" +
                         "try {" +
-                        getChildJava() +
+                        toJava() +
                         "} catch (Exception e) { e.printStackTrace(); }" +
                         "return null;" +
                         "});");

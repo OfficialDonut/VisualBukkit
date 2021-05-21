@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprPersistentDataValue extends Expression {
 
     public ExprPersistentDataValue() {
-        super("expr-persistent-data-value", ClassInfo.STRING);
+        super("expr-persistent-data-value");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

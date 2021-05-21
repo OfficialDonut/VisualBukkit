@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprFileExists extends Expression {
 
     public ExprFileExists() {
-        super("expr-file-exists", ClassInfo.BOOLEAN);
+        super("expr-file-exists");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

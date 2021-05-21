@@ -2,12 +2,17 @@ package com.gmail.visualbukkit.extensions.vault;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
 public class ExprVaultChat extends Expression {
 
     public ExprVaultChat() {
-        super("expr-vault-chat", ClassInfo.of("net.milkbowl.vault.chat.Chat"));
+        super("expr-vault-chat");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("net.milkbowl.vault.chat.Chat");
     }
 
     @Override

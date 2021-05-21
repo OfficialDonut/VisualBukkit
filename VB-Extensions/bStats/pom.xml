@@ -5,16 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>vb-extensions</artifactId>
-        <version>1.0.0</version>
+        <groupId>com.gmail.visualbukkit</groupId>
+        <version>1.0</version>
     </parent>
 
     <artifactId>bstats-extension</artifactId>
-    <version>1.0.1</version>
 
     <build>
-        <finalName>bStats-extension-${project.version}</finalName>
+        <finalName>bStats-Extension</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

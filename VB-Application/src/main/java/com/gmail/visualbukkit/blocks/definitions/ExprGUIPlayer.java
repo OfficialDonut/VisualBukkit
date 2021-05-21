@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIPlayer extends Expression {
 
     public ExprGUIPlayer() {
-        super("expr-gui-player", ClassInfo.of("org.bukkit.entity.Player"));
+        super("expr-gui-player");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.entity.Player");
     }
 
     @Override

@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCommandArguments extends Expression {
 
     public ExprCommandArguments() {
-        super("expr-command-arguments", ClassInfo.LIST);
+        super("expr-command-arguments");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override

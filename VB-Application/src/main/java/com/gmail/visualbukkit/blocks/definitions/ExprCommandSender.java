@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCommandSender extends Expression {
 
     public ExprCommandSender() {
-        super("expr-command-sender", ClassInfo.of("org.bukkit.command.CommandSender"));
+        super("expr-command-sender");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.command.CommandSender");
     }
 
     @Override

@@ -7,15 +7,15 @@
     <parent>
         <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>visual-bukkit</artifactId>
-        <version>1.0.0</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>vb-extensions</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>bStats</module>
         <module>Vault</module>
+        <module>bStats</module>
         <module>PlaceholderAPI</module>
     </modules>
 
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.gmail.visualbukkit</groupId>
             <artifactId>vb-application</artifactId>
-            <version>3.5.0</version>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

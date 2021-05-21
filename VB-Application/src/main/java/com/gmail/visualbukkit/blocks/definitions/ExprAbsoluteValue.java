@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprAbsoluteValue extends Expression {
 
     public ExprAbsoluteValue() {
-        super("expr-absolute-value", ClassInfo.DOUBLE);
+        super("expr-absolute-value");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.DOUBLE;
     }
 
     @Override

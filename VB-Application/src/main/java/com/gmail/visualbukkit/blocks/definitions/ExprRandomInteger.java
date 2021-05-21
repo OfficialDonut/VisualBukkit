@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprRandomInteger extends Expression {
 
     public ExprRandomInteger() {
-        super("expr-random-integer", ClassInfo.INT);
+        super("expr-random-integer");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.INT;
     }
 
     @Override
@@ -15,7 +20,7 @@ public class ExprRandomInteger extends Expression {
         return new Block(this, new ExpressionParameter(ClassInfo.INT), new ExpressionParameter(ClassInfo.INT)) {
             @Override
             public String toJava() {
-                return "java.util.concurrent.ThreadLocalRandom.current().nextInt(" + arg(0) + "," + arg(1) + "+1)";
+                return "java.util.concurrent.ThreadLocalRandom.current().nextInt(" + arg(0) + "," + arg(1) + ")";
             }
         };
     }

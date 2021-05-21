@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigFromFile extends Expression {
 
     public ExprConfigFromFile() {
-        super("expr-config-from-file", ClassInfo.of("org.bukkit.configuration.file.YamlConfiguration"));
+        super("expr-config-from-file");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.configuration.file.YamlConfiguration");
     }
 
     @Override

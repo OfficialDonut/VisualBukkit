@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsPluginEnabled extends Expression {
 
     public ExprIsPluginEnabled() {
-        super("expr-is-plugin-enabled", ClassInfo.BOOLEAN);
+        super("expr-is-plugin-enabled");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

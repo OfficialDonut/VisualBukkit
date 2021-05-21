@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprSquareRoot extends Expression {
 
     public ExprSquareRoot() {
-        super("expr-square-root", ClassInfo.DOUBLE);
+        super("expr-square-root");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.DOUBLE;
     }
 
     @Override

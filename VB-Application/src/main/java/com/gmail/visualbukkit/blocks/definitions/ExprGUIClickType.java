@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIClickType extends Expression {
 
     public ExprGUIClickType() {
-        super("expr-gui-click-type", ClassInfo.of("org.bukkit.event.inventory.ClickType"));
+        super("expr-gui-click-type");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.event.inventory.ClickType");
     }
 
     @Override

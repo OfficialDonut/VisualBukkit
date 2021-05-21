@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigKeys extends Expression {
 
     public ExprConfigKeys() {
-        super("expr-config-keys", ClassInfo.LIST);
+        super("expr-config-keys");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override

@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsConfigKeySet extends Expression {
 
     public ExprIsConfigKeySet() {
-        super("expr-is-config-key-set", ClassInfo.BOOLEAN);
+        super("expr-is-config-key-set");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

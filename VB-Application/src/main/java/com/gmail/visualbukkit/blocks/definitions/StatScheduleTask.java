@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Container;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class StatScheduleTask extends Container {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("sync", "async"), new ChoiceParameter("false", "true"), new ExpressionParameter(ClassInfo.LONG)) {
+        return new Block(this, new ChoiceParameter("sync", "async"), new ChoiceParameter("run once", "repeat"), new ExpressionParameter(ClassInfo.LONG)) {
             @Override
             public String toJava() {
                 String childJava = getChildJava();
@@ -29,8 +30,8 @@ public class StatScheduleTask extends Container {
                 while (matcher.find()) {
                     String variable = matcher.group();
                     if (variables.add(variable)) {
-                        String tempVar = ExprSimpleLocalVariable.getRandomVariable().replace("$", "TEMP_");
-                        String finalVar = ExprSimpleLocalVariable.getRandomVariable().replace("$", "FINAL_");
+                        String tempVar = "TEMP_" + RandomStringUtils.randomAlphabetic(16);
+                        String finalVar = "FINAL_" + RandomStringUtils.randomAlphabetic(16);
                         tempVarDeclarations.append("Object ").append(tempVar).append(" = ").append(variable).append(";");
                         finalVarDeclarations.append("Object ").append(finalVar).append(" = ").append(tempVar).append(";");
                         childJava = childJava.replace(variable, finalVar);
@@ -39,7 +40,7 @@ public class StatScheduleTask extends Container {
 
                 String method;
 
-                if (arg(1).equals("false")) {
+                if (arg(1).equals("run once")) {
                     method = ((arg(0).equals("sync") ? "runTaskLater" : "runTaskLaterAsynchronously")) +
                             "(PluginMain.getInstance()," + arg(2) + ");";
                 } else {

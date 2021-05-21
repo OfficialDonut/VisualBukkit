@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprFileParentDirectory extends Expression {
 
     public ExprFileParentDirectory() {
-        super("expr-file-parent-directory", ClassInfo.of(File.class));
+        super("expr-file-parent-directory");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(File.class);
     }
 
     @Override

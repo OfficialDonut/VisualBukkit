@@ -1,21 +1,22 @@
-.button-bar {
-    -fx-border-color: gray transparent transparent transparent;
+.block-info-popover > .content {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-border-color: lightgray;
 }
 
-.extension-info-grid .button:hover {
-    -fx-background-color: rgb(50, 50, 50);
-}
-
-.list-view .label {
+.block-info-popover .label {
     -fx-text-fill: white;
+}
+
+.dialog-pane {
+    -fx-background-color: derive(-fx-background, -30%);
+}
+
+.list-cell {
+    -fx-control-inner-background: black;
 }
 
 .log-display {
     -fx-border-color: black;
-    -fx-faint-focus-color: -fx-base;
-    -fx-focus-color: -fx-base;
-    -fx-font-family: "JetBrains Mono Medium";
-    -fx-text-fill: white;
 }
 
 .log-display .content {
@@ -27,12 +28,12 @@
     -fx-background-color: rgb(35, 43, 50);
 }
 
-.menu-item > .label {
-    -fx-text-fill: white;
+.plugin-settings-grid {
+    -fx-background-color: derive(-fx-background, -30%);
 }
 
-.plugin-settings-grid {
-    -fx-border-color: black;
+.project-button-bar {
+    -fx-border-color: gray transparent transparent transparent;
 }
 
 .root {
@@ -40,36 +41,10 @@
     -fx-background: rgb(32, 34, 37);
     -fx-base: rgb(48, 51, 56);
     -fx-control-inner-background: rgb(20, 20, 20);
-    -fx-control-inner-background-alt: rgb(25, 25, 25);
+    -fx-control-inner-background-alt: black;
     -fx-light-text-color: white;
 }
 
-.scroll-bar {
-   -fx-background-color: derive(-fx-base, -25%);
-}
-
 .tab-pane .tab-header-background {
-    -fx-background-color: derive(-fx-base, -90%);
-}
-
-.text-field {
-    -fx-border-color: black;
-    -fx-border-radius: 2;
-    -fx-control-inner-background: lightgray;
-    -fx-faint-focus-color: transparent;
-    -fx-focus-color: transparent;
-    -fx-padding: 2 2 2 4;
-    -fx-text-fill: black;
-}
-
-.text-field .context-menu {
-    -fx-background-color: black;
-}
-
-.text-field .context-menu .menu-item {
-    -fx-background-color: black;
-}
-
-.text-field .context-menu .menu-item:hover {
-    -fx-background-color: -fx-accent;
+    -fx-background-color: derive(-fx-background, 10%);
 }

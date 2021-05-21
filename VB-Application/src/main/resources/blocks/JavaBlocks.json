@@ -1,408 +1,524 @@
 [
   {
-    "method": "toLowerCase",
-    "id": "035b899e594db4384ca2a3ae721ef11c",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "isEmpty",
-    "id": "14d0b64796778dd01f98780c19ac926f",
-    "class": "java.util.List",
-    "parameters": ["java.util.List"],
-    "return": "boolean"
-  },
-  {
-    "method": "indexOf",
-    "id": "1c1fe8fdbce65d175ecd464c19a7967a",
-    "class": "java.lang.String",
-    "parameters": [
+    "method": "replaceAll",
+    "param": [
+      "java.lang.String",
       "java.lang.String",
       "java.lang.String"
     ],
+    "id": "003abaa3ff2710e7b29108d323f514f4",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "clear",
+    "param": ["java.util.Map"],
+    "id": "00e6f77ada2b95df9a6b5c692fb1ff73",
+    "class": "java.util.Map"
+  },
+  {
+    "method": "compareToIgnoreCase",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "01351984ced67166c8b26a9ee22586f3",
+    "class": "java.lang.String",
     "return": "int"
   },
   {
-    "method": "get",
-    "id": "26746ae0a079413fc050cee66cca27c3",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int"
+    "method": "startsWith",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
     ],
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "addAll",
-    "id": "2ecfe3e800db3fc08969ea122f769779",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
+    "id": "035d2bb8a51dabb254bc70a8323cee3f",
+    "class": "java.lang.String",
     "return": "boolean"
   },
   {
-    "method": "indexOf",
-    "id": "36968b1413180119531232e9041ed311",
+    "method": "toUpperCase",
+    "param": ["java.lang.String"],
+    "id": "03b9e2fb49114042aa4aaf8f7c4f1926",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "replaceFirst",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "09f0b8d476f6b18bd4ce615624282054",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "trim",
+    "param": ["java.lang.String"],
+    "id": "0ebbf3b9ad531f5e979625090d9f8ef1",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "containsKey",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object"
+    ],
+    "id": "10a60ac792b83ec0a85fc510961e9a8c",
+    "class": "java.util.Map",
+    "return": "boolean"
+  },
+  {
+    "method": "addAll",
+    "param": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "id": "12263bf2b2e31b980ae34716ec192a43",
     "class": "java.util.List",
-    "parameters": [
+    "return": "boolean"
+  },
+  {
+    "method": "add",
+    "param": [
       "java.util.List",
       "java.lang.Object"
     ],
-    "return": "int"
+    "id": "1fc1eecc9c5d327cd3088f9cc9286de8",
+    "class": "java.util.List",
+    "return": "boolean"
   },
   {
-    "method": "isEmpty",
-    "id": "36d28b2e92381010f018d562e1597169",
+    "method": "contains",
+    "param": [
+      "java.lang.String",
+      "java.lang.CharSequence"
+    ],
+    "id": "20df59f4ce5a3103e230fd9cc2d859f4",
     "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
     "return": "boolean"
   },
   {
     "method": "compareTo",
-    "id": "37693ca93f702b8a8074975e8e07ce95",
-    "class": "java.lang.String",
-    "parameters": [
+    "param": [
       "java.lang.String",
       "java.lang.String"
     ],
+    "id": "314b183818e556b05a53b767b798109f",
+    "class": "java.lang.String",
     "return": "int"
-  },
-  {
-    "method": "set",
-    "id": "3fa20a5c9e8e0b8e90f3e2ced0567dfb",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "java.lang.Object"
-    ],
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "containsAll",
-    "id": "40ae3a374c37b1a21d41428da968fe42",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "split",
-    "id": "415258fbe1a020d60adec801248a34e2",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "[Ljava.lang.String;"
-  },
-  {
-    "method": "trim",
-    "id": "46a941793c367239f3b4d09983248e43",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
   },
   {
     "static": true,
-    "method": "join",
-    "id": "4cbec66fa5c4cbc52a442dc973a55fa6",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.CharSequence",
-      "[Ljava.lang.CharSequence;"
+    "method": "format",
+    "param": [
+      "java.lang.String",
+      "java.lang.Object[]"
     ],
+    "id": "37ecab955c06a038e006805e60da4021",
+    "class": "java.lang.String",
     "return": "java.lang.String"
   },
   {
     "method": "lastIndexOf",
-    "id": "54014290a60efd6bd1d6ffb93979f22e",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
-    "method": "endsWith",
-    "id": "63d4a93e2ec335248b8f73a1ec1d98b6",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "startsWith",
-    "id": "66a569b38929e8d374d5bf772cac6e11",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "indexOf",
-    "id": "69ae35294681e1dd8f2399b239e63946",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "return": "int"
-  },
-  {
-    "method": "lastIndexOf",
-    "id": "70315c3fa5795ff3e3c4258ad7dbf669",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
-  },
-  {
-    "method": "lastIndexOf",
-    "id": "76e348df61eea969c7b7b9e2f12086b4",
-    "class": "java.util.List",
-    "parameters": [
+    "param": [
       "java.util.List",
       "java.lang.Object"
     ],
+    "id": "394928b49d4cef6b7c2684b3b7c50b88",
+    "class": "java.util.List",
     "return": "int"
   },
   {
-    "method": "add",
-    "id": "7dec0c874e91003e6b8344a53c37fadf",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
+    "method": "keySet",
+    "param": ["java.util.Map"],
+    "id": "39e4447ed7472fc6573026ef5a4995db",
+    "class": "java.util.Map",
+    "return": "java.util.Set"
   },
   {
-    "method": "clear",
-    "id": "83253bab8a6fa7cf8aec61cca61351d4",
-    "class": "java.util.List",
-    "parameters": ["java.util.List"]
-  },
-  {
-    "method": "addAll",
-    "id": "92d0e0cd25e6f606c937ef46f6fb257b",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
+    "method": "substring",
+    "param": [
+      "java.lang.String",
       "int",
-      "java.util.Collection"
+      "int"
     ],
-    "return": "boolean"
-  },
-  {
-    "method": "contains",
-    "id": "96b9c981cef7dbccd5114b0aed99c450",
+    "id": "3b80c769a6e966d127e0733205165c2c",
     "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "matches",
-    "id": "9b65a2265a007fd58c68dace7397123f",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "replace",
-    "id": "9cb27c8761a5fdbba34cb6f6cf4e68ee",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.CharSequence",
-      "java.lang.CharSequence"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "replaceAll",
-    "id": "ac2263a8e21050bf0d662a1be58d0f70",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
     "return": "java.lang.String"
   },
   {
     "method": "size",
-    "id": "b3447abec14dd4ab0295c30a9fdd45a3",
+    "param": ["java.util.List"],
+    "id": "416d4bccdd00bc3e4bade125c934aec2",
     "class": "java.util.List",
-    "parameters": ["java.util.List"],
     "return": "int"
   },
   {
-    "method": "remove",
-    "id": "b3e43a8300e1c4ef271ce53572d558b9",
-    "class": "java.util.List",
-    "parameters": [
+    "method": "addAll",
+    "param": [
       "java.util.List",
+      "int",
+      "java.util.Collection"
+    ],
+    "id": "440b2b79feaf62440aa1eade90e878ee",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "clear",
+    "param": ["java.util.List"],
+    "id": "4768d151bb7765322a5efdbf152db581",
+    "class": "java.util.List"
+  },
+  {
+    "method": "split",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "486681406385b2097fa17185c20f505a",
+    "class": "java.lang.String",
+    "return": "java.lang.String[]"
+  },
+  {
+    "method": "indexOf",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "4ff80cc6d5ff70219cec622b981b3223",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "method": "isEmpty",
+    "param": ["java.lang.String"],
+    "id": "5094c7902de8f8ba7038fbe11cf299f0",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "method": "substring",
+    "param": [
+      "java.lang.String",
       "int"
     ],
+    "id": "590d72149eb48a883c1d73f21e73e618",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "replace",
+    "param": [
+      "java.lang.String",
+      "java.lang.CharSequence",
+      "java.lang.CharSequence"
+    ],
+    "id": "5dd5860cb30211a3a542b9e943dd38aa",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "isEmpty",
+    "param": ["java.util.Map"],
+    "id": "5fe3ac4848da518f9187684eb7d663dd",
+    "class": "java.util.Map",
+    "return": "boolean"
+  },
+  {
+    "method": "containsAll",
+    "param": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "id": "6258818936b7041839ee14bb2a886cab",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "matches",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "63b81223c2050a35c9fda94f884f5c30",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "method": "containsValue",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object"
+    ],
+    "id": "650ad22ca330882fdb04e7a003314aeb",
+    "class": "java.util.Map",
+    "return": "boolean"
+  },
+  {
+    "method": "put",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object",
+      "java.lang.Object"
+    ],
+    "id": "6c60968a58cbded67ec68f50bd75a40e",
+    "class": "java.util.Map",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "equalsIgnoreCase",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "6c9e3e963cbadd502f2b34f300ed5820",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "method": "remove",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object"
+    ],
+    "id": "706a27b83856011773f7978e94af1d4d",
+    "class": "java.util.Map",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "split",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "id": "73dbb6bd5438545e74f3b8ba563e656a",
+    "class": "java.lang.String",
+    "return": "java.lang.String[]"
+  },
+  {
+    "method": "isEmpty",
+    "param": ["java.util.List"],
+    "id": "7c5075626aa73627366a9306cc93a0d0",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "removeAll",
+    "param": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "id": "7edfd2e69e832ab99ca6fa38d7b2f8d7",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "values",
+    "param": ["java.util.Map"],
+    "id": "835edd4ece423cacd16c484f2365bbf8",
+    "class": "java.util.Map",
+    "return": "java.util.Collection"
+  },
+  {
+    "method": "putAll",
+    "param": [
+      "java.util.Map",
+      "java.util.Map"
+    ],
+    "id": "8d55c1e1d8b381654b2420cc066d9531",
+    "class": "java.util.Map"
+  },
+  {
+    "method": "putIfAbsent",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object",
+      "java.lang.Object"
+    ],
+    "id": "a16458ec245b5d93567078eb711a51ac",
+    "class": "java.util.Map",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "get",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object"
+    ],
+    "id": "a7dd2755112ea11caad03e0b2be05a34",
+    "class": "java.util.Map",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "startsWith",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "id": "ab9bc6353c3e4f38dab6c6a97bc1d383",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "method": "lastIndexOf",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "b58fa010b5b914346b0126440fd4f4fb",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "method": "charAt",
+    "param": [
+      "java.lang.String",
+      "int"
+    ],
+    "id": "b63092a4f631883eda976ab142f58899",
+    "class": "java.lang.String",
+    "return": "char"
+  },
+  {
+    "method": "toLowerCase",
+    "param": ["java.lang.String"],
+    "id": "b8427c0a4adad397f1a877fda422b9a3",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "method": "remove",
+    "param": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "id": "b940fe39b6608f4f31abd59ebdba0968",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "getOrDefault",
+    "param": [
+      "java.util.Map",
+      "java.lang.Object",
+      "java.lang.Object"
+    ],
+    "id": "bba50fbe7a538b7b4b67e83b64898d64",
+    "class": "java.util.Map",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "lastIndexOf",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "id": "c760a43e3e81f7ae50ddde10e8309cde",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "method": "contains",
+    "param": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "id": "c916b274a1bf54b26f3e3974aa6db214",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "method": "set",
+    "param": [
+      "java.util.List",
+      "int",
+      "java.lang.Object"
+    ],
+    "id": "ca03fc2cf5803f617b07affb73b59c4d",
+    "class": "java.util.List",
     "return": "java.lang.Object"
   },
   {
     "method": "length",
-    "id": "b9f848b15c7978a6ecbae0659dc86d9e",
+    "param": ["java.lang.String"],
+    "id": "d732f97309144854a8cb1d00e8e1409d",
     "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
+    "return": "int"
+  },
+  {
+    "method": "indexOf",
+    "param": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "id": "dbcde2e17dbd1e63dac2d8b53870f7c9",
+    "class": "java.util.List",
+    "return": "int"
+  },
+  {
+    "method": "remove",
+    "param": [
+      "java.util.List",
+      "int"
+    ],
+    "id": "dd9fd259792646588e1a6cc9cc76188e",
+    "class": "java.util.List",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "get",
+    "param": [
+      "java.util.List",
+      "int"
+    ],
+    "id": "de5bc8e443dd340afe42f0675eff75be",
+    "class": "java.util.List",
+    "return": "java.lang.Object"
+  },
+  {
+    "method": "indexOf",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "id": "e9fa6670d368966f2c4b5b5fad7a43cb",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "method": "endsWith",
+    "param": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "id": "f320015f96d7e74ae8c96863453f968e",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "method": "size",
+    "param": ["java.util.Map"],
+    "id": "f558b930a8b86027482f16e2751d2a18",
+    "class": "java.util.Map",
     "return": "int"
   },
   {
     "method": "add",
-    "id": "babd2d60e7a98178a62f6059c0500a8e",
-    "class": "java.util.List",
-    "parameters": [
+    "param": [
       "java.util.List",
       "int",
       "java.lang.Object"
-    ]
-  },
-  {
-    "method": "charAt",
-    "id": "c31a14894276f70b40834edf18e5b252",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
     ],
-    "return": "char"
-  },
-  {
-    "method": "substring",
-    "id": "c38ef61b8cdace3b53e77c78b2ad16d0",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "toUpperCase",
-    "id": "c79707c17cfadb8b30b134dfbe5f6fcd",
-    "class": "java.lang.String",
-    "parameters": ["java.lang.String"],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "substring",
-    "id": "ca21a3fc2f17df5b6559799cd356dc14",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "int"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "contains",
-    "id": "cb865ff726ddb2629f4726c8af47f326",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "replaceFirst",
-    "id": "d17d11af068d90d77eb731de54f833b3",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "java.lang.String"
-  },
-  {
-    "method": "subList",
-    "id": "dfdd886a386581ab59103914eaba4303",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "int",
-      "int"
-    ],
-    "return": "java.util.List"
-  },
-  {
-    "method": "remove",
-    "id": "e3737dc3a5274d6f37c07020acd11c4d",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "startsWith",
-    "id": "e3e3f0598c0e2812b1a4275de995be81",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "compareToIgnoreCase",
-    "id": "f2a2b3d914f95b06df5a90be92e79abf",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "int"
-  },
-  {
-    "method": "removeAll",
-    "id": "f65cbe1f452e54ef001cd0e0d050255c",
-    "class": "java.util.List",
-    "parameters": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "return": "boolean"
-  },
-  {
-    "method": "equalsIgnoreCase",
-    "id": "fb463ebbd4bb3fb63079d8fe58477b93",
-    "class": "java.lang.String",
-    "parameters": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "return": "boolean"
+    "id": "ffb4befde0c6907ae8f4230703a0baa1",
+    "class": "java.util.List"
   }
 ]

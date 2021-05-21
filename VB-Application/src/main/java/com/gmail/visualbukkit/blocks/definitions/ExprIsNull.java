@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsNull extends Expression {
 
     public ExprIsNull() {
-        super("expr-is-null", ClassInfo.BOOLEAN);
+        super("expr-is-null");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprNumberFromString extends Expression {
 
     public ExprNumberFromString() {
-        super("expr-number-from-string", ClassInfo.DOUBLE);
+        super("expr-number-from-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.DOUBLE;
     }
 
     @Override

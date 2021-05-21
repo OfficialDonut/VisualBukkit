@@ -9,7 +9,12 @@ import java.sql.ResultSet;
 public class ExprSQLResultSetValue extends Expression {
 
     public ExprSQLResultSetValue() {
-        super("expr-sql-result-set-value", ClassInfo.OBJECT);
+        super("expr-sql-result-set-value");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

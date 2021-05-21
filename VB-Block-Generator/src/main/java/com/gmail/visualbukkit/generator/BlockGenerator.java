@@ -1,226 +1,222 @@
 package com.gmail.visualbukkit.generator;
 
 import com.google.common.hash.Hashing;
-import com.google.common.reflect.ClassPath;
-import org.apache.commons.lang3.ClassUtils;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree;
+import jdk.javadoc.doclet.DocletEnvironment;
+import jdk.javadoc.doclet.Reporter;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
+import javax.lang.model.element.*;
+import javax.lang.model.type.NoType;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import javax.tools.Diagnostic;
 import java.io.IOException;
-import java.lang.reflect.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class BlockGenerator {
 
-    private Map<String, JSONObject> blockMap = new TreeMap<>();
-    private Map<String, String> langMap = new TreeMap<>();
-
-    private Path dir;
-    private Path blocksFile;
-    private Path langFile;
-
-    private Map<Class<?>, String> classNames = new HashMap<>();
-    private Set<String> blacklist = new HashSet<>();
-    private String category;
-    private String pluginModule;
+    private Path outputDir = Paths.get(".");
+    private Reporter reporter;
     private boolean includeDeprecated;
+    private String pluginModule;
+    private Path blacklistFile;
 
-    private static Class<?> eventClass;
+    private DocletEnvironment environment;
+    private Set<GeneratedBlock> generatedBlocks;
 
-    static {
-        try {
-            eventClass = Class.forName("org.bukkit.event.Event");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void setOutputDir(Path outputDir) {
+        this.outputDir = outputDir;
     }
 
-    public BlockGenerator(Path dir, Path blocksFile, Path langFile) throws IOException {
-        this.dir = dir;
-        this.blocksFile = blocksFile;
-        this.langFile = langFile;
-
-        if (Files.exists(blocksFile)) {
-            for (Object obj : new JSONArray(String.join("\n", Files.readAllLines(blocksFile)))) {
-                JSONObject json = (JSONObject) obj;
-                blockMap.put(json.getString("id"), json);
-            }
-        }
-
-        if (Files.exists(langFile)) {
-            for (String line : Files.readAllLines(langFile)) {
-                int i = line.indexOf("=");
-                langMap.put(line.substring(0, i), line.substring(i + 1));
-            }
-        }
+    public void setReporter(Reporter reporter) {
+        this.reporter = reporter;
     }
 
-    public void writeFiles() throws IOException {
-        if (Files.notExists(dir)) {
-            Files.createDirectories(dir);
+    public void setIncludeDeprecated(boolean includeDeprecated) {
+        this.includeDeprecated = includeDeprecated;
+    }
+
+    public void setPluginModule(String pluginModule) {
+        this.pluginModule = pluginModule;
+    }
+
+    public void setBlacklistFile(Path blacklistFile) {
+        this.blacklistFile = blacklistFile;
+    }
+
+    public void generate(DocletEnvironment environment) throws IOException {
+        this.environment = environment;
+        generatedBlocks = new TreeSet<>();
+        Set<String> blacklistedClasses = blacklistFile != null && Files.exists(blacklistFile) ? new HashSet<>(Files.readAllLines(blacklistFile)) : Collections.emptySet();
+
+        reporter.print(Diagnostic.Kind.NOTE, "Included Classes:");
+
+        for (Element element : environment.getIncludedElements()) {
+            if (element instanceof TypeElement && element.getSimpleName().length() != 0 && !blacklistedClasses.contains(element.toString()) && (includeDeprecated || !environment.getElementUtils().isDeprecated(element))) {
+                reporter.print(Diagnostic.Kind.NOTE, "\t" + element);
+                TypeElement clazz = (TypeElement) element;
+                if (isEvent(clazz)) {
+                    if (!clazz.getModifiers().contains(Modifier.ABSTRACT)) {
+                        GeneratedBlock eventBlock = new GeneratedBlock(clazz.toString());
+                        eventBlock.getJson().put("event", clazz.toString());
+                        eventBlock.getJson().putOpt("module", pluginModule);
+                        generatedBlocks.add(eventBlock);
+                        generateElements(clazz, clazz.getEnclosedElements(), true);
+                        ArrayDeque<TypeMirror> supertypes = new ArrayDeque<>(environment.getTypeUtils().directSupertypes(clazz.asType()));
+                        while (!supertypes.isEmpty()) {
+                            TypeMirror type = supertypes.pop();
+                            if (!type.toString().equals("java.lang.Object")) {
+                                supertypes.addAll(environment.getTypeUtils().directSupertypes(type));
+                                Element superElement = environment.getTypeUtils().asElement(type);
+                                if (superElement instanceof TypeElement) {
+                                    generateElements(clazz, superElement.getEnclosedElements(), true);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    generateElements(clazz, element.getEnclosedElements(), false);
+                }
+            }
         }
 
         JSONArray blockArray = new JSONArray();
-        blockMap.values().forEach(blockArray::put);
+        Map<String, String> langMap = new TreeMap<>();
+
+        for (GeneratedBlock generatedBlock : generatedBlocks) {
+            if (!generatedBlock.isInvalid()) {
+                blockArray.put(generatedBlock.getJson());
+                langMap.putAll(generatedBlock.getLangMap());
+            }
+        }
 
         StringJoiner langString = new StringJoiner("\n");
         langMap.forEach((key, value) -> langString.add(key + "=" + value));
 
-        Files.write(blocksFile, blockArray.toString(2).getBytes(StandardCharsets.UTF_8));
-        Files.write(langFile, langString.toString().getBytes(StandardCharsets.UTF_8));
-    }
+        reporter.print(Diagnostic.Kind.NOTE, System.lineSeparator());
+        reporter.print(Diagnostic.Kind.NOTE, "Writing files to " + outputDir.toAbsolutePath());
 
-    @SuppressWarnings("UnstableApiUsage")
-    public void generatePackage(String packageName) throws IOException {
-        for (ClassPath.ClassInfo classInfo : ClassPath.from(ClassLoader.getSystemClassLoader()).getTopLevelClasses(packageName)) {
-            Class<?> clazz = classInfo.load();
-            generatePackageClass(clazz);
-            for (Class<?> innerClass : clazz.getDeclaredClasses()) {
-                generatePackageClass(innerClass);
-            }
+        if (Files.notExists(outputDir)) {
+            Files.createDirectories(outputDir);
         }
+
+        Files.writeString(outputDir.resolve("Blocks.json"), blockArray.toString(2), StandardCharsets.UTF_8);
+        Files.writeString(outputDir.resolve("Blocks.properties"), langString.toString(), StandardCharsets.UTF_8);
+        reporter.print(Diagnostic.Kind.NOTE, "Done.");
+        reporter.print(Diagnostic.Kind.NOTE, System.lineSeparator());
     }
 
-    private void generatePackageClass(Class<?> clazz) {
-        if (!clazz.isAnonymousClass()
-                && (includeDeprecated || !clazz.isAnnotationPresent(Deprecated.class))
-                && !blacklist.contains(clazz.toString())) {
-            generateClass(clazz);
-        }
-    }
-
-    public void generateClass(Class<?> clazz) {
-        if (eventClass.isAssignableFrom(clazz)) {
-            if (!Modifier.isAbstract(clazz.getModifiers())) {
-                String id = hash(clazz.toString());
-                if (!blockMap.containsKey(id)) {
-                    JSONObject json = new JSONObject();
-                    json.put("id", id);
-                    json.put("event", clazz.getName());
-                    json.putOpt("plugin-module", pluginModule);
-                    blockMap.put(id, json);
-                }
-                if (category != null) {
-                    langMap.putIfAbsent(id + ".category", category);
-                }
-                generateMethods(clazz, clazz.getMethods(), true);
-            }
-        } else {
-            generateFields(clazz, clazz.getDeclaredFields());
-            generateConstructors(clazz, clazz.getDeclaredConstructors());
-            generateMethods(clazz, clazz.getDeclaredMethods(), false);
-        }
-    }
-
-    private void generateFields(Class<?> clazz, Field[] fields) {
-        for (Field field : fields) {
-            if (Modifier.isPublic(field.getModifiers())
-                    && (includeDeprecated || !field.isAnnotationPresent(Deprecated.class))
-                    && !blacklist.contains(field.toString())) {
-                String id = hash(field.toString());
-                if (!blockMap.containsKey(id)) {
-                    JSONObject json = new JSONObject();
-                    json.put("id", id);
-                    json.put("class", clazz.getName());
-                    json.put("field", field.getName());
-                    json.put("return", field.getType().getName());
-                    json.putOpt("plugin-module", pluginModule);
-                    if (Modifier.isStatic(field.getModifiers())) {
-                        json.put("static", true);
-                    } else {
-                        json.append("parameters", clazz.getName());
-                        langMap.computeIfAbsent(id + ".parameters", k -> getDisplayClassName(clazz));
+    private void generateElements(TypeElement clazz, List<? extends Element> elements, boolean event) {
+        for (Element element : elements) {
+            if (element.getModifiers().contains(Modifier.PUBLIC) && (includeDeprecated || !environment.getElementUtils().isDeprecated(element))) {
+                if (element instanceof VariableElement) {
+                    generateField(clazz, (VariableElement) element, generateBlock(clazz, element, event));
+                } else if (element instanceof ExecutableElement) {
+                    if (element.getKind() == ElementKind.CONSTRUCTOR && !event) {
+                        generateConstructor(clazz, (ExecutableElement) element, generateBlock(clazz, element, false));
+                    } else if (element.getKind() == ElementKind.METHOD && element.getAnnotation(Override.class) == null) {
+                        generateMethod(clazz, (ExecutableElement) element, generateBlock(clazz, element, event));
                     }
-                    blockMap.put(id, json);
-                }
-                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(clazz) + "] " + field.getName());
-                if (category != null) {
-                    langMap.putIfAbsent(id + ".category", category);
                 }
             }
         }
     }
 
-    private void generateConstructors(Class<?> clazz, Constructor<?>[] constructors) {
-        for (Constructor<?> constructor : constructors) {
-            if (Modifier.isPublic(constructor.getModifiers())
-                    && (includeDeprecated || !constructor.isAnnotationPresent(Deprecated.class))
-                    && !blacklist.contains(constructor.toString())
-                    && !blacklist.contains(constructor.getName())) {
-                String id = hash(constructor.toString());
-                if (!blockMap.containsKey(id)) {
-                    blockMap.put(id, generateExecutable(clazz, constructor, id));
+    private GeneratedBlock generateBlock(TypeElement clazz, Element element, boolean event) {
+        GeneratedBlock block = new GeneratedBlock(computeID(clazz.toString() + element));
+        block.getJson().put("id", block.getID());
+        block.getJson().put("class", clazz.toString());
+        block.getJson().putOpt("module", pluginModule);
+        if (event) {
+            block.getJson().put("event", true);
+        }
+        if (element.getModifiers().contains(Modifier.STATIC)) {
+            block.getJson().put("static", true);
+        }
+        DocCommentTree docCommentTree = environment.getDocTrees().getDocCommentTree(element);
+        if (docCommentTree != null) {
+            List<? extends DocTree> docTreeList = docCommentTree.getFullBody();
+            if (!docTreeList.isEmpty()) {
+                StringBuilder descBuilder = new StringBuilder();
+                for (DocTree docTree : docTreeList) {
+                    descBuilder.append(docTree.toString()
+                            .replaceAll("\\n\\s*", "\\\\n")
+                            .replaceAll("<.+>\\s?", "")
+                            .replaceAll("\\{@(?:.+?) (.+)}", "$1"));
                 }
-                langMap.putIfAbsent(id + ".title", "New " + getDisplayClassName(clazz));
-                if (category != null) {
-                    langMap.putIfAbsent(id + ".category", category);
-                }
+                block.addLang("descr", descBuilder.toString());
             }
         }
+        generatedBlocks.add(block);
+        return block;
     }
 
-    private void generateMethods(Class<?> clazz, Method[] methods, boolean isEvent) {
-        for (Method method : methods) {
-            if (Modifier.isPublic(method.getModifiers())
-                    && method.getDeclaringClass() != Object.class
-                    && (includeDeprecated || !method.isAnnotationPresent(Deprecated.class))
-                    && !blacklist.contains(method.toString())
-                    && !blacklist.contains(method.getName())) {
-                String id = hash(method.getDeclaringClass() != clazz ? clazz + method.toString() : method.toString());
-                if (!blockMap.containsKey(id)) {
-                    JSONObject json = generateExecutable(clazz, method, id);
-                    json.put("method", method.getName());
-                    if (method.getReturnType() != void.class) {
-                        json.put("return", method.getReturnType().getName());
-                    }
-                    if (Modifier.isStatic(method.getModifiers())) {
-                        json.put("static", true);
-                    }
-                    if (isEvent) {
-                        json.put("event-method", true);
-                    }
-                    blockMap.put(id, json);
-                }
-                langMap.putIfAbsent(id + ".title", "[" + getDisplayClassName(clazz) + "] " + formatLowerCamelCase(method.getName()));
-                if (category != null) {
-                    langMap.putIfAbsent(id + ".category", category);
-                }
+    private void generateField(TypeElement clazz, VariableElement field, GeneratedBlock block) {
+        if (isTypeDisallowed(field.asType())) {
+            block.setInvalid();
+            return;
+        }
+        block.getJson().put("field", field.getSimpleName().toString());
+        block.getJson().put("return", environment.getTypeUtils().erasure(field.asType()).toString());
+        block.addLang("title", "[" + formatClassName(clazz) + "] " + field.getSimpleName());
+    }
+
+    private void generateConstructor(TypeElement clazz, ExecutableElement constructor, GeneratedBlock block) {
+        block.addLang("title", "[" + formatClassName(clazz) + "] New " + formatClassName(clazz));
+        generateParameters(clazz, constructor, block);
+    }
+
+    private void generateMethod(TypeElement clazz, ExecutableElement method, GeneratedBlock block) {
+        block.getJson().put("method", method.getSimpleName().toString());
+        block.addLang("title", "[" + formatClassName(clazz) + "] " + formatLowerCamelCase(method.getSimpleName().toString()));
+        generateParameters(clazz, method, block);
+        if (!(method.getReturnType() instanceof NoType)) {
+            if (isTypeDisallowed(method.getReturnType())) {
+                block.setInvalid();
+                return;
+            }
+            block.getJson().put("return", environment.getTypeUtils().erasure(method.getReturnType()).toString());
+        }
+    }
+
+    private void generateParameters(TypeElement clazz, ExecutableElement element, GeneratedBlock block) {
+        StringJoiner parameterJoiner = new StringJoiner(",");
+        if (!block.getJson().has("static") && !block.getJson().has("event") && element.getKind() != ElementKind.CONSTRUCTOR) {
+            block.getJson().append("param", clazz.toString());
+            parameterJoiner.add(formatClassName(clazz));
+        }
+        for (VariableElement parameter : element.getParameters()) {
+            if (isTypeDisallowed(parameter.asType())) {
+                block.setInvalid();
+                return;
+            }
+            block.getJson().append("param", environment.getTypeUtils().erasure(parameter.asType()).toString());
+            parameterJoiner.add(formatLowerCamelCase(parameter.getSimpleName().toString()));
+        }
+        if (parameterJoiner.length() > 0) {
+            block.addLang("param", parameterJoiner.toString());
+        }
+    }
+
+    private boolean isTypeDisallowed(TypeMirror type) {
+        type = environment.getTypeUtils().erasure(type);
+        return type.getKind() == TypeKind.ERROR || type.toString().startsWith("java.lang.Class") || type.toString().startsWith("java.util.function.");
+    }
+
+    private String formatClassName(TypeElement clazz) {
+        String str = clazz.toString();
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isUpperCase(str.charAt(i))) {
+                return str.substring(i);
             }
         }
-    }
-
-    private JSONObject generateExecutable(Class<?> clazz, Executable executable, String id) {
-        JSONObject json = new JSONObject();
-        json.put("id", id);
-        json.put("class", clazz.getName());
-        json.putOpt("plugin-module", pluginModule);
-        boolean isInstanceMethod = !Modifier.isStatic(executable.getModifiers()) && !(executable instanceof Constructor) && !eventClass.isAssignableFrom(clazz);
-        if (isInstanceMethod) {
-            json.append("parameters", clazz.getName());
-        }
-        for (Class<?> parameterClass : executable.getParameterTypes()) {
-            json.append("parameters", parameterClass.getName());
-        }
-        if (executable.getParameterCount() > 0 || isInstanceMethod) {
-            langMap.computeIfAbsent(id + ".parameters", k -> {
-                StringJoiner joiner = new StringJoiner(",");
-                if (isInstanceMethod) {
-                    joiner.add(getDisplayClassName(clazz));
-                }
-                for (Parameter parameter : executable.getParameters()) {
-                    joiner.add(formatLowerCamelCase(parameter.getName()));
-                }
-                return joiner.toString();
-            });
-        }
-        return json;
-    }
-
-    private String getDisplayClassName(Class<?> clazz) {
-        return classNames.computeIfAbsent(clazz, ClassUtils::getShortClassName);
+        return str;
     }
 
     private String formatLowerCamelCase(String str) {
@@ -239,34 +235,27 @@ public class BlockGenerator {
         return builder.toString();
     }
 
-    public void reset() {
-        category = null;
-        pluginModule = null;
-        includeDeprecated = false;
-    }
-
-    public void addAlias(Class<?> clazz, String alias) {
-        classNames.put(clazz, alias);
-    }
-
-    public void addToBlackList(String string) {
-        blacklist.add(string);
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setPluginModule(String pluginModule) {
-        this.pluginModule = pluginModule;
-    }
-
-    public void setIncludeDeprecated(boolean includeDeprecated) {
-        this.includeDeprecated = includeDeprecated;
+    private boolean isEvent(TypeElement clazz) {
+        TypeMirror type = clazz.asType();
+        while (true) {
+            String name = type.toString();
+            if (name.equals("java.lang.Object")) {
+                return false;
+            }
+            if (name.equals("org.bukkit.event.Event")) {
+                return true;
+            }
+            List<? extends TypeMirror> supertypes = environment.getTypeUtils().directSupertypes(type);
+            if (!supertypes.isEmpty()) {
+                type = supertypes.get(0);
+            } else {
+                return false;
+            }
+        }
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    private static String hash(String string) {
+    private String computeID(String string) {
         return Hashing.murmur3_128().hashString(string, StandardCharsets.UTF_8).toString();
     }
 }

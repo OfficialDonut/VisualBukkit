@@ -8,7 +8,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprTrigFunction extends Expression {
 
     public ExprTrigFunction() {
-        super("expr-trig-function", ClassInfo.DOUBLE);
+        super("expr-trig-function");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.DOUBLE;
     }
 
     @Override

@@ -11,13 +11,13 @@ import java.util.ResourceBundle;
 
 public class BstatsExtension extends VisualBukkitExtension {
 
-    public static String METRICS_CLASS;
+    protected static String METRICS_CLASS;
 
     public BstatsExtension() throws IOException {
         try (InputStream inputStream = BstatsExtension.class.getResourceAsStream("/Metrics.java")) {
             METRICS_CLASS = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            BlockRegistry.register(this, "com.gmail.visualbukkit.extensions.bstats", ResourceBundle.getBundle("CustomBstatsBlocks"));
         }
-        BlockRegistry.register("com.gmail.visualbukkit.extensions.bstats", BstatsExtension.class.getClassLoader(), ResourceBundle.getBundle("bStatsCustomBlocks"));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class BstatsExtension extends VisualBukkitExtension {
 
     @Override
     public String getVersion() {
-        return "1.0.1";
+        return "1.0";
     }
 
     @Override

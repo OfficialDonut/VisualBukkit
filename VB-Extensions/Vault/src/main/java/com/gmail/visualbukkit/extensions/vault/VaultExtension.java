@@ -1,10 +1,9 @@
 package com.gmail.visualbukkit.extensions.vault;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.TypeHandler;
 import com.gmail.visualbukkit.extensions.VisualBukkitExtension;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import com.gmail.visualbukkit.plugin.PluginModule;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 
@@ -17,11 +16,10 @@ public class VaultExtension extends VisualBukkitExtension {
 
     public VaultExtension() throws IOException {
         PluginModule.register("Vault", VAULT_MODULE);
-        TypeHandler.registerClassNames(ResourceBundle.getBundle("VaultTypes"));
-        BlockRegistry.register("com.gmail.visualbukkit.extensions.vault", VaultExtension.class.getClassLoader(), ResourceBundle.getBundle("VaultCustomBlocks"));
-        try (InputStream inputStream = VaultExtension.class.getResourceAsStream("/VaultGeneratedBlocks.json")) {
+        BlockRegistry.register(this, "com.gmail.visualbukkit.extensions.vault", ResourceBundle.getBundle("CustomVaultBlocks"));
+        try (InputStream inputStream = VaultExtension.class.getResourceAsStream("/GeneratedVaultBlocks.json")) {
             JSONArray jsonArray = new JSONArray(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-            BlockRegistry.register(jsonArray, ResourceBundle.getBundle("VaultGeneratedBlocks"));
+            BlockRegistry.register(this, jsonArray, ResourceBundle.getBundle("GeneratedVaultBlocks"));
         }
     }
 
@@ -32,7 +30,7 @@ public class VaultExtension extends VisualBukkitExtension {
 
     @Override
     public String getVersion() {
-        return "1.0.0";
+        return "1.0";
     }
 
     @Override
@@ -54,9 +52,9 @@ public class VaultExtension extends VisualBukkitExtension {
                     "<version>1.7</version>" +
                     "<scope>provided</scope>");
 
-            buildContext.getMainClass().addField("private static net.milkbowl.vault.chat.Chat vaultChat;");
-            buildContext.getMainClass().addField("private static net.milkbowl.vault.economy.Economy vaultEconomy;");
-            buildContext.getMainClass().addField("private static net.milkbowl.vault.permission.Permission vaultPermission;");
+            buildContext.getMainClass().addField("public static net.milkbowl.vault.chat.Chat vaultChat;");
+            buildContext.getMainClass().addField("public static net.milkbowl.vault.economy.Economy vaultEconomy;");
+            buildContext.getMainClass().addField("public static net.milkbowl.vault.permission.Permission vaultPermission;");
 
             buildContext.getMainClass().addMethod(
                     "public static net.milkbowl.vault.chat.Chat getVaultChat() {" +

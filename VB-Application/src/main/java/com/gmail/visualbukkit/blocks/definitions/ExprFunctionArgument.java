@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprFunctionArgument extends Expression {
 
     public ExprFunctionArgument() {
-        super("expr-function-argument", ClassInfo.OBJECT);
+        super("expr-function-argument");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

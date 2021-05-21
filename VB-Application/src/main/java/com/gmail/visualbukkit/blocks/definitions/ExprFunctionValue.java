@@ -8,7 +8,12 @@ import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 public class ExprFunctionValue extends Expression {
 
     public ExprFunctionValue() {
-        super("expr-function-value", ClassInfo.OBJECT);
+        super("expr-function-value");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

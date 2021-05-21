@@ -2,153 +2,79 @@ package com.gmail.visualbukkit.blocks.parameters;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.*;
-import com.gmail.visualbukkit.gui.SoundManager;
-import com.gmail.visualbukkit.gui.StyleableHBox;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.*;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.ui.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.VBox;
-import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.List;
 
-public class ExpressionParameter extends VBox implements BlockParameter {
-
-    private static Map<ClassInfo, PopOver> expressionSelectors = new HashMap<>();
-    private static ExpressionParameter currentExpressionParameter;
+public class ExpressionParameter extends StyleableVBox implements BlockParameter {
 
     private ClassInfo type;
     private Expression.Block expression;
-    private Button button;
+    private Button placeholder;
 
     public ExpressionParameter(ClassInfo type) {
         this.type = type;
-        button = new Button("<" + type.getDisplayClassName() + ">");
 
-        getChildren().add(button);
-        getStyleClass().add("expression-parameter");
+        placeholder = new Button("<" + type.getDisplayClassName() + ">");
+        placeholder.getStyleClass().add("expression-parameter");
+        getChildren().add(placeholder);
 
-        PopOver selector = expressionSelectors.computeIfAbsent(type, k -> {
-            ObservableList<Expression> expressions = FXCollections.observableArrayList();
-            TreeSet<String> categories = new TreeSet<>();
-
-            int i = 0;
-            Set<String> exprTitles = new HashSet<>();
-            for (Expression expr : BlockRegistry.getExpressions()) {
-                if (exprTitles.add(expr.getTitle())) {
-                    expressions.add(expr.getReturnType().getDisplayClassName().equals(type.getDisplayClassName()) ? i++ : expressions.size(), expr);
-                    if (expr.getCategory() != null) {
-                        categories.add(expr.getCategory());
-                    }
-                }
-            }
-            expressions.add(i, new ListSeparatorExpression());
-
-            FilteredList<Expression> expressionList = new FilteredList<>(expressions);
-            ListView<Expression> listView = new ListView<>(expressionList);
-
-            TextField searchField = new TextField();
-            ComboBox<String> categoryBox = new ComboBox<>();
-            categories.add(VisualBukkitApp.getString("label.all"));
-            categoryBox.getItems().addAll(categories);
-
-            Predicate<Expression> filter = expr ->
-                    expr instanceof ListSeparatorExpression ||
-                    (StringUtils.containsIgnoreCase(expr.getTitle(), searchField.getText())
-                    && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(expr.getCategory())));
-
-            searchField.textProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));
-            categoryBox.valueProperty().addListener((o, oldValue, newValue) -> expressionList.setPredicate(filter::test));
-
-            PopOver popOver = new PopOver(new VBox(new StyleableHBox(new Label(VisualBukkitApp.getString("label.search")), searchField, categoryBox), listView));
-            popOver.setAnimated(false);
-            popOver.setOnShowing(e -> {
-                searchField.clear();
-                categoryBox.getSelectionModel().selectFirst();
-                listView.getSelectionModel().clearSelection();
-            });
-
-            listView.setPlaceholder(new Label(VisualBukkitApp.getString("label.empty_list")));
-            listView.getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
-                if (newValue != null && currentExpressionParameter != null) {
-                    if (!(newValue instanceof ListSeparatorExpression)) {
-                        UndoManager.run(currentExpressionParameter.setExpression(newValue.createBlock()));
-                    }
-                    popOver.hide();
-                }
-            });
-
-            return popOver;
-        });
-
-        button.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY && !selector.isShowing()) {
-                currentExpressionParameter = this;
-                selector.setArrowLocation(2 * e.getSceneY() > VisualBukkitApp.getInstance().getScene().getHeight() ?
+        placeholder.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+                VisualBukkitApp.getExpressionSelector().show(this, 2 * e.getSceneY() > VisualBukkitApp.getScene().getHeight() ?
                         PopOver.ArrowLocation.BOTTOM_LEFT :
                         PopOver.ArrowLocation.TOP_LEFT);
-                selector.show(this);
             }
-        });
-
-        ContextMenu contextMenu = new ContextMenu();
-        button.setContextMenu(contextMenu);
-
-        if (type.getClazz() == boolean.class) {
-            MenuItem booleanItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_boolean"));
-            MenuItem equalsItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_equals"));
-            contextMenu.getItems().addAll(booleanItem, equalsItem);
-            booleanItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean").createBlock())));
-            equalsItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-is-equal").createBlock())));
-        } else if (type.getClazz() == String.class) {
-            MenuItem stringItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_string"));
-            contextMenu.getItems().add(stringItem);
-            stringItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-string").createBlock())));
-        } else if (type.getClazz() == List.class) {
-            MenuItem newListItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_list"));
-            contextMenu.getItems().add(newListItem);
-            newListItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-list").createBlock())));
-        } else if (type.isNumber()) {
-            MenuItem numberItem = new MenuItem(VisualBukkitApp.getString("context_menu.insert_number"));
-            contextMenu.getItems().add(numberItem);
-            numberItem.setOnAction(e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-number").createBlock())));
-        }
-
-        MenuItem pasteItem = new MenuItem(VisualBukkitApp.getString("context_menu.paste"));
-        pasteItem.setOnAction(e -> UndoManager.run(setExpression(CopyPasteManager.pasteExpression())));
-
-        contextMenu.getItems().add(pasteItem);
-
-        contextMenu.setOnShowing(e -> {
-            selector.hide();
-            pasteItem.setDisable(!(CopyPasteManager.peek() instanceof Expression));
         });
 
         setOnDragOver(e -> {
-            if (expression == null) {
-                Object source = e.getGestureSource();
-                if (source instanceof Expression.Block) {
-                    e.acceptTransferModes(TransferMode.ANY);
-                }
+            Object source = e.getGestureSource();
+            if (source instanceof Expression.Block) {
+                e.acceptTransferModes(TransferMode.ANY);
             }
             e.consume();
         });
 
         setOnDragDropped(e -> {
-            Object source = e.getGestureSource();
-            Expression.Block block = (Expression.Block) source;
-            UndoManager.run(setExpression(block));
+            UndoManager.run(setExpression((Expression.Block) e.getGestureSource()));
             e.setDropCompleted(true);
             e.consume();
             SoundManager.SNAP.play();
         });
+
+        ActionMenuItem pasteItem = new ActionMenuItem(LanguageManager.get("context_menu.paste"), e -> UndoManager.run(setExpression(CopyPasteManager.pasteExpression())));
+        ContextMenu contextMenu = new ContextMenu(pasteItem);
+        contextMenu.setOnShowing(e -> pasteItem.setDisable(!CopyPasteManager.isExpressionCopied()));
+        placeholder.setContextMenu(contextMenu);
+
+        if (type.getClassType() == boolean.class) {
+            contextMenu.getItems().addAll(
+                    new SeparatorMenuItem(),
+                    new ActionMenuItem("Insert Boolean", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean").createBlock()))),
+                    new ActionMenuItem("Insert Equals", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-is-equal").createBlock()))),
+                    new ActionMenuItem("Insert Boolean Logic", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean-logic").createBlock()))));
+        } else if (type.getClassType() == String.class) {
+            contextMenu.getItems().addAll(
+                    new SeparatorMenuItem(),
+                    new ActionMenuItem("Insert String", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-string").createBlock()))));
+        } else if (type.getClassType() == List.class) {
+            contextMenu.getItems().addAll(
+                    new SeparatorMenuItem(),
+                    new ActionMenuItem("Insert List", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-list").createBlock()))));
+        } else if (type.isNumber()) {
+            contextMenu.getItems().addAll(
+                    new SeparatorMenuItem(),
+                    new ActionMenuItem("Insert Number", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-number").createBlock()))),
+                    new ActionMenuItem("Insert Arithmetic", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-arithmetic").createBlock()))));
+        }
     }
 
     public UndoManager.RevertableAction setExpression(Expression.Block newExpression) {
@@ -164,11 +90,12 @@ public class ExpressionParameter extends VBox implements BlockParameter {
                 disconnectNew.run();
                 expression = newExpression;
                 getChildren().setAll(newExpression);
+                expression.update();
             }
             @Override
             public void revert() {
                 expression = null;
-                getChildren().setAll(button);
+                getChildren().setAll(placeholder);
                 disconnectNew.revert();
                 clearAction.revert();
             }
@@ -184,7 +111,7 @@ public class ExpressionParameter extends VBox implements BlockParameter {
             @Override
             public void run() {
                 expression = null;
-                getChildren().setAll(button);
+                getChildren().setAll(placeholder);
             }
             @Override
             public void revert() {
@@ -210,11 +137,11 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
     @Override
     public String toJava() {
-        return expression != null ? expression.getDefinition().getReturnType().convert(expression.toJava(), type) : ClassInfo.VOID.convert("null", type);
+        return expression != null ? expression.getDefinition().getReturnType().convertTo(type, expression.toJava()) : ClassInfo.VOID.convertTo(type, "null");
     }
 
     @Override
-    public Object serialize() {
+    public JSONObject serialize() {
         return expression != null ? expression.serialize() : null;
     }
 
@@ -235,22 +162,5 @@ public class ExpressionParameter extends VBox implements BlockParameter {
 
     public Expression.Block getExpression() {
         return expression;
-    }
-
-    private static class ListSeparatorExpression extends Expression {
-
-        public ListSeparatorExpression() {
-            super(null, null);
-        }
-
-        @Override
-        public Block createBlock() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public String toString() {
-            return "==================================================";
-        }
     }
 }

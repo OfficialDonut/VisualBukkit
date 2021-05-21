@@ -6,12 +6,13 @@
 
     <groupId>com.gmail.visualbukkit</groupId>
     <artifactId>visual-bukkit</artifactId>
-    <version>1.0.0</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>VB-Application</module>
         <module>VB-Block-Generator</module>
+        <module>VB-Plugin</module>
         <module>VB-Extensions</module>
     </modules>
 

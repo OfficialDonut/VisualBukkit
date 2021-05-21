@@ -2,9 +2,9 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 import javafx.beans.binding.Bindings;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
@@ -36,7 +36,7 @@ public class CompCommand extends PluginComponent {
                         "if (command.getName().equalsIgnoreCase(\"" + StringEscapeUtils.escapeJava(arg(0)) + "\")) {" +
                         buildContext.getLocalVariableDeclarations() +
                         "try {" +
-                        getChildJava() +
+                        toJava() +
                         "} catch (Exception e) { e.printStackTrace(); }" +
                         "return true;" +
                         "}" +

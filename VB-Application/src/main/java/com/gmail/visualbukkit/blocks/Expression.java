@@ -1,44 +1,66 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
-import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
+import com.gmail.visualbukkit.ui.CopyPasteManager;
+import com.gmail.visualbukkit.ui.LanguageManager;
+import com.gmail.visualbukkit.ui.UndoManager;
 import javafx.css.PseudoClass;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
+import org.json.JSONObject;
 
-public abstract class Expression extends BlockDefinition<Expression.Block> {
+public abstract class Expression extends BlockDefinition {
 
-    private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
-
-    private final ClassInfo returnType;
-
-    public Expression(String id, ClassInfo returnType) {
+    public Expression(String id) {
         super(id);
-        this.returnType = returnType;
     }
 
-    public final ClassInfo getReturnType() {
-        return returnType;
+    public abstract ClassInfo getReturnType();
+
+    @Override
+    public abstract Block createBlock();
+
+    @Override
+    public Block createBlock(JSONObject json) {
+        return (Block) super.createBlock(json);
     }
 
-    public static abstract class Block extends CodeBlock<Expression> {
+    @Override
+    public String toString() {
+        return super.toString() + " → (" + getReturnType() + ")";
+    }
+
+    public static abstract class Block extends CodeBlock {
+
+        private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
 
         public Block(Expression expression, BlockParameter... parameters) {
             super(expression);
 
-            addToHeader(new Label(expression.getTitle()));
-            addParameterLines(parameters);
-            getSyntaxBox().getStyleClass().add("expression-block");
+            getBody().getStyleClass().add("expression-block");
+            addParameterLines(expression.getParameterNames(), parameters);
 
-            MenuItem addStringItem = new MenuItem(VisualBukkitApp.getString("context_menu.add_string"));
-            addStringItem.setOnAction(e -> {
+            getBody().setOnDragDetected(e -> {
+                if (e.getButton() == MouseButton.PRIMARY) {
+                    Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
+                    SnapshotParameters snapshotParameters = new SnapshotParameters();
+                    snapshotParameters.setFill(Color.TRANSPARENT);
+                    Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
+                    dragboard.setDragView(image, -1, -1);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString("");
+                    dragboard.setContent(content);
+                }
+                e.consume();
+            });
+
+            ActionMenuItem addStringItem = new ActionMenuItem("Add String", e -> {
                 ExpressionParameter exprParameter = getExpressionParameter();
                 UndoManager.run(new UndoManager.RevertableAction() {
                     @Override
@@ -54,76 +76,30 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
                 });
             });
 
-            MenuItem copyItem = new MenuItem(VisualBukkitApp.getString("context_menu.copy"));
-            MenuItem cutItem = new MenuItem(VisualBukkitApp.getString("context_menu.cut"));
-            MenuItem deleteItem = new MenuItem(VisualBukkitApp.getString("context_menu.delete"));
-            copyItem.setOnAction(e -> copy());
-            cutItem.setOnAction(e -> UndoManager.run(cut()));
-            deleteItem.setOnAction(e -> UndoManager.run(delete()));
-            getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, addStringItem);
-            getContextMenu().setOnShowing(e -> addStringItem.setVisible(getExpressionParameter().getType().getClazz() == String.class || getDefinition().returnType.getClazz() == String.class));
+            getContextMenu().getItems().addAll(
+                    new ActionMenuItem(LanguageManager.get("context_menu.copy"), e -> CopyPasteManager.copyExpression(this)),
+                    new ActionMenuItem(LanguageManager.get("context_menu.cut"), e -> {
+                        CopyPasteManager.copyExpression(this);
+                        UndoManager.run(getExpressionParameter().clear());
+                    }),
+                    new ActionMenuItem(LanguageManager.get("context_menu.delete"), e -> UndoManager.run(getExpressionParameter().clear())),
+                    addStringItem);
 
-            if (getDefinition().getReturnType().getClazz() == boolean.class) {
-                MenuItem negateBooleanItem = new MenuItem(VisualBukkitApp.getString("context_menu.negate_boolean"));
-                getContextMenu().getItems().add(negateBooleanItem);
-                negateBooleanItem.setOnAction(e -> {
-                    ExpressionParameter exprParameter = getExpressionParameter();
-                    UndoManager.run(new UndoManager.RevertableAction() {
-                        @Override
-                        public void run() {
-                            Block negateBooleanBlock = BlockRegistry.getExpression("expr-negate-boolean").createBlock();
-                            exprParameter.setExpression(negateBooleanBlock).run();
-                            (((ExpressionParameter) negateBooleanBlock.getParameters().get(0)).setExpression(Block.this)).run();
-                        }
-
-                        @Override
-                        public void revert() {
-                            exprParameter.setExpression(Block.this).run();
-                        }
-                    });
-                });
-            }
-
-            getSyntaxBox().setOnDragDetected(e -> {
-                if (e.getButton() == MouseButton.PRIMARY) {
-                    Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
-                    SnapshotParameters snapshotParameters = new SnapshotParameters();
-                    snapshotParameters.setFill(Color.TRANSPARENT);
-                    Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
-                    dragboard.setDragView(image, -1, -1);
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString("");
-                    dragboard.setContent(content);
-                }
-                e.consume();
-            });
+            getContextMenu().setOnShowing(e -> addStringItem.setVisible(getExpressionParameter().getType().getClassType() == String.class || getDefinition().getReturnType().getClassType() == String.class));
         }
 
         @Override
-        protected void handleSelectedAction(KeyEvent e) {
-            KeyCode key = e.getCode();
+        public void handleSelectedAction(KeyEvent e) {
             if (e.isShortcutDown()) {
-                if (key == KeyCode.C) {
-                    copy();
-                } else if (key == KeyCode.X) {
-                    UndoManager.run(cut());
+                if (e.getCode() == KeyCode.C) {
+                    CopyPasteManager.copyExpression(this);
+                } else if (e.getCode() == KeyCode.X) {
+                    CopyPasteManager.copyExpression(this);
+                    UndoManager.run(getExpressionParameter().clear());
                 }
-            } else if (key == KeyCode.DELETE) {
-                UndoManager.run(delete());
+            } else if (e.getCode() == KeyCode.DELETE) {
+                UndoManager.run(getExpressionParameter().clear());
             }
-        }
-
-        public void copy() {
-            CopyPasteManager.copyExpression(this);
-        }
-
-        public UndoManager.RevertableAction cut() {
-            copy();
-            return delete();
-        }
-
-        public UndoManager.RevertableAction delete() {
-            return getExpressionParameter().clear();
         }
 
         @Override
@@ -137,7 +113,7 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
                 }
                 parent = parent.getParent();
             }
-            getSyntaxBox().pseudoClassStateChanged(NESTED_STYLE_CLASS, i % 2 == 1);
+            getBody().pseudoClassStateChanged(NESTED_STYLE_CLASS, i % 2 == 1);
         }
 
         public abstract String toJava();
@@ -145,10 +121,10 @@ public abstract class Expression extends BlockDefinition<Expression.Block> {
         public ExpressionParameter getExpressionParameter() {
             return (ExpressionParameter) getParent();
         }
-    }
 
-    @Override
-    public String toString() {
-        return super.toString() + " → (" + returnType.getDisplayClassName() + ")";
+        @Override
+        public Expression getDefinition() {
+            return (Expression) super.getDefinition();
+        }
     }
 }

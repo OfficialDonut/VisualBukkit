@@ -22,14 +22,12 @@ public class StatListLoop extends Container {
         };
     }
 
-    public static int getNestedLoops(Node node) {
+    protected static int getNestedLoops(Node node) {
         int loops = 0;
         Parent parent = node.getParent();
         while (parent != null) {
-            if (parent instanceof Container.ChildConnector) {
-                if ((((Container.ChildConnector) parent).getOwner().getDefinition().getID().equals("stat-list-loop"))) {
-                    loops++;
-                }
+            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getID().equals("stat-list-loop")) {
+                loops++;
             }
             parent = parent.getParent();
         }

@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprCeilNumber extends Expression {
 
     public ExprCeilNumber() {
-        super("expr-ceil-number", ClassInfo.LONG);
+        super("expr-ceil-number");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LONG;
     }
 
     @Override

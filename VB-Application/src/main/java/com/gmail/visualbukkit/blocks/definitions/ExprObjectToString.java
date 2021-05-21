@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprObjectToString extends Expression {
 
     public ExprObjectToString() {
-        super("expr-object-to-string", ClassInfo.STRING);
+        super("expr-object-to-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
 public class StatSetSimpleLocalVariable extends Statement {
 
@@ -14,10 +14,10 @@ public class StatSetSimpleLocalVariable extends Statement {
 
     @Override
     public Block createBlock() {
-        InputParameter inputParameter = new InputParameter();
-        inputParameter.getStyleClass().add("simple-local-variable");
+        InputParameter input = new InputParameter();
+        input.getStyleClass().add("simple-local-variable-field");
 
-        return new Block(this, inputParameter, new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, input, new ExpressionParameter(ClassInfo.OBJECT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

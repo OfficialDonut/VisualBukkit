@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.PluginComponent;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
@@ -21,7 +21,7 @@ public class CompPluginEnable extends PluginComponent {
                 enableMethod.setBody(enableMethod.getBody() +
                         "try {" +
                         buildContext.getLocalVariableDeclarations() +
-                        getChildJava() +
+                        toJava() +
                         "} catch (Exception e) { e.printStackTrace(); }");
             }
         };

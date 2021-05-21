@@ -1,12 +1,23 @@
 package com.gmail.visualbukkit.blocks;
 
-import org.apache.commons.lang3.ClassUtils;
+import com.google.common.primitives.Primitives;
 
 import java.util.*;
 
 public class ClassInfo {
 
-    private static Map<String, ClassInfo> classInfoCache = new HashMap<>();
+    private static Map<String, ClassInfo> cache = new HashMap<>();
+    private static Map<String, String> classAliases = new HashMap<>();
+
+    static {
+        classAliases.put("boolean", "Boolean");
+        classAliases.put("char", "String");
+        classAliases.put("void", "Object");
+        classAliases.put("java.io.File", "FilePath");
+        classAliases.put("java.lang.CharSequence", "String");
+        classAliases.put("java.time.LocalDateTime", "Date");
+        classAliases.put("org.bukkit.configuration.ConfigurationSection", "Config");
+    }
 
     public static final ClassInfo OBJECT = ClassInfo.of(Object.class);
     public static final ClassInfo STRING = ClassInfo.of(String.class);
@@ -28,66 +39,77 @@ public class ClassInfo {
     private ClassInfo(Class<?> clazz) {
         this.clazz = clazz;
         canonicalClassName = clazz.getCanonicalName();
-        displayClassName = TypeHandler.getDisplayClassName(clazz.getName());
+        displayClassName = classAliases.get(canonicalClassName);
         if (displayClassName == null) {
             if (isNumber()) {
-                displayClassName = TypeHandler.getDisplayClassName("number");
-            } else if (isArrayOrCollection() && clazz != List.class) {
+                displayClassName = "Number";
+            } else if (isArrayOrCollection() && !isList()) {
                 displayClassName = LIST.displayClassName;
             } else {
-                displayClassName = ClassUtils.getShortClassName(clazz);
+                displayClassName = formatClassName(canonicalClassName);
             }
         }
     }
 
-    private ClassInfo(String className) {
-        canonicalClassName = className.contains("$") ? className.replace("$", ".") : className;
-        canonicalClassName = canonicalClassName.startsWith("[L") ? canonicalClassName.substring(2, canonicalClassName.length() - 1) + "[]" : canonicalClassName;
-        displayClassName = TypeHandler.getDisplayClassName(className);
+    private ClassInfo(String canonicalClassName) {
+        this.canonicalClassName = canonicalClassName;
+        displayClassName = classAliases.get(canonicalClassName);
         if (displayClassName == null) {
             if (isArrayOrCollection()) {
                 displayClassName = LIST.displayClassName;
             } else {
-                displayClassName = ClassUtils.getShortClassName(className);
+                displayClassName = formatClassName(canonicalClassName);
             }
         }
     }
 
-    public String convert(String src, ClassInfo classInfo) {
-        if (equals(classInfo) || (classInfo.clazz == Object.class && !isPrimitive())) {
+    private String formatClassName(String canonicalClassName) {
+        for (int i = 0; i < canonicalClassName.length(); i++) {
+            if (Character.isUpperCase(canonicalClassName.charAt(i))) {
+                return canonicalClassName.substring(i);
+            }
+        }
+        return canonicalClassName;
+    }
+
+    public String convertTo(ClassInfo to, String src) {
+        if (equals(to) || (to.clazz == Object.class && !isPrimitive())) {
             return src;
         }
         if (clazz == void.class) {
-            return "((" + classInfo.canonicalClassName + ")" + (classInfo.isPrimitive() ? "(Object) null" : "null") + ")";
+            return "((" + to.canonicalClassName + ")" + (to.isPrimitive() ? "(Object) null" : "null") + ")";
         }
-        if ((isPrimitiveNumber() && classInfo.isPrimitiveNumber()) || (classInfo.isPrimitive() && clazz == ClassUtils.primitiveToWrapper(classInfo.clazz)) || (isPrimitive() && classInfo.clazz == ClassUtils.primitiveToWrapper(clazz))) {
-            return "((" + classInfo.canonicalClassName + ")" + src + ")";
+        if ((isPrimitiveNumber() && to.isPrimitiveNumber()) || (to.isPrimitive() && clazz == Primitives.wrap(to.clazz)) || (isPrimitive() && to.clazz == Primitives.wrap(clazz))) {
+            return "((" + to.canonicalClassName + ")" + src + ")";
         }
-        if (classInfo.clazz == String.class || classInfo.clazz == CharSequence.class) {
+        if (to.clazz == String.class || to.clazz == CharSequence.class) {
             return "String.valueOf(" + src + ")";
         }
-        if (clazz == String.class && classInfo.clazz == char.class) {
-            return src + ".charAt(0)";
+        if (to.clazz == char.class) {
+            return clazz == String.class ? (src + ".charAt(0)") : ("String.valueOf(" + src + ").charAt(0)");
         }
-        if (clazz != null && Collection.class.isAssignableFrom(clazz) && classInfo.isArray()) {
-            return "((" + classInfo.canonicalClassName + ")" + src + ".toArray(new " + classInfo.canonicalClassName + "{}))";
+        if (isCollection() && to.isArray()) {
+            return "((" + to.canonicalClassName + ")" + src + ".toArray(new " + to.canonicalClassName + "{}))";
         }
-        if (isPrimitiveNumber() && classInfo.clazz == Number.class) {
-            return convert(src, ClassInfo.of(ClassUtils.primitiveToWrapper(clazz)));
+        if (isCollection() && (to.clazz == Set.class || to.clazz == HashSet.class)) {
+            return "new HashSet(" + src + ")";
         }
-        if (isPrimitiveNumber() && classInfo.isNumber()) {
-            return ClassInfo.of(ClassUtils.wrapperToPrimitive(classInfo.clazz)).convert("((" + ClassUtils.wrapperToPrimitive(classInfo.clazz) + ")" + src, classInfo);
+        if (isPrimitiveNumber() && to.clazz == Number.class) {
+            return convertTo(ClassInfo.of(Primitives.wrap(clazz)), src);
         }
-        if (clazz != null && Number.class.isAssignableFrom(clazz) && classInfo.isPrimitiveNumber()) {
-            return src + "." + classInfo.canonicalClassName + "Value()";
+        if (isPrimitiveNumber() && to.isNumber()) {
+            return ClassInfo.of(Primitives.unwrap(to.clazz)).convertTo(to, "((" + Primitives.unwrap(to.clazz) + ")" + src + ")");
         }
-        if (clazz == Object.class && classInfo.isPrimitiveNumber()) {
-            return "((Number)" + src + ")." + classInfo.canonicalClassName + "Value()";
+        if (clazz != null && Number.class.isAssignableFrom(clazz) && to.isPrimitiveNumber()) {
+            return src + "." + to.canonicalClassName + "Value()";
         }
-        if (clazz == Object.class && classInfo.isArray()) {
-            return "((" + classInfo.canonicalClassName + ") ((List)" + src + ").toArray(new " + classInfo.canonicalClassName + "{}))";
+        if (clazz == Object.class && to.isPrimitiveNumber()) {
+            return "((Number)" + src + ")." + to.canonicalClassName + "Value()";
         }
-        return "((" + classInfo.canonicalClassName + ") (Object)" + src + ")";
+        if (clazz == Object.class && to.isArray()) {
+            return "((" + to.canonicalClassName + ") ((Collection)" + src + ").toArray(new " + to.canonicalClassName + "{}))";
+        }
+        return "((" + to.canonicalClassName + ") (Object)" + src + ")";
     }
 
     @Override
@@ -96,6 +118,11 @@ public class ClassInfo {
             return canonicalClassName.equals(((ClassInfo) obj).canonicalClassName);
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return displayClassName;
     }
 
     public boolean isPrimitive() {
@@ -107,18 +134,30 @@ public class ClassInfo {
     }
 
     public boolean isNumber() {
-        return isPrimitiveNumber() || (clazz != null && Number.class.isAssignableFrom(clazz));
+        return isPrimitiveNumber() || isSubclassOf(Number.class);
     }
 
     public boolean isArray() {
         return (clazz != null && clazz.isArray()) || canonicalClassName.endsWith("[]");
     }
 
-    public boolean isArrayOrCollection() {
-        return isArray() || (clazz != null && Collection.class.isAssignableFrom(clazz));
+    public boolean isCollection() {
+        return isSubclassOf(Collection.class);
     }
 
-    public Class<?> getClazz() {
+    public boolean isList() {
+        return isSubclassOf(List.class);
+    }
+
+    public boolean isArrayOrCollection() {
+        return isArray() || isCollection();
+    }
+
+    public boolean isSubclassOf(Class<?> superClass) {
+        return clazz != null && superClass.isAssignableFrom(clazz);
+    }
+
+    public Class<?> getClassType() {
         return clazz;
     }
 
@@ -130,16 +169,20 @@ public class ClassInfo {
         return displayClassName;
     }
 
-    public static ClassInfo of(Class<?> clazz) {
-        return classInfoCache.computeIfAbsent(clazz.getName(), k -> new ClassInfo(clazz));
+    public static void addClassAlias(String canonicalClassName, String alias) {
+        classAliases.put(canonicalClassName, alias);
     }
 
-    public static ClassInfo of(String className) {
-        return classInfoCache.computeIfAbsent(className, k -> {
+    public static ClassInfo of(Class<?> clazz) {
+        return cache.computeIfAbsent(clazz.getCanonicalName(), k -> new ClassInfo(clazz));
+    }
+
+    public static ClassInfo of(String canonicalClassName) {
+        return cache.computeIfAbsent(canonicalClassName, k -> {
             try {
-                return new ClassInfo(Class.forName(className));
+                return new ClassInfo(Class.forName(canonicalClassName));
             } catch (ClassNotFoundException e) {
-                return new ClassInfo(className);
+                return new ClassInfo(canonicalClassName);
             }
         });
     }

@@ -13,10 +13,10 @@ public class StatIfStatement extends Container {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ChoiceParameter("false", "true")) {
+        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ChoiceParameter("normal", "negate condition")) {
             @Override
             public String toJava() {
-                return arg(1).equals("false") ?
+                return arg(1).equals("normal") ?
                         ("if (" + arg(0) + ") {" + getChildJava() + "}") :
                         ("if (!" + arg(0) + ") {" + getChildJava() + "}");
             }

@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprFloorNumber extends Expression {
 
     public ExprFloorNumber() {
-        super("expr-floor-number", ClassInfo.LONG);
+        super("expr-floor-number");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LONG;
     }
 
     @Override

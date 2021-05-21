@@ -3,12 +3,16 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
 
 public class ExprCommandArgument extends Expression {
 
     public ExprCommandArgument() {
-        super("expr-command-argument", ClassInfo.STRING);
+        super("expr-command-argument");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override
@@ -21,20 +25,9 @@ public class ExprCommandArgument extends Expression {
             }
 
             @Override
-            public void prepareBuild(BuildContext buildContext) {
-                super.prepareBuild(buildContext);
-                buildContext.addUtilMethod(ARG_METHOD);
-            }
-
-            @Override
             public String toJava() {
-                return "PluginMain.getCommandArg(commandArgs," + arg(0) + ")";
+                return "(commandArgs.length > " + arg(0) + " ? commandArgs[" + arg(0) + "] : null" + ")";
             }
         };
     }
-
-    private static final String ARG_METHOD =
-            "public static String getCommandArg(String[] args, int i) {\n" +
-            "    return args.length > i ? args[i] : null;\n" +
-            "}";
 }

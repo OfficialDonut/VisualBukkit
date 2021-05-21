@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprHexColor extends Expression {
 
     public ExprHexColor() {
-        super("expr-hex-color", ClassInfo.STRING);
+        super("expr-hex-color");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

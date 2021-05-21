@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCurrentTime extends Expression {
 
     public ExprCurrentTime() {
-        super("expr-current-time", ClassInfo.LONG);
+        super("expr-current-time");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LONG;
     }
 
     @Override

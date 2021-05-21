@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprThisPlugin extends Expression {
 
     public ExprThisPlugin() {
-        super("expr-this-plugin", ClassInfo.of("org.bukkit.plugin.java.JavaPlugin"));
+        super("expr-this-plugin");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.plugin.java.JavaPlugin");
     }
 
     @Override

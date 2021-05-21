@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprProcedureArguments extends Expression {
 
     public ExprProcedureArguments() {
-        super("expr-procedure-arguments", ClassInfo.LIST);
+        super("expr-procedure-arguments");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override

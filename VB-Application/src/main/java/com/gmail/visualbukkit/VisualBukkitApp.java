@@ -1,36 +1,36 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.TypeHandler;
-import com.gmail.visualbukkit.blocks.UndoManager;
+import com.gmail.visualbukkit.blocks.ExpressionSelector;
+import com.gmail.visualbukkit.blocks.StatementSelector;
+import com.gmail.visualbukkit.extensions.DefaultBlocksExtension;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
-import com.gmail.visualbukkit.gui.IconButton;
-import com.gmail.visualbukkit.gui.LogDisplay;
-import com.gmail.visualbukkit.gui.NotificationManager;
-import com.gmail.visualbukkit.gui.StatementSelector;
-import com.gmail.visualbukkit.plugin.PluginBuilder;
-import com.gmail.visualbukkit.plugin.Project;
-import com.gmail.visualbukkit.plugin.ProjectManager;
+import com.gmail.visualbukkit.project.Project;
+import com.gmail.visualbukkit.project.ProjectManager;
+import com.gmail.visualbukkit.ui.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,260 +42,231 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class VisualBukkitApp extends Application {
 
-    public static final String VERSION = String.valueOf(VisualBukkitLauncher.class.getPackage().getSpecificationVersion());
-    private static ResourceBundle resourceBundle;
-    private static VisualBukkitApp instance;
+    private static String version = VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
+    private static VisualBukkitLogger logger;
+    private static VisualBukkitServer server;
+    private static SettingsManager settingsManager;
 
-    private boolean saveOnExit = true;
-    private Path dataDir;
-    private DataFile dataFile;
+    private static ExecutorService executorService = Executors.newCachedThreadPool();
+    private static Path dataDir = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
+    private static Path dataFile = dataDir.resolve("data.json");
+    private static JSONObject data;
+    private static Timeline autosaveTimeline;
+    private static boolean exitNoSave;
 
-    private BorderPane rootPane = new BorderPane();
-    private BorderPane innerBorderPane = new BorderPane();
-    private Scene scene = new Scene(rootPane, 500, 500);
-    private Stage primaryStage;
-    private StatementSelector statementSelector;
-    private LogDisplay logDisplay;
-
-    public VisualBukkitApp() {
-        if (instance != null) {
-            throw new IllegalStateException();
-        }
-        instance = this;
-    }
+    private static BorderPane rootPane = new BorderPane();
+    private static SplitPane splitPane = new SplitPane();
+    private static Scene scene = new Scene(rootPane, 750, 500);
+    private static Stage stage;
+    private static StatementSelector statementSelector;
+    private static ExpressionSelector expressionSelector;
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.primaryStage = stage;
-        dataDir = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
-        dataFile = new DataFile(dataDir.resolve("data.json"));
-        SettingsManager.getInstance().loadSettings(dataFile);
-        resourceBundle = ResourceBundle.getBundle("lang.GUI");
-        logDisplay = new LogDisplay();
-        System.setOut(logDisplay.getPrintStream());
-        System.setErr(logDisplay.getPrintStream());
-        Thread.setDefaultUncaughtExceptionHandler((thread, e) -> Platform.runLater(() -> {
-            NotificationManager.displayException("An exception occurred", e);
-            if (!stage.isShowing()) {
-                Platform.exit();
-            }
-        }));
-        System.out.println("===== Visual Bukkit v" + VERSION + " =====");
+        VisualBukkitApp.stage = stage;
+        logger = new VisualBukkitLogger();
+        System.setOut(logger.getPrintStream());
+        System.setErr(logger.getPrintStream());
+        System.out.println("===== Visual Bukkit v" + version + " =====");
+        System.out.println("Initializing...");
+
         DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
         DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Loading...").build());
-        Platform.runLater(this::load);
+
+        if (Files.exists(dataFile)) {
+            try {
+                data = new JSONObject(Files.readString(dataFile));
+            } catch (JSONException e) {
+                data = new JSONObject();
+            }
+        } else {
+            data = new JSONObject();
+        }
+
+        System.out.println("Loading settings...");
+        settingsManager = new SettingsManager();
+        settingsManager.bindStyle(logger.getTextArea());
+        settingsManager.bindStyle(rootPane);
+
+        statementSelector = new StatementSelector();
+        expressionSelector = new ExpressionSelector();
+
+        rootPane.setTop(createMenuBar());
+        rootPane.setCenter(splitPane);
+
+        splitPane.widthProperty().addListener((o, oldValue, newValue) -> Platform.runLater(() -> splitPane.setDividerPositions(0.25)));
+        splitPane.getItems().addAll(statementSelector, new Pane());
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
+                e.consume();
+                try {
+                    saveCurrentProject();
+                    NotificationManager.displayMessage(LanguageManager.get("message.saved.title"), LanguageManager.get("message.saved.content"));
+                } catch (IOException ex) {
+                    NotificationManager.displayException("Failed to save", ex);
+                }
+            }
+        });
+
+        try (InputStream iconInputStream = VisualBukkitApp.class.getResourceAsStream("/images/icon.png");
+             InputStream bukkitBlocksInputStream = VisualBukkitApp.class.getResourceAsStream("/blocks/BukkitBlocks.json");
+             InputStream javaBlocksInputStream = VisualBukkitApp.class.getResourceAsStream("/blocks/JavaBlocks.json")) {
+            stage.getIcons().add(new Image(iconInputStream));
+            System.out.println("Loading blocks...");
+            JSONArray bukkitBlockArray = new JSONArray(IOUtils.toString(bukkitBlocksInputStream, StandardCharsets.UTF_8));
+            JSONArray javaBlockArray = new JSONArray(IOUtils.toString(javaBlocksInputStream, StandardCharsets.UTF_8));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), bukkitBlockArray, ResourceBundle.getBundle("lang.BukkitBlocks"));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), javaBlockArray, ResourceBundle.getBundle("lang.JavaBlocks"));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), "com.gmail.visualbukkit.blocks.definitions", ResourceBundle.getBundle("lang.CustomBlocks"));
+        }
+
+        System.out.println("Loading extensions...");
+        ExtensionManager.loadExtensions();
+
+        stage.setTitle("Visual Bukkit");
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
+        notifyPreloader(new Preloader.ProgressNotification(1));
+        System.out.println("Finished loading.");
+        ProjectManager.openLast();
+
+        (server = new VisualBukkitServer()).start().whenComplete((o, e) -> {
+            if (e != null) {
+                System.out.println("Failed to start the application server.");
+                e.printStackTrace();
+            } else {
+                System.out.println("Successfully started the application server.");
+            }
+        });
+
+        Platform.runLater(this::isUpdateAvailable);
     }
 
     @Override
     public void stop() throws IOException {
-        NotificationManager.log("Shutting down...");
-        dataFile.clear();
-        SettingsManager.getInstance().saveSettings(dataFile);
+        System.out.println("Shutting down...");
+
         if (ProjectManager.getCurrentProject() != null) {
-            dataFile.getJson().put("last-project", ProjectManager.getCurrentProject().getDir().getFileName());
+            data.put("last-project", ProjectManager.getCurrentProject().getName());
+            if (!exitNoSave) {
+                try {
+                    ProjectManager.getCurrentProject().save();
+                } catch (IOException ignored) {}
+            }
         }
-        if (statementSelector != null) {
-            statementSelector.savePinned(dataFile);
+
+        try {
+            if (Files.notExists(dataDir)) {
+                Files.createDirectories(dataDir);
+            }
+            Files.writeString(dataFile, data.toString(2));
+        } catch (IOException ignored) {}
+
+        if (server != null) {
+            server.stop();
         }
-        dataFile.save();
-        if (saveOnExit) {
-            saveCurrentProject();
-        }
+
+        executorService.shutdown();
         DiscordRPC.discordShutdown();
-        NotificationManager.log("Finished shut down.");
-        logDisplay.writeToFile(dataDir.resolve("log.txt"));
+        System.out.println("Finished shut down.");
+        logger.writeToFile(dataDir.resolve("log.txt"));
     }
 
-    private void load() {
-        NotificationManager.log("Loading...");
-        Stage splashScreen = new Stage();
-        VBox splashRootPane = new VBox();
-        splashRootPane.getStyleClass().add("splash-screen");
-        SettingsManager.getInstance().bindStyle(splashRootPane);
+    private MenuBar createMenuBar() {
+        return new MenuBar(
+                new Menu(LanguageManager.get("menu.file"), null,
+                        new ActionMenuItem(LanguageManager.get("menu_item.new_project"), e -> ProjectManager.promptCreateProject(true)),
+                        new ActionMenuItem(LanguageManager.get("menu_item.open_project"), e -> ProjectManager.promptOpenProject(true)),
+                        new ActionMenuItem(LanguageManager.get("menu_item.rename_project"), e -> ProjectManager.promptRenameProject()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.delete_project"), e -> ProjectManager.promptDeleteProject()),
+                        new SeparatorMenuItem(),
+                        new ActionMenuItem(LanguageManager.get("menu_item.import_project"), e -> ProjectManager.promptImportProject()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.import_component"), e -> ProjectManager.getCurrentProject().promptImportComponent()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.export_project"), e -> ProjectManager.promptExportProject()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.export_component"), e -> ProjectManager.getCurrentProject().promptExportComponent()),
+                        new SeparatorMenuItem(),
+                        new ActionMenuItem(LanguageManager.get("menu_item.save"), e -> {
+                            try {
+                                saveCurrentProject();
+                                NotificationManager.displayMessage(LanguageManager.get("message.saved.title"), LanguageManager.get("message.saved.content"));
+                            } catch (IOException ex) {
+                                NotificationManager.displayException("Failed to save project", ex);
+                            }
+                        }),
+                        new ActionMenuItem(LanguageManager.get("menu_item.save_exit"), e -> Platform.exit()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.exit_no_save"), e -> {
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.confirm_exit_no_save"));
+                            settingsManager.style(alert.getDialogPane());
+                            alert.setHeaderText(null);
+                            alert.setGraphic(null);
+                            alert.showAndWait().ifPresent(buttonType -> {
+                                if (buttonType == ButtonType.OK) {
+                                    exitNoSave = true;
+                                    Platform.exit();
+                                }
+                            });
+                        }),
+                        new ActionMenuItem(LanguageManager.get("menu_item.check_update"), e -> {
+                            if (!isUpdateAvailable()) {
+                                NotificationManager.displayMessage(LanguageManager.get("message.no_update.title"), LanguageManager.get("message.no_update.content"));
+                            }
+                        })),
+                new Menu(LanguageManager.get("menu.edit"), null,
+                        new ActionMenuItem(LanguageManager.get("menu_item.undo"), e -> UndoManager.undo()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.redo"), e -> UndoManager.redo())),
+                new Menu(LanguageManager.get("menu.extensions"), null,
+                        new ActionMenuItem(LanguageManager.get("menu_item.install_extension"), e -> ExtensionManager.promptInstall()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.manage_extensions"), e -> ExtensionManager.openViewer()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.extension_help"), e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions")))),
+                settingsManager.createMenu(),
+                new Menu(LanguageManager.get("menu.help"), null,
+                        new ActionMenuItem("Github", e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
+                        new ActionMenuItem("Spigot", e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
+                        new ActionMenuItem("Discord", e -> openURI(URI.create("https://discord.gg/ugkvGpu")))));
+    }
 
-        try (InputStream inputStream = VisualBukkitApp.class.getResourceAsStream("/images/icon.png")) {
-            Image icon = new Image(inputStream);
-            primaryStage.getIcons().add(icon);
-            splashScreen.getIcons().add(icon);
-            ImageView imageView = new ImageView(icon);
-            imageView.setFitWidth(250);
-            imageView.setFitHeight(250);
-            splashRootPane.getChildren().addAll(new Label("Visual Bukkit"), imageView);
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to load icon", e);
+    public static void saveCurrentProject() throws IOException {
+        Project currentProject = ProjectManager.getCurrentProject();
+        if (currentProject != null) {
+            currentProject.save();
         }
+    }
 
-        splashScreen.setTitle("Visual Bukkit");
-        splashScreen.setScene(new Scene(splashRootPane, 600, 500));
-        splashScreen.initStyle(StageStyle.UNDECORATED);
-        splashScreen.show();
-
-        Platform.runLater(() -> {
-            try (InputStream javaBlocksStream = VisualBukkitApp.class.getResourceAsStream("/blocks/JavaBlocks.json");
-                 InputStream bukkitBlocksStream = VisualBukkitApp.class.getResourceAsStream("/blocks/BukkitBlocks.json")) {
-                TypeHandler.registerClassNames(ResourceBundle.getBundle("lang.Types"));
-                JSONArray javaBlockArray = new JSONArray(IOUtils.toString(javaBlocksStream, StandardCharsets.UTF_8));
-                JSONArray bukkitBlockArray = new JSONArray(IOUtils.toString(bukkitBlocksStream, StandardCharsets.UTF_8));
-                BlockRegistry.register(javaBlockArray, ResourceBundle.getBundle("lang.JavaBlocks"));
-                BlockRegistry.register(bukkitBlockArray, ResourceBundle.getBundle("lang.BukkitBlocks"));
-                BlockRegistry.register("com.gmail.visualbukkit.blocks.definitions", VisualBukkitApp.class.getClassLoader(), ResourceBundle.getBundle("lang.CustomBlocks"));
-                ExtensionManager.loadExtensions();
-                statementSelector = new StatementSelector(BlockRegistry.getStatements());
-            } catch (IOException e) {
-                NotificationManager.displayException("Failed to load blocks", e);
-                Platform.exit();
-            }
-
-            AutoSaver.getInstance().setTime(SettingsManager.getInstance().getAutosaveTime());
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-                if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
-                    e.consume();
-                    try {
-                        saveCurrentProject();
-                        NotificationManager.displayMessage(getString("message.saved.title"), getString("message.saved.content"));
-                    } catch (IOException ex) {
-                        NotificationManager.displayException("Failed to save", ex);
-                    }
+    public static void setAutosaveTime(int minutes) {
+        if (autosaveTimeline != null) {
+            autosaveTimeline.stop();
+        }
+        if (minutes > 0) {
+            autosaveTimeline = new Timeline(new KeyFrame(Duration.minutes(minutes), e -> {
+                try {
+                    saveCurrentProject();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-            });
-
-            SplitPane splitPane = new SplitPane(statementSelector, innerBorderPane);
-            rootPane.setCenter(splitPane);
-            rootPane.setTop(loadMenuBar());
-            innerBorderPane.setBottom(loadButtonBar());
-
-            primaryStage.setTitle("Visual Bukkit");
-            primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-            SettingsManager.getInstance().bindStyle(rootPane);
-            splashScreen.close();
-            primaryStage.show();
-            splitPane.setDividerPosition(0, 0.25);
-            NotificationManager.log("Finished loading.");
-            ProjectManager.openLast();
-            Platform.runLater(this::checkForUpdate);
-        });
+            }));
+            autosaveTimeline.setCycleCount(Timeline.INDEFINITE);
+            autosaveTimeline.play();
+        } else {
+            autosaveTimeline = null;
+        }
     }
 
-    private MenuBar loadMenuBar() {
-        Menu fileMenu = new Menu(getString("menu.file"));
-        MenuItem newItem = new MenuItem(getString("menu_item.new_project"));
-        MenuItem openItem = new MenuItem(getString("menu_item.open_project"));
-        MenuItem renameItem = new MenuItem(getString("menu_item.rename_project"));
-        MenuItem deleteItem = new MenuItem(getString("menu_item.delete_project"));
-        MenuItem importProjectItem = new MenuItem(getString("menu_item.import_project"));
-        MenuItem importComponentItem = new MenuItem(getString("menu_item.import_component"));
-        MenuItem exportProjectItem = new MenuItem(getString("menu_item.export_project"));
-        MenuItem exportComponentItem = new MenuItem(getString("menu_item.export_component"));
-        MenuItem saveItem = new MenuItem(getString("menu_item.save"));
-        MenuItem saveAndExitItem = new MenuItem(getString("menu_item.save_exit"));
-        MenuItem exitNoSaveItem = new MenuItem(getString("menu_item.exit_no_save"));
-        MenuItem updateItem = new MenuItem(getString("menu_item.check_update"));
-        newItem.setOnAction(e -> ProjectManager.promptCreateProject(true));
-        openItem.setOnAction(e -> ProjectManager.promptOpenProject(true));
-        renameItem.setOnAction(e -> ProjectManager.promptRenameProject());
-        deleteItem.setOnAction(e -> ProjectManager.promptDeleteProject());
-        importProjectItem.setOnAction(e -> ProjectManager.promptImportProject());
-        importComponentItem.setOnAction(e -> ProjectManager.getCurrentProject().promptImportComponent());
-        exportProjectItem.setOnAction(e -> ProjectManager.promptExportProject());
-        exportComponentItem.setOnAction(e -> ProjectManager.getCurrentProject().promptExportComponent());
-        saveItem.setOnAction(e -> {
-            try {
-                saveCurrentProject();
-            } catch (IOException ex) {
-                NotificationManager.displayException("Failed to save", ex);
-            }
-        });
-        saveAndExitItem.setOnAction(e -> Platform.exit());
-        exitNoSaveItem.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, getString("dialog.confirm_exit_no_save"));
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == ButtonType.OK) {
-                    saveOnExit = false;
-                    Platform.exit();
-                }
-            });
-        });
-        updateItem.setOnAction(e -> {
-            if (!checkForUpdate()) {
-                NotificationManager.displayMessage(getString("message.no_update.content"), getString("message.no_update.title"));
-            }
-        });
-        fileMenu.getItems().addAll(
-                newItem, openItem, renameItem, deleteItem, new SeparatorMenuItem(),
-                importProjectItem, importComponentItem, exportProjectItem, exportComponentItem, new SeparatorMenuItem(),
-                saveItem, saveAndExitItem, exitNoSaveItem, new SeparatorMenuItem(),
-                updateItem);
-
-        Menu editMenu = new Menu(getString("menu.edit"));
-        MenuItem undoItem = new MenuItem(getString("menu_item.undo"));
-        MenuItem redoItem = new MenuItem(getString("menu_item.redo"));
-        undoItem.setOnAction(e -> UndoManager.undo());
-        redoItem.setOnAction(e -> UndoManager.redo());
-        editMenu.getItems().addAll(undoItem, redoItem);
-
-        Menu extensionsMenu = new Menu(getString("menu.extensions"));
-        MenuItem installItem = new MenuItem(getString("menu_item.install_extension"));
-        MenuItem viewItem = new MenuItem(getString("menu_item.view_extensions"));
-        MenuItem helpItem = new MenuItem(getString("menu_item.extension_help"));
-        installItem.setOnAction(e -> ExtensionManager.promptInstall());
-        viewItem.setOnAction(e -> ExtensionManager.openViewer());
-        helpItem.setOnAction(e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions")));
-        extensionsMenu.getItems().addAll(installItem, viewItem, helpItem);
-
-        Menu supportMenu = new Menu(getString("menu.support"));
-        MenuItem githubItem = new MenuItem("Github");
-        MenuItem spigotItem = new MenuItem("Spigot");
-        MenuItem discordItem = new MenuItem("Discord");
-        spigotItem.setOnAction(e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/")));
-        githubItem.setOnAction(e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit")));
-        discordItem.setOnAction(e -> openURI(URI.create("https://discord.gg/ugkvGpu")));
-        supportMenu.getItems().addAll(githubItem, spigotItem, discordItem);
-
-        return new MenuBar(fileMenu, editMenu, extensionsMenu, SettingsManager.getInstance(), supportMenu);
-    }
-
-    private HBox loadButtonBar() {
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        Label projectLabel = new Label(String.format(getString("label.current_project"), "n/a"));
-        ProjectManager.currentProjectProperty().addListener((o, oldValue, newValue) ->
-                projectLabel.setText(String.format(getString("label.current_project"), newValue != null ? newValue.getDir().getFileName().toString() : "n/a")));
-        HBox buttonBar = new HBox(
-                new IconButton("add", getString("tooltip.add_component"), e -> ProjectManager.getCurrentProject().promptAddPluginComponent()),
-                new IconButton("settings", getString("tooltip.plugin_settings"), e -> ProjectManager.getCurrentProject().getPluginSettingsStage().show()),
-                new IconButton("folder", getString("tooltip.resource_files"), e -> openDirectory(ProjectManager.getCurrentProject().getResourceDir())),
-                new IconButton("build", getString("tooltip.build_plugin"), e -> {
-                    logDisplay.show();
-                    PluginBuilder.build(ProjectManager.getCurrentProject());
-                }),
-                new IconButton("jar", getString("tooltip.build_directory"), e -> {
-                    Path dir = ProjectManager.getCurrentProject().getBuildDir().resolve("target");
-                    if (Files.exists(dir)) {
-                        openDirectory(dir);
-                    } else {
-                        NotificationManager.displayError(getString("error.cannot_open_build_dir.title"), getString("error.cannot_open_build_dir.content"));
-                    }
-                }),
-                new IconButton("log", getString("tooltip.log"), e -> logDisplay.show()), spacer, projectLabel);
-        buttonBar.getStyleClass().add("button-bar");
-        return buttonBar;
-    }
-
-    public void openURI(URI uri) {
+    public static void openURI(URI uri) {
         try {
             Desktop.getDesktop().browse(uri);
-        } catch (IOException e) {
+        } catch (Exception e) {
             NotificationManager.displayException("Failed to open URI", e);
         }
     }
 
-    public void openDirectory(Path dir) {
+    public static void openDirectory(Path dir) {
         if (Files.notExists(dir)) {
             try {
                 Files.createDirectories(dir);
@@ -315,20 +286,14 @@ public class VisualBukkitApp extends Application {
         }
     }
 
-    public void saveCurrentProject() throws IOException {
-        Project currentProject = ProjectManager.getCurrentProject();
-        if (currentProject != null) {
-            currentProject.save();
-        }
-    }
-
-    public boolean checkForUpdate() {
+    public boolean isUpdateAvailable() {
         try (InputStream inputStream = new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/VB-Application/version").openStream()) {
             String latestVersion = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
-            if (!VERSION.equals(latestVersion)) {
-                ButtonType viewButton = new ButtonType(getString("button.view_update"));
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format(getString("dialog.update.content"), VERSION, latestVersion), viewButton, new ButtonType(getString("button.ignore_update")));
-                alert.setTitle(getString("dialog.update.title"));
+            if (version != null && !version.equals(latestVersion)) {
+                ButtonType viewButton = new ButtonType(LanguageManager.get("button.view_update"));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format(LanguageManager.get("dialog.update.content"), version, latestVersion), viewButton, new ButtonType(LanguageManager.get("button.ignore_update")));
+                settingsManager.style(alert.getDialogPane());
+                alert.setTitle(LanguageManager.get("dialog.update.title"));
                 alert.setHeaderText(null);
                 alert.setGraphic(null);
                 alert.showAndWait().ifPresent(buttonType -> {
@@ -342,35 +307,51 @@ public class VisualBukkitApp extends Application {
         return false;
     }
 
-    public void setPluginComponentTabPane(TabPane tabPane) {
-        innerBorderPane.setCenter(tabPane);
+    public static VisualBukkitLogger getLogger() {
+        return logger;
     }
 
-    public static VisualBukkitApp getInstance() {
-        return instance;
+    public static VisualBukkitServer getServer() {
+        return server;
     }
 
-    public static String getString(String key) {
-        return resourceBundle.containsKey(key) ? resourceBundle.getString(key) : key;
+    public static SettingsManager getSettingsManager() {
+        return settingsManager;
     }
 
-    public Path getDataDir() {
+    public static ExecutorService getExecutorService() {
+        return executorService;
+    }
+
+    public static Path getDataDir() {
         return dataDir;
     }
 
-    public DataFile getDataFile() {
-        return dataFile;
+    public static JSONObject getData() {
+        return data;
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
+    public static BorderPane getRootPane() {
+        return rootPane;
     }
 
-    public Scene getScene() {
+    public static SplitPane getSplitPane() {
+        return splitPane;
+    }
+
+    public static Scene getScene() {
         return scene;
     }
 
-    public BorderPane getRootPane() {
-        return rootPane;
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static StatementSelector getStatementSelector() {
+        return statementSelector;
+    }
+
+    public static ExpressionSelector getExpressionSelector() {
+        return expressionSelector;
     }
 }

@@ -1,22 +1,20 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
-import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.PluginComponent;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
-import com.gmail.visualbukkit.gui.StyleableHBox;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import com.gmail.visualbukkit.plugin.PluginModule;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
+import com.gmail.visualbukkit.ui.LanguageManager;
+import com.gmail.visualbukkit.ui.StyleableHBox;
+import com.gmail.visualbukkit.ui.StyleableVBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
@@ -26,37 +24,24 @@ import java.util.function.Predicate;
 
 public class CompEventListener extends PluginComponent {
 
+    private static Map<String, JSONObject> eventMap = new TreeMap<>();
     private static String[] priorities = {"HIGH", "HIGHEST", "LOW", "LOWEST", "MONITOR", "NORMAL"};
-    private static Map<String, ClassInfo> events = new HashMap<>();
-    private static Map<String, String> eventCategories = new HashMap<>();
-    private static Map<String, PluginModule> eventModules = new HashMap<>();
-    private static Set<String> eventNames = new TreeSet<>();
 
     public CompEventListener() {
         super("comp-event-listener");
     }
 
-    public static void registerEvent(JSONObject json) {
-        ClassInfo event = ClassInfo.of(json.getString("event"));
-        String category = BlockRegistry.getString(json.getString("id"), "category", null);
-        PluginModule module = PluginModule.get(json.optString("plugin-module"));
-        registerEvent(event, category, module);
-    }
-
-    public static void registerEvent(ClassInfo event, String category, PluginModule module) {
-        events.put(event.getDisplayClassName(), event);
-        eventNames.add(event.getDisplayClassName());
-        if (category != null) {
-            eventCategories.put(event.getDisplayClassName(), category);
-        }
-        if (module != null) {
-            eventModules.put(event.getDisplayClassName(), module);
-        }
-    }
-
     @Override
     public Block createBlock() {
-        return new EventBlock(new ChoiceParameter(eventNames), new ChoiceParameter(priorities));
+        return new EventBlock(new ChoiceParameter(eventMap.keySet()), new ChoiceParameter(priorities));
+    }
+
+    public static void addEvent(JSONObject json) {
+        eventMap.put(ClassInfo.of(json.getString("event")).getDisplayClassName(), json);
+    }
+
+    public static void clearEvents() {
+        eventMap.clear();
     }
 
     public class EventBlock extends PluginComponent.Block {
@@ -67,33 +52,20 @@ public class CompEventListener extends PluginComponent {
             priorityChoice.setValue("NORMAL");
             eventChoice.setOnShown(e -> eventChoice.hide());
 
-            TreeSet<String> categories = new TreeSet<>(eventCategories.values());
-            ObservableList<String> events = FXCollections.observableArrayList(eventNames);
+            ObservableList<String> events = FXCollections.observableArrayList(eventMap.keySet());
             FilteredList<String> eventList = new FilteredList<>(events);
             ListView<String> listView = new ListView<>(eventList);
 
             TextField searchField = new TextField();
-            ComboBox<String> categoryBox = new ComboBox<>();
-            categories.add(VisualBukkitApp.getString("label.all"));
-            categoryBox.getItems().addAll(categories);
-
-            Predicate<String> filter = event ->
-                    StringUtils.containsIgnoreCase(event, searchField.getText())
-                    && (categoryBox.getSelectionModel().getSelectedIndex() == 0 || categoryBox.getValue().equals(eventCategories.get(event)));
-
+            Predicate<String> filter = event -> StringUtils.containsIgnoreCase(event, searchField.getText());
             searchField.textProperty().addListener((o, oldValue, newValue) -> eventList.setPredicate(filter::test));
-            categoryBox.valueProperty().addListener((o, oldValue, newValue) -> eventList.setPredicate(filter::test));
 
-            PopOver selector = new PopOver(new VBox(new StyleableHBox(new Label(VisualBukkitApp.getString("label.search")), searchField, categoryBox), listView));
+            PopOver selector = new PopOver(new StyleableVBox(new StyleableHBox(new Label(LanguageManager.get("label.search")), searchField), listView));
+            selector.setOnShowing(e -> listView.getSelectionModel().clearSelection());
             selector.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
             selector.setAnimated(false);
-            selector.setOnShowing(e -> {
-                searchField.clear();
-                categoryBox.getSelectionModel().selectFirst();
-                listView.getSelectionModel().clearSelection();
-            });
 
-            listView.setPlaceholder(new Label(VisualBukkitApp.getString("label.empty_list")));
+            listView.setPlaceholder(new Label(LanguageManager.get("label.empty_list")));
             listView.getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
                 if (newValue != null) {
                     eventChoice.setValue(newValue);
@@ -118,21 +90,22 @@ public class CompEventListener extends PluginComponent {
         @Override
         public void prepareBuild(BuildContext buildContext) {
             super.prepareBuild(buildContext);
-            String event = arg(0);
-            if (eventModules.containsKey(event)) {
-                buildContext.addPluginModule(eventModules.get(event));
+            JSONObject json = eventMap.get(arg(0));
+            PluginModule module = PluginModule.get(json.optString("module"));
+            if (module != null) {
+                buildContext.addPluginModule(module);
             }
-            buildContext.getMetaData().increment("event-number");
+            buildContext.getMetadata().increment("event-number");
             buildContext.getMainClass().addMethod(
                     "@EventHandler(priority=EventPriority." + arg(1) + ")" +
-                    "public void on" + event + buildContext.getMetaData().getInt("event-number") + "(" + getEvent().getCanonicalClassName() + " event) throws Exception {" +
+                    "public void on" + json.getString("event") + buildContext.getMetadata().getInt("event-number") + "(" + getEvent().getCanonicalClassName() + " event) throws Exception {" +
                     buildContext.getLocalVariableDeclarations() +
-                    getChildJava() +
+                    toJava() +
                     "}");
         }
 
         public ClassInfo getEvent() {
-            return events.get(arg(0));
+            return ClassInfo.of(arg(0));
         }
     }
 }

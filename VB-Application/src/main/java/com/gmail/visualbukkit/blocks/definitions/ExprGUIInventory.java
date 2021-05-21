@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIInventory extends Expression {
 
     public ExprGUIInventory() {
-        super("expr-gui-inventory", ClassInfo.of("org.bukkit.inventory.Inventory"));
+        super("expr-gui-inventory");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.inventory.Inventory");
     }
 
     @Override

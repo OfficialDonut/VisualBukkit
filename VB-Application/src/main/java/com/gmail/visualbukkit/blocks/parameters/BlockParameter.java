@@ -1,6 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
 
 public interface BlockParameter {
 

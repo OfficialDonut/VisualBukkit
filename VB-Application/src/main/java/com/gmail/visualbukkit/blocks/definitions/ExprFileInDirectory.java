@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprFileInDirectory extends Expression {
 
     public ExprFileInDirectory() {
-        super("expr-file-in-directory", ClassInfo.of(File.class));
+        super("expr-file-in-directory");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(File.class);
     }
 
     @Override

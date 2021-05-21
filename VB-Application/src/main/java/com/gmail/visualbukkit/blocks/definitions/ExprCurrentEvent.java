@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCurrentEvent extends Expression {
 
     public ExprCurrentEvent() {
-        super("expr-current-event", ClassInfo.of("org.bukkit.event.Event"));
+        super("expr-current-event");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.event.Event");
     }
 
     @Override

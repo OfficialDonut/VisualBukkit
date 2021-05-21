@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigSection extends Expression {
 
     public ExprConfigSection() {
-        super("expr-config-section", ClassInfo.of("org.bukkit.configuration.ConfigurationSection"));
+        super("expr-config-section");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of("org.bukkit.configuration.ConfigurationSection");
     }
 
     @Override

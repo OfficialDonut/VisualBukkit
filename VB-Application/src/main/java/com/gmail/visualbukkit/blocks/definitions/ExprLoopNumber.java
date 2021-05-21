@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprLoopNumber extends Expression {
 
     public ExprLoopNumber() {
-        super("expr-loop-number", ClassInfo.INT);
+        super("expr-loop-number");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.INT;
     }
 
     @Override

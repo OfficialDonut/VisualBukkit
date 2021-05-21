@@ -10,7 +10,12 @@ import java.sql.ResultSet;
 public class ExprSQLResultSet extends Expression {
 
     public ExprSQLResultSet() {
-        super("expr-sql-result-set", ClassInfo.of(ResultSet.class));
+        super("expr-sql-result-set");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(ResultSet.class);
     }
 
     @Override

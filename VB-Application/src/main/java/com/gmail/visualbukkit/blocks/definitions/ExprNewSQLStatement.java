@@ -9,7 +9,12 @@ import java.sql.PreparedStatement;
 public class ExprNewSQLStatement extends Expression {
 
     public ExprNewSQLStatement() {
-        super("expr-new-sql-statement", ClassInfo.of(PreparedStatement.class));
+        super("expr-new-sql-statement");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(PreparedStatement.class);
     }
 
     @Override

@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprDirectoryFiles extends Expression {
 
     public ExprDirectoryFiles() {
-        super("expr-directory-files", ClassInfo.LIST);
+        super("expr-directory-files");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.LIST;
     }
 
     @Override

@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 public class ExprRawString extends Expression {
 
     public ExprRawString() {
-        super("expr-raw-string", ClassInfo.STRING);
+        super("expr-raw-string");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

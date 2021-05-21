@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprRandomListElement extends Expression {
 
     public ExprRandomListElement() {
-        super("expr-random-list-element", ClassInfo.OBJECT);
+        super("expr-random-list-element");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.OBJECT;
     }
 
     @Override

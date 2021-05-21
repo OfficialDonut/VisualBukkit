@@ -1,8 +1,8 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Container;
-import com.gmail.visualbukkit.plugin.BuildContext;
-import com.gmail.visualbukkit.plugin.PluginModule;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
 
 public class StatOpenDatabaseConnection extends Container {
 

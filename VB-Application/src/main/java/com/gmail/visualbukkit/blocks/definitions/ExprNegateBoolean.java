@@ -7,7 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprNegateBoolean extends Expression {
 
     public ExprNegateBoolean() {
-        super("expr-negate-boolean", ClassInfo.BOOLEAN);
+        super("expr-negate-boolean");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

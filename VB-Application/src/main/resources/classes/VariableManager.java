@@ -1,4 +1,3 @@
-import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -20,13 +19,12 @@ public class VariableManager {
 
     private static Map<String, Object> globalVariables = new ConcurrentHashMap<>();
     private static Map<String, Object> persistentVariables = new ConcurrentHashMap<>();
-    private static HashFunction hashFunction = Hashing.murmur3_128();
     private static File dataFile;
 
     public static void loadVariables(JavaPlugin plugin) {
         dataFile = new File(plugin.getDataFolder(), "data.yml");
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, VariableManager::saveVariables, 18000, 18000);
-        persistentVariables.putAll(YamlConfiguration.loadConfiguration(dataFile).getValues(true));
+        persistentVariables.putAll(YamlConfiguration.loadConfiguration(dataFile).getValues(false));
     }
 
     public static void saveVariables() {
@@ -49,51 +47,57 @@ public class VariableManager {
         }
     }
 
-    public static Object getVariable(boolean persistent, String name, List<?> args) {
-        return (persistent ? persistentVariables : globalVariables).get(hash(name, args));
+    public static Object getSimpleVariable(String name) {
+        return persistentVariables.get(name);
     }
 
-    public static void setVariable(boolean persistent, Object value, String name, List<?> args) {
+    public static void setSimpleVariable(String name, Object value) {
+        if (value != null) {
+            persistentVariables.put(name, value);
+        } else {
+            persistentVariables.remove(name);
+        }
+    }
+
+    public static Object getVariable(boolean persistent, String name, Object arg) {
+        return arg != null ? (persistent ? persistentVariables : globalVariables).get(getString(name, arg)) : null;
+    }
+
+    public static void setVariable(boolean persistent, Object value, String name, Object arg) {
         Map<String, Object> map = persistent ? persistentVariables : globalVariables;
         if (value != null) {
-            map.put(hash(name, args), value);
+            map.put(getString(name, arg), value);
         } else {
-            map.remove(hash(name, args));
+            map.remove(getString(name, arg));
         }
     }
 
-    public static void addToVariable(boolean persistent, double delta, String name, List<?> args) {
-        Object object = getVariable(persistent, name, args);
-        if (object == null) {
-            setVariable(persistent, delta, name, args);
-        } else if (object instanceof Number) {
-            setVariable(persistent, ((Number) object).doubleValue() + delta, name, args);
-        } else {
-            throw new IllegalArgumentException("Cannot add " + delta + " to " + object);
-        }
-    }
-
-    public static void removeFromVariable(boolean persistent, double delta, String name, List<?> args) {
-        addToVariable(persistent, -delta, name, args);
-    }
-
-    private static String hash(String name, List<?> args) {
-        StringBuilder variable = new StringBuilder();
-        variable.append(name);
-        for (Object object : args) {
-            String string = object.toString();
-            if (object instanceof Entity) {
-                string = ((Entity) object).getUniqueId().toString();
-            } else if (object instanceof OfflinePlayer) {
-                string = ((OfflinePlayer) object).getUniqueId().toString();
-            } else if (object instanceof World) {
-                string = ((World) object).getUID().toString();
-            } else if (object instanceof Block) {
-                string = ((Block) object).getLocation().toString();
+    private static String getString(String name, Object arg) {
+        StringBuilder variable = new StringBuilder(name);
+        if (arg instanceof Collection) {
+            for (Object obj : (Collection<?>) arg) {
+                variable.append(getString(obj));
             }
-            variable.append(object.getClass().getName()).append(string);
+        } else {
+            variable.append(getString(arg));
         }
-        return hashFunction.hashString(variable.toString(), StandardCharsets.UTF_8).toString();
+        return Hashing.murmur3_128().hashString(variable.toString(), StandardCharsets.UTF_8).toString();
+    }
+
+    private static String getString(Object object) {
+        String string;
+        if (object instanceof Entity) {
+            string = ((Entity) object).getUniqueId().toString();
+        } else if (object instanceof OfflinePlayer) {
+            string = ((OfflinePlayer) object).getUniqueId().toString();
+        } else if (object instanceof World) {
+            string = ((World) object).getUID().toString();
+        } else if (object instanceof Block) {
+            string = ((Block) object).getLocation().toString();
+        } else {
+            string = object.toString();
+        }
+        return object.getClass().getName() + string;
     }
 
     private static boolean isSerializable(Object object) {

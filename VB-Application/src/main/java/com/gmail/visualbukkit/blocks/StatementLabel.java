@@ -1,7 +1,9 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.ui.LanguageManager;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -15,8 +17,8 @@ public class StatementLabel extends Label {
     public StatementLabel(Statement statement) {
         super(statement.getTitle());
         this.statement = statement;
-
         getStyleClass().add("statement-label");
+        setTooltip(new Tooltip(statement.getDescription() != null ? statement.getDescription() : LanguageManager.get("tooltip.no_description")));
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -30,6 +32,10 @@ public class StatementLabel extends Label {
                 e.consume();
             }
         });
+    }
+
+    public Statement.Block createBlock() {
+        return statement.createBlock();
     }
 
     public Statement getStatement() {

@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprPluginVersion extends Expression {
 
     public ExprPluginVersion() {
-        super("expr-plugin-version", ClassInfo.STRING);
+        super("expr-plugin-version");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.STRING;
     }
 
     @Override

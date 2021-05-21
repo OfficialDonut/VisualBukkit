@@ -6,7 +6,12 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprIsCommandSenderAPlayer extends Expression {
 
     public ExprIsCommandSenderAPlayer() {
-        super("expr-is-command-sender-a-player", ClassInfo.BOOLEAN);
+        super("expr-is-command-sender-a-player");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.BOOLEAN;
     }
 
     @Override

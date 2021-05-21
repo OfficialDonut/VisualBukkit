@@ -9,7 +9,12 @@ import java.io.File;
 public class ExprNewFilePath extends Expression {
 
     public ExprNewFilePath() {
-        super("expr-new-file-path", ClassInfo.of(File.class));
+        super("expr-new-file-path");
+    }
+
+    @Override
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(File.class);
     }
 
     @Override

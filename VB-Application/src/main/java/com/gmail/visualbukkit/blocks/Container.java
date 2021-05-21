@@ -1,112 +1,99 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
-import com.gmail.visualbukkit.plugin.BuildContext;
+import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.ui.*;
 import javafx.css.PseudoClass;
 import javafx.geometry.Bounds;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Parent;
 import javafx.scene.control.Separator;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public abstract class Container extends Statement {
 
-    private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
-
     public Container(String id) {
         super(id);
     }
 
+    @Override
+    public abstract Block createBlock();
+
+    @Override
+    public Block createBlock(JSONObject json) {
+        return (Block) super.createBlock(json);
+    }
+
     public static abstract class Block extends Statement.Block {
 
-        private ChildConnector childConnector = new ChildConnector(this);
+        private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
+        private StatementHolder childHolder = new StatementHolder();
+        private StatementConnector childConnector = new StatementConnector(block -> UndoManager.run(childHolder.addFirst(block)));
 
-        public Block(Container container, BlockParameter... parameters) {
-            super(container, parameters);
+        public Block(Statement statement, BlockParameter... parameters) {
+            super(statement, parameters);
 
-            MenuItem pasteInsideItem = new MenuItem(VisualBukkitApp.getString("context_menu.paste_inside"));
-            pasteInsideItem.disableProperty().bind(getContextMenu().getItems().get(getContextMenu().getItems().size() - 1).disableProperty());
-            pasteInsideItem.setOnAction(e -> UndoManager.run(pasteInside()));
-            getContextMenu().getItems().add(pasteInsideItem);
+            getBody().getStyleClass().remove("statement-block");
+            getBody().getStyleClass().add("container-block");
 
-            getSyntaxBox().getChildren().addAll(new Separator(), childConnector);
-            getSyntaxBox().getStyleClass().remove("statement-block");
-            getSyntaxBox().getStyleClass().add("container-block");
+            getBody().getChildren().addAll(new Separator(), new StyleableVBox(childConnector, childHolder));
 
-            getSyntaxBox().addEventHandler(MouseEvent.DRAG_DETECTED, e -> childConnector.setAcceptingConnections(false));
-            addEventHandler(DragEvent.DRAG_DONE, e -> childConnector.setAcceptingConnections(true));
-
-            getSyntaxBox().addEventHandler(DragEvent.DRAG_OVER, e -> {
-                Bounds bounds = childConnector.localToScreen(childConnector.getBoundsInLocal());
+            getBody().addEventHandler(DragEvent.DRAG_OVER, e -> {
+                Bounds bounds = childHolder.localToScreen(childHolder.getBoundsInLocal());
                 if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
                     double deltaY = e.getScreenY() - bounds.getMinY();
-                    if (deltaY > 0 && deltaY < childConnector.getPlacementIndicator().getMaxHeight()) {
-                        childConnector.showIndicator();
+                    if (deltaY > 0 && deltaY < childConnector.getMaxHeight()) {
+                        childConnector.show();
                         e.consume();
                         return;
                     }
                 }
-                if (childConnector.hasConnection()) {
-                    bounds = childConnector.localToScreen(childConnector.getBoundsInLocal());
+                if (!childHolder.getChildren().isEmpty()) {
                     if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                        StatementConnector connector = childConnector.getConnected().getLast().getNext();
                         double deltaY = e.getScreenY() - bounds.getMaxY();
-                        if (deltaY > 0 && deltaY < connector.getPlacementIndicator().getMaxHeight()) {
-                            connector.showIndicator();
+                        if (deltaY > 0 && deltaY < childConnector.getMaxHeight()) {
+                            childHolder.getLast().getStatementConnector().show();
                         }
                     }
                 }
                 e.consume();
             });
-        }
 
-        public UndoManager.RevertableAction pasteInside() {
-            return childConnector.connect(CopyPasteManager.pasteStatement());
-        }
-
-        @Override
-        public void collapseStack(boolean collapse) {
-            super.collapseStack(collapse);
-            if (childConnector.hasConnection()) {
-                childConnector.getConnected().collapseStack(collapse);
-            }
+            ActionMenuItem pasteInsideItem = new ActionMenuItem(LanguageManager.get("context_menu.paste_inside"), e -> UndoManager.run(childHolder.addFirst(CopyPasteManager.pasteStatement())));
+            pasteInsideItem.disableProperty().bind(getContextMenu().getItems().get(getContextMenu().getItems().size() - 1).disableProperty());
+            getContextMenu().getItems().add(pasteInsideItem);
         }
 
         @Override
         public void update() {
             super.update();
-            if (childConnector.hasConnection()) {
-                childConnector.getConnected().update();
+            for (Statement.Block block : childHolder.getBlocks()) {
+                block.update();
             }
             int level = 0;
-            Statement.Block block = this;
-            while (block != null && block.getPrevious() != null) {
-                if (block.getPrevious() instanceof ChildConnector) {
+            Parent parent = getParent();
+            while (parent != null) {
+                if (parent instanceof Container.Block) {
                     level++;
                 }
-                CodeBlock<?> owner = block.getPrevious().getOwner();
-                block = owner instanceof Statement.Block ? (Statement.Block) owner : null;
+                parent = parent.getParent();
             }
-            getSyntaxBox().pseudoClassStateChanged(NESTED_STYLE_CLASS, level % 2 == 1);
+            getBody().pseudoClassStateChanged(NESTED_STYLE_CLASS, level % 2 == 1);
         }
 
         @Override
         public void prepareBuild(BuildContext buildContext) {
             super.prepareBuild(buildContext);
-            if (childConnector.hasConnection()) {
-                childConnector.getConnected().prepareBuild(buildContext);
+            for (Statement.Block block : childHolder.getBlocks()) {
+                block.prepareBuild(buildContext);
             }
         }
 
         public String getChildJava() {
             StringBuilder builder = new StringBuilder();
-            Statement.Block child = childConnector.getConnected();
-            while (child != null) {
-                builder.append(child.toJava());
-                child = child.getNext().getConnected();
+            for (Statement.Block block : childHolder.getBlocks()) {
+                builder.append(block.toJava());
             }
             return builder.toString();
         }
@@ -114,10 +101,8 @@ public abstract class Container extends Statement {
         @Override
         public JSONObject serialize() {
             JSONObject json = super.serialize();
-            Statement.Block child = childConnector.getConnected();
-            while (child != null) {
-                json.append("children", child.serialize());
-                child = child.getNext().getConnected();
+            for (Statement.Block block : childHolder.getBlocks()) {
+                json.append("children", block.serialize());
             }
             return json;
         }
@@ -127,15 +112,12 @@ public abstract class Container extends Statement {
             super.deserialize(json);
             JSONArray childArray = json.optJSONArray("children");
             if (childArray != null) {
-                StatementConnector connector = childConnector;
                 for (Object obj : childArray) {
                     if (obj instanceof JSONObject) {
                         JSONObject childJson = (JSONObject) obj;
                         Statement statement = BlockRegistry.getStatement(childJson.optString("="));
                         if (statement != null) {
-                            Statement.Block block = statement.createBlock(childJson);
-                            connector.connect(block).run();
-                            connector = block.getNext();
+                            childHolder.addLast(statement.createBlock(childJson)).run();
                         }
                     }
                 }
@@ -146,20 +128,22 @@ public abstract class Container extends Statement {
         protected void setAcceptingConnections(boolean state) {
             super.setAcceptingConnections(state);
             childConnector.setAcceptingConnections(state);
-            if (childConnector.hasConnection()) {
-                childConnector.getConnected().setAcceptingConnections(state);
+            for (Statement.Block block : childHolder.getBlocks()) {
+                block.setAcceptingConnections(state);
             }
         }
 
-        public ChildConnector getChildConnector() {
+        public StatementHolder getChildHolder() {
+            return childHolder;
+        }
+
+        public StatementConnector getChildConnector() {
             return childConnector;
         }
-    }
 
-    public static class ChildConnector extends StatementConnector {
-
-        public ChildConnector(CodeBlock<?> owner) {
-            super(owner);
+        @Override
+        public Container getDefinition() {
+            return (Container) super.getDefinition();
         }
     }
 }
