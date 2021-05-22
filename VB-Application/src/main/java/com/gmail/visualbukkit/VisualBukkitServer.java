@@ -113,7 +113,7 @@ public class VisualBukkitServer {
                                     ((ExpressionParameter) setItemBlock.getParameters().get(0)).setExpression(BlockRegistry.getExpression("expr-gui-inventory").createBlock()).run();
                                     ((ExpressionParameter) setItemBlock.getParameters().get(1)).setExpression(slotBlock).run();
                                     ((ExpressionParameter) setItemBlock.getParameters().get(2)).setExpression(((ExprSerializedItem) BlockRegistry.getExpression("expr-serialized-item")).createBlock(itemJson.optString("yaml", ""))).run();
-                                    guiBlock.getStatementHolder().addLast(setItemBlock);
+                                    guiBlock.getStatementHolder().addLast(setItemBlock).run();
                                 }
                             }
                         }

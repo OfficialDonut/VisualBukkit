@@ -2,6 +2,8 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.project.BuildContext;
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,8 +37,20 @@ public class ExprSerializedItem extends Expression {
         }
 
         @Override
+        public void prepareBuild(BuildContext buildContext) {
+            super.prepareBuild(buildContext);
+            String itemVar = ExprSimpleLocalVariable.getVariable(itemString).replace("$", "ITEM_");
+            if (!buildContext.getMainClass().hasField(itemVar)) {
+                buildContext.getMainClass().addField(
+                        "public static org.bukkit.inventory.ItemStack " + itemVar + " = org.bukkit.configuration.file.YamlConfiguration" +
+                        ".loadConfiguration(new StringReader(\"" + StringEscapeUtils.escapeJava(itemString) + "\"))" +
+                        ".getItemStack(\"item\");");
+            }
+        }
+
+        @Override
         public String toJava() {
-            return null;
+            return ExprSimpleLocalVariable.getVariable(itemString).replace("$", "ITEM_");
         }
 
         @Override
