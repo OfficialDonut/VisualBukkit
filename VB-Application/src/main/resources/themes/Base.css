@@ -114,18 +114,6 @@
     -fx-background-color: pink !important;
 }
 
-.expression-selector .hbox {
-    -fx-padding: 5;
-}
-
-.expression-selector .hbox > .text-field {
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-radius: 0;
-    -fx-border-width: 0 0 2 0;
-    -fx-pref-width: 200;
-}
-
 .extension-info-grid {
     -fx-hgap: 10;
     -fx-padding: 15;
@@ -196,6 +184,18 @@
 
 .popover {
     -fx-pref-width: 550;
+}
+
+.popover-selector .hbox {
+    -fx-padding: 5;
+}
+
+.popover-selector .hbox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-width: 200;
 }
 
 .project-button-bar {

@@ -74,7 +74,7 @@ public class MethodExpression extends Expression {
             @Override
             public String toJava() {
                 StringJoiner parameterJoiner = new StringJoiner(",");
-                for (int i = json.optBoolean("static") || json.optBoolean("event") ? 0 : 1; i < parameterTypes.size(); i++) {
+                for (int i = json.optBoolean("static") || json.optBoolean("event") ? 0 : 1; i < getParameters().size(); i++) {
                     parameterJoiner.add(arg(i));
                 }
                 String java;

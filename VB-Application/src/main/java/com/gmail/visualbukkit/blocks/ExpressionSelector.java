@@ -41,7 +41,7 @@ public class ExpressionSelector {
             searchField.textProperty().addListener((o, oldValue, newValue) -> filteredExpressionList.setPredicate(filter::test));
 
             PopOver popOver = new PopOver(new StyleableVBox(new StyleableHBox(new Label(LanguageManager.get("label.search")), searchField), listView));
-            popOver.getStyleClass().add("expression-selector");
+            popOver.getStyleClass().add("popover-selector");
             popOver.setAnimated(false);
             popOver.setOnShowing(e -> {
                 listView.getSelectionModel().clearSelection();

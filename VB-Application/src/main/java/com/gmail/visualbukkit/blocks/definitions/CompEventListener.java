@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.PluginComponent;
+import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.project.PluginModule;
@@ -61,6 +62,7 @@ public class CompEventListener extends PluginComponent {
             searchField.textProperty().addListener((o, oldValue, newValue) -> eventList.setPredicate(filter::test));
 
             PopOver selector = new PopOver(new StyleableVBox(new StyleableHBox(new Label(LanguageManager.get("label.search")), searchField), listView));
+            selector.getStyleClass().add("popover-selector");
             selector.setOnShowing(e -> listView.getSelectionModel().clearSelection());
             selector.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
             selector.setAnimated(false);
@@ -75,7 +77,9 @@ public class CompEventListener extends PluginComponent {
 
             eventChoice.valueProperty().addListener((o, oldValue, newValue) -> {
                 if (newValue != null) {
-                    update();
+                    for (Statement.Block block : getStatementHolder().getBlocks()) {
+                        block.update();
+                    }
                 }
             });
 
@@ -98,14 +102,14 @@ public class CompEventListener extends PluginComponent {
             buildContext.getMetadata().increment("event-number");
             buildContext.getMainClass().addMethod(
                     "@EventHandler(priority=EventPriority." + arg(1) + ")" +
-                    "public void on" + json.getString("event") + buildContext.getMetadata().getInt("event-number") + "(" + getEvent().getCanonicalClassName() + " event) throws Exception {" +
+                    "public void on" + arg(0) + buildContext.getMetadata().getInt("event-number") + "(" + json.getString("event") + " event) throws Exception {" +
                     buildContext.getLocalVariableDeclarations() +
                     toJava() +
                     "}");
         }
 
         public ClassInfo getEvent() {
-            return ClassInfo.of(arg(0));
+            return ClassInfo.of(eventMap.get(arg(0)).getString("event"));
         }
     }
 }

@@ -15,6 +15,10 @@
     -fx-control-inner-background: black;
 }
 
+.list-view .label {
+    -fx-text-fill: white;
+}
+
 .log-display {
     -fx-border-color: black;
 }
