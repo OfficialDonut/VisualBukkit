@@ -1,9 +1,11 @@
 package com.gmail.visualbukkit.extensions;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.project.Project;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.LanguageManager;
 import com.gmail.visualbukkit.ui.NotificationManager;
+import com.gmail.visualbukkit.ui.StyleableVBox;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -125,39 +127,20 @@ public class ExtensionManager {
 
     private static class ExtensionViewer extends Stage {
 
-        private TabPane tabPane = new TabPane();
         private ListView<VisualBukkitExtension> listView = new ListView<>();
         private SplitPane splitPane = new SplitPane(listView);
-        private Map<VisualBukkitExtension, ScrollPane> extensionPanes = new HashMap<>();
+        private Map<VisualBukkitExtension, GridPane> extensionGrids = new HashMap<>();
 
         public ExtensionViewer(Set<VisualBukkitExtension> extensions) {
             listView.getItems().addAll(extensions);
             listView.setPlaceholder(new Label(LanguageManager.get("label.no_extensions")));
             listView.getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
                 if (newValue != null) {
-                    splitPane.getItems().setAll(listView, extensionPanes.computeIfAbsent(newValue, k -> {
-                        Button uninstallButton = new Button(LanguageManager.get("button.uninstall_extension"));
-                        uninstallButton.setOnAction(e -> {
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.confirm_uninstall_extension"));
-                            VisualBukkitApp.getSettingsManager().style(alert.getDialogPane());
-                            alert.setHeaderText(null);
-                            alert.setGraphic(null);
-                            alert.showAndWait().ifPresent(buttonType -> {
-                                if (buttonType == ButtonType.OK) {
-                                    try {
-                                        Files.deleteIfExists(extensionMap.get(k));
-                                        NotificationManager.displayMessage(LanguageManager.get("message.uninstalled_extension.title"), LanguageManager.get("message.uninstalled_extension.content"));
-                                    } catch (IOException ex) {
-                                        NotificationManager.displayException("Failed to uninstall extension", ex);
-                                    }
-                                }
-                            });
-                        });
+                    GridPane extensionGrid = extensionGrids.computeIfAbsent(newValue, k -> {
                         GridPane gridPane = new GridPane();
                         gridPane.getStyleClass().add("extension-info-grid");
                         gridPane.addColumn(0, new Label("Name:"), new Label("Version:"), new Label("Author:"), new Label("Description:"));
                         gridPane.addColumn(1, new Label(k.getName()), new Label(k.getVersion()), new Label(k.getAuthor()), new Label(k.getDescription()));
-                        gridPane.addRow(4, uninstallButton);
                         ColumnConstraints columnConstraints = new ColumnConstraints();
                         columnConstraints.setPercentWidth(30);
                         gridPane.getColumnConstraints().add(columnConstraints);
@@ -165,30 +148,61 @@ public class ExtensionManager {
                             GridPane.setValignment(child, VPos.TOP);
                         }
                         k.setupInfoPane(gridPane);
-                        ScrollPane pane = new ScrollPane(gridPane);
-                        pane.setFitToWidth(true);
-                        pane.setFitToHeight(true);
-                        return pane;
-                    }));
+                        return gridPane;
+                    });
+
+                    Button uninstallButton = new Button(LanguageManager.get("button.uninstall_extension"));
+                    uninstallButton.setOnAction(e -> {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.confirm_uninstall_extension"));
+                        VisualBukkitApp.getSettingsManager().style(alert.getDialogPane());
+                        alert.setHeaderText(null);
+                        alert.setGraphic(null);
+                        alert.showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.OK) {
+                                try {
+                                    Files.deleteIfExists(extensionMap.get(newValue));
+                                    NotificationManager.displayMessage(LanguageManager.get("message.uninstalled_extension.title"), LanguageManager.get("message.uninstalled_extension.content"));
+                                } catch (IOException ex) {
+                                    NotificationManager.displayException("Failed to uninstall extension", ex);
+                                }
+                            }
+                        });
+                    });
+
+                    CheckBox enableCheckBox = new CheckBox(LanguageManager.get("label.enable_extension"));
+                    enableCheckBox.setSelected(ProjectManager.getCurrentProject().getExtensions().contains(newValue));
+                    enableCheckBox.setOnAction(e -> {
+                        Project project = ProjectManager.getCurrentProject();
+                        if (enableCheckBox.isSelected()) {
+                            project.getExtensions().add(newValue);
+                        } else {
+                            project.getExtensions().remove(newValue);
+                        }
+                        ProjectManager.open(project.getName());
+                    });
+
+                    ScrollPane scrollPane = new ScrollPane(new StyleableVBox(extensionGrid, enableCheckBox, uninstallButton));
+                    scrollPane.getStyleClass().add("extension-pane");
+                    scrollPane.setFitToWidth(true);
+                    scrollPane.setFitToHeight(true);
+                    splitPane.getItems().setAll(listView, scrollPane);
                 } else {
                     splitPane.getItems().setAll(listView);
                 }
             });
 
-            VisualBukkitApp.getSettingsManager().bindStyle(tabPane);
-            tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-
+            VisualBukkitApp.getSettingsManager().bindStyle(splitPane);
             initOwner(VisualBukkitApp.getStage());
             initModality(Modality.APPLICATION_MODAL);
             setTitle("Extension Manager");
-            setScene(new Scene(tabPane, 900, 600));
+            setScene(new Scene(splitPane, 900, 600));
+            setOnHidden(e -> listView.getSelectionModel().clearSelection());
         }
 
         public void open() {
             if (!listView.getItems().isEmpty()) {
                 listView.getSelectionModel().selectFirst();
             }
-            tabPane.getTabs().setAll(new Tab("Installed", splitPane), new Tab("Current Project", ProjectManager.getCurrentProject().getExtensionView()));
             show();
         }
     }

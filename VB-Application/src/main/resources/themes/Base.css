@@ -18,6 +18,10 @@
     -fx-focus-traversable: false;
 }
 
+.check-box {
+    -fx-focus-traversable: false;
+}
+
 .code-block {
     -fx-border-color: black;
     -fx-font-family: "JetBrains Mono Medium";
@@ -116,8 +120,12 @@
 
 .extension-info-grid {
     -fx-hgap: 10;
-    -fx-padding: 15;
     -fx-vgap: 15;
+}
+
+.extension-pane .vbox {
+    -fx-padding: 15;
+    -fx-spacing: 15;
 }
 
 .hbox {

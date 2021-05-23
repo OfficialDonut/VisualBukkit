@@ -22,7 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
-import org.controlsfx.control.ListSelectionView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +53,7 @@ public class Project {
     private Stage pluginSettingsStage = new Stage();
     private TabPane pluginComponentPane = new TabPane();
     private Map<Tab, PluginComponent.Block> pluginComponents = new HashMap<>();
-    private ListSelectionView<VisualBukkitExtension> extensionView = new ListSelectionView<>();
+    private Set<VisualBukkitExtension> extensions = new HashSet<>();
 
     protected Project(Path dir) throws IOException {
         this.dir = dir;
@@ -124,20 +123,12 @@ public class Project {
             }
         });
 
-        Button reloadButton = new Button(LanguageManager.get("button.reload_project"));
-        reloadButton.setOnAction(e -> {
-            ProjectManager.open(getName());
-            NotificationManager.displayMessage(LanguageManager.get("message.reloaded_project.title"), LanguageManager.get("message.reloaded_project.content"));
-        });
-
         projectPane.setBottom(buttonBar);
         projectPane.centerProperty().bind(Bindings.when(Bindings.isNotEmpty(pluginComponentPane.getTabs())).then((Node) pluginComponentPane).otherwise(componentPlaceholder));
         pluginSettingsStage.initModality(Modality.APPLICATION_MODAL);
         pluginSettingsStage.setTitle("Plugin Settings");
         pluginSettingsStage.setScene(new Scene(gridPane, 300, 300));
         pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
-        extensionView.getSourceItems().addAll(ExtensionManager.getExtensions());
-        extensionView.setSourceFooter(reloadButton);
 
         JSONObject json = new JSONObject();
 
@@ -161,14 +152,13 @@ public class Project {
                 if (obj instanceof String) {
                     VisualBukkitExtension extension = ExtensionManager.getExtension((String) obj);
                     if (extension != null) {
-                        extensionView.getSourceItems().remove(extension);
-                        extensionView.getTargetItems().add(extension);
+                        extensions.add(extension);
                     }
                 }
             }
         }
 
-        BlockRegistry.setActiveExtensions(extensionView.getTargetItems());
+        BlockRegistry.setActiveExtensions(extensions);
 
         JSONArray componentArray = json.optJSONArray("plugin-components");
         if (componentArray != null) {
@@ -200,7 +190,7 @@ public class Project {
         json.put("plugin.soft-dependencies", getPluginSoftDependencies());
         json.put("open-tab", pluginComponentPane.getSelectionModel().getSelectedIndex());
 
-        for (VisualBukkitExtension extension : extensionView.getTargetItems()) {
+        for (VisualBukkitExtension extension : extensions) {
             json.append("extensions", extension.getName());
         }
 
@@ -332,8 +322,8 @@ public class Project {
         return pluginComponentPane;
     }
 
-    public ListSelectionView<VisualBukkitExtension> getExtensionView() {
-        return extensionView;
+    public Set<VisualBukkitExtension> getExtensions() {
+        return extensions;
     }
 
     public String getPluginName() {

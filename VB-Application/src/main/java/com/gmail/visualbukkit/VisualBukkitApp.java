@@ -139,10 +139,7 @@ public class VisualBukkitApp extends Application {
 
         (server = new VisualBukkitServer()).start().whenComplete((o, e) -> {
             if (e != null) {
-                System.out.println("Failed to start the application server.");
                 e.printStackTrace();
-            } else {
-                System.out.println("Successfully started the application server.");
             }
         });
 

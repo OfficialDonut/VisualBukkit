@@ -54,7 +54,7 @@
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.0.3</version>
+            <version>11.1.0</version>
         </dependency>
 
         <dependency>
