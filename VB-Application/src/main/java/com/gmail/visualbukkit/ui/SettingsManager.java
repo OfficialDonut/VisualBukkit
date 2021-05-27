@@ -124,12 +124,13 @@ public class SettingsManager {
         if (Files.exists(themeDir)) {
             try (DirectoryStream<Path> pathStream = Files.newDirectoryStream(themeDir, p -> p.toString().endsWith(".css"))) {
                 for (Path path : pathStream) {
-                    themeMap.put(MoreFiles.getNameWithoutExtension(path), path.toUri().toString());
+                    themeMap.put(path.toUri().toString(), MoreFiles.getNameWithoutExtension(path));
                 }
             } catch (IOException ignored) {}
         }
 
         String selectedTheme = VisualBukkitApp.getData().optString("settings.theme");
+        theme.set(null);
         theme.set(themeMap.containsKey(selectedTheme) ? selectedTheme : "/themes/Dark.css");
 
         Menu selectThemeMenu = new Menu(LanguageManager.get("menu.select_theme"));
