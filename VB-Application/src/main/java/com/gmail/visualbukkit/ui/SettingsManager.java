@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class SettingsManager {
 
-    private final static List<String> LANGUAGES = List.of("System Default", "de-DE", "en-US", "zh-CN");
+    private final static List<String> LANGUAGES = List.of("System Default", "de-DE", "en-US", "ru-RU", "zh-CN");
     private final static List<Integer> FONT_SIZES = List.of(8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48);
     private final static List<Integer> AUTOSAVE_TIMES = List.of(5, 10, 15, 20, 25, 30, -1);
 
