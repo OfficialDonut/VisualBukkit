@@ -82,7 +82,7 @@ public class ExtensionManager {
                     extensionMap.put(extension, entry.getValue());
                     System.out.println("Loaded extension: " + extension.getName() + " " + extension.getVersion());
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 NotificationManager.displayException("Failed to load extension: " + entry.getValue().getFileName() + "\nIt will be uninstalled.", e);
                 Files.delete(entry.getValue());
             }
