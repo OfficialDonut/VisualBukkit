@@ -136,6 +136,7 @@ public class VisualBukkitApp extends Application {
         notifyPreloader(new Preloader.ProgressNotification(1));
         System.out.println("Finished loading.");
         ProjectManager.openLast();
+        statementSelector.loadPinned();
 
         (server = new VisualBukkitServer()).start().whenComplete((o, e) -> {
             if (e != null) {

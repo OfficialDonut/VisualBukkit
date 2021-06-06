@@ -55,7 +55,9 @@ public class StatementSelector extends StyleableVBox {
             e.setDropCompleted(true);
             e.consume();
         });
+    }
 
+    public void loadPinned() {
         JSONArray pinnedArray = VisualBukkitApp.getData().optJSONArray("pinned-blocks");
         if (pinnedArray != null) {
             for (Object obj : pinnedArray) {
@@ -67,7 +69,6 @@ public class StatementSelector extends StyleableVBox {
                 }
             }
         }
-
         updatePinned();
     }
 
