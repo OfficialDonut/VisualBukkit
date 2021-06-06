@@ -45,7 +45,6 @@ public abstract class Container extends Statement {
                     double deltaY = e.getScreenY() - bounds.getMinY();
                     if (deltaY > 0 && deltaY < childConnector.getMaxHeight()) {
                         childConnector.show();
-                        e.consume();
                         return;
                     }
                 }
@@ -57,7 +56,6 @@ public abstract class Container extends Statement {
                         }
                     }
                 }
-                e.consume();
             });
 
             ActionMenuItem pasteInsideItem = new ActionMenuItem(LanguageManager.get("context_menu.paste_inside"), e -> UndoManager.run(childHolder.addFirst(CopyPasteManager.pasteStatement())));
