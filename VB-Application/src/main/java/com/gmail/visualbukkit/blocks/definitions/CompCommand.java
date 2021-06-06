@@ -27,7 +27,7 @@ public class CompCommand extends PluginComponent {
             }
         }));
 
-        Block block = new Block(this, nameParameter, new InputParameter(), new InputParameter(), new InputParameter(), new InputParameter()) {
+        Block block = new Block(this, nameParameter, new InputParameter(), new InputParameter(), new InputParameter(), new InputParameter(), new InputParameter()) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

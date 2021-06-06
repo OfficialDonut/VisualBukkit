@@ -260,6 +260,9 @@ public class PluginBuilder {
                 if (!pluginComponent.arg(4).isBlank()) {
                     commandsBuilder.append("    permission-message: \"").append(pluginComponent.arg(4)).append("\"\n");
                 }
+                if (!pluginComponent.arg(5).isBlank()) {
+                    commandsBuilder.append("    usage: \"").append(pluginComponent.arg(5)).append("\"\n");
+                }
             }
         }
         return pluginYml.append(commandsBuilder).append(permissionsBuilder).toString();
