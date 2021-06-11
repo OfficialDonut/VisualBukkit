@@ -311,7 +311,7 @@ public class PluginBuilder {
             "        <dependency>\n" +
             "            <groupId>org.spigotmc</groupId>\n" +
             "            <artifactId>spigot-api</artifactId>\n" +
-            "            <version>1.16.5-R0.1-SNAPSHOT</version>\n" +
+            "            <version>1.17-R0.1-SNAPSHOT</version>\n" +
             "            <scope>provided</scope>\n" +
             "        </dependency>\n" +
             "{DEPENDENCIES}" +
