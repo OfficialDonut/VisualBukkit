@@ -1,5 +1,3 @@
-import org.bukkit.Bukkit;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,15 +7,10 @@ import java.util.Map;
 
 public class ReflectionUtil {
 
-    private static String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
     private static Map<String, Class<?>> classCache = new HashMap<>();
     private static Map<String, Constructor<?>> constructorCache = new HashMap<>();
     private static Map<String, Method> methodCache = new HashMap<>();
     private static Map<String, Field> fieldCache = new HashMap<>();
-
-    public static Class<?> getNmsClass(String simpleClassName) {
-        return getClass("net.minecraft.server." + version + "." + simpleClassName);
-    }
 
     public static Class<?> getClass(String className) {
         return classCache.computeIfAbsent(className, k -> {

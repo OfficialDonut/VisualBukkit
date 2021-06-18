@@ -38,7 +38,7 @@ public class StatSetPlayerSkin extends Statement {
     private static final String SKIN_METHOD =
             "public static void setPlayerSkin(org.bukkit.entity.Player player, String value, String signature) throws Exception {\n" +
             "    Object entityPlayer = ReflectionUtil.getDeclaredMethod(player.getClass(), \"getHandle\").invoke(player);\n" +
-            "    Object gameProfile = ReflectionUtil.getDeclaredMethod(ReflectionUtil.getNmsClass(\"EntityHuman\"), \"getProfile\").invoke(entityPlayer);\n" +
+            "    Object gameProfile = ReflectionUtil.getDeclaredMethod(entityPlayer.getClass().getSuperclass(), \"getProfile\").invoke(entityPlayer);\n" +
             "    Object propertyMap = ReflectionUtil.getDeclaredMethod(gameProfile.getClass(), \"getProperties\").invoke(gameProfile);\n" +
             "    Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass(\"com.mojang.authlib.properties.Property\"), String.class, String.class, String.class).newInstance(\"textures\", value, signature);\n" +
             "    ReflectionUtil.getDeclaredMethod(com.google.common.collect.ForwardingMultimap.class, \"removeAll\", Object.class).invoke(propertyMap, \"textures\");\n" +
