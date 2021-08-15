@@ -51,30 +51,30 @@ public class ExpressionParameter extends StyleableVBox implements BlockParameter
         });
 
         ActionMenuItem pasteItem = new ActionMenuItem(LanguageManager.get("context_menu.paste"), e -> UndoManager.run(setExpression(CopyPasteManager.pasteExpression())));
-        ContextMenu contextMenu = new ContextMenu(pasteItem);
+        ContextMenu contextMenu = new ContextMenu(pasteItem, new SeparatorMenuItem());
         contextMenu.setOnShowing(e -> pasteItem.setDisable(!CopyPasteManager.isExpressionCopied()));
         placeholder.setContextMenu(contextMenu);
 
         if (type.getClassType() == boolean.class) {
             contextMenu.getItems().addAll(
-                    new SeparatorMenuItem(),
                     new ActionMenuItem("Insert Boolean", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean").createBlock()))),
+                    new ActionMenuItem("Insert Boolean Logic", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean-logic").createBlock()))),
                     new ActionMenuItem("Insert Equals", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-is-equal").createBlock()))),
-                    new ActionMenuItem("Insert Boolean Logic", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-boolean-logic").createBlock()))));
+                    new ActionMenuItem("Insert Equals Ignore Case", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("6c9e3e963cbadd502f2b34f300ed5820").createBlock()))));
         } else if (type.getClassType() == String.class) {
             contextMenu.getItems().addAll(
-                    new SeparatorMenuItem(),
-                    new ActionMenuItem("Insert String", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-string").createBlock()))));
+                    new ActionMenuItem("Insert String", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-string").createBlock()))),
+                    new ActionMenuItem("Insert Combine Strings", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-combine-strings").createBlock()))));
         } else if (type.getClassType() == List.class) {
             contextMenu.getItems().addAll(
-                    new SeparatorMenuItem(),
                     new ActionMenuItem("Insert List", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-new-list").createBlock()))));
         } else if (type.isNumber()) {
             contextMenu.getItems().addAll(
-                    new SeparatorMenuItem(),
                     new ActionMenuItem("Insert Number", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-number").createBlock()))),
                     new ActionMenuItem("Insert Arithmetic", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-arithmetic").createBlock()))));
         }
+
+        contextMenu.getItems().add(new ActionMenuItem("Insert Local Variable", e -> UndoManager.run(setExpression(BlockRegistry.getExpression("expr-simple-local-variable").createBlock()))));
     }
 
     public UndoManager.RevertableAction setExpression(Expression.Block newExpression) {
