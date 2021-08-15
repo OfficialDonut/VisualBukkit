@@ -50,9 +50,9 @@ public class StatScheduleTask extends Container {
 
                 return tempVarDeclarations +
                         "new org.bukkit.scheduler.BukkitRunnable() {" +
+                        finalVarDeclarations +
                         "public void run() {" +
                         "try {" +
-                        finalVarDeclarations +
                         childJava +
                         "} catch (Exception ex) { ex.printStackTrace(); }}}." + method;
             }
