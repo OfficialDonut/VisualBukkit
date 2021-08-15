@@ -24,7 +24,9 @@ public abstract class PluginModule {
         @Override
         public void prepareBuild(BuildContext buildContext) {
             MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
-            enableMethod.setBody("Bukkit.getMessenger().registerOutgoingPluginChannel(this, \"BungeeCord\");" + enableMethod.getBody());
+            MethodSource<JavaClassSource> disableMethod = buildContext.getMainClass().getMethod("onDisable");
+            enableMethod.setBody(enableMethod.getBody() + "Bukkit.getMessenger().registerOutgoingPluginChannel(this, \"BungeeCord\");");
+            disableMethod.setBody(disableMethod.getBody() + "Bukkit.getMessenger().unregisterOutgoingPluginChannel(this);");
         }
     };
 
