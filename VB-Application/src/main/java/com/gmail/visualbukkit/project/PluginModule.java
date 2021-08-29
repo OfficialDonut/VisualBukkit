@@ -54,21 +54,34 @@ public abstract class PluginModule {
         }
     };
 
+    public static final PluginModule PERSISTENT_VARIABLES = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.getMainClass().addField("public static org.bukkit.configuration.file.YamlConfiguration PERSISTENT_VARIABLES;");
+            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
+            MethodSource<JavaClassSource> disableMethod = buildContext.getMainClass().getMethod("onDisable");
+            enableMethod.setBody(
+                    enableMethod.getBody() +
+                    "PERSISTENT_VARIABLES = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(new File(getDataFolder(), \"data.yml\"));");
+            disableMethod.setBody(disableMethod.getBody() + "try { PERSISTENT_VARIABLES.save(new File(getDataFolder(), \"data.yml\")); } catch (IOException e) { e.printStackTrace(); }");
+        }
+    };
+
+    public static final PluginModule PLAYER_DATA = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.addUtilClass(PluginBuilder.getUtilClass("PlayerDataManager"));
+            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
+            MethodSource<JavaClassSource> disableMethod = buildContext.getMainClass().getMethod("onDisable");
+            enableMethod.setBody(enableMethod.getBody() + "getServer().getPluginManager().registerEvents(PlayerDataManager.getInstance(), this);");
+            disableMethod.setBody(disableMethod.getBody() + "PlayerDataManager.getInstance().saveAllData();");
+        }
+    };
+
     public static final PluginModule REFLECTION_UTIL = new PluginModule() {
         @Override
         public void prepareBuild(BuildContext buildContext) {
             buildContext.getUtilClasses().add(PluginBuilder.getUtilClass("ReflectionUtil"));
-        }
-    };
-
-    public static final PluginModule VARIABLES = new PluginModule() {
-        @Override
-        public void prepareBuild(BuildContext buildContext) {
-            buildContext.addUtilClass(PluginBuilder.getUtilClass("VariableManager"));
-            MethodSource<JavaClassSource> enableMethod = buildContext.getMainClass().getMethod("onEnable");
-            MethodSource<JavaClassSource> disableMethod = buildContext.getMainClass().getMethod("onDisable");
-            enableMethod.setBody("VariableManager.loadVariables(this);" + enableMethod.getBody());
-            disableMethod.setBody(disableMethod.getBody() + "VariableManager.saveVariables();");
         }
     };
 }
