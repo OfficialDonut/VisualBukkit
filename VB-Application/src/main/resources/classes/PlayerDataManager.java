@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -55,14 +55,16 @@ public class PlayerDataManager implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onJoin(PlayerJoinEvent e) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            synchronized (this) {
-                UUID uuid = e.getPlayer().getUniqueId();
-                playerConfigs.put(uuid, YamlConfiguration.loadConfiguration(new File(playerDataDir, uuid + ".yml")));
-            }
-        });
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onLogin(PlayerLoginEvent e) {
+        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                synchronized (this) {
+                    UUID uuid = e.getPlayer().getUniqueId();
+                    playerConfigs.put(uuid, YamlConfiguration.loadConfiguration(new File(playerDataDir, uuid + ".yml")));
+                }
+            });
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
