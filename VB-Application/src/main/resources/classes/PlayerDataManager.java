@@ -13,33 +13,49 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.Semaphore;
 
 public class PlayerDataManager implements Listener {
 
     private static PlayerDataManager instance = new PlayerDataManager();
     private JavaPlugin plugin = PluginMain.getInstance();
     private File playerDataDir = new File(plugin.getDataFolder(), "Player Data");
-    private Map<UUID, YamlConfiguration> playerConfigs = new HashMap<>();
+    private Map<UUID, PlayerData> playerData = new HashMap<>();
 
     private PlayerDataManager() {
         instance = this;
         playerDataDir.mkdirs();
     }
 
-    public synchronized void setData(Player player, String variable, Object value) {
-        playerConfigs.get(player.getUniqueId()).set(variable, value);
+    public void setData(Player player, String variable, Object value) {
+        PlayerData data = playerData.get(player.getUniqueId());
+        try {
+            data.lock.acquireUninterruptibly();
+            data.config.set(variable, value);
+        } finally {
+            data.lock.release();
+        }
     }
 
-    public synchronized Object getData(Player player, String variable) {
-        return playerConfigs.get(player.getUniqueId()).get(variable);
+    public Object getData(Player player, String variable) {
+        PlayerData data = playerData.get(player.getUniqueId());
+        try {
+            data.lock.acquireUninterruptibly();
+            return data.config.get(variable);
+        } finally {
+            data.lock.release();
+        }
     }
 
-    public synchronized void saveAllData() {
-        for (Map.Entry<UUID, YamlConfiguration> entry : playerConfigs.entrySet()) {
+    public void saveAllData() {
+        for (Map.Entry<UUID, PlayerData> entry : playerData.entrySet()) {
             try {
-                saveData(entry.getKey(), entry.getValue());
+                entry.getValue().lock.acquireUninterruptibly();
+                saveData(entry.getKey(), entry.getValue().config);
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                entry.getValue().lock.release();
             }
         }
     }
@@ -58,10 +74,14 @@ public class PlayerDataManager implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onLogin(PlayerLoginEvent e) {
         if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
+            PlayerData data = new PlayerData();
+            data.lock.acquireUninterruptibly();
+            playerData.put(e.getPlayer().getUniqueId(), data);
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                synchronized (this) {
-                    UUID uuid = e.getPlayer().getUniqueId();
-                    playerConfigs.put(uuid, YamlConfiguration.loadConfiguration(new File(playerDataDir, uuid + ".yml")));
+                try {
+                    data.config = YamlConfiguration.loadConfiguration(new File(playerDataDir, e.getPlayer().getUniqueId() + ".yml"));
+                } finally {
+                    data.lock.release();
                 }
             });
         }
@@ -69,18 +89,25 @@ public class PlayerDataManager implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent e) {
+        PlayerData data = playerData.remove(e.getPlayer().getUniqueId());
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                synchronized (this) {
-                    saveData(e.getPlayer().getUniqueId(), playerConfigs.remove(e.getPlayer().getUniqueId()));
-                }
+                data.lock.acquireUninterruptibly();
+                saveData(e.getPlayer().getUniqueId(), data.config);
             } catch (IOException ex) {
                 Bukkit.getScheduler().runTask(plugin, (Runnable) ex::printStackTrace);
+            } finally {
+                data.lock.release();
             }
         });
     }
 
     public static PlayerDataManager getInstance() {
         return instance;
+    }
+
+    private static class PlayerData {
+        private Semaphore lock = new Semaphore(1);
+        private YamlConfiguration config;
     }
 }
