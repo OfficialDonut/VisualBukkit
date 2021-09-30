@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.gmail.visualbukkit</groupId>
             <artifactId>vb-application</artifactId>
-            <version>4.5.2</version>
+            <version>4.5.3</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
