@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 public class PlayerDataManager implements Listener {
@@ -21,6 +23,7 @@ public class PlayerDataManager implements Listener {
     private JavaPlugin plugin = PluginMain.getInstance();
     private File playerDataDir = new File(plugin.getDataFolder(), "Player Data");
     private Map<UUID, PlayerData> playerData = new HashMap<>();
+    private ExecutorService executor = Executors.newCachedThreadPool();
 
     private PlayerDataManager() {
         instance = this;
@@ -77,7 +80,7 @@ public class PlayerDataManager implements Listener {
             PlayerData data = new PlayerData();
             data.lock.acquireUninterruptibly();
             playerData.put(e.getPlayer().getUniqueId(), data);
-            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            executor.submit(() -> {
                 try {
                     data.config = YamlConfiguration.loadConfiguration(new File(playerDataDir, e.getPlayer().getUniqueId() + ".yml"));
                 } finally {
@@ -90,7 +93,7 @@ public class PlayerDataManager implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent e) {
         PlayerData data = playerData.remove(e.getPlayer().getUniqueId());
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        executor.submit(() -> {
             try {
                 data.lock.acquireUninterruptibly();
                 saveData(e.getPlayer().getUniqueId(), data.config);
