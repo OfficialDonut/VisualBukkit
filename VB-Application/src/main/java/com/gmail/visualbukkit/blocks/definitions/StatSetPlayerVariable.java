@@ -7,27 +7,24 @@ import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.project.PluginModule;
 
-public class StatSetSimplePersistentVariable extends Statement {
+public class StatSetPlayerVariable extends Statement {
 
-    public StatSetSimplePersistentVariable() {
-        super("stat-set-simple-persistent-variable");
+    public StatSetPlayerVariable() {
+        super("stat-set-player-variable");
     }
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter input = new StringLiteralParameter();
-        input.getStyleClass().add("simple-persistent-variable-field");
-
-        return new Block(this, input, new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")), new StringLiteralParameter(), new ExpressionParameter(ClassInfo.OBJECT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
-                buildContext.addPluginModule(PluginModule.PERSISTENT_VARIABLES);
+                buildContext.addPluginModule(PluginModule.PLAYER_DATA);
             }
 
             @Override
             public String toJava() {
-                return "PluginMain.PERSISTENT_VARIABLES.set(" + arg(0) + "," + arg(1) + ");";
+                return "PlayerDataManager.getInstance().setData(" + arg(0) + "," + arg(1) + "," + arg(2) + ");";
             }
         };
     }
