@@ -1,15 +1,16 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
-import com.gmail.visualbukkit.blocks.SimpleExpression;
+import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.project.PluginModule;
 
-public class ExprSimplePersistentVariable extends SimpleExpression {
+public class ExprPlayerVariable extends Expression {
 
-    public ExprSimplePersistentVariable() {
-        super("expr-simple-persistent-variable");
+    public ExprPlayerVariable() {
+        super("expr-player-variable");
     }
 
     @Override
@@ -19,19 +20,16 @@ public class ExprSimplePersistentVariable extends SimpleExpression {
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter input = new StringLiteralParameter();
-        input.getStyleClass().add("simple-persistent-variable-field");
-
-        return new Block(this, input) {
+        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")), new StringLiteralParameter()) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
-                buildContext.addPluginModule(PluginModule.PERSISTENT_VARIABLES);
+                buildContext.addPluginModule(PluginModule.PLAYER_DATA);
             }
 
             @Override
             public String toJava() {
-                return "PluginMain.PERSISTENT_VARIABLES.get(" + arg(0) + ")";
+                return "PlayerDataManager.getInstance().getData(" + arg(0) + "," + arg(1) + ")";
             }
         };
     }

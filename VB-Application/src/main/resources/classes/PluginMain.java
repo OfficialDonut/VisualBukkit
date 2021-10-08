@@ -32,6 +32,9 @@ public class PluginMain extends JavaPlugin implements Listener {
     }
 
     public static List createList(Object obj) {
+        if (obj instanceof List) {
+            return (List) obj;
+        }
         List list = new ArrayList<>();
         if (obj.getClass().isArray()) {
             int length = java.lang.reflect.Array.getLength(obj);
