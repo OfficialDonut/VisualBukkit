@@ -25,6 +25,7 @@ public class CompRegisterPlaceholder extends PluginComponent {
                 registerMethod.setBody(registerMethod.getBody() +
                         "papiHook.registerPlaceholder(" + arg(0) + ", placeholderPlayer -> {" +
                         "try {" +
+                        buildContext.getLocalVariableDeclarations() +
                         toJava() +
                         "} catch (Exception e) { e.printStackTrace(); }" +
                         "return null;" +
