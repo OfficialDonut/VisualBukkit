@@ -61,6 +61,7 @@ public class PlayerDataManager implements Listener {
                 entry.getValue().lock.release();
             }
         }
+        executor.shutdown();
     }
 
     private void saveData(UUID uuid, YamlConfiguration config) throws IOException {

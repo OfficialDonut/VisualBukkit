@@ -226,6 +226,8 @@ public class PluginBuilder {
 
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
         StringBuilder pluginYml = new StringBuilder(YML_STRING.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
+        StringBuilder commandsBuilder = new StringBuilder("commands:\n");
+        StringBuilder permissionsBuilder = new StringBuilder("permissions:\n");
         if (!project.getPluginAuthor().isBlank()) {
             pluginYml.append("author: \"").append(project.getPluginAuthor()).append("\"\n");
         }
@@ -241,8 +243,9 @@ public class PluginBuilder {
         if (!project.getPluginSoftDependencies().isBlank()) {
             pluginYml.append("softdepend: [").append(project.getPluginSoftDependencies()).append("]\n");
         }
-        StringBuilder commandsBuilder = new StringBuilder("commands:\n");
-        StringBuilder permissionsBuilder = new StringBuilder("permissions:\n");
+        if (!project.getPluginPermissions().isBlank()) {
+            permissionsBuilder.append("  ").append(project.getPluginPermissions().replace("\n", "\n  ")).append("\n");
+        }
         for (PluginComponent.Block pluginComponent : project.getPluginComponents()) {
             if (pluginComponent.getDefinition() instanceof CompCommand && !pluginComponent.arg(0).isBlank()) {
                 commandsBuilder.append("  ").append(pluginComponent.arg(0)).append(":\n");

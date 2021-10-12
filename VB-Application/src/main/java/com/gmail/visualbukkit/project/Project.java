@@ -43,6 +43,7 @@ public class Project {
     private StringProperty pluginWebsite = new SimpleStringProperty();
     private StringProperty pluginDependencies = new SimpleStringProperty();
     private StringProperty pluginSoftDependencies = new SimpleStringProperty();
+    private StringProperty pluginPermissions = new SimpleStringProperty();
 
     private Path dir;
     private Path dataFile;
@@ -70,6 +71,7 @@ public class Project {
         TextField pluginWebsiteField = new TextField();
         TextField pluginDependField = new TextField();
         TextField pluginSoftDependField = new TextField();
+        TextArea pluginPermsField = new TextArea();
 
         pluginNameField.textProperty().bindBidirectional(pluginName);
         pluginVerField.textProperty().bindBidirectional(pluginVersion);
@@ -78,20 +80,23 @@ public class Project {
         pluginWebsiteField.textProperty().bindBidirectional(pluginWebsite);
         pluginDependField.textProperty().bindBidirectional(pluginDependencies);
         pluginSoftDependField.textProperty().bindBidirectional(pluginSoftDependencies);
+        pluginPermsField.textProperty().bindBidirectional(pluginPermissions);
+        pluginPermsField.prefWidthProperty().bind(pluginNameField.widthProperty());
         pluginNameField.textProperty().addListener((o, oldValue, newValue) -> {
             if (!newValue.isEmpty() && !StringUtils.isAlphanumeric(newValue)) {
                 pluginNameField.setText(oldValue);
             }
         });
 
-        GridPane gridPane = new GridPane();
-        VisualBukkitApp.getSettingsManager().bindStyle(gridPane);
-        gridPane.getStyleClass().add("plugin-settings-grid");
-        gridPane.addColumn(0, new Label(LanguageManager.get("label.plugin_name")),
+        GridPane settingsGrid = new GridPane();
+        VisualBukkitApp.getSettingsManager().bindStyle(settingsGrid);
+        settingsGrid.getStyleClass().add("plugin-settings-grid");
+        settingsGrid.addColumn(0, new Label(LanguageManager.get("label.plugin_name")),
                 new Label(LanguageManager.get("label.plugin_version")), new Label(LanguageManager.get("label.plugin_author")),
                 new Label(LanguageManager.get("label.plugin_description")), new Label(LanguageManager.get("label.plugin_website")),
-                new Label(LanguageManager.get("label.plugin_depend")), new Label(LanguageManager.get("label.plugin_soft_depend")));
-        gridPane.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginWebsiteField, pluginDependField, pluginSoftDependField);
+                new Label(LanguageManager.get("label.plugin_depend")), new Label(LanguageManager.get("label.plugin_soft_depend")),
+                new Label(LanguageManager.get("label.plugin_permissions")));
+        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginPermsField);
 
         HBox buttonBar = new StyleableHBox();
         buttonBar.getStyleClass().add("project-button-bar");
@@ -127,7 +132,7 @@ public class Project {
         projectPane.centerProperty().bind(Bindings.when(Bindings.isNotEmpty(pluginComponentPane.getTabs())).then((Node) pluginComponentPane).otherwise(componentPlaceholder));
         pluginSettingsStage.initModality(Modality.APPLICATION_MODAL);
         pluginSettingsStage.setTitle("Plugin Settings");
-        pluginSettingsStage.setScene(new Scene(gridPane, 300, 300));
+        pluginSettingsStage.setScene(new Scene(settingsGrid, 350, 350));
         pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
 
         JSONObject json = new JSONObject();
@@ -145,6 +150,7 @@ public class Project {
         pluginWebsite.set(json.optString("plugin.website", ""));
         pluginDependencies.set(json.optString("plugin.dependencies", ""));
         pluginSoftDependencies.set(json.optString("plugin.soft-dependencies", ""));
+        pluginPermissions.set(json.optString("plugin.permissions", ""));
 
         JSONArray extensionArray = json.optJSONArray("extensions");
         if (extensionArray != null) {
@@ -188,6 +194,7 @@ public class Project {
         json.put("plugin.website", getPluginWebsite());
         json.put("plugin.dependencies", getPluginDependencies());
         json.put("plugin.soft-dependencies", getPluginSoftDependencies());
+        json.put("plugin.permissions", getPluginPermissions());
         json.put("open-tab", pluginComponentPane.getSelectionModel().getSelectedIndex());
 
         for (VisualBukkitExtension extension : extensions) {
@@ -352,5 +359,9 @@ public class Project {
 
     public String getPluginSoftDependencies() {
         return pluginSoftDependencies.get();
+    }
+
+    public String getPluginPermissions() {
+        return pluginPermissions.get();
     }
 }

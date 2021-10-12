@@ -283,6 +283,8 @@
 }
 
 .text-area {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-border-color: black;
     -fx-faint-focus-color: transparent;
     -fx-focus-color: transparent;
 }
