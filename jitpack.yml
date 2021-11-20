@@ -1,5 +1,5 @@
 before_install:
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
   - sdk update
-  - sdk install java 11.0.13-librca
-  - sdk use java 11.0.13-librca
+  - sdk install java 11.0.13.fx-librca
+  - sdk use java 11.0.13.fx-librca
