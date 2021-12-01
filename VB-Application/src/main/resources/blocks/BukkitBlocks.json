@@ -88,6 +88,13 @@
     "return": "org.bukkit.entity.Fox.Type"
   },
   {
+    "static": true,
+    "method": "getTicksPerWaterUndergroundCreatureSpawns",
+    "id": "005d04f3bb218dc4e4198dfedce45636",
+    "class": "org.bukkit.Bukkit",
+    "return": "int"
+  },
+  {
     "method": "getMinimumPickles",
     "param": ["org.bukkit.block.data.type.SeaPickle"],
     "id": "0071499e4d654b3eae33b6deb96f5977",
@@ -114,13 +121,6 @@
     "id": "008c3c6163bd02ae89b62f5deb1404d5",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "field": "DESERT_HILLS",
-    "id": "0095f93a79a231676816aa7eda55e3f5",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "getStructureSize",
@@ -1927,6 +1927,13 @@
     "class": "org.bukkit.event.player.PlayerBedEnterEvent"
   },
   {
+    "method": "getPlayer",
+    "id": "07b5fce3a2db3bec589d196bd26b3370",
+    "event": true,
+    "class": "org.bukkit.event.entity.SheepDyeWoolEvent",
+    "return": "org.bukkit.entity.Player"
+  },
+  {
     "static": true,
     "field": "ENTITY_LLAMA_EAT",
     "id": "07bd46be0f3ff0c80b53a032697c5b16",
@@ -2163,13 +2170,6 @@
     "return": "boolean"
   },
   {
-    "static": true,
-    "field": "MODIFIED_GRAVELLY_MOUNTAINS",
-    "id": "08a1b41cdd89062512c0826d2c5e2d9e",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getAnimalSpawnLimit",
     "param": ["org.bukkit.World"],
     "id": "08a70fcf40f33fdd8d41c1a0858b42fa",
@@ -2241,13 +2241,6 @@
     "id": "091460ff1544882c6b807f5a5060a42a",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "field": "MOUNTAINS",
-    "id": "091762d4f30fecfe7caaae43ce33aadc",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "getMaximumDelay",
@@ -2486,13 +2479,6 @@
     "return": "org.bukkit.BanList.Type"
   },
   {
-    "method": "getMaxHeight",
-    "param": ["org.bukkit.World"],
-    "id": "0a998e5e527dd8ef6a324e3ed523d9ec",
-    "class": "org.bukkit.World",
-    "return": "int"
-  },
-  {
     "static": true,
     "field": "AZTEC",
     "id": "0a9ead11df75863986df670d69937474",
@@ -2526,13 +2512,6 @@
     "id": "0abf9c3ae418cb4594c3d33073c980ee",
     "class": "org.bukkit.block.data.type.Beehive",
     "return": "int"
-  },
-  {
-    "static": true,
-    "field": "WOODED_BADLANDS_PLATEAU",
-    "id": "0abfe6993effbf89719f8f593e246510",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "discoverRecipes",
@@ -2673,13 +2652,6 @@
     "id": "0b4a46e1e7fcdbf614912c32509df8c7",
     "class": "org.bukkit.entity.Boat",
     "return": "double"
-  },
-  {
-    "static": true,
-    "field": "DESERT_LAKES",
-    "id": "0b522dd3923232ec9dae886872309e40",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "getRenderType",
@@ -3667,6 +3639,13 @@
   },
   {
     "static": true,
+    "field": "OLD_GROWTH_SPRUCE_TAIGA",
+    "id": "0e7aca578e689c93b5b3935dfa4e1e58",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "field": "PLAYER_KILLS",
     "id": "0e8445c911ec99b7ba6411db0a8684e4",
     "class": "org.bukkit.scoreboard.Criterias",
@@ -4007,6 +3986,13 @@
     "id": "102f868a84e9810c13fbe85ca9fa7e91",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "static": true,
+    "field": "JAGGED_PEAKS",
+    "id": "1031efb4fc1c5c38fd2b8d43da063c19",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -4374,6 +4360,13 @@
     "return": "org.bukkit.event.entity.EntityTransformEvent.TransformReason"
   },
   {
+    "static": true,
+    "field": "WOODED_BADLANDS",
+    "id": "117b7f480dc2ef8ef819c08f3c64800d",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "method": "getExhaustion",
     "param": ["org.bukkit.entity.HumanEntity"],
     "id": "1183f9514bcc4dfc961ff062736f94f7",
@@ -4696,6 +4689,13 @@
     "id": "12c09a2fc7f61a08e91f97fdf5828adb",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "isRespawnAnchorWorks",
+    "param": ["org.bukkit.World"],
+    "id": "12c0cb8ef54d537fb1c2386352f1ccf4",
+    "class": "org.bukkit.World",
+    "return": "boolean"
   },
   {
     "method": "setCustomNameVisible",
@@ -5079,13 +5079,6 @@
   },
   {
     "static": true,
-    "field": "SWAMP_HILLS",
-    "id": "149188a45ee547ede6d29458144544b3",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "ENTITY_CAT_PURR",
     "id": "14b0ca740e89fccabf3d11f90ef269e6",
     "class": "org.bukkit.Sound",
@@ -5285,6 +5278,13 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "method": "isNatural",
+    "param": ["org.bukkit.World"],
+    "id": "151bcb949e25fd68c53138d66c780979",
+    "class": "org.bukkit.World",
+    "return": "boolean"
+  },
+  {
     "method": "getTransformedEntity",
     "id": "1522ba025ec08254cf04fa6bfb3cd451",
     "event": true,
@@ -5431,13 +5431,6 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
-    "method": "clone",
-    "param": ["org.bukkit.inventory.meta.Damageable"],
-    "id": "157e2620c1b30394d292285cd936e18c",
-    "class": "org.bukkit.inventory.meta.Damageable",
-    "return": "org.bukkit.inventory.meta.Damageable"
-  },
-  {
     "static": true,
     "field": "AREA_EFFECT_CLOUD",
     "id": "158243816245e92566436ba674ba595a",
@@ -5514,6 +5507,13 @@
     "id": "15e65bc95dcbd9de0a767387d92d9955",
     "class": "org.bukkit.block.data.type.Switch",
     "return": "org.bukkit.block.data.type.Switch.Face"
+  },
+  {
+    "method": "getEntities",
+    "id": "15e870b76519701ad5a69afc4adbb11a",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesUnloadEvent",
+    "return": "java.util.List"
   },
   {
     "static": true,
@@ -5607,6 +5607,13 @@
     "return": "boolean"
   },
   {
+    "static": true,
+    "field": "SMITHING_TABLE_USE",
+    "id": "164d611bef7c1849d3d0229090a63150",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
     "method": "isCancelled",
     "id": "1659fccec55766361fcce782538161c5",
     "event": true,
@@ -5682,6 +5689,15 @@
     "id": "168f389e6bb37743e2d16a4737013e45",
     "class": "org.bukkit.block.data.type.PointedDripstone.Thickness",
     "return": "org.bukkit.block.data.type.PointedDripstone.Thickness"
+  },
+  {
+    "method": "sendMessage",
+    "param": [
+      "org.bukkit.command.CommandSender",
+      "java.lang.String[]"
+    ],
+    "id": "168f65f9a082b1990e05b53b447a06ee",
+    "class": "org.bukkit.command.CommandSender"
   },
   {
     "method": "getChangedType",
@@ -5802,6 +5818,13 @@
     "event": true,
     "class": "org.bukkit.event.player.PlayerAdvancementDoneEvent",
     "return": "org.bukkit.advancement.Advancement"
+  },
+  {
+    "method": "getBlock",
+    "id": "16f8bda57d6f4c28267df5f98d417185",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent",
+    "return": "org.bukkit.block.Block"
   },
   {
     "static": true,
@@ -6484,6 +6507,13 @@
     "return": "org.bukkit.entity.memory.MemoryKey"
   },
   {
+    "static": true,
+    "field": "WINDSWEPT_HILLS",
+    "id": "19bc8f1720a8f64dfca470bb5152ed20",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "method": "getAddress",
     "id": "19bf0787284f362a05fa24ef94ba8ca7",
     "event": true,
@@ -7005,25 +7035,11 @@
     "return": "org.bukkit.Registry"
   },
   {
-    "static": true,
-    "field": "MOUNTAIN_EDGE",
-    "id": "1bcfde30cc52e3dfa282805631e87199",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getSpawnLocation",
     "param": ["org.bukkit.World"],
     "id": "1bd0d0b84341d9a87a669ecb8ea6ec0c",
     "class": "org.bukkit.World",
     "return": "org.bukkit.Location"
-  },
-  {
-    "static": true,
-    "field": "BAMBOO_JUNGLE_HILLS",
-    "id": "1bd29892a958efbb518fc868873cb14b",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -7052,6 +7068,13 @@
     "id": "1bec853685a47d06063e81ab12f20929",
     "class": "org.bukkit.entity.LivingEntity",
     "return": "int"
+  },
+  {
+    "method": "getUID",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "1bedfdfe9b4d2cda59cc69254af4aaf6",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "java.util.UUID"
   },
   {
     "static": true,
@@ -7217,13 +7240,6 @@
   },
   {
     "static": true,
-    "field": "LIGHT",
-    "id": "1c6d4b99343e174a30ec449d0049f83a",
-    "class": "org.bukkit.Particle",
-    "return": "org.bukkit.Particle"
-  },
-  {
-    "static": true,
     "field": "UNKNOWN",
     "id": "1c75a859cf0863b5531c6c9ad03bc109",
     "class": "org.bukkit.event.block.CauldronLevelChangeEvent.ChangeReason",
@@ -7337,6 +7353,13 @@
   },
   {
     "static": true,
+    "field": "ZOMBIE_CONVERTED_TO_DROWNED",
+    "id": "1cca7454396092b9366ef4c295208372",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "CRIMSON_SIGN",
     "id": "1ccdb5eb985c6bed89edd500de35cf9a",
     "class": "org.bukkit.Material",
@@ -7447,13 +7470,6 @@
     "id": "1d1c8dd695d87c972ef602d0978232b9",
     "class": "org.bukkit.block.Structure",
     "return": "boolean"
-  },
-  {
-    "static": true,
-    "field": "GIANT_TREE_TAIGA",
-    "id": "1d25b2a015e69ef0d1fcfa6ac58f410e",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -7974,6 +7990,13 @@
   },
   {
     "static": true,
+    "field": "COMPOSTER",
+    "id": "1f6c55f1e679cffd6619d67d8e062d29",
+    "class": "org.bukkit.event.inventory.InventoryType",
+    "return": "org.bukkit.event.inventory.InventoryType"
+  },
+  {
+    "static": true,
     "field": "NOT_POSSIBLE_HERE",
     "id": "1f703644ab2093b2d8a4beaa9a24715a",
     "class": "org.bukkit.event.player.PlayerBedEnterEvent.BedEnterResult",
@@ -8092,6 +8115,13 @@
     "id": "1fbbb0e11294ecbaaf88c7d3eabf30ed",
     "class": "org.bukkit.Axis",
     "return": "org.bukkit.Axis[]"
+  },
+  {
+    "method": "getMaxHeight",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "1fbe5e38fb817fb06967196ca589cd0b",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "int"
   },
   {
     "static": true,
@@ -8699,6 +8729,13 @@
   },
   {
     "static": true,
+    "method": "getSimulationDistance",
+    "id": "22794cad7b4b45c15d48ad3e4a64d2a2",
+    "class": "org.bukkit.Bukkit",
+    "return": "int"
+  },
+  {
+    "static": true,
     "field": "ENTITY_MINECART_INSIDE",
     "id": "2279d0eb5ca5a0be39d0d54dff44fe62",
     "class": "org.bukkit.Sound",
@@ -8843,6 +8880,18 @@
     "return": "org.bukkit.event.block.CauldronLevelChangeEvent.ChangeReason"
   },
   {
+    "method": "getBiome",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int"
+    ],
+    "id": "22dff3b3b971147bd4e6c866a8f793c1",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "static": true,
     "field": "AVIATE_ONE_CM",
     "id": "22e1ac646a7db698f63e9892ff6378fd",
@@ -8967,13 +9016,6 @@
     "id": "233dd4caf60d9602077223e2fd2ad214",
     "event": true,
     "class": "org.bukkit.event.entity.ArrowBodyCountChangeEvent"
-  },
-  {
-    "static": true,
-    "field": "TAIGA_MOUNTAINS",
-    "id": "2343c21d94b711ad9e60876c3ed6c9fc",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -9239,6 +9281,13 @@
   },
   {
     "static": true,
+    "field": "WINDSWEPT_SAVANNA",
+    "id": "241c03d34b69050eb43f65e1b72489a6",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "field": "BLAZE",
     "id": "243a882cbb961ab0fece3a55fb87ff24",
     "class": "org.bukkit.loot.LootTables",
@@ -9250,6 +9299,13 @@
     "id": "2446b9980d534b5d6ba3281131bd0ff1",
     "class": "org.bukkit.BanList.Type",
     "return": "org.bukkit.BanList.Type"
+  },
+  {
+    "method": "isAsynchronous",
+    "id": "2449ec4856e3b6b9620758315589c17d",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesLoadEvent",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -9366,6 +9422,18 @@
     "id": "24bf5c1d7b00f5af94a5fba0a06d42ab",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "getBlockData",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int"
+    ],
+    "id": "24c25f08ab6f1e4b468e2fad6dd4b434",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.data.BlockData"
   },
   {
     "method": "setCreationRadius",
@@ -9691,13 +9759,6 @@
   },
   {
     "static": true,
-    "field": "DARK_FOREST_HILLS",
-    "id": "2613cc14a711013b6792772f2cb603e5",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "BLOCK_ANVIL_HIT",
     "id": "261a811c8f05edc0c5530443f121b67d",
     "class": "org.bukkit.Sound",
@@ -9977,13 +10038,6 @@
     "return": "org.bukkit.potion.PotionType"
   },
   {
-    "static": true,
-    "field": "TALL_BIRCH_FOREST",
-    "id": "277ece0cc39258a35c112e5b5d47b947",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "isCancelled",
     "id": "27880e4efddab73d27812c1b33a61567",
     "event": true,
@@ -10074,13 +10128,6 @@
     ],
     "id": "27dc96e5f8da62678734a46650bbaa10",
     "class": "org.bukkit.entity.FallingBlock"
-  },
-  {
-    "static": true,
-    "field": "MODIFIED_JUNGLE_EDGE",
-    "id": "27e18d67437ef22921589f0e275e72a1",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -10188,6 +10235,13 @@
     "id": "2859f2da18dd3b594c9f58d1d5999914",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
+    "field": "SPONGE_DRY",
+    "id": "285bebf5b82b258a14a8db9ba78afbf8",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "method": "getType",
@@ -10518,13 +10572,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "static": true,
-    "field": "SNOWY_TAIGA_HILLS",
-    "id": "29a083b8e84b3df38aecf50d9eb2ef6c",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "isCancelled",
     "id": "29a83c65735e755d7278a069a7ba8b9c",
     "event": true,
@@ -10698,6 +10745,16 @@
     "return": "org.bukkit.Location"
   },
   {
+    "method": "biomeProvider",
+    "param": [
+      "org.bukkit.WorldCreator",
+      "org.bukkit.generator.BiomeProvider"
+    ],
+    "id": "2a55ca2e2a83e986b8229acb0bb083d6",
+    "class": "org.bukkit.WorldCreator",
+    "return": "org.bukkit.WorldCreator"
+  },
+  {
     "method": "setSpawnLocation",
     "param": [
       "org.bukkit.World",
@@ -10830,6 +10887,13 @@
     "id": "2b11fdcb0d4e7e2ab9bcd44bf93fe3e2",
     "event": true,
     "class": "org.bukkit.event.player.AsyncPlayerChatEvent"
+  },
+  {
+    "method": "getTotalCookTime",
+    "id": "2b12c8a1a0c9ec91658aa5a05f8f173c",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+    "return": "int"
   },
   {
     "static": true,
@@ -11155,6 +11219,13 @@
     "class": "org.bukkit.event.player.PlayerBedLeaveEvent"
   },
   {
+    "method": "getWorld",
+    "id": "2c96f6e265cd2139498b2ec5a8a148c0",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesUnloadEvent",
+    "return": "org.bukkit.World"
+  },
+  {
     "method": "getVillagerType",
     "param": ["org.bukkit.entity.ZombieVillager"],
     "id": "2c97adb377cbaed945d51909fa46349a",
@@ -11170,6 +11241,13 @@
   },
   {
     "static": true,
+    "field": "POINTED_DRIPSTONE_LAND",
+    "id": "2c9aa001a023b7fae8ebf96d490288e2",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "ENTITY_PLAYER_SWIM",
     "id": "2ca216a09e9ad02cd4a760b8a2e202fc",
     "class": "org.bukkit.Sound",
@@ -11181,6 +11259,13 @@
     "id": "2ca6fc0cbe84fac8b7cbdee294dd6f15",
     "class": "org.bukkit.Particle",
     "return": "org.bukkit.Particle"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_SNOWY_SLOPES",
+    "id": "2ca85c96cd917dc1383a1b60f405a28d",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "static": true,
@@ -11224,6 +11309,13 @@
     "id": "2cd5d3c4fd08fcbf5b675aa5de9a9ab3",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "isEntitiesLoaded",
+    "param": ["org.bukkit.Chunk"],
+    "id": "2ceec7009168d658c767606403833fb4",
+    "class": "org.bukkit.Chunk",
+    "return": "boolean"
   },
   {
     "method": "getArt",
@@ -11834,6 +11926,13 @@
     "return": "org.bukkit.DyeColor"
   },
   {
+    "static": true,
+    "field": "ELECTRIC_SPARK",
+    "id": "2f2f4035789b43bb734b3dd2956ae448",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
     "method": "getTier",
     "param": ["org.bukkit.block.Beacon"],
     "id": "2f329a68c0df6983ca8ba00517bbe0ef",
@@ -12310,6 +12409,12 @@
     "return": "int"
   },
   {
+    "method": "showDemoScreen",
+    "param": ["org.bukkit.entity.Player"],
+    "id": "31099be6282ddf3f981e29f17b45f26c",
+    "class": "org.bukkit.entity.Player"
+  },
+  {
     "static": true,
     "field": "MATCH",
     "id": "31132c0a8922f71f8b0e1fe5f396d5a5",
@@ -12754,13 +12859,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "static": true,
-    "field": "SHATTERED_SAVANNA",
-    "id": "3296717fce2f6b7ccb7ad2e88c703006",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getHitBlockFace",
     "param": ["org.bukkit.util.RayTraceResult"],
     "id": "329f0a5ac764a61fa22e9b740698135f",
@@ -12887,16 +12985,6 @@
     "id": "32e471bfeea142e3010803c9854658a0",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "method": "sendMessage",
-    "param": [
-      "org.bukkit.command.CommandSender",
-      "java.util.UUID",
-      "java.lang.String[]"
-    ],
-    "id": "32e91cf873768c6c00fc1cad10d45424",
-    "class": "org.bukkit.command.CommandSender"
   },
   {
     "static": true,
@@ -13238,13 +13326,6 @@
   },
   {
     "static": true,
-    "field": "JUNGLE_EDGE",
-    "id": "344c10c8ab9596d587bd1f350c667714",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "FOX",
     "id": "344f361ace41003998f81d67b99735b8",
     "class": "org.bukkit.loot.LootTables",
@@ -13548,13 +13629,6 @@
     "return": "boolean"
   },
   {
-    "static": true,
-    "field": "SNOWY_TAIGA_MOUNTAINS",
-    "id": "356c01d6cabb7b0dacf0c73e709a8d2f",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "isEditable",
     "param": ["org.bukkit.block.Sign"],
     "id": "356c0744d98f1f2a12a8f9f4c9fa2a72",
@@ -13611,6 +13685,13 @@
     "id": "358d6ccb27549c020dc9ef86c41bf45d",
     "class": "org.bukkit.event.entity.EntityTargetEvent.TargetReason",
     "return": "org.bukkit.event.entity.EntityTargetEvent.TargetReason"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_LUSH_CAVES",
+    "id": "35985cdfd7a3f8c3a1539cb414bb81b9",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "static": true,
@@ -13833,13 +13914,6 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
-    "static": true,
-    "field": "BIRCH_FOREST_HILLS",
-    "id": "365878bd7c86fe650bd6853a08018f14",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "setMirror",
     "param": [
       "org.bukkit.block.Structure",
@@ -13854,6 +13928,13 @@
     "id": "366d0f46314b8144b225876cb2a2e596",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "getEntity",
+    "id": "367010009bd5c8e4417b3667ff2ccb44",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent",
+    "return": "org.bukkit.entity.Entity"
   },
   {
     "static": true,
@@ -14303,13 +14384,6 @@
     "return": "org.bukkit.NetherWartsState"
   },
   {
-    "static": true,
-    "field": "GRAVELLY_MOUNTAINS",
-    "id": "388f691a0957c5d2d6a3cf029545d7a4",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getNameId",
     "param": ["org.bukkit.potion.Potion"],
     "id": "388f6eae4b0882b88f72b5824950a642",
@@ -14359,6 +14433,13 @@
     "id": "38e3dd3600ea1863bb03a7067611a5cd",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "isConverting",
+    "param": ["org.bukkit.entity.Skeleton"],
+    "id": "38f03d0a0fff114233a9145bfad5ef09",
+    "class": "org.bukkit.entity.Skeleton",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -15230,6 +15311,13 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "method": "getWaterUndergroundCreatureSpawnLimit",
+    "param": ["org.bukkit.World"],
+    "id": "3c50833e7b5782372422feb3bc2c7a0d",
+    "class": "org.bukkit.World",
+    "return": "int"
+  },
+  {
     "static": true,
     "field": "BROWN_CANDLE_CAKE",
     "id": "3c50b4e95d9ea19364bc737f8868872c",
@@ -15277,6 +15365,13 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "static": true,
+    "field": "MUSIC_DISC_OTHERSIDE",
+    "id": "3c900c71c50d5cd398481f0b149a5718",
+    "class": "org.bukkit.Material",
+    "return": "org.bukkit.Material"
+  },
+  {
     "method": "toItemStack",
     "param": [
       "org.bukkit.potion.Potion",
@@ -15292,6 +15387,13 @@
     "id": "3c9d8f7b4eb335a03fdfca1c3f5410de",
     "class": "org.bukkit.Bukkit",
     "return": "org.bukkit.util.CachedServerIcon"
+  },
+  {
+    "method": "getBlock",
+    "id": "3ca626d761c18f68b47211b287147b43",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+    "return": "org.bukkit.block.Block"
   },
   {
     "static": true,
@@ -15342,6 +15444,13 @@
     "id": "3ce59b9cc816adbbedfa90feaadf6870",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "getSeed",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "3ced4747bae6dc4b6f1463146bbd6a7f",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "long"
   },
   {
     "static": true,
@@ -15402,6 +15511,18 @@
     "id": "3d1ced3cfe18256334b34ee49b904cc5",
     "class": "org.bukkit.World",
     "return": "boolean"
+  },
+  {
+    "method": "setBlockData",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int",
+      "org.bukkit.block.data.BlockData"
+    ],
+    "id": "3d1e6260d57433df73555cd4a244a3b4",
+    "class": "org.bukkit.RegionAccessor"
   },
   {
     "method": "getVelocity",
@@ -15847,13 +15968,6 @@
     "id": "3ea5d98209c995260f580349e7a6c226",
     "class": "org.bukkit.block.Block",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "field": "MODIFIED_JUNGLE",
-    "id": "3ea9116252dd81a4927b8b7d21afe28a",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -16770,6 +16884,13 @@
   },
   {
     "static": true,
+    "field": "BLOCK_GROWING_PLANT_CROP",
+    "id": "422c98dc8876381ebb5e613403ca65d4",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
     "field": "CONDUIT_POWER",
     "id": "4232e74397aaff59d81d42379e541faf",
     "class": "org.bukkit.potion.PotionEffectType",
@@ -17012,16 +17133,18 @@
     "return": "org.bukkit.Material"
   },
   {
-    "method": "setBiome",
-    "param": [
-      "org.bukkit.World",
-      "int",
-      "int",
-      "int",
-      "org.bukkit.block.Biome"
-    ],
-    "id": "431e63e5098db7ae6c76b646bb6ce7e2",
-    "class": "org.bukkit.World"
+    "method": "getSkeletonType",
+    "param": ["org.bukkit.entity.AbstractSkeleton"],
+    "id": "431f1906de202b8315606b21eb5eccc8",
+    "class": "org.bukkit.entity.AbstractSkeleton",
+    "return": "org.bukkit.entity.Skeleton.SkeletonType"
+  },
+  {
+    "method": "getEntities",
+    "param": ["org.bukkit.RegionAccessor"],
+    "id": "4321a3620f6164f72e90fd019fa0958d",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "java.util.List"
   },
   {
     "method": "isOpen",
@@ -17273,6 +17396,13 @@
     "id": "445891bbf5e8c16b282a767e77df8209",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "isCancelled",
+    "id": "445f6076d5525bcb9f98c056be8f59be",
+    "event": true,
+    "class": "org.bukkit.event.entity.StriderTemperatureChangeEvent",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -17728,6 +17858,13 @@
     "event": true,
     "class": "org.bukkit.event.player.PlayerPortalEvent",
     "return": "int"
+  },
+  {
+    "static": true,
+    "field": "ITEM_BUNDLE_INSERT",
+    "id": "45e38f3a890facd60d7a81b877ffec60",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "static": true,
@@ -18270,13 +18407,6 @@
     "id": "4830f450714faf231dfd415e89618f4f",
     "class": "org.bukkit.entity.AreaEffectCloud",
     "return": "int"
-  },
-  {
-    "static": true,
-    "field": "BARRIER",
-    "id": "483fbb745d5cc1273123deab5ec7a4bc",
-    "class": "org.bukkit.Particle",
-    "return": "org.bukkit.Particle"
   },
   {
     "static": true,
@@ -19079,6 +19209,16 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "canSee",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.entity.Entity"
+    ],
+    "id": "4b4cc7922fc0035e84dc53520acbcd0c",
+    "class": "org.bukkit.entity.Player",
+    "return": "boolean"
+  },
+  {
     "static": true,
     "field": "IGNORE",
     "id": "4b529aeeb8d313d9c085b04ecb4b7cda",
@@ -19629,6 +19769,13 @@
   },
   {
     "static": true,
+    "field": "POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON",
+    "id": "4d828c5c41146b1c4523573ea5539686",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "ENTITY_PUFFER_FISH_BLOW_OUT",
     "id": "4d9be8185ae7cce6b3d7072499ba6381",
     "class": "org.bukkit.Sound",
@@ -19795,11 +19942,25 @@
     "return": "int"
   },
   {
+    "method": "getName",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "4e47c4c48eb3bc70e47df2fd3563efdc",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "java.lang.String"
+  },
+  {
     "static": true,
     "field": "VILLAGER",
     "id": "4e4d142aadf8a06bf2a50d5d27053350",
     "class": "org.bukkit.entity.EntityType",
     "return": "org.bukkit.entity.EntityType"
+  },
+  {
+    "static": true,
+    "method": "getStructureManager",
+    "id": "4e524ea8aaff8e004e2776acfc538787",
+    "class": "org.bukkit.Bukkit",
+    "return": "org.bukkit.structure.StructureManager"
   },
   {
     "static": true,
@@ -19815,6 +19976,13 @@
     "id": "4e600cea2cb5773a55e794ab11e9de5d",
     "class": "org.bukkit.entity.Fox",
     "return": "org.bukkit.entity.AnimalTamer"
+  },
+  {
+    "method": "setCancelled",
+    "param": ["boolean"],
+    "id": "4e6ad29f8f0c332e957b5520aeb19156",
+    "event": true,
+    "class": "org.bukkit.event.entity.StriderTemperatureChangeEvent"
   },
   {
     "method": "getEntity",
@@ -19884,18 +20052,11 @@
     "class": "org.bukkit.entity.Player"
   },
   {
-    "method": "sendChunkChange",
-    "param": [
-      "org.bukkit.entity.Player",
-      "org.bukkit.Location",
-      "int",
-      "int",
-      "int",
-      "byte[]"
-    ],
-    "id": "4eb118aea218a41e50664cb3e635cbec",
-    "class": "org.bukkit.entity.Player",
-    "return": "boolean"
+    "method": "getSource",
+    "id": "4eb145c9532b610aee8554bcc9d2067e",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+    "return": "org.bukkit.inventory.ItemStack"
   },
   {
     "method": "getEntered",
@@ -20344,6 +20505,13 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "setCancelled",
+    "param": ["boolean"],
+    "id": "507403f7755f84d26a9d183d4d6aed39",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent"
+  },
+  {
     "method": "expand",
     "param": [
       "org.bukkit.util.BoundingBox",
@@ -20634,6 +20802,17 @@
     "return": "boolean"
   },
   {
+    "method": "spawnEntity",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "org.bukkit.entity.EntityType"
+    ],
+    "id": "517b2104506e60f1e31eba59a1b6be31",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.entity.Entity"
+  },
+  {
     "static": true,
     "method": "valueOf",
     "param": ["java.lang.String"],
@@ -20732,6 +20911,13 @@
     "return": "org.bukkit.Note.Tone"
   },
   {
+    "method": "getLivingEntities",
+    "param": ["org.bukkit.RegionAccessor"],
+    "id": "51e0b592d73d15a5079a3572fa7afbaf",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "java.util.List"
+  },
+  {
     "static": true,
     "field": "END_STONE",
     "id": "51e33855f618cf710f49787879586905",
@@ -20819,6 +21005,12 @@
     "return": "org.bukkit.block.data.type.Slab.Type"
   },
   {
+    "method": "stopAllSounds",
+    "param": ["org.bukkit.entity.Player"],
+    "id": "5214eda5258158cbbde12e9b9dfeaacb",
+    "class": "org.bukkit.entity.Player"
+  },
+  {
     "static": true,
     "field": "DROP_ALL_CURSOR",
     "id": "522d4132704b4995c9500a0572a5bde2",
@@ -20902,13 +21094,6 @@
     "id": "526fd7c796a568adeb335a77ebcb9707",
     "class": "org.bukkit.event.inventory.ClickType",
     "return": "org.bukkit.event.inventory.ClickType"
-  },
-  {
-    "method": "getMinHeight",
-    "param": ["org.bukkit.World"],
-    "id": "527465e3868d019844f8837c5c71fd19",
-    "class": "org.bukkit.World",
-    "return": "int"
   },
   {
     "method": "getSecondary",
@@ -21043,6 +21228,13 @@
     "id": "52b92a1075a89094c55603504166701e",
     "class": "org.bukkit.block.data.Directional",
     "return": "java.util.Set"
+  },
+  {
+    "method": "getCollisionShape",
+    "param": ["org.bukkit.block.Block"],
+    "id": "52d1c01e74ca6a7b58ca1bf56078932a",
+    "class": "org.bukkit.block.Block",
+    "return": "org.bukkit.util.VoxelShape"
   },
   {
     "method": "setBaby",
@@ -21797,6 +21989,13 @@
   },
   {
     "static": true,
+    "field": "OLD_GROWTH_PINE_TAIGA",
+    "id": "556237d8c7681b1e177d6673304b8493",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "method": "valueOf",
     "param": ["java.lang.String"],
     "id": "55640cbc8cf19d6c3ff5495a0e7fdae8",
@@ -21929,15 +22128,6 @@
     "id": "5627decf32fbb23bd65f7bcd6e23eaa2",
     "class": "org.bukkit.map.MapFont.CharacterSprite",
     "return": "int"
-  },
-  {
-    "method": "sendMessage",
-    "param": [
-      "org.bukkit.command.CommandSender",
-      "java.lang.String[]"
-    ],
-    "id": "56285c91de3a2de179af03813175e54c",
-    "class": "org.bukkit.command.CommandSender"
   },
   {
     "method": "getSoundGroup",
@@ -22225,13 +22415,6 @@
     "return": "float"
   },
   {
-    "method": "getEnvironment",
-    "param": ["org.bukkit.World"],
-    "id": "5776ab96b0f9487b2cb631b10fdc82ae",
-    "class": "org.bukkit.World",
-    "return": "org.bukkit.World.Environment"
-  },
-  {
     "method": "getEntityType",
     "id": "577f80d47a8e1b47da982195787b163f",
     "event": true,
@@ -22407,6 +22590,13 @@
     "class": "org.bukkit.map.MapCursor"
   },
   {
+    "static": true,
+    "field": "BLOCK_MARKER",
+    "id": "5800abcfe32fafd6fe86a56b2b8d83c8",
+    "class": "org.bukkit.Particle",
+    "return": "org.bukkit.Particle"
+  },
+  {
     "method": "getCaption",
     "param": ["org.bukkit.map.MapCursor"],
     "id": "5804b4e462d4879f260743a034196bd9",
@@ -22461,6 +22651,13 @@
     "id": "582fbe6bb5f09bacc6684bcec37f8267",
     "class": "org.bukkit.TreeType",
     "return": "org.bukkit.TreeType"
+  },
+  {
+    "static": true,
+    "field": "BONE_MEAL_USE",
+    "id": "58422597dbe7ad0a2f3ba7766792d65a",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "static": true,
@@ -22549,17 +22746,21 @@
   },
   {
     "static": true,
+    "method": "getCraftingRecipe",
+    "param": [
+      "org.bukkit.inventory.ItemStack[]",
+      "org.bukkit.World"
+    ],
+    "id": "587a265f92e099cfb6934bb25a3c8cab",
+    "class": "org.bukkit.Bukkit",
+    "return": "org.bukkit.inventory.Recipe"
+  },
+  {
+    "static": true,
     "field": "STRIPPED_CRIMSON_HYPHAE",
     "id": "5881049965e4069f8d01de4c7f91249e",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "field": "GIANT_TREE_TAIGA_HILLS",
-    "id": "588288e1258121afad9077c6bf1ae504",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "hasNectar",
@@ -22704,6 +22905,15 @@
     "id": "597b695fcadaf6123ded3d44074e2213",
     "class": "org.bukkit.inventory.DoubleChestInventory",
     "return": "org.bukkit.inventory.Inventory"
+  },
+  {
+    "method": "setTicksPerWaterUndergroundCreatureSpawns",
+    "param": [
+      "org.bukkit.World",
+      "int"
+    ],
+    "id": "59822c8fb22d4737ff937f995b37087f",
+    "class": "org.bukkit.World"
   },
   {
     "method": "getItem",
@@ -23037,6 +23247,13 @@
     ],
     "id": "5ad7bc1b878c42b62bb3aab148b49368",
     "class": "org.bukkit.inventory.MerchantRecipe"
+  },
+  {
+    "static": true,
+    "field": "SNOWY_PLAINS",
+    "id": "5ada7d65bc8af3a5cc0b15eb4a62e512",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "removePluginChunkTicket",
@@ -24110,6 +24327,15 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "setSkeletonType",
+    "param": [
+      "org.bukkit.entity.AbstractSkeleton",
+      "org.bukkit.entity.Skeleton.SkeletonType"
+    ],
+    "id": "5f1a026a4f23f404a9c31ca4d979a0fe",
+    "class": "org.bukkit.entity.AbstractSkeleton"
+  },
+  {
     "static": true,
     "field": "TOO_FAR_AWAY",
     "id": "5f1bbc479977472dfd26d935c7bcf41f",
@@ -24285,6 +24511,13 @@
   },
   {
     "static": true,
+    "field": "OXIDISED_COPPER_SCRAPE",
+    "id": "5fe6479f363d4ab764bb770c0dd6e02b",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "ENTITY_BAT_LOOP",
     "id": "5feb3bf8e78e0f562727657593eeba71",
     "class": "org.bukkit.Sound",
@@ -24359,6 +24592,13 @@
     "id": "6020857ebb73c6d8fa6c18561ab2f57b",
     "class": "org.bukkit.inventory.meta.BookMeta",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "GROVE",
+    "id": "602f87116705093b7e2fa874ae359e9d",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -24869,6 +25109,13 @@
     "id": "620bd2dc51f17f365fcafac25a053ac3",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "isAsynchronous",
+    "id": "620d6ff2c8f90c20d013e90b68d0e6ca",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesUnloadEvent",
+    "return": "boolean"
   },
   {
     "method": "isSticky",
@@ -25863,6 +26110,13 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "getConversionTime",
+    "param": ["org.bukkit.entity.Skeleton"],
+    "id": "6667a740d563a1c1a6440907dfb61207",
+    "class": "org.bukkit.entity.Skeleton",
+    "return": "int"
+  },
+  {
     "method": "setSmall",
     "param": [
       "org.bukkit.entity.ArmorStand",
@@ -26217,6 +26471,15 @@
     "return": "byte"
   },
   {
+    "method": "setTrusting",
+    "param": [
+      "org.bukkit.entity.Ocelot",
+      "boolean"
+    ],
+    "id": "678469c7b8a02c28c9e700261747d270",
+    "class": "org.bukkit.entity.Ocelot"
+  },
+  {
     "static": true,
     "field": "DISPENSER_INSPECTED",
     "id": "67900ec779f43103224a21b105909f2e",
@@ -26532,6 +26795,13 @@
     "id": "68e4065165a5c826dc7e89638819cf6b",
     "class": "org.bukkit.boss.BossBar",
     "return": "boolean"
+  },
+  {
+    "method": "getBiomeProvider",
+    "param": ["org.bukkit.World"],
+    "id": "68eaa9e121653fccf1b02fc7818ffd9d",
+    "class": "org.bukkit.World",
+    "return": "org.bukkit.generator.BiomeProvider"
   },
   {
     "method": "getEntityType",
@@ -26882,13 +27152,6 @@
     "return": "java.lang.String[]"
   },
   {
-    "static": true,
-    "field": "MODIFIED_BADLANDS_PLATEAU",
-    "id": "6a6583a5b93da8c6ae91e1752af64b46",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "isAsynchronous",
     "id": "6a6686b53e51aaefee3bc7952612e93c",
     "event": true,
@@ -27119,6 +27382,14 @@
     "id": "6b1c52c255feda5e8d31a31a6feb7c41",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
+    "method": "getByKey",
+    "param": ["org.bukkit.NamespacedKey"],
+    "id": "6b2351559d0a422e9e78e1b0bf20a7ff",
+    "class": "org.bukkit.potion.PotionEffectType",
+    "return": "org.bukkit.potion.PotionEffectType"
   },
   {
     "static": true,
@@ -27661,6 +27932,13 @@
     "return": "org.bukkit.Material"
   },
   {
+    "static": true,
+    "method": "getHideOnlinePlayers",
+    "id": "6d30d7e2f5b62cf6f016e5445cb66b93",
+    "class": "org.bukkit.Bukkit",
+    "return": "boolean"
+  },
+  {
     "method": "isCancelled",
     "id": "6d3cb43e8b7cef8efbff86d351fe67ea",
     "event": true,
@@ -28083,6 +28361,13 @@
     "return": "org.bukkit.block.BlockFace[]"
   },
   {
+    "method": "getRecipe",
+    "id": "6ef27a5b3e6a00bbae73ee50b6274040",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+    "return": "org.bukkit.inventory.CookingRecipe"
+  },
+  {
     "static": true,
     "field": "BLOCK_STEM_STEP",
     "id": "6efedb8b897e6c04a746064395406e0a",
@@ -28178,6 +28463,13 @@
     "id": "6f47563f8475104c294b37f18a98a703",
     "class": "org.bukkit.Statistic",
     "return": "org.bukkit.Statistic"
+  },
+  {
+    "static": true,
+    "field": "STONY_PEAKS",
+    "id": "6f534ca1538995b8069077a71e3757e8",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "isShiftClick",
@@ -28545,13 +28837,6 @@
     "event": true,
     "class": "org.bukkit.event.entity.EntityTargetLivingEntityEvent",
     "return": "org.bukkit.event.entity.EntityTargetEvent.TargetReason"
-  },
-  {
-    "static": true,
-    "field": "GIANT_SPRUCE_TAIGA",
-    "id": "70ba6802fbaaf496fb1067e1ff3ced08",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -29072,13 +29357,6 @@
     "return": "org.bukkit.block.Block"
   },
   {
-    "static": true,
-    "field": "SNOWY_TUNDRA",
-    "id": "72bccbf08401a33cc8e0a95004ba2cf0",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getMinY",
     "param": ["org.bukkit.util.BoundingBox"],
     "id": "72ca4885e25c06e2f6325dc63a1d65e2",
@@ -29338,6 +29616,13 @@
     "id": "73b37e9cbea354f0183e28f68b035ad8",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "static": true,
+    "field": "BOOK_PAGE_TURN",
+    "id": "73b9a13551756fc3ae8a911225378ebe",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "method": "removeBarterMaterial",
@@ -29764,6 +30049,16 @@
     "return": "org.bukkit.Effect"
   },
   {
+    "method": "setType",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "org.bukkit.Material"
+    ],
+    "id": "751004de1e1bec90cc41d2b899257b0c",
+    "class": "org.bukkit.RegionAccessor"
+  },
+  {
     "method": "getOwner",
     "param": ["org.bukkit.entity.Tameable"],
     "id": "7510fb96a57139212589127f51828761",
@@ -30030,6 +30325,13 @@
     "return": "org.bukkit.Raid.RaidStatus[]"
   },
   {
+    "method": "getWorld",
+    "id": "761d6646eb6032ef877bd8231c5ca6b9",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesLoadEvent",
+    "return": "org.bukkit.World"
+  },
+  {
     "static": true,
     "field": "GLOW_ITEM_FRAME",
     "id": "7623074d1d67d371ceb8886e5513fa7a",
@@ -30042,6 +30344,13 @@
     "event": true,
     "class": "org.bukkit.event.inventory.InventoryDragEvent",
     "return": "org.bukkit.inventory.ItemStack"
+  },
+  {
+    "static": true,
+    "method": "getWaterUndergroundCreatureSpawnLimit",
+    "id": "764a045645b3cefceb086611cd8ce09c",
+    "class": "org.bukkit.Bukkit",
+    "return": "int"
   },
   {
     "static": true,
@@ -30471,6 +30780,16 @@
     "return": "boolean"
   },
   {
+    "method": "setBiome",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "org.bukkit.block.Biome"
+    ],
+    "id": "77c36b52f2a5379560607a13d1c77ff9",
+    "class": "org.bukkit.RegionAccessor"
+  },
+  {
     "static": true,
     "field": "ENTITY_DOLPHIN_SPLASH",
     "id": "77ca83376de8984c1ad832e2173242ff",
@@ -30497,6 +30816,13 @@
     "event": true,
     "class": "org.bukkit.event.player.PlayerItemBreakEvent",
     "return": "org.bukkit.inventory.ItemStack"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_STONY_PEAKS",
+    "id": "77e4c95a38e503ba99a4c9a46a2a8375",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "method": "isCancelled",
@@ -30796,6 +31122,13 @@
     "return": "org.bukkit.Location"
   },
   {
+    "method": "getSlipperiness",
+    "param": ["org.bukkit.Material"],
+    "id": "79120d5c9dad033b489234ccadaa5ec2",
+    "class": "org.bukkit.Material",
+    "return": "float"
+  },
+  {
     "method": "addItem",
     "param": [
       "org.bukkit.inventory.Inventory",
@@ -30941,6 +31274,16 @@
     "id": "798ac4a573ee9505486e392efc1869e3",
     "class": "org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason",
     "return": "org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason"
+  },
+  {
+    "method": "setLaser",
+    "param": [
+      "org.bukkit.entity.Guardian",
+      "boolean"
+    ],
+    "id": "7993a7c4c3d8b4c868d2d0a886bf472b",
+    "class": "org.bukkit.entity.Guardian",
+    "return": "boolean"
   },
   {
     "method": "isBaby",
@@ -32302,6 +32645,13 @@
   },
   {
     "static": true,
+    "field": "WINDSWEPT_FOREST",
+    "id": "7ec005a75a61c897a6d488afa4a32c70",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "field": "GENERIC_ATTACK_SPEED",
     "id": "7ec9d692fa52ad5f5a3111be9f68ee7f",
     "class": "org.bukkit.attribute.Attribute",
@@ -32819,6 +33169,16 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
+    "method": "getBiome",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location"
+    ],
+    "id": "808ef0cb9982c29b89074f9b62c4dc86",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "method": "allow",
     "id": "809d234b3bc1b94c365b7d8dc7930e0a",
     "event": true,
@@ -32987,6 +33347,13 @@
     "event": true,
     "class": "org.bukkit.event.player.PlayerLevelChangeEvent",
     "return": "boolean"
+  },
+  {
+    "method": "biomeProvider",
+    "param": ["org.bukkit.WorldCreator"],
+    "id": "817bc09cc4b26fd694d8103b444addfd",
+    "class": "org.bukkit.WorldCreator",
+    "return": "org.bukkit.generator.BiomeProvider"
   },
   {
     "static": true,
@@ -33505,6 +33872,13 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
+    "method": "isAsynchronous",
+    "id": "8394070316f1a23f41f7ee0cfdd40ab7",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent",
+    "return": "boolean"
+  },
+  {
     "static": true,
     "field": "ENTITY_ARMOR_STAND_BREAK",
     "id": "8394d9327bd5420e817b05fe893caf66",
@@ -33960,6 +34334,13 @@
   },
   {
     "static": true,
+    "field": "MUSIC_OVERWORLD_MEADOW",
+    "id": "8560f961b1362dc0f54de15bec709453",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
     "field": "BLOCK_NETHER_GOLD_ORE_PLACE",
     "id": "85665f06de90fbf8fba385162bfa76d9",
     "class": "org.bukkit.Sound",
@@ -33978,6 +34359,13 @@
     "id": "8578721b6456d287a55809f33a6113ab",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "getResults",
+    "id": "857b66e9ae82cdf3e23c533f3d48b102",
+    "event": true,
+    "class": "org.bukkit.event.inventory.BrewEvent",
+    "return": "java.util.List"
   },
   {
     "static": true,
@@ -34236,6 +34624,16 @@
     "id": "86629c9a5ca4677741776395f7c6f05d",
     "class": "org.bukkit.event.entity.EntityPotionEffectEvent.Cause",
     "return": "org.bukkit.event.entity.EntityPotionEffectEvent.Cause"
+  },
+  {
+    "method": "biomeProvider",
+    "param": [
+      "org.bukkit.WorldCreator",
+      "java.lang.String"
+    ],
+    "id": "866b10b6ae02278bffbd882dfe0e1a9d",
+    "class": "org.bukkit.WorldCreator",
+    "return": "org.bukkit.WorldCreator"
   },
   {
     "method": "remove",
@@ -34776,6 +35174,13 @@
   },
   {
     "static": true,
+    "field": "MEADOW",
+    "id": "88831ebfd964025706541291b0204282",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "field": "ENTITY_TURTLE_AMBIENT_LAND",
     "id": "8888a9815256e617aa8d0d2be591de5c",
     "class": "org.bukkit.Sound",
@@ -34864,6 +35269,16 @@
     "id": "8912e10e287958169cd433ca28c7decd",
     "class": "org.bukkit.EntityEffect",
     "return": "org.bukkit.EntityEffect"
+  },
+  {
+    "method": "hideEntity",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.plugin.Plugin",
+      "org.bukkit.entity.Entity"
+    ],
+    "id": "8915c729c2898f5c13e5f4b153b660c0",
+    "class": "org.bukkit.entity.Player"
   },
   {
     "static": true,
@@ -35180,6 +35595,16 @@
     "id": "8a36f3063119d514cd12b54728d4e9a6",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "getType",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location"
+    ],
+    "id": "8a37f453cf7b11557c1a580fee02c2d6",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.Material"
   },
   {
     "method": "isCustomNameVisible",
@@ -35601,15 +36026,6 @@
     "id": "8b98418dcd6ee274f8ee0af5833759e5",
     "class": "org.bukkit.entity.Entity",
     "return": "org.bukkit.util.Vector"
-  },
-  {
-    "method": "setSkeletonType",
-    "param": [
-      "org.bukkit.entity.Skeleton",
-      "org.bukkit.entity.Skeleton.SkeletonType"
-    ],
-    "id": "8ba9278fe25c911e90094809216c0182",
-    "class": "org.bukkit.entity.Skeleton"
   },
   {
     "method": "isRightClick",
@@ -36052,6 +36468,16 @@
     "id": "8d61ef73a3e5f5c61a275bad2e88f745",
     "class": "org.bukkit.boss.BarColor",
     "return": "org.bukkit.boss.BarColor"
+  },
+  {
+    "method": "getBreakSpeed",
+    "param": [
+      "org.bukkit.block.Block",
+      "org.bukkit.entity.Player"
+    ],
+    "id": "8d64639dad6bee90681aba01f77f6a84",
+    "class": "org.bukkit.block.Block",
+    "return": "float"
   },
   {
     "method": "wakeup",
@@ -36853,6 +37279,18 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "setBiome",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int",
+      "org.bukkit.block.Biome"
+    ],
+    "id": "90db77bd934509e92ba2345ae46baaac",
+    "class": "org.bukkit.RegionAccessor"
+  },
+  {
     "method": "getExited",
     "id": "90dcccd1046a05be499506c6d1658300",
     "event": true,
@@ -37070,6 +37508,13 @@
     "event": true,
     "class": "org.bukkit.event.player.PlayerItemMendEvent",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_JAGGED_PEAKS",
+    "id": "91af2b58ed5f16096df01b3afc11f83b",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "method": "registerNewObjective",
@@ -37565,13 +38010,6 @@
     "id": "93730641d6ab861eea1eba4c931a81a0",
     "class": "org.bukkit.Registry",
     "return": "org.bukkit.Registry"
-  },
-  {
-    "static": true,
-    "field": "DEEP_WARM_OCEAN",
-    "id": "9375c72bf88896ad0d5f7c9acb5ce1c2",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "setMaxNearbyEntities",
@@ -38166,6 +38604,13 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "method": "hasLaser",
+    "param": ["org.bukkit.entity.Guardian"],
+    "id": "95dca47a464a54266fc079736d717db4",
+    "class": "org.bukkit.entity.Guardian",
+    "return": "boolean"
+  },
+  {
     "static": true,
     "field": "ITEM_ARMOR_EQUIP_NETHERITE",
     "id": "95eb4e4634d194df7529fdf68e2a2bc5",
@@ -38185,6 +38630,13 @@
     "id": "95eea3a0227bfe0bd1fecdd4a3385254",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "static": true,
+    "field": "DRIPPING_DRIPSTONE",
+    "id": "95f14333d4b80e504196984eb6e59ffd",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "static": true,
@@ -39629,6 +40081,13 @@
     "return": "org.bukkit.loot.LootTables"
   },
   {
+    "method": "isUltraWarm",
+    "param": ["org.bukkit.World"],
+    "id": "9af8b209c1383d43ac4e8aae8dfe88ec",
+    "class": "org.bukkit.World",
+    "return": "boolean"
+  },
+  {
     "method": "getItemStack",
     "param": ["org.bukkit.inventory.RecipeChoice"],
     "id": "9b0efd4e3a35d6b94cf445bd50a7e825",
@@ -39693,6 +40152,13 @@
     "id": "9b2623b6fc994bb5804ddcb3e094b2e3",
     "class": "org.bukkit.World",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "FROZEN",
+    "id": "9b2900fc3a7eb1d1a0f5e25f7d9db955",
+    "class": "org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason",
+    "return": "org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason"
   },
   {
     "method": "getKickMessage",
@@ -39849,6 +40315,13 @@
     "return": "org.bukkit.Location"
   },
   {
+    "static": true,
+    "field": "SPARSE_JUNGLE",
+    "id": "9be96158f8d949a46236e8a4d2ab5a41",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "method": "hasMapId",
     "param": ["org.bukkit.inventory.meta.MapMeta"],
     "id": "9be9df25a02c8e304f99e0cc89875c01",
@@ -39965,6 +40438,13 @@
     "id": "9c3430a14957673fb5cc37903e3836ab",
     "class": "org.bukkit.entity.memory.MemoryKey",
     "return": "org.bukkit.entity.memory.MemoryKey"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_DRIPSTONE_CAVES",
+    "id": "9c37bad606a0304d199c1f3839ab3e6f",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "static": true,
@@ -40241,6 +40721,15 @@
     "id": "9d639bfbca732ed21fc2a9ca95e4b7db",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "setVariant",
+    "param": [
+      "org.bukkit.inventory.meta.AxolotlBucketMeta",
+      "org.bukkit.entity.Axolotl.Variant"
+    ],
+    "id": "9d640537ba87b234b949b4144fbf27cd",
+    "class": "org.bukkit.inventory.meta.AxolotlBucketMeta"
   },
   {
     "method": "setPlayerListName",
@@ -40780,6 +41269,13 @@
   },
   {
     "static": true,
+    "field": "POINTED_DRIPSTONE_DRIP_LAVA_INTO_CAULDRON",
+    "id": "9f336ad242246245801e155ae00cf77c",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "END_BARRENS",
     "id": "9f37cf1572b9e9e4bd4edf6a35abb691",
     "class": "org.bukkit.block.Biome",
@@ -41248,6 +41744,13 @@
   },
   {
     "static": true,
+    "field": "WINDSWEPT_GRAVELLY_HILLS",
+    "id": "a106767b6163a9964257bfe8ed118e75",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
+    "static": true,
     "field": "FLETCHING_TABLE",
     "id": "a11649704499be1668cee7e891b5a4a7",
     "class": "org.bukkit.Material",
@@ -41353,6 +41856,13 @@
     "id": "a16a3c5f51f08ceadf8b8027b83a0036",
     "class": "org.bukkit.attribute.AttributeModifier.Operation",
     "return": "org.bukkit.attribute.AttributeModifier.Operation"
+  },
+  {
+    "method": "getEntities",
+    "id": "a17dc7c951192601ae6ac9c287998b0e",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesLoadEvent",
+    "return": "java.util.List"
   },
   {
     "static": true,
@@ -41658,6 +42168,13 @@
     "return": "int"
   },
   {
+    "method": "isCancelled",
+    "id": "a28154f0edfe97f2d69e31382e192a38",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent",
+    "return": "boolean"
+  },
+  {
     "method": "disallow",
     "param": [
       "org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result",
@@ -41930,6 +42447,13 @@
     "param": ["org.bukkit.inventory.meta.ItemMeta"],
     "id": "a377c875a5c968baecdd53c176ac1dfb",
     "class": "org.bukkit.inventory.meta.ItemMeta",
+    "return": "boolean"
+  },
+  {
+    "method": "hasSkyLight",
+    "param": ["org.bukkit.World"],
+    "id": "a38b3c39cfc3bb776031baa7e51c0976",
+    "class": "org.bukkit.World",
     "return": "boolean"
   },
   {
@@ -42274,13 +42798,6 @@
     "class": "org.bukkit.entity.Minecart"
   },
   {
-    "static": true,
-    "field": "SHATTERED_SAVANNA_PLATEAU",
-    "id": "a4eceff16796ad7e9ebb8b095401de34",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "setSpawnLocation",
     "param": [
       "org.bukkit.World",
@@ -42593,6 +43110,18 @@
     "return": "org.bukkit.entity.Llama.Color[]"
   },
   {
+    "method": "spawnEntity",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "org.bukkit.entity.EntityType",
+      "boolean"
+    ],
+    "id": "a5fd738937a4f69cf3a9068ec3351508",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.entity.Entity"
+  },
+  {
     "static": true,
     "field": "ENTITY_PUFFER_FISH_FLOP",
     "id": "a6104a2afa9db5cd7207f5c6c4f18c41",
@@ -42617,6 +43146,13 @@
     "param": ["org.bukkit.Tag"],
     "id": "a6266d2763a1d3c4b73a983987f16fce",
     "class": "org.bukkit.inventory.RecipeChoice.MaterialChoice"
+  },
+  {
+    "method": "getChunk",
+    "id": "a6273f394fe00df088db9ae0bc637f3b",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesUnloadEvent",
+    "return": "org.bukkit.Chunk"
   },
   {
     "static": true,
@@ -42731,6 +43267,20 @@
   },
   {
     "static": true,
+    "field": "COPPER_WAX_OFF",
+    "id": "a67bbb811621a70f00601ff504fcf88b",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
+    "field": "CUSTOM",
+    "id": "a67c86216a841ac9870c9e053a596448",
+    "class": "org.bukkit.event.weather.LightningStrikeEvent.Cause",
+    "return": "org.bukkit.event.weather.LightningStrikeEvent.Cause"
+  },
+  {
+    "static": true,
     "field": "ENTITY_SKELETON_HORSE_DEATH",
     "id": "a67fc3318051c7f9fe54d06c186e44cb",
     "class": "org.bukkit.Sound",
@@ -42807,6 +43357,15 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "method": "setWaterUndergroundCreatureSpawnLimit",
+    "param": [
+      "org.bukkit.World",
+      "int"
+    ],
+    "id": "a6b7b066825966b984f2afa398b17738",
+    "class": "org.bukkit.World"
+  },
+  {
     "method": "zero",
     "param": ["org.bukkit.Location"],
     "id": "a6b8b4d754be4ef81f207d71c9808c57",
@@ -42833,6 +43392,13 @@
     "id": "a6c7b2f5883f556b170e5501cd6471a7",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "getItemStack",
+    "id": "a6ce41fc6a59b5173310a3e9285c0abf",
+    "event": true,
+    "class": "org.bukkit.event.hanging.HangingPlaceEvent",
+    "return": "org.bukkit.inventory.ItemStack"
   },
   {
     "static": true,
@@ -42868,13 +43434,6 @@
     "id": "a6f6f3de1030372d41413a542a478efc",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "static": true,
-    "field": "SNOWY_MOUNTAINS",
-    "id": "a6fbf4943a4e4676dd2faaea7ca4569c",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "setDurability",
@@ -43132,13 +43691,6 @@
     "return": "java.lang.String"
   },
   {
-    "static": true,
-    "field": "MUSHROOM_FIELD_SHORE",
-    "id": "a816cbccd08cd56b1c0f7bd7fe354f78",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getItemInHand",
     "param": ["org.bukkit.entity.HumanEntity"],
     "id": "a81849fb67178c41974ff64887668e2f",
@@ -43186,6 +43738,13 @@
     "id": "a85ec3a5fa7f42ed3bf29b78d12966f7",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "static": true,
+    "field": "SNOWY_SLOPES",
+    "id": "a8620b694e40707076e1550ebe38c9fe",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -43261,6 +43820,16 @@
     ],
     "id": "a8ce6e468b7f3c186be1af0269555b48",
     "class": "org.bukkit.entity.Minecart"
+  },
+  {
+    "method": "sendMessage",
+    "param": [
+      "org.bukkit.command.CommandSender",
+      "java.util.UUID",
+      "java.lang.String[]"
+    ],
+    "id": "a8cf3a1dda344f4f75cce55bf6a7976e",
+    "class": "org.bukkit.command.CommandSender"
   },
   {
     "static": true,
@@ -44038,13 +44607,6 @@
     "return": "org.bukkit.Sound"
   },
   {
-    "method": "getSkeletonType",
-    "param": ["org.bukkit.entity.Skeleton"],
-    "id": "abce350ed0426f3da8d1578e3c73f506",
-    "class": "org.bukkit.entity.Skeleton",
-    "return": "org.bukkit.entity.Skeleton.SkeletonType"
-  },
-  {
     "static": true,
     "field": "BLOCK_NETHER_ORE_PLACE",
     "id": "abcf609089e64b4d367e2d1afce832ab",
@@ -44189,6 +44751,16 @@
     ],
     "id": "ac3d8be3e45bb971868de7dc9a00704f",
     "class": "org.bukkit.entity.Projectile"
+  },
+  {
+    "method": "breakBlock",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.block.Block"
+    ],
+    "id": "ac3fe99b8aed03119a9b698336013ed3",
+    "class": "org.bukkit.entity.Player",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -44406,6 +44978,13 @@
     "id": "ad355fc5c9a2ddb881d4955ba09c5bdd",
     "class": "org.bukkit.map.MapView",
     "return": "int"
+  },
+  {
+    "static": true,
+    "field": "STONY_SHORE",
+    "id": "ad3c5077824bb0f8c3cfbcf347b48d14",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "getRightClicked",
@@ -45120,6 +45699,13 @@
     "return": "org.bukkit.event.world.PortalCreateEvent.CreateReason"
   },
   {
+    "static": true,
+    "field": "FROZEN_PEAKS",
+    "id": "afee075e5c0ecc6ac5bfa6f4e1de02f2",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
+  },
+  {
     "method": "isConverting",
     "param": ["org.bukkit.entity.Hoglin"],
     "id": "aff10ff0f94fd2b166ceefcdfd77c3d8",
@@ -45582,6 +46168,13 @@
     "id": "b1e9d2955e28b2ebc4d91a51165c3832",
     "class": "org.bukkit.scoreboard.RenderType",
     "return": "org.bukkit.scoreboard.RenderType"
+  },
+  {
+    "static": true,
+    "method": "setWhitelistEnforced",
+    "param": ["boolean"],
+    "id": "b1f16599ec539dae14ea1d3e673572ab",
+    "class": "org.bukkit.Bukkit"
   },
   {
     "static": true,
@@ -46058,6 +46651,13 @@
     "class": "org.bukkit.inventory.ItemStack"
   },
   {
+    "method": "getMinHeight",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "b3793be7a6dcad9f7d13d6a5258b3bb6",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "int"
+  },
+  {
     "method": "spawnParticle",
     "param": [
       "org.bukkit.entity.Player",
@@ -46132,6 +46732,16 @@
     "return": "org.bukkit.entity.Ocelot.Type[]"
   },
   {
+    "method": "isBreedItem",
+    "param": [
+      "org.bukkit.entity.Animals",
+      "org.bukkit.Material"
+    ],
+    "id": "b3c66379cb2314f05dab66f1615448a2",
+    "class": "org.bukkit.entity.Animals",
+    "return": "boolean"
+  },
+  {
     "method": "addEnchant",
     "param": [
       "org.bukkit.inventory.meta.ItemMeta",
@@ -46194,6 +46804,17 @@
     "id": "b3f2cecf5f37dc44ae0b32e738a1fba0",
     "class": "org.bukkit.boss.DragonBattle.RespawnPhase",
     "return": "org.bukkit.boss.DragonBattle.RespawnPhase"
+  },
+  {
+    "method": "biomeProvider",
+    "param": [
+      "org.bukkit.WorldCreator",
+      "java.lang.String",
+      "org.bukkit.command.CommandSender"
+    ],
+    "id": "b3f58ab392f28d4aa971bc5cc07ef9a0",
+    "class": "org.bukkit.WorldCreator",
+    "return": "org.bukkit.WorldCreator"
   },
   {
     "static": true,
@@ -46272,6 +46893,13 @@
     "id": "b433f903b7fe7e3eca6e18cec944e360",
     "class": "org.bukkit.entity.FallingBlock",
     "return": "org.bukkit.block.data.BlockData"
+  },
+  {
+    "method": "hasRaids",
+    "param": ["org.bukkit.World"],
+    "id": "b43441e77101275c4a51eb3ca9d88391",
+    "class": "org.bukkit.World",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -46402,6 +47030,18 @@
     "id": "b4c38f5ceccc1ecf897cdb33d11c1fa4",
     "event": true,
     "class": "org.bukkit.event.entity.EntityCombustByBlockEvent",
+    "return": "boolean"
+  },
+  {
+    "method": "generateTree",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "java.util.Random",
+      "org.bukkit.TreeType"
+    ],
+    "id": "b4c42eab498b09b75541ed1603735a50",
+    "class": "org.bukkit.RegionAccessor",
     "return": "boolean"
   },
   {
@@ -46671,10 +47311,10 @@
   },
   {
     "static": true,
-    "field": "JUNGLE_HILLS",
-    "id": "b5ce2d238a93d6ba40cd8deb4b2b90f4",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
+    "field": "SPAWNER",
+    "id": "b5c2d4755285852af131bf8e68ec16bf",
+    "class": "org.bukkit.event.weather.LightningStrikeEvent.Cause",
+    "return": "org.bukkit.event.weather.LightningStrikeEvent.Cause"
   },
   {
     "method": "isAsynchronous",
@@ -46815,6 +47455,16 @@
     "event": true,
     "class": "org.bukkit.event.block.BlockPhysicsEvent",
     "return": "boolean"
+  },
+  {
+    "method": "getBlockData",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location"
+    ],
+    "id": "b63bc0ba5a8f67cd89e3ad748db1fc0a",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.data.BlockData"
   },
   {
     "method": "disallow",
@@ -47822,6 +48472,13 @@
     "return": "org.bukkit.entity.Axolotl.Variant"
   },
   {
+    "method": "getSimulationDistance",
+    "param": ["org.bukkit.World"],
+    "id": "b9a86e34d7045e1b0e262753fa52eead",
+    "class": "org.bukkit.World",
+    "return": "int"
+  },
+  {
     "method": "setCancelled",
     "param": ["boolean"],
     "id": "b9a9d9a03c13bd9b7244718ca918d8e2",
@@ -47998,6 +48655,13 @@
     "return": "int"
   },
   {
+    "static": true,
+    "field": "PHANTOM_BITE",
+    "id": "ba5edc163101b09cf428ce2c9959fae3",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
     "method": "getMessage",
     "id": "ba6450f3f32f1e1dd207d2cb9e996f04",
     "event": true,
@@ -48017,6 +48681,13 @@
     "id": "ba7f90d6cbd6f68fa9b45ff0d7b47df1",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
+    "field": "HUSK_CONVERTED_TO_ZOMBIE",
+    "id": "ba86d9cd071e13e89daedbe825d828ad",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "static": true,
@@ -48069,6 +48740,18 @@
   },
   {
     "static": true,
+    "method": "craftItem",
+    "param": [
+      "org.bukkit.inventory.ItemStack[]",
+      "org.bukkit.World",
+      "org.bukkit.entity.Player"
+    ],
+    "id": "baac078442ea9740dca840f9baf4059c",
+    "class": "org.bukkit.Bukkit",
+    "return": "org.bukkit.inventory.ItemStack"
+  },
+  {
+    "static": true,
     "field": "ENTITY_PHANTOM_HURT",
     "id": "baad7c4af917e50224ead327706e5b84",
     "class": "org.bukkit.Sound",
@@ -48111,6 +48794,18 @@
     "id": "bad81fafa26e215f2e7462c2be930eef",
     "class": "org.bukkit.entity.Entity",
     "return": "boolean"
+  },
+  {
+    "method": "getBlockState",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int"
+    ],
+    "id": "bae039263fb90528e4baae0b0f690c20",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.BlockState"
   },
   {
     "method": "getEntity",
@@ -48489,6 +49184,13 @@
     "id": "bcdbca65354a30483d7b6282bbc1b5d8",
     "class": "org.bukkit.Bukkit",
     "return": "org.bukkit.boss.KeyedBossBar"
+  },
+  {
+    "method": "getTicksPerWaterUndergroundCreatureSpawns",
+    "param": ["org.bukkit.World"],
+    "id": "bcdc4df91d41fb18e53a772dbfec206a",
+    "class": "org.bukkit.World",
+    "return": "long"
   },
   {
     "static": true,
@@ -49105,13 +49807,6 @@
     "id": "bf0be66b2d945eb8c06543d9c42bfbbe",
     "class": "org.bukkit.NamespacedKey",
     "return": "org.bukkit.NamespacedKey"
-  },
-  {
-    "method": "getName",
-    "param": ["org.bukkit.World"],
-    "id": "bf19fe48f69da72e2998925061df4238",
-    "class": "org.bukkit.World",
-    "return": "java.lang.String"
   },
   {
     "static": true,
@@ -50141,6 +50836,13 @@
     "return": "org.bukkit.EntityEffect"
   },
   {
+    "static": true,
+    "field": "MUSIC_DISC_OTHERSIDE",
+    "id": "c328bab185fac22535506dfc7a341414",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
+  },
+  {
     "method": "isBerries",
     "param": ["org.bukkit.block.data.type.CaveVinesPlant"],
     "id": "c335c51df2420b2de156c499cc89d1e6",
@@ -50160,6 +50862,13 @@
     "id": "c340ef4178bf7454c6d97a439179325a",
     "class": "org.bukkit.entity.EntityType",
     "return": "org.bukkit.entity.EntityType"
+  },
+  {
+    "static": true,
+    "field": "ENDER_DRAGON_DESTROY_BLOCK",
+    "id": "c3459a454569b379bcad0916a6a0e2e4",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "method": "getPuffState",
@@ -50261,6 +50970,13 @@
     "id": "c3b0cf08efd179f43771fbc07578361a",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
+  },
+  {
+    "method": "getChunk",
+    "id": "c3bca2543f7c5a0d7c20fc42ca5298e0",
+    "event": true,
+    "class": "org.bukkit.event.world.EntitiesLoadEvent",
+    "return": "org.bukkit.Chunk"
   },
   {
     "static": true,
@@ -50591,6 +51307,13 @@
     "id": "c50cef97448fe8c266311cd8f2a55a37",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "getLogicalHeight",
+    "param": ["org.bukkit.World"],
+    "id": "c5103ffc55274f75ad88015bf96ea21d",
+    "class": "org.bukkit.World",
+    "return": "int"
   },
   {
     "static": true,
@@ -50983,6 +51706,15 @@
     "return": "org.bukkit.Rotation"
   },
   {
+    "method": "setConversionTime",
+    "param": [
+      "org.bukkit.entity.Skeleton",
+      "int"
+    ],
+    "id": "c69a2d7a44293046d490eab18faf25ea",
+    "class": "org.bukkit.entity.Skeleton"
+  },
+  {
     "static": true,
     "field": "BLOCK_BARREL_CLOSE",
     "id": "c6a54e100b3808787fe14b579710abd0",
@@ -51169,13 +51901,6 @@
     "id": "c75b400349067d8b6503c03bf3175f51",
     "class": "org.bukkit.Color",
     "return": "org.bukkit.Color"
-  },
-  {
-    "static": true,
-    "field": "STONE_SHORE",
-    "id": "c7623825c2b91c483dd953a2c07bed65",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "removeFlag",
@@ -51410,6 +52135,13 @@
     "return": "org.bukkit.event.inventory.ClickType"
   },
   {
+    "method": "hasCeiling",
+    "param": ["org.bukkit.World"],
+    "id": "c85bb9ee9af176b0261be508540429a0",
+    "class": "org.bukkit.World",
+    "return": "boolean"
+  },
+  {
     "method": "setSource",
     "param": [
       "org.bukkit.entity.AreaEffectCloud",
@@ -51424,6 +52156,13 @@
     "id": "c86ef2434121f8de1b46c5e192ecf3c7",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "method": "setTotalCookTime",
+    "param": ["int"],
+    "id": "c874242dad52c4036301428a6e587d71",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent"
   },
   {
     "static": true,
@@ -51963,13 +52702,6 @@
   },
   {
     "static": true,
-    "field": "GIANT_SPRUCE_TAIGA_HILLS",
-    "id": "ca735ff25920737a19ee1fa153bc9c05",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "ENTITY_PUFFER_FISH_HURT",
     "id": "ca77cebd85c40ae3660a77d16c1b7510",
     "class": "org.bukkit.Sound",
@@ -52275,6 +53007,13 @@
     "id": "cb8bfe81eb5902b4dc8fb2685455ee2c",
     "class": "org.bukkit.FireworkEffect",
     "return": "org.bukkit.FireworkEffect.Builder"
+  },
+  {
+    "static": true,
+    "field": "ITEM_BUNDLE_DROP_CONTENTS",
+    "id": "cb8f5cf951a259429fef6991d632d738",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "method": "getSlot",
@@ -52709,6 +53448,18 @@
     "return": "org.bukkit.inventory.ItemStack"
   },
   {
+    "method": "getType",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int"
+    ],
+    "id": "cd40c8216a7f2b2c72852e3ca488fed5",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.Material"
+  },
+  {
     "method": "setAmount",
     "param": ["int"],
     "id": "cd410038a518458184b66565210c5409",
@@ -53028,13 +53779,6 @@
   },
   {
     "static": true,
-    "field": "TALL_BIRCH_HILLS",
-    "id": "ce40b2cde0190c0ecbf231c08b6f76f9",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "ENTITY_ZOMBIE_AMBIENT",
     "id": "ce467c44d742b07d40256c775a3708eb",
     "class": "org.bukkit.Sound",
@@ -53190,6 +53934,13 @@
     "id": "ceed98aea24fa13c8d6c3dd38c2d0cde",
     "class": "org.bukkit.potion.PotionType",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "OLD_GROWTH_BIRCH_FOREST",
+    "id": "cef6cfd5b0323f55bcf65930024ca396",
+    "class": "org.bukkit.block.Biome",
+    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -53370,6 +54121,16 @@
     "id": "cfb460b138396b1f88da616dd9635ef6",
     "class": "org.bukkit.potion.PotionEffectType",
     "return": "double"
+  },
+  {
+    "method": "canPlace",
+    "param": [
+      "org.bukkit.block.Block",
+      "org.bukkit.block.data.BlockData"
+    ],
+    "id": "cfb8b04134dc8c40328ac1ec9f7e33b3",
+    "class": "org.bukkit.block.Block",
+    "return": "boolean"
   },
   {
     "method": "getType",
@@ -53566,6 +54327,18 @@
     "id": "d03af186d58f93007e6c97bead4230cd",
     "class": "org.bukkit.ChunkSnapshot",
     "return": "int"
+  },
+  {
+    "method": "setType",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "int",
+      "int",
+      "int",
+      "org.bukkit.Material"
+    ],
+    "id": "d03d8b75016786f9c3ab77abcd00c747",
+    "class": "org.bukkit.RegionAccessor"
   },
   {
     "static": true,
@@ -53907,6 +54680,13 @@
   },
   {
     "static": true,
+    "field": "LAVA_INTERACT",
+    "id": "d1c6241863e7a99ffec4a9d387ea1752",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "POTTED_RED_MUSHROOM",
     "id": "d1caa203c90b37cb228ddd988e981cc7",
     "class": "org.bukkit.Material",
@@ -53923,6 +54703,13 @@
     "static": true,
     "field": "DOOR_TOGGLE",
     "id": "d1ddc3e615619517efc13c80108942c2",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
+    "field": "SKELETON_CONVERTED_TO_STRAY",
+    "id": "d1e83178790f11d1076cd9b8f8de243f",
     "class": "org.bukkit.Effect",
     "return": "org.bukkit.Effect"
   },
@@ -54020,6 +54807,18 @@
     ],
     "id": "d23ef17077e5b5b693456c3987893e4c",
     "class": "org.bukkit.inventory.meta.BlockDataMeta"
+  },
+  {
+    "static": true,
+    "method": "getBiomeProviderForName",
+    "param": [
+      "java.lang.String",
+      "java.lang.String",
+      "org.bukkit.command.CommandSender"
+    ],
+    "id": "d24a75b80ca125988caef6fba50f0f15",
+    "class": "org.bukkit.WorldCreator",
+    "return": "org.bukkit.generator.BiomeProvider"
   },
   {
     "method": "getHitBlockFace",
@@ -54198,13 +54997,6 @@
   },
   {
     "static": true,
-    "field": "TAIGA_HILLS",
-    "id": "d2e058578a9d8886c7769721cce3a343",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
-    "static": true,
     "field": "JUMP",
     "id": "d2f171ba9e762f4a886226107d428652",
     "class": "org.bukkit.Statistic",
@@ -54352,6 +55144,13 @@
     "param": ["org.bukkit.block.data.Snowable"],
     "id": "d365dc41f693fe1f5986ae61d451e8f9",
     "class": "org.bukkit.block.data.Snowable",
+    "return": "boolean"
+  },
+  {
+    "method": "isAllowingServerListings",
+    "param": ["org.bukkit.entity.Player"],
+    "id": "d36984aa47a20d00dca54bde48eabef7",
+    "class": "org.bukkit.entity.Player",
     "return": "boolean"
   },
   {
@@ -54895,6 +55694,18 @@
     "return": "org.bukkit.block.data.Rail.Shape"
   },
   {
+    "method": "sendSignChange",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.Location",
+      "java.lang.String[]",
+      "org.bukkit.DyeColor",
+      "boolean"
+    ],
+    "id": "d60352ed847c66b06cf3002bd3d13783",
+    "class": "org.bukkit.entity.Player"
+  },
+  {
     "method": "getLines",
     "param": ["org.bukkit.block.Sign"],
     "id": "d604ce002a178fcdccf401aefb619a8e",
@@ -55255,6 +56066,13 @@
   },
   {
     "static": true,
+    "field": "ITEM_BUNDLE_REMOVE_ONE",
+    "id": "d70302633b8d265f37e89a06f237c90c",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
+  },
+  {
+    "static": true,
     "field": "DAMAGE_INDICATOR",
     "id": "d703dd226b82c31da0988d0a3d7992b9",
     "class": "org.bukkit.Particle",
@@ -55287,6 +56105,13 @@
     "id": "d71d0f1e7e5982e05f41e3896751de48",
     "class": "org.bukkit.GameRule",
     "return": "org.bukkit.GameRule"
+  },
+  {
+    "method": "hasVariant",
+    "param": ["org.bukkit.inventory.meta.AxolotlBucketMeta"],
+    "id": "d7382c353aec9d56e057130933b7c5e7",
+    "class": "org.bukkit.inventory.meta.AxolotlBucketMeta",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -55470,6 +56295,13 @@
     "event": true,
     "class": "org.bukkit.event.vehicle.VehicleCreateEvent",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "COMPOSTER_FILL_ATTEMPT",
+    "id": "d80340a00a9a2fb2bb58618d212662f3",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "method": "spawnParticle",
@@ -55657,13 +56489,6 @@
     "id": "d8e5bfd727a5c68db151c7522b606cb3",
     "class": "org.bukkit.GameRule",
     "return": "org.bukkit.GameRule"
-  },
-  {
-    "static": true,
-    "field": "BADLANDS_PLATEAU",
-    "id": "d8ea4f902ada91393d48d79f8816d041",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "setDamage",
@@ -55967,17 +56792,6 @@
     "return": "org.bukkit.map.MapView.Scale"
   },
   {
-    "method": "spawnEntity",
-    "param": [
-      "org.bukkit.World",
-      "org.bukkit.Location",
-      "org.bukkit.entity.EntityType"
-    ],
-    "id": "da29a522f154db91b633e9502ef89a95",
-    "class": "org.bukkit.World",
-    "return": "org.bukkit.entity.Entity"
-  },
-  {
     "method": "setCancelled",
     "param": ["boolean"],
     "id": "da2d42941885e9f90d11c379f138a4b1",
@@ -56154,13 +56968,6 @@
     "id": "dade952bf6231e913c863457cb08b886",
     "class": "org.bukkit.loot.LootTables",
     "return": "org.bukkit.loot.LootTables"
-  },
-  {
-    "method": "getSeed",
-    "param": ["org.bukkit.World"],
-    "id": "dae475006caec9646d696ab01577d175",
-    "class": "org.bukkit.World",
-    "return": "long"
   },
   {
     "static": true,
@@ -56420,6 +57227,13 @@
   },
   {
     "static": true,
+    "field": "GRINDSTONE_USE",
+    "id": "dbe118e205b50e765035427f3f77e6c8",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "method": "getByKey",
     "param": ["org.bukkit.NamespacedKey"],
     "id": "dbe192d1e034cd94ba9eb0730aa52ee2",
@@ -56505,6 +57319,13 @@
     "id": "dc58ca40e3d011e04bb5f1c7c671fb92",
     "class": "org.bukkit.inventory.meta.BookMeta",
     "return": "java.lang.String"
+  },
+  {
+    "static": true,
+    "field": "COPPER_WAX_ON",
+    "id": "dc5aa5d085b98d1451131a44528926bf",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "static": true,
@@ -56796,6 +57617,16 @@
     "return": "org.bukkit.Sound"
   },
   {
+    "method": "showEntity",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.plugin.Plugin",
+      "org.bukkit.entity.Entity"
+    ],
+    "id": "dd78e8ff9e16ba4e59c036a1d5ef1a76",
+    "class": "org.bukkit.entity.Player"
+  },
+  {
     "method": "getDirection",
     "param": ["org.bukkit.entity.Fireball"],
     "id": "dd7c11b6e512cf78394822a0d26a3478",
@@ -57060,6 +57891,13 @@
     "return": "org.bukkit.GameEvent"
   },
   {
+    "method": "getEnvironment",
+    "param": ["org.bukkit.generator.WorldInfo"],
+    "id": "dec7bce8ce5c6f6d0237bcd1d7f59a36",
+    "class": "org.bukkit.generator.WorldInfo",
+    "return": "org.bukkit.World.Environment"
+  },
+  {
     "method": "isCancelled",
     "id": "ded1d3f5b8546b311aca6db41a76ccf0",
     "event": true,
@@ -57250,13 +58088,6 @@
     "id": "df54cfe8468c632008f2b7bf6cf62b29",
     "class": "org.bukkit.inventory.Recipe",
     "return": "org.bukkit.inventory.ItemStack"
-  },
-  {
-    "method": "getUID",
-    "param": ["org.bukkit.World"],
-    "id": "df6348a4d1a80a22e8db5454283102ca",
-    "class": "org.bukkit.World",
-    "return": "java.util.UUID"
   },
   {
     "static": true,
@@ -57725,6 +58556,13 @@
   },
   {
     "static": true,
+    "field": "FROZEN",
+    "id": "e14c8ede67242a513f50450d2f2bbcf1",
+    "class": "org.bukkit.event.entity.EntityTransformEvent.TransformReason",
+    "return": "org.bukkit.event.entity.EntityTransformEvent.TransformReason"
+  },
+  {
+    "static": true,
     "field": "CRIMSON_SPORE",
     "id": "e150f67dc730d797de2aa72b4c14b49d",
     "class": "org.bukkit.Particle",
@@ -57916,13 +58754,6 @@
     "return": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
   },
   {
-    "static": true,
-    "field": "WOODED_HILLS",
-    "id": "e1b739d86cf57d24300ea3073072fb26",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
-  },
-  {
     "method": "getCenterX",
     "param": ["org.bukkit.util.BoundingBox"],
     "id": "e1b83ac30b6ed537da6849c2731e0bad",
@@ -58016,6 +58847,12 @@
     "event": true,
     "class": "org.bukkit.event.entity.AreaEffectCloudApplyEvent",
     "return": "boolean"
+  },
+  {
+    "method": "shakeHead",
+    "param": ["org.bukkit.entity.Villager"],
+    "id": "e1f553cd0a5f7a2e59d0ed79d6483c24",
+    "class": "org.bukkit.entity.Villager"
   },
   {
     "static": true,
@@ -58326,6 +59163,19 @@
     "class": "org.bukkit.entity.Bee"
   },
   {
+    "method": "generateTree",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "java.util.Random",
+      "org.bukkit.TreeType",
+      "org.bukkit.util.Consumer"
+    ],
+    "id": "e351688c41e171101fad2565927b33b2",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "boolean"
+  },
+  {
     "static": true,
     "field": "COLD_OCEAN",
     "id": "e362f354b0f68ab169d82977c1c8d3db",
@@ -58499,6 +59349,17 @@
     "event": true,
     "class": "org.bukkit.event.inventory.InventoryCreativeEvent",
     "return": "int"
+  },
+  {
+    "method": "sendEquipmentChange",
+    "param": [
+      "org.bukkit.entity.Player",
+      "org.bukkit.entity.LivingEntity",
+      "org.bukkit.inventory.EquipmentSlot",
+      "org.bukkit.inventory.ItemStack"
+    ],
+    "id": "e4113ce834e1ff97556db105ed6f5a4e",
+    "class": "org.bukkit.entity.Player"
   },
   {
     "static": true,
@@ -58703,6 +59564,13 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "isBedWorks",
+    "param": ["org.bukkit.World"],
+    "id": "e4ea007da17245d9a8ace925ce60a6bd",
+    "class": "org.bukkit.World",
+    "return": "boolean"
+  },
+  {
     "static": true,
     "field": "BLOCK_AZALEA_LEAVES_BREAK",
     "id": "e4ed2e5f1d77e77df62eb65253ad4b5b",
@@ -58807,13 +59675,6 @@
     "id": "e54f8e5a775a235e085b55652ed2be13",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
-  },
-  {
-    "static": true,
-    "field": "WOODED_MOUNTAINS",
-    "id": "e55191f1e9636e92ef571fa56e03e19e",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -59066,6 +59927,13 @@
   },
   {
     "static": true,
+    "method": "isWhitelistEnforced",
+    "id": "e65976715ebf999352e8ae63abf40398",
+    "class": "org.bukkit.Bukkit",
+    "return": "boolean"
+  },
+  {
+    "static": true,
     "field": "WALK_ON_WATER",
     "id": "e665c15d4548c11c87121d423d80609d",
     "class": "org.bukkit.event.entity.EntityExhaustionEvent.ExhaustionReason",
@@ -59247,6 +60115,16 @@
     "return": "org.bukkit.Instrument"
   },
   {
+    "method": "getBlockState",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location"
+    ],
+    "id": "e6edf817a18550a03dd72240bfe1a9a7",
+    "class": "org.bukkit.RegionAccessor",
+    "return": "org.bukkit.block.BlockState"
+  },
+  {
     "method": "isOnline",
     "param": ["org.bukkit.OfflinePlayer"],
     "id": "e6f780d134d2a300c0fb440754712e23",
@@ -59357,6 +60235,13 @@
     "id": "e792ef736904dedd6b11d73d9c361d45",
     "class": "org.bukkit.Material",
     "return": "org.bukkit.Material"
+  },
+  {
+    "static": true,
+    "field": "REDSTONE_TORCH_BURNOUT",
+    "id": "e7975eea1a2d0e0ef50c788bca9bd9ad",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
   },
   {
     "static": true,
@@ -60722,6 +61607,13 @@
     "return": "org.bukkit.potion.PotionType"
   },
   {
+    "method": "isPiglinSafe",
+    "param": ["org.bukkit.World"],
+    "id": "ecabde5bd157a5ed133c7a174a12fc3c",
+    "class": "org.bukkit.World",
+    "return": "boolean"
+  },
+  {
     "method": "getOriginalBucket",
     "id": "ecad698d4ea659ec37bda560b913a128",
     "event": true,
@@ -60946,13 +61838,6 @@
     "id": "eda56e9b66310535c9e72c6f7fce42b6",
     "class": "org.bukkit.Sound",
     "return": "org.bukkit.Sound"
-  },
-  {
-    "static": true,
-    "field": "MODIFIED_WOODED_BADLANDS_PLATEAU",
-    "id": "edad5c0952216a14bb3adaecc7c132bf",
-    "class": "org.bukkit.block.Biome",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "static": true,
@@ -61235,6 +62120,16 @@
     "id": "ee9a7f61395b7588c7df61520e3b43e6",
     "class": "org.bukkit.Effect",
     "return": "org.bukkit.Effect"
+  },
+  {
+    "method": "isBreedItem",
+    "param": [
+      "org.bukkit.entity.Animals",
+      "org.bukkit.inventory.ItemStack"
+    ],
+    "id": "eea287d02351510f501ace340f02c02d",
+    "class": "org.bukkit.entity.Animals",
+    "return": "boolean"
   },
   {
     "static": true,
@@ -61656,6 +62551,13 @@
     "return": "org.bukkit.Material"
   },
   {
+    "method": "getVariant",
+    "param": ["org.bukkit.inventory.meta.AxolotlBucketMeta"],
+    "id": "f066be12bf5710f0682e6655f6ea6793",
+    "class": "org.bukkit.inventory.meta.AxolotlBucketMeta",
+    "return": "org.bukkit.entity.Axolotl.Variant"
+  },
+  {
     "method": "getPlayer",
     "id": "f069fe10cdaae667c2b9156aa531f7cb",
     "event": true,
@@ -61671,6 +62573,13 @@
   },
   {
     "static": true,
+    "field": "END_PORTAL_FRAME_FILL",
+    "id": "f080e87bb4e36d9be7db2c71b301b444",
+    "class": "org.bukkit.Effect",
+    "return": "org.bukkit.Effect"
+  },
+  {
+    "static": true,
     "field": "DARK_AQUA",
     "id": "f0838062458cc583e3b21362ba47cedf",
     "class": "org.bukkit.ChatColor",
@@ -61682,6 +62591,13 @@
     "id": "f0840b75cd39e348572eaed22b6a56fe",
     "class": "org.bukkit.Effect",
     "return": "org.bukkit.Effect"
+  },
+  {
+    "method": "isTrusting",
+    "param": ["org.bukkit.entity.Ocelot"],
+    "id": "f0865a17d6bb93310603728bb6db8ab5",
+    "class": "org.bukkit.entity.Ocelot",
+    "return": "boolean"
   },
   {
     "method": "sendBlockDamage",
@@ -62283,6 +63199,13 @@
     "return": "org.bukkit.map.MapCursor.Type"
   },
   {
+    "method": "isClimbing",
+    "param": ["org.bukkit.entity.LivingEntity"],
+    "id": "f2e14546297a0466238daea27a965145",
+    "class": "org.bukkit.entity.LivingEntity",
+    "return": "boolean"
+  },
+  {
     "method": "spigot",
     "param": ["org.bukkit.World"],
     "id": "f2e61eadbc45f6c210dc0d60d412df1c",
@@ -62381,6 +63304,13 @@
     "id": "f32ca276d524a07382eeb7feaecf9283",
     "class": "org.bukkit.entity.WitherSkull",
     "return": "boolean"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_FROZEN_PEAKS",
+    "id": "f32da0e224deca6cced66238f87b0737",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "method": "getMaxX",
@@ -63680,6 +64610,13 @@
     "return": "org.bukkit.EntityEffect"
   },
   {
+    "method": "getItemInUse",
+    "param": ["org.bukkit.entity.HumanEntity"],
+    "id": "f7bc26290f8ac7813ea8aeba2e6fc742",
+    "class": "org.bukkit.entity.HumanEntity",
+    "return": "org.bukkit.inventory.ItemStack"
+  },
+  {
     "method": "getMaxSpawnDelay",
     "param": ["org.bukkit.block.CreatureSpawner"],
     "id": "f7ca2fffdb90082519faf19614ec043b",
@@ -63736,6 +64673,13 @@
     "id": "f7f89cc9b39df648a948a00e9a42f7ce",
     "class": "org.bukkit.TreeSpecies",
     "return": "org.bukkit.TreeSpecies"
+  },
+  {
+    "static": true,
+    "field": "MUSIC_OVERWORLD_GROVE",
+    "id": "f8021f0c804c4b6cf21246c9800f83b9",
+    "class": "org.bukkit.Sound",
+    "return": "org.bukkit.Sound"
   },
   {
     "static": true,
@@ -64181,18 +65125,6 @@
     ],
     "id": "f9fe5040896f2e1373af800c3d9371d0",
     "class": "org.bukkit.potion.Potion"
-  },
-  {
-    "method": "getBiome",
-    "param": [
-      "org.bukkit.World",
-      "int",
-      "int",
-      "int"
-    ],
-    "id": "fa0c6e79603818a3d42247c3caf80175",
-    "class": "org.bukkit.World",
-    "return": "org.bukkit.block.Biome"
   },
   {
     "method": "setArrowCooldown",
@@ -64706,6 +65638,13 @@
     "return": "org.bukkit.inventory.EquipmentSlot"
   },
   {
+    "method": "getEvent",
+    "id": "fb9a556032fb62c7b1e7ce5b3c85482d",
+    "event": true,
+    "class": "org.bukkit.event.block.BlockReceiveGameEvent",
+    "return": "org.bukkit.GameEvent"
+  },
+  {
     "static": true,
     "field": "TALL",
     "id": "fba5f63bce93e016f07c85f6264b3599",
@@ -64799,6 +65738,13 @@
     "id": "fbfa1e55bc9a7fe9a66cc208268e5213",
     "class": "org.bukkit.potion.Potion",
     "return": "org.bukkit.potion.PotionBrewer"
+  },
+  {
+    "method": "isAsynchronous",
+    "id": "fbfb948c14c0fdd9dcf562181a472729",
+    "event": true,
+    "class": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+    "return": "boolean"
   },
   {
     "method": "getBedSpawnLocation",
@@ -65702,6 +66648,16 @@
     "return": "org.bukkit.potion.PotionEffectType"
   },
   {
+    "method": "setBlockData",
+    "param": [
+      "org.bukkit.RegionAccessor",
+      "org.bukkit.Location",
+      "org.bukkit.block.data.BlockData"
+    ],
+    "id": "ff7214cc9c593f983016829607789b04",
+    "class": "org.bukkit.RegionAccessor"
+  },
+  {
     "method": "addBan",
     "param": [
       "org.bukkit.BanList",
@@ -65944,6 +66900,7 @@
   {"event": "org.bukkit.event.block.BlockPistonExtendEvent"},
   {"event": "org.bukkit.event.block.BlockPistonRetractEvent"},
   {"event": "org.bukkit.event.block.BlockPlaceEvent"},
+  {"event": "org.bukkit.event.block.BlockReceiveGameEvent"},
   {"event": "org.bukkit.event.block.BlockRedstoneEvent"},
   {"event": "org.bukkit.event.block.BlockShearEntityEvent"},
   {"event": "org.bukkit.event.block.BlockSpreadEvent"},
@@ -66035,6 +66992,7 @@
   {"event": "org.bukkit.event.inventory.FurnaceBurnEvent"},
   {"event": "org.bukkit.event.inventory.FurnaceExtractEvent"},
   {"event": "org.bukkit.event.inventory.FurnaceSmeltEvent"},
+  {"event": "org.bukkit.event.inventory.FurnaceStartSmeltEvent"},
   {"event": "org.bukkit.event.inventory.InventoryClickEvent"},
   {"event": "org.bukkit.event.inventory.InventoryCloseEvent"},
   {"event": "org.bukkit.event.inventory.InventoryCreativeEvent"},
@@ -66137,6 +67095,8 @@
   {"event": "org.bukkit.event.world.ChunkLoadEvent"},
   {"event": "org.bukkit.event.world.ChunkPopulateEvent"},
   {"event": "org.bukkit.event.world.ChunkUnloadEvent"},
+  {"event": "org.bukkit.event.world.EntitiesLoadEvent"},
+  {"event": "org.bukkit.event.world.EntitiesUnloadEvent"},
   {"event": "org.bukkit.event.world.GenericGameEvent"},
   {"event": "org.bukkit.event.world.LootGenerateEvent"},
   {"event": "org.bukkit.event.world.PortalCreateEvent"},
