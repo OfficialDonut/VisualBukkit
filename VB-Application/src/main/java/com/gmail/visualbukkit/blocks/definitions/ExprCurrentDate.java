@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class ExprCurrentDate extends Expression {
 
     public ExprCurrentDate() {
-        super("expr-current-date");
+        super("expr-current-date", "Current Date", "System", "The current date (includes time information)");
     }
 
     @Override

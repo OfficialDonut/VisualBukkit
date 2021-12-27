@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprStringCharacters extends Expression {
 
     public ExprStringCharacters() {
-        super("expr-string-characters");
+        super("expr-string-characters", "String Characters", "String", "The characters of a string");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprStringCharacters extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "PluginMain.createList(" + arg(0) + ".toCharArray())";

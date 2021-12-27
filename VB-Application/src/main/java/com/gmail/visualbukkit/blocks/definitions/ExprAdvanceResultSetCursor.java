@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class ExprAdvanceResultSetCursor extends Expression {
 
     public ExprAdvanceResultSetCursor() {
-        super("expr-advance-result-set-cursor");
+        super("expr-advance-result-set-cursor", "Advance Result Set Cursor", "SQL", "Moves the result set cursor forward one row, returns false if there are no more rows");
     }
 
     @Override
@@ -19,11 +19,11 @@ public class ExprAdvanceResultSetCursor extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(ResultSet.class))) {
+        return new Block(this, new ExpressionParameter("Result Set", ClassInfo.of(ResultSet.class))) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

@@ -7,7 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class StatAttemptExecution extends Container {
 
     public StatAttemptExecution() {
-        super("stat-attempt-execution");
+        super("stat-attempt-execution", "Attempt Execution", "VB", "Attempts to execute code and suppresses any errors");
     }
 
     @Override
@@ -16,7 +16,7 @@ public class StatAttemptExecution extends Container {
             @Override
             public String toJava() {
                 Statement.Block next = getStatementHolder().getNext(this);
-                if (next != null && next.getDefinition().getID().equals("stat-handle-execution-error")) {
+                if (next != null && next.getDefinition().getClass() == StatHandleExecutionError.class) {
                     return "try {" + getChildJava() + "}";
                 } else {
                     return "try {" + getChildJava() + "} catch (Exception " + RandomStringUtils.randomAlphabetic(16) + ") {}";

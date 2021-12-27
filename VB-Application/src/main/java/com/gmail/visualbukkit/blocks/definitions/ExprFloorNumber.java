@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprFloorNumber extends Expression {
 
     public ExprFloorNumber() {
-        super("expr-floor-number");
+        super("expr-floor-number", "Floor Number", "Math", "Rounds a number down");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprFloorNumber extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 return "((long) Math.floor(" + arg(0) + "))";

@@ -33,12 +33,12 @@ public class StatLaunchProjectile extends Statement {
     }
 
     public StatLaunchProjectile() {
-        super("stat-launch-projectile");
+        super("stat-launch-projectile", "Launch Projectile", "World", "Launches a projectile");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter(projectileTypes), new ExpressionParameter(ClassInfo.of("org.bukkit.projectiles.ProjectileSource")), new ExpressionParameter(ClassInfo.of("org.bukkit.util.Vector"))) {
+        return new Block(this, new ChoiceParameter("Type", projectileTypes), new ExpressionParameter("Source", ClassInfo.of("org.bukkit.projectiles.ProjectileSource")), new ExpressionParameter("Velocity", ClassInfo.of("org.bukkit.util.Vector"))) {
             @Override
             public String toJava() {
                 return arg(1) + ".launchProjectile(org.bukkit.entity." + arg(0) + ".class," + arg(2) + ");";

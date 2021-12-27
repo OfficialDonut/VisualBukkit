@@ -52,7 +52,9 @@ public class ProjectManager {
         }
         try {
             currentProject = new Project(projectsDir.resolve(projectName));
-            VisualBukkitApp.getSplitPane().getItems().set(1, currentProject.getProjectPane());
+            VisualBukkitApp.getSidePane().getTabs().get(1).setContent(currentProject.getPluginSettingsPane());
+            VisualBukkitApp.getSplitPane().getItems().set(1, currentProject.getPluginComponentPane());
+            VisualBukkitApp.getStage().setTitle("Visual Bukkit - " + projectName);
             DiscordRPC.discordUpdatePresence(new DiscordRichPresence
                     .Builder("Developing " + projectName)
                     .setStartTimestamps(System.currentTimeMillis())

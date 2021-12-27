@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCurrentTime extends Expression {
 
     public ExprCurrentTime() {
-        super("expr-current-time");
+        super("expr-current-time", "Current Time", "System", "The current time in milliseconds");
     }
 
     @Override

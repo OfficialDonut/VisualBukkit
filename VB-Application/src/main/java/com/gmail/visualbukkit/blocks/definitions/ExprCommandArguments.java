@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCommandArguments extends Expression {
 
     public ExprCommandArguments() {
-        super("expr-command-arguments");
+        super("expr-command-arguments", "Command Arguments", "Bukkit", "The arguments of a command");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprCommandArguments extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-command");
+                checkForPluginComponent(CompCommand.class);
             }
 
             @Override

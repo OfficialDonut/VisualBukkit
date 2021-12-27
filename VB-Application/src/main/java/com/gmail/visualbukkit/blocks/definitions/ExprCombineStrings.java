@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprCombineStrings extends VarArgsExpression {
 
     public ExprCombineStrings() {
-        super("expr-combine-strings");
+        super("expr-combine-strings", "Combine Strings", "String", "Concatenates strings");
     }
 
     @Override
@@ -17,11 +17,11 @@ public class ExprCombineStrings extends VarArgsExpression {
 
     @Override
     public Block createBlock() {
-        Block block = new Block(this) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING), new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 String java = arg(0);
-                for (int i = 1; i < getParameters().size(); i ++) {
+                for (int i = 1; i < parameters.length; i ++) {
                     java = "(" + java + " + " + arg(i) + ")";
                 }
                 return java;
@@ -29,19 +29,13 @@ public class ExprCombineStrings extends VarArgsExpression {
 
             @Override
             protected void increaseSize() {
-                addParameterLine("String", new ExpressionParameter(ClassInfo.STRING));
+                push(new ExpressionParameter("String", ClassInfo.STRING));
             }
 
             @Override
             protected void decreaseSize() {
-                getBody().getChildren().remove(getBody().getChildren().size() - 1);
-                getParameters().remove(getParameters().size() - 1);
+                pop();
             }
         };
-
-        block.addParameterLine("String", new ExpressionParameter(ClassInfo.STRING));
-        block.addParameterLine("String", new ExpressionParameter(ClassInfo.STRING));
-
-        return block;
     }
 }

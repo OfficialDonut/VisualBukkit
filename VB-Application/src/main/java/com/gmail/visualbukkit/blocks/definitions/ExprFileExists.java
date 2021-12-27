@@ -9,7 +9,7 @@ import java.io.File;
 public class ExprFileExists extends Expression {
 
     public ExprFileExists() {
-        super("expr-file-exists");
+        super("expr-file-exists", "File Exists", "File", "Checks if a file exists");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprFileExists extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class))) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of(File.class))) {
             @Override
             public String toJava() {
                 return arg(0) + ".exists()";

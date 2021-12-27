@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 public class ExprMathConstant extends SimpleExpression {
 
     public ExprMathConstant() {
-        super("expr-math-constant");
+        super("expr-math-constant", "Math Constant", "Math", "A math constant");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprMathConstant extends SimpleExpression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("pi", "e")) {
+        return new Block(this, new ChoiceParameter("", "pi", "e")) {
             @Override
             public String toJava() {
                 return "Math." + arg(0).toUpperCase();

@@ -10,61 +10,102 @@
     src: url("/fonts/Roboto-Regular.ttf");
 }
 
-.block-info-popover .label {
-    -fx-padding: 10;
-}
-
-.button {
-    -fx-focus-traversable: false;
-}
-
-.check-box {
-    -fx-focus-traversable: false;
-}
-
-.code-block {
+.block {
     -fx-border-color: black;
     -fx-font-family: "JetBrains Mono Medium";
     -fx-padding: 8;
     -fx-spacing: 8;
 }
 
-.code-block:invalid {
+.block:invalid {
     -fx-background-color: red !important;
 }
 
-.code-block:selected {
+.block:selected {
     -fx-border-color: yellow;
-    -fx-border-width: 2;
 }
 
-.code-block .button {
+.block .button {
     -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
 }
 
-.code-block .button:hover {
+.block .button:hover {
     -fx-opacity: 75%;
 }
 
-.code-block .button:pressed {
+.block .button:pressed {
     -fx-opacity: 50%;
 }
 
-.code-block .label {
+.block .label {
     -fx-text-fill: black;
 }
 
-.code-block .text-field {
+.block .text-field {
     -fx-control-inner-background: lightgray;
     -fx-text-fill: black;
 }
 
-.code-block-header {
+.block-header {
     -fx-font-family: "JetBrains Mono";
 }
 
-.code-block-header > .button {
+.block-header > .button {
     -fx-padding: 0;
+}
+
+.block-selector {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0 1;
+    -fx-spacing: 15;
+}
+
+.block-selector > .list-view {
+    -fx-background-insets: 0;
+    -fx-focus-traversable: false;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.block-selector > .vbox {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.block-source {
+    -fx-background-insets: 1;
+    -fx-background-radius: 5;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-font-family: "JetBrains Mono";
+    -fx-padding: 5;
+    -fx-text-fill: black;
+}
+
+.block-source:hover {
+    -fx-cursor: hand;
+}
+
+.button {
+    -fx-background-insets: 0;
+    -fx-background-insets: 1;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-focus-traversable: false;
+    -fx-padding: 8;
+}
+
+.check-box {
+    -fx-focus-traversable: false;
+}
+
+.check-box > .box {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-padding: 5;
 }
 
 .combo-box {
@@ -86,6 +127,10 @@
     -fx-padding: 8 8 25 8;
 }
 
+.container-block:hover {
+    -fx-cursor: hand;
+}
+
 .container-block:nested {
     -fx-background-color: cornflowerblue;
 }
@@ -95,9 +140,13 @@
 }
 
 .expression-block {
-    -fx-background-color: orange;
+    -fx-background-color: rgb(255, 179, 71);
     -fx-background-radius: 10;
     -fx-border-radius: 10;
+}
+
+.expression-block:hover {
+    -fx-cursor: hand;
 }
 
 .expression-block:nested {
@@ -114,18 +163,29 @@
     -fx-text-fill: black;
 }
 
-.expression-parameter:hover {
-    -fx-background-color: pink !important;
+.expression-parameter:connecting {
+    -fx-background-color: yellow !important;
 }
 
-.extension-info-grid {
+.expression-parameter:drag-over {
+    -fx-background-color: derive(yellow, 25%) !important;
+}
+
+.expression-source {
+    -fx-background-color: rgb(255, 179, 71);
+}
+
+.extension-view .list-view {
+    -fx-focus-traversable: false;
+}
+
+.grid-pane {
     -fx-hgap: 10;
-    -fx-vgap: 15;
+    -fx-vgap: 10;
 }
 
-.extension-pane .vbox {
-    -fx-padding: 15;
-    -fx-spacing: 15;
+.grid-pane .button {
+    -fx-max-width: Infinity;
 }
 
 .hbox {
@@ -133,25 +193,12 @@
     -fx-spacing: 10;
 }
 
-.icon-button {
-    -fx-background-color: transparent;
-    -fx-padding: 0;
-}
-
-.icon-button:hover {
-    -fx-opacity: 75%;
-}
-
-.icon-button:pressed {
-    -fx-opacity: 50%;
-}
-
 .label {
     -fx-wrap-text: true;
 }
 
-.list-view {
-    -fx-focus-traversable: false;
+.local-variable-field {
+    -fx-control-inner-background: yellow !important;
 }
 
 .log-display {
@@ -181,36 +228,24 @@
 }
 
 .plugin-component-pane {
-    -fx-padding: 15;
-}
-
-.plugin-settings-grid {
-    -fx-hgap: 10;
-    -fx-padding: 15;
-    -fx-vgap: 10;
-}
-
-.popover {
-    -fx-pref-width: 550;
-}
-
-.popover-selector .hbox {
-    -fx-padding: 5;
-}
-
-.popover-selector .hbox > .text-field {
-    -fx-background-color: transparent;
     -fx-border-color: black;
-    -fx-border-radius: 0;
-    -fx-border-width: 0 0 2 0;
-    -fx-pref-width: 200;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 15;
 }
 
-.project-button-bar {
-    -fx-alignment: center-left;
-    -fx-border-width: 3 0 0 0;
-    -fx-padding: 15;
-    -fx-spacing: 20;
+.plugin-component-source {
+    -fx-background-color: rgb(180, 96, 235);
+}
+
+.plugin-settings-pane {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0 1;
+    -fx-padding: 10;
+    -fx-spacing: 15;
+}
+
+.popover .label {
+    -fx-padding: 10;
 }
 
 .root {
@@ -225,61 +260,51 @@
     -fx-background: gray;
 }
 
-.simple-global-variable-field {
-    -fx-control-inner-background: derive(yellow, 50%) !important;
-}
-
-.simple-local-variable-field {
-    -fx-control-inner-background: yellow !important;
-}
-
-.simple-persistent-variable-field {
-    -fx-control-inner-background: pink !important;
-}
-
 .statement-block {
     -fx-background-color: rgb(0, 230, 154);
 }
 
-.statement-connector {
-    -fx-background-color: yellow;
-    -fx-max-height: 25;
-}
-
-.statement-label {
-    -fx-background-color: rgb(0, 230, 154);
-    -fx-background-insets: 1;
-    -fx-background-radius: 5;
-    -fx-border-color: black;
-    -fx-border-radius: 5;
-    -fx-font-family: "JetBrains Mono Medium";
-    -fx-padding: 5;
-    -fx-text-fill: black;
-}
-
-.statement-label:hover {
+.statement-block:hover {
     -fx-cursor: hand;
 }
 
-.statement-selector {
-    -fx-spacing: 10;
+.statement-connector {
+    -fx-background-color: yellow;
+    -fx-border-color: black;
+    -fx-pref-height: 25;
 }
 
-.statement-selector .vbox {
-    -fx-padding: 10;
-    -fx-spacing: 10;
+.statement-connector:disabled {
+    -fx-border-width: 0;
+    -fx-pref-height: 0;
+}
+
+.statement-source {
+    -fx-background-color: rgb(0, 230, 154);
 }
 
 .tab-pane .tab {
-    -fx-background-color: -fx-background;
+    -fx-background-color: derive(-fx-background, -35%);
     -fx-background-radius: 0;
-    -fx-border-color: -fx-control-inner-background;
+    -fx-border-color: black;
     -fx-faint-focus-color: transparent;
     -fx-focus-color: transparent;
 }
 
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-background;
+}
+
 .tab-pane .tab-header-area {
     -fx-padding: 0;
+}
+
+.tab-pane:left .tab {
+    -fx-border-width: 0 0 0 1;
+}
+
+.tab-pane:top .tab {
+    -fx-border-width: 0 1 0 0;
 }
 
 .text-area {
@@ -302,5 +327,20 @@
     -fx-border-color: lightgray;
     -fx-border-radius: 5;
     -fx-font-size: 14;
+    -fx-padding: 5;
+}
+
+.tree-node {
+    -fx-spacing: 5;
+}
+
+.tree-node > .vbox {
+    -fx-padding: 0 0 0 10;
+    -fx-spacing: 5;
+}
+
+.tree-node > .vbox > .button {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
     -fx-padding: 5;
 }

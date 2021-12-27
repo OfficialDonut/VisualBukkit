@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprCeilNumber extends Expression {
 
     public ExprCeilNumber() {
-        super("expr-ceil-number");
+        super("expr-ceil-number", "Ceil Number", "Math", "Rounds a number up");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprCeilNumber extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 return "((long) Math.ceil(" + arg(0) + "))";

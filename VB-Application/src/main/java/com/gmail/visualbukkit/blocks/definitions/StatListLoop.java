@@ -9,12 +9,12 @@ import javafx.scene.Parent;
 public class StatListLoop extends Container {
 
     public StatListLoop() {
-        super("stat-list-loop");
+        super("stat-list-loop", "List Loop", "VB", "Loops through each value in a list");
     }
 
     @Override
     public Block createBlock() {
-        return new Container.Block(this, new ExpressionParameter(ClassInfo.LIST)) {
+        return new Container.Block(this, new ExpressionParameter("List", ClassInfo.LIST)) {
             @Override
             public String toJava() {
                 return "for (Object FINAL_loopValue" + (getNestedLoops(this) + 1) + " : " + arg(0) + ") {" + getChildJava() + "}";
@@ -26,7 +26,7 @@ public class StatListLoop extends Container {
         int loops = 0;
         Parent parent = node.getParent();
         while (parent != null) {
-            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getID().equals("stat-list-loop")) {
+            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getClass() == StatListLoop.class) {
                 loops++;
             }
             parent = parent.getParent();

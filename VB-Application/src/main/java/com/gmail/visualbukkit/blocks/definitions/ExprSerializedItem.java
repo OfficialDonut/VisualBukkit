@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class ExprSerializedItem extends Expression {
 
     public ExprSerializedItem() {
-        super("expr-serialized-item");
+        super("expr-serialized-item", "Serialized ItemStack", "ItemStack", "A serialized ItemStack");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ExprSerializedItem extends Expression {
         @Override
         public void prepareBuild(BuildContext buildContext) {
             super.prepareBuild(buildContext);
-            String itemVar = ExprSimpleLocalVariable.getVariable(itemString).replace("$", "ITEM_");
+            String itemVar = ExprLocalVariable.getVariable(itemString).replace("$", "ITEM_");
             if (!buildContext.getMainClass().hasField(itemVar)) {
                 buildContext.getMainClass().addField(
                         "public static org.bukkit.inventory.ItemStack " + itemVar + " = org.bukkit.configuration.file.YamlConfiguration" +
@@ -50,7 +50,7 @@ public class ExprSerializedItem extends Expression {
 
         @Override
         public String toJava() {
-            return ExprSimpleLocalVariable.getVariable(itemString).replace("$", "ITEM_");
+            return ExprLocalVariable.getVariable(itemString).replace("$", "ITEM_");
         }
 
         @Override

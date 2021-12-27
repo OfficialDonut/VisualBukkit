@@ -12,12 +12,12 @@ import java.util.List;
 public class CompProcedure extends PluginComponent {
 
     public CompProcedure() {
-        super("comp-procedure");
+        super("comp-procedure", "Procedure", "VB", "Defines a procedure");
     }
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter nameParameter = new StringLiteralParameter();
+        StringLiteralParameter nameParameter = new StringLiteralParameter("Name");
         Block block = new Block(this, nameParameter) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
@@ -26,7 +26,7 @@ public class CompProcedure extends PluginComponent {
                 procedureMethod.setBody(
                         "if (procedure.equalsIgnoreCase(" + arg(0) + ")) {" +
                         buildContext.getLocalVariableDeclarations() +
-                        toJava() +
+                        getChildJava() +
                         "return;" +
                         "}" +
                         procedureMethod.getBody());
@@ -34,8 +34,8 @@ public class CompProcedure extends PluginComponent {
         };
 
         block.getTab().textProperty().bind(Bindings
-                .when(nameParameter.textProperty().isNotEmpty())
-                .then(Bindings.concat("Procedure: ", nameParameter.textProperty()))
+                .when(nameParameter.getControl().textProperty().isNotEmpty())
+                .then(Bindings.concat("Procedure - ", nameParameter.getControl().textProperty()))
                 .otherwise("Procedure"));
 
         return block;

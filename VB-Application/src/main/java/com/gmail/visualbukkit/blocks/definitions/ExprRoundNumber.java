@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprRoundNumber extends Expression {
 
     public ExprRoundNumber() {
-        super("expr-round-number");
+        super("expr-round-number", "Round Number", "Math", "Rounds a number (half-up");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprRoundNumber extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 return "Math.round(" + arg(0) + ")";

@@ -1,65 +1,56 @@
 package com.gmail.visualbukkit.blocks;
 
-import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
-public abstract class BlockDefinition implements Comparable<BlockDefinition> {
+public sealed abstract class BlockDefinition implements Comparable<BlockDefinition> permits PluginComponent, Statement, Expression {
 
     private final String id;
     private final String title;
+    private final String tag;
     private final String description;
-    private final String[] parameterNames;
 
-    public BlockDefinition(String id) {
+    public BlockDefinition(String id, String title, String tag, String description) {
         this.id = id;
-        title = BlockRegistry.getString(this, "title", id);
-        description = BlockRegistry.getString(this, "descr", null);
-        String parameterString = BlockRegistry.getString(this, "param", null);
-        parameterNames = parameterString != null ? parameterString.split(",") : null;
+        this.title = title;
+        this.tag = "[" + tag + "]";
+        this.description = description;
     }
 
-    public abstract CodeBlock createBlock();
+    public abstract BlockSource<?> createSource();
 
-    public CodeBlock createBlock(JSONObject json) {
-        CodeBlock block = createBlock();
+    public abstract BlockNode createBlock();
+
+    public BlockNode createBlock(JSONObject json) {
+        BlockNode block = createBlock();
         block.deserialize(json);
         return block;
     }
 
     @Override
-    public int compareTo(BlockDefinition other) {
-        if (equals(other)) {
+    public int compareTo(BlockDefinition obj) {
+        if (equals(obj)) {
             return 0;
         }
-        int i = StringUtils.compareIgnoreCase(title, other.title);
+        int i = tag.compareTo(obj.tag);
         if (i != 0) {
             return i;
         }
-        if (parameterNames == null) {
-            return -1;
-        }
-        if (other.parameterNames == null) {
-            return 1;
-        }
-        i = parameterNames.length - other.parameterNames.length;
-        if (i != 0) {
-            return i;
-        }
-        return id.compareTo(other.id);
+        i = title.compareTo(obj.title);
+        return i != 0 ? i : id.compareTo(obj.id);
     }
-
 
     @Override
     public boolean equals(Object obj) {
         if (obj != null && getClass() == obj.getClass()) {
-            return id.equals(((BlockDefinition) obj).id);
+            BlockDefinition block = (BlockDefinition) obj;
+            return title.equals(block.title) && tag.equals(block.tag);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return title;
+        return tag + " " + title;
     }
 
     public final String getID() {
@@ -70,11 +61,11 @@ public abstract class BlockDefinition implements Comparable<BlockDefinition> {
         return title;
     }
 
-    public final String getDescription() {
-        return description;
+    public final String getTag() {
+        return tag;
     }
 
-    public final String[] getParameterNames() {
-        return parameterNames;
+    public final String getDescription() {
+        return description;
     }
 }

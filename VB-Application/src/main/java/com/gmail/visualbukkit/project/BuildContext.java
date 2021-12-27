@@ -4,6 +4,7 @@ import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,9 +19,13 @@ public class BuildContext {
     private Set<InputStream> jarDependencies = new HashSet<>();
     private Set<String> localVariables = new HashSet<>();
     private JavaClassSource mainClass;
+    private Path resourcesDir;
+    private boolean debugMode;
 
-    public BuildContext(JavaClassSource mainClass) {
+    public BuildContext(JavaClassSource mainClass, Path resourcesDir, boolean debugMode) {
         this.mainClass = mainClass;
+        this.resourcesDir = resourcesDir;
+        this.debugMode = debugMode;
     }
 
     public void addPluginModule(PluginModule module) {
@@ -88,5 +93,13 @@ public class BuildContext {
 
     public JavaClassSource getMainClass() {
         return mainClass;
+    }
+
+    public Path getResourcesDir() {
+        return resourcesDir;
+    }
+
+    public boolean isDebugMode() {
+        return debugMode;
     }
 }

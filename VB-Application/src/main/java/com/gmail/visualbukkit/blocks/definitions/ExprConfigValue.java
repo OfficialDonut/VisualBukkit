@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigValue extends Expression {
 
     public ExprConfigValue() {
-        super("expr-config-value");
+        super("expr-config-value", "Config Value", "Config", "A value from a config");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprConfigValue extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.ConfigurationSection")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Config", ClassInfo.of("org.bukkit.configuration.ConfigurationSection")), new ExpressionParameter("Key", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return arg(0) + ".get(" + arg(1) + ")";

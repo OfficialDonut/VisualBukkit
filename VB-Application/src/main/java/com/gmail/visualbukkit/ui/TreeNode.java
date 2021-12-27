@@ -1,45 +1,63 @@
 package com.gmail.visualbukkit.ui;
 
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseButton;
 
-public class TreeNode extends VBox {
+import java.util.*;
 
-    private final static String RIGHT_ARROW = "▸ ";
-    private final static String DOWN_ARROW = "▾ ";
-    private VBox content = new VBox(5);
-    private Label label;
-    private String labelText;
-    private boolean expanded;
+public class TreeNode<T extends Node> extends StyleableVBox {
+
+    private Label label = new Label();
+    private StyleableVBox content = new StyleableVBox();
+    private Comparator comparator;
+    private String collapsedText;
+    private String expandedText;
+    private boolean expanded = true;
+
+    public TreeNode(String labelText, Comparator<T> comparator) {
+        this.comparator = comparator;
+        collapsedText = "▸ " + labelText;
+        expandedText = "▾ " + labelText;
+
+        label.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+                toggle();
+                e.consume();
+            }
+        });
+
+        getStyleClass().add("tree-node");
+        getChildren().addAll(label, content);
+        toggle();
+    }
 
     public TreeNode(String labelText) {
-        super(5);
-        label = new Label(RIGHT_ARROW + (this.labelText = labelText));
-        label.setOnMouseClicked(e -> toggle());
-        content.setPadding(new Insets(0, 0, 0, 15));
-        content.setVisible(false);
-        content.setManaged(false);
-        getChildren().addAll(label, content);
-    }
-
-    public void add(Node node) {
-        content.getChildren().add(node);
-    }
-
-    public void remove(Node node) {
-        content.getChildren().remove(node);
-    }
-
-    public void clear() {
-        content.getChildren().clear();
+        this(labelText, null);
     }
 
     public void toggle() {
-        label.setText((expanded ? RIGHT_ARROW : DOWN_ARROW) + labelText);
         expanded = !expanded;
+        label.setText(expanded ? expandedText : collapsedText);
         content.setVisible(expanded);
         content.setManaged(expanded);
+    }
+
+    public void add(T node) {
+        content.getChildren().add(node);
+        sort();
+    }
+
+    public void remove(T node) {
+        content.getChildren().remove(node);
+        sort();
+    }
+
+    public void sort() {
+        if (comparator != null) {
+            Node[] sorted = content.getChildren().toArray(Node[]::new);
+            Arrays.sort(sorted, comparator);
+            content.getChildren().setAll(sorted);
+        }
     }
 }

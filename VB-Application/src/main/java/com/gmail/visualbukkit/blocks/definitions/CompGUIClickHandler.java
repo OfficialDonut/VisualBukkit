@@ -11,12 +11,12 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 public class CompGUIClickHandler extends PluginComponent {
 
     public CompGUIClickHandler() {
-        super("comp-gui-click-handler");
+        super("comp-gui-click-handler", "GUI Click Handler", "GUI", "Handles GUI clicks");
     }
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter nameParameter = new StringLiteralParameter();
+        StringLiteralParameter nameParameter = new StringLiteralParameter("GUI ID");
         Block block = new Block(this, nameParameter) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
@@ -26,15 +26,15 @@ public class CompGUIClickHandler extends PluginComponent {
                 eventMethod.setBody(eventMethod.getBody() +
                         "if (event.getID().equalsIgnoreCase(" + arg(0) + ")) {" +
                         buildContext.getLocalVariableDeclarations() +
-                        toJava() +
+                        getChildJava() +
                         "return;" +
                         "}");
             }
         };
 
         block.getTab().textProperty().bind(Bindings
-                .when(nameParameter.textProperty().isNotEmpty())
-                .then(Bindings.concat("GUI Click Handler: ", nameParameter.textProperty()))
+                .when(nameParameter.getControl().textProperty().isNotEmpty())
+                .then(Bindings.concat("GUI Click Handler - ", nameParameter.getControl().textProperty()))
                 .otherwise("GUI Click Handler"));
 
         return block;

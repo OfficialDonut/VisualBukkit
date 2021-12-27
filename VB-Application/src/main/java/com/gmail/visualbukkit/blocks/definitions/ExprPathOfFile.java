@@ -9,7 +9,7 @@ import java.io.File;
 public class ExprPathOfFile extends Expression {
 
     public ExprPathOfFile() {
-        super("expr-path-of-file");
+        super("expr-path-of-file", "Path of File", "File", "The path of a file");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprPathOfFile extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class))) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of(File.class))) {
             @Override
             public String toJava() {
                 return arg(0) + ".getCanonicalPath()";

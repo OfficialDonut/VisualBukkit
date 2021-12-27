@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprColoredString extends Expression {
 
     public ExprColoredString() {
-        super("expr-colored-string");
+        super("expr-colored-string", "Colored String", "String", "Colors a string with '&' as the color code character");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprColoredString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "ChatColor.translateAlternateColorCodes('&'," + arg(0) + ")";

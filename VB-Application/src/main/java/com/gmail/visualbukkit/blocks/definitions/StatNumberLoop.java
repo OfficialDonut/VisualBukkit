@@ -9,12 +9,12 @@ import javafx.scene.Parent;
 public class StatNumberLoop extends Container {
 
     public StatNumberLoop() {
-        super("stat-number-loop");
+        super("stat-number-loop", "Number Loop", "VB", "Loops a certain number of times");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.INT)) {
             @Override
             public String toJava() {
                 String loopVar = "loopNumber" + (getNestedLoops(this) + 1);
@@ -30,7 +30,7 @@ public class StatNumberLoop extends Container {
         int loops = 0;
         Parent parent = node.getParent();
         while (parent != null) {
-            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getID().equals("stat-number-loop")) {
+            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getClass() == StatNumberLoop.class) {
                 loops++;
             }
             parent = parent.getParent();

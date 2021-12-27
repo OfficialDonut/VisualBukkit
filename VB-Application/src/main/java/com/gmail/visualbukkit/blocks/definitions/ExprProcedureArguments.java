@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprProcedureArguments extends Expression {
 
     public ExprProcedureArguments() {
-        super("expr-procedure-arguments");
+        super("expr-procedure-arguments", "Procedure Arguments", "VB", "The arguments of a procedure");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprProcedureArguments extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-procedure");
+                checkForPluginComponent(CompProcedure.class);
             }
 
             @Override

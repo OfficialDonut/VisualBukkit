@@ -8,7 +8,7 @@ import java.io.File;
 public class ExprPluginDirectory extends Expression {
 
     public ExprPluginDirectory() {
-        super("expr-plugin-directory");
+        super("expr-plugin-directory", "Plugin Directory", "Bukkit", "The plugin directory");
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 public class ExprNewList extends VarArgsExpression {
 
     public ExprNewList() {
-        super("expr-new-list");
+        super("expr-new-list", "New List", "List", "Creates a new list");
     }
 
     @Override
@@ -23,12 +23,12 @@ public class ExprNewList extends VarArgsExpression {
         return new Block(this) {
             @Override
             public String toJava() {
-                int size = getParameters().size();
+                int size = parameters.length;
                 if (size == 0) {
                     return "new ArrayList()";
                 }
                 StringJoiner joiner = new StringJoiner(",");
-                for (BlockParameter parameter : getParameters()) {
+                for (BlockParameter<?> parameter : parameters) {
                     joiner.add(parameter.toJava());
                 }
                 return "new ArrayList(Arrays.asList(" + joiner + "))";
@@ -36,13 +36,12 @@ public class ExprNewList extends VarArgsExpression {
 
             @Override
             protected void increaseSize() {
-                addParameterLine("Object", new ExpressionParameter(ClassInfo.OBJECT));
+                push(new ExpressionParameter("Object", ClassInfo.OBJECT));
             }
 
             @Override
             protected void decreaseSize() {
-                getBody().getChildren().remove(getBody().getChildren().size() - 1);
-                getParameters().remove(getParameters().size() - 1);
+                pop();
             }
         };
     }

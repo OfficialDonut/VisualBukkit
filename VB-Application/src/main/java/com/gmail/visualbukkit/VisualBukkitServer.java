@@ -9,7 +9,11 @@ import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.CopyPasteManager;
 import com.gmail.visualbukkit.ui.LanguageManager;
 import com.gmail.visualbukkit.ui.NotificationManager;
+import com.gmail.visualbukkit.ui.SelectionManager;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import org.controlsfx.control.PopOver;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,7 +97,28 @@ public class VisualBukkitServer {
             try {
                 JSONObject json = new JSONObject(input.readUTF());
                 String id = json.optString("id");
-                if ("item".equals(id)) {
+                if ("error-report".equals(id)) {
+                    Platform.runLater(() -> {
+                        Statement.Block block = ProjectManager.getCurrentProject().getDebugMap().get(json.optString("block"));
+                        if (block != null) {
+                            PluginComponent.Block pluginComponent = block.getPluginComponentBlock();
+                            if (pluginComponent != null) {
+                                ProjectManager.getCurrentProject().openPluginComponent(pluginComponent);
+                                ScrollPane scrollPane = (ScrollPane) pluginComponent.getTab().getContent();
+                                double height = scrollPane.getViewportBounds().getHeight();
+                                scrollPane.setVvalue(scrollPane.getVmax() * ((((block.getBoundsInParent().getMaxY() + block.getBoundsInParent().getMinY()) / 2) - 0.5 * height) / (scrollPane.getContent().getBoundsInLocal().getHeight() - height)));
+                                PopOver popOver = new PopOver(new Label(json.optString("exception")));
+                                popOver.setAnimated(false);
+                                popOver.setDetachable(false);
+                                popOver.show(block);
+                                SelectionManager.select(block);
+                                NotificationManager.displayMessage(LanguageManager.get("message.imported_error.title"), LanguageManager.get("message.imported_error.content"));
+                                return;
+                            }
+                        }
+                        NotificationManager.displayError(LanguageManager.get("message.imported_error_fail.title"), LanguageManager.get("message.imported_error_fail.content"));
+                    });
+                } else if ("item".equals(id)) {
                     Platform.runLater(() -> {
                         CopyPasteManager.copyExpression(((ExprSerializedItem) BlockRegistry.getExpression("expr-serialized-item")).createBlock(json.optString("yaml", "")));
                         NotificationManager.displayMessage(LanguageManager.get("message.imported_item.title"), LanguageManager.get("message.imported_item.content"));
@@ -101,18 +126,17 @@ public class VisualBukkitServer {
                 } else if ("inv".equals(id)) {
                     Platform.runLater(() -> {
                         PluginComponent.Block guiBlock = BlockRegistry.getPluginComponent("comp-create-gui").createBlock();
-                        ProjectManager.getCurrentProject().addPluginComponent(guiBlock);
+                        ProjectManager.getCurrentProject().createPluginComponent(guiBlock, true);
                         JSONArray itemArray = json.optJSONArray("items");
                         if (itemArray != null) {
                             for (Object obj : itemArray) {
-                                if (obj instanceof JSONObject) {
-                                    JSONObject itemJson = (JSONObject) obj;
-                                    Statement.Block setItemBlock = BlockRegistry.getStatement("1b2f17c0b118cd5036f48cbd82ad5845").createBlock();
+                                if (obj instanceof JSONObject itemJson) {
+                                    Statement.Block setItemBlock = BlockRegistry.getStatement("org.bukkit.inventory.Inventory#setItem(int,org.bukkit.inventory.ItemStack)").createBlock();
                                     Expression.Block slotBlock = BlockRegistry.getExpression("expr-number").createBlock();
-                                    ((InputParameter) slotBlock.getParameters().get(0)).setText(String.valueOf(itemJson.optInt("slot")));
-                                    ((ExpressionParameter) setItemBlock.getParameters().get(0)).setExpression(BlockRegistry.getExpression("expr-gui-inventory").createBlock()).run();
-                                    ((ExpressionParameter) setItemBlock.getParameters().get(1)).setExpression(slotBlock).run();
-                                    ((ExpressionParameter) setItemBlock.getParameters().get(2)).setExpression(((ExprSerializedItem) BlockRegistry.getExpression("expr-serialized-item")).createBlock(itemJson.optString("yaml", ""))).run();
+                                    ((InputParameter) slotBlock.getParameters()[0]).getControl().setText(String.valueOf(itemJson.optInt("slot")));
+                                    ((ExpressionParameter) setItemBlock.getParameters()[0]).setExpression(BlockRegistry.getExpression("expr-created-gui-inventory").createBlock()).run();
+                                    ((ExpressionParameter) setItemBlock.getParameters()[1]).setExpression(slotBlock).run();
+                                    ((ExpressionParameter) setItemBlock.getParameters()[2]).setExpression(((ExprSerializedItem) BlockRegistry.getExpression("expr-serialized-item")).createBlock(itemJson.optString("yaml", ""))).run();
                                     guiBlock.getStatementHolder().addLast(setItemBlock).run();
                                 }
                             }
@@ -122,15 +146,15 @@ public class VisualBukkitServer {
                 } else if ("loc".equals(id) || "block-loc".equals(id)) {
                     Platform.runLater(() -> {
                         boolean isBlockLoc = "block-loc".equals(id);
-                        Expression.Block locBlock = BlockRegistry.getExpression(isBlockLoc ? "3b9e7a63077b10c70abc69e996e984bb" : "e6dcf84ff601849c49921eb275bb5c32").createBlock();
+                        Expression.Block locBlock = BlockRegistry.getExpression(isBlockLoc ? "org.bukkit.Location#Location(org.bukkit.World,double,double,double)" : "org.bukkit.Location#Location(org.bukkit.World,double,double,double,float,float)").createBlock();
                         Expression.Block worldBlock = BlockRegistry.getExpression("expr-new-string").createBlock();
-                        ((StringLiteralParameter) worldBlock.getParameters().get(0)).setText(json.optString("world", ""));
-                        ((ExpressionParameter) locBlock.getParameters().get(0)).setExpression(worldBlock).run();
+                        ((StringLiteralParameter) worldBlock.getParameters()[0]).getControl().setText(json.optString("world", ""));
+                        ((ExpressionParameter) locBlock.getParameters()[0]).setExpression(worldBlock).run();
                         String[] fields = isBlockLoc ? new String[]{"x", "y", "z"} : new String[]{"x", "y", "z", "yaw", "pitch"};
                         for (int i = 0; i < fields.length; i++) {
                             Expression.Block numberBlock = BlockRegistry.getExpression("expr-number").createBlock();
-                            ((InputParameter) numberBlock.getParameters().get(0)).setText(String.valueOf(json.optDouble(fields[i])));
-                            ((ExpressionParameter) locBlock.getParameters().get(i + 1)).setExpression(numberBlock).run();
+                            ((InputParameter) numberBlock.getParameters()[0]).getControl().setText(String.valueOf(json.optDouble(fields[i])));
+                            ((ExpressionParameter) locBlock.getParameters()[i + 1]).setExpression(numberBlock).run();
                         }
                         CopyPasteManager.copyExpression(locBlock);
                         NotificationManager.displayMessage(LanguageManager.get("message.imported_location.title"), LanguageManager.get("message.imported_location.content"));

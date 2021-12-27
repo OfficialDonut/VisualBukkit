@@ -8,7 +8,7 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 public class CompPluginEnable extends PluginComponent {
 
     public CompPluginEnable() {
-        super("comp-plugin-enable");
+        super("comp-plugin-enable", "Plugin Enable", "Bukkit", "Runs when the plugin enables");
     }
 
     @Override
@@ -21,7 +21,7 @@ public class CompPluginEnable extends PluginComponent {
                 enableMethod.setBody(enableMethod.getBody() +
                         "try {" +
                         buildContext.getLocalVariableDeclarations() +
-                        toJava() +
+                        getChildJava() +
                         "} catch (Exception e) { e.printStackTrace(); }");
             }
         };

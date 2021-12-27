@@ -12,12 +12,12 @@ import java.util.List;
 public class CompFunction extends PluginComponent {
 
     public CompFunction() {
-        super("comp-function");
+        super("comp-function", "Function", "VB", "Defines a function");
     }
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter nameParameter = new StringLiteralParameter();
+        StringLiteralParameter nameParameter = new StringLiteralParameter("Name");
         Block block = new Block(this, nameParameter) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
@@ -26,15 +26,15 @@ public class CompFunction extends PluginComponent {
                 functionMethod.setBody(
                         "if (function.equalsIgnoreCase(" + arg(0) + ")) {" +
                         buildContext.getLocalVariableDeclarations() +
-                        toJava() +
+                        getChildJava() +
                         "}" +
                         functionMethod.getBody());
             }
         };
 
         block.getTab().textProperty().bind(Bindings
-                .when(nameParameter.textProperty().isNotEmpty())
-                .then(Bindings.concat("Function: ", nameParameter.textProperty()))
+                .when(nameParameter.getControl().textProperty().isNotEmpty())
+                .then(Bindings.concat("Function - ", nameParameter.getControl().textProperty()))
                 .otherwise("Function"));
 
         return block;

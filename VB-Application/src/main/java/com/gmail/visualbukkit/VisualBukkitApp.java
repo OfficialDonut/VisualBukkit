@@ -1,8 +1,9 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.ExpressionSelector;
-import com.gmail.visualbukkit.blocks.StatementSelector;
+import com.gmail.visualbukkit.blocks.BlockSelector;
+import com.gmail.visualbukkit.blocks.Expression;
+import com.gmail.visualbukkit.blocks.Statement;
 import com.gmail.visualbukkit.extensions.DefaultBlocksExtension;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
 import com.gmail.visualbukkit.project.Project;
@@ -13,6 +14,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
@@ -20,6 +22,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -27,21 +30,19 @@ import javafx.util.Duration;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -53,7 +54,7 @@ public class VisualBukkitApp extends Application {
     private static SettingsManager settingsManager;
 
     private static ExecutorService executorService = Executors.newCachedThreadPool();
-    private static Path dataDir = Paths.get(System.getProperty("user.home"), "Visual Bukkit");
+    private static Path dataDir = Paths.get(System.getProperty("user.home"), "VisualBukkit5");
     private static Path dataFile = dataDir.resolve("data.json");
     private static JSONObject data;
     private static Timeline autosaveTimeline;
@@ -61,10 +62,10 @@ public class VisualBukkitApp extends Application {
 
     private static BorderPane rootPane = new BorderPane();
     private static SplitPane splitPane = new SplitPane();
+    private static TabPane sidePane = new TabPane();
     private static Scene scene = new Scene(rootPane, 750, 500);
     private static Stage stage;
-    private static StatementSelector statementSelector;
-    private static ExpressionSelector expressionSelector;
+    private static BlockSelector blockSelector;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -93,14 +94,36 @@ public class VisualBukkitApp extends Application {
         settingsManager.bindStyle(logger.getTextArea());
         settingsManager.bindStyle(rootPane);
 
-        statementSelector = new StatementSelector();
-        expressionSelector = new ExpressionSelector();
-
         rootPane.setTop(createMenuBar());
         rootPane.setCenter(splitPane);
 
         splitPane.widthProperty().addListener((o, oldValue, newValue) -> Platform.runLater(() -> splitPane.setDividerPositions(0.25)));
-        splitPane.getItems().addAll(statementSelector, new Pane());
+        splitPane.getItems().addAll(sidePane, new Pane());
+
+        sidePane.setSide(Side.LEFT);
+        sidePane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        sidePane.getTabs().addAll(
+                new Tab(LanguageManager.get("label.block_selector"), blockSelector = new BlockSelector()),
+                new Tab(LanguageManager.get("label.plugin_settings")));
+
+        sidePane.setOnDragOver(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof Statement.Block || source instanceof Expression.Block) {
+                e.acceptTransferModes(TransferMode.ANY);
+                e.consume();
+            }
+        });
+
+        sidePane.setOnDragDropped(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof Statement.Block || source instanceof Expression.Block) {
+                UndoManager.run(source instanceof Statement.Block ?
+                        ((Statement.Block) source).getStatementHolder().removeStack((Statement.Block) source) :
+                        ((Expression.Block) source).getExpressionParameter().clear());
+                e.setDropCompleted(true);
+                e.consume();
+            }
+        });
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
@@ -119,11 +142,9 @@ public class VisualBukkitApp extends Application {
              InputStream javaBlocksInputStream = VisualBukkitApp.class.getResourceAsStream("/blocks/JavaBlocks.json")) {
             stage.getIcons().add(new Image(iconInputStream));
             System.out.println("Loading blocks...");
-            JSONArray bukkitBlockArray = new JSONArray(IOUtils.toString(bukkitBlocksInputStream, StandardCharsets.UTF_8));
-            JSONArray javaBlockArray = new JSONArray(IOUtils.toString(javaBlocksInputStream, StandardCharsets.UTF_8));
-            BlockRegistry.register(DefaultBlocksExtension.getInstance(), bukkitBlockArray, ResourceBundle.getBundle("lang.BukkitBlocks"));
-            BlockRegistry.register(DefaultBlocksExtension.getInstance(), javaBlockArray, ResourceBundle.getBundle("lang.JavaBlocks"));
-            BlockRegistry.register(DefaultBlocksExtension.getInstance(), "com.gmail.visualbukkit.blocks.definitions", ResourceBundle.getBundle("lang.CustomBlocks"));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), new JSONArray(new JSONTokener(bukkitBlocksInputStream)));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), new JSONArray(new JSONTokener(javaBlocksInputStream)));
+            BlockRegistry.register(DefaultBlocksExtension.getInstance(), "com.gmail.visualbukkit.blocks.definitions");
         }
 
         System.out.println("Loading extensions...");
@@ -136,7 +157,6 @@ public class VisualBukkitApp extends Application {
         notifyPreloader(new Preloader.ProgressNotification(1));
         System.out.println("Finished loading.");
         ProjectManager.openLast();
-        statementSelector.loadPinned();
 
         (server = new VisualBukkitServer()).start().whenComplete((o, e) -> {
             if (e != null) {
@@ -211,17 +231,18 @@ public class VisualBukkitApp extends Application {
                                 }
                             });
                         }),
+                        new SeparatorMenuItem(),
                         new ActionMenuItem(LanguageManager.get("menu_item.check_update"), e -> {
                             if (!isUpdateAvailable()) {
                                 NotificationManager.displayMessage(LanguageManager.get("message.no_update.title"), LanguageManager.get("message.no_update.content"));
                             }
-                        })),
+                        }),
+                        new ActionMenuItem(LanguageManager.get("menu_item.log"), e -> logger.show())),
                 new Menu(LanguageManager.get("menu.edit"), null,
                         new ActionMenuItem(LanguageManager.get("menu_item.undo"), e -> UndoManager.undo()),
                         new ActionMenuItem(LanguageManager.get("menu_item.redo"), e -> UndoManager.redo())),
                 new Menu(LanguageManager.get("menu.extensions"), null,
-                        new ActionMenuItem(LanguageManager.get("menu_item.install_extension"), e -> ExtensionManager.promptInstall()),
-                        new ActionMenuItem(LanguageManager.get("menu_item.manage_extensions"), e -> ExtensionManager.openViewer()),
+                        new ActionMenuItem(LanguageManager.get("menu_item.manage_extensions"), e -> openDirectory(ExtensionManager.getExtensionsDir())),
                         new ActionMenuItem(LanguageManager.get("menu_item.extension_help"), e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions")))),
                 settingsManager.createMenu(),
                 new Menu(LanguageManager.get("menu.help"), null,
@@ -285,8 +306,9 @@ public class VisualBukkitApp extends Application {
     }
 
     public boolean isUpdateAvailable() {
-        try (InputStream inputStream = new URL("https://raw.githubusercontent.com/OfficialDonut/VisualBukkit/master/VB-Application/version").openStream()) {
-            String latestVersion = IOUtils.toString(inputStream, StandardCharsets.UTF_8).trim();
+        try (InputStream inputStream = new URL("https://api.github.com/repos/OfficialDonut/VisualBukkit/releases/latest").openStream()) {
+            JSONObject response = new JSONObject(new JSONTokener(inputStream));
+            String latestVersion = response.getString("tag_name");
             if (version != null && !version.equals(latestVersion)) {
                 ButtonType viewButton = new ButtonType(LanguageManager.get("button.view_update"));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format(LanguageManager.get("dialog.update.content"), version, latestVersion), viewButton, new ButtonType(LanguageManager.get("button.ignore_update")));
@@ -301,7 +323,7 @@ public class VisualBukkitApp extends Application {
                 });
                 return true;
             }
-        } catch (IOException ignored) {}
+        } catch (Exception ignored) {}
         return false;
     }
 
@@ -337,6 +359,10 @@ public class VisualBukkitApp extends Application {
         return splitPane;
     }
 
+    public static TabPane getSidePane() {
+        return sidePane;
+    }
+
     public static Scene getScene() {
         return scene;
     }
@@ -345,11 +371,7 @@ public class VisualBukkitApp extends Application {
         return stage;
     }
 
-    public static StatementSelector getStatementSelector() {
-        return statementSelector;
-    }
-
-    public static ExpressionSelector getExpressionSelector() {
-        return expressionSelector;
+    public static BlockSelector getBlockSelector() {
+        return blockSelector;
     }
 }

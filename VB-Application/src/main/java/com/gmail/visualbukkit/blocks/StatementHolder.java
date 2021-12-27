@@ -1,16 +1,23 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.StyleableVBox;
 import com.gmail.visualbukkit.ui.UndoManager;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class StatementHolder extends StyleableVBox {
+
+    private StatementConnector parentConnector;
+    private boolean debugMode;
+
+    public StatementHolder(StatementConnector parentConnector) {
+        this.parentConnector = parentConnector;
+    }
 
     public UndoManager.RevertableAction addFirst(Statement.Block... blocks) {
         return add(null, blocks);
@@ -148,6 +155,11 @@ public class StatementHolder extends StyleableVBox {
         }
     }
 
+    public StatementConnector getPreviousConnector(Statement.Block block) {
+        Statement.Block prev = getPrevious(block);
+        return prev != null ? prev.getConnector() : parentConnector;
+    }
+
     public Statement.Block getPrevious(Statement.Block block) {
         int i = getChildren().indexOf(block) - 1;
         return i >= 0 ? (Statement.Block) getChildren().get(i) : null;
@@ -158,17 +170,50 @@ public class StatementHolder extends StyleableVBox {
         return i < getChildren().size() ? (Statement.Block) getChildren().get(i) : null;
     }
 
-    public Statement.Block getFirst() {
-        return getChildren().isEmpty() ? null : (Statement.Block) getChildren().get(0);
-    }
-
-    public Statement.Block getLast() {
-        int i = getChildren().size() - 1;
-        return i >= 0 ? (Statement.Block) getChildren().get(i) : null;
+    public StatementConnector getLastEnabledConnector() {
+        if (!getChildren().isEmpty()) {
+            for (int i = getChildren().size() - 1; i >= 0; i--) {
+                Statement.Block block = (Statement.Block) getChildren().get(i);
+                if (!block.isDisabled()) {
+                    return block.getConnector();
+                }
+            }
+        }
+        return parentConnector;
     }
 
     @SuppressWarnings("unchecked")
     public List<Statement.Block> getBlocks() {
-        return Collections.unmodifiableList((ObservableList<Statement.Block>) (Object) getChildren());
+        return (List<Statement.Block>) (Object) getChildrenUnmodifiable();
+    }
+
+    public void setDebugMode(boolean debugMode) {
+        this.debugMode = debugMode;
+    }
+
+    public String toJava() {
+        List<Statement.Block> blocks = getBlocks();
+        if (debugMode) {
+            String java = "";
+            for (int i = blocks.size() - 1; i >= 0; i--) {
+                Statement.Block block = blocks.get(i);
+                String id = RandomStringUtils.randomAlphanumeric(16);
+                ProjectManager.getCurrentProject().getDebugMap().put(id, block);
+                java = new StringBuilder()
+                        .append("try {")
+                        .append(block.toJava())
+                        .append(java)
+                        .append("} catch (Exception $").append(id).append(") {")
+                        .append("PluginMain.reportError(\"").append(id).append("\",$").append(id).append(");")
+                        .append("}")
+                        .toString();
+            }
+            return java;
+        }
+        StringBuilder builder = new StringBuilder();
+        for (Statement.Block block : blocks) {
+            builder.append(block.toJava());
+        }
+        return builder.toString();
     }
 }

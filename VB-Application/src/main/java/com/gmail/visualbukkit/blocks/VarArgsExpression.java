@@ -1,12 +1,15 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.ui.IconButton;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 public abstract class VarArgsExpression extends Expression {
 
-    public VarArgsExpression(String id) {
-        super(id);
+    public VarArgsExpression(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
     }
 
     @Override
@@ -19,10 +22,10 @@ public abstract class VarArgsExpression extends Expression {
 
     public static abstract class Block extends Expression.Block {
 
-        protected int size = 0;
+        private int size = 0;
 
-        public Block(VarArgsExpression expression) {
-            super(expression);
+        public Block(VarArgsExpression expression, BlockParameter<?>... parameters) {
+            super(expression, parameters);
             addToHeader(new IconButton("plus", null, e -> {
                 increaseSize();
                 size++;
@@ -38,6 +41,35 @@ public abstract class VarArgsExpression extends Expression {
         protected abstract void increaseSize();
 
         protected abstract void decreaseSize();
+
+        protected void push(BlockParameter<?> parameter) {
+            parameters = Arrays.copyOf(parameters, parameters.length + 1);
+            parameters[parameters.length - 1] = parameter;
+            getBody().getChildren().add(parameter);
+            adjustParameterLabels();
+        }
+
+        protected void pop() {
+            BlockParameter<?> parameter = parameters[parameters.length - 1];
+            parameters = Arrays.copyOf(parameters, parameters.length - 1);
+            getBody().getChildren().remove(parameter);
+            adjustParameterLabels();
+        }
+
+        private void adjustParameterLabels() {
+            if (parameters.length > 0) {
+                int maxLen = -1;
+                for (BlockParameter<?> parameter : parameters) {
+                    int len = parameter.getLabelText().length();
+                    if (len > maxLen) {
+                        maxLen = len;
+                    }
+                }
+                for (BlockParameter<?> parameter : parameters) {
+                    parameter.getLabel().setText(String.format("%-" + (maxLen + 1) + "s", parameter.getLabelText() + ":"));
+                }
+            }
+        }
 
         @Override
         public JSONObject serialize() {

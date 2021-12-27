@@ -7,12 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class StatLogInfo extends Statement {
 
     public StatLogInfo() {
-        super("stat-log-info");
+        super("stat-log-info", "Log Info", "Bukkit", "Logs an INFO message");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Message", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "PluginMain.getInstance().getLogger().info(" + arg(0) + ");";

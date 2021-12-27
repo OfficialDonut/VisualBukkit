@@ -7,12 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class StatLogError extends Statement {
 
     public StatLogError() {
-        super("stat-log-error");
+        super("stat-log-error", "Log Error", "Bukkit", "Logs a SEVERE message");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Message", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "PluginMain.getInstance().getLogger().severe(" + arg(0) + ");";

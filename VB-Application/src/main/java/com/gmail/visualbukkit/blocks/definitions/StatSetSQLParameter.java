@@ -9,16 +9,16 @@ import java.sql.PreparedStatement;
 public class StatSetSQLParameter extends Statement {
 
     public StatSetSQLParameter() {
-        super("stat-set-sql-parameter");
+        super("stat-set-sql-parameter", "Set Statement Parameter", "SQL", "Sets a statement parameter (parameter numbers start at 1)");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(PreparedStatement.class)), new ExpressionParameter(ClassInfo.INT), new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Statement", ClassInfo.of(PreparedStatement.class)), new ExpressionParameter("Parameter", ClassInfo.INT), new ExpressionParameter("Value", ClassInfo.OBJECT)) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIClickedItem extends Expression {
 
     public ExprGUIClickedItem() {
-        super("expr-gui-clicked-item");
+        super("expr-gui-clicked-item", "Clicked Item", "GUI", "The clicked item");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprGUIClickedItem extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-gui-click-handler");
+                checkForPluginComponent(CompGUIClickHandler.class);
             }
 
             @Override

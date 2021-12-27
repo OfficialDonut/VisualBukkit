@@ -8,12 +8,12 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class StatSetItemName extends Statement {
 
     public StatSetItemName() {
-        super("stat-set-item-name");
+        super("stat-set-item-name", "Set ItemStack Name", "ItemStack", "Sets the name of an ItemStack");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.inventory.ItemStack")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("ItemStack", ClassInfo.of("org.bukkit.inventory.ItemStack")), new ExpressionParameter("Name", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -28,11 +28,13 @@ public class StatSetItemName extends Statement {
     }
 
     private static final String NAME_METHOD =
-            "public static void setItemName(org.bukkit.inventory.ItemStack item, String name) {\n" +
-            "    org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();\n" +
-            "    if (itemMeta != null) {\n" +
-            "        itemMeta.setDisplayName(name);\n" +
-            "        item.setItemMeta(itemMeta);\n" +
-            "    }\n" +
-            "}";
+            """
+            public static void setItemName(org.bukkit.inventory.ItemStack item, String name) {
+                org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();
+                if (itemMeta != null) {
+                    itemMeta.setDisplayName(name);
+                    item.setItemMeta(itemMeta);
+                }
+            }
+            """;
 }

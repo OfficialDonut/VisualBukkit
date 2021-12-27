@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprCommandSender extends Expression {
 
     public ExprCommandSender() {
-        super("expr-command-sender");
+        super("expr-command-sender", "Command Sender", "Command", "The player/console who executed a command");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprCommandSender extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-command");
+                checkForPluginComponent(CompCommand.class);
             }
 
             @Override

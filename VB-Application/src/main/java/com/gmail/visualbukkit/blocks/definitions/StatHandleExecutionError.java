@@ -6,7 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class StatHandleExecutionError extends Container {
 
     public StatHandleExecutionError() {
-        super("stat-handle-execution-error");
+        super("stat-handle-execution-error", "Handle Execution Error", "VB", "Runs code if an error occurred in the previous attempt execution block");
     }
 
     @Override
@@ -15,7 +15,7 @@ public class StatHandleExecutionError extends Container {
             @Override
             public void update() {
                 super.update();
-                checkForPrevious("stat-attempt-execution");
+                checkForPrevious(StatAttemptExecution.class);
             }
 
             @Override

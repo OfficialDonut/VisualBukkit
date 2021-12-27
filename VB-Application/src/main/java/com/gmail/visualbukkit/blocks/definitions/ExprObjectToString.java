@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprObjectToString extends Expression {
 
     public ExprObjectToString() {
-        super("expr-object-to-string");
+        super("expr-object-to-string", "Object To String", "String", "The string representation of an object");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprObjectToString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Object", ClassInfo.OBJECT)) {
             @Override
             public String toJava() {
                 return "String.valueOf(" + arg(0) + ")";

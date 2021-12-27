@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsConfigKeySet extends Expression {
 
     public ExprIsConfigKeySet() {
-        super("expr-is-config-key-set");
+        super("expr-is-config-key-set", "Is Config Key Set", "Config", "Checks if a config has a value for a key");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprIsConfigKeySet extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.Configuration")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Config", ClassInfo.of("org.bukkit.configuration.Configuration")), new ExpressionParameter("Key", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return arg(0) + ".isSet(" + arg(1) + ")";

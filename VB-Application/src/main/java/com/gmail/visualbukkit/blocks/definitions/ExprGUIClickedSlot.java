@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprGUIClickedSlot extends Expression {
 
     public ExprGUIClickedSlot() {
-        super("expr-gui-clicked-slot");
+        super("expr-gui-clicked-slot", "Clicked Slot", "GUI", "The clicked slot");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprGUIClickedSlot extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-gui-click-handler");
+                checkForPluginComponent(CompGUIClickHandler.class);
             }
 
             @Override

@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.Statement;
 public class StatCancelScheduledTask extends Statement {
 
     public StatCancelScheduledTask() {
-        super("stat-cancel-scheduled-task");
+        super("stat-cancel-scheduled-task", "Cancel Scheduled Task", "Bukkit", "Cancels a scheduled task");
     }
 
     @Override
@@ -14,7 +14,7 @@ public class StatCancelScheduledTask extends Statement {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-schedule-task");
+                checkForContainer(StatScheduleTask.class);
             }
 
             @Override

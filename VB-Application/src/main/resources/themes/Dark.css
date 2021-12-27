@@ -1,22 +1,21 @@
-.block-info-popover > .content {
-    -fx-background-color: -fx-control-inner-background;
-    -fx-border-color: lightgray;
-}
-
-.block-info-popover .label {
-    -fx-text-fill: white;
+.block-selector > .list-view {
+    -fx-control-inner-background: rgb(32, 34, 37);
+    -fx-control-inner-background-alt: rgb(32, 34, 37);
 }
 
 .dialog-pane {
     -fx-background-color: derive(-fx-background, -30%);
 }
 
-.list-cell {
-    -fx-control-inner-background: black;
+.extension-view {
+    -fx-border-color: black;
 }
 
-.list-view .label {
-    -fx-text-fill: white;
+.extension-view .list-view {
+    -fx-control-inner-background: rgb(20, 20, 20);
+    -fx-control-inner-background-alt: rgb(20, 20, 20);
+    -fx-selection-bar: -fx-accent;
+    -fx-selection-bar-non-focused: -fx-accent;
 }
 
 .log-display {
@@ -32,12 +31,9 @@
     -fx-background-color: rgb(35, 43, 50);
 }
 
-.plugin-settings-grid {
-    -fx-background-color: derive(-fx-background, -30%);
-}
-
-.project-button-bar {
-    -fx-border-color: gray transparent transparent transparent;
+.popover .label {
+    -fx-background-color: black;
+    -fx-border-color: white;
 }
 
 .root {
@@ -50,5 +46,5 @@
 }
 
 .tab-pane .tab-header-background {
-    -fx-background-color: derive(-fx-background, 10%);
+    -fx-background-color: derive(-fx-background, 5%);
 }

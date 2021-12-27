@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsPluginEnabled extends Expression {
 
     public ExprIsPluginEnabled() {
-        super("expr-is-plugin-enabled");
+        super("expr-is-plugin-enabled", "Is Plugin Enabled", "Bukkit", "Checks if a plugin is enabled");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprIsPluginEnabled extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Plugin", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "Bukkit.getPluginManager().isPluginEnabled(" + arg(0) + ")";

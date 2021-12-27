@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class ExprSQLResultSetValue extends Expression {
 
     public ExprSQLResultSetValue() {
-        super("expr-sql-result-set-value");
+        super("expr-sql-result-set-value", "Result Set Value", "SQL", "The value in a result set column");
     }
 
     @Override
@@ -19,11 +19,11 @@ public class ExprSQLResultSetValue extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(ResultSet.class)), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("ResultSet", ClassInfo.of(ResultSet.class)), new ExpressionParameter("Column", ClassInfo.STRING)) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class ExprNewNamedItemWithLore extends Expression {
 
     public ExprNewNamedItemWithLore() {
-        super("expr-new-named-item-with-lore");
+        super("expr-new-named-item-with-lore", "New Named ItemStack With Lore", "ItemStack", "A named ItemStack with lore");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ExprNewNamedItemWithLore extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.Material")), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.LIST)) {
+        return new Block(this, new ExpressionParameter("Material", ClassInfo.of("org.bukkit.Material")), new ExpressionParameter("Name", ClassInfo.STRING), new ExpressionParameter("Lore", ClassInfo.LIST)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -33,14 +33,16 @@ public class ExprNewNamedItemWithLore extends Expression {
     }
 
     private static final String ITEM_METHOD =
-            "public static org.bukkit.inventory.ItemStack getNamedItemWithLore(Material material, String name, List<String> lore) {\n" +
-            "    org.bukkit.inventory.ItemStack item = new org.bukkit.inventory.ItemStack(material);\n" +
-            "    org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();\n" +
-            "    if (itemMeta != null) {\n" +
-            "        itemMeta.setDisplayName(name);\n" +
-            "        itemMeta.setLore(lore);\n" +
-            "        item.setItemMeta(itemMeta);\n" +
-            "    }\n" +
-            "    return item;\n" +
-            "}";
+            """
+            public static org.bukkit.inventory.ItemStack getNamedItemWithLore(Material material, String name, List<String> lore) {
+                org.bukkit.inventory.ItemStack item = new org.bukkit.inventory.ItemStack(material);
+                org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();
+                if (itemMeta != null) {
+                    itemMeta.setDisplayName(name);
+                    itemMeta.setLore(lore);
+                    item.setItemMeta(itemMeta);
+                }
+                return item;
+            }
+            """;
 }

@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprRandomBoolean extends Expression {
 
     public ExprRandomBoolean() {
-        super("expr-random-boolean");
+        super("expr-random-boolean", "Random Boolean", "Math", "A random boolean");
     }
 
     @Override

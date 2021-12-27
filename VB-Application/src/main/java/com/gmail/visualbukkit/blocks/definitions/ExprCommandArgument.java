@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprCommandArgument extends Expression {
 
     public ExprCommandArgument() {
-        super("expr-command-argument");
+        super("expr-command-argument", "Command Argument", "Bukkit", "An argument of a command (indices start at 0)");
     }
 
     @Override
@@ -17,11 +17,11 @@ public class ExprCommandArgument extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.INT)) {
+        return new Block(this, new ExpressionParameter("Index", ClassInfo.INT)) {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-command");
+                checkForPluginComponent(CompCommand.class);
             }
 
             @Override

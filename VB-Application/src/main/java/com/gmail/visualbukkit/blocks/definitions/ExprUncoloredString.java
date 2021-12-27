@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprUncoloredString extends Expression {
 
     public ExprUncoloredString() {
-        super("expr-uncolored-string");
+        super("expr-uncolored-string", "Uncolored String", "String", "Strips all colors from a string");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprUncoloredString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "ChatColor.stripColor(" + arg(0) + ")";

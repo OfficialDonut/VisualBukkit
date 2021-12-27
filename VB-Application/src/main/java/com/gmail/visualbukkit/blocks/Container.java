@@ -7,14 +7,14 @@ import javafx.css.PseudoClass;
 import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.control.Separator;
-import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public abstract class Container extends Statement {
 
-    public Container(String id) {
-        super(id);
+    public Container(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
     }
 
     @Override
@@ -28,33 +28,47 @@ public abstract class Container extends Statement {
     public static abstract class Block extends Statement.Block {
 
         private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
-        private StatementHolder childHolder = new StatementHolder();
-        private StatementConnector childConnector = new StatementConnector(block -> UndoManager.run(childHolder.addFirst(block)));
 
-        public Block(Statement statement, BlockParameter... parameters) {
+        private StatementHolder childHolder;
+        private StatementConnector childConnector;
+
+        public Block(Statement statement, BlockParameter<?>... parameters) {
             super(statement, parameters);
 
+            childConnector = new StatementConnector() {
+                @Override
+                public void accept(Statement.Block block) {
+                    UndoManager.run(childHolder.addFirst(block));
+                }
+            };
+            childHolder = new StatementHolder(childConnector);
+
+            Separator separator = new Separator();
+            getBody().getChildren().addAll(separator, new StyleableVBox(childConnector, childHolder));
             getBody().getStyleClass().remove("statement-block");
             getBody().getStyleClass().add("container-block");
 
-            getBody().getChildren().addAll(new Separator(), new StyleableVBox(childConnector, childHolder));
-
-            getBody().addEventHandler(DragEvent.DRAG_OVER, e -> {
-                Bounds bounds = childHolder.localToScreen(childHolder.getBoundsInLocal());
-                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                    double deltaY = e.getScreenY() - bounds.getMinY();
-                    if (deltaY > 0 && deltaY < childConnector.getMaxHeight()) {
-                        childConnector.show();
-                        return;
+            getBody().setOnDragOver(e -> {
+                Object source = e.getGestureSource();
+                if (source instanceof StatementSource || source instanceof Statement.Block) {
+                    if (e.getY() > separator.getBoundsInParent().getMinY()) {
+                        Bounds bounds = childHolder.localToScreen(childHolder.getBoundsInLocal());
+                        (e.getScreenY() < bounds.getMinY() ? childConnector : childHolder.getLastEnabledConnector()).show();
+                    } else {
+                        getStatementHolder().getPreviousConnector(this).show();
                     }
+                    e.acceptTransferModes(TransferMode.ANY);
+                    e.consume();
                 }
-                if (!childHolder.getChildren().isEmpty()) {
-                    if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                        double deltaY = e.getScreenY() - bounds.getMaxY();
-                        if (deltaY > 0 && deltaY < childConnector.getMaxHeight()) {
-                            childHolder.getLast().getStatementConnector().show();
-                        }
-                    }
+            });
+
+            getBody().setOnDragDropped(e -> {
+                Object source = e.getGestureSource();
+                if (source instanceof StatementSource || source instanceof Statement.Block) {
+                    StatementConnector.getCurrent().accept(source instanceof StatementSource s ? s.getBlockDefinition().createBlock() : (Statement.Block) source);
+                    SoundManager.SNAP.play();
+                    e.setDropCompleted(true);
+                    e.consume();
                 }
             });
 
@@ -81,19 +95,24 @@ public abstract class Container extends Statement {
         }
 
         @Override
+        public void toggleExpressionParameters(boolean state) {
+            super.toggleExpressionParameters(state);
+            for (Statement.Block block : childHolder.getBlocks()) {
+                block.toggleExpressionParameters(state);
+            }
+        }
+
+        @Override
         public void prepareBuild(BuildContext buildContext) {
             super.prepareBuild(buildContext);
+            childHolder.setDebugMode(buildContext.isDebugMode());
             for (Statement.Block block : childHolder.getBlocks()) {
                 block.prepareBuild(buildContext);
             }
         }
 
         public String getChildJava() {
-            StringBuilder builder = new StringBuilder();
-            for (Statement.Block block : childHolder.getBlocks()) {
-                builder.append(block.toJava());
-            }
-            return builder.toString();
+            return childHolder.toJava();
         }
 
         @Override
@@ -111,23 +130,13 @@ public abstract class Container extends Statement {
             JSONArray childArray = json.optJSONArray("children");
             if (childArray != null) {
                 for (Object obj : childArray) {
-                    if (obj instanceof JSONObject) {
-                        JSONObject childJson = (JSONObject) obj;
+                    if (obj instanceof JSONObject childJson) {
                         Statement statement = BlockRegistry.getStatement(childJson.optString("="));
                         if (statement != null) {
                             childHolder.addLast(statement.createBlock(childJson)).run();
                         }
                     }
                 }
-            }
-        }
-
-        @Override
-        protected void setAcceptingConnections(boolean state) {
-            super.setAcceptingConnections(state);
-            childConnector.setAcceptingConnections(state);
-            for (Statement.Block block : childHolder.getBlocks()) {
-                block.setAcceptingConnections(state);
             }
         }
 

@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 public class ExprNewSQLStatement extends Expression {
 
     public ExprNewSQLStatement() {
-        super("expr-new-sql-statement");
+        super("expr-new-sql-statement", "New Statement", "SQL", "A SQL statement");
     }
 
     @Override
@@ -19,11 +19,11 @@ public class ExprNewSQLStatement extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("SQL", ClassInfo.STRING)) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

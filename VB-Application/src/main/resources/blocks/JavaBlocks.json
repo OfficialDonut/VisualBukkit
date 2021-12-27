@@ -1,524 +1,845 @@
 [
   {
-    "method": "replaceAll",
-    "param": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
+    "descr": "Returns the index of the last occurrence of the specified element\\nin this list, or -1 if this list does not contain the element.\\nMore formally, returns the highest index i such that\\n(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i))),\\nor -1 if there is no such index.",
+    "param-names": [
+      "List",
+      "O"
     ],
-    "id": "003abaa3ff2710e7b29108d323f514f4",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
-  },
-  {
-    "method": "clear",
-    "param": ["java.util.Map"],
-    "id": "00e6f77ada2b95df9a6b5c692fb1ff73",
-    "class": "java.util.Map"
-  },
-  {
-    "method": "compareToIgnoreCase",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "01351984ced67166c8b26a9ee22586f3",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
-    "method": "startsWith",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "035d2bb8a51dabb254bc70a8323cee3f",
-    "class": "java.lang.String",
-    "return": "boolean"
-  },
-  {
-    "method": "toUpperCase",
-    "param": ["java.lang.String"],
-    "id": "03b9e2fb49114042aa4aaf8f7c4f1926",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
-  },
-  {
-    "method": "replaceFirst",
-    "param": [
-      "java.lang.String",
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "09f0b8d476f6b18bd4ce615624282054",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
-  },
-  {
-    "method": "trim",
-    "param": ["java.lang.String"],
-    "id": "0ebbf3b9ad531f5e979625090d9f8ef1",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
-  },
-  {
-    "method": "containsKey",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object"
-    ],
-    "id": "10a60ac792b83ec0a85fc510961e9a8c",
-    "class": "java.util.Map",
-    "return": "boolean"
-  },
-  {
-    "method": "addAll",
-    "param": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "id": "12263bf2b2e31b980ae34716ec192a43",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "add",
-    "param": [
+    "param-types": [
       "java.util.List",
       "java.lang.Object"
     ],
-    "id": "1fc1eecc9c5d327cd3088f9cc9286de8",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "contains",
-    "param": [
-      "java.lang.String",
-      "java.lang.CharSequence"
-    ],
-    "id": "20df59f4ce5a3103e230fd9cc2d859f4",
-    "class": "java.lang.String",
-    "return": "boolean"
-  },
-  {
-    "method": "compareTo",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "314b183818e556b05a53b767b798109f",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
-    "static": true,
-    "method": "format",
-    "param": [
-      "java.lang.String",
-      "java.lang.Object[]"
-    ],
-    "id": "37ecab955c06a038e006805e60da4021",
-    "class": "java.lang.String",
-    "return": "java.lang.String"
-  },
-  {
     "method": "lastIndexOf",
-    "param": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "id": "394928b49d4cef6b7c2684b3b7c50b88",
+    "id": "java.util.List#lastIndexOf(java.lang.Object)",
     "class": "java.util.List",
     "return": "int"
   },
   {
-    "method": "keySet",
-    "param": ["java.util.Map"],
-    "id": "39e4447ed7472fc6573026ef5a4995db",
-    "class": "java.util.Map",
-    "return": "java.util.Set"
+    "descr": "Returns the index of the first occurrence of the specified element\\nin this list, or -1 if this list does not contain the element.\\nMore formally, returns the lowest index i such that\\n(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i))),\\nor -1 if there is no such index.",
+    "param-names": [
+      "List",
+      "O"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "method": "indexOf",
+    "id": "java.util.List#indexOf(java.lang.Object)",
+    "class": "java.util.List",
+    "return": "int"
   },
   {
-    "method": "substring",
-    "param": [
-      "java.lang.String",
-      "int",
-      "int"
-    ],
-    "id": "3b80c769a6e966d127e0733205165c2c",
+    "descr": "Returns a string whose value is this string, with any leading and trailing\\nwhitespace removed.\\n\\nIf this String object represents an empty character\\nsequence, or the first and last characters of character sequence\\nrepresented by this String object both have codes\\ngreater than '\\u0020' (the space character), then a\\nreference to this String object is returned.\\n\\nOtherwise, if there is no character with a code greater than\\n'\\u0020' in the string, then a\\nString object representing an empty string is\\nreturned.\\n\\nOtherwise, let k be the index of the first character in the\\nstring whose code is greater than '\\u0020', and let\\nm be the index of the last character in the string whose code\\nis greater than '\\u0020'. A String\\nobject is returned, representing the substring of this string that\\nbegins with the character at index k and ends with the\\ncharacter at index m-that is, the result of\\nthis.substring(k, m + 1).\\n\\nThis method may be used to trim whitespace (as defined above) from\\nthe beginning and end of a string.",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
+    "method": "trim",
+    "id": "java.lang.String#trim()",
     "class": "java.lang.String",
     "return": "java.lang.String"
   },
   {
-    "method": "size",
-    "param": ["java.util.List"],
-    "id": "416d4bccdd00bc3e4bade125c934aec2",
-    "class": "java.util.List",
-    "return": "int"
-  },
-  {
-    "method": "addAll",
-    "param": [
-      "java.util.List",
-      "int",
-      "java.util.Collection"
-    ],
-    "id": "440b2b79feaf62440aa1eade90e878ee",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
+    "descr": "Removes all of the elements from this list (optional operation).\\nThe list will be empty after this call returns.",
+    "param-names": ["List"],
+    "param-types": ["java.util.List"],
     "method": "clear",
-    "param": ["java.util.List"],
-    "id": "4768d151bb7765322a5efdbf152db581",
+    "id": "java.util.List#clear()",
     "class": "java.util.List"
   },
   {
-    "method": "split",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
+    "descr": "Appends all of the elements in the specified collection to the end of\\nthis list, in the order that they are returned by the specified\\ncollection's iterator (optional operation).  The behavior of this\\noperation is undefined if the specified collection is modified while\\nthe operation is in progress.  (Note that this will occur if the\\nspecified collection is this list, and it's nonempty.)",
+    "param-names": [
+      "List",
+      "C"
     ],
-    "id": "486681406385b2097fa17185c20f505a",
-    "class": "java.lang.String",
-    "return": "java.lang.String[]"
-  },
-  {
-    "method": "indexOf",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
+    "param-types": [
+      "java.util.List",
+      "java.util.Collection"
     ],
-    "id": "4ff80cc6d5ff70219cec622b981b3223",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
-    "method": "isEmpty",
-    "param": ["java.lang.String"],
-    "id": "5094c7902de8f8ba7038fbe11cf299f0",
-    "class": "java.lang.String",
+    "method": "addAll",
+    "id": "java.util.List#addAll(java.util.Collection<? extends E>)",
+    "class": "java.util.List",
     "return": "boolean"
   },
   {
-    "method": "substring",
-    "param": [
-      "java.lang.String",
-      "int"
+    "descr": "Returns true if this map contains a mapping for the\\nspecified key.",
+    "param-names": [
+      "HashMap",
+      "Key"
     ],
-    "id": "590d72149eb48a883c1d73f21e73e618",
+    "param-types": [
+      "java.util.HashMap",
+      "java.lang.Object"
+    ],
+    "method": "containsKey",
+    "id": "java.util.HashMap#containsKey(java.lang.Object)",
+    "class": "java.util.HashMap",
+    "return": "boolean"
+  },
+  {
+    "descr": "Encodes this String into a sequence of bytes using the given\\njava.nio.charset.Charset charset, storing the result into a\\nnew byte array.\\n This method always replaces malformed-input and unmappable-character\\nsequences with this charset's default replacement byte array.  The\\njava.nio.charset.CharsetEncoder class should be used when more\\ncontrol over the encoding process is required.",
+    "param-names": [
+      "String",
+      "Charset"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.nio.charset.Charset"
+    ],
+    "method": "getBytes",
+    "id": "java.lang.String#getBytes(java.nio.charset.Charset)",
+    "class": "java.lang.String",
+    "return": "byte[]"
+  },
+  {
+    "descr": "Replaces the element at the specified position in this list with the\\nspecified element (optional operation).",
+    "param-names": [
+      "List",
+      "Index",
+      "Element"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int",
+      "java.lang.Object"
+    ],
+    "method": "set",
+    "id": "java.util.List#set(int,E)",
+    "class": "java.util.List",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Encodes this String into a sequence of bytes using the named\\ncharset, storing the result into a new byte array.\\n The behavior of this method when this string cannot be encoded in\\nthe given charset is unspecified.  The java.nio.charset.CharsetEncoder class should be used when more control\\nover the encoding process is required.",
+    "param-names": [
+      "String",
+      "Charset Name"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "getBytes",
+    "id": "java.lang.String#getBytes(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "byte[]"
+  },
+  {
+    "descr": "Replaces the first substring of this string that matches the given regular expression with the\\ngiven replacement.\\n An invocation of this method of the form\\nstr.replaceFirst(regex, repl)\\nyields exactly the same result as the expression\\n\\n\\njava.util.regex.Pattern.java.util.regex.Pattern#compile compile(regex).java.util.regex.Pattern#matcher(java.lang.CharSequence) matcher(str).java.util.regex.Matcher#replaceFirst replaceFirst(repl)\\n\\n\\n\\nNote that backslashes (\\) and dollar signs ($) in the\\nreplacement string may cause the results to be different than if it were\\nbeing treated as a literal replacement string; see\\njava.util.regex.Matcher#replaceFirst.\\nUse java.util.regex.Matcher#quoteReplacement to suppress the special\\nmeaning of these characters, if desired.",
+    "param-names": [
+      "String",
+      "Regex",
+      "Replacement"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "replaceFirst",
+    "id": "java.lang.String#replaceFirst(java.lang.String,java.lang.String)",
     "class": "java.lang.String",
     "return": "java.lang.String"
   },
   {
-    "method": "replace",
-    "param": [
+    "descr": "Returns true if this list contains no elements.",
+    "param-names": ["List"],
+    "param-types": ["java.util.List"],
+    "method": "isEmpty",
+    "id": "java.util.List#isEmpty()",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Removes the element at the specified position in this list (optional\\noperation).  Shifts any subsequent elements to the left (subtracts one\\nfrom their indices).  Returns the element that was removed from the\\nlist.",
+    "param-names": [
+      "List",
+      "Index"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int"
+    ],
+    "method": "remove",
+    "id": "java.util.List#remove(int)",
+    "class": "java.util.List",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Removes the first occurrence of the specified element from this list,\\nif it is present (optional operation).  If this list does not contain\\nthe element, it is unchanged.  More formally, removes the element with\\nthe lowest index i such that\\n(o==null&nbsp;?&nbsp;get(i)==null&nbsp;:&nbsp;o.equals(get(i)))\\n(if such an element exists).  Returns true if this list\\ncontained the specified element (or equivalently, if this list changed\\nas a result of the call).",
+    "param-names": [
+      "List",
+      "O"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "method": "remove",
+    "id": "java.util.List#remove(java.lang.Object)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Returns the index within this string of the last occurrence of the\\nspecified substring, searching backward starting at the specified index.\\nThe returned index is the largest value k for which:\\n\\nk <= fromIndex && this.startsWith(str, k)\\n\\nIf no such value of k exists, then -1 is returned.",
+    "param-names": [
+      "String",
+      "Str",
+      "From Index"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "method": "lastIndexOf",
+    "id": "java.lang.String#lastIndexOf(java.lang.String,int)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Compares two strings lexicographically, ignoring case\\ndifferences. This method returns an integer whose sign is that of\\ncalling compareTo with normalized versions of the strings\\nwhere case differences have been eliminated by calling\\nCharacter.toLowerCase(Character.toUpperCase(character)) on\\neach character.\\n\\nNote that this method does not take locale into account,\\nand will result in an unsatisfactory ordering for certain locales.\\nThe java.text package provides collators to allow\\nlocale-sensitive ordering.",
+    "param-names": [
+      "String",
+      "Str"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "compareToIgnoreCase",
+    "id": "java.lang.String#compareToIgnoreCase(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Returns the number of key-value mappings in this map.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "size",
+    "id": "java.util.HashMap#size()",
+    "class": "java.util.HashMap",
+    "return": "int"
+  },
+  {
+    "descr": "Compares this String to another String, ignoring case\\nconsiderations.  Two strings are considered equal ignoring case if they\\nare of the same length and corresponding characters in the two strings\\nare equal ignoring case.\\n Two characters c1 and c2 are considered the same\\nignoring case if at least one of the following is true:\\n\\n The two characters are the same (as compared by the\\n== operator)\\n Applying the method java.lang.Character#toUpperCase(char) to each character\\nproduces the same result\\n Applying the method java.lang.Character#toLowerCase(char) to each character\\nproduces the same result\\n",
+    "param-names": [
+      "String",
+      "Another String"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "equalsIgnoreCase",
+    "id": "java.lang.String#equalsIgnoreCase(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Returns a string that is a substring of this string. The\\nsubstring begins at the specified beginIndex and\\nextends to the character at index endIndex - 1.\\nThus the length of the substring is endIndex-beginIndex.\\n\\nExamples:\\n\\n\"hamburger\".substring(4, 8) returns \"urge\"\\n\"smiles\".substring(1, 5) returns \"mile\"\\n",
+    "param-names": [
+      "String",
+      "Begin Index",
+      "End Index"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "int",
+      "int"
+    ],
+    "method": "substring",
+    "id": "java.lang.String#substring(int,int)",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "descr": "Returns a formatted string using the specified format string and\\narguments.\\n The locale always used is the one returned by java.util.Locale#getDefault() Locale.getDefault().",
+    "param-names": [
+      "Format",
+      "Args"
+    ],
+    "static": true,
+    "param-types": [
+      "java.lang.String",
+      "java.lang.Object[]"
+    ],
+    "method": "format",
+    "id": "java.lang.String#format(java.lang.String,java.lang.Object...)",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "descr": "Returns the index within this string of the first occurrence of the\\nspecified substring, starting at the specified index.\\nThe returned index is the smallest value k for which:\\n\\nk &gt;= fromIndex && this.startsWith(str, k)\\n\\nIf no such value of k exists, then -1 is returned.",
+    "param-names": [
+      "String",
+      "Str",
+      "From Index"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "method": "indexOf",
+    "id": "java.lang.String#indexOf(java.lang.String,int)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Returns true if this list contains all of the elements of the\\nspecified collection.",
+    "param-names": [
+      "List",
+      "C"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "method": "containsAll",
+    "id": "java.util.List#containsAll(java.util.Collection<?>)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Replaces each substring of this string that matches the given regular expression with the\\ngiven replacement.\\n An invocation of this method of the form\\nstr.replaceAll(regex, repl)\\nyields exactly the same result as the expression\\n\\n\\njava.util.regex.Pattern.java.util.regex.Pattern#compile compile(regex).java.util.regex.Pattern#matcher(java.lang.CharSequence) matcher(str).java.util.regex.Matcher#replaceAll replaceAll(repl)\\n\\n\\n\\nNote that backslashes (\\) and dollar signs ($) in the\\nreplacement string may cause the results to be different than if it were\\nbeing treated as a literal replacement string; see\\njava.util.regex.Matcher#replaceAll Matcher.replaceAll.\\nUse java.util.regex.Matcher#quoteReplacement to suppress the special\\nmeaning of these characters, if desired.",
+    "param-names": [
+      "String",
+      "Regex",
+      "Replacement"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "replaceAll",
+    "id": "java.lang.String#replaceAll(java.lang.String,java.lang.String)",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "descr": "Replaces each substring of this string that matches the literal target\\nsequence with the specified literal replacement sequence. The\\nreplacement proceeds from the beginning of the string to the end, for\\nexample, replacing \"aa\" with \"b\" in the string \"aaa\" will result in\\n\"ba\" rather than \"ab\".",
+    "param-names": [
+      "String",
+      "Target",
+      "Replacement"
+    ],
+    "param-types": [
       "java.lang.String",
       "java.lang.CharSequence",
       "java.lang.CharSequence"
     ],
-    "id": "5dd5860cb30211a3a542b9e943dd38aa",
+    "method": "replace",
+    "id": "java.lang.String#replace(java.lang.CharSequence,java.lang.CharSequence)",
     "class": "java.lang.String",
     "return": "java.lang.String"
   },
   {
-    "method": "isEmpty",
-    "param": ["java.util.Map"],
-    "id": "5fe3ac4848da518f9187684eb7d663dd",
-    "class": "java.util.Map",
-    "return": "boolean"
-  },
-  {
-    "method": "containsAll",
-    "param": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "id": "6258818936b7041839ee14bb2a886cab",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "matches",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "63b81223c2050a35c9fda94f884f5c30",
+    "descr": "A Comparator that orders String objects as by\\ncompareToIgnoreCase. This comparator is serializable.\\n\\nNote that this Comparator does not take locale into account,\\nand will result in an unsatisfactory ordering for certain locales.\\nThe java.text package provides Collators to allow\\nlocale-sensitive ordering.",
+    "static": true,
+    "field": "CASE_INSENSITIVE_ORDER",
+    "id": "java.lang.String#CASE_INSENSITIVE_ORDER",
     "class": "java.lang.String",
-    "return": "boolean"
+    "return": "java.util.Comparator"
   },
   {
-    "method": "containsValue",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object"
-    ],
-    "id": "650ad22ca330882fdb04e7a003314aeb",
-    "class": "java.util.Map",
-    "return": "boolean"
-  },
-  {
-    "method": "put",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object",
-      "java.lang.Object"
-    ],
-    "id": "6c60968a58cbded67ec68f50bd75a40e",
-    "class": "java.util.Map",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "equalsIgnoreCase",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "6c9e3e963cbadd502f2b34f300ed5820",
+    "descr": "Encodes this String into a sequence of bytes using the\\nplatform's default charset, storing the result into a new byte array.\\n The behavior of this method when this string cannot be encoded in\\nthe default charset is unspecified.  The java.nio.charset.CharsetEncoder class should be used when more control\\nover the encoding process is required.",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
+    "method": "getBytes",
+    "id": "java.lang.String#getBytes()",
     "class": "java.lang.String",
-    "return": "boolean"
+    "return": "byte[]"
   },
   {
-    "method": "remove",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object"
+    "descr": "Copies all of the mappings from the specified map to this map.\\nThese mappings will replace any mappings that this map had for\\nany of the keys currently in the specified map.",
+    "param-names": [
+      "HashMap",
+      "M"
     ],
-    "id": "706a27b83856011773f7978e94af1d4d",
-    "class": "java.util.Map",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "split",
-    "param": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "id": "73dbb6bd5438545e74f3b8ba563e656a",
-    "class": "java.lang.String",
-    "return": "java.lang.String[]"
-  },
-  {
-    "method": "isEmpty",
-    "param": ["java.util.List"],
-    "id": "7c5075626aa73627366a9306cc93a0d0",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "removeAll",
-    "param": [
-      "java.util.List",
-      "java.util.Collection"
-    ],
-    "id": "7edfd2e69e832ab99ca6fa38d7b2f8d7",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "values",
-    "param": ["java.util.Map"],
-    "id": "835edd4ece423cacd16c484f2365bbf8",
-    "class": "java.util.Map",
-    "return": "java.util.Collection"
-  },
-  {
-    "method": "putAll",
-    "param": [
-      "java.util.Map",
+    "param-types": [
+      "java.util.HashMap",
       "java.util.Map"
     ],
-    "id": "8d55c1e1d8b381654b2420cc066d9531",
-    "class": "java.util.Map"
+    "method": "putAll",
+    "id": "java.util.HashMap#putAll(java.util.Map<? extends K,? extends V>)",
+    "class": "java.util.HashMap"
   },
   {
-    "method": "putIfAbsent",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object",
-      "java.lang.Object"
-    ],
-    "id": "a16458ec245b5d93567078eb711a51ac",
-    "class": "java.util.Map",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "get",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object"
-    ],
-    "id": "a7dd2755112ea11caad03e0b2be05a34",
-    "class": "java.util.Map",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "startsWith",
-    "param": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "id": "ab9bc6353c3e4f38dab6c6a97bc1d383",
-    "class": "java.lang.String",
-    "return": "boolean"
-  },
-  {
-    "method": "lastIndexOf",
-    "param": [
-      "java.lang.String",
-      "java.lang.String"
-    ],
-    "id": "b58fa010b5b914346b0126440fd4f4fb",
+    "descr": "Returns the length of this string.\\nThe length is equal to the number of Unicode\\ncode units in the string.",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
+    "method": "length",
+    "id": "java.lang.String#length()",
     "class": "java.lang.String",
     "return": "int"
   },
   {
-    "method": "charAt",
-    "param": [
+    "descr": "Returns a view of the portion of this list between the specified\\nfromIndex, inclusive, and toIndex, exclusive.  (If\\nfromIndex and toIndex are equal, the returned list is\\nempty.)  The returned list is backed by this list, so non-structural\\nchanges in the returned list are reflected in this list, and vice-versa.\\nThe returned list supports all of the optional list operations supported\\nby this list.\\nThis method eliminates the need for explicit range operations (of\\nthe sort that commonly exist for arrays).  Any operation that expects\\na list can be used as a range operation by passing a subList view\\ninstead of a whole list.  For example, the following idiom\\nremoves a range of elements from a list:\\nto).clear();\\n\\nSimilar idioms may be constructed for indexOf and\\nlastIndexOf, and all of the algorithms in the\\nCollections class can be applied to a subList.\\nThe semantics of the list returned by this method become undefined if\\nthe backing list (i.e., this list) is structurally modified in\\nany way other than via the returned list.  (Structural modifications are\\nthose that change the size of this list, or otherwise perturb it in such\\na fashion that iterations in progress may yield incorrect results.)",
+    "param-names": [
+      "List",
+      "From Index",
+      "To Index"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int",
+      "int"
+    ],
+    "method": "subList",
+    "id": "java.util.List#subList(int,int)",
+    "class": "java.util.List",
+    "return": "java.util.List"
+  },
+  {
+    "descr": "Returns the value to which the specified key is mapped,\\nor null if this map contains no mapping for the key.\\nMore formally, if this map contains a mapping from a key\\nk to a value v such that (key==null ? k==null :\\nkey.equals(k)), then this method returns v; otherwise\\nit returns null.  (There can be at most one such mapping.)\\nA return value of null does not necessarily\\nindicate that the map contains no mapping for the key; it's also\\npossible that the map explicitly maps the key to null.\\nThe #containsKey containsKey operation may be used to\\ndistinguish these two cases.",
+    "param-names": [
+      "HashMap",
+      "Key"
+    ],
+    "param-types": [
+      "java.util.HashMap",
+      "java.lang.Object"
+    ],
+    "method": "get",
+    "id": "java.util.HashMap#get(java.lang.Object)",
+    "class": "java.util.HashMap",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Returns true if this map contains no key-value mappings.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "isEmpty",
+    "id": "java.util.HashMap#isEmpty()",
+    "class": "java.util.HashMap",
+    "return": "boolean"
+  },
+  {
+    "descr": "Removes from this list all of its elements that are contained in the\\nspecified collection (optional operation).",
+    "param-names": [
+      "List",
+      "C"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "method": "removeAll",
+    "id": "java.util.List#removeAll(java.util.Collection<?>)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Removes the mapping for the specified key from this map if present.",
+    "param-names": [
+      "HashMap",
+      "Key"
+    ],
+    "param-types": [
+      "java.util.HashMap",
+      "java.lang.Object"
+    ],
+    "method": "remove",
+    "id": "java.util.HashMap#remove(java.lang.Object)",
+    "class": "java.util.HashMap",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Returns a Set view of the keys contained in this map.\\nThe set is backed by the map, so changes to the map are\\nreflected in the set, and vice-versa.  If the map is modified\\nwhile an iteration over the set is in progress (except through\\nthe iterator's own remove operation), the results of\\nthe iteration are undefined.  The set supports element removal,\\nwhich removes the corresponding mapping from the map, via the\\nIterator.remove, Set.remove,\\nremoveAll, retainAll, and clear\\noperations.  It does not support the add or addAll\\noperations.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "keySet",
+    "id": "java.util.HashMap#keySet()",
+    "class": "java.util.HashMap",
+    "return": "java.util.Set"
+  },
+  {
+    "descr": "Returns a string that is a substring of this string. The\\nsubstring begins with the character at the specified index and\\nextends to the end of this string. \\nExamples:\\n\\n\"unhappy\".substring(2) returns \"happy\"\\n\"Harbison\".substring(3) returns \"bison\"\\n\"emptiness\".substring(9) returns \"\" (an empty string)\\n",
+    "param-names": [
+      "String",
+      "Begin Index"
+    ],
+    "param-types": [
       "java.lang.String",
       "int"
     ],
-    "id": "b63092a4f631883eda976ab142f58899",
+    "method": "substring",
+    "id": "java.lang.String#substring(int)",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "descr": "Tells whether or not this string matches the given regular expression.\\n An invocation of this method of the form\\nstr.matches(regex) yields exactly the\\nsame result as the expression\\n\\njava.util.regex.Pattern.java.util.regex.Pattern#matches(String,CharSequence) matches()\\n",
+    "param-names": [
+      "String",
+      "Regex"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "matches",
+    "id": "java.lang.String#matches(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Tests if this string ends with the specified suffix.",
+    "param-names": [
+      "String",
+      "Suffix"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "endsWith",
+    "id": "java.lang.String#endsWith(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Appends the specified element to the end of this list (optional\\noperation).\\nLists that support this operation may place limitations on what\\nelements may be added to this list.  In particular, some\\nlists will refuse to add null elements, and others will impose\\nrestrictions on the type of elements that may be added.  List\\nclasses should clearly specify in their documentation any restrictions\\non what elements may be added.",
+    "param-names": [
+      "List",
+      "E"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "method": "add",
+    "id": "java.util.List#add(E)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Returns the char value at the\\nspecified index. An index ranges from 0 to\\nlength() - 1. The first char value of the sequence\\nis at index 0, the next at index 1,\\nand so on, as for array indexing.\\nIf the char value specified by the index is a\\nsurrogate, the surrogate\\nvalue is returned.",
+    "param-names": [
+      "String",
+      "Index"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "int"
+    ],
+    "method": "charAt",
+    "id": "java.lang.String#charAt(int)",
     "class": "java.lang.String",
     "return": "char"
   },
   {
+    "descr": "Returns true if this map maps one or more keys to the\\nspecified value.",
+    "param-names": [
+      "HashMap",
+      "Value"
+    ],
+    "param-types": [
+      "java.util.HashMap",
+      "java.lang.Object"
+    ],
+    "method": "containsValue",
+    "id": "java.util.HashMap#containsValue(java.lang.Object)",
+    "class": "java.util.HashMap",
+    "return": "boolean"
+  },
+  {
+    "descr": "Compares two strings lexicographically.\\nThe comparison is based on the Unicode value of each character in\\nthe strings. The character sequence represented by this\\nString object is compared lexicographically to the\\ncharacter sequence represented by the argument string. The result is\\na negative integer if this String object\\nlexicographically precedes the argument string. The result is a\\npositive integer if this String object lexicographically\\nfollows the argument string. The result is zero if the strings\\nare equal; compareTo returns 0 exactly when\\nthe #equals(Object) method would return true.\\n\\nThis is the definition of lexicographic ordering. If two strings are\\ndifferent, then either they have different characters at some index\\nthat is a valid index for both strings, or their lengths are different,\\nor both. If they have different characters at one or more index\\npositions, let k be the smallest such index; then the string\\nwhose character at position k has the smaller value, as\\ndetermined by using the &lt; operator, lexicographically precedes the\\nother string. In this case, compareTo returns the\\ndifference of the two character values at position k in\\nthe two string -- that is, the value:\\n\\nthis.charAt(k)-anotherString.charAt(k)\\n\\nIf there is no index position at which they differ, then the shorter\\nstring lexicographically precedes the longer string. In this case,\\ncompareTo returns the difference of the lengths of the\\nstrings -- that is, the value:\\n\\nthis.length()-anotherString.length()\\n",
+    "param-names": [
+      "String",
+      "Another String"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "compareTo",
+    "id": "java.lang.String#compareTo(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Returns a Set view of the mappings contained in this map.\\nThe set is backed by the map, so changes to the map are\\nreflected in the set, and vice-versa.  If the map is modified\\nwhile an iteration over the set is in progress (except through\\nthe iterator's own remove operation, or through the\\nsetValue operation on a map entry returned by the\\niterator) the results of the iteration are undefined.  The set\\nsupports element removal, which removes the corresponding\\nmapping from the map, via the Iterator.remove,\\nSet.remove, removeAll, retainAll and\\nclear operations.  It does not support the\\nadd or addAll operations.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "entrySet",
+    "id": "java.util.HashMap#entrySet()",
+    "class": "java.util.HashMap",
+    "return": "java.util.Set"
+  },
+  {
+    "descr": "Inserts all of the elements in the specified collection into this\\nlist at the specified position (optional operation).  Shifts the\\nelement currently at that position (if any) and any subsequent\\nelements to the right (increases their indices).  The new elements\\nwill appear in this list in the order that they are returned by the\\nspecified collection's iterator.  The behavior of this operation is\\nundefined if the specified collection is modified while the\\noperation is in progress.  (Note that this will occur if the specified\\ncollection is this list, and it's nonempty.)",
+    "param-names": [
+      "List",
+      "Index",
+      "C"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int",
+      "java.util.Collection"
+    ],
+    "method": "addAll",
+    "id": "java.util.List#addAll(int,java.util.Collection<? extends E>)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Splits this string around matches of the given regular expression.\\n This method works as if by invoking the two-argument #split(String, int) split method with the given expression and a limit\\nargument of zero.  Trailing empty strings are therefore not included in\\nthe resulting array.\\n The string \"boo:and:foo\", for example, yields the following\\nresults with these expressions:\\n\\n\\nRegex\\nResult\\n\\n:\\n{ \"boo\", \"and\", \"foo\" }\\no\\n{ \"b\", \"\", \":and:f\" }\\n",
+    "param-names": [
+      "String",
+      "Regex"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "split",
+    "id": "java.lang.String#split(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "java.lang.String[]"
+  },
+  {
+    "descr": "Inserts the specified element at the specified position in this list\\n(optional operation).  Shifts the element currently at that position\\n(if any) and any subsequent elements to the right (adds one to their\\nindices).",
+    "param-names": [
+      "List",
+      "Index",
+      "Element"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int",
+      "java.lang.Object"
+    ],
+    "method": "add",
+    "id": "java.util.List#add(int,E)",
+    "class": "java.util.List"
+  },
+  {
+    "descr": "Tests if the substring of this string beginning at the\\nspecified index starts with the specified prefix.",
+    "param-names": [
+      "String",
+      "Prefix",
+      "Toffset"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "method": "startsWith",
+    "id": "java.lang.String#startsWith(java.lang.String,int)",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Returns true if, and only if, #length() is 0.",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
+    "method": "isEmpty",
+    "id": "java.lang.String#isEmpty()",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Removes all of the mappings from this map.\\nThe map will be empty after this call returns.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "clear",
+    "id": "java.util.HashMap#clear()",
+    "class": "java.util.HashMap"
+  },
+  {
+    "descr": "Splits this string around matches of the given\\nregular expression.\\n The array returned by this method contains each substring of this\\nstring that is terminated by another substring that matches the given\\nexpression or is terminated by the end of the string.  The substrings in\\nthe array are in the order in which they occur in this string.  If the\\nexpression does not match any part of the input then the resulting array\\nhas just one element, namely this string.\\n When there is a positive-width match at the beginning of this\\nstring then an empty leading substring is included at the beginning\\nof the resulting array. A zero-width match at the beginning however\\nnever produces such empty leading substring.\\n The limit parameter controls the number of times the\\npattern is applied and therefore affects the length of the resulting\\narray.  If the limit n is greater than zero then the pattern\\nwill be applied at most n&nbsp;-&nbsp;1 times, the array's\\nlength will be no greater than n, and the array's last entry\\nwill contain all input beyond the last matched delimiter.  If n\\nis non-positive then the pattern will be applied as many times as\\npossible and the array can have any length.  If n is zero then\\nthe pattern will be applied as many times as possible, the array can\\nhave any length, and trailing empty strings will be discarded.\\n The string \"boo:and:foo\", for example, yields the\\nfollowing results with these parameters:\\n\\n\\nRegex\\nLimit\\nResult\\n\\n:\\n2\\n{ \"boo\", \"and:foo\" }\\n:\\n5\\n{ \"boo\", \"and\", \"foo\" }\\n:\\n-2\\n{ \"boo\", \"and\", \"foo\" }\\no\\n5\\n{ \"b\", \"\", \":and:f\", \"\", \"\" }\\no\\n-2\\n{ \"b\", \"\", \":and:f\", \"\", \"\" }\\no\\n0\\n{ \"b\", \"\", \":and:f\" }\\n\\n An invocation of this method of the form\\nstr.split(regex,&nbsp;n)\\nyields the same result as the expression\\n\\n\\njava.util.regex.Pattern.java.util.regex.Pattern#compile compile(regex).java.util.regex.Pattern#split(java.lang.CharSequence,int) split(str,&nbsp;n)\\n\\n",
+    "param-names": [
+      "String",
+      "Regex",
+      "Limit"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String",
+      "int"
+    ],
+    "method": "split",
+    "id": "java.lang.String#split(java.lang.String,int)",
+    "class": "java.lang.String",
+    "return": "java.lang.String[]"
+  },
+  {
+    "descr": "Returns the index within this string of the first occurrence of the\\nspecified substring.\\nThe returned index is the smallest value k for which:\\n\\nthis.startsWith(str, k)\\n\\nIf no such value of k exists, then -1 is returned.",
+    "param-names": [
+      "String",
+      "Str"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "indexOf",
+    "id": "java.lang.String#indexOf(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Returns the element at the specified position in this list.",
+    "param-names": [
+      "List",
+      "Index"
+    ],
+    "param-types": [
+      "java.util.List",
+      "int"
+    ],
+    "method": "get",
+    "id": "java.util.List#get(int)",
+    "class": "java.util.List",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Associates the specified value with the specified key in this map.\\nIf the map previously contained a mapping for the key, the old\\nvalue is replaced.",
+    "param-names": [
+      "HashMap",
+      "Key",
+      "Value"
+    ],
+    "param-types": [
+      "java.util.HashMap",
+      "java.lang.Object",
+      "java.lang.Object"
+    ],
+    "method": "put",
+    "id": "java.util.HashMap#put(K,V)",
+    "class": "java.util.HashMap",
+    "return": "java.lang.Object"
+  },
+  {
+    "descr": "Returns a Collection view of the values contained in this map.\\nThe collection is backed by the map, so changes to the map are\\nreflected in the collection, and vice-versa.  If the map is\\nmodified while an iteration over the collection is in progress\\n(except through the iterator's own remove operation),\\nthe results of the iteration are undefined.  The collection\\nsupports element removal, which removes the corresponding\\nmapping from the map, via the Iterator.remove,\\nCollection.remove, removeAll,\\nretainAll and clear operations.  It does not\\nsupport the add or addAll operations.",
+    "param-names": ["HashMap"],
+    "param-types": ["java.util.HashMap"],
+    "method": "values",
+    "id": "java.util.HashMap#values()",
+    "class": "java.util.HashMap",
+    "return": "java.util.Collection"
+  },
+  {
+    "descr": "Converts all of the characters in this String to lower\\ncase using the rules of the default locale. This is equivalent to calling\\ntoLowerCase(Locale.getDefault()).\\n\\nNote: This method is locale sensitive, and may produce unexpected\\nresults if used for strings that are intended to be interpreted locale\\nindependently.\\nExamples are programming language identifiers, protocol keys, and HTML\\ntags.\\nFor instance, \"TITLE\".toLowerCase() in a Turkish locale\\nreturns \"t\\u0131tle\", where '\\u0131' is the\\nLATIN SMALL LETTER DOTLESS I character.\\nTo obtain correct results for locale insensitive strings, use\\ntoLowerCase(Locale.ROOT).\\n",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
     "method": "toLowerCase",
-    "param": ["java.lang.String"],
-    "id": "b8427c0a4adad397f1a877fda422b9a3",
+    "id": "java.lang.String#toLowerCase()",
     "class": "java.lang.String",
     "return": "java.lang.String"
   },
   {
-    "method": "remove",
-    "param": [
-      "java.util.List",
-      "java.lang.Object"
+    "descr": "Returns true if and only if this string contains the specified\\nsequence of char values.",
+    "param-names": [
+      "String",
+      "S"
     ],
-    "id": "b940fe39b6608f4f31abd59ebdba0968",
-    "class": "java.util.List",
-    "return": "boolean"
-  },
-  {
-    "method": "getOrDefault",
-    "param": [
-      "java.util.Map",
-      "java.lang.Object",
-      "java.lang.Object"
-    ],
-    "id": "bba50fbe7a538b7b4b67e83b64898d64",
-    "class": "java.util.Map",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "lastIndexOf",
-    "param": [
+    "param-types": [
       "java.lang.String",
-      "java.lang.String",
-      "int"
+      "java.lang.CharSequence"
     ],
-    "id": "c760a43e3e81f7ae50ddde10e8309cde",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
     "method": "contains",
-    "param": [
-      "java.util.List",
-      "java.lang.Object"
+    "id": "java.lang.String#contains(java.lang.CharSequence)",
+    "class": "java.lang.String",
+    "return": "boolean"
+  },
+  {
+    "descr": "Retains only the elements in this list that are contained in the\\nspecified collection (optional operation).  In other words, removes\\nfrom this list all of its elements that are not contained in the\\nspecified collection.",
+    "param-names": [
+      "List",
+      "C"
     ],
-    "id": "c916b274a1bf54b26f3e3974aa6db214",
+    "param-types": [
+      "java.util.List",
+      "java.util.Collection"
+    ],
+    "method": "retainAll",
+    "id": "java.util.List#retainAll(java.util.Collection<?>)",
     "class": "java.util.List",
     "return": "boolean"
   },
   {
-    "method": "set",
-    "param": [
-      "java.util.List",
-      "int",
-      "java.lang.Object"
+    "descr": "Returns the index within this string of the last occurrence of the\\nspecified substring.  The last occurrence of the empty string \"\"\\nis considered to occur at the index value this.length().\\nThe returned index is the largest value k for which:\\n\\nthis.startsWith(str, k)\\n\\nIf no such value of k exists, then -1 is returned.",
+    "param-names": [
+      "String",
+      "Str"
     ],
-    "id": "ca03fc2cf5803f617b07affb73b59c4d",
-    "class": "java.util.List",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "length",
-    "param": ["java.lang.String"],
-    "id": "d732f97309144854a8cb1d00e8e1409d",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
-    "method": "indexOf",
-    "param": [
-      "java.util.List",
-      "java.lang.Object"
-    ],
-    "id": "dbcde2e17dbd1e63dac2d8b53870f7c9",
-    "class": "java.util.List",
-    "return": "int"
-  },
-  {
-    "method": "remove",
-    "param": [
-      "java.util.List",
-      "int"
-    ],
-    "id": "dd9fd259792646588e1a6cc9cc76188e",
-    "class": "java.util.List",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "get",
-    "param": [
-      "java.util.List",
-      "int"
-    ],
-    "id": "de5bc8e443dd340afe42f0675eff75be",
-    "class": "java.util.List",
-    "return": "java.lang.Object"
-  },
-  {
-    "method": "indexOf",
-    "param": [
-      "java.lang.String",
-      "java.lang.String",
-      "int"
-    ],
-    "id": "e9fa6670d368966f2c4b5b5fad7a43cb",
-    "class": "java.lang.String",
-    "return": "int"
-  },
-  {
-    "method": "endsWith",
-    "param": [
+    "param-types": [
       "java.lang.String",
       "java.lang.String"
     ],
-    "id": "f320015f96d7e74ae8c96863453f968e",
+    "method": "lastIndexOf",
+    "id": "java.lang.String#lastIndexOf(java.lang.String)",
+    "class": "java.lang.String",
+    "return": "int"
+  },
+  {
+    "descr": "Returns true if this list contains the specified element.\\nMore formally, returns true if and only if this list contains\\nat least one element e such that\\n(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e)).",
+    "param-names": [
+      "List",
+      "O"
+    ],
+    "param-types": [
+      "java.util.List",
+      "java.lang.Object"
+    ],
+    "method": "contains",
+    "id": "java.util.List#contains(java.lang.Object)",
+    "class": "java.util.List",
+    "return": "boolean"
+  },
+  {
+    "descr": "Converts all of the characters in this String to upper\\ncase using the rules of the default locale. This method is equivalent to\\ntoUpperCase(Locale.getDefault()).\\n\\nNote: This method is locale sensitive, and may produce unexpected\\nresults if used for strings that are intended to be interpreted locale\\nindependently.\\nExamples are programming language identifiers, protocol keys, and HTML\\ntags.\\nFor instance, \"title\".toUpperCase() in a Turkish locale\\nreturns \"T\\u0130TLE\", where '\\u0130' is the\\nLATIN CAPITAL LETTER I WITH DOT ABOVE character.\\nTo obtain correct results for locale insensitive strings, use\\ntoUpperCase(Locale.ROOT).\\n",
+    "param-names": ["String"],
+    "param-types": ["java.lang.String"],
+    "method": "toUpperCase",
+    "id": "java.lang.String#toUpperCase()",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
+  },
+  {
+    "descr": "Tests if this string starts with the specified prefix.",
+    "param-names": [
+      "String",
+      "Prefix"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "java.lang.String"
+    ],
+    "method": "startsWith",
+    "id": "java.lang.String#startsWith(java.lang.String)",
     "class": "java.lang.String",
     "return": "boolean"
   },
   {
-    "method": "size",
-    "param": ["java.util.Map"],
-    "id": "f558b930a8b86027482f16e2751d2a18",
-    "class": "java.util.Map",
-    "return": "int"
+    "descr": "Returns a string resulting from replacing all occurrences of\\noldChar in this string with newChar.\\n\\nIf the character oldChar does not occur in the\\ncharacter sequence represented by this String object,\\nthen a reference to this String object is returned.\\nOtherwise, a String object is returned that\\nrepresents a character sequence identical to the character sequence\\nrepresented by this String object, except that every\\noccurrence of oldChar is replaced by an occurrence\\nof newChar.\\n\\nExamples:\\n\\n\"mesquite in your cellar\".replace('e', 'o')\\nreturns \"mosquito in your collar\"\\n\"the war of baronets\".replace('r', 'y')\\nreturns \"the way of bayonets\"\\n\"sparring with a purple porpoise\".replace('p', 't')\\nreturns \"starring with a turtle tortoise\"\\n\"JonL\".replace('q', 'x') returns \"JonL\" (no change)\\n",
+    "param-names": [
+      "String",
+      "Old Char",
+      "New Char"
+    ],
+    "param-types": [
+      "java.lang.String",
+      "char",
+      "char"
+    ],
+    "method": "replace",
+    "id": "java.lang.String#replace(char,char)",
+    "class": "java.lang.String",
+    "return": "java.lang.String"
   },
   {
-    "method": "add",
-    "param": [
-      "java.util.List",
-      "int",
-      "java.lang.Object"
-    ],
-    "id": "ffb4befde0c6907ae8f4230703a0baa1",
-    "class": "java.util.List"
+    "descr": "Returns the number of elements in this list.  If this list contains\\nmore than Integer.MAX_VALUE elements, returns\\nInteger.MAX_VALUE.",
+    "param-names": ["List"],
+    "param-types": ["java.util.List"],
+    "method": "size",
+    "id": "java.util.List#size()",
+    "class": "java.util.List",
+    "return": "int"
   }
 ]

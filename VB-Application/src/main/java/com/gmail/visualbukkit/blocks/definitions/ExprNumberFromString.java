@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprNumberFromString extends Expression {
 
     public ExprNumberFromString() {
-        super("expr-number-from-string");
+        super("expr-number-from-string", "Number From String", "String", "Converts a string to a number");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprNumberFromString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "Double.parseDouble(" + arg(0) + ")";

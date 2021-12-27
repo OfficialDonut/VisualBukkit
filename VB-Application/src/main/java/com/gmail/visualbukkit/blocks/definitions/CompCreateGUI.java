@@ -13,13 +13,13 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 public class CompCreateGUI extends PluginComponent {
 
     public CompCreateGUI() {
-        super("comp-create-gui");
+        super("comp-create-gui", "Create GUI", "GUI", "Defines a GUI");
     }
 
     @Override
     public Block createBlock() {
-        StringLiteralParameter nameParameter = new StringLiteralParameter();
-        Block block = new Block(this, nameParameter, new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.INT)) {
+        StringLiteralParameter nameParameter = new StringLiteralParameter("GUI ID");
+        Block block = new Block(this, nameParameter, new ExpressionParameter("Title", ClassInfo.STRING), new ExpressionParameter("Size", ClassInfo.INT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -30,15 +30,15 @@ public class CompCreateGUI extends PluginComponent {
                         "try {" +
                         buildContext.getLocalVariableDeclarations() +
                         "org.bukkit.inventory.Inventory guiInventory = Bukkit.createInventory(new GUIIdentifier(" + arg(0) + ")," + arg(2) + "," + arg(1) + ");" +
-                        toJava() +
+                        getChildJava() +
                         "return guiInventory;" +
                         "} catch (Exception e) { e.printStackTrace(); return null; }});");
             }
         };
 
         block.getTab().textProperty().bind(Bindings
-                .when(nameParameter.textProperty().isNotEmpty())
-                .then(Bindings.concat("Create GUI: ", nameParameter.textProperty()))
+                .when(nameParameter.getControl().textProperty().isNotEmpty())
+                .then(Bindings.concat("Create GUI - ", nameParameter.getControl().textProperty()))
                 .otherwise("Create GUI"));
 
         return block;

@@ -9,16 +9,16 @@ import java.sql.PreparedStatement;
 public class StatExecuteSQLStatement extends Statement {
 
     public StatExecuteSQLStatement() {
-        super("stat-execute-sql-statement");
+        super("stat-execute-sql-statement", "Execute Statement", "SQL", "Executes a SQL statement");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(PreparedStatement.class))) {
+        return new Block(this, new ExpressionParameter("Statement", ClassInfo.of(PreparedStatement.class))) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

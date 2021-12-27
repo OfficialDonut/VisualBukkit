@@ -19,7 +19,7 @@ public class ExprBooleanLogic extends VarArgsExpression {
     }
 
     public ExprBooleanLogic() {
-        super("expr-boolean-logic");
+        super("expr-boolean-logic", "Boolean Logic", "Math", "Boolean operations (AND, OR, XOR)");
     }
 
     @Override
@@ -29,11 +29,11 @@ public class ExprBooleanLogic extends VarArgsExpression {
 
     @Override
     public Block createBlock() {
-        Block block = new Block(this) {
+        return new Block(this, new ExpressionParameter("Boolean", ClassInfo.BOOLEAN), new ChoiceParameter("Operation", OPERATIONS.keySet()), new ExpressionParameter("Boolean", ClassInfo.BOOLEAN)) {
             @Override
             public String toJava() {
                 String java = null;
-                for (int i = 1; i < getParameters().size(); i += 2) {
+                for (int i = 1; i < parameters.length; i += 2) {
                     java = "(" + (java == null ? arg(0) : java) + " " + OPERATIONS.get(arg(i)) + " " + arg(i + 1) + ")";
                 }
                 return java;
@@ -41,23 +41,15 @@ public class ExprBooleanLogic extends VarArgsExpression {
 
             @Override
             protected void increaseSize() {
-                addParameterLine("Operation", new ChoiceParameter(OPERATIONS.keySet()));
-                addParameterLine("Boolean", new ExpressionParameter(ClassInfo.BOOLEAN));
+                push(new ChoiceParameter("Operation", OPERATIONS.keySet()));
+                push(new ExpressionParameter("Boolean", ClassInfo.BOOLEAN));
             }
 
             @Override
             protected void decreaseSize() {
-                int i = getBody().getChildren().size();
-                getBody().getChildren().remove(i - 2, i);
-                getParameters().remove(getParameters().size() - 1);
-                getParameters().remove(getParameters().size() - 1);
+                pop();
+                pop();
             }
         };
-
-        block.addParameterLine("Boolean", new ExpressionParameter(ClassInfo.BOOLEAN));
-        block.addParameterLine("Operation", new ChoiceParameter(OPERATIONS.keySet()));
-        block.addParameterLine("Boolean", new ExpressionParameter(ClassInfo.BOOLEAN));
-
-        return block;
     }
 }

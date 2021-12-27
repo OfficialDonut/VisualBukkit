@@ -13,19 +13,19 @@ import java.util.regex.Matcher;
 public class StatScheduleTask extends Container {
 
     public StatScheduleTask() {
-        super("stat-schedule-task");
+        super("stat-schedule-task", "Schedule Task", "Bukkit", "Schedules a task to run");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ChoiceParameter("sync", "async"), new ChoiceParameter("run once", "repeat"), new ExpressionParameter(ClassInfo.LONG)) {
+        return new Block(this, new ChoiceParameter("Type", "sync", "async"), new ChoiceParameter("Mode", "run once", "repeat"), new ExpressionParameter("Delay", ClassInfo.LONG)) {
             @Override
             public String toJava() {
                 String childJava = getChildJava();
                 StringBuilder tempVarDeclarations = new StringBuilder();
                 StringBuilder finalVarDeclarations = new StringBuilder();
                 Set<String> variables = new HashSet<>();
-                Matcher matcher = ExprSimpleLocalVariable.VAR_PATTERN.matcher(childJava);
+                Matcher matcher = ExprLocalVariable.VAR_PATTERN.matcher(childJava);
 
                 while (matcher.find()) {
                     String variable = matcher.group();

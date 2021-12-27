@@ -79,7 +79,6 @@ public class PlayerDataManager implements Listener {
     public void onLogin(PlayerLoginEvent e) {
         if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
             PlayerData data = new PlayerData();
-            data.lock.acquireUninterruptibly();
             playerData.put(e.getPlayer().getUniqueId(), data);
             executor.submit(() -> {
                 try {
@@ -111,7 +110,7 @@ public class PlayerDataManager implements Listener {
     }
 
     private static class PlayerData {
-        private Semaphore lock = new Semaphore(1);
+        private Semaphore lock = new Semaphore(0);
         private YamlConfiguration config;
     }
 }

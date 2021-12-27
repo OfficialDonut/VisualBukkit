@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ExprUUIDFromString extends Expression {
 
     public ExprUUIDFromString() {
-        super("expr-uuid-from-string");
+        super("expr-uuid-from-string", "UUID From String", "UUID", "Converts the string representation of a UUID to a UUID object");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprUUIDFromString extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("String", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "UUID.fromString(" + arg(0) + ")";

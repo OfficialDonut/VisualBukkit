@@ -9,12 +9,12 @@ import com.gmail.visualbukkit.project.PluginModule;
 public class StatSetPlayerSkin extends Statement {
 
     public StatSetPlayerSkin() {
-        super("stat-set-player-skin");
+        super("stat-set-player-skin", "Set Skin", "Player", "Sets the skin of a player");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter("Skin Value", ClassInfo.STRING), new ExpressionParameter("Skin Signature", ClassInfo.STRING)) {
             @Override
             public void update() {
                 super.update();
@@ -36,12 +36,14 @@ public class StatSetPlayerSkin extends Statement {
     }
 
     private static final String SKIN_METHOD =
-            "public static void setPlayerSkin(org.bukkit.entity.Player player, String value, String signature) throws Exception {\n" +
-            "    Object entityPlayer = ReflectionUtil.getDeclaredMethod(player.getClass(), \"getHandle\").invoke(player);\n" +
-            "    Object gameProfile = ReflectionUtil.getDeclaredMethod(entityPlayer.getClass().getSuperclass(), \"getProfile\").invoke(entityPlayer);\n" +
-            "    Object propertyMap = ReflectionUtil.getDeclaredMethod(gameProfile.getClass(), \"getProperties\").invoke(gameProfile);\n" +
-            "    Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass(\"com.mojang.authlib.properties.Property\"), String.class, String.class, String.class).newInstance(\"textures\", value, signature);\n" +
-            "    ReflectionUtil.getDeclaredMethod(com.google.common.collect.ForwardingMultimap.class, \"removeAll\", Object.class).invoke(propertyMap, \"textures\");\n" +
-            "    ReflectionUtil.getDeclaredMethod(com.google.common.collect.ForwardingMultimap.class, \"put\", Object.class, Object.class).invoke(propertyMap, \"textures\", property);\n" +
-            "}";
+            """
+            public static void setPlayerSkin(org.bukkit.entity.Player player, String value, String signature) throws Exception {
+                Object entityPlayer = ReflectionUtil.getDeclaredMethod(player.getClass(), "getHandle").invoke(player);
+                Object gameProfile = ReflectionUtil.getDeclaredMethod(entityPlayer.getClass().getSuperclass(), "getProfile").invoke(entityPlayer);
+                Object propertyMap = ReflectionUtil.getDeclaredMethod(gameProfile.getClass(), "getProperties").invoke(gameProfile);
+                Object property = ReflectionUtil.getDeclaredConstructor(ReflectionUtil.getClass("com.mojang.authlib.properties.Property"), String.class, String.class, String.class).newInstance("textures", value, signature);
+                ReflectionUtil.getDeclaredMethod(com.google.common.collect.ForwardingMultimap.class, "removeAll", Object.class).invoke(propertyMap, "textures");
+                ReflectionUtil.getDeclaredMethod(com.google.common.collect.ForwardingMultimap.class, "put", Object.class, Object.class).invoke(propertyMap, "textures", property);
+            }
+            """;
 }

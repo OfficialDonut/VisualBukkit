@@ -1,11 +1,9 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
-import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;;
-import com.gmail.visualbukkit.ui.ActionMenuItem;
-import com.gmail.visualbukkit.ui.CopyPasteManager;
-import com.gmail.visualbukkit.ui.LanguageManager;
-import com.gmail.visualbukkit.ui.UndoManager;
+import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.ProjectManager;
+import com.gmail.visualbukkit.ui.*;
 import javafx.css.PseudoClass;
 import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
@@ -15,13 +13,18 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
-public abstract class Expression extends BlockDefinition {
+public non-sealed abstract class Expression extends BlockDefinition {
 
-    public Expression(String id) {
-        super(id);
+    public Expression(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
     }
 
     public abstract ClassInfo getReturnType();
+
+    @Override
+    public ExpressionSource createSource() {
+        return new ExpressionSource(this);
+    }
 
     @Override
     public abstract Block createBlock();
@@ -32,30 +35,43 @@ public abstract class Expression extends BlockDefinition {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + " → (" + getReturnType() + ")";
+    public int compareTo(BlockDefinition obj) {
+        return obj instanceof PluginComponent || obj instanceof Statement ? 1 : super.compareTo(obj);
     }
 
-    public static abstract class Block extends CodeBlock {
+    public static non-sealed abstract class Block extends BlockNode {
 
         private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
 
-        public Block(Expression expression, BlockParameter... parameters) {
-            super(expression);
+        public Block(Expression expression, BlockParameter<?>... parameters) {
+            super(expression, parameters);
 
-            getBody().getStyleClass().add("expression-block");
-            addParameterLines(expression.getParameterNames(), parameters);
+            getStyleClass().add("expression-block");
 
-            getBody().setOnDragDetected(e -> {
+            setOnDragDetected(e -> {
                 if (e.getButton() == MouseButton.PRIMARY) {
                     Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                     SnapshotParameters snapshotParameters = new SnapshotParameters();
                     snapshotParameters.setFill(Color.TRANSPARENT);
                     Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
-                    dragboard.setDragView(image, -1, -1);
+                    dragboard.setDragView(image);
                     ClipboardContent content = new ClipboardContent();
                     content.putString("");
                     dragboard.setContent(content);
+                    setDisable(true);
+                    PluginComponent.Block block = ProjectManager.getCurrentProject().getCurrentPluginComponent();
+                    if (block != null) {
+                        block.toggleExpressionParameters(true);
+                    }
+                    e.consume();
+                }
+            });
+
+            setOnDragDone(e -> {
+                setDisable(false);
+                PluginComponent.Block block = ProjectManager.getCurrentProject().getCurrentPluginComponent();
+                if (block != null) {
+                    block.toggleExpressionParameters(false);
                 }
                 e.consume();
             });
@@ -67,7 +83,7 @@ public abstract class Expression extends BlockDefinition {
                     public void run() {
                         Block combineStringsBlock = BlockRegistry.getExpression("expr-combine-strings").createBlock();
                         exprParameter.setExpression(combineStringsBlock).run();
-                        (((ExpressionParameter) combineStringsBlock.getParameters().get(0)).setExpression(Block.this)).run();
+                        (((ExpressionParameter) combineStringsBlock.parameters[0]).setExpression(Block.this)).run();
                     }
                     @Override
                     public void revert() {
@@ -113,13 +129,13 @@ public abstract class Expression extends BlockDefinition {
                 }
                 parent = parent.getParent();
             }
-            getBody().pseudoClassStateChanged(NESTED_STYLE_CLASS, i % 2 == 1);
+            pseudoClassStateChanged(NESTED_STYLE_CLASS, i % 2 == 1);
         }
 
         public abstract String toJava();
 
         public ExpressionParameter getExpressionParameter() {
-            return (ExpressionParameter) getParent();
+            return getParent() != null ? (ExpressionParameter) getParent().getParent() : null;
         }
 
         @Override

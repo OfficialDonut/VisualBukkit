@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprSquareRoot extends Expression {
 
     public ExprSquareRoot() {
-        super("expr-square-root");
+        super("expr-square-root", "Square Root", "Math", "The square root of a number");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprSquareRoot extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 return "Math.sqrt(" + arg(0) + ")";

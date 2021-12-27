@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprInequality extends Expression {
 
     public ExprInequality() {
-        super("expr-inequality");
+        super("expr-inequality", "Inequality", "Math", "Compare two numbers");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ExprInequality extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.DOUBLE), new ChoiceParameter("<", "<=", ">", ">="), new ExpressionParameter(ClassInfo.DOUBLE)) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE), new ChoiceParameter("Inequality", "<", "<=", ">", ">="), new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 return "(" + arg(0) + " " + arg(1) + " " + arg(2) + ")";

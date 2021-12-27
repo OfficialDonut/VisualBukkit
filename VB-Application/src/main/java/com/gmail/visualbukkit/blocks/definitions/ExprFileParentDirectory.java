@@ -9,7 +9,7 @@ import java.io.File;
 public class ExprFileParentDirectory extends Expression {
 
     public ExprFileParentDirectory() {
-        super("expr-file-parent-directory");
+        super("expr-file-parent-directory", "File Parent Directory", "File", "The parent directory of a file");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprFileParentDirectory extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class))) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of(File.class))) {
             @Override
             public String toJava() {
                 return arg(0) + ".getParentFile()";

@@ -9,12 +9,12 @@ import java.io.File;
 public class StatCreateDirectory extends Statement {
 
     public StatCreateDirectory() {
-        super("stat-create-directory");
+        super("stat-create-directory", "Create Directory", "File", "Creates a directory");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class))) {
+        return new Block(this, new ExpressionParameter("Directory", ClassInfo.of(File.class))) {
             @Override
             public String toJava() {
                 return arg(0) + ".mkdirs();";

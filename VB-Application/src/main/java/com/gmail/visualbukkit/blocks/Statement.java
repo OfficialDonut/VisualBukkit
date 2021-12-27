@@ -6,7 +6,6 @@ import com.gmail.visualbukkit.ui.*;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Bounds;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.SeparatorMenuItem;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
@@ -22,10 +20,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public abstract class Statement extends BlockDefinition {
+public non-sealed abstract class Statement extends BlockDefinition {
 
-    public Statement(String id) {
-        super(id);
+    public Statement(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
+    }
+
+    @Override
+    public StatementSource createSource() {
+        return new StatementSource(this);
     }
 
     @Override
@@ -36,13 +39,21 @@ public abstract class Statement extends BlockDefinition {
         return (Block) super.createBlock(json);
     }
 
-    public static abstract class Block extends CodeBlock {
+    @Override
+    public int compareTo(BlockDefinition obj) {
+        if (obj instanceof PluginComponent) {
+            return 1;
+        }
+        if (obj instanceof Expression) {
+            return -1;
+        }
+        return super.compareTo(obj);
+    }
+
+    public static non-sealed abstract class Block extends BlockNode {
 
         private static Image COLLAPSE_IMAGE;
         private static Image EXPAND_IMAGE;
-
-        private StatementConnector statementConnector = new StatementConnector(block -> UndoManager.run(getStatementHolder().add(this, block)));
-        private BooleanProperty collapsed = new SimpleBooleanProperty(false);
 
         static {
             try (InputStream inputStream1 = Statement.class.getResourceAsStream("/images/collapse.png");
@@ -54,24 +65,40 @@ public abstract class Statement extends BlockDefinition {
             }
         }
 
-        public Block(Statement statement, BlockParameter... parameters) {
-            super(statement);
+        private BooleanProperty collapsed = new SimpleBooleanProperty(false);
+        private StatementConnector connector;
+
+        public Block(Statement statement, BlockParameter<?>... parameters) {
+            super(statement, new StyleableVBox(), parameters);
+
+            connector = new StatementConnector() {
+                @Override
+                public void accept(Block block) {
+                    UndoManager.run(getStatementHolder().add(Block.this, block));
+                }
+            };
 
             getBody().getStyleClass().add("statement-block");
-            getChildren().add(statementConnector);
+            getChildren().addAll(getBody(), connector);
 
             if (parameters.length > 0) {
+                for (BlockParameter<?> parameter : parameters) {
+                    parameter.visibleProperty().bind(collapsedProperty().not());
+                    parameter.managedProperty().bind(parameter.visibleProperty());
+                }
+
                 Button toggleCollapseButton = new Button();
+                addToHeader(toggleCollapseButton);
+
                 toggleCollapseButton.setOnAction(e -> {
                     collapsed.set(!isCollapsed());
                     SoundManager.WHOOSH.play();
                 });
+
                 toggleCollapseButton.graphicProperty().bind(Bindings
                         .when(collapsed)
                         .then(new ImageView(EXPAND_IMAGE))
                         .otherwise(new ImageView(COLLAPSE_IMAGE)));
-                addToHeader(toggleCollapseButton);
-                addParameterLines(statement.getParameterNames(), parameters);
             }
 
             getBody().setOnDragDetected(e -> {
@@ -79,40 +106,53 @@ public abstract class Statement extends BlockDefinition {
                     Dragboard dragboard = startDragAndDrop(TransferMode.ANY);
                     SnapshotParameters snapshotParameters = new SnapshotParameters();
                     snapshotParameters.setFill(Color.TRANSPARENT);
-                    Image image = snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
-                    dragboard.setDragView(image, -1, -1);
+                    Image image = getBody().snapshot(snapshotParameters, new WritableImage((int) Math.min(getWidth(), 500), (int) Math.min(getHeight(), 500)));
+                    dragboard.setDragView(image);
                     ClipboardContent content = new ClipboardContent();
                     content.putString("");
                     dragboard.setContent(content);
-                    setAcceptingConnections(false);
                     List<Block> blocks = getStatementHolder().getBlocks();
                     for (int i = blocks.indexOf(this); i < blocks.size(); i++) {
-                        blocks.get(i).setAcceptingConnections(false);
+                        blocks.get(i).setDisable(true);
                     }
+                    e.consume();
                 }
-                e.consume();
             });
 
             setOnDragDone(e -> {
+                StatementConnector.hideCurrent();
                 if (!e.isDropCompleted() && getStatementHolder() != null) {
                     List<Block> blocks = getStatementHolder().getBlocks();
                     for (int i = blocks.indexOf(this); i < blocks.size(); i++) {
-                        blocks.get(i).setAcceptingConnections(true);
+                        blocks.get(i).setDisable(false);
                     }
                 }
                 e.consume();
             });
 
             getBody().setOnDragOver(e -> {
-                Bounds bounds = getBody().localToScreen(getBody().getBoundsInLocal());
-                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                    double deltaY = e.getScreenY() - bounds.getMinY();
-                    if (deltaY > 0 && deltaY < statementConnector.getMaxHeight()) {
-                        Block previous = getStatementHolder().getPrevious(this);
-                        if (previous != null) {
-                            previous.statementConnector.show();
-                        }
-                    }
+                Object source = e.getGestureSource();
+                if (source instanceof StatementSource || source instanceof Statement.Block) {
+                    StatementConnector connectorToShow = 2 * e.getY() > getBody().getHeight() ? connector : getStatementHolder().getPreviousConnector(this);
+                    connectorToShow.show();
+                }
+            });
+
+            setOnDragOver(e -> {
+                Object source = e.getGestureSource();
+                if (source instanceof StatementSource || source instanceof Statement.Block) {
+                    e.acceptTransferModes(TransferMode.ANY);
+                    e.consume();
+                }
+            });
+
+            setOnDragDropped(e -> {
+                Object source = e.getGestureSource();
+                if (source instanceof StatementSource || source instanceof Statement.Block) {
+                    StatementConnector.getCurrent().accept(source instanceof StatementSource s ? s.getBlockDefinition().createBlock() : (Statement.Block) source);
+                    SoundManager.SNAP.play();
+                    e.setDropCompleted(true);
+                    e.consume();
                 }
             });
 
@@ -142,21 +182,13 @@ public abstract class Statement extends BlockDefinition {
             });
         }
 
-        @Override
-        public HBox addParameterLine(String name, BlockParameter parameter) {
-            HBox hBox = super.addParameterLine(name, parameter);
-            hBox.visibleProperty().bind(collapsedProperty().not());
-            hBox.managedProperty().bind(hBox.visibleProperty());
-            return hBox;
-        }
-
-        protected boolean checkForPrevious(String statementID) {
+        protected boolean checkForPrevious(Class<? extends Statement> statement) {
             List<Block> blocks = getStatementHolder().getBlocks();
             for (int i = blocks.indexOf(this) - 1; i >= 0; i--) {
-                Statement statement = blocks.get(i).getDefinition();
-                if (!(statement instanceof StatComment)) {
-                    if (!statement.getID().equals(statementID)) {
-                        setInvalid(String.format(LanguageManager.get("error.invalid_block_placement"), BlockRegistry.getStatement(statementID).getTitle()));
+                Statement prev = blocks.get(i).getDefinition();
+                if (!(prev instanceof StatComment)) {
+                    if (prev.getClass() != statement) {
+                        setValid(false);
                         return false;
                     }
                     return true;
@@ -182,7 +214,7 @@ public abstract class Statement extends BlockDefinition {
         @Override
         public void update() {
             super.update();
-            setAcceptingConnections(true);
+            setDisable(false);
         }
 
         public abstract String toJava();
@@ -204,30 +236,25 @@ public abstract class Statement extends BlockDefinition {
             }
         }
 
-        protected void setAcceptingConnections(boolean state) {
-            setOpacity(state ? 1 : 0.5);
-            statementConnector.setAcceptingConnections(state);
-        }
-
         public boolean isCollapsed() {
             return collapsed.get();
+        }
+
+        public BooleanProperty collapsedProperty() {
+            return collapsed;
+        }
+
+        public StatementConnector getConnector() {
+            return connector;
         }
 
         public StatementHolder getStatementHolder() {
             return (StatementHolder) getParent();
         }
 
-        public StatementConnector getStatementConnector() {
-            return statementConnector;
-        }
-
         @Override
         public Statement getDefinition() {
             return (Statement) super.getDefinition();
-        }
-
-        public BooleanProperty collapsedProperty() {
-            return collapsed;
         }
     }
 }

@@ -8,12 +8,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class StatIfStatement extends Container {
 
     public StatIfStatement() {
-        super("stat-if-statement");
+        super("stat-if-statement", "If Statement", "VB", "Runs code if a condition is true");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ChoiceParameter("normal", "negate condition")) {
+        return new Block(this, new ExpressionParameter("Condition", ClassInfo.BOOLEAN), new ChoiceParameter("Mode", "normal", "negate condition")) {
             @Override
             public String toJava() {
                 return arg(1).equals("normal") ?

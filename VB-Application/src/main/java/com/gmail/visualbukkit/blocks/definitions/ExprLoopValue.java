@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprLoopValue extends Expression {
 
     public ExprLoopValue() {
-        super("expr-loop-value");
+        super("expr-loop-value", "Loop Value", "VB", "The current loop value");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprLoopValue extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-list-loop");
+                checkForContainer(StatListLoop.class);
             }
 
             @Override

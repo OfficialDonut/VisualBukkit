@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprFunctionArguments extends Expression {
 
     public ExprFunctionArguments() {
-        super("expr-function-arguments");
+        super("expr-function-arguments", "Function Arguments", "VB", "The arguments of a function");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprFunctionArguments extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForPluginComponent("comp-function");
+                checkForPluginComponent(CompFunction.class);
             }
 
             @Override

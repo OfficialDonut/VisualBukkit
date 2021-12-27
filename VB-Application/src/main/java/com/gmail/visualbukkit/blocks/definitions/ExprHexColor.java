@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprHexColor extends Expression {
 
     public ExprHexColor() {
-        super("expr-hex-color");
+        super("expr-hex-color", "Hex Color", "String", "A hex color code");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprHexColor extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Hex", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "net.md_5.bungee.api.ChatColor.of(" + arg(0) + ").toString()";

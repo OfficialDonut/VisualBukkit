@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.plugin;
 
+import com.google.common.base.Throwables;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -23,13 +24,19 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class VisualBukkitPlugin extends JavaPlugin {
+
+    private static VisualBukkitPlugin plugin;
+    private static String lastErrorBlockID;
+    private static Exception lastError;
 
     private VisualBukkitClient client = new VisualBukkitClient(this);
 
     @Override
     public void onEnable() {
+        plugin = this;
         client.addHandler("deploy", json -> Bukkit.getScheduler().runTask(this, () -> {
             sendFormatted("Received deploy request from the Visual Bukkit app.", Bukkit.getConsoleSender());
             Path jarPath = Paths.get(json.optString("jar-path"));
@@ -184,28 +191,48 @@ public class VisualBukkitPlugin extends JavaPlugin {
                 }
                 return true;
             }
+
+            if (args[1].equalsIgnoreCase("error")) {
+                if (lastError != null) {
+                    if (validateConnected(player)) {
+                        JSONObject json = new JSONObject();
+                        json.put("id", "error-report");
+                        json.put("block", lastErrorBlockID);
+                        json.put("exception", Throwables.getStackTraceAsString(lastError));
+                        sendFormatted("&7Attempting to export error...", player);
+                        client.send(json).whenComplete((o, e) -> Bukkit.getScheduler().runTask(this, () -> {
+                            if (e != null) {
+                                sendFormatted("&cFailed to export error: " + e.getMessage(), sender);
+                                e.printStackTrace();
+                            } else {
+                                sendFormatted("&aSuccessfully exported error.", sender);
+                            }
+                        }));
+                    }
+                } else {
+                    sendFormatted("&cAn error has not occurred in a Visual Bukkit plugin.", sender);
+                }
+                return true;
+            }
         }
 
         if (args.length >= 2 && (args[0].equalsIgnoreCase("name") || args[0].equalsIgnoreCase("lore"))) {
             ItemStack item = player.getInventory().getItemInMainHand();
             if (!item.getType().isAir()) {
-                StringBuilder stringBuilder = new StringBuilder();
+                StringJoiner joiner = new StringJoiner(" ");
                 for (int i = 1; i < args.length; i++) {
-                    if (i != 1) {
-                        stringBuilder.append(' ');
-                    }
-                    stringBuilder.append(ChatColor.translateAlternateColorCodes('&', args[i]));
+                    joiner.add(ChatColor.translateAlternateColorCodes('&', args[i]));
                 }
                 ItemMeta itemMeta = item.getItemMeta();
                 if (itemMeta != null) {
                     if (args[0].equalsIgnoreCase("name")) {
-                        itemMeta.setDisplayName(stringBuilder.toString());
+                        itemMeta.setDisplayName(joiner.toString());
                     } else {
-                        itemMeta.setLore(Arrays.asList(stringBuilder.toString().split("\\|")));
+                        itemMeta.setLore(Arrays.asList(joiner.toString().split("\\|")));
                     }
                     item.setItemMeta(itemMeta);
                 }
-                sendFormatted("&aSet item " + args[0] + " to: " + stringBuilder, sender);
+                sendFormatted("&aSet item " + args[0] + " to: " + joiner, sender);
             } else {
                 sendFormatted("&cYou are not holding an item.", sender);
             }
@@ -218,6 +245,7 @@ public class VisualBukkitPlugin extends JavaPlugin {
         sendColored("&3/vb export inv &b- exports target chest inventory", player);
         sendColored("&3/vb export loc &b- exports current location", player);
         sendColored("&3/vb export block-loc &b- exports target block location", player);
+        sendColored("&3/vb export error &b- exports last error", player);
         sendColored("&3/vb name <string> &b- sets name of held item", player);
         sendColored("&3/vb lore <string> &b- sets lore of held item (line separator: '|')", player);
         return true;
@@ -229,21 +257,31 @@ public class VisualBukkitPlugin extends JavaPlugin {
             return Arrays.asList("connect", "export", "name", "lore");
         }
         if (args.length > 0 && args[0].equalsIgnoreCase("export")) {
-            return Arrays.asList("item", "inv", "loc", "block-loc");
+            return Arrays.asList("item", "inv", "loc", "block-loc", "error");
         }
         return null;
     }
 
-    private boolean validateConnected(CommandSender sender) {
+    public static void reportError(String id, Exception error) {
+        lastErrorBlockID = id;
+        lastError = error;
+        error.printStackTrace();
+        plugin.getLogger().severe("========================================================");
+        plugin.getLogger().severe("An error has occurred in a Visual Bukkit plugin.");
+        plugin.getLogger().severe("Use '/vb export error' to view the block that caused it.");
+        plugin.getLogger().severe("========================================================");
+    }
+
+    private boolean validateConnected(Player player) {
         if (client.isConnected()) {
             return true;
         }
-        sendFormatted("&cThe server is not connected to the Visual Bukkit app.", sender);
+        sendFormatted("&cThe server is not connected to the Visual Bukkit app.", player);
         TextComponent textComponent = new TextComponent("[Attempt to Connect]");
         textComponent.setColor(net.md_5.bungee.api.ChatColor.GOLD);
         textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("/vb connect")));
         textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/vb connect"));
-        sender.spigot().sendMessage(textComponent);
+        player.spigot().sendMessage(textComponent);
         return false;
     }
 

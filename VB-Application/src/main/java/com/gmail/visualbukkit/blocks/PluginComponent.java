@@ -2,23 +2,24 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.*;
-import javafx.event.Event;
-import javafx.geometry.Bounds;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Region;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.List;
+public non-sealed abstract class PluginComponent extends BlockDefinition {
 
-public abstract class PluginComponent extends Statement {
+    public PluginComponent(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
+    }
 
-    public PluginComponent(String id) {
-        super(id);
+    @Override
+    public BlockSource<?> createSource() {
+        return new PluginComponentSource(this);
     }
 
     @Override
@@ -29,86 +30,97 @@ public abstract class PluginComponent extends Statement {
         return (Block) super.createBlock(json);
     }
 
-    public static abstract class Block extends Statement.Block {
+    @Override
+    public int compareTo(BlockDefinition obj) {
+        return obj instanceof Statement || obj instanceof Expression ? -1 : super.compareTo(obj);
+    }
 
-        private StatementHolder statementHolder = new StatementHolder();
+    public static non-sealed abstract class Block extends BlockNode {
+
+        private StatementHolder statementHolder;
+        private StatementConnector statementConnector;
         private Tab tab;
+        private Button openButton;
 
-        public Block(PluginComponent pluginComponent, BlockParameter... parameters) {
-            super(pluginComponent);
+        public Block(PluginComponent pluginComponent, BlockParameter<?>... parameters) {
+            super(pluginComponent, parameters);
 
-            getBody().getStyleClass().remove("statement-block");
-            getBody().getStyleClass().add("plugin-component-block");
-            getBody().setOnDragDetected(Event::consume);
-            addParameterLines(pluginComponent.getParameterNames(), parameters);
+            getStyleClass().add("plugin-component-block");
 
-            statementHolder.getChildren().add(this);
-            Pane pane = new Pane(this, statementHolder);
-            tab = new Tab(pluginComponent.getTitle(), new ScrollPane(pane));
-
-            pane.setOnDragOver(e -> {
-                Bounds bounds = statementHolder.localToScreen(statementHolder.getBoundsInLocal());
-                if (e.getScreenX() > bounds.getMinX() && e.getScreenX() < bounds.getMaxX()) {
-                    double deltaY = e.getScreenY() - bounds.getMaxY();
-                    if (deltaY > 0 && deltaY < getStatementConnector().getMaxHeight()) {
-                        statementHolder.getLast().getStatementConnector().show();
-                    }
+            statementConnector = new StatementConnector() {
+                @Override
+                public void accept(Statement.Block block) {
+                    UndoManager.run(getStatementHolder().addFirst(block));;
                 }
-                e.consume();
-            });
+            };
+            statementHolder = new StatementHolder(statementConnector);
 
-            ActionMenuItem collapseAllItem = new ActionMenuItem(LanguageManager.get("context_menu.collapse_all"), e -> recursiveCollapse(statementHolder, true));
-            ActionMenuItem expandAllItem = new ActionMenuItem(LanguageManager.get("context_menu.expand_all"), e -> recursiveCollapse(statementHolder, false));
-            ActionMenuItem pasteAfterItem = new ActionMenuItem(LanguageManager.get("context_menu.paste_after"), e -> UndoManager.run(statementHolder.add(this, CopyPasteManager.pasteStatement())));
-            getContextMenu().getItems().setAll(collapseAllItem, expandAllItem, new SeparatorMenuItem(), pasteAfterItem);
+            tab = new Tab(pluginComponent.getTitle(), new Pane());
+            openButton = new Button();
+            openButton.textProperty().bind(tab.textProperty());
+            openButton.setOnAction(e -> ProjectManager.getCurrentProject().openPluginComponent(this));
+            openButton.setContextMenu(new ContextMenu(new ActionMenuItem(LanguageManager.get("context_menu.delete"), e -> UndoManager.run(ProjectManager.getCurrentProject().deletePluginComponent(this)))));
+
+            ActionMenuItem deleteItem = new ActionMenuItem(LanguageManager.get("context_menu.delete"), e -> UndoManager.run(ProjectManager.getCurrentProject().deletePluginComponent(this)));
+            ActionMenuItem collapseAllItem = new ActionMenuItem(LanguageManager.get("context_menu.collapse_all"), e -> toggleStatementCollapse(statementHolder, true));
+            ActionMenuItem expandAllItem = new ActionMenuItem(LanguageManager.get("context_menu.expand_all"), e -> toggleStatementCollapse(statementHolder, false));
+            ActionMenuItem pasteAfterItem = new ActionMenuItem(LanguageManager.get("context_menu.paste_after"), e -> UndoManager.run(statementHolder.addFirst(CopyPasteManager.pasteStatement())));
+            getContextMenu().getItems().addAll(deleteItem, new SeparatorMenuItem(), pasteAfterItem, new SeparatorMenuItem(), collapseAllItem, expandAllItem);
 
             getContextMenu().setOnShowing(e -> {
-                boolean state = statementHolder.getChildren().size() == 1;
+                boolean state = statementHolder.getChildren().isEmpty();
                 collapseAllItem.setDisable(state);
                 expandAllItem.setDisable(state);
                 pasteAfterItem.setDisable(!CopyPasteManager.isStatementCopied());
             });
         }
 
-        private void recursiveCollapse(StatementHolder statementHolder, boolean state) {
+        @Override
+        public void handleSelectedAction(KeyEvent e) {}
+
+        private void toggleStatementCollapse(StatementHolder statementHolder, boolean state) {
             for (Statement.Block block : statementHolder.getBlocks()) {
-                if (!(block instanceof Block)) {
-                    block.collapsedProperty().set(state);
-                    if (block instanceof Container.Block) {
-                        recursiveCollapse(((Container.Block) block).getChildHolder(), state);
-                    }
+                block.collapsedProperty().set(state);
+                if (block instanceof Container.Block) {
+                    toggleStatementCollapse(((Container.Block) block).getChildHolder(), state);
                 }
             }
         }
 
         @Override
-        public void handleSelectedAction(KeyEvent e) {}
-
-        @Override
-        public void prepareBuild(BuildContext buildContext) {
-            super.prepareBuild(buildContext);
-            List<Statement.Block> children = statementHolder.getBlocks();
-            for (int i = 1; i < children.size(); i++) {
-                children.get(i).prepareBuild(buildContext);
+        public void toggleExpressionParameters(boolean state) {
+            super.toggleExpressionParameters(state);
+            for (Statement.Block block : statementHolder.getBlocks()) {
+                block.toggleExpressionParameters(state);
             }
         }
 
         @Override
-        public final String toJava() {
-            StringBuilder builder = new StringBuilder();
-            List<Statement.Block> children = statementHolder.getBlocks();
-            for (int i = 1; i < children.size(); i++) {
-                builder.append(children.get(i).toJava());
+        public void prepareBuild(BuildContext buildContext) {
+            super.prepareBuild(buildContext);
+            statementHolder.setDebugMode(buildContext.isDebugMode());
+            for (Statement.Block block : statementHolder.getBlocks()) {
+                block.prepareBuild(buildContext);
             }
-            return builder.toString();
+            if (buildContext.isDebugMode()) {
+                buildContext.addUtilMethod(
+                        """
+                        public static void reportError(String id, Exception error) throws Exception {
+                            Class.forName("com.gmail.visualbukkit.plugin.VisualBukkitPlugin").getDeclaredMethod("reportError", String.class, Exception.class).invoke(null, id, error);
+                        }
+                        """);
+            }
+        }
+
+        public String getChildJava() {
+            return statementHolder.toJava();
         }
 
         @Override
         public JSONObject serialize() {
             JSONObject json = super.serialize();
-            List<Statement.Block> children = statementHolder.getBlocks();
-            for (int i = 1; i < children.size(); i++) {
-                json.append("children", children.get(i).serialize());
+            for (Statement.Block block : statementHolder.getBlocks()) {
+                json.append("children", block.serialize());
             }
             return json;
         }
@@ -119,8 +131,7 @@ public abstract class PluginComponent extends Statement {
             JSONArray childArray = json.optJSONArray("children");
             if (childArray != null) {
                 for (Object obj : childArray) {
-                    if (obj instanceof JSONObject) {
-                        JSONObject childJson = (JSONObject) obj;
+                    if (obj instanceof JSONObject childJson) {
                         Statement statement = BlockRegistry.getStatement(childJson.optString("="));
                         if (statement != null) {
                             statementHolder.addLast(statement.createBlock(childJson)).run();
@@ -130,30 +141,60 @@ public abstract class PluginComponent extends Statement {
             }
         }
 
+        public StatementHolder getStatementHolder() {
+            return statementHolder;
+        }
+
+        public StatementConnector getStatementConnector() {
+            return statementConnector;
+        }
+
         public Tab getTab() {
             return tab;
+        }
+
+        public Button getOpenButton() {
+            return openButton;
         }
 
         @Override
         public PluginComponent getDefinition() {
             return (PluginComponent) super.getDefinition();
         }
-    }
 
-    public static class Pane extends StyleableVBox {
+        public class Pane extends ScrollPane {
 
-        private Block block;
+            private Pane() {
+                Region spacer = new Region();
+                spacer.setPrefHeight(1000);
+                setContent(new StyleableVBox(getBlock(), statementConnector, statementHolder, spacer));
+                getStyleClass().add("plugin-component-pane");
 
-        private Pane(Block block, StatementHolder statementHolder) {
-            this.block = block;
-            Region spacer = new Region();
-            spacer.setPrefHeight(1000);
-            getChildren().addAll(statementHolder, spacer);
-            getStyleClass().add("plugin-component-pane");
-        }
+                getContent().setOnDragOver(e -> {
+                    Object source = e.getGestureSource();
+                    if (source instanceof StatementSource || source instanceof Statement.Block) {
+                        (e.getY() < statementHolder.getBoundsInParent().getMinY() ? statementConnector : statementHolder.getLastEnabledConnector()).show();
+                        e.acceptTransferModes(TransferMode.ANY);
+                        e.consume();
+                    }
+                });
 
-        public Block getBlock() {
-            return block;
+                getContent().setOnDragDropped(e -> {
+                    Object source = e.getGestureSource();
+                    if (source instanceof StatementSource || source instanceof Statement.Block) {
+                        StatementConnector.getCurrent().accept(source instanceof StatementSource s ? s.getBlockDefinition().createBlock() : (Statement.Block) source);
+                        SoundManager.SNAP.play();
+                        e.setDropCompleted(true);
+                        e.consume();
+                    }
+                });
+
+                getContent().setOnDragExited(e -> StatementConnector.hideCurrent());
+            }
+
+            public Block getBlock() {
+                return PluginComponent.Block.this;
+            }
         }
     }
 }

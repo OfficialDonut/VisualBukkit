@@ -1,6 +1,5 @@
 package com.gmail.visualbukkit.generator;
 
-import com.google.common.hash.Hashing;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -52,7 +51,7 @@ public class BlockGenerator {
 
     public void generate(DocletEnvironment environment) throws IOException {
         this.environment = environment;
-        generatedBlocks = new TreeSet<>();
+        generatedBlocks = new HashSet<>();
         Set<String> blacklistedClasses = blacklistFile != null && Files.exists(blacklistFile) ? new HashSet<>(Files.readAllLines(blacklistFile)) : Collections.emptySet();
 
         reporter.print(Diagnostic.Kind.NOTE, "Included Classes:");
@@ -63,10 +62,7 @@ public class BlockGenerator {
                 TypeElement clazz = (TypeElement) element;
                 if (isEvent(clazz)) {
                     if (!clazz.getModifiers().contains(Modifier.ABSTRACT)) {
-                        GeneratedBlock eventBlock = new GeneratedBlock(clazz.toString());
-                        eventBlock.getJson().put("event", clazz.toString());
-                        eventBlock.getJson().putOpt("module", pluginModule);
-                        generatedBlocks.add(eventBlock);
+                        generateBlock(clazz, clazz, true);
                         generateElements(clazz, clazz.getEnclosedElements(), true);
                         ArrayDeque<TypeMirror> supertypes = new ArrayDeque<>(environment.getTypeUtils().directSupertypes(clazz.asType()));
                         while (!supertypes.isEmpty()) {
@@ -87,27 +83,20 @@ public class BlockGenerator {
         }
 
         JSONArray blockArray = new JSONArray();
-        Map<String, String> langMap = new TreeMap<>();
-
         for (GeneratedBlock generatedBlock : generatedBlocks) {
             if (!generatedBlock.isInvalid()) {
                 blockArray.put(generatedBlock.getJson());
-                langMap.putAll(generatedBlock.getLangMap());
             }
         }
 
-        StringJoiner langString = new StringJoiner("\n");
-        langMap.forEach((key, value) -> langString.add(key + "=" + value));
-
         reporter.print(Diagnostic.Kind.NOTE, System.lineSeparator());
-        reporter.print(Diagnostic.Kind.NOTE, "Writing files to " + outputDir.toAbsolutePath());
+        reporter.print(Diagnostic.Kind.NOTE, "Writing output to " + outputDir.toAbsolutePath());
 
         if (Files.notExists(outputDir)) {
             Files.createDirectories(outputDir);
         }
 
         Files.writeString(outputDir.resolve("Blocks.json"), blockArray.toString(2), StandardCharsets.UTF_8);
-        Files.writeString(outputDir.resolve("Blocks.properties"), langString.toString(), StandardCharsets.UTF_8);
         reporter.print(Diagnostic.Kind.NOTE, "Done.");
         reporter.print(Diagnostic.Kind.NOTE, System.lineSeparator());
     }
@@ -129,8 +118,7 @@ public class BlockGenerator {
     }
 
     private GeneratedBlock generateBlock(TypeElement clazz, Element element, boolean event) {
-        GeneratedBlock block = new GeneratedBlock(computeID(clazz.toString() + element));
-        block.getJson().put("id", block.getID());
+        GeneratedBlock block = new GeneratedBlock();
         block.getJson().put("class", clazz.toString());
         block.getJson().putOpt("module", pluginModule);
         if (event) {
@@ -150,7 +138,7 @@ public class BlockGenerator {
                             .replaceAll("<.+>\\s?", "")
                             .replaceAll("\\{@(?:.+?) (.+)}", "$1"));
                 }
-                block.addLang("descr", descBuilder.toString());
+                block.getJson().put("descr", descBuilder.toString());
             }
         }
         generatedBlocks.add(block);
@@ -158,26 +146,26 @@ public class BlockGenerator {
     }
 
     private void generateField(TypeElement clazz, VariableElement field, GeneratedBlock block) {
-        if (isTypeDisallowed(field.asType())) {
+        if (field.asType().getKind() == TypeKind.ERROR) {
             block.setInvalid();
             return;
         }
+        block.getJson().put("id", clazz + "#" + field);
         block.getJson().put("field", field.getSimpleName().toString());
         block.getJson().put("return", environment.getTypeUtils().erasure(field.asType()).toString());
-        block.addLang("title", "[" + formatClassName(clazz) + "] " + field.getSimpleName());
     }
 
     private void generateConstructor(TypeElement clazz, ExecutableElement constructor, GeneratedBlock block) {
-        block.addLang("title", "[" + formatClassName(clazz) + "] New " + formatClassName(clazz));
+        block.getJson().put("id", clazz + "#" + constructor);
         generateParameters(clazz, constructor, block);
     }
 
     private void generateMethod(TypeElement clazz, ExecutableElement method, GeneratedBlock block) {
+        block.getJson().put("id", clazz + "#" + method);
         block.getJson().put("method", method.getSimpleName().toString());
-        block.addLang("title", "[" + formatClassName(clazz) + "] " + formatLowerCamelCase(method.getSimpleName().toString()));
         generateParameters(clazz, method, block);
         if (!(method.getReturnType() instanceof NoType)) {
-            if (isTypeDisallowed(method.getReturnType())) {
+            if (method.getReturnType().getKind() == TypeKind.ERROR) {
                 block.setInvalid();
                 return;
             }
@@ -186,31 +174,21 @@ public class BlockGenerator {
     }
 
     private void generateParameters(TypeElement clazz, ExecutableElement element, GeneratedBlock block) {
-        StringJoiner parameterJoiner = new StringJoiner(",");
         if (!block.getJson().has("static") && !block.getJson().has("event") && element.getKind() != ElementKind.CONSTRUCTOR) {
-            block.getJson().append("param", clazz.toString());
-            parameterJoiner.add(formatClassName(clazz));
+            block.getJson().append("param-types", clazz.toString());
+            block.getJson().append("param-names", formatClassName(clazz.toString()));
         }
         for (VariableElement parameter : element.getParameters()) {
-            if (isTypeDisallowed(parameter.asType())) {
+            if (parameter.asType().getKind() == TypeKind.ERROR) {
                 block.setInvalid();
                 return;
             }
-            block.getJson().append("param", environment.getTypeUtils().erasure(parameter.asType()).toString());
-            parameterJoiner.add(formatLowerCamelCase(parameter.getSimpleName().toString()));
-        }
-        if (parameterJoiner.length() > 0) {
-            block.addLang("param", parameterJoiner.toString());
+            block.getJson().append("param-types", environment.getTypeUtils().erasure(parameter.asType()).toString());
+            block.getJson().append("param-names", formatLowerCamelCase(parameter.getSimpleName().toString()));
         }
     }
 
-    private boolean isTypeDisallowed(TypeMirror type) {
-        type = environment.getTypeUtils().erasure(type);
-        return type.getKind() == TypeKind.ERROR || type.toString().startsWith("java.lang.Class") || type.toString().startsWith("java.util.function.");
-    }
-
-    private String formatClassName(TypeElement clazz) {
-        String str = clazz.toString();
+    private static String formatClassName(String str) {
         for (int i = 0; i < str.length(); i++) {
             if (Character.isUpperCase(str.charAt(i))) {
                 return str.substring(i);
@@ -219,16 +197,13 @@ public class BlockGenerator {
         return str;
     }
 
-    private String formatLowerCamelCase(String str) {
+    private static String formatLowerCamelCase(String str) {
         str = Character.toUpperCase(str.charAt(0)) + str.substring(1);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             builder.append(c);
-            if (i + 1 < str.length()
-                    && Character.isUpperCase(str.charAt(i + 1))
-                    && (Character.isLowerCase(c)
-                    || (i + 2 < str.length() && Character.isLowerCase(str.charAt(i + 2))))) {
+            if (i + 1 < str.length() && Character.isUpperCase(str.charAt(i + 1)) && (Character.isLowerCase(c) || (i + 2 < str.length() && Character.isLowerCase(str.charAt(i + 2))))) {
                 builder.append(' ');
             }
         }
@@ -252,10 +227,5 @@ public class BlockGenerator {
                 return false;
             }
         }
-    }
-
-    @SuppressWarnings("UnstableApiUsage")
-    private String computeID(String string) {
-        return Hashing.murmur3_128().hashString(string, StandardCharsets.UTF_8).toString();
     }
 }

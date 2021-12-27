@@ -9,7 +9,7 @@ import java.io.File;
 public class ExprFileInDirectory extends Expression {
 
     public ExprFileInDirectory() {
-        super("expr-file-in-directory");
+        super("expr-file-in-directory", "File In Directory", "File", "A file in a directory");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprFileInDirectory extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Directory", ClassInfo.STRING), new ExpressionParameter("File", ClassInfo.STRING)) {
             @Override
             public String toJava() {
                 return "new File(" + arg(0) + "," + arg(1) + ")";

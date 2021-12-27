@@ -11,7 +11,7 @@ public class ExprNumber extends SimpleExpression {
     private static final Pattern NUM_PATTERN = Pattern.compile("-?\\d*\\.?\\d*");
 
     public ExprNumber() {
-        super("expr-number");
+        super("expr-number", "Number", "Math", "A number");
     }
 
     @Override
@@ -21,11 +21,11 @@ public class ExprNumber extends SimpleExpression {
 
     @Override
     public Block createBlock() {
-        InputParameter input = new InputParameter();
-        input.getStyleClass().add("number-field");
-        input.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!NUM_PATTERN.matcher(input.getText()).matches()) {
-                input.setText(oldValue);
+        InputParameter input = new InputParameter("");
+        input.getControl().getStyleClass().add("number-field");
+        input.getControl().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!NUM_PATTERN.matcher(input.getControl().getText()).matches()) {
+                input.getControl().setText(oldValue);
             }
         });
 

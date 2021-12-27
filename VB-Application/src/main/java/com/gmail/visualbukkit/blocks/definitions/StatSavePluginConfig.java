@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.Statement;
 public class StatSavePluginConfig extends Statement {
 
     public StatSavePluginConfig() {
-        super("stat-save-plugin-config");
+        super("stat-save-plugin-config", "Save Plugin Config", "Bukkit", "Saves the default plugin config");
     }
 
     @Override

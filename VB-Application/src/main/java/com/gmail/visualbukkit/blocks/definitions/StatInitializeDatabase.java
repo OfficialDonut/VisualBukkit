@@ -9,12 +9,12 @@ import com.gmail.visualbukkit.project.PluginModule;
 public class StatInitializeDatabase extends Statement {
 
     public StatInitializeDatabase() {
-        super("stat-initialize-database");
+        super("stat-initialize-database", "Intialize Database", "SQL", "Initializes connections to a SQL database");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("URL", ClassInfo.STRING), new ExpressionParameter("Username", ClassInfo.STRING), new ExpressionParameter("Password", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprThisPlugin extends Expression {
 
     public ExprThisPlugin() {
-        super("expr-this-plugin");
+        super("expr-this-plugin", "This Plugin", "Bukkit", "An object representing this plugin");
     }
 
     @Override

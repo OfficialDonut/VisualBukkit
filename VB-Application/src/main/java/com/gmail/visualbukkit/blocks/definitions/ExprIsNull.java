@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIsNull extends Expression {
 
     public ExprIsNull() {
-        super("expr-is-null");
+        super("expr-is-null", "Is Null", "VB", "Checks if an object is null");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprIsNull extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Object", ClassInfo.OBJECT)) {
             @Override
             public String toJava() {
                 return "(" + arg(0) + "== null)";

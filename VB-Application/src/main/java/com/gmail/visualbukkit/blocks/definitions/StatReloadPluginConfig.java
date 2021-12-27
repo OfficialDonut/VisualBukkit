@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.Statement;
 public class StatReloadPluginConfig extends Statement {
 
     public StatReloadPluginConfig() {
-        super("stat-reload-plugin-config");
+        super("stat-reload-plugin-config", "Reload Config", "Bukkit", "Reloads the default plugin config");
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Statement;
-import com.gmail.visualbukkit.ui.LanguageManager;
 
 public class StatStopLoop extends Statement {
 
     public StatStopLoop() {
-        super("stat-stop-loop");
+        super("stat-stop-loop", "Stop Loop", "VB", "Stops a loop");
     }
 
     @Override
@@ -15,11 +14,7 @@ public class StatStopLoop extends Statement {
             @Override
             public void update() {
                 super.update();
-                if (checkForContainer("stat-list-loop") || checkForContainer("stat-number-loop") || checkForContainer("stat-while-loop")) {
-                    setValid();
-                } else {
-                    setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), "Loop"));
-                }
+                setValid(checkForContainer(StatListLoop.class) || checkForContainer(StatNumberLoop.class) || checkForContainer(StatWhileLoop.class));
             }
 
             @Override

@@ -1,27 +1,23 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.PluginComponent;
+import com.gmail.visualbukkit.blocks.*;
+import com.gmail.visualbukkit.blocks.definitions.CompCommand;
+import com.gmail.visualbukkit.blocks.generated.EventComponent;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
 import com.gmail.visualbukkit.extensions.VisualBukkitExtension;
 import com.gmail.visualbukkit.ui.*;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.apache.commons.lang3.StringUtils;
+import org.controlsfx.control.ListSelectionView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,53 +30,49 @@ import java.util.*;
 
 public class Project {
 
-    public static Set<PluginComponent> AVAILABLE_PLUGIN_COMPONENTS;
-
-    private StringProperty pluginName = new SimpleStringProperty();
-    private StringProperty pluginVersion = new SimpleStringProperty();
-    private StringProperty pluginAuthor = new SimpleStringProperty();
-    private StringProperty pluginDescription = new SimpleStringProperty();
-    private StringProperty pluginWebsite = new SimpleStringProperty();
-    private StringProperty pluginDependencies = new SimpleStringProperty();
-    private StringProperty pluginSoftDependencies = new SimpleStringProperty();
-    private StringProperty pluginPermissions = new SimpleStringProperty();
-
     private Path dir;
     private Path dataFile;
     private Path resourcesDir;
     private Path buildDir;
 
-    private BorderPane projectPane = new BorderPane();
-    private Stage pluginSettingsStage = new Stage();
+    private List<PluginComponent.Block> pluginComponents = new ArrayList<>();
+    private Map<String, Statement.Block> debugMap = new HashMap<>();
+
     private TabPane pluginComponentPane = new TabPane();
-    private Map<Tab, PluginComponent.Block> pluginComponents = new HashMap<>();
-    private Set<VisualBukkitExtension> extensions = new HashSet<>();
+    private ScrollPane pluginSettingsPane = new ScrollPane();
+    private TreeNode<Button> commandsTree = new TreeNode<>(LanguageManager.get("label.commands"), Comparator.comparing(Labeled::getText));
+    private TreeNode<Button> eventsTree = new TreeNode<>(LanguageManager.get("label.events"), Comparator.comparing(Labeled::getText));
+    private TreeNode<Button> otherTree = new TreeNode<>(LanguageManager.get("label.other"), Comparator.comparing(Labeled::getText));
+    private CheckBox debugModeCheckBox = new CheckBox(LanguageManager.get("check_box.debug_mode"));
+    private TextField pluginNameField = new TextField();
+    private TextField pluginVerField = new TextField();
+    private TextField pluginAuthorField = new TextField();
+    private TextField pluginDescField = new TextField();
+    private TextField pluginWebsiteField = new TextField();
+    private TextField pluginDependField = new TextField();
+    private TextField pluginSoftDependField = new TextField();
+    private TextArea pluginPermsField = new TextArea();
+    private ListSelectionView<VisualBukkitExtension> extensionView = new ListSelectionView<>();
 
     protected Project(Path dir) throws IOException {
         this.dir = dir;
         dataFile = dir.resolve("data.json");
-        resourcesDir = dir.resolve("Resource Files");
+        resourcesDir = dir.resolve("ResourceFiles");
         buildDir = dir.resolve("Build");
         Files.createDirectories(resourcesDir);
         Files.createDirectories(buildDir);
 
-        TextField pluginNameField = new TextField();
-        TextField pluginVerField = new TextField();
-        TextField pluginAuthorField = new TextField();
-        TextField pluginDescField = new TextField();
-        TextField pluginWebsiteField = new TextField();
-        TextField pluginDependField = new TextField();
-        TextField pluginSoftDependField = new TextField();
-        TextArea pluginPermsField = new TextArea();
+        Label title = new Label(LanguageManager.get("label.plugin_settings"));
+        title.setUnderline(true);
 
-        pluginNameField.textProperty().bindBidirectional(pluginName);
-        pluginVerField.textProperty().bindBidirectional(pluginVersion);
-        pluginAuthorField.textProperty().bindBidirectional(pluginAuthor);
-        pluginDescField.textProperty().bindBidirectional(pluginDescription);
-        pluginWebsiteField.textProperty().bindBidirectional(pluginWebsite);
-        pluginDependField.textProperty().bindBidirectional(pluginDependencies);
-        pluginSoftDependField.textProperty().bindBidirectional(pluginSoftDependencies);
-        pluginPermsField.textProperty().bindBidirectional(pluginPermissions);
+        StyleableGridPane settingsGrid = new StyleableGridPane();
+        settingsGrid.addColumn(0,
+                new Label(LanguageManager.get("label.plugin_name")), new Label(LanguageManager.get("label.plugin_version")),
+                new Label(LanguageManager.get("label.plugin_author")), new Label(LanguageManager.get("label.plugin_description")),
+                new Label(LanguageManager.get("label.plugin_website")), new Label(LanguageManager.get("label.plugin_depend")),
+                new Label(LanguageManager.get("label.plugin_soft_depend")), new Label(LanguageManager.get("label.plugin_permissions")));
+        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginPermsField);
+
         pluginPermsField.prefWidthProperty().bind(pluginNameField.widthProperty());
         pluginNameField.textProperty().addListener((o, oldValue, newValue) -> {
             if (!newValue.isEmpty() && !StringUtils.isAlphanumeric(newValue)) {
@@ -88,27 +80,32 @@ public class Project {
             }
         });
 
-        GridPane settingsGrid = new GridPane();
-        VisualBukkitApp.getSettingsManager().bindStyle(settingsGrid);
-        settingsGrid.getStyleClass().add("plugin-settings-grid");
-        settingsGrid.addColumn(0, new Label(LanguageManager.get("label.plugin_name")),
-                new Label(LanguageManager.get("label.plugin_version")), new Label(LanguageManager.get("label.plugin_author")),
-                new Label(LanguageManager.get("label.plugin_description")), new Label(LanguageManager.get("label.plugin_website")),
-                new Label(LanguageManager.get("label.plugin_depend")), new Label(LanguageManager.get("label.plugin_soft_depend")),
-                new Label(LanguageManager.get("label.plugin_permissions")));
-        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginPermsField);
+        TreeNode<TreeNode<Button>> pluginComponentsTree = new TreeNode<>(LanguageManager.get("label.plugin_components"));
+        pluginComponentsTree.add(commandsTree);
+        pluginComponentsTree.add(eventsTree);
+        pluginComponentsTree.add(otherTree);
+        pluginComponentsTree.toggle();
 
-        HBox buttonBar = new StyleableHBox();
-        buttonBar.getStyleClass().add("project-button-bar");
-        buttonBar.getChildren().addAll(
-                new IconButton("add", LanguageManager.get("tooltip.add_component"), e -> promptAddPluginComponent()),
-                new IconButton("settings", LanguageManager.get("tooltip.plugin_settings"), e -> pluginSettingsStage.show()),
-                new IconButton("folder", LanguageManager.get("tooltip.resource_files"), e -> VisualBukkitApp.openDirectory(resourcesDir)),
-                new IconButton("build", LanguageManager.get("tooltip.build_plugin"), e -> {
+        extensionView.setSourceHeader(new Label(LanguageManager.get("label.installed_extensions")));
+        extensionView.setTargetHeader(new Label(LanguageManager.get("label.enabled_extensions")));
+        extensionView.getSourceItems().addAll(ExtensionManager.getExtensions());
+        extensionView.getStyleClass().add("extension-view");
+        Stage extensionStage = new Stage();
+        VisualBukkitApp.getSettingsManager().bindStyle(extensionView);
+        extensionStage.initOwner(VisualBukkitApp.getStage());
+        extensionStage.initModality(Modality.APPLICATION_MODAL);
+        extensionStage.setTitle("Extension Manager");
+        extensionStage.setScene(new Scene(extensionView, 1000, 600));
+        extensionStage.setOnHidden(e -> BlockRegistry.setActiveExtensions(extensionView.getTargetItems()));
+
+        StyleableGridPane buttonGrid = new StyleableGridPane();
+        buttonGrid.addColumn(0,
+                new IconButton("build", LanguageManager.get("button.build_plugin"), e -> {
                     VisualBukkitApp.getLogger().show();
-                    PluginBuilder.build(this);
+                    debugMap.clear();
+                    PluginBuilder.build(this, debugModeCheckBox.isSelected());
                 }),
-                new IconButton("jar", LanguageManager.get("tooltip.build_directory"), e -> {
+                new IconButton("jar", LanguageManager.get("button.output_directory"), e -> {
                     Path targetDir = buildDir.resolve("target");
                     if (Files.exists(targetDir)) {
                         VisualBukkitApp.openDirectory(targetDir);
@@ -116,24 +113,35 @@ public class Project {
                         NotificationManager.displayError(LanguageManager.get("error.cannot_open_build_dir.title"), LanguageManager.get("error.cannot_open_build_dir.content"));
                     }
                 }),
-                new IconButton("deploy", LanguageManager.get("tooltip.deploy_plugin"), e -> PluginBuilder.deploy(this)),
-                new IconButton("log", LanguageManager.get("tooltip.log"), e -> VisualBukkitApp.getLogger().show()),
-                new SpacerRegion(),
-                new Label(String.format(LanguageManager.get("label.current_project"), getName())));
+                new IconButton("folder", LanguageManager.get("button.resource_directory"), e -> VisualBukkitApp.openDirectory(resourcesDir)),
+                new IconButton("deploy", LanguageManager.get("button.deploy_plugin"), e -> PluginBuilder.deploy(this)),
+                new IconButton("plug", LanguageManager.get("button.extensions"), e -> extensionStage.show()));
+        buttonGrid.addColumn(1, debugModeCheckBox);
 
-        Label componentPlaceholder = new Label(LanguageManager.get("label.add_plugin_component"));
-        projectPane.setOnMouseClicked(e -> {
-            if (projectPane.getCenter().equals(componentPlaceholder)) {
-                promptAddPluginComponent();
+        StyleableVBox projectVBox = new StyleableVBox(title, pluginComponentsTree, settingsGrid, buttonGrid);
+        projectVBox.getStyleClass().add("plugin-settings-pane");
+        pluginSettingsPane.setContent(projectVBox);
+        pluginSettingsPane.setFitToWidth(true);
+        pluginSettingsPane.setFitToHeight(true);
+        pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
+        pluginComponentPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+
+        pluginComponentPane.setOnDragOver(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof PluginComponentSource) {
+                e.acceptTransferModes(TransferMode.ANY);
+                e.consume();
             }
         });
 
-        projectPane.setBottom(buttonBar);
-        projectPane.centerProperty().bind(Bindings.when(Bindings.isNotEmpty(pluginComponentPane.getTabs())).then((Node) pluginComponentPane).otherwise(componentPlaceholder));
-        pluginSettingsStage.initModality(Modality.APPLICATION_MODAL);
-        pluginSettingsStage.setTitle("Plugin Settings");
-        pluginSettingsStage.setScene(new Scene(settingsGrid, 350, 350));
-        pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
+        pluginComponentPane.setOnDragDropped(e -> {
+            Object source = e.getGestureSource();
+            if (source instanceof PluginComponentSource s) {
+                createPluginComponent(s.getBlockDefinition().createBlock(), true);
+                e.setDropCompleted(true);
+                e.consume();
+            }
+        });
 
         JSONObject json = new JSONObject();
 
@@ -143,14 +151,15 @@ public class Project {
             } catch (JSONException ignored) {}
         }
 
-        pluginName.set(json.optString("plugin.name", ""));
-        pluginVersion.set(json.optString("plugin.version", ""));
-        pluginAuthor.set(json.optString("plugin.author", ""));
-        pluginDescription.set(json.optString("plugin.description", ""));
-        pluginWebsite.set(json.optString("plugin.website", ""));
-        pluginDependencies.set(json.optString("plugin.dependencies", ""));
-        pluginSoftDependencies.set(json.optString("plugin.soft-dependencies", ""));
-        pluginPermissions.set(json.optString("plugin.permissions", ""));
+        pluginNameField.setText(json.optString("plugin.name", ""));
+        pluginVerField.setText(json.optString("plugin.version", ""));
+        pluginAuthorField.setText(json.optString("plugin.author", ""));
+        pluginDescField.setText(json.optString("plugin.description", ""));
+        pluginWebsiteField.setText(json.optString("plugin.website", ""));
+        pluginDependField.setText(json.optString("plugin.dependencies", ""));
+        pluginSoftDependField.setText(json.optString("plugin.soft-dependencies", ""));
+        pluginPermsField.setText(json.optString("plugin.permissions", ""));
+        debugModeCheckBox.setSelected(json.optBoolean("debug-build-mode"));
 
         JSONArray extensionArray = json.optJSONArray("extensions");
         if (extensionArray != null) {
@@ -158,30 +167,37 @@ public class Project {
                 if (obj instanceof String) {
                     VisualBukkitExtension extension = ExtensionManager.getExtension((String) obj);
                     if (extension != null) {
-                        extensions.add(extension);
+                        extensionView.getSourceItems().remove(extension);
+                        extensionView.getTargetItems().add(extension);
                     }
                 }
             }
         }
 
-        BlockRegistry.setActiveExtensions(extensions);
+        BlockRegistry.setActiveExtensions(extensionView.getTargetItems());
 
         JSONArray componentArray = json.optJSONArray("plugin-components");
         if (componentArray != null) {
             for (Object obj : componentArray) {
-                if (obj instanceof JSONObject) {
-                    JSONObject componentJson = (JSONObject) obj;
+                if (obj instanceof JSONObject componentJson) {
                     PluginComponent component = BlockRegistry.getPluginComponent(componentJson.optString("="));
                     if (component != null) {
-                        addPluginComponent(component.createBlock(componentJson));
+                        createPluginComponent(component.createBlock(componentJson), false);
                     }
                 }
             }
         }
 
-        int openTabIndex = json.optInt("open-tab");
-        if (openTabIndex >= 0 && openTabIndex < pluginComponentPane.getTabs().size()) {
-            pluginComponentPane.getSelectionModel().select(openTabIndex);
+        JSONArray openPluginComponents = json.optJSONArray("open-plugin-components");
+        if (openPluginComponents != null) {
+            for (int i = 0; i < openPluginComponents.length(); i++) {
+                pluginComponentPane.getTabs().add(pluginComponents.get(openPluginComponents.getInt(i)).getTab());
+            }
+        }
+
+        int currentPluginComponent = json.optInt("current-plugin-component");
+        if (currentPluginComponent >= 0 && currentPluginComponent < pluginComponentPane.getTabs().size()) {
+            pluginComponentPane.getSelectionModel().select(currentPluginComponent);
         }
     }
 
@@ -195,14 +211,20 @@ public class Project {
         json.put("plugin.dependencies", getPluginDependencies());
         json.put("plugin.soft-dependencies", getPluginSoftDependencies());
         json.put("plugin.permissions", getPluginPermissions());
+        json.put("debug-build-mode", debugModeCheckBox.isSelected());
         json.put("open-tab", pluginComponentPane.getSelectionModel().getSelectedIndex());
+        json.put("current-plugin-component", pluginComponentPane.getSelectionModel().getSelectedIndex());
 
-        for (VisualBukkitExtension extension : extensions) {
+        for (VisualBukkitExtension extension : extensionView.getTargetItems()) {
             json.append("extensions", extension.getName());
         }
 
+        for (PluginComponent.Block block : pluginComponents) {
+            json.append("plugin-components", block.serialize());
+        }
+
         for (Tab tab : pluginComponentPane.getTabs()) {
-            json.append("plugin-components", pluginComponents.get(tab).serialize());
+            json.append("open-plugin-components", pluginComponents.indexOf(getPluginComponent(tab)));
         }
 
         if (Files.notExists(dir)) {
@@ -211,37 +233,52 @@ public class Project {
         Files.writeString(dataFile, json.toString(2));
     }
 
-    public void addPluginComponent(PluginComponent.Block block) {
-        Tab tab = block.getTab();
-        tab.setOnCloseRequest(e -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.confirm_delete_component"), ButtonType.YES, ButtonType.CANCEL);
-            VisualBukkitApp.getSettingsManager().style(alert.getDialogPane());
-            alert.setHeaderText(null);
-            alert.setGraphic(null);
-            if (alert.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.YES) {
-                int index = pluginComponentPane.getTabs().indexOf(tab);
-                Platform.runLater(() -> {
-                    pluginComponentPane.getTabs().add(index, tab);
-                    pluginComponentPane.getSelectionModel().select(tab);
-                });
-            } else {
-                pluginComponents.remove(tab);
-            }
-        });
-        pluginComponents.put(tab, block);
-        pluginComponentPane.getTabs().add(tab);
-        pluginComponentPane.getSelectionModel().selectLast();
+    public void createPluginComponent(PluginComponent.Block block, boolean open) {
+        pluginComponents.add(block);
+        TreeNode<Button> tree = getTree(block);
+        tree.add(block.getOpenButton());
+        block.getTab().textProperty().addListener((observable, oldValue, newValue) -> tree.sort());
+        if (open) {
+            openPluginComponent(block);
+        }
     }
 
-    public void promptAddPluginComponent() {
-        ChoiceDialog<PluginComponent> addComponentDialog = new ChoiceDialog<>();
-        VisualBukkitApp.getSettingsManager().style(addComponentDialog.getDialogPane());
-        addComponentDialog.getItems().addAll(AVAILABLE_PLUGIN_COMPONENTS);
-        addComponentDialog.setTitle(LanguageManager.get("dialog.add_component.title"));
-        addComponentDialog.setContentText(LanguageManager.get("dialog.add_component.content"));
-        addComponentDialog.setHeaderText(null);
-        addComponentDialog.setGraphic(null);
-        addComponentDialog.showAndWait().ifPresent(pluginComponent -> addPluginComponent(pluginComponent.createBlock()));
+    public void openPluginComponent(PluginComponent.Block block) {
+        if (!pluginComponentPane.getTabs().contains(block.getTab())) {
+            pluginComponentPane.getTabs().add(0, block.getTab());
+        }
+        pluginComponentPane.getSelectionModel().select(block.getTab());
+    }
+
+    public UndoManager.RevertableAction deletePluginComponent(PluginComponent.Block block) {
+        return new UndoManager.RevertableAction() {
+            @Override
+            public void run() {
+                pluginComponents.remove(block);
+                pluginComponentPane.getTabs().remove(block.getTab());
+                getTree(block).remove(block.getOpenButton());
+            }
+            @Override
+            public void revert() {
+                pluginComponents.add(block);
+                pluginComponentPane.getTabs().add(0, block.getTab());
+                pluginComponentPane.getSelectionModel().selectFirst();
+                getTree(block).add(block.getOpenButton());
+            }
+        };
+    }
+
+    public PluginComponent.Block getCurrentPluginComponent() {
+        Tab currentTab = pluginComponentPane.getSelectionModel().getSelectedItem();
+        return currentTab != null ? getPluginComponent(currentTab) : null;
+    }
+
+    private PluginComponent.Block getPluginComponent(Tab tab) {
+        return ((PluginComponent.Block.Pane) tab.getContent()).getBlock();
+    }
+
+    private TreeNode<Button> getTree(PluginComponent.Block block) {
+        return block instanceof CompCommand.Block ? commandsTree : block instanceof EventComponent.Block ? eventsTree : otherTree;
     }
 
     public void promptImportComponent() {
@@ -253,7 +290,7 @@ public class Project {
                 JSONObject json = new JSONObject(Files.readString(file.toPath()));
                 PluginComponent component = BlockRegistry.getPluginComponent(json.optString("="));
                 if (component != null) {
-                    addPluginComponent(component.createBlock(json));
+                    createPluginComponent(component.createBlock(json), true);
                 }
             } catch (IOException e) {
                 NotificationManager.displayException("Failed to import component", e);
@@ -288,7 +325,7 @@ public class Project {
             File outputDir = directoryChooser.showDialog(VisualBukkitApp.getStage());
             if (outputDir != null) {
                 try {
-                    Files.writeString(outputDir.toPath().resolve(UUID.randomUUID() + ".json"), pluginComponents.get(tab).serialize().toString(2));
+                    Files.writeString(outputDir.toPath().resolve(UUID.randomUUID() + ".json"), getPluginComponent(tab).serialize().toString(2));
                     VisualBukkitApp.openDirectory(outputDir.toPath());
                 } catch (IOException e) {
                     NotificationManager.displayException("Failed to export component", e);
@@ -313,55 +350,51 @@ public class Project {
         return resourcesDir;
     }
 
-    public BorderPane getProjectPane() {
-        return projectPane;
-    }
-
-    public Collection<PluginComponent.Block> getPluginComponents() {
-        return pluginComponents.values();
-    }
-
-    public Stage getPluginSettingsStage() {
-        return pluginSettingsStage;
+    public ScrollPane getPluginSettingsPane() {
+        return pluginSettingsPane;
     }
 
     public TabPane getPluginComponentPane() {
         return pluginComponentPane;
     }
 
-    public Set<VisualBukkitExtension> getExtensions() {
-        return extensions;
+    public List<PluginComponent.Block> getPluginComponents() {
+        return Collections.unmodifiableList(pluginComponents);
+    }
+
+    public Map<String, Statement.Block> getDebugMap() {
+        return debugMap;
     }
 
     public String getPluginName() {
-        return pluginName.get();
+        return pluginNameField.getText();
     }
 
     public String getPluginVersion() {
-        return pluginVersion.get();
+        return pluginVerField.getText();
     }
 
     public String getPluginAuthor() {
-        return pluginAuthor.get();
+        return pluginAuthorField.getText();
     }
 
     public String getPluginDescription() {
-        return pluginDescription.get();
+        return pluginDescField.getText();
     }
 
     public String getPluginWebsite() {
-        return pluginWebsite.get();
+        return pluginWebsiteField.getText();
     }
 
     public String getPluginDependencies() {
-        return pluginDependencies.get();
+        return pluginDependField.getText();
     }
 
     public String getPluginSoftDependencies() {
-        return pluginSoftDependencies.get();
+        return pluginSoftDependField.getText();
     }
 
     public String getPluginPermissions() {
-        return pluginPermissions.get();
+        return pluginPermsField.getText();
     }
 }

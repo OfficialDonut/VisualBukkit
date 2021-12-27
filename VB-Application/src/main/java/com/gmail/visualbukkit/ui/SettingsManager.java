@@ -12,16 +12,22 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class SettingsManager {
 
-    private final static List<String> LANGUAGES = List.of("System Default", "de-DE", "en-US", "ja-JP", "ru-RU", "zh-CN");
-    private final static List<Integer> FONT_SIZES = List.of(8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48);
-    private final static List<Integer> AUTOSAVE_TIMES = List.of(5, 10, 15, 20, 25, 30, -1);
+    private static final List<Integer> FONT_SIZES = List.of(8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48);
+    private static final List<Integer> AUTOSAVE_TIMES = List.of(5, 10, 15, 20, 25, 30, -1);
+    private static final Map<String, String> LANGUAGES = new LinkedHashMap<>();
+
+    static {
+        LANGUAGES.put("System Default", "System Default");
+        LANGUAGES.put("zh-CN", "Chinese");
+        LANGUAGES.put("en-US", "English");
+        LANGUAGES.put("de-DE", "German");
+        LANGUAGES.put("ja-JP", "Japanese");
+        LANGUAGES.put("ru-RU", "Russian");
+    }
 
     private StringProperty language = new SimpleStringProperty();
     private StringProperty theme = new SimpleStringProperty();
@@ -41,7 +47,7 @@ public class SettingsManager {
         });
 
         String lang = VisualBukkitApp.getData().optString("settings.lang");
-        language.set(LANGUAGES.contains(lang) ? lang : "System Default");
+        language.set(LANGUAGES.containsKey(lang) ? lang : "System Default");
         if (!language.get().equals("System Default")) {
             Locale.setDefault(Locale.forLanguageTag(lang));
         }
@@ -61,7 +67,7 @@ public class SettingsManager {
         Menu autosaveTimeMenu = new Menu(LanguageManager.get("menu.autosave"));
         Menu langMenu = new Menu(LanguageManager.get("menu.language"));
 
-        themeMenu = new Menu(LanguageManager.get("menu.theme"));
+        themeMenu = new Menu(LanguageManager.get("menu.themes"));
         reloadThemes();
 
         ToggleGroup soundsGroup = new ToggleGroup();
@@ -98,15 +104,15 @@ public class SettingsManager {
         }
 
         ToggleGroup langGroup = new ToggleGroup();
-        for (String s : LANGUAGES) {
-            RadioMenuItem langItem = new RadioMenuItem(s);
+        for (Map.Entry<String, String> entry : LANGUAGES.entrySet()) {
+            RadioMenuItem langItem = new RadioMenuItem(entry.getValue());
             langItem.setOnAction(e -> {
-                language.set(s);
+                language.set(entry.getKey());
                 NotificationManager.displayMessage(LanguageManager.get("message.language_change.title"), LanguageManager.get("message.language_change.content"));
             });
             langGroup.getToggles().add(langItem);
             langMenu.getItems().add(langItem);
-            if (s.equals(language.get())) {
+            if (entry.getKey().equals(language.get())) {
                 langItem.setSelected(true);
             }
         }
@@ -116,7 +122,7 @@ public class SettingsManager {
 
     @SuppressWarnings("UnstableApiUsage")
     public void reloadThemes() {
-        Map<String, String> themeMap = new HashMap<>();
+        Map<String, String> themeMap = new LinkedHashMap<>();
         themeMap.put("/themes/Dark.css", "Dark");
         themeMap.put("/themes/Light.css", "Light");
 
@@ -135,7 +141,7 @@ public class SettingsManager {
 
         Menu selectThemeMenu = new Menu(LanguageManager.get("menu.select_theme"));
         themeMenu.getItems().setAll(selectThemeMenu,
-                new ActionMenuItem(LanguageManager.get("menu_item.open_theme_dir"), e -> VisualBukkitApp.openDirectory(themeDir)),
+                new ActionMenuItem(LanguageManager.get("menu_item.manage_themes"), e -> VisualBukkitApp.openDirectory(themeDir)),
                 new ActionMenuItem(LanguageManager.get("menu_item.reload_themes"), e -> reloadThemes()));
 
         ToggleGroup themeGroup = new ToggleGroup();

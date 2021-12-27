@@ -7,12 +7,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class StatSetChatRecipients extends Statement {
 
     public StatSetChatRecipients() {
-        super("stat-set-chat-recipients");
+        super("stat-set-chat-recipients", "Set Chat Recipients", "AsyncPlayerChatEvent", "Sets the message recipients");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.LIST)) {
+        return new Block(this, new ExpressionParameter("Recipients", ClassInfo.LIST)) {
             @Override
             public void update() {
                 super.update();

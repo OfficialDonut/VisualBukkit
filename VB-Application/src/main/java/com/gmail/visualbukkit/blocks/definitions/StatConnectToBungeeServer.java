@@ -9,12 +9,12 @@ import com.gmail.visualbukkit.project.PluginModule;
 public class StatConnectToBungeeServer extends Statement {
 
     public StatConnectToBungeeServer() {
-        super("stat-connect-to-bungee-server");
+        super("stat-connect-to-bungee-server", "Connect Player To Bungee Server", "VB", "Connects a player to a Bungee server");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter("Server", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -30,10 +30,12 @@ public class StatConnectToBungeeServer extends Statement {
     }
 
     private static final String CONNECT_METHOD =
-            "public static void connectToServer(org.bukkit.entity.Player player, String server) {" +
-            "    com.google.common.io.ByteArrayDataOutput out = com.google.common.io.ByteStreams.newDataOutput();" +
-            "    out.writeUTF(\"Connect\");" +
-            "    out.writeUTF(server);" +
-            "    player.sendPluginMessage(PluginMain.getInstance(), \"BungeeCord\", out.toByteArray());" +
-            "}";
+            """
+            public static void connectToServer(org.bukkit.entity.Player player, String server) {
+                com.google.common.io.ByteArrayDataOutput out = com.google.common.io.ByteStreams.newDataOutput();
+                out.writeUTF("Connect");
+                out.writeUTF(server);
+                player.sendPluginMessage(PluginMain.getInstance(), "BungeeCord", out.toByteArray());
+            }
+            """;
 }

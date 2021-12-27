@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigFromFile extends Expression {
 
     public ExprConfigFromFile() {
-        super("expr-config-from-file");
+        super("expr-config-from-file", "Config From File", "Config", "Loads a config from a file");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprConfigFromFile extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("java.io.File"))) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of("java.io.File"))) {
             @Override
             public String toJava() {
                 return "org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(" + arg(0) + ")";

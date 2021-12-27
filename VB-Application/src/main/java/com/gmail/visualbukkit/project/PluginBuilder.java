@@ -48,7 +48,7 @@ public class PluginBuilder {
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    public static void build(Project project) {
+    public static void build(Project project, boolean debugMode) {
         if (isBuilding.get()) {
             return;
         }
@@ -113,7 +113,7 @@ public class PluginBuilder {
                 }
 
                 System.out.println("Generating source code...");
-                BuildContext buildContext = new BuildContext(mainClass);
+                BuildContext buildContext = new BuildContext(mainClass, resourcesDir, debugMode);
                 project.getPluginComponents().forEach(component -> component.prepareBuild(buildContext));
                 buildContext.getUtilMethods().forEach(mainClass::addMethod);
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString());
@@ -166,9 +166,9 @@ public class PluginBuilder {
                         }
                     }
                     System.out.println();
-                    System.out.println("================================================================");
-                    System.out.println("Click the 'Open Build Directory' button to access the plugin jar");
-                    System.out.println("================================================================");
+                    System.out.println("============================================================");
+                    System.out.println("Click the 'Output Directory' button to access the plugin jar");
+                    System.out.println("============================================================");
                 }
 
             } catch (Exception e) {
@@ -247,24 +247,22 @@ public class PluginBuilder {
             permissionsBuilder.append("  ").append(project.getPluginPermissions().replace("\n", "\n  ")).append("\n");
         }
         for (PluginComponent.Block pluginComponent : project.getPluginComponents()) {
-            if (pluginComponent.getDefinition() instanceof CompCommand && !pluginComponent.arg(0).isBlank()) {
-                commandsBuilder.append("  ").append(pluginComponent.arg(0)).append(":\n");
-                if (!pluginComponent.arg(1).isBlank()) {
-                    commandsBuilder.append("    aliases: [").append(pluginComponent.arg(1)).append("]\n");
+            if (pluginComponent instanceof CompCommand.Block command && !command.getName().isBlank()) {
+                commandsBuilder.append("  ").append(command.getName()).append(":\n");
+                if (!command.getAliases().isBlank()) {
+                    commandsBuilder.append("    aliases: [").append(command.getAliases()).append("]\n");
                 }
-                if (!pluginComponent.arg(2).isBlank()) {
-                    commandsBuilder.append("    description: \"").append(pluginComponent.arg(2)).append("\"\n");
+                if (!command.getDescription().isBlank()) {
+                    commandsBuilder.append("    description: \"").append(command.getDescription()).append("\"\n");
                 }
-                if (!pluginComponent.arg(3).isBlank()) {
-                    commandsBuilder.append("    permission: \"").append(pluginComponent.arg(3)).append("\"\n");
-                    permissionsBuilder.append("  ").append(pluginComponent.arg(3)).append(":\n");
-                    permissionsBuilder.append("    default: op\n");
+                if (!command.getPermission().isBlank()) {
+                    commandsBuilder.append("    permission: \"").append(command.getPermission()).append("\"\n");
                 }
-                if (!pluginComponent.arg(4).isBlank()) {
-                    commandsBuilder.append("    permission-message: \"").append(pluginComponent.arg(4)).append("\"\n");
+                if (!command.getPermissionMessage().isBlank()) {
+                    commandsBuilder.append("    permission-message: \"").append(command.getPermissionMessage()).append("\"\n");
                 }
-                if (!pluginComponent.arg(5).isBlank()) {
-                    commandsBuilder.append("    usage: \"").append(pluginComponent.arg(5)).append("\"\n");
+                if (!command.getUsage().isBlank()) {
+                    commandsBuilder.append("    usage: \"").append(command.getUsage()).append("\"\n");
                 }
             }
         }
@@ -282,82 +280,85 @@ public class PluginBuilder {
     }
 
     public static String POM_STRING =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n" +
-            "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-            "         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n" +
-            "    <modelVersion>4.0.0</modelVersion>\n" +
-            "\n" +
-            "    <groupId>vb</groupId>\n" +
-            "    <artifactId>{ARTIFACT_ID}</artifactId>\n" +
-            "    <version>{VERSION}</version>\n" +
-            "\n" +
-            "    <properties>\n" +
-            "        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n" +
-            "        <maven.compiler.source>1.8</maven.compiler.source>\n" +
-            "        <maven.compiler.target>1.8</maven.compiler.target>\n" +
-            "    </properties>\n" +
-            "\n" +
-            "    <repositories>\n" +
-            "        <repository>\n" +
-            "            <id>spigot-repo</id>\n" +
-            "            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>\n" +
-            "        </repository>\n" +
-            "        <repository>\n" +
-            "           <id>jitpack.io</id>\n" +
-            "           <url>https://jitpack.io</url>\n" +
-            "        </repository>\n" +
-            "{REPOSITORIES}" +
-            "    </repositories>\n" +
-            "\n" +
-            "    <dependencies>\n" +
-            "        <dependency>\n" +
-            "            <groupId>org.spigotmc</groupId>\n" +
-            "            <artifactId>spigot-api</artifactId>\n" +
-            "            <version>1.18-R0.1-SNAPSHOT</version>\n" +
-            "            <scope>provided</scope>\n" +
-            "        </dependency>\n" +
-            "{DEPENDENCIES}" +
-            "    </dependencies>\n" +
-            "\n" +
-            "    <build>\n" +
-            "        <plugins>\n" +
-            "            <plugin>\n" +
-            "                <artifactId>maven-compiler-plugin</artifactId>\n" +
-            "                <version>3.8.0</version>\n" +
-            "                <configuration>\n" +
-            "                    <compilerId>eclipse</compilerId>\n" +
-            "                </configuration>\n" +
-            "                <dependencies>\n" +
-            "                    <dependency>\n" +
-            "                        <groupId>org.codehaus.plexus</groupId>\n" +
-            "                        <artifactId>plexus-compiler-eclipse</artifactId>\n" +
-            "                        <version>2.8.8</version>\n" +
-            "                    </dependency>\n" +
-            "                </dependencies>\n" +
-            "            </plugin>\n" +
-            "\n" +
-            "            <plugin>\n" +
-            "                <groupId>org.apache.maven.plugins</groupId>\n" +
-            "                <artifactId>maven-shade-plugin</artifactId>\n" +
-            "                <version>3.2.1</version>\n" +
-            "                <executions>\n" +
-            "                    <execution>\n" +
-            "                        <phase>package</phase>\n" +
-            "                        <goals>\n" +
-            "                            <goal>shade</goal>\n" +
-            "                        </goals>\n" +
-            "                    </execution>\n" +
-            "                </executions>\n" +
-            "            </plugin>\n" +
-            "        </plugins>\n" +
-            "    </build>" +
-            "\n" +
-            "</project>";
+            """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <project xmlns="http://maven.apache.org/POM/4.0.0"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                <modelVersion>4.0.0</modelVersion>
+
+                <groupId>vb</groupId>
+                <artifactId>{ARTIFACT_ID}</artifactId>
+                <version>{VERSION}</version>
+
+                <properties>
+                    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                    <maven.compiler.source>1.8</maven.compiler.source>
+                    <maven.compiler.target>1.8</maven.compiler.target>
+                </properties>
+
+                <repositories>
+                    <repository>
+                        <id>spigot-repo</id>
+                        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+                    </repository>
+                    <repository>
+                       <id>jitpack.io</id>
+                       <url>https://jitpack.io</url>
+                    </repository>
+            {REPOSITORIES}
+                </repositories>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.spigotmc</groupId>
+                        <artifactId>spigot-api</artifactId>
+                        <version>1.18-R0.1-SNAPSHOT</version>
+                        <scope>provided</scope>
+                    </dependency>
+            {DEPENDENCIES}
+                </dependencies>
+
+                <build>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.8.1</version>
+                            <configuration>
+                                <compilerId>eclipse</compilerId>
+                            </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.codehaus.plexus</groupId>
+                                    <artifactId>plexus-compiler-eclipse</artifactId>
+                                    <version>2.8.8</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
+
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-shade-plugin</artifactId>
+                            <version>3.2.4</version>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>shade</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </build>
+            </project>
+            """;
 
     public static String YML_STRING =
-            "name: \"{NAME}\"\n" +
-            "version: \"{VERSION}\"\n" +
-            "main: \"{MAIN_CLASS}\"\n" +
-            "api-version: 1.13\n";
+            """
+            name: "{NAME}"
+            version: "{VERSION}"
+            main: "{MAIN_CLASS}"
+            api-version: 1.13
+            """;
 }

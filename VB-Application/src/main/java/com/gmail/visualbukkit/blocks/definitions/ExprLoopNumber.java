@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprLoopNumber extends Expression {
 
     public ExprLoopNumber() {
-        super("expr-loop-number");
+        super("expr-loop-number", "Loop Number", "VB", "The current loop number");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ExprLoopNumber extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-number-loop");
+                checkForContainer(StatNumberLoop.class);
             }
 
             @Override

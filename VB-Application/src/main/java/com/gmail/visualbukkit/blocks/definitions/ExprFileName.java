@@ -9,7 +9,7 @@ import java.io.File;
 public class ExprFileName extends Expression {
 
     public ExprFileName() {
-        super("expr-file-name");
+        super("expr-file-name", "File Name", "File", "The name of a file (includes extension)");
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ExprFileName extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class))) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of(File.class))) {
             @Override
             public String toJava() {
                 return arg(0) + ".getName()";

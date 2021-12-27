@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class ExprMetadataValue extends Expression {
 
     public ExprMetadataValue() {
-        super("expr-metadata-value");
+        super("expr-metadata-value", "Metadata Value", "Bukkit", "A metadata value");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ExprMetadataValue extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.metadata.Metadatable")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Target", ClassInfo.of("org.bukkit.metadata.Metadatable")), new ExpressionParameter("Key", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -33,12 +33,14 @@ public class ExprMetadataValue extends Expression {
     }
 
     private static final String METADATA_METHOD =
-            "public static Object getMetadataValue(org.bukkit.metadata.Metadatable metadatable, String key) {\n" +
-            "    for (org.bukkit.metadata.MetadataValue value : metadatable.getMetadata(key)) {\n" +
-            "        if (PluginMain.getInstance().equals(value.getOwningPlugin())) {\n" +
-            "            return value.value();\n" +
-            "        }\n" +
-            "    }\n" +
-            "    return null;\n" +
-            "}";
+            """
+            public static Object getMetadataValue(org.bukkit.metadata.Metadatable metadatable, String key) {
+                for (org.bukkit.metadata.MetadataValue value : metadatable.getMetadata(key)) {
+                    if (PluginMain.getInstance().equals(value.getOwningPlugin())) {
+                        return value.value();
+                    }
+                }
+                return null;
+            }
+            """;
 }

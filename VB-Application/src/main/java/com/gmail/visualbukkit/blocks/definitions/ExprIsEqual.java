@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class ExprIsEqual extends Expression {
 
     public ExprIsEqual() {
-        super("expr-is-equal");
+        super("expr-is-equal", "Is Equal", "VB", "Checks if two objects are equal");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ExprIsEqual extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.OBJECT), new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Object", ClassInfo.OBJECT), new ExpressionParameter("Object", ClassInfo.OBJECT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -33,10 +33,12 @@ public class ExprIsEqual extends Expression {
     }
 
     private static final String EQUALS_METHOD =
-            "public static boolean checkEquals(Object o1, Object o2) {\n" +
-            "    if (o1 == null || o2 == null) {\n" +
-            "        return false;\n" +
-            "    }\n" +
-            "    return o1 instanceof Number && o2 instanceof Number ? ((Number) o1).doubleValue() == ((Number) o2).doubleValue() : o1.equals(o2);\n" +
-            "}";
+            """
+            public static boolean checkEquals(Object o1, Object o2) {
+                if (o1 == null || o2 == null) {
+                    return false;
+                }
+                return o1 instanceof Number && o2 instanceof Number ? ((Number) o1).doubleValue() == ((Number) o2).doubleValue() : o1.equals(o2);
+            }
+            """;
 }

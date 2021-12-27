@@ -1,13 +1,12 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
-import javafx.scene.Node;
 import org.json.JSONObject;
 
 public abstract class SimpleExpression extends Expression {
 
-    public SimpleExpression(String id) {
-        super(id);
+    public SimpleExpression(String id, String title, String tag, String description) {
+        super(id, title, tag, description);
     }
 
     @Override
@@ -20,12 +19,11 @@ public abstract class SimpleExpression extends Expression {
 
     public static abstract class Block extends Expression.Block {
 
-        public Block(SimpleExpression expression, BlockParameter parameter) {
-            super(expression);
-            getBody().getStyleClass().clear();
-            getHeader().getStyleClass().clear();
-            getHeader().getChildren().clear();
-            addToHeader((Node) parameter);
+        public Block(SimpleExpression expression, BlockParameter<?> parameter) {
+            super(expression, parameter);
+            getStyleClass().clear();
+            getChildren().setAll(parameter);
+            parameter.getChildren().remove(parameter.getLabel());
         }
     }
 }

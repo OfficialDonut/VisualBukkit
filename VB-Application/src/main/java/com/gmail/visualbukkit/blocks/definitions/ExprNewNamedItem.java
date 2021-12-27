@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class ExprNewNamedItem extends Expression {
 
     public ExprNewNamedItem() {
-        super("expr-new-named-item");
+        super("expr-new-named-item", "New Named ItemStack", "ItemStack", "A named ItemStack");
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ExprNewNamedItem extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.Material")), new ExpressionParameter(ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Material", ClassInfo.of("org.bukkit.Material")), new ExpressionParameter("Name", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -33,13 +33,15 @@ public class ExprNewNamedItem extends Expression {
     }
 
     private static final String ITEM_METHOD =
-            "public static org.bukkit.inventory.ItemStack getNamedItem(Material material, String name) {\n" +
-            "    org.bukkit.inventory.ItemStack item = new org.bukkit.inventory.ItemStack(material);\n" +
-            "    org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();\n" +
-            "    if (itemMeta != null) {\n" +
-            "        itemMeta.setDisplayName(name);\n" +
-            "        item.setItemMeta(itemMeta);\n" +
-            "    }\n" +
-            "    return item;\n" +
-            "}";
+            """
+            public static org.bukkit.inventory.ItemStack getNamedItem(Material material, String name) {
+                org.bukkit.inventory.ItemStack item = new org.bukkit.inventory.ItemStack(material);
+                org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();
+                if (itemMeta != null) {
+                    itemMeta.setDisplayName(name);
+                    item.setItemMeta(itemMeta);
+                }
+                return item;
+            }
+            """;
 }

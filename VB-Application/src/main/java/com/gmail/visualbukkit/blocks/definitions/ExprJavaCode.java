@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 public class ExprJavaCode extends Expression {
 
     public ExprJavaCode() {
-        super("expr-java-code");
+        super("expr-java-code", "Java Code", "VB", "Raw Java code");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprJavaCode extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new InputParameter()) {
+        return new Block(this, new InputParameter("Java")) {
             @Override
             public String toJava() {
                 return arg(0);

@@ -10,12 +10,12 @@ import java.io.File;
 public class StatWriteToFile extends Statement {
 
     public StatWriteToFile() {
-        super("stat-write-to-file");
+        super("stat-write-to-file", "Write To File", "File", "Writes a string to a file");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(File.class)), new ExpressionParameter(ClassInfo.STRING), new ChoiceParameter("WRITE", "APPEND")) {
+        return new Block(this, new ExpressionParameter("File", ClassInfo.of(File.class)), new ExpressionParameter("String", ClassInfo.STRING), new ChoiceParameter("Mode", "WRITE", "APPEND")) {
             @Override
             public String toJava() {
                 return "java.nio.file.Files.write(" + arg(0) + ".toPath()," +

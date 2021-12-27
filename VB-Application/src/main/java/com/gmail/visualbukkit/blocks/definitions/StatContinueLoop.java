@@ -1,12 +1,11 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.Statement;
-import com.gmail.visualbukkit.ui.LanguageManager;
 
 public class StatContinueLoop extends Statement {
 
     public StatContinueLoop() {
-        super("stat-continue-loop");
+        super("stat-continue-loop", "Continue Loop", "VB", "Advances a loop to the next iteration");
     }
 
     @Override
@@ -15,11 +14,7 @@ public class StatContinueLoop extends Statement {
             @Override
             public void update() {
                 super.update();
-                if (checkForContainer("stat-list-loop") || checkForContainer("stat-number-loop") || checkForContainer("stat-while-loop")) {
-                    setValid();
-                } else {
-                    setInvalid(String.format(LanguageManager.get("error.invalid_block_parent"), "Loop"));
-                }
+                setValid(checkForContainer(StatListLoop.class) || checkForContainer(StatNumberLoop.class) || checkForContainer(StatNumberLoop.class));
             }
 
             @Override

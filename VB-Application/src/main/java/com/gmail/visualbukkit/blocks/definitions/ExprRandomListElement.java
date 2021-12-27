@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprRandomListElement extends Expression {
 
     public ExprRandomListElement() {
-        super("expr-random-list-element");
+        super("expr-random-list-element", "Random Element", "List", "A random element of a list");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprRandomListElement extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.LIST)) {
+        return new Block(this, new ExpressionParameter("List", ClassInfo.LIST)) {
             @Override
             public String toJava() {
                 return arg(0) + ".get(java.util.concurrent.ThreadLocalRandom.current().nextInt(" + arg(0) + ".size()))";

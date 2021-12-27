@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprIPOfPlayer extends Expression {
 
     public ExprIPOfPlayer() {
-        super("expr-ip-of-player");
+        super("expr-ip-of-player", "Get IP", "Player", "The IP of a player");
     }
 
     @Override
@@ -17,10 +17,10 @@ public class ExprIPOfPlayer extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player"))) {
+        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player"))) {
             @Override
             public String toJava() {
-                return arg(0) + ".getAddress().getHostName()";
+                return arg(0) + ".getAddress().getAddress().getHostAddress()";
             }
         };
     }

@@ -8,12 +8,12 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class StatWhileLoop extends Container {
 
     public StatWhileLoop() {
-        super("stat-while-loop");
+        super("stat-while-loop", "While Loop", "VB", "Loops while a condition is true");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ChoiceParameter("normal", "negate condition")) {
+        return new Block(this, new ExpressionParameter("Condition", ClassInfo.BOOLEAN), new ChoiceParameter("Mode", "normal", "negate condition")) {
             @Override
             public String toJava() {
                 return arg(1).equals("normal") ?

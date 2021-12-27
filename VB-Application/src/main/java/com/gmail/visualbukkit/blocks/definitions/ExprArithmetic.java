@@ -10,7 +10,7 @@ public class ExprArithmetic extends VarArgsExpression {
     private static final String[] OPERATIONS = {"+", "-", "*", "/", "%"};
 
     public ExprArithmetic() {
-        super("expr-arithmetic");
+        super("expr-arithmetic", "Arithmetic", "Math", "Arithmetic operations (+, -, *, /, %)");
     }
 
     @Override
@@ -20,11 +20,11 @@ public class ExprArithmetic extends VarArgsExpression {
 
     @Override
     public Block createBlock() {
-        Block block = new Block(this) {
+        return new Block(this, new ExpressionParameter("Number", ClassInfo.DOUBLE), new ChoiceParameter("Operation", OPERATIONS), new ExpressionParameter("Number", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 String java = null;
-                for (int i = 1; i < getParameters().size(); i += 2) {
+                for (int i = 1; i < parameters.length; i += 2) {
                     java = "(" + (java == null ? arg(0) : java) + " " + arg(i) + " " + arg(i + 1) + ")";
                 }
                 return java;
@@ -32,23 +32,15 @@ public class ExprArithmetic extends VarArgsExpression {
 
             @Override
             protected void increaseSize() {
-                addParameterLine("Operation", new ChoiceParameter(OPERATIONS));
-                addParameterLine("Number", new ExpressionParameter(ClassInfo.DOUBLE));
+                push(new ChoiceParameter("Operation", OPERATIONS));
+                push(new ExpressionParameter("Number", ClassInfo.DOUBLE));
             }
 
             @Override
             protected void decreaseSize() {
-                int i = getBody().getChildren().size();
-                getBody().getChildren().remove(i - 2, i);
-                getParameters().remove(getParameters().size() - 1);
-                getParameters().remove(getParameters().size() - 1);
+                pop();
+                pop();
             }
         };
-
-        block.addParameterLine("Number", new ExpressionParameter(ClassInfo.DOUBLE));
-        block.addParameterLine("Operation", new ChoiceParameter(OPERATIONS));
-        block.addParameterLine("Number", new ExpressionParameter(ClassInfo.DOUBLE));
-
-        return block;
     }
 }

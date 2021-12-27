@@ -8,7 +8,7 @@ import java.util.UUID;
 public class ExprRandomUUID extends Expression {
 
     public ExprRandomUUID() {
-        super("expr-random-uuid");
+        super("expr-random-uuid", "Random UUID", "UUID", "A random UUID");
     }
 
     @Override

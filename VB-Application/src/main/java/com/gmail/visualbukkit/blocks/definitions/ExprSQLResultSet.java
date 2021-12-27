@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 public class ExprSQLResultSet extends Expression {
 
     public ExprSQLResultSet() {
-        super("expr-sql-result-set");
+        super("expr-sql-result-set", "Query Result Set", "SQL", "The result set from an SQL query");
     }
 
     @Override
@@ -20,11 +20,11 @@ public class ExprSQLResultSet extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of(PreparedStatement.class))) {
+        return new Block(this, new ExpressionParameter("Statement", ClassInfo.of(PreparedStatement.class))) {
             @Override
             public void update() {
                 super.update();
-                checkForContainer("stat-open-database-connection");
+                checkForContainer(StatOpenDatabaseConnection.class);
             }
 
             @Override

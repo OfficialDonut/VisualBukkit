@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 public class ExprNewImmutableList extends VarArgsExpression {
 
     public ExprNewImmutableList() {
-        super("expr-new-immutable-list");
+        super("expr-new-immutable-list", "New Immutable List", "List", "Creates a new list that cannot be modified");
     }
 
     @Override
@@ -23,12 +23,12 @@ public class ExprNewImmutableList extends VarArgsExpression {
         return new Block(this) {
             @Override
             public String toJava() {
-                int size = getParameters().size();
+                int size = parameters.length;
                 if (size == 0) {
                     return "Collections.EMPTY_LIST";
                 }
                 StringJoiner joiner = new StringJoiner(",");
-                for (BlockParameter parameter : getParameters()) {
+                for (BlockParameter<?> parameter : parameters) {
                     joiner.add(parameter.toJava());
                 }
                 return "((List) Arrays.asList(" + joiner + "))";
@@ -36,13 +36,12 @@ public class ExprNewImmutableList extends VarArgsExpression {
 
             @Override
             protected void increaseSize() {
-                addParameterLine("Object", new ExpressionParameter(ClassInfo.OBJECT));
+                push(new ExpressionParameter("Object", ClassInfo.OBJECT));
             }
 
             @Override
             protected void decreaseSize() {
-                getBody().getChildren().remove(getBody().getChildren().size() - 1);
-                getParameters().remove(getParameters().size() - 1);
+                pop();
             }
         };
     }

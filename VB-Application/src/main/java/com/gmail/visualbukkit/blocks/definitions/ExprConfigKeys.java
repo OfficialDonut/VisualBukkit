@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConfigKeys extends Expression {
 
     public ExprConfigKeys() {
-        super("expr-config-keys");
+        super("expr-config-keys", "Config Keys", "Config", "All the keys in a config");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprConfigKeys extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.configuration.ConfigurationSection"))) {
+        return new Block(this, new ExpressionParameter("Config", ClassInfo.of("org.bukkit.configuration.ConfigurationSection"))) {
             @Override
             public String toJava() {
                 return "PluginMain.createList(" + arg(0) + ".getKeys(false))";

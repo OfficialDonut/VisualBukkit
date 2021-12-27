@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.project.PluginModule;
 public class StatOpenDatabaseConnection extends Container {
 
     public StatOpenDatabaseConnection() {
-        super("stat-open-database-connection");
+        super("stat-open-database-connection", "Open Database Connection", "SQL", "Opens a connection to a database");
     }
 
     @Override

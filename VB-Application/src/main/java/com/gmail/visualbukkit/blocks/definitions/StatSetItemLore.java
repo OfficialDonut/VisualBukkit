@@ -8,12 +8,12 @@ import com.gmail.visualbukkit.project.BuildContext;
 public class StatSetItemLore extends Statement {
 
     public StatSetItemLore() {
-        super("stat-set-item-lore");
+        super("stat-set-item-lore", "Set ItemStack Lore", "ItemStack", "Sets the lore of an ItemStack");
     }
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.of("org.bukkit.inventory.ItemStack")), new ExpressionParameter(ClassInfo.LIST)) {
+        return new Block(this, new ExpressionParameter("ItemStack", ClassInfo.of("org.bukkit.inventory.ItemStack")), new ExpressionParameter("Lore", ClassInfo.LIST)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -28,11 +28,13 @@ public class StatSetItemLore extends Statement {
     }
 
     private static final String LORE_METHOD =
-            "public static void setItemLore(org.bukkit.inventory.ItemStack item, List lore) {\n" +
-            "    org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();\n" +
-            "    if (itemMeta != null) {\n" +
-            "        itemMeta.setLore((List<String>) lore);\n" +
-            "        item.setItemMeta(itemMeta);\n" +
-            "    }\n" +
-            "}";
+            """
+            public static void setItemLore(org.bukkit.inventory.ItemStack item, List lore) {
+                org.bukkit.inventory.meta.ItemMeta itemMeta = item.getItemMeta();
+                if (itemMeta != null) {
+                    itemMeta.setLore((List<String>) lore);
+                    item.setItemMeta(itemMeta);
+                }
+            }
+            """;
 }

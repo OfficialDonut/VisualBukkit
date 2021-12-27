@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprConditionalExpression extends Expression {
 
     public ExprConditionalExpression() {
-        super("expr-conditional-expression");
+        super("expr-conditional-expression", "Conditional Expression", "VB", "Returns one of two objects depending on a condition");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprConditionalExpression extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.BOOLEAN), new ExpressionParameter(ClassInfo.OBJECT), new ExpressionParameter(ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Condition", ClassInfo.BOOLEAN), new ExpressionParameter("If True", ClassInfo.OBJECT), new ExpressionParameter("If False", ClassInfo.OBJECT)) {
             @Override
             public String toJava() {
                 return "(" + arg(0) + " ? " + arg(1) + " : " + arg(2) + ")";

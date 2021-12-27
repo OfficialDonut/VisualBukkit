@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 public class ExprMergeStringList extends Expression {
 
     public ExprMergeStringList() {
-        super("expr-merge-string-list");
+        super("expr-merge-string-list", "Merge String List", "String", "Merges a list of strings into one string");
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ExprMergeStringList extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter(ClassInfo.STRING), new ExpressionParameter(ClassInfo.LIST)) {
+        return new Block(this, new ExpressionParameter("Delimiter", ClassInfo.STRING), new ExpressionParameter("Strings", ClassInfo.LIST)) {
             @Override
             public String toJava() {
                 return "String.join(" + arg(0) + "," + arg(1) + ")";
