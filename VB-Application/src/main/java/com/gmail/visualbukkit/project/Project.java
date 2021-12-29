@@ -16,6 +16,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.ListSelectionView;
 import org.json.JSONArray;
@@ -39,7 +41,8 @@ public class Project {
     private Map<String, Statement.Block> debugMap = new HashMap<>();
 
     private TabPane pluginComponentPane = new TabPane();
-    private ScrollPane pluginSettingsPane = new ScrollPane();
+    private StyleableVBox pluginSettingsPane = new StyleableVBox();
+    private ScrollPane pluginSettingsScrollPane = new ScrollPane(pluginSettingsPane);
     private TreeNode<Button> commandsTree = new TreeNode<>(LanguageManager.get("label.commands"), Comparator.comparing(Labeled::getText));
     private TreeNode<Button> eventsTree = new TreeNode<>(LanguageManager.get("label.events"), Comparator.comparing(Labeled::getText));
     private TreeNode<Button> otherTree = new TreeNode<>(LanguageManager.get("label.other"), Comparator.comparing(Labeled::getText));
@@ -48,9 +51,11 @@ public class Project {
     private TextField pluginVerField = new TextField();
     private TextField pluginAuthorField = new TextField();
     private TextField pluginDescField = new TextField();
+    private TextField pluginPrefixField = new TextField();
     private TextField pluginWebsiteField = new TextField();
     private TextField pluginDependField = new TextField();
     private TextField pluginSoftDependField = new TextField();
+    private TextField pluginLoadBeforeField = new TextField();
     private TextArea pluginPermsField = new TextArea();
     private ListSelectionView<VisualBukkitExtension> extensionView = new ListSelectionView<>();
 
@@ -69,9 +74,10 @@ public class Project {
         settingsGrid.addColumn(0,
                 new Label(LanguageManager.get("label.plugin_name")), new Label(LanguageManager.get("label.plugin_version")),
                 new Label(LanguageManager.get("label.plugin_author")), new Label(LanguageManager.get("label.plugin_description")),
-                new Label(LanguageManager.get("label.plugin_website")), new Label(LanguageManager.get("label.plugin_depend")),
-                new Label(LanguageManager.get("label.plugin_soft_depend")), new Label(LanguageManager.get("label.plugin_permissions")));
-        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginPermsField);
+                new Label(LanguageManager.get("label.plugin_prefix")), new Label(LanguageManager.get("label.plugin_website")),
+                new Label(LanguageManager.get("label.plugin_depend")), new Label(LanguageManager.get("label.plugin_soft_depend")),
+                new Label(LanguageManager.get("label.plugin_load_before")), new Label(LanguageManager.get("label.plugin_permissions")));
+        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginPrefixField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginLoadBeforeField, pluginPermsField);
 
         pluginPermsField.prefWidthProperty().bind(pluginNameField.widthProperty());
         pluginNameField.textProperty().addListener((o, oldValue, newValue) -> {
@@ -96,7 +102,12 @@ public class Project {
         extensionStage.initModality(Modality.APPLICATION_MODAL);
         extensionStage.setTitle("Extension Manager");
         extensionStage.setScene(new Scene(extensionView, 1000, 600));
-        extensionStage.setOnHidden(e -> BlockRegistry.setActiveExtensions(extensionView.getTargetItems()));
+        extensionStage.setOnHidden(e -> {
+            for (VisualBukkitExtension extension : BlockRegistry.getActiveExtensions()) {
+                extension.deactivate(this);
+            }
+            BlockRegistry.setExtensions(this);
+        });
 
         StyleableGridPane buttonGrid = new StyleableGridPane();
         buttonGrid.addColumn(0,
@@ -118,11 +129,10 @@ public class Project {
                 new IconButton("plug", LanguageManager.get("button.extensions"), e -> extensionStage.show()));
         buttonGrid.addColumn(1, debugModeCheckBox);
 
-        StyleableVBox projectVBox = new StyleableVBox(title, pluginComponentsTree, settingsGrid, buttonGrid);
-        projectVBox.getStyleClass().add("plugin-settings-pane");
-        pluginSettingsPane.setContent(projectVBox);
-        pluginSettingsPane.setFitToWidth(true);
-        pluginSettingsPane.setFitToHeight(true);
+        pluginSettingsPane.getStyleClass().add("plugin-settings-pane");
+        pluginSettingsPane.getChildren().addAll(title, pluginComponentsTree, settingsGrid, buttonGrid);
+        pluginSettingsScrollPane.setFitToWidth(true);
+        pluginSettingsScrollPane.setFitToHeight(true);
         pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
         pluginComponentPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
 
@@ -155,9 +165,11 @@ public class Project {
         pluginVerField.setText(json.optString("plugin.version", ""));
         pluginAuthorField.setText(json.optString("plugin.author", ""));
         pluginDescField.setText(json.optString("plugin.description", ""));
+        pluginPrefixField.setText(json.optString("plugin.prefix", ""));
         pluginWebsiteField.setText(json.optString("plugin.website", ""));
         pluginDependField.setText(json.optString("plugin.dependencies", ""));
         pluginSoftDependField.setText(json.optString("plugin.soft-dependencies", ""));
+        pluginLoadBeforeField.setText(json.optString("plugin.load-before", ""));
         pluginPermsField.setText(json.optString("plugin.permissions", ""));
         debugModeCheckBox.setSelected(json.optBoolean("debug-build-mode"));
 
@@ -174,7 +186,7 @@ public class Project {
             }
         }
 
-        BlockRegistry.setActiveExtensions(extensionView.getTargetItems());
+        BlockRegistry.setExtensions(this);
 
         JSONArray componentArray = json.optJSONArray("plugin-components");
         if (componentArray != null) {
@@ -201,15 +213,34 @@ public class Project {
         }
     }
 
+    protected void open() throws IOException {
+        VisualBukkitApp.getSidePane().getTabs().get(1).setContent(pluginSettingsScrollPane);
+        VisualBukkitApp.getSplitPane().getItems().set(1, pluginComponentPane);
+        VisualBukkitApp.getStage().setTitle("Visual Bukkit - " + getName());
+        DiscordRPC.discordUpdatePresence(new DiscordRichPresence
+                .Builder("Developing " + getName())
+                .setStartTimestamps(System.currentTimeMillis())
+                .build());
+    }
+
+    protected void close() throws IOException {
+        for (VisualBukkitExtension extension : extensionView.getTargetItems()) {
+            extension.deactivate(this);
+        }
+        save();
+    }
+
     public void save() throws IOException {
         JSONObject json = new JSONObject();
         json.put("plugin.name", getPluginName());
         json.put("plugin.version", getPluginVersion());
         json.put("plugin.author", getPluginAuthor());
         json.put("plugin.description", getPluginDescription());
+        json.put("plugin.prefix", getPluginPrefix());
         json.put("plugin.website", getPluginWebsite());
         json.put("plugin.dependencies", getPluginDependencies());
         json.put("plugin.soft-dependencies", getPluginSoftDependencies());
+        json.put("plugin.load-before", getPluginLoadBefore());
         json.put("plugin.permissions", getPluginPermissions());
         json.put("debug-build-mode", debugModeCheckBox.isSelected());
         json.put("open-tab", pluginComponentPane.getSelectionModel().getSelectedIndex());
@@ -217,6 +248,7 @@ public class Project {
 
         for (VisualBukkitExtension extension : extensionView.getTargetItems()) {
             json.append("extensions", extension.getName());
+            extension.save(this, json);
         }
 
         for (PluginComponent.Block block : pluginComponents) {
@@ -350,16 +382,20 @@ public class Project {
         return resourcesDir;
     }
 
-    public ScrollPane getPluginSettingsPane() {
-        return pluginSettingsPane;
-    }
-
     public TabPane getPluginComponentPane() {
         return pluginComponentPane;
     }
 
+    public StyleableVBox getPluginSettingsPane() {
+        return pluginSettingsPane;
+    }
+
     public List<PluginComponent.Block> getPluginComponents() {
         return Collections.unmodifiableList(pluginComponents);
+    }
+
+    public List<VisualBukkitExtension> getExtensions() {
+        return Collections.unmodifiableList(extensionView.getTargetItems());
     }
 
     public Map<String, Statement.Block> getDebugMap() {
@@ -382,6 +418,10 @@ public class Project {
         return pluginDescField.getText();
     }
 
+    public String getPluginPrefix() {
+        return pluginPrefixField.getText();
+    }
+
     public String getPluginWebsite() {
         return pluginWebsiteField.getText();
     }
@@ -392,6 +432,10 @@ public class Project {
 
     public String getPluginSoftDependencies() {
         return pluginSoftDependField.getText();
+    }
+
+    public String getPluginLoadBefore() {
+        return pluginLoadBeforeField.getText();
     }
 
     public String getPluginPermissions() {

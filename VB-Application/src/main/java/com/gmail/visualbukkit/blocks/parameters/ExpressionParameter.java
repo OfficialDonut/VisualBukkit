@@ -1,13 +1,16 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.*;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.ui.*;
 import javafx.css.PseudoClass;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
+import org.controlsfx.control.PopOver;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -19,15 +22,23 @@ public class ExpressionParameter extends BlockParameter<StyleableVBox> {
 
     private ClassInfo type;
     private Expression.Block expression;
-    private Label placeholder;
+    private Button placeholder;
 
     public ExpressionParameter(String label, ClassInfo type) {
         super(label, new StyleableVBox());
         this.type = type;
 
-        placeholder = new Label("<" + type.getDisplayClassName() + ">");
+        placeholder = new Button("<" + type.getDisplayClassName() + ">");
         placeholder.getStyleClass().add("expression-parameter");
         control.getChildren().add(placeholder);
+
+        placeholder.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.PRIMARY) {
+                ExpressionSelector.show(this, 2 * e.getSceneY() > VisualBukkitApp.getScene().getHeight() ?
+                        PopOver.ArrowLocation.BOTTOM_LEFT :
+                        PopOver.ArrowLocation.TOP_LEFT);
+            }
+        });
 
         placeholder.setOnDragOver(e -> {
             Object source = e.getGestureSource();

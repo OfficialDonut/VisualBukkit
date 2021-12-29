@@ -27,16 +27,6 @@
 
 .block .button {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
-    -fx-padding: 0;
-}
-
-.block .button:hover {
-    -fx-opacity: 75%;
-}
-
-.block .button:pressed {
-    -fx-opacity: 50%;
 }
 
 .block .label {
@@ -53,7 +43,16 @@
 }
 
 .block-header > .button {
+    -fx-border-width: 0;
     -fx-padding: 0;
+}
+
+.block-header > .button:hover {
+    -fx-opacity: 75%;
+}
+
+.block-header > .button:pressed {
+    -fx-opacity: 50%;
 }
 
 .block-selector {
@@ -64,7 +63,6 @@
 
 .block-selector > .list-view {
     -fx-background-insets: 0;
-    -fx-focus-traversable: false;
     -fx-selection-bar: transparent;
     -fx-selection-bar-non-focused: transparent;
 }
@@ -89,13 +87,13 @@
 }
 
 .button {
-    -fx-background-insets: 0;
     -fx-background-insets: 1;
-    -fx-background-radius: 15;
+    -fx-background-radius: 5;
     -fx-border-color: black;
-    -fx-border-radius: 15;
+    -fx-border-radius: 5;
+    -fx-cursor: default;
     -fx-focus-traversable: false;
-    -fx-padding: 8;
+    -fx-padding: 5;
 }
 
 .check-box {
@@ -139,6 +137,19 @@
     -fx-padding: 1;
 }
 
+.custom-text-field .button {
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
+.custom-text-field .button:hover {
+    -fx-opacity: 75%;
+}
+
+.custom-text-field .button:pressed {
+    -fx-opacity: 50%;
+}
+
 .expression-block {
     -fx-background-color: rgb(255, 179, 71);
     -fx-background-radius: 10;
@@ -159,6 +170,7 @@
     -fx-background-radius: 10;
     -fx-border-color: black;
     -fx-border-radius: 10;
+    -fx-cursor: default;
     -fx-padding: 3;
     -fx-text-fill: black;
 }
@@ -169,6 +181,23 @@
 
 .expression-parameter:drag-over {
     -fx-background-color: derive(yellow, 25%) !important;
+}
+
+.expression-parameter:hover {
+    -fx-background-color: pink !important;
+}
+
+.expression-selector .hbox {
+    -fx-padding: 0 10 0 0;
+    -fx-spacing: 0;
+}
+
+.expression-selector .hbox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-width: 180;
 }
 
 .expression-source {
@@ -195,6 +224,10 @@
 
 .label {
     -fx-wrap-text: true;
+}
+
+.list-view {
+    -fx-focus-traversable: false;
 }
 
 .local-variable-field {
@@ -242,6 +275,16 @@
     -fx-border-width: 0 0 0 1;
     -fx-padding: 10;
     -fx-spacing: 15;
+}
+
+.plugin-settings-pane .grid-pane .button {
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 8;
+}
+
+.plugin-settings-pane .text-area {
+    -fx-pref-height: 100;
 }
 
 .popover .label {
@@ -337,10 +380,4 @@
 .tree-node > .vbox {
     -fx-padding: 0 0 0 10;
     -fx-spacing: 5;
-}
-
-.tree-node > .vbox > .button {
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-    -fx-padding: 5;
 }

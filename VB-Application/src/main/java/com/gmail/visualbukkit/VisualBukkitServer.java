@@ -108,6 +108,7 @@ public class VisualBukkitServer {
                                 double height = scrollPane.getViewportBounds().getHeight();
                                 scrollPane.setVvalue(scrollPane.getVmax() * ((((block.getBoundsInParent().getMaxY() + block.getBoundsInParent().getMinY()) / 2) - 0.5 * height) / (scrollPane.getContent().getBoundsInLocal().getHeight() - height)));
                                 PopOver popOver = new PopOver(new Label(json.optString("exception")));
+                                popOver.getStyleClass().add("error-popover");
                                 popOver.setAnimated(false);
                                 popOver.setDetachable(false);
                                 popOver.show(block);

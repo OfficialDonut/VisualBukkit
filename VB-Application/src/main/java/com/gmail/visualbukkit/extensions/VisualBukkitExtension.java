@@ -1,5 +1,8 @@
 package com.gmail.visualbukkit.extensions;
 
+import com.gmail.visualbukkit.project.Project;
+import org.json.JSONObject;
+
 public abstract class VisualBukkitExtension implements Comparable<VisualBukkitExtension> {
 
     public abstract String getName();
@@ -10,9 +13,11 @@ public abstract class VisualBukkitExtension implements Comparable<VisualBukkitEx
 
     public abstract String getDescription();
 
-    public void activate() {}
+    public void activate(Project project) {}
 
-    public void deactivate() {}
+    public void save(Project project, JSONObject data) {}
+
+    public void deactivate(Project project) {}
 
     @Override
     public final int compareTo(VisualBukkitExtension obj) {
@@ -26,6 +31,6 @@ public abstract class VisualBukkitExtension implements Comparable<VisualBukkitEx
 
     @Override
     public final String toString() {
-        return getName() + " v" + getVersion();
+        return getName();
     }
 }

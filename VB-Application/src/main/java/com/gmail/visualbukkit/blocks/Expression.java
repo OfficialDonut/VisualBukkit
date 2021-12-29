@@ -39,6 +39,11 @@ public non-sealed abstract class Expression extends BlockDefinition {
         return obj instanceof PluginComponent || obj instanceof Statement ? 1 : super.compareTo(obj);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " → (" + getReturnType() + ")";
+    }
+
     public static non-sealed abstract class Block extends BlockNode {
 
         private static PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");

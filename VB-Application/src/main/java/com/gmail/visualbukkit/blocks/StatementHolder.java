@@ -12,11 +12,13 @@ import java.util.List;
 
 public class StatementHolder extends StyleableVBox {
 
-    private StatementConnector parentConnector;
+    private BlockNode owner;
+    private StatementConnector ownerConnector;
     private boolean debugMode;
 
-    public StatementHolder(StatementConnector parentConnector) {
-        this.parentConnector = parentConnector;
+    public StatementHolder(BlockNode owner, StatementConnector ownerConnector) {
+        this.owner = owner;
+        this.ownerConnector = ownerConnector;
     }
 
     public UndoManager.RevertableAction addFirst(Statement.Block... blocks) {
@@ -150,14 +152,14 @@ public class StatementHolder extends StyleableVBox {
     }
 
     private void updateBlocks() {
-        for (Node node : getChildren()) {
-            ((Statement.Block) node).update();
+        for (Statement.Block block : getBlocks()) {
+            block.update();
         }
     }
 
     public StatementConnector getPreviousConnector(Statement.Block block) {
         Statement.Block prev = getPrevious(block);
-        return prev != null ? prev.getConnector() : parentConnector;
+        return prev != null ? prev.getConnector() : ownerConnector;
     }
 
     public Statement.Block getPrevious(Statement.Block block) {
@@ -179,7 +181,11 @@ public class StatementHolder extends StyleableVBox {
                 }
             }
         }
-        return parentConnector;
+        return ownerConnector;
+    }
+
+    public BlockNode getOwner() {
+        return owner;
     }
 
     @SuppressWarnings("unchecked")

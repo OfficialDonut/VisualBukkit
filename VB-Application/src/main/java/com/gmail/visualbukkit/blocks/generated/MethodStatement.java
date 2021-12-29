@@ -16,13 +16,17 @@ import javafx.scene.control.ContextMenu;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.StringJoiner;
 
 public class MethodStatement extends Statement {
 
-    private static SetMultimap<String, MethodStatement> methodStatements = TreeMultimap.create(Comparator.naturalOrder(), (o1, o2) -> Comparator.nullsFirst(Comparator.comparingInt((ClassInfo[] a) -> a.length).thenComparing(a -> a[0])).compare(o1.parameterTypes, o2.parameterTypes));
+    private static SetMultimap<String, MethodStatement> methodStatements = TreeMultimap.create(Comparator.naturalOrder(), (o1, o2) -> Comparator.nullsFirst((Comparator<ClassInfo[]>) (a1, a2) -> {
+        int i = Integer.compare(a1.length, a2.length);
+        return i == 0 ? Arrays.compare(a1, a2) : i;
+    }).compare(o1.parameterTypes, o2.parameterTypes));
 
     private JSONObject json;
     private ClassInfo[] parameterTypes;

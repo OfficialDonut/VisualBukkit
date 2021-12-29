@@ -36,7 +36,7 @@ public sealed abstract class BlockNode extends StyleableVBox permits PluginCompo
 
         header = new StyleableHBox();
         header.getStyleClass().add("block-header");
-        header.getChildren().add(new Label(definition.toString()));
+        header.getChildren().add(new Label(definition.getFullTitle()));
 
         body.getStyleClass().add("block");
         body.getChildren().add(header);
@@ -130,8 +130,8 @@ public sealed abstract class BlockNode extends StyleableVBox permits PluginCompo
     public PluginComponent.Block getPluginComponentBlock() {
         Parent parent = getParent();
         while (parent != null) {
-            if (parent instanceof PluginComponent.Block.Pane) {
-                return ((PluginComponent.Block.Pane) parent).getBlock();
+            if (parent instanceof StatementHolder s && s.getOwner() instanceof PluginComponent.Block b) {
+                return b;
             }
             parent = parent.getParent();
         }

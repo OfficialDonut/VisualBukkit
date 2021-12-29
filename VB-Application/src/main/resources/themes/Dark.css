@@ -7,6 +7,16 @@
     -fx-background-color: derive(-fx-background, -30%);
 }
 
+.error-popover .label {
+    -fx-background-color: black;
+    -fx-border-color: white;
+}
+
+.expression-selector .list-view {
+    -fx-control-inner-background: black;
+    -fx-control-inner-background-alt: black;
+}
+
 .extension-view {
     -fx-border-color: black;
 }
@@ -29,11 +39,6 @@
 
 .menu-bar {
     -fx-background-color: rgb(35, 43, 50);
-}
-
-.popover .label {
-    -fx-background-color: black;
-    -fx-border-color: white;
 }
 
 .root {

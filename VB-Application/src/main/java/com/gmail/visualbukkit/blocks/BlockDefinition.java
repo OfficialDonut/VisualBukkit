@@ -8,12 +8,14 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
     private final String title;
     private final String tag;
     private final String description;
+    private final String fullTitle;
 
     public BlockDefinition(String id, String title, String tag, String description) {
         this.id = id;
         this.title = title;
         this.tag = "[" + tag + "]";
-        this.description = description;
+        this.description = description.replace("\\n", "\n");
+        fullTitle = this.tag + " " + this.title;
     }
 
     public abstract BlockSource<?> createSource();
@@ -50,7 +52,7 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
 
     @Override
     public String toString() {
-        return tag + " " + title;
+        return fullTitle;
     }
 
     public final String getID() {
@@ -67,5 +69,9 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
 
     public final String getDescription() {
         return description;
+    }
+
+    public final String getFullTitle() {
+        return fullTitle;
     }
 }

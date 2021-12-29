@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.generated.*;
 import com.gmail.visualbukkit.extensions.DefaultBlocksExtension;
 import com.gmail.visualbukkit.extensions.VisualBukkitExtension;
+import com.gmail.visualbukkit.project.Project;
 import com.gmail.visualbukkit.ui.NotificationManager;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -60,27 +61,27 @@ public class BlockRegistry {
         }
     }
 
-    public static void setActiveExtensions(Collection<VisualBukkitExtension> extensions) {
-        if (activeExtensions != null) {
-            activeExtensions.forEach(VisualBukkitExtension::deactivate);
-        }
-
-        activeExtensions = new HashSet<>(extensions);
+    public static void setExtensions(Project project) {
+        activeExtensions = new HashSet<>(project.getExtensions());
         activePluginComponents.clear();
         activeStatements.clear();
         activeExpressions.clear();
 
-        activateExtension(DefaultBlocksExtension.getInstance());
-        extensions.forEach(BlockRegistry::activateExtension);
+        activateExtension(DefaultBlocksExtension.getInstance(), project);
+        for (VisualBukkitExtension extension : activeExtensions) {
+            activateExtension(extension, project);
+        }
+
         Set<BlockDefinition> activeBlocks = new TreeSet<>();
         activeBlocks.addAll(activePluginComponents.values());
         activeBlocks.addAll(activeStatements.values());
         activeBlocks.addAll(activeExpressions.values());
         VisualBukkitApp.getBlockSelector().setBlocks(activeBlocks);
+        ExpressionSelector.setExpressions(new TreeSet<>(activeExpressions.values()));
     }
 
-    private static void activateExtension(VisualBukkitExtension extension) {
-        extension.activate();
+    private static void activateExtension(VisualBukkitExtension extension, Project project) {
+        extension.activate(project);
         for (BlockDefinition block : allBlocks.get(extension)) {
             if (block instanceof PluginComponent p) {
                 activePluginComponents.put(p.getID(), p);
@@ -104,5 +105,9 @@ public class BlockRegistry {
 
     public static Expression getExpression(String id) {
         return activeExpressions.get(id);
+    }
+
+    public static Set<VisualBukkitExtension> getActiveExtensions() {
+        return Collections.unmodifiableSet(activeExtensions);
     }
 }

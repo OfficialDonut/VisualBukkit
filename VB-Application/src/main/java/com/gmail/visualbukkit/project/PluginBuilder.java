@@ -234,6 +234,9 @@ public class PluginBuilder {
         if (!project.getPluginDescription().isBlank()) {
             pluginYml.append("description: \"").append(project.getPluginDescription()).append("\"\n");
         }
+        if (!project.getPluginPrefix().isBlank()) {
+            pluginYml.append("prefix: \"").append(project.getPluginPrefix()).append("\"\n");
+        }
         if (!project.getPluginWebsite().isBlank()) {
             pluginYml.append("website: \"").append(project.getPluginWebsite()).append("\"\n");
         }
@@ -242,6 +245,9 @@ public class PluginBuilder {
         }
         if (!project.getPluginSoftDependencies().isBlank()) {
             pluginYml.append("softdepend: [").append(project.getPluginSoftDependencies()).append("]\n");
+        }
+        if (!project.getPluginLoadBefore().isBlank()) {
+            pluginYml.append("loadbefore: [").append(project.getPluginLoadBefore()).append("]\n");
         }
         if (!project.getPluginPermissions().isBlank()) {
             permissionsBuilder.append("  ").append(project.getPluginPermissions().replace("\n", "\n  ")).append("\n");

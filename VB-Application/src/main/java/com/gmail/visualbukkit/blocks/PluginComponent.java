@@ -50,10 +50,10 @@ public non-sealed abstract class PluginComponent extends BlockDefinition {
             statementConnector = new StatementConnector() {
                 @Override
                 public void accept(Statement.Block block) {
-                    UndoManager.run(getStatementHolder().addFirst(block));;
+                    UndoManager.run(getStatementHolder().addFirst(block));
                 }
             };
-            statementHolder = new StatementHolder(statementConnector);
+            statementHolder = new StatementHolder(this, statementConnector);
 
             tab = new Tab(pluginComponent.getTitle(), new Pane());
             openButton = new Button();

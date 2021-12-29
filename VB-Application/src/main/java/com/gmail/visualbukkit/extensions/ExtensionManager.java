@@ -31,7 +31,7 @@ public class ExtensionManager {
                                 if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
                                     VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
                                     extensionMap.put(extension.getName(), extension);
-                                    System.out.println("Loaded extension: " + extension.getName() + " " + extension.getVersion());
+                                    System.out.println("Loaded extension: " + extension.getName() + " - " + extension.getVersion());
                                 }
                             }
                         }

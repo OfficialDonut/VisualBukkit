@@ -17,7 +17,7 @@ public class StatElseIfStatement extends Container {
             @Override
             public void update() {
                 super.update();
-                setValid(checkForPrevious(StatIfStatement.class) || checkForPrevious(StatElseStatement.class));
+                setValid(checkForPrevious(StatIfStatement.class) || checkForPrevious(StatElseIfStatement.class));
             }
 
             @Override

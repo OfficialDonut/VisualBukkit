@@ -14,7 +14,6 @@ public class ExpressionSource extends BlockSource<Expression> {
         super(expression);
 
         getStyleClass().add("expression-source");
-        setText(getText() + " → (" + expression.getReturnType() + ")");
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {

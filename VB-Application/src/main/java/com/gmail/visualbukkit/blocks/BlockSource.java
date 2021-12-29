@@ -16,6 +16,7 @@ public abstract class BlockSource<T extends BlockDefinition> extends Label {
         String desc = block.getDescription();
         Tooltip tooltip = new Tooltip(desc == null ? LanguageManager.get("tooltip.no_description") : desc);
         tooltip.setShowDelay(Duration.millis(500));
+        tooltip.setShowDuration(Duration.seconds(15));
         setTooltip(tooltip);
     }
 

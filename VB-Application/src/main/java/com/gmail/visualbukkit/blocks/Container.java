@@ -41,7 +41,7 @@ public abstract class Container extends Statement {
                     UndoManager.run(childHolder.addFirst(block));
                 }
             };
-            childHolder = new StatementHolder(childConnector);
+            childHolder = new StatementHolder(this, childConnector);
 
             Separator separator = new Separator();
             getBody().getChildren().addAll(separator, new StyleableVBox(childConnector, childHolder));

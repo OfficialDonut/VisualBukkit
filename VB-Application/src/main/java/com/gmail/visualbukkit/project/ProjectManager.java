@@ -11,8 +11,6 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import net.arikia.dev.drpc.DiscordRPC;
-import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.lang3.StringUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
@@ -44,7 +42,7 @@ public class ProjectManager {
     public static void open(String projectName) {
         if (currentProject != null) {
             try {
-                currentProject.save();
+                currentProject.close();
             } catch (IOException e) {
                 NotificationManager.displayException("Failed to save current project", e);
                 return;
@@ -52,13 +50,7 @@ public class ProjectManager {
         }
         try {
             currentProject = new Project(projectsDir.resolve(projectName));
-            VisualBukkitApp.getSidePane().getTabs().get(1).setContent(currentProject.getPluginSettingsPane());
-            VisualBukkitApp.getSplitPane().getItems().set(1, currentProject.getPluginComponentPane());
-            VisualBukkitApp.getStage().setTitle("Visual Bukkit - " + projectName);
-            DiscordRPC.discordUpdatePresence(new DiscordRichPresence
-                    .Builder("Developing " + projectName)
-                    .setStartTimestamps(System.currentTimeMillis())
-                    .build());
+            currentProject.open();
         } catch (IOException e) {
             NotificationManager.displayException("Failed to load project", e);
         }

@@ -1,9 +1,6 @@
 package com.gmail.visualbukkit;
 
-import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.BlockSelector;
-import com.gmail.visualbukkit.blocks.Expression;
-import com.gmail.visualbukkit.blocks.Statement;
+import com.gmail.visualbukkit.blocks.*;
 import com.gmail.visualbukkit.extensions.DefaultBlocksExtension;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
 import com.gmail.visualbukkit.project.Project;
