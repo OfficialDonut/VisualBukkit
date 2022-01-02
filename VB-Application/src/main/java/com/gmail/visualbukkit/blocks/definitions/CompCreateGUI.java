@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.PluginComponent;
+import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.StringLiteralParameter;
 import com.gmail.visualbukkit.project.BuildContext;
@@ -19,7 +20,7 @@ public class CompCreateGUI extends PluginComponent {
     @Override
     public Block createBlock() {
         StringLiteralParameter nameParameter = new StringLiteralParameter("GUI ID");
-        Block block = new Block(this, nameParameter, new ExpressionParameter("Title", ClassInfo.STRING), new ExpressionParameter("Size", ClassInfo.INT)) {
+        Block block = new Block(this, nameParameter, new ExpressionParameter("Title", ClassInfo.STRING), new ExpressionParameter("Size", ClassInfo.INT), new ChoiceParameter("Mode", "create once", "recreate when opened")) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
@@ -32,7 +33,7 @@ public class CompCreateGUI extends PluginComponent {
                         "org.bukkit.inventory.Inventory guiInventory = Bukkit.createInventory(new GUIIdentifier(" + arg(0) + ")," + arg(2) + "," + arg(1) + ");" +
                         getChildJava() +
                         "return guiInventory;" +
-                        "} catch (Exception e) { e.printStackTrace(); return null; }});");
+                        "} catch (Exception e) { e.printStackTrace(); return null; }}," + arg(3).equals("create once") + ");");
             }
         };
 

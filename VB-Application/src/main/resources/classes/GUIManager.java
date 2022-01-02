@@ -14,17 +14,16 @@ import java.util.function.Function;
 public class GUIManager implements Listener {
 
     private static GUIManager instance = new GUIManager();
-    private Map<String, Function<Player, Inventory>> guiCreators = new HashMap<>();
-    private Map<Player, Map<String, Inventory>> playerGuis = new HashMap<>();
+    private Map<String, GUI> guis = new HashMap<>();
+    private Map<Player, Map<String, Inventory>> caches = new HashMap<>();
 
-    public void register(String id, Function<Player, Inventory> creator) {
-        guiCreators.put(id, creator);
+    public void register(String id, Function<Player, Inventory> creator, boolean cache) {
+        guis.put(id, new GUI(creator, cache));
     }
 
     public void open(String id, Player player) {
-        player.openInventory(playerGuis
-                .computeIfAbsent(player, k -> new HashMap<>())
-                .computeIfAbsent(id, k -> guiCreators.get(id).apply(player)));
+        GUI gui = guis.get(id);
+        player.openInventory(gui.cache ? caches.computeIfAbsent(player, k -> new HashMap<>()).computeIfAbsent(id, k -> gui.creator.apply(player)) : gui.creator.apply(player));
     }
 
     @EventHandler
@@ -40,10 +39,21 @@ public class GUIManager implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        playerGuis.remove(e.getPlayer());
+        caches.remove(e.getPlayer());
     }
 
     public static GUIManager getInstance() {
         return instance;
+    }
+
+    private static class GUI {
+
+        private Function<Player, Inventory> creator;
+        private boolean cache;
+
+        public GUI(Function<Player, Inventory> creator, boolean cache) {
+            this.creator = creator;
+            this.cache = cache;
+        }
     }
 }

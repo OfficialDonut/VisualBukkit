@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class EventComponent extends PluginComponent {
 
-    private static String[] priorities = {"HIGH", "HIGHEST", "LOW", "LOWEST", "MONITOR", "NORMAL"};
+    private static String[] priorities = {"NORMAL", "HIGH", "HIGHEST", "LOW", "LOWEST", "MONITOR"};
     private JSONObject json;
 
     public EventComponent(JSONObject json) {

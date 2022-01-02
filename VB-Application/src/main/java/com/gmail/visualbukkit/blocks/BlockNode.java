@@ -130,6 +130,9 @@ public sealed abstract class BlockNode extends StyleableVBox permits PluginCompo
     public PluginComponent.Block getPluginComponentBlock() {
         Parent parent = getParent();
         while (parent != null) {
+            if (parent instanceof PluginComponent.Block b) {
+                return b;
+            }
             if (parent instanceof StatementHolder s && s.getOwner() instanceof PluginComponent.Block b) {
                 return b;
             }
