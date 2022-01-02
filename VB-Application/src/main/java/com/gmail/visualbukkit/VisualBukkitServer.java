@@ -147,9 +147,11 @@ public class VisualBukkitServer {
                 } else if ("loc".equals(id) || "block-loc".equals(id)) {
                     Platform.runLater(() -> {
                         boolean isBlockLoc = "block-loc".equals(id);
+                        Expression.Block worldNameBlock = BlockRegistry.getExpression("expr-string").createBlock();
+                        ((StringLiteralParameter) worldNameBlock.getParameters()[0]).getControl().setText(json.optString("world", ""));
+                        Expression.Block worldBlock = BlockRegistry.getExpression("org.bukkit.Bukkit#getWorld(java.lang.String)").createBlock();
+                        ((ExpressionParameter) worldBlock.getParameters()[0]).setExpression(worldNameBlock).run();
                         Expression.Block locBlock = BlockRegistry.getExpression(isBlockLoc ? "org.bukkit.Location#Location(org.bukkit.World,double,double,double)" : "org.bukkit.Location#Location(org.bukkit.World,double,double,double,float,float)").createBlock();
-                        Expression.Block worldBlock = BlockRegistry.getExpression("expr-new-string").createBlock();
-                        ((StringLiteralParameter) worldBlock.getParameters()[0]).getControl().setText(json.optString("world", ""));
                         ((ExpressionParameter) locBlock.getParameters()[0]).setExpression(worldBlock).run();
                         String[] fields = isBlockLoc ? new String[]{"x", "y", "z"} : new String[]{"x", "y", "z", "yaw", "pitch"};
                         for (int i = 0; i < fields.length; i++) {

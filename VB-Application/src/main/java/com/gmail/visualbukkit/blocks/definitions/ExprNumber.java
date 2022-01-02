@@ -35,7 +35,7 @@ public class ExprNumber extends SimpleExpression {
                 String number = arg(0);
                 try {
                     Double.parseDouble(number);
-                    return number + "d";
+                    return "(" + number + "d)";
                 } catch (NumberFormatException e) {
                     return "0d";
                 }
