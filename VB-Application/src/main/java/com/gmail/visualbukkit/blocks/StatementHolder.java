@@ -203,16 +203,20 @@ public class StatementHolder extends StyleableVBox {
             String java = "";
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 Statement.Block block = blocks.get(i);
-                String id = RandomStringUtils.randomAlphanumeric(16);
-                ProjectManager.getCurrentProject().getDebugMap().put(id, block);
-                java = new StringBuilder()
-                        .append("try {")
-                        .append(block.toJava())
-                        .append(java)
-                        .append("} catch (Exception $").append(id).append(") {")
-                        .append("PluginMain.reportError(\"").append(id).append("\",$").append(id).append(");")
-                        .append("}")
-                        .toString();
+                if (block instanceof Container.Block) {
+                    java = block.toJava() + java;
+                } else {
+                    String id = RandomStringUtils.randomAlphanumeric(16);
+                    ProjectManager.getCurrentProject().getDebugMap().put(id, block);
+                    java = new StringBuilder()
+                            .append("try {")
+                            .append(block.toJava())
+                            .append(java)
+                            .append("} catch (Exception $").append(id).append(") {")
+                            .append("PluginMain.reportError(\"").append(id).append("\",$").append(id).append(");")
+                            .append("}")
+                            .toString();
+                }
             }
             return java;
         }
