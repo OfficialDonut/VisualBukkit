@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>vb-application</artifactId>
-    <version>5.0.0</version>
+    <version>5.0.1</version>
 
     <repositories>
         <repository>
