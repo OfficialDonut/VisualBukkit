@@ -7,7 +7,7 @@
 }
 
 @font-face {
-    src: url("/fonts/Roboto-Regular.ttf");
+    src: url("/fonts/NotoSans-Regular.ttf");
 }
 
 .block {
@@ -247,7 +247,7 @@
 }
 
 .menu-item > .label {
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Noto Sans";
 }
 
 .number-field {
@@ -292,7 +292,7 @@
 }
 
 .root {
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Noto Sans";
 }
 
 .scroll-pane {
