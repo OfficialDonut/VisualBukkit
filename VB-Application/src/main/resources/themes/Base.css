@@ -13,12 +13,12 @@
 
 @font-face {
     font-family: 'Noto Sans JP';
-    src: url("/fonts/NotoSans-Regular.ttf");
+    src: url("/fonts/NotoSansJP-Regular.otf");
 }
 
 @font-face {
     font-family: 'Noto Sans TC';
-    src: url("/fonts/NotoSans-Regular.ttf");
+    src: url("/fonts/NotoSansTC-Regular.otf");
 }
 
 .block {
