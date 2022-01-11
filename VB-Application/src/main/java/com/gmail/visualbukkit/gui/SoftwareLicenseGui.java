@@ -21,7 +21,7 @@ public class SoftwareLicenseGui extends Stage {
     public final TableView<Software> table = new TableView<>();
     public final ObservableList<Software> data =
             FXCollections.observableArrayList(
-                    new Software("Noto Sans", "SIL Open Font License 1.1")
+                    new Software("Noto Sans CJK", "SIL Open Font License 1.1")
             ).sorted(new SoftwareComparator());
 
     public SoftwareLicenseGui(Stage parent) {

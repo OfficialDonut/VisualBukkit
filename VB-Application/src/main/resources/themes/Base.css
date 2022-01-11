@@ -8,22 +8,12 @@
 
 @font-face {
     font-family: 'Noto Sans';
-    src: url("/fonts/NotoSans-Regular.ttf");
-}
-
-@font-face {
-    font-family: 'Noto Sans JP';
-    src: url("/fonts/NotoSansJP-Regular.otf");
-}
-
-@font-face {
-    font-family: 'Noto Sans TC';
-    src: url("/fonts/NotoSansTC-Regular.otf");
+    src: url("/fonts/NotoSansCJK-Regular.otf");
 }
 
 .block {
     -fx-border-color: black;
-    -fx-font-family: "JetBrains Mono Medium", "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif;
+    -fx-font-family: "JetBrains Mono Medium", "Noto Sans", sans-serif;
     -fx-padding: 8;
     -fx-spacing: 8;
 }
@@ -50,7 +40,7 @@
 }
 
 .block-header {
-    -fx-font-family: "JetBrains Mono", "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif;
+    -fx-font-family: "JetBrains Mono", "Noto Sans", sans-serif;
 }
 
 .block-header > .button {
@@ -88,7 +78,7 @@
     -fx-background-radius: 5;
     -fx-border-color: black;
     -fx-border-radius: 5;
-    -fx-font-family: "JetBrains Mono", "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif;
+    -fx-font-family: "JetBrains Mono", "Noto Sans", sans-serif;
     -fx-padding: 5;
     -fx-text-fill: black;
 }
@@ -246,7 +236,7 @@
 }
 
 .log-display {
-    -fx-font-family: "JetBrains Mono Medium", "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif !important;
+    -fx-font-family: "JetBrains Mono Medium", "Noto Sans", sans-serif !important;
 }
 
 .menu-item {
@@ -258,7 +248,7 @@
 }
 
 .menu-item > .label {
-    -fx-font-family: "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif;
+    -fx-font-family: "Noto Sans", sans-serif;
 }
 
 .number-field {
@@ -303,7 +293,7 @@
 }
 
 .root {
-    -fx-font-family: "Noto Sans", "Noto Sans JP", "Noto Sans TC", sans-serif;
+    -fx-font-family: "Noto Sans", sans-serif;
 }
 
 .scroll-pane {
