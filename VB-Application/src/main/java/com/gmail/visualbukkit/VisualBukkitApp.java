@@ -3,7 +3,6 @@ package com.gmail.visualbukkit;
 import com.gmail.visualbukkit.blocks.*;
 import com.gmail.visualbukkit.extensions.DefaultBlocksExtension;
 import com.gmail.visualbukkit.extensions.ExtensionManager;
-import com.gmail.visualbukkit.gui.SoftwareLicenseGui;
 import com.gmail.visualbukkit.project.Project;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.*;
@@ -246,8 +245,7 @@ public class VisualBukkitApp extends Application {
                 new Menu(LanguageManager.get("menu.help"), null,
                         new ActionMenuItem("Github", e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
-                        new ActionMenuItem("Discord", e -> openURI(URI.create("https://discord.gg/ugkvGpu"))),
-                        new ActionMenuItem(LanguageManager.get("menu_item.software"), e -> new SoftwareLicenseGui(stage))));
+                        new ActionMenuItem("Discord", e -> openURI(URI.create("https://discord.gg/ugkvGpu")))));
     }
 
     public static void saveCurrentProject() throws IOException {
