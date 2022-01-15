@@ -30,7 +30,7 @@ public class StatNumberLoop extends Container {
         int loops = 0;
         Parent parent = node.getParent();
         while (parent != null) {
-            if (parent instanceof Container.Block && ((Container.Block) parent).getDefinition().getClass() == StatNumberLoop.class) {
+            if (parent instanceof Container.Block b && (b.getDefinition().getClass() == StatNumberLoop.class || b.getDefinition().getClass() == StatAdvancedNumberLoop.class)) {
                 loops++;
             }
             parent = parent.getParent();

@@ -20,7 +20,7 @@ public class ExprLoopNumber extends Expression {
             @Override
             public void update() {
                 super.update();
-                checkForContainer(StatNumberLoop.class);
+                setValid(checkForContainer(StatNumberLoop.class) || checkForContainer(StatAdvancedNumberLoop.class));
             }
 
             @Override
