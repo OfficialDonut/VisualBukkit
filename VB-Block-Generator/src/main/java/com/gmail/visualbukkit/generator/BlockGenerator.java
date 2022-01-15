@@ -153,6 +153,7 @@ public class BlockGenerator {
         block.getJson().put("id", clazz + "#" + field);
         block.getJson().put("field", field.getSimpleName().toString());
         block.getJson().put("return", environment.getTypeUtils().erasure(field.asType()).toString());
+        generateParameters(clazz, field, block);
     }
 
     private void generateConstructor(TypeElement clazz, ExecutableElement constructor, GeneratedBlock block) {
@@ -173,18 +174,20 @@ public class BlockGenerator {
         }
     }
 
-    private void generateParameters(TypeElement clazz, ExecutableElement element, GeneratedBlock block) {
+    private void generateParameters(TypeElement clazz, Element element, GeneratedBlock block) {
         if (!block.getJson().has("static") && !block.getJson().has("event") && element.getKind() != ElementKind.CONSTRUCTOR) {
             block.getJson().append("param-types", clazz.toString());
             block.getJson().append("param-names", formatClassName(clazz.toString()));
         }
-        for (VariableElement parameter : element.getParameters()) {
-            if (parameter.asType().getKind() == TypeKind.ERROR) {
-                block.setInvalid();
-                return;
+        if (element instanceof ExecutableElement) {
+            for (VariableElement parameter : ((ExecutableElement) element).getParameters()) {
+                if (parameter.asType().getKind() == TypeKind.ERROR) {
+                    block.setInvalid();
+                    return;
+                }
+                block.getJson().append("param-types", environment.getTypeUtils().erasure(parameter.asType()).toString());
+                block.getJson().append("param-names", formatLowerCamelCase(parameter.getSimpleName().toString()));
             }
-            block.getJson().append("param-types", environment.getTypeUtils().erasure(parameter.asType()).toString());
-            block.getJson().append("param-names", formatLowerCamelCase(parameter.getSimpleName().toString()));
         }
     }
 

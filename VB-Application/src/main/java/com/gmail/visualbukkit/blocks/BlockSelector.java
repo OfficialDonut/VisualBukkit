@@ -28,6 +28,7 @@ public class BlockSelector extends StyleableVBox {
     private CheckBox expressionCheckBox = new CheckBox(LanguageManager.get("check_box.expressions"));
     private CheckBox pinnedCheckBox = new CheckBox(LanguageManager.get("check_box.favorite"));
 
+    @SuppressWarnings("unchecked")
     public BlockSelector() {
         Label title = new Label(LanguageManager.get("label.block_selector"));
         title.setUnderline(true);
@@ -103,6 +104,7 @@ public class BlockSelector extends StyleableVBox {
                 StringUtils.containsIgnoreCase(block.getBlockDefinition().getTag(), searchTagField.getText()));
     }
 
+    @SuppressWarnings("unchecked")
     private void updateFavorite() {
         for (Pair<String, Set<String>> pair : new Pair[]{new Pair<>("favorite-plugin-components", favPluginComponents), new Pair<>("favorite-statements", favStatements), new Pair<>("favorite-expressions", favExpressions)}) {
             VisualBukkitApp.getData().remove(pair.getKey());

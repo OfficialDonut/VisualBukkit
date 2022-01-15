@@ -239,7 +239,10 @@ public class VisualBukkitApp extends Application {
                         new ActionMenuItem(LanguageManager.get("menu_item.undo"), e -> UndoManager.undo()),
                         new ActionMenuItem(LanguageManager.get("menu_item.redo"), e -> UndoManager.redo())),
                 new Menu(LanguageManager.get("menu.extensions"), null,
-                        new ActionMenuItem(LanguageManager.get("menu_item.manage_extensions"), e -> openDirectory(ExtensionManager.getExtensionsDir())),
+                        new ActionMenuItem(LanguageManager.get("menu_item.manage_extensions"), e -> {
+                            openDirectory(ExtensionManager.getExtensionsDir());
+                            NotificationManager.displayMessage(LanguageManager.get("message.manage_extensions.title"), LanguageManager.get("message.manage_extensions.content"));
+                        }),
                         new ActionMenuItem(LanguageManager.get("menu_item.extension_help"), e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Extensions")))),
                 settingsManager.createMenu(),
                 new Menu(LanguageManager.get("menu.help"), null,

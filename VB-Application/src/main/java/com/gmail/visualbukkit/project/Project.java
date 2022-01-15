@@ -36,6 +36,7 @@ public class Project {
     private Path dataFile;
     private Path resourcesDir;
     private Path buildDir;
+    private JSONObject data;
 
     private List<PluginComponent.Block> pluginComponents = new ArrayList<>();
     private Map<String, Statement.Block> debugMap = new HashMap<>();
@@ -153,27 +154,27 @@ public class Project {
             }
         });
 
-        JSONObject json = new JSONObject();
+        data = new JSONObject();
 
         if (Files.exists(dataFile)) {
             try {
-                json = new JSONObject(Files.readString(dataFile));
+                data = new JSONObject(Files.readString(dataFile));
             } catch (JSONException ignored) {}
         }
 
-        pluginNameField.setText(json.optString("plugin.name", ""));
-        pluginVerField.setText(json.optString("plugin.version", ""));
-        pluginAuthorField.setText(json.optString("plugin.author", ""));
-        pluginDescField.setText(json.optString("plugin.description", ""));
-        pluginPrefixField.setText(json.optString("plugin.prefix", ""));
-        pluginWebsiteField.setText(json.optString("plugin.website", ""));
-        pluginDependField.setText(json.optString("plugin.dependencies", ""));
-        pluginSoftDependField.setText(json.optString("plugin.soft-dependencies", ""));
-        pluginLoadBeforeField.setText(json.optString("plugin.load-before", ""));
-        pluginPermsField.setText(json.optString("plugin.permissions", ""));
-        debugModeCheckBox.setSelected(json.optBoolean("debug-build-mode"));
+        pluginNameField.setText(data.optString("plugin.name", ""));
+        pluginVerField.setText(data.optString("plugin.version", ""));
+        pluginAuthorField.setText(data.optString("plugin.author", ""));
+        pluginDescField.setText(data.optString("plugin.description", ""));
+        pluginPrefixField.setText(data.optString("plugin.prefix", ""));
+        pluginWebsiteField.setText(data.optString("plugin.website", ""));
+        pluginDependField.setText(data.optString("plugin.dependencies", ""));
+        pluginSoftDependField.setText(data.optString("plugin.soft-dependencies", ""));
+        pluginLoadBeforeField.setText(data.optString("plugin.load-before", ""));
+        pluginPermsField.setText(data.optString("plugin.permissions", ""));
+        debugModeCheckBox.setSelected(data.optBoolean("debug-build-mode"));
 
-        JSONArray extensionArray = json.optJSONArray("extensions");
+        JSONArray extensionArray = data.optJSONArray("extensions");
         if (extensionArray != null) {
             for (Object obj : extensionArray) {
                 if (obj instanceof String) {
@@ -188,7 +189,7 @@ public class Project {
 
         BlockRegistry.setExtensions(this);
 
-        JSONArray componentArray = json.optJSONArray("plugin-components");
+        JSONArray componentArray = data.optJSONArray("plugin-components");
         if (componentArray != null) {
             for (Object obj : componentArray) {
                 if (obj instanceof JSONObject componentJson) {
@@ -200,14 +201,14 @@ public class Project {
             }
         }
 
-        JSONArray openPluginComponents = json.optJSONArray("open-plugin-components");
+        JSONArray openPluginComponents = data.optJSONArray("open-plugin-components");
         if (openPluginComponents != null) {
             for (int i = 0; i < openPluginComponents.length(); i++) {
                 pluginComponentPane.getTabs().add(pluginComponents.get(openPluginComponents.getInt(i)).getTab());
             }
         }
 
-        int currentPluginComponent = json.optInt("current-plugin-component");
+        int currentPluginComponent = data.optInt("current-plugin-component");
         if (currentPluginComponent >= 0 && currentPluginComponent < pluginComponentPane.getTabs().size()) {
             pluginComponentPane.getSelectionModel().select(currentPluginComponent);
         }
@@ -262,7 +263,7 @@ public class Project {
         if (Files.notExists(dir)) {
             Files.createDirectories(dir);
         }
-        Files.writeString(dataFile, json.toString(2));
+        Files.writeString(dataFile, (data = json).toString(2));
     }
 
     public void createPluginComponent(PluginComponent.Block block, boolean open) {
@@ -380,6 +381,10 @@ public class Project {
 
     public Path getResourcesDir() {
         return resourcesDir;
+    }
+
+    public JSONObject getData() {
+        return data;
     }
 
     public TabPane getPluginComponentPane() {

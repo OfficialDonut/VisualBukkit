@@ -6,6 +6,7 @@ import javafx.scene.input.MouseButton;
 
 import java.util.*;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class TreeNode<T extends Node> extends StyleableVBox {
 
     private Label label = new Label();
