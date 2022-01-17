@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.ClassInfo;
 import com.gmail.visualbukkit.blocks.Expression;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildContext;
+import com.gmail.visualbukkit.project.PluginModule;
 
 public class ExprHexColoredString extends Expression {
 
@@ -22,7 +23,7 @@ public class ExprHexColoredString extends Expression {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
-                buildContext.getMainClass().addField("public static java.util.regex.Pattern HEX_PATTERN = java.util.regex.Pattern.compile(\"#([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])\");");
+                buildContext.addPluginModule(HEX_MODULE);
             }
 
             @Override
@@ -31,4 +32,11 @@ public class ExprHexColoredString extends Expression {
             }
         };
     }
+
+    private static final PluginModule HEX_MODULE = new PluginModule() {
+        @Override
+        public void prepareBuild(BuildContext buildContext) {
+            buildContext.getMainClass().addField("public static java.util.regex.Pattern HEX_PATTERN = java.util.regex.Pattern.compile(\"#([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])\");");
+        }
+    };
 }
