@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>visual-bukkit</artifactId>
-        <version>1.0</version>
+        <version>5.1.1</version>
     </parent>
 
     <artifactId>vb-block-generator</artifactId>
