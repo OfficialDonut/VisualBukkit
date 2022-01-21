@@ -14,7 +14,7 @@ public class StatContinueLoop extends Statement {
             @Override
             public void update() {
                 super.update();
-                setValid(checkForContainer(StatListLoop.class) || checkForContainer(StatNumberLoop.class) || checkForContainer(StatNumberLoop.class));
+                setValid(checkForContainer(StatListLoop.class) || checkForContainer(StatNumberLoop.class) || checkForContainer(StatAdvancedNumberLoop.class));
             }
 
             @Override
