@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.Expression;
 public class ExprPluginAuthors extends Expression {
 
     public ExprPluginAuthors() {
-        super("expr-plugin-authors", "Plugin Authors", "Bukkit", "Authors of the plugin");
+        super("expr-plugin-authors", "Plugin Authors", "Bukkit", "The authors of the plugin");
     }
 
     @Override
