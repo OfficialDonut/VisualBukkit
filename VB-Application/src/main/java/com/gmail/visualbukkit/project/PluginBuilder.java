@@ -229,7 +229,7 @@ public class PluginBuilder {
         StringBuilder commandsBuilder = new StringBuilder("commands:\n");
         StringBuilder permissionsBuilder = new StringBuilder("permissions:\n");
         if (!project.getPluginAuthor().isBlank()) {
-            pluginYml.append("author: [").append(project.getPluginAuthor()).append("]\n");
+            pluginYml.append("authors: [").append(project.getPluginAuthor()).append("]\n");
         }
         if (!project.getPluginDescription().isBlank()) {
             pluginYml.append("description: \"").append(project.getPluginDescription()).append("\"\n");
