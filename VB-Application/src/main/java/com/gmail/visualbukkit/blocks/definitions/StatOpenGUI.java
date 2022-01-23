@@ -14,7 +14,7 @@ public class StatOpenGUI extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter("GUI", ClassInfo.STRING), new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player"))) {
+        return new Block(this, new ExpressionParameter("GUI ID", ClassInfo.STRING), new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player"))) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
