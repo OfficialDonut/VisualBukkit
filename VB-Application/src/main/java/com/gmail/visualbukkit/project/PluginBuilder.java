@@ -220,14 +220,14 @@ public class PluginBuilder {
                 .replace("{REPOSITORIES}", buildContext.getMavenRepositories().stream().map(s -> "<repository>\n" + s + "</repository>").collect(Collectors.joining("\n")))
                 .replace("{DEPENDENCIES}",
                         buildContext.getMavenDependencies().stream().map(s -> "<dependency>\n" + s + "</dependency>\n").collect(Collectors.joining()) +
-                                IntStream.rangeClosed(1, buildContext.getJarDependencies().size()).mapToObj(i ->
-                                        "        <dependency>\n" +
-                                                "            <groupId>com.gmail.visualbukkit</groupId>\n" +
-                                                "            <artifactId>depend-" + i + "</artifactId>\n" +
-                                                "            <version>0</version>\n" +
-                                                "            <scope>system</scope>\n" +
-                                                "            <systemPath>${pom.basedir}/depend/depend-" + i + ".jar</systemPath>\n" +
-                                                "        </dependency>\n").collect(Collectors.joining()));
+                        IntStream.rangeClosed(1, buildContext.getJarDependencies().size()).mapToObj(i ->
+                        "        <dependency>\n" +
+                        "            <groupId>com.gmail.visualbukkit</groupId>\n" +
+                        "            <artifactId>depend-" + i + "</artifactId>\n" +
+                        "            <version>0</version>\n" +
+                        "            <scope>system</scope>\n" +
+                        "            <systemPath>${pom.basedir}/depend/depend-" + i + ".jar</systemPath>\n" +
+                        "        </dependency>\n").collect(Collectors.joining()));
     }
 
     private static String createYml(Project project, String pluginName, String version, String mainClassName) {
@@ -293,84 +293,84 @@ public class PluginBuilder {
 
     public static String POM_STRING =
             """
-                    <?xml version="1.0" encoding="UTF-8"?>
-                    <project xmlns="http://maven.apache.org/POM/4.0.0"
-                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-                        <modelVersion>4.0.0</modelVersion>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <project xmlns="http://maven.apache.org/POM/4.0.0"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                <modelVersion>4.0.0</modelVersion>
 
-                        <groupId>vb</groupId>
-                        <artifactId>{ARTIFACT_ID}</artifactId>
-                        <version>{VERSION}</version>
+                <groupId>vb</groupId>
+                <artifactId>{ARTIFACT_ID}</artifactId>
+                <version>{VERSION}</version>
 
-                        <properties>
-                            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-                            <maven.compiler.source>1.8</maven.compiler.source>
-                            <maven.compiler.target>1.8</maven.compiler.target>
-                        </properties>
+                <properties>
+                    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                    <maven.compiler.source>1.8</maven.compiler.source>
+                    <maven.compiler.target>1.8</maven.compiler.target>
+                </properties>
 
-                        <repositories>
-                            <repository>
-                                <id>spigot-repo</id>
-                                <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-                            </repository>
-                            <repository>
-                               <id>jitpack.io</id>
-                               <url>https://jitpack.io</url>
-                            </repository>
-                    {REPOSITORIES}
-                        </repositories>
+                <repositories>
+                    <repository>
+                        <id>spigot-repo</id>
+                        <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+                    </repository>
+                    <repository>
+                       <id>jitpack.io</id>
+                       <url>https://jitpack.io</url>
+                    </repository>
+            {REPOSITORIES}
+                </repositories>
 
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.spigotmc</groupId>
-                                <artifactId>spigot-api</artifactId>
-                                <version>1.18-R0.1-SNAPSHOT</version>
-                                <scope>provided</scope>
-                            </dependency>
-                    {DEPENDENCIES}
-                        </dependencies>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.spigotmc</groupId>
+                        <artifactId>spigot-api</artifactId>
+                        <version>1.18-R0.1-SNAPSHOT</version>
+                        <scope>provided</scope>
+                    </dependency>
+            {DEPENDENCIES}
+                </dependencies>
 
-                        <build>
-                            <plugins>
-                                <plugin>
-                                    <artifactId>maven-compiler-plugin</artifactId>
-                                    <version>3.8.1</version>
-                                    <configuration>
-                                        <compilerId>eclipse</compilerId>
-                                    </configuration>
-                                    <dependencies>
-                                        <dependency>
-                                            <groupId>org.codehaus.plexus</groupId>
-                                            <artifactId>plexus-compiler-eclipse</artifactId>
-                                            <version>2.8.8</version>
-                                        </dependency>
-                                    </dependencies>
-                                </plugin>
+                <build>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.8.1</version>
+                            <configuration>
+                                <compilerId>eclipse</compilerId>
+                            </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.codehaus.plexus</groupId>
+                                    <artifactId>plexus-compiler-eclipse</artifactId>
+                                    <version>2.8.8</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
 
-                                <plugin>
-                                    <groupId>org.apache.maven.plugins</groupId>
-                                    <artifactId>maven-shade-plugin</artifactId>
-                                    <version>3.2.4</version>
-                                    <executions>
-                                        <execution>
-                                            <phase>package</phase>
-                                            <goals>
-                                                <goal>shade</goal>
-                                            </goals>
-                                        </execution>
-                                    </executions>
-                                </plugin>
-                            </plugins>
-                        </build>
-                    </project>
-                    """;
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-shade-plugin</artifactId>
+                            <version>3.2.4</version>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>shade</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </build>
+            </project>
+            """;
 
     public static String YML_STRING =
             """
-                    name: "{NAME}"
-                    version: "{VERSION}"
-                    main: "{MAIN_CLASS}"
-                    api-version: 1.13
-                    """;
+            name: "{NAME}"
+            version: "{VERSION}"
+            main: "{MAIN_CLASS}"
+            api-version: 1.13
+            """;
 }
