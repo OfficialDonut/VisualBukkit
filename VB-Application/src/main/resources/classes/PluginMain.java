@@ -13,7 +13,6 @@ public class PluginMain extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        getDataFolder().mkdir();
         getServer().getPluginManager().registerEvents(this, this);
     }
 

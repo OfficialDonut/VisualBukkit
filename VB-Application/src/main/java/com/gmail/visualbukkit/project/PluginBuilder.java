@@ -25,7 +25,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -107,6 +110,8 @@ public class PluginBuilder {
                             Files.copy(path, resourceDirPath);
                             String filePath = StringEscapeUtils.escapeJava(relativePath.toString().replace("\\", "/"));
                             MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+
+                            enableMethod.setBody("getDataFolder().mkdir();" + enableMethod.getBody());
                             enableMethod.setBody(enableMethod.getBody() + (filePath.equals("config.yml") ? "saveDefaultConfig();" : ("PluginMain.createResourceFile(\"" + filePath + "\");")));
                         }
                     }
