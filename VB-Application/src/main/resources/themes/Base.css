@@ -198,7 +198,7 @@
     -fx-border-color: black;
     -fx-border-radius: 0;
     -fx-border-width: 0 0 2 0;
-    -fx-pref-width: 180;
+    -fx-pref-width: 500;
 }
 
 .expression-source {

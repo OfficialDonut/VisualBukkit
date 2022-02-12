@@ -6,16 +6,14 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
 
     private final String id;
     private final String title;
-    private final String tag;
-    private final String description;
     private final String fullTitle;
+    private final String description;
 
     public BlockDefinition(String id, String title, String tag, String description) {
         this.id = id;
         this.title = title;
-        this.tag = "[" + tag + "]";
         this.description = description.replace("\\n", "\n");
-        fullTitle = this.tag + " " + this.title;
+        fullTitle = "[" + tag + "] " + title;
     }
 
     public abstract BlockSource<?> createSource();
@@ -33,11 +31,7 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
         if (equals(obj)) {
             return 0;
         }
-        int i = tag.compareTo(obj.tag);
-        if (i != 0) {
-            return i;
-        }
-        i = title.compareTo(obj.title);
+        int i = fullTitle.compareTo(obj.fullTitle);
         return i != 0 ? i : id.compareTo(obj.id);
     }
 
@@ -45,7 +39,7 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
     public boolean equals(Object obj) {
         if (obj != null && getClass() == obj.getClass()) {
             BlockDefinition block = (BlockDefinition) obj;
-            return title.equals(block.title) && tag.equals(block.tag);
+            return fullTitle.equals(block.fullTitle);
         }
         return false;
     }
@@ -63,15 +57,11 @@ public sealed abstract class BlockDefinition implements Comparable<BlockDefiniti
         return title;
     }
 
-    public final String getTag() {
-        return tag;
+    public final String getFullTitle() {
+        return fullTitle;
     }
 
     public final String getDescription() {
         return description;
-    }
-
-    public final String getFullTitle() {
-        return fullTitle;
     }
 }

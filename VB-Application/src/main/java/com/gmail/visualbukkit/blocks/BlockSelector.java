@@ -21,8 +21,7 @@ public class BlockSelector extends StyleableVBox {
     private Set<String> favStatements = new HashSet<>();
     private Set<String> favExpressions = new HashSet<>();
 
-    private CustomTextField searchTitleField = new CustomTextField();
-    private CustomTextField searchTagField = new CustomTextField();
+    private CustomTextField searchField = new CustomTextField();
     private CheckBox pluginComponentCheckBox = new CheckBox(LanguageManager.get("check_box.plugin_components"));
     private CheckBox statementCheckBox = new CheckBox(LanguageManager.get("check_box.statements"));
     private CheckBox expressionCheckBox = new CheckBox(LanguageManager.get("check_box.expressions"));
@@ -40,18 +39,12 @@ public class BlockSelector extends StyleableVBox {
         statementCheckBox.setSelected(true);
         expressionCheckBox.setSelected(true);
 
-        searchTitleField.setRight(new IconButton("x", null, e -> searchTitleField.clear()));
-        searchTagField.setRight(new IconButton("x", null, e -> searchTagField.clear()));
-        searchTitleField.textProperty().addListener((o, oldValue, newValue) -> updateFiltered());
-        searchTagField.textProperty().addListener((o, oldValue, newValue) -> updateFiltered());
+        searchField.setRight(new IconButton("x", null, e -> searchField.clear()));
+        searchField.textProperty().addListener((o, oldValue, newValue) -> updateFiltered());
         pluginComponentCheckBox.setOnAction(e -> updateFiltered());
         statementCheckBox.setOnAction(e -> updateFiltered());
         expressionCheckBox.setOnAction(e -> updateFiltered());
         pinnedCheckBox.setOnAction(e -> updateFiltered());
-
-        StyleableGridPane gridPane = new StyleableGridPane();
-        gridPane.addRow(0, new Label(LanguageManager.get("label.search_title")), searchTitleField);
-        gridPane.addRow(1, new Label(LanguageManager.get("label.search_tag")), searchTagField);
 
         for (Pair<String, Set<String>> pair : new Pair[]{new Pair<>("favorite-plugin-components", favPluginComponents), new Pair<>("favorite-statements", favStatements), new Pair<>("favorite-expressions", favExpressions)}) {
             JSONArray json = VisualBukkitApp.getData().optJSONArray(pair.getKey());
@@ -65,7 +58,7 @@ public class BlockSelector extends StyleableVBox {
         }
 
         getStyleClass().add("block-selector");
-        getChildren().addAll(new StyleableVBox(title, gridPane, pluginComponentCheckBox, statementCheckBox, expressionCheckBox, pinnedCheckBox), new Separator(), listView);
+        getChildren().addAll(new StyleableVBox(title, new StyleableHBox(new Label(LanguageManager.get("label.search")), searchField), pluginComponentCheckBox, statementCheckBox, expressionCheckBox, pinnedCheckBox), new Separator(), listView);
     }
 
     public void setBlocks(Set<BlockDefinition> definitions) {
@@ -100,8 +93,7 @@ public class BlockSelector extends StyleableVBox {
                 (statementCheckBox.isSelected() || !(block instanceof StatementSource)) &&
                 (expressionCheckBox.isSelected() || !(block instanceof ExpressionSource)) &&
                 (!pinnedCheckBox.isSelected() || getFavorites(block).contains(block.getBlockDefinition().getID())) &&
-                StringUtils.containsIgnoreCase(block.getBlockDefinition().getTitle(), searchTitleField.getText()) &&
-                StringUtils.containsIgnoreCase(block.getBlockDefinition().getTag(), searchTagField.getText()));
+                StringUtils.containsIgnoreCase(block.getBlockDefinition().getFullTitle(), searchField.getText()));
     }
 
     @SuppressWarnings("unchecked")

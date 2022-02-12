@@ -31,20 +31,17 @@ public class ExpressionSelector {
 
             FilteredList<Expression> filteredExpressionList = new FilteredList<>(expressionList);
             ListView<Expression> listView = new ListView<>(filteredExpressionList);
-            TextField searchTitleField = new TextField();
-            TextField searchTagField = new TextField();
+            TextField searchField = new TextField();
 
-            Predicate<Expression> filter = expr -> expr instanceof ListSeparatorExpression || (StringUtils.containsIgnoreCase(expr.getTitle(), searchTitleField.getText()) && StringUtils.containsIgnoreCase(expr.getTag(), searchTagField.getText()));
-            searchTitleField.textProperty().addListener((o, oldValue, newValue) -> filteredExpressionList.setPredicate(filter::test));
-            searchTagField.textProperty().addListener((o, oldValue, newValue) -> filteredExpressionList.setPredicate(filter::test));
+            Predicate<Expression> filter = expr -> expr instanceof ListSeparatorExpression || (StringUtils.containsIgnoreCase(expr.getFullTitle(), searchField.getText()));
+            searchField.textProperty().addListener((o, oldValue, newValue) -> filteredExpressionList.setPredicate(filter::test));
 
-            PopOver popOver = new PopOver(new StyleableVBox(new StyleableHBox(new Label(LanguageManager.get("label.search_title")), searchTitleField, new Label(LanguageManager.get("label.search_tag")), searchTagField), listView));
+            PopOver popOver = new PopOver(new StyleableVBox(new StyleableHBox(new Label(LanguageManager.get("label.search")), searchField), listView));
             popOver.getStyleClass().add("expression-selector");
             popOver.setAnimated(false);
             popOver.setOnShowing(e -> {
                 listView.getSelectionModel().clearSelection();
-                searchTitleField.clear();
-                searchTagField.clear();
+                searchField.clear();
             });
 
             listView.getSelectionModel().selectedItemProperty().addListener((o, oldValue, newValue) -> {
