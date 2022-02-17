@@ -228,8 +228,8 @@ public class PluginBuilder {
         StringBuilder pluginYml = new StringBuilder(YML_STRING.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
         StringBuilder commandsBuilder = new StringBuilder("commands:\n");
         StringBuilder permissionsBuilder = new StringBuilder("permissions:\n");
-        if (!project.getPluginAuthor().isBlank()) {
-            pluginYml.append("authors: [").append(project.getPluginAuthor()).append("]\n");
+        if (!project.getPluginAuthors().isBlank()) {
+            pluginYml.append("authors: [").append(project.getPluginAuthors()).append("]\n");
         }
         if (!project.getPluginDescription().isBlank()) {
             pluginYml.append("description: \"").append(project.getPluginDescription()).append("\"\n");

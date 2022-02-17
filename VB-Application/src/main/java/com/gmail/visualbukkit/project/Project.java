@@ -50,7 +50,7 @@ public class Project {
     private CheckBox debugModeCheckBox = new CheckBox(LanguageManager.get("check_box.debug_mode"));
     private TextField pluginNameField = new TextField();
     private TextField pluginVerField = new TextField();
-    private TextField pluginAuthorField = new TextField();
+    private TextField pluginAuthorsField = new TextField();
     private TextField pluginDescField = new TextField();
     private TextField pluginPrefixField = new TextField();
     private TextField pluginWebsiteField = new TextField();
@@ -78,7 +78,7 @@ public class Project {
                 new Label(LanguageManager.get("label.plugin_prefix")), new Label(LanguageManager.get("label.plugin_website")),
                 new Label(LanguageManager.get("label.plugin_depend")), new Label(LanguageManager.get("label.plugin_soft_depend")),
                 new Label(LanguageManager.get("label.plugin_load_before")), new Label(LanguageManager.get("label.plugin_permissions")));
-        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorField, pluginDescField, pluginPrefixField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginLoadBeforeField, pluginPermsField);
+        settingsGrid.addColumn(1, pluginNameField, pluginVerField, pluginAuthorsField, pluginDescField, pluginPrefixField, pluginWebsiteField, pluginDependField, pluginSoftDependField, pluginLoadBeforeField, pluginPermsField);
 
         pluginPermsField.prefWidthProperty().bind(pluginNameField.widthProperty());
         pluginNameField.textProperty().addListener((o, oldValue, newValue) -> {
@@ -164,7 +164,7 @@ public class Project {
 
         pluginNameField.setText(data.optString("plugin.name", ""));
         pluginVerField.setText(data.optString("plugin.version", ""));
-        pluginAuthorField.setText(data.optString("plugin.author", ""));
+        pluginAuthorsField.setText(data.optString("plugin.author", ""));
         pluginDescField.setText(data.optString("plugin.description", ""));
         pluginPrefixField.setText(data.optString("plugin.prefix", ""));
         pluginWebsiteField.setText(data.optString("plugin.website", ""));
@@ -235,7 +235,7 @@ public class Project {
         JSONObject json = new JSONObject();
         json.put("plugin.name", getPluginName());
         json.put("plugin.version", getPluginVersion());
-        json.put("plugin.author", getPluginAuthor());
+        json.put("plugin.author", getPluginAuthors());
         json.put("plugin.description", getPluginDescription());
         json.put("plugin.prefix", getPluginPrefix());
         json.put("plugin.website", getPluginWebsite());
@@ -415,8 +415,8 @@ public class Project {
         return pluginVerField.getText();
     }
 
-    public String getPluginAuthor() {
-        return pluginAuthorField.getText();
+    public String getPluginAuthors() {
+        return pluginAuthorsField.getText();
     }
 
     public String getPluginDescription() {
