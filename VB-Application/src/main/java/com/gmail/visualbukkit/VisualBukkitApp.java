@@ -27,6 +27,7 @@ import javafx.util.Duration;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
+import org.apache.commons.lang3.SystemUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -286,22 +287,17 @@ public class VisualBukkitApp extends Application {
     }
 
     public static void openDirectory(Path dir) {
-        if (Files.notExists(dir)) {
-            try {
-                Files.createDirectories(dir);
-            } catch (IOException e) {
-                NotificationManager.displayException("Failed to open directory", e);
-                return;
-            }
-        }
         try {
-            Desktop.getDesktop().browse(dir.toUri());
-        } catch (Exception e1) {
-            try {
-                Runtime.getRuntime().exec(new String[]{"xdg-open", dir.toUri().toString()});
-            } catch (IOException e2) {
-                NotificationManager.displayError("Error", "Action not supported by your OS");
+            if (Files.notExists(dir)) {
+                Files.createDirectories(dir);
             }
+            if (SystemUtils.IS_OS_LINUX) {
+                Runtime.getRuntime().exec(new String[]{"xdg-open", dir.toUri().toString()});
+            } else {
+                Desktop.getDesktop().browse(dir.toUri());
+            }
+        } catch (IOException e) {
+            NotificationManager.displayException("Failed to open directory", e);
         }
     }
 
