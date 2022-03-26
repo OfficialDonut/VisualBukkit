@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.project.ProjectManager;
@@ -56,6 +57,20 @@ public non-sealed abstract class PluginComponent extends BlockDefinition {
             statementHolder = new StatementHolder(this, statementConnector);
 
             tab = new Tab(pluginComponent.getTitle(), new Pane());
+            tab.setOnCloseRequest(e -> {
+                ButtonType minimizeType = new ButtonType("Minimize");
+                ButtonType deleteType = new ButtonType("Delete");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.component_close"), minimizeType, deleteType);
+                VisualBukkitApp.getSettingsManager().style(alert.getDialogPane());
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType.equals(deleteType)) {
+                        UndoManager.run(ProjectManager.getCurrentProject().deletePluginComponent(this));
+                    }
+                });
+            });
+
             openButton = new Button();
             openButton.textProperty().bind(tab.textProperty());
             openButton.setOnAction(e -> ProjectManager.getCurrentProject().openPluginComponent(this));
