@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.blocks.definitions.StatComment;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.ui.StyleableVBox;
 import com.gmail.visualbukkit.ui.UndoManager;
@@ -205,7 +206,7 @@ public class StatementHolder extends StyleableVBox {
                 Statement.Block block = blocks.get(i);
                 if (block instanceof Container.Block) {
                     java = block.toJava() + java;
-                } else {
+                } else if (block.getDefinition().getClass() != StatComment.class) {
                     String id = RandomStringUtils.randomAlphanumeric(16);
                     ProjectManager.getCurrentProject().getDebugMap().put(id, block);
                     java = new StringBuilder()
