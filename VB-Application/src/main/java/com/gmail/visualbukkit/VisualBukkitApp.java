@@ -308,6 +308,7 @@ public class VisualBukkitApp extends Application {
             if (version != null && !version.equals(latestVersion)) {
                 ButtonType viewButton = new ButtonType(LanguageManager.get("button.view_update"));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format(LanguageManager.get("dialog.update.content"), version, latestVersion), viewButton, new ButtonType(LanguageManager.get("button.ignore_update")));
+                alert.getDialogPane().getScene().getWindow().setOnCloseRequest(e -> alert.getDialogPane().getScene().getWindow().hide());
                 settingsManager.style(alert.getDialogPane());
                 alert.setTitle(LanguageManager.get("dialog.update.title"));
                 alert.setHeaderText(null);

@@ -135,7 +135,7 @@ public class Project {
         pluginSettingsScrollPane.setFitToWidth(true);
         pluginSettingsScrollPane.setFitToHeight(true);
         pluginComponentPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
-        pluginComponentPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+        pluginComponentPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
 
         pluginComponentPane.setOnDragOver(e -> {
             Object source = e.getGestureSource();
