@@ -11,7 +11,7 @@ public class ExprLoopNumber extends Expression {
 
     @Override
     public ClassInfo getReturnType() {
-        return ClassInfo.INT;
+        return ClassInfo.DOUBLE;
     }
 
     @Override

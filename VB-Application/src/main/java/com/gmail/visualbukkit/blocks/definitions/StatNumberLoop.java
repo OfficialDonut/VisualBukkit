@@ -19,7 +19,7 @@ public class StatNumberLoop extends Container {
             public String toJava() {
                 String loopVar = "loopNumber" + (getNestedLoops(this) + 1);
                 return "for (int " + loopVar +  " = 0; " + loopVar + " < " + arg(0) + "; " + loopVar + "++) {" +
-                        "int FINAL_" + loopVar + " = " + loopVar + ";" +
+                        "double FINAL_" + loopVar + " = " + loopVar + ";" +
                         getChildJava() +
                         "}";
             }

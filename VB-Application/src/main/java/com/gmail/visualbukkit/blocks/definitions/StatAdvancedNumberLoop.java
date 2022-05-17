@@ -13,12 +13,12 @@ public class StatAdvancedNumberLoop extends Container {
 
     @Override
     public Block createBlock() {
-        return new Container.Block(this, new ExpressionParameter("Start", ClassInfo.INT), new ChoiceParameter("Mode", "<", "<=", ">", ">="), new ExpressionParameter("Stop", ClassInfo.INT), new ExpressionParameter("Increment", ClassInfo.INT)) {
+        return new Container.Block(this, new ExpressionParameter("Start", ClassInfo.DOUBLE), new ChoiceParameter("Mode", "<", "<=", ">", ">="), new ExpressionParameter("Stop", ClassInfo.DOUBLE), new ExpressionParameter("Increment", ClassInfo.DOUBLE)) {
             @Override
             public String toJava() {
                 String loopVar = "loopNumber" + (StatNumberLoop.getNestedLoops(this) + 1);
-                return "for (int " + loopVar + " = " + arg(0) + "; " + loopVar + " " + arg(1) + " " + arg(2) + "; " + loopVar + " += " + arg(3) + ") {" +
-                        "int FINAL_" + loopVar + " = " + loopVar + ";" +
+                return "for (double " + loopVar + " = " + arg(0) + "; " + loopVar + " " + arg(1) + " " + arg(2) + "; " + loopVar + " += " + arg(3) + ") {" +
+                        "double FINAL_" + loopVar + " = " + loopVar + ";" +
                         getChildJava() +
                         "}";
             }
