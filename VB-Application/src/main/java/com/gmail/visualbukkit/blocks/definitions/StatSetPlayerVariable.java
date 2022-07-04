@@ -14,7 +14,7 @@ public class StatSetPlayerVariable extends Statement {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter("Var", ClassInfo.STRING), new ExpressionParameter("Value", ClassInfo.OBJECT)) {
+        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.OfflinePlayer")), new ExpressionParameter("Var", ClassInfo.STRING), new ExpressionParameter("Value", ClassInfo.OBJECT)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);

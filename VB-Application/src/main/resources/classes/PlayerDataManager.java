@@ -1,6 +1,6 @@
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -8,109 +8,128 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 public class PlayerDataManager implements Listener {
 
     private static PlayerDataManager instance = new PlayerDataManager();
     private JavaPlugin plugin = PluginMain.getInstance();
-    private File playerDataDir = new File(plugin.getDataFolder(), "Player Data");
+    private Path playerDataDir = plugin.getDataFolder().toPath().resolve("Player Data");
     private Map<UUID, PlayerData> playerData = new HashMap<>();
     private ExecutorService executor = Executors.newCachedThreadPool();
 
     private PlayerDataManager() {
-        instance = this;
-        playerDataDir.mkdirs();
-    }
-
-    public void setData(Player player, String variable, Object value) {
-        PlayerData data = playerData.get(player.getUniqueId());
         try {
-            data.lock.acquireUninterruptibly();
-            data.config.set(variable, value);
-        } finally {
-            data.lock.release();
+            Files.createDirectories(playerDataDir);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    public Object getData(Player player, String variable) {
-        PlayerData data = playerData.get(player.getUniqueId());
-        try {
-            data.lock.acquireUninterruptibly();
-            return data.config.get(variable);
-        } finally {
-            data.lock.release();
-        }
-    }
-
-    public void saveAllData() {
-        for (Map.Entry<UUID, PlayerData> entry : playerData.entrySet()) {
-            try {
-                entry.getValue().lock.acquireUninterruptibly();
-                saveData(entry.getKey(), entry.getValue().config);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                entry.getValue().lock.release();
-            }
-        }
-        executor.shutdown();
-    }
-
-    private void saveData(UUID uuid, YamlConfiguration config) throws IOException {
-        File file = new File(playerDataDir, uuid + ".yml");
-        if (config.getKeys(false).isEmpty()) {
-            if (file.exists()) {
-                file.delete();
-            }
-        } else {
-            config.save(file);
-        }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onLogin(PlayerLoginEvent e) {
-        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
-            PlayerData data = new PlayerData();
-            playerData.put(e.getPlayer().getUniqueId(), data);
-            executor.submit(() -> {
-                try {
-                    data.config = YamlConfiguration.loadConfiguration(new File(playerDataDir, e.getPlayer().getUniqueId() + ".yml"));
-                } finally {
-                    data.lock.release();
-                }
-            });
-        }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onQuit(PlayerQuitEvent e) {
-        PlayerData data = playerData.remove(e.getPlayer().getUniqueId());
-        executor.submit(() -> {
-            try {
-                data.lock.acquireUninterruptibly();
-                saveData(e.getPlayer().getUniqueId(), data.config);
-            } catch (IOException ex) {
-                Bukkit.getScheduler().runTask(plugin, (Runnable) ex::printStackTrace);
-            } finally {
-                data.lock.release();
-            }
-        });
     }
 
     public static PlayerDataManager getInstance() {
         return instance;
     }
 
-    private static class PlayerData {
-        private Semaphore lock = new Semaphore(0);
+    public void setData(OfflinePlayer player, String variable, Object value) {
+        getPlayerData(player).set(variable, value);
+    }
+
+    public Object getData(OfflinePlayer player, String variable) {
+        return getPlayerData(player).get(variable);
+    }
+
+    public void saveAllData() {
+        playerData.values().forEach(PlayerData::save);
+        executor.shutdown();
+    }
+
+    private PlayerData getPlayerData(OfflinePlayer player) {
+        PlayerData data = playerData.computeIfAbsent(player.getUniqueId(), PlayerData::new);
+        if (!player.isOnline()) {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                if (!player.isOnline()) {
+                    playerData.remove(player.getUniqueId());
+                    executor.execute(data::save);
+                }
+            }, 6000);
+        }
+        return data;
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onLogin(PlayerLoginEvent e) {
+        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
+            playerData.computeIfAbsent(e.getPlayer().getUniqueId(), PlayerData::new);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onQuit(PlayerQuitEvent e) {
+        PlayerData data = playerData.remove(e.getPlayer().getUniqueId());
+        if (data != null) {
+            executor.execute(data::save);
+        }
+    }
+
+    private class PlayerData {
+
+        private UUID uuid;
+        private Path configFile;
         private YamlConfiguration config;
+        private boolean isLoaded;
+
+        private PlayerData(UUID uuid) {
+            this.uuid = uuid;
+            executor.execute(this::load);
+        }
+
+        private void load() {
+            configFile = playerDataDir.resolve(uuid + ".yml");
+            config = YamlConfiguration.loadConfiguration(configFile.toFile());
+            synchronized (this) {
+                isLoaded = true;
+                notifyAll();
+            }
+        }
+
+        private synchronized void waitForLoad() {
+            while (!isLoaded) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        private void set(String variable, Object value) {
+            waitForLoad();
+            config.set(variable, value);
+        }
+
+        private Object get(String variable) {
+            waitForLoad();
+            return config.get(variable);
+        }
+
+        private void save() {
+            try {
+                waitForLoad();
+                if (config.getKeys(false).isEmpty()) {
+                    Files.deleteIfExists(configFile);
+                } else {
+                    config.save(configFile.toFile());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

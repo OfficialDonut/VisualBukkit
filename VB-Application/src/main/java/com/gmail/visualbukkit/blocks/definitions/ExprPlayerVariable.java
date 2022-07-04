@@ -19,7 +19,7 @@ public class ExprPlayerVariable extends Expression {
 
     @Override
     public Block createBlock() {
-        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.entity.Player")), new ExpressionParameter("Var", ClassInfo.STRING)) {
+        return new Block(this, new ExpressionParameter("Player", ClassInfo.of("org.bukkit.OfflinePlayer")), new ExpressionParameter("Var", ClassInfo.STRING)) {
             @Override
             public void prepareBuild(BuildContext buildContext) {
                 super.prepareBuild(buildContext);
