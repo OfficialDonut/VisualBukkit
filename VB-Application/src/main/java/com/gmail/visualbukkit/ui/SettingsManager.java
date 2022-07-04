@@ -27,6 +27,7 @@ public class SettingsManager {
         LANGUAGES.put("de-DE", "German");
         LANGUAGES.put("ja-JP", "Japanese");
         LANGUAGES.put("ru-RU", "Russian");
+        LANGUAGES.put("es-ES", "Spanish");
     }
 
     private StringProperty language = new SimpleStringProperty();
