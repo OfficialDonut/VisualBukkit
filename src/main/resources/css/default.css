@@ -1,0 +1,202 @@
+@import "modena.css"
+
+@font-face {
+    src: url("/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+    src: url("/fonts/JetBrainsMono-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url("/fonts/NotoSansCJK-Regular.otf");
+}
+
+.block {
+    -fx-border-color: black;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
+}
+
+.block .combo-box {
+    -fx-border-color: black;
+    -fx-color: lightgray;
+    -fx-cursor: default;
+    -fx-min-width: 10em;
+}
+
+.block .combo-box:hover {
+    -fx-color: derive(lightgray, 25%);
+}
+
+.block .combo-box > .list-cell {
+    -fx-text-fill: black;
+}
+
+.block .label {
+    -fx-text-fill: black;
+}
+
+.block .text-field {
+    -fx-control-inner-background: lightgray;
+    -fx-min-width: 7em;
+    -fx-text-fill: black;
+}
+
+.block-header {
+    -fx-font-family: "JetBrains Mono Bold";
+}
+
+.container-block {
+    -fx-background-color: lightblue !important;
+    -fx-padding: 0.5em 0.5em 2em 0.5em;
+}
+
+.container-block:nested {
+    -fx-background-color: cornflowerblue !important;
+}
+
+.expression-block {
+    -fx-background-color: rgb(255, 179, 71);
+    -fx-background-radius: 0.5em;
+    -fx-border-radius: 0.5em;
+}
+
+.expression-block:hover {
+    -fx-cursor: closed-hand;
+}
+
+.expression-block:nested {
+    -fx-background-color: derive(orange, 50%);
+}
+
+.expression-parameter:connecting {
+    -fx-border-color: yellow;
+}
+
+.expression-parameter:drag-over {
+    -fx-opacity: 50%;
+}
+
+GridPane {
+    -fx-hgap: 0.5em;
+    -fx-vgap: 0.5em;
+}
+
+HBox {
+    -fx-alignment: center-left;
+    -fx-spacing: 0.5em;
+}
+
+.log-window {
+    -fx-font-family: "JetBrains Mono Regular" !important;
+    -fx-pref-height: 50em;
+    -fx-pref-width: 85em;
+}
+
+.menu-bar {
+    -fx-background-color: rgb(35, 43, 50);
+}
+
+.plugin-component-block {
+    -fx-background-color: rgb(180, 96, 235);
+    -fx-background-radius: 1em 1em 0 0;
+    -fx-border-radius: 1em 1em 0 0;
+}
+
+.plugin-component-list {
+    -fx-pref-width: 25em;
+}
+
+.plugin-component-list > .button-bar {
+    -fx-padding: 0.5em;
+}
+
+.plugin-component-pane VBox {
+    -fx-padding: 1em;
+}
+
+.pop-over-selector {
+    -fx-color: -fx-base;
+}
+
+.pop-over-selector HBox {
+    -fx-background-color: white;
+    -fx-padding: 0.5em;
+}
+
+.pop-over-selector HBox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 0.1em 0;
+    -fx-pref-width: 25em;
+}
+
+.pop-over-selector VBox {
+    -fx-padding: 0;
+}
+
+.progress-indicator .spinner {
+    -fx-pref-width: 8em;
+    -fx-pref-height: 8em;
+}
+
+.project-pane > .button-bar {
+    -fx-padding: 1em;
+}
+
+.root {
+    -fx-accent: rgb(63, 81, 181);
+    -fx-background: rgb(32, 34, 37);
+    -fx-base: rgb(48, 51, 56);
+    -fx-control-inner-background: rgb(20, 20, 20);
+    -fx-control-inner-background-alt: rgb(25, 25, 25);
+    -fx-font-family: "Noto Sans";
+    -fx-font-size: 16;
+    -fx-light-text-color: white;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.statement-block {
+    -fx-background-color: rgb(0, 230, 154);
+}
+
+.statement-block:hover {
+    -fx-cursor: closed-hand;
+}
+
+.statement-connector {
+    -fx-background-color: yellow;
+    -fx-border-color: black;
+    -fx-pref-height: 2em;
+}
+
+.statement-connector:disabled {
+    -fx-border-width: 0;
+    -fx-pref-height: 0;
+}
+
+.statement-selector VBox {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
+}
+
+.statement-source {
+    -fx-background-color: rgb(0, 230, 154);
+    -fx-background-radius: 0.4em;
+    -fx-border-color: black;
+    -fx-border-radius: 0.4em;
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-padding: 0.5em;
+    -fx-text-fill: black;
+}
+
+.statement-source:hover {
+    -fx-cursor: closed-hand;
+}

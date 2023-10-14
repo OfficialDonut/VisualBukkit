@@ -1,0 +1,4 @@
+name: "{NAME}"
+version: "{VERSION}"
+main: "{MAIN_CLASS}"
+api-version: "1.20"
