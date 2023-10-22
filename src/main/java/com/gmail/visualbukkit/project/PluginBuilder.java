@@ -7,12 +7,13 @@ import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
-import javafx.application.Platform;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.maven.shared.invoker.*;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
+import org.jboss.forge.roaster.model.source.MethodSource;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +23,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PluginBuilder {
 
@@ -36,11 +38,12 @@ public class PluginBuilder {
     }
 
     public static void build(Project project) {
+        VisualBukkitApp.getLogger().info("Building plugin...");
         VisualBukkitApp.getLogWindow().show();
         BackgroundTaskExecutor.executeAndWait(() -> {
             try {
-                String name = project.getPluginSettings().getName();
-                String version = project.getPluginSettings().getVersion();
+                String name = project.getPluginName();
+                String version = project.getPluginVersion();
                 if (name.isBlank()) {
                     name = "Plugin";
                 }
@@ -62,6 +65,22 @@ public class PluginBuilder {
 
                 JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, Resources.toString(PluginBuilder.class.getResource("/plugin/PluginMain.java"), StandardCharsets.UTF_8));
                 mainClass.setPackage(packageName);
+
+                if (Files.exists(project.getResourcesDirectory()) && Files.list(project.getResourcesDirectory()).findAny().isPresent()) {
+                    try (Stream<Path> stream = Files.walk(project.getResourcesDirectory())) {
+                        for (Path path : stream.toArray(Path[]::new)) {
+                            if (Files.isRegularFile(path) && !Files.isHidden(path)) {
+                                Path relativePath = project.getResourcesDirectory().relativize(path);
+                                Path resourceDirPath = resourcesDir.resolve(relativePath);
+                                Files.createDirectories(resourceDirPath.getParent());
+                                Files.copy(path, resourceDirPath);
+                                String filePath = StringEscapeUtils.escapeJava(relativePath.toString().replace("\\", "/"));
+                                MethodSource<JavaClassSource> enableMethod = mainClass.getMethod("onEnable");
+                                enableMethod.setBody(enableMethod.getBody() + (filePath.equals("config.yml") ? "saveDefaultConfig();" : ("PluginMain.createResourceFile(\"" + filePath + "\");")));
+                            }
+                        }
+                    }
+                }
 
                 BuildInfo buildInfo = new BuildInfo(mainClass);
                 buildInfo.getMavenRepositories().addAll(ClassRegistry.getMavenRepositories());
@@ -125,26 +144,29 @@ public class PluginBuilder {
     private static String createPluginYml(Project project, String pluginName, String version, String mainClassName) throws IOException {
         String template = Resources.toString(PluginBuilder.class.getResource("/plugin/plugin.yml"), StandardCharsets.UTF_8);
         StringBuilder builder = new StringBuilder(template.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
-        if (!project.getPluginSettings().getAuthors().isBlank()) {
-            builder.append("authors: [").append(project.getPluginSettings().getAuthors()).append("]\n");
+        if (!project.getPluginAuthors().isBlank()) {
+            builder.append("authors: [").append(project.getPluginAuthors()).append("]\n");
         }
-        if (!project.getPluginSettings().getDescription().isBlank()) {
-            builder.append("description: \"").append(project.getPluginSettings().getDescription()).append("\"\n");
+        if (!project.getPluginDescription().isBlank()) {
+            builder.append("description: \"").append(project.getPluginDescription()).append("\"\n");
         }
-        if (!project.getPluginSettings().getWebsite().isBlank()) {
-            builder.append("website: \"").append(project.getPluginSettings().getWebsite()).append("\"\n");
+        if (!project.getPluginWebsite().isBlank()) {
+            builder.append("website: \"").append(project.getPluginWebsite()).append("\"\n");
         }
-        if (!project.getPluginSettings().getDependencies().isBlank()) {
-            builder.append("depend: [").append(project.getPluginSettings().getDependencies()).append("]\n");
+        if (!project.getPluginDependencies().isBlank()) {
+            builder.append("depend: [").append(project.getPluginDependencies()).append("]\n");
         }
-        if (!project.getPluginSettings().getSoftDepend().isBlank()) {
-            builder.append("softdepend: [").append(project.getPluginSettings().getSoftDepend()).append("]\n");
+        if (!project.getPluginSoftDepend().isBlank()) {
+            builder.append("softdepend: [").append(project.getPluginSoftDepend()).append("]\n");
         }
-        if (!project.getPluginSettings().getLoadBefore().isBlank()) {
-            builder.append("loadbefore: [").append(project.getPluginSettings().getLoadBefore()).append("]\n");
+        if (!project.getPluginLoadBefore().isBlank()) {
+            builder.append("loadbefore: [").append(project.getPluginLoadBefore()).append("]\n");
         }
-        if (!project.getPluginSettings().getPrefix().isBlank()) {
-            builder.append("prefix: \"").append(project.getPluginSettings().getPrefix()).append("\"\n");
+        if (!project.getPluginPrefix().isBlank()) {
+            builder.append("prefix: \"").append(project.getPluginPrefix()).append("\"\n");
+        }
+        if (!project.getPluginPermissions().isBlank()) {
+            builder.append("permissions:\\n  ").append(project.getPluginPermissions().replace("\n", "\n  ")).append("\n");
         }
         return builder.toString();
     }

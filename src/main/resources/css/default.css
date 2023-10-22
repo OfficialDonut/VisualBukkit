@@ -96,6 +96,11 @@ HBox {
     -fx-pref-width: 85em;
 }
 
+.log-window > .scroll-pane {
+    -fx-hbar-policy: always;
+    -fx-vbar-policy: always;
+}
+
 .menu-bar {
     -fx-background-color: rgb(35, 43, 50);
 }
@@ -116,6 +121,16 @@ HBox {
 
 .plugin-component-pane VBox {
     -fx-padding: 1em;
+}
+
+.plugin-settings-grid {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
+}
+
+.plugin-settings-grid .text-area {
+    -fx-pref-height: 5em;
+    -fx-pref-width: 10em;
 }
 
 .pop-over-selector {

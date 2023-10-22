@@ -36,6 +36,7 @@ public class StatementSelector extends VBox {
     }
 
     public void refreshStatements() {
+        statementListBox.getChildren().clear();
         for (StatementBlock.Factory factory : BlockRegistry.getStatements()) {
             statementListBox.getChildren().add(new StatementSource(factory));
         }

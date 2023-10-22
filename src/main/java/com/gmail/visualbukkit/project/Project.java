@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.VisualBukkitExtension;
 import com.gmail.visualbukkit.blocks.*;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.gmail.visualbukkit.ui.PopupWindow;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -16,9 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.shared.invoker.MavenInvocationException;
-import org.controlsfx.control.PropertySheet;
+import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.SearchableComboBox;
-import org.controlsfx.property.BeanPropertyUtils;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.eclipse.aether.resolution.DependencyResolutionException;
@@ -45,14 +46,26 @@ public class Project {
     private final Path pluginComponentDirectory;
     private final Path resourcesDirectory;
     private final Path buildDirectory;
+    private JSONObject data;
 
     private final BorderPane projectPane = new BorderPane();
     private final SplitPane splitPane = new SplitPane();
     private final VBox placeholderPane = new VBox();
     private final TabPane tabPane = new TabPane();
     private final StatementSelector statementSelector = new StatementSelector();
-    private final PluginSettings pluginSettings = new PluginSettings();
+    private final ListSelectionView<PluginModule> moduleSelector = new ListSelectionView<>();
     private final Map<String, PluginComponentBlock> pluginComponents = new HashMap<>();
+
+    private final TextField pluginNameField = new TextField();
+    private final TextField pluginVersionField = new TextField();
+    private final TextField pluginDescriptionField = new TextField();
+    private final TextField pluginAuthorsField = new TextField();
+    private final TextField pluginPrefixField = new TextField();
+    private final TextField pluginWebsiteField = new TextField();
+    private final TextField pluginDependenciesField = new TextField();
+    private final TextField pluginSoftDependField = new TextField();
+    private final TextField pluginLoadBeforeField = new TextField();
+    private final TextArea pluginPermissionsField = new TextArea();
 
     public Project(Path directory) {
         this.directory = directory;
@@ -61,23 +74,44 @@ public class Project {
         resourcesDirectory = directory.resolve("resource_files");
         buildDirectory = directory.resolve("build");
 
-        PropertySheet pluginSettingsSheet = new PropertySheet();
-        pluginSettingsSheet.setModeSwitcherVisible(false);
-        pluginSettingsSheet.setSearchBoxVisible(false);
-        pluginSettingsSheet.getItems().setAll(BeanPropertyUtils.getProperties(pluginSettings));
-        PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), pluginSettingsSheet);
+        GridPane pluginSettingsGrid = new GridPane();
+        pluginSettingsGrid.addRow(0, new Label(VisualBukkitApp.localizedText("label.plugin_settings_name")), pluginNameField);
+        pluginSettingsGrid.addRow(1, new Label(VisualBukkitApp.localizedText("label.plugin_settings_version")), pluginVersionField);
+        pluginSettingsGrid.addRow(2, new Label(VisualBukkitApp.localizedText("label.plugin_settings_description")), pluginDescriptionField);
+        pluginSettingsGrid.addRow(3, new Label(VisualBukkitApp.localizedText("label.plugin_settings_authors")), pluginAuthorsField);
+        pluginSettingsGrid.addRow(4, new Label(VisualBukkitApp.localizedText("label.plugin_settings_prefix")), pluginPrefixField);
+        pluginSettingsGrid.addRow(5, new Label(VisualBukkitApp.localizedText("label.plugin_settings_website")), pluginWebsiteField);
+        pluginSettingsGrid.addRow(6, new Separator(), new Separator());
+        pluginSettingsGrid.addRow(7, new Label(VisualBukkitApp.localizedText("label.plugin_settings_dependencies")), pluginDependenciesField);
+        pluginSettingsGrid.addRow(8, new Label(VisualBukkitApp.localizedText("label.plugin_settings_softdepend")), pluginSoftDependField);
+        pluginSettingsGrid.addRow(9, new Label(VisualBukkitApp.localizedText("label.plugin_settings_loadbefore")), pluginLoadBeforeField);
+        pluginSettingsGrid.addRow(10, new Label(VisualBukkitApp.localizedText("label.plugin_settings_permissions")), pluginPermissionsField);
+        pluginSettingsGrid.getStyleClass().add("plugin-settings-grid");
+        PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), pluginSettingsGrid);
+
+        PopupWindow moduleSelectorWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_modules"), moduleSelector);
+        Button applyChangesButton = new Button(VisualBukkitApp.localizedText("button.apply_changes"));
+        applyChangesButton.setDisable(true);
+        applyChangesButton.setOnAction(e -> {
+            applyChangesButton.setDisable(true);
+            moduleSelectorWindow.close();
+            save();
+            open();
+        });
+        moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> applyChangesButton.setDisable(false));
+        moduleSelector.setSourceFooter(applyChangesButton);
 
         Button addComponentButton = new Button(VisualBukkitApp.localizedText("button.add_plugin_component"));
         Button pluginComponentsButton = new Button(VisualBukkitApp.localizedText("button.plugin_components"));
         Button pluginSettingsButton = new Button(VisualBukkitApp.localizedText("button.plugin_settings"));
         Button buildPluginButton = new Button(VisualBukkitApp.localizedText("button.build_plugin"));
-        Button modulesButton = new Button(VisualBukkitApp.localizedText("button.extension_modules"));
+        Button pluginModulesButton = new Button(VisualBukkitApp.localizedText("button.plugin_modules"));
         addComponentButton.setOnAction(e -> promptAddPluginComponent());
         pluginComponentsButton.setOnAction(e -> showPluginComponents());
         pluginSettingsButton.setOnAction(e -> pluginSettingsWindow.show());
-        modulesButton.setOnAction(e -> {});
+        pluginModulesButton.setOnAction(e -> moduleSelectorWindow.show());
         buildPluginButton.setOnAction(e -> PluginBuilder.build(this));
-        HBox buttonBar = new HBox(addComponentButton, pluginComponentsButton, pluginSettingsButton, buildPluginButton, modulesButton);
+        HBox buttonBar = new HBox(addComponentButton, pluginComponentsButton, pluginSettingsButton, pluginModulesButton, buildPluginButton);
         buttonBar.getStyleClass().add("button-bar");
 
         placeholderPane.getChildren().add(new Label(VisualBukkitApp.localizedText("label.add_plugin_component")));
@@ -102,12 +136,19 @@ public class Project {
     }
 
     public void open() {
+        tabPane.getTabs().clear();
+        pluginComponents.clear();
+        moduleSelector.getSourceItems().clear();
+        moduleSelector.getTargetItems().clear();
         BlockRegistry.clear();
         ClassRegistry.clear();
         UndoManager.clear();
 
         BackgroundTaskExecutor.executeAndWait(() -> {
             try {
+                if (Files.exists(dataFile)) {
+                    data = new JSONObject(Files.readString(dataFile));
+                }
                 BlockRegistry.register(BlockRegistry.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions");
                 ClassRegistry.register(PAPER_ARTIFACT, PAPER_REPO, "org.bukkit", "com.destroystokyo.paper");
                 Pattern classPattern = Pattern.compile("/modules/java\\.base/(.+)\\.class");
@@ -129,30 +170,44 @@ public class Project {
                         return FileVisitResult.CONTINUE;
                     }
                 });
-            } catch (IOException | MavenInvocationException | DependencyResolutionException e) {
+            } catch (IOException | MavenInvocationException | DependencyResolutionException | JSONException e) {
                 Platform.runLater(() -> VisualBukkitApp.displayException(e));
+            }
+            JSONArray enabledModulesJson = data.optJSONArray("enabled-modules");
+            List<Object> enabledModules = enabledModulesJson != null ? enabledModulesJson.toList() : Collections.emptyList();
+            for (PluginModule module : PluginModuleRegistry.getPluginModules()) {
+                if (enabledModules.contains(module.getUID())) {
+                    Platform.runLater(() -> moduleSelector.getTargetItems().add(module));
+                    module.enable();
+                } else {
+                    Platform.runLater(() -> moduleSelector.getSourceItems().add(module));
+                }
             }
         });
 
-        if (Files.exists(dataFile)) {
-            try {
-                JSONObject json = new JSONObject(Files.readString(dataFile));
-                JSONObject pluginSettingsJson = json.optJSONObject("plugin-settings");
-                if (pluginSettingsJson != null) {
-                    pluginSettings.deserialize(pluginSettingsJson);
+        pluginNameField.setText(data.optString("plugin-settings.name", ""));
+        pluginVersionField.setText(data.optString("plugin-settings.version", ""));
+        pluginDescriptionField.setText(data.optString("plugin-settings.description", ""));
+        pluginAuthorsField.setText(data.optString("plugin-settings.authors", ""));
+        pluginPrefixField.setText(data.optString("plugin-settings.prefix", ""));
+        pluginWebsiteField.setText(data.optString("plugin-settings.website", ""));
+        pluginDependenciesField.setText(data.optString("plugin-settings.dependencies", ""));
+        pluginSoftDependField.setText(data.optString("plugin-settings.soft-depend", ""));
+        pluginLoadBeforeField.setText(data.optString("plugin-settings.load-before", ""));
+        pluginPermissionsField.setText(data.optString("plugin-settings.permissions", ""));
+
+        JSONArray openPluginComponents = data.optJSONArray("open-plugin-components");
+        if (openPluginComponents != null) {
+            for (Object object : openPluginComponents) {
+                if (object instanceof String name) {
+                    openPluginComponent(name);
                 }
-                JSONArray openPluginComponents = json.optJSONArray("open-plugin-components");
-                if (openPluginComponents != null) {
-                    for (Object object : openPluginComponents) {
-                        if (object instanceof String name) {
-                            openPluginComponent(name);
-                        }
-                    }
-                    tabPane.getSelectionModel().select(json.optInt("selected-tab"));
-                }
-            } catch (IOException | JSONException e) {
-                VisualBukkitApp.displayException(e);
             }
+            tabPane.getSelectionModel().select(data.optInt("selected-tab"));
+        }
+
+        for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
+            extension.open(this);
         }
 
         statementSelector.refreshStatements();
@@ -162,14 +217,30 @@ public class Project {
 
     public void save() {
         try {
-            JSONObject json = new JSONObject();
-            json.put("plugin-settings", pluginSettings.serialize());
-            json.put("selected-tab", tabPane.getSelectionModel().getSelectedIndex());
+            data.put("plugin-settings.name", pluginNameField.getText());
+            data.put("plugin-settings.version", pluginVersionField.getText());
+            data.put("plugin-settings.description", pluginDescriptionField.getText());
+            data.put("plugin-settings.authors", pluginAuthorsField.getText());
+            data.put("plugin-settings.prefix", pluginPrefixField.getText());
+            data.put("plugin-settings.website", pluginWebsiteField.getText());
+            data.put("plugin-settings.dependencies", pluginDependenciesField.getText());
+            data.put("plugin-settings.soft-depend", pluginSoftDependField.getText());
+            data.put("plugin-settings.load-before", pluginLoadBeforeField.getText());
+            data.put("plugin-settings.permissions", pluginPermissionsField.getText());
+            data.put("selected-tab", tabPane.getSelectionModel().getSelectedIndex());
+            data.remove("open-plugin-components");
             for (Tab tab : tabPane.getTabs()) {
-                json.append("open-plugin-components", tab.getText());
+                data.append("open-plugin-components", tab.getText());
+            }
+            data.remove("enabled-modules");
+            for (PluginModule module : moduleSelector.getTargetItems()) {
+                data.append("enabled-modules", module.getUID());
+            }
+            for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
+                extension.save(this);
             }
             Files.createDirectories(directory);
-            Files.writeString(dataFile, json.toString(2));
+            Files.writeString(dataFile, data.toString(2));
             for (Map.Entry<String, PluginComponentBlock> entry : pluginComponents.entrySet()) {
                 savePluginComponent(entry.getKey(), entry.getValue());
             }
@@ -196,8 +267,7 @@ public class Project {
         Button openAllButton = new Button(VisualBukkitApp.localizedText("button.open_all"));
         Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
         Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
-        Button closeButton = new Button(VisualBukkitApp.localizedText("button.close"));
-        HBox buttonBar = new HBox(addButton, openAllButton, openButton, deleteButton, closeButton);
+        HBox buttonBar = new HBox(addButton, openAllButton, openButton, deleteButton);
         buttonBar.getStyleClass().add("button-bar");
         VBox vBox = new VBox(listView, buttonBar);
         vBox.getStyleClass().add("plugin-component-list");
@@ -220,7 +290,6 @@ public class Project {
             popupWindow.close();
             promptDeletePluginComponent(listView.getSelectionModel().getSelectedItem());
         });
-        closeButton.setOnAction(e -> popupWindow.close());
         openButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
         deleteButton.disableProperty().bind(openButton.disableProperty());
         listView.setCellFactory(new Callback<>() {
@@ -388,7 +457,43 @@ public class Project {
         return buildDirectory;
     }
 
-    public PluginSettings getPluginSettings() {
-        return pluginSettings;
+    public String getPluginName() {
+        return pluginNameField.getText();
+    }
+
+    public String getPluginVersion() {
+        return pluginVersionField.getText();
+    }
+
+    public String getPluginDescription() {
+        return pluginDescriptionField.getText();
+    }
+
+    public String getPluginAuthors() {
+        return pluginAuthorsField.getText();
+    }
+
+    public String getPluginPrefix() {
+        return pluginPrefixField.getText();
+    }
+
+    public String getPluginWebsite() {
+        return pluginWebsiteField.getText();
+    }
+
+    public String getPluginDependencies() {
+        return pluginDependenciesField.getText();
+    }
+
+    public String getPluginSoftDepend() {
+        return pluginSoftDependField.getText();
+    }
+
+    public String getPluginLoadBefore() {
+        return pluginLoadBeforeField.getText();
+    }
+
+    public String getPluginPermissions() {
+        return pluginPermissionsField.getText();
     }
 }

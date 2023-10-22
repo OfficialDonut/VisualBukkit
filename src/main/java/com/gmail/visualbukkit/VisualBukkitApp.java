@@ -27,10 +27,14 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.jar.JarFile;
 import java.util.logging.*;
 
 public class VisualBukkitApp extends Application {
@@ -38,6 +42,7 @@ public class VisualBukkitApp extends Application {
     private static final String version = VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static final Logger logger = Logger.getLogger("Visual Bukkit");
     private static final ResourceBundle resourceBundle = ResourceBundle.getBundle("lang.gui");
+    private static final Set<VisualBukkitExtension> extensions = new HashSet<>();
     private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_beta"); // todo: remove beta
     private static final Path dataFile = dataDirectory.resolve("data.json");
     private static JSONObject data = new JSONObject();
@@ -65,7 +70,7 @@ public class VisualBukkitApp extends Application {
             try {
                 data = new JSONObject(Files.readString(dataFile));
             } catch (IOException | JSONException e) {
-                displayException(e);
+                logger.log(Level.SEVERE, "Failed to load data file", e);
             }
         }
 
@@ -97,6 +102,28 @@ public class VisualBukkitApp extends Application {
                 }
             }
         });
+
+        Path extensionsDir = dataDirectory.resolve("extensions");
+        Files.createDirectories(extensionsDir);
+        try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(extensionsDir, "*.jar")) {
+            for (Path path : dirStream) {
+                try (JarFile jarFile = new JarFile(path.toFile())) {
+                    String mainClassName = jarFile.getManifest().getMainAttributes().getValue("main-class");
+                    if (mainClassName != null) {
+                        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{path.toUri().toURL()})) {
+                            Class<?> mainClass = Class.forName(mainClassName, true, classLoader);
+                            if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
+                                VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
+                                extensions.add(extension);
+                                logger.info("Loaded extension: " + extension.getName() + " " + extension.getVersion());
+                            }
+                        }
+                    }
+                } catch (Throwable e) {
+                    logger.log(Level.WARNING, "Failed to load extension", e);
+                }
+            }
+        }
 
         primaryStage.show();
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> displayException(e));
@@ -162,6 +189,10 @@ public class VisualBukkitApp extends Application {
 
     public static Logger getLogger() {
         return logger;
+    }
+
+    public static Set<VisualBukkitExtension> getExtensions() {
+        return extensions;
     }
 
     public static Path getDataDirectory() {

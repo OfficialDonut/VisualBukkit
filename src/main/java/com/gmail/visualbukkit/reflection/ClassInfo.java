@@ -46,7 +46,7 @@ public record ClassInfo(Class<?> clazz) implements Comparable<ClassInfo> {
         if (to.isPrimitive()) {
             return String.format("PluginMain.resolve_%s(%s)", to.getCanonicalName(), java);
         }
-        return String.format("PluginMain.resolve_object(%s, %s)", to.getCanonicalName(), java);
+        return String.format("PluginMain.resolve_object(%s, %s.class)", java, to.getCanonicalName());
     }
 
     private static boolean isPrimitiveNumber(Class<?> clazz) {
