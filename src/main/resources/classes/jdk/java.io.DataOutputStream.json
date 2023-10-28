@@ -1,0 +1,183 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "out",
+      "type": "java.io.OutputStream"
+    }]
+  }],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "nullOutputStream",
+      "return": "java.io.OutputStream"
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }]
+    },
+    {"name": "close"},
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "b",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "write",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "flush"},
+    {
+      "name": "writeBoolean",
+      "parameters": [{
+        "name": "v",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "writeByte",
+      "parameters": [{
+        "name": "v",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "writeShort",
+      "parameters": [{
+        "name": "v",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "writeChar",
+      "parameters": [{
+        "name": "v",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "writeInt",
+      "parameters": [{
+        "name": "v",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "writeLong",
+      "parameters": [{
+        "name": "v",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "writeFloat",
+      "parameters": [{
+        "name": "v",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "writeDouble",
+      "parameters": [{
+        "name": "v",
+        "type": "double"
+      }]
+    },
+    {
+      "name": "writeBytes",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "writeChars",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "writeUTF",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "size",
+      "return": "int"
+    }
+  ],
+  "name": "java.io.DataOutputStream",
+  "simple-name": "DataOutputStream"
+}

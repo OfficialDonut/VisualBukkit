@@ -1,0 +1,74 @@
+{
+  "package": "java.nio.file",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "get",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "more",
+          "type": "java.lang.String[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "get",
+      "parameters": [{
+        "name": "uri",
+        "type": "java.net.URI"
+      }],
+      "return": "java.nio.file.Path"
+    }
+  ],
+  "name": "java.nio.file.Paths",
+  "simple-name": "Paths"
+}

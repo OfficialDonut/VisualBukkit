@@ -1,0 +1,54 @@
+{
+  "package": "java.net",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "createSocketImpl",
+      "return": "java.net.SocketImpl"
+    }
+  ],
+  "name": "java.net.SocketImplFactory",
+  "simple-name": "SocketImplFactory"
+}

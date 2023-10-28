@@ -1,0 +1,265 @@
+{
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.event.entity.EntityDamageEvent.DamageCause[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    }
+  ],
+  "name": "org.bukkit.event.entity.EntityDamageEvent.DamageCause",
+  "simple-name": "DamageCause",
+  "fields": [
+    {
+      "static": true,
+      "name": "KILL",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "WORLD_BORDER",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "CONTACT",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ATTACK",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SWEEP_ATTACK",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "PROJECTILE",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "SUFFOCATION",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FALL",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FIRE",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FIRE_TICK",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "MELTING",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "LAVA",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "DROWNING",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_EXPLOSION",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EXPLOSION",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "VOID",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "LIGHTNING",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "SUICIDE",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "STARVATION",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "POISON",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "MAGIC",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "WITHER",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FALLING_BLOCK",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "THORNS",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "DRAGON_BREATH",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "CUSTOM",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FLY_INTO_WALL",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "HOT_FLOOR",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "CRAMMING",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "DRYOUT",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "FREEZE",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    },
+    {
+      "static": true,
+      "name": "SONIC_BOOM",
+      "type": "org.bukkit.event.entity.EntityDamageEvent.DamageCause"
+    }
+  ]
+}

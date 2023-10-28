@@ -1,0 +1,94 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "modulus",
+          "type": "java.math.BigInteger"
+        },
+        {
+          "name": "privateExponent",
+          "type": "java.math.BigInteger"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "modulus",
+          "type": "java.math.BigInteger"
+        },
+        {
+          "name": "privateExponent",
+          "type": "java.math.BigInteger"
+        },
+        {
+          "name": "params",
+          "type": "java.security.spec.AlgorithmParameterSpec"
+        }
+      ]
+    }
+  ],
+  "package": "java.security.spec",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getModulus",
+      "return": "java.math.BigInteger"
+    },
+    {
+      "name": "getPrivateExponent",
+      "return": "java.math.BigInteger"
+    },
+    {
+      "name": "getParams",
+      "return": "java.security.spec.AlgorithmParameterSpec"
+    }
+  ],
+  "name": "java.security.spec.RSAPrivateKeySpec",
+  "simple-name": "RSAPrivateKeySpec"
+}

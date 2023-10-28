@@ -1,0 +1,83 @@
+{
+  "package": "org.bukkit.plugin",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "execute",
+      "parameters": [
+        {
+          "name": "listener",
+          "type": "org.bukkit.event.Listener"
+        },
+        {
+          "name": "event",
+          "type": "org.bukkit.event.Event"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "create",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "java.lang.reflect.Method"
+        },
+        {
+          "name": "eventClass",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "org.bukkit.plugin.EventExecutor"
+    }
+  ],
+  "name": "org.bukkit.plugin.EventExecutor",
+  "simple-name": "EventExecutor",
+  "fields": [{
+    "static": true,
+    "name": "eventExecutorMap",
+    "type": "java.util.concurrent.ConcurrentMap"
+  }]
+}

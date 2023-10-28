@@ -1,0 +1,32 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "loaderOptions",
+        "type": "LoaderOptions"
+      }]
+    }
+  ],
+  "package": "org.bukkit.configuration.file",
+  "methods": [
+    {
+      "name": "flattenMapping",
+      "parameters": [{
+        "name": "node",
+        "type": "MappingNode"
+      }]
+    },
+    {
+      "name": "construct",
+      "parameters": [{
+        "name": "node",
+        "type": "Node"
+      }],
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "org.bukkit.configuration.file.YamlConstructor",
+  "simple-name": "YamlConstructor"
+}

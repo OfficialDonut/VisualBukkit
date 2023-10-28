@@ -1,0 +1,643 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "capacity",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "seq",
+        "type": "java.lang.CharSequence"
+      }]
+    }
+  ],
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "length",
+      "return": "int"
+    },
+    {
+      "name": "capacity",
+      "return": "int"
+    },
+    {
+      "name": "ensureCapacity",
+      "parameters": [{
+        "name": "minimumCapacity",
+        "type": "int"
+      }]
+    },
+    {"name": "trimToSize"},
+    {
+      "name": "setLength",
+      "parameters": [{
+        "name": "newLength",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "charAt",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "char"
+    },
+    {
+      "name": "codePointAt",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "codePointBefore",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "codePointCount",
+      "parameters": [
+        {
+          "name": "beginIndex",
+          "type": "int"
+        },
+        {
+          "name": "endIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "offsetByCodePoints",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "codePointOffset",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "getChars",
+      "parameters": [
+        {
+          "name": "srcBegin",
+          "type": "int"
+        },
+        {
+          "name": "srcEnd",
+          "type": "int"
+        },
+        {
+          "name": "dst",
+          "type": "char[]"
+        },
+        {
+          "name": "dstBegin",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setCharAt",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "ch",
+          "type": "char"
+        }
+      ]
+    },
+    {
+      "name": "substring",
+      "parameters": [{
+        "name": "start",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "subSequence",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.CharSequence"
+    },
+    {
+      "name": "substring",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "chars",
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "codePoints",
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "another",
+        "type": "java.lang.StringBuilder"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "sb",
+        "type": "java.lang.StringBuffer"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "str",
+        "type": "char[]"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "char[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "b",
+        "type": "boolean"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "c",
+        "type": "char"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "lng",
+        "type": "long"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "appendCodePoint",
+      "parameters": [{
+        "name": "codePoint",
+        "type": "int"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "delete",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "deleteCharAt",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        },
+        {
+          "name": "str",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "str",
+          "type": "char[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "str",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "str",
+          "type": "char[]"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "dstOffset",
+          "type": "int"
+        },
+        {
+          "name": "s",
+          "type": "java.lang.CharSequence"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "dstOffset",
+          "type": "int"
+        },
+        {
+          "name": "s",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "boolean"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "c",
+          "type": "char"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "i",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "l",
+          "type": "long"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "f",
+          "type": "float"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "insert",
+      "parameters": [
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "d",
+          "type": "double"
+        }
+      ],
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "indexOf",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "indexOf",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "lastIndexOf",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "reverse",
+      "return": "java.lang.StringBuilder"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.StringBuilder",
+  "simple-name": "StringBuilder"
+}

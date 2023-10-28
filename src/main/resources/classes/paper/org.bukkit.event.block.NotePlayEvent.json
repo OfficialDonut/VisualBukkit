@@ -1,0 +1,125 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "block",
+        "type": "org.bukkit.block.Block"
+      },
+      {
+        "name": "instrument",
+        "type": "org.bukkit.Instrument"
+      },
+      {
+        "name": "note",
+        "type": "org.bukkit.Note"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.block",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getBlock",
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getInstrument",
+      "return": "org.bukkit.Instrument"
+    },
+    {
+      "name": "getNote",
+      "return": "org.bukkit.Note"
+    },
+    {
+      "name": "setInstrument",
+      "parameters": [{
+        "name": "instrument",
+        "type": "org.bukkit.Instrument"
+      }]
+    },
+    {
+      "name": "setNote",
+      "parameters": [{
+        "name": "note",
+        "type": "org.bukkit.Note"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.block.NotePlayEvent",
+  "simple-name": "NotePlayEvent"
+}

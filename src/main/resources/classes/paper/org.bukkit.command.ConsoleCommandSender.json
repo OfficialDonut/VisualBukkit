@@ -1,0 +1,342 @@
+{
+  "package": "org.bukkit.command",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "isOp",
+      "return": "boolean"
+    },
+    {
+      "name": "setOp",
+      "parameters": [{
+        "name": "value",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isConversing",
+      "return": "boolean"
+    },
+    {
+      "name": "acceptConversationInput",
+      "parameters": [{
+        "name": "input",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "beginConversation",
+      "parameters": [{
+        "name": "conversation",
+        "type": "org.bukkit.conversations.Conversation"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "abandonConversation",
+      "parameters": [{
+        "name": "conversation",
+        "type": "org.bukkit.conversations.Conversation"
+      }]
+    },
+    {
+      "name": "abandonConversation",
+      "parameters": [
+        {
+          "name": "conversation",
+          "type": "org.bukkit.conversations.Conversation"
+        },
+        {
+          "name": "details",
+          "type": "org.bukkit.conversations.ConversationAbandonedEvent"
+        }
+      ]
+    },
+    {
+      "name": "sendRawMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "sendRawMessage",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "java.util.UUID"
+        },
+        {
+          "name": "message",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "isPermissionSet",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isPermissionSet",
+      "parameters": [{
+        "name": "perm",
+        "type": "org.bukkit.permissions.Permission"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hasPermission",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hasPermission",
+      "parameters": [{
+        "name": "perm",
+        "type": "org.bukkit.permissions.Permission"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "addAttachment",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "boolean"
+        }
+      ],
+      "return": "org.bukkit.permissions.PermissionAttachment"
+    },
+    {
+      "name": "addAttachment",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }],
+      "return": "org.bukkit.permissions.PermissionAttachment"
+    },
+    {
+      "name": "addAttachment",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "boolean"
+        },
+        {
+          "name": "ticks",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.permissions.PermissionAttachment"
+    },
+    {
+      "name": "addAttachment",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "ticks",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.permissions.PermissionAttachment"
+    },
+    {
+      "name": "removeAttachment",
+      "parameters": [{
+        "name": "attachment",
+        "type": "org.bukkit.permissions.PermissionAttachment"
+      }]
+    },
+    {"name": "recalculatePermissions"},
+    {
+      "name": "getEffectivePermissions",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "permissionValue",
+      "parameters": [{
+        "name": "permission",
+        "type": "org.bukkit.permissions.Permission"
+      }],
+      "return": "net.kyori.adventure.util.TriState"
+    },
+    {
+      "name": "permissionValue",
+      "parameters": [{
+        "name": "permission",
+        "type": "java.lang.String"
+      }],
+      "return": "net.kyori.adventure.util.TriState"
+    },
+    {
+      "name": "sendMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "sendMessage",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "java.util.UUID"
+        },
+        {
+          "name": "message",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "sendMessage",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "java.util.UUID"
+        },
+        {
+          "name": "messages",
+          "type": "java.lang.String[]"
+        }
+      ]
+    },
+    {
+      "name": "getServer",
+      "return": "org.bukkit.Server"
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "spigot",
+      "return": "org.bukkit.command.CommandSender.Spigot"
+    },
+    {
+      "name": "name",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "sendMessage",
+      "parameters": [
+        {
+          "name": "identity",
+          "type": "net.kyori.adventure.identity.Identity"
+        },
+        {
+          "name": "message",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "type",
+          "type": "net.kyori.adventure.audience.MessageType"
+        }
+      ]
+    },
+    {
+      "name": "sendRichMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "sendRichMessage",
+      "parameters": [
+        {
+          "name": "message",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "resolvers",
+          "type": "net.kyori.adventure.text.minimessage.tag.resolver.TagResolver[]"
+        }
+      ]
+    },
+    {
+      "name": "sendPlainMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "sendMessage",
+      "parameters": [{
+        "name": "components",
+        "type": "net.md_5.bungee.api.chat.BaseComponent[]"
+      }]
+    }
+  ],
+  "name": "org.bukkit.command.ConsoleCommandSender",
+  "simple-name": "ConsoleCommandSender"
+}

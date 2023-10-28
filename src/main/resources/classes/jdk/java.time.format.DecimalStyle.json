@@ -1,0 +1,122 @@
+{
+  "package": "java.time.format",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getAvailableLocales",
+      "return": "java.util.Set"
+    },
+    {
+      "static": true,
+      "name": "ofDefaultLocale",
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "locale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "name": "getZeroDigit",
+      "return": "char"
+    },
+    {
+      "name": "withZeroDigit",
+      "parameters": [{
+        "name": "zeroDigit",
+        "type": "char"
+      }],
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "name": "getPositiveSign",
+      "return": "char"
+    },
+    {
+      "name": "withPositiveSign",
+      "parameters": [{
+        "name": "positiveSign",
+        "type": "char"
+      }],
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "name": "getNegativeSign",
+      "return": "char"
+    },
+    {
+      "name": "withNegativeSign",
+      "parameters": [{
+        "name": "negativeSign",
+        "type": "char"
+      }],
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "name": "getDecimalSeparator",
+      "return": "char"
+    },
+    {
+      "name": "withDecimalSeparator",
+      "parameters": [{
+        "name": "decimalSeparator",
+        "type": "char"
+      }],
+      "return": "java.time.format.DecimalStyle"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.format.DecimalStyle",
+  "simple-name": "DecimalStyle",
+  "fields": [{
+    "static": true,
+    "name": "STANDARD",
+    "type": "java.time.format.DecimalStyle"
+  }]
+}

@@ -1,0 +1,227 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.potion.PotionType"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionType"
+        },
+        {
+          "name": "level",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionType"
+        },
+        {
+          "name": "level",
+          "type": "int"
+        },
+        {
+          "name": "splash",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionType"
+        },
+        {
+          "name": "level",
+          "type": "int"
+        },
+        {
+          "name": "splash",
+          "type": "boolean"
+        },
+        {
+          "name": "extended",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.potion",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "splash",
+      "return": "org.bukkit.potion.Potion"
+    },
+    {
+      "name": "extend",
+      "return": "org.bukkit.potion.Potion"
+    },
+    {
+      "name": "apply",
+      "parameters": [{
+        "name": "to",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "apply",
+      "parameters": [{
+        "name": "to",
+        "type": "org.bukkit.entity.LivingEntity"
+      }]
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getEffects",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "getLevel",
+      "return": "int"
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.potion.PotionType"
+    },
+    {
+      "name": "hasExtendedDuration",
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "isSplash",
+      "return": "boolean"
+    },
+    {
+      "name": "setHasExtendedDuration",
+      "parameters": [{
+        "name": "isExtended",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "setSplash",
+      "parameters": [{
+        "name": "isSplash",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "setType",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.potion.PotionType"
+      }]
+    },
+    {
+      "name": "setLevel",
+      "parameters": [{
+        "name": "level",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "toDamageValue",
+      "return": "short"
+    },
+    {
+      "name": "toItemStack",
+      "parameters": [{
+        "name": "amount",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "static": true,
+      "name": "fromDamage",
+      "parameters": [{
+        "name": "damage",
+        "type": "int"
+      }],
+      "return": "org.bukkit.potion.Potion"
+    },
+    {
+      "static": true,
+      "name": "fromItemStack",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "org.bukkit.potion.Potion"
+    },
+    {
+      "static": true,
+      "name": "getBrewer",
+      "return": "org.bukkit.potion.PotionBrewer"
+    },
+    {
+      "static": true,
+      "name": "setPotionBrewer",
+      "parameters": [{
+        "name": "other",
+        "type": "org.bukkit.potion.PotionBrewer"
+      }]
+    },
+    {
+      "name": "getNameId",
+      "return": "int"
+    }
+  ],
+  "name": "org.bukkit.potion.Potion",
+  "simple-name": "Potion"
+}

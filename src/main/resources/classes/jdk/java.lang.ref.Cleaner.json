@@ -1,0 +1,78 @@
+{
+  "package": "java.lang.ref",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "create",
+      "return": "java.lang.ref.Cleaner"
+    },
+    {
+      "static": true,
+      "name": "create",
+      "parameters": [{
+        "name": "threadFactory",
+        "type": "java.util.concurrent.ThreadFactory"
+      }],
+      "return": "java.lang.ref.Cleaner"
+    },
+    {
+      "name": "register",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "action",
+          "type": "java.lang.Runnable"
+        }
+      ],
+      "return": "java.lang.ref.Cleaner.Cleanable"
+    }
+  ],
+  "name": "java.lang.ref.Cleaner",
+  "simple-name": "Cleaner"
+}

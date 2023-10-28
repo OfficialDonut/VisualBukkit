@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.blocks.classes.ClassInfo;
 
 import java.util.Collections;
 
@@ -23,8 +24,8 @@ public class ExprString extends ExpressionBlock {
     }
 
     @Override
-    public Class<?> getReturnType() {
-        return String.class;
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(String.class);
     }
 
     @Override

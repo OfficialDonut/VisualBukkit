@@ -1,0 +1,67 @@
+{
+  "package": "java.lang.module",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [{
+        "name": "v",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.module.ModuleDescriptor.Version"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "that",
+        "type": "java.lang.module.ModuleDescriptor.Version"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "ob",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.module.ModuleDescriptor.Version",
+  "simple-name": "Version"
+}

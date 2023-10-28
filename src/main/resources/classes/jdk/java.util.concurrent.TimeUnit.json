@@ -1,0 +1,264 @@
+{
+  "package": "java.util.concurrent",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.util.concurrent.TimeUnit[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "name": "convert",
+      "parameters": [
+        {
+          "name": "sourceDuration",
+          "type": "long"
+        },
+        {
+          "name": "sourceUnit",
+          "type": "java.util.concurrent.TimeUnit"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "convert",
+      "parameters": [{
+        "name": "duration",
+        "type": "java.time.Duration"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toNanos",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toMicros",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toMillis",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toSeconds",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toMinutes",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toHours",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "toDays",
+      "parameters": [{
+        "name": "duration",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "timedWait",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "timeout",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "timedJoin",
+      "parameters": [
+        {
+          "name": "thread",
+          "type": "java.lang.Thread"
+        },
+        {
+          "name": "timeout",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "sleep",
+      "parameters": [{
+        "name": "timeout",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "toChronoUnit",
+      "return": "java.time.temporal.ChronoUnit"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "chronoUnit",
+        "type": "java.time.temporal.ChronoUnit"
+      }],
+      "return": "java.util.concurrent.TimeUnit"
+    }
+  ],
+  "name": "java.util.concurrent.TimeUnit",
+  "simple-name": "TimeUnit",
+  "fields": [
+    {
+      "static": true,
+      "name": "NANOSECONDS",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "MICROSECONDS",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "MILLISECONDS",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "SECONDS",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "MINUTES",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "HOURS",
+      "type": "java.util.concurrent.TimeUnit"
+    },
+    {
+      "static": true,
+      "name": "DAYS",
+      "type": "java.util.concurrent.TimeUnit"
+    }
+  ]
+}

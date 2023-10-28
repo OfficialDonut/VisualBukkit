@@ -1,0 +1,115 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "entity",
+        "type": "org.bukkit.entity.Entity"
+      },
+      {
+        "name": "loc",
+        "type": "org.bukkit.Location"
+      },
+      {
+        "name": "targetEntity",
+        "type": "org.bukkit.entity.Entity"
+      }
+    ]
+  }],
+  "package": "com.destroystokyo.paper.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "getTargetEntity",
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "getLoc",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.entity.EntityPathfindEvent",
+  "simple-name": "EntityPathfindEvent"
+}

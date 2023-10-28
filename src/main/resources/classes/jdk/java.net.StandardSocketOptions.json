@@ -1,0 +1,112 @@
+{
+  "package": "java.net",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "name": "java.net.StandardSocketOptions",
+  "simple-name": "StandardSocketOptions",
+  "fields": [
+    {
+      "static": true,
+      "name": "SO_BROADCAST",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_KEEPALIVE",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_SNDBUF",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_RCVBUF",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_REUSEADDR",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_REUSEPORT",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "SO_LINGER",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "IP_TOS",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "IP_MULTICAST_IF",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "IP_MULTICAST_TTL",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "IP_MULTICAST_LOOP",
+      "type": "java.net.SocketOption"
+    },
+    {
+      "static": true,
+      "name": "TCP_NODELAY",
+      "type": "java.net.SocketOption"
+    }
+  ]
+}

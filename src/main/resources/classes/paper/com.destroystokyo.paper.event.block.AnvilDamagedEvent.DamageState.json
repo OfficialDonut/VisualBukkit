@@ -1,0 +1,147 @@
+{
+  "package": "com.destroystokyo.paper.event.block",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    },
+    {
+      "name": "getMaterial",
+      "return": "org.bukkit.Material"
+    },
+    {
+      "static": true,
+      "name": "getState",
+      "parameters": [{
+        "name": "blockData",
+        "type": "org.bukkit.block.data.BlockData"
+      }],
+      "return": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    },
+    {
+      "static": true,
+      "name": "getState",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState",
+  "simple-name": "DamageState",
+  "fields": [
+    {
+      "static": true,
+      "name": "FULL",
+      "type": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    },
+    {
+      "static": true,
+      "name": "CHIPPED",
+      "type": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    },
+    {
+      "static": true,
+      "name": "DAMAGED",
+      "type": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    },
+    {
+      "static": true,
+      "name": "BROKEN",
+      "type": "com.destroystokyo.paper.event.block.AnvilDamagedEvent.DamageState"
+    }
+  ]
+}

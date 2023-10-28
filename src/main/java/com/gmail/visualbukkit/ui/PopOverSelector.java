@@ -63,6 +63,7 @@ public class PopOverSelector<T> extends ComboBox<T> {
         addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
             popOver.setArrowLocation(2 * e.getSceneY() > VisualBukkitApp.getPrimaryStage().getScene().getHeight() ? PopOver.ArrowLocation.BOTTOM_CENTER : PopOver.ArrowLocation.TOP_CENTER);
             popOver.show(this);
+            searchField.requestFocus();
             e.consume();
         });
     }

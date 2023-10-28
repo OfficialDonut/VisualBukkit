@@ -1,0 +1,72 @@
+{
+  "package": "org.bukkit",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "andThen",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Consumer"
+      }],
+      "return": "java.util.function.Consumer"
+    },
+    {
+      "name": "onLoad",
+      "parameters": [{
+        "name": "chunk",
+        "type": "org.bukkit.Chunk"
+      }]
+    },
+    {
+      "name": "accept",
+      "parameters": [{
+        "name": "chunk",
+        "type": "org.bukkit.Chunk"
+      }]
+    }
+  ],
+  "name": "org.bukkit.World.ChunkLoadCallback",
+  "simple-name": "ChunkLoadCallback"
+}

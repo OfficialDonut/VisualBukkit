@@ -1,0 +1,58 @@
+{
+  "package": "io.papermc.paper.plugin.provider.classloader",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "canAccess",
+      "parameters": [{
+        "name": "classLoader",
+        "type": "io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess",
+  "simple-name": "ClassLoaderAccess"
+}

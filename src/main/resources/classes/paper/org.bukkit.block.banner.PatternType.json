@@ -1,0 +1,323 @@
+{
+  "package": "org.bukkit.block.banner",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.block.banner.PatternType[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "name": "getIdentifier",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getByIdentifier",
+      "parameters": [{
+        "name": "identifier",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.block.banner.PatternType"
+    }
+  ],
+  "name": "org.bukkit.block.banner.PatternType",
+  "simple-name": "PatternType",
+  "fields": [
+    {
+      "static": true,
+      "name": "BASE",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "SQUARE_BOTTOM_LEFT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "SQUARE_BOTTOM_RIGHT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "SQUARE_TOP_LEFT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "SQUARE_TOP_RIGHT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_BOTTOM",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_TOP",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_LEFT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_RIGHT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_CENTER",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_MIDDLE",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_DOWNRIGHT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_DOWNLEFT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRIPE_SMALL",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "CROSS",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "STRAIGHT_CROSS",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "TRIANGLE_BOTTOM",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "TRIANGLE_TOP",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "TRIANGLES_BOTTOM",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "TRIANGLES_TOP",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "DIAGONAL_LEFT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "DIAGONAL_RIGHT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "DIAGONAL_LEFT_MIRROR",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "DIAGONAL_RIGHT_MIRROR",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "CIRCLE_MIDDLE",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "RHOMBUS_MIDDLE",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "HALF_VERTICAL",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "HALF_HORIZONTAL",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "HALF_VERTICAL_MIRROR",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "HALF_HORIZONTAL_MIRROR",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "BORDER",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "CURLY_BORDER",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "CREEPER",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "GRADIENT",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "GRADIENT_UP",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "BRICKS",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "SKULL",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "FLOWER",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "MOJANG",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "GLOBE",
+      "type": "org.bukkit.block.banner.PatternType"
+    },
+    {
+      "static": true,
+      "name": "PIGLIN",
+      "type": "org.bukkit.block.banner.PatternType"
+    }
+  ]
+}

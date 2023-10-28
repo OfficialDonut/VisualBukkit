@@ -1,0 +1,60 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "co.aikar.util",
+  "methods": [
+    {
+      "name": "decrement",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "increment",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "decrement",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "amount",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "increment",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "amount",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "getCount",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "long"
+    }
+  ],
+  "name": "co.aikar.util.Counter",
+  "simple-name": "Counter"
+}

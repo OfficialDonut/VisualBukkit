@@ -1,0 +1,97 @@
+{
+  "package": "java.net",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "add",
+      "parameters": [
+        {
+          "name": "uri",
+          "type": "java.net.URI"
+        },
+        {
+          "name": "cookie",
+          "type": "java.net.HttpCookie"
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "uri",
+        "type": "java.net.URI"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getCookies",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getURIs",
+      "return": "java.util.List"
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        {
+          "name": "uri",
+          "type": "java.net.URI"
+        },
+        {
+          "name": "cookie",
+          "type": "java.net.HttpCookie"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "removeAll",
+      "return": "boolean"
+    }
+  ],
+  "name": "java.net.CookieStore",
+  "simple-name": "CookieStore"
+}

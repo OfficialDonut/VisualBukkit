@@ -1,0 +1,110 @@
+{
+  "package": "java.nio.file",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "type",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isReadOnly",
+      "return": "boolean"
+    },
+    {
+      "name": "getTotalSpace",
+      "return": "long"
+    },
+    {
+      "name": "getUsableSpace",
+      "return": "long"
+    },
+    {
+      "name": "getUnallocatedSpace",
+      "return": "long"
+    },
+    {
+      "name": "getBlockSize",
+      "return": "long"
+    },
+    {
+      "name": "supportsFileAttributeView",
+      "parameters": [{
+        "name": "type",
+        "type": "java.lang.Class"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "supportsFileAttributeView",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getFileStoreAttributeView",
+      "parameters": [{
+        "name": "type",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.nio.file.attribute.FileStoreAttributeView"
+    },
+    {
+      "name": "getAttribute",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "java.nio.file.FileStore",
+  "simple-name": "FileStore"
+}

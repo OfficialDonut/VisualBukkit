@@ -1,0 +1,114 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "type",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "name",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "actions",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "certs",
+        "type": "java.security.cert.Certificate[]"
+      }
+    ]
+  }],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "checkGuard",
+      "parameters": [{
+        "name": "object",
+        "type": "java.lang.Object"
+      }]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "implies",
+      "parameters": [{
+        "name": "p",
+        "type": "java.security.Permission"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "getActions",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getUnresolvedType",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getUnresolvedName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getUnresolvedActions",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getUnresolvedCerts",
+      "return": "java.security.cert.Certificate[]"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "newPermissionCollection",
+      "return": "java.security.PermissionCollection"
+    }
+  ],
+  "name": "java.security.UnresolvedPermission",
+  "simple-name": "UnresolvedPermission"
+}

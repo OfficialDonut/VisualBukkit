@@ -1,0 +1,73 @@
+{
+  "package": "java.nio.file",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "close"},
+    {
+      "name": "poll",
+      "return": "java.nio.file.WatchKey"
+    },
+    {
+      "name": "poll",
+      "parameters": [
+        {
+          "name": "timeout",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.util.concurrent.TimeUnit"
+        }
+      ],
+      "return": "java.nio.file.WatchKey"
+    },
+    {
+      "name": "take",
+      "return": "java.nio.file.WatchKey"
+    }
+  ],
+  "name": "java.nio.file.WatchService",
+  "simple-name": "WatchService"
+}

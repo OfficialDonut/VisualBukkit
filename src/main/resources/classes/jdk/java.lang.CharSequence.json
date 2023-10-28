@@ -1,0 +1,103 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "length",
+      "return": "int"
+    },
+    {
+      "name": "charAt",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "char"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "subSequence",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.CharSequence"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "chars",
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "codePoints",
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "cs1",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "cs2",
+          "type": "java.lang.CharSequence"
+        }
+      ],
+      "return": "int"
+    }
+  ],
+  "name": "java.lang.CharSequence",
+  "simple-name": "CharSequence"
+}

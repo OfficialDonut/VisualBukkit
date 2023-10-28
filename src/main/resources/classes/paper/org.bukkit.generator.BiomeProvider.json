@@ -1,0 +1,107 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "org.bukkit.generator",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getBiome",
+      "parameters": [
+        {
+          "name": "worldInfo",
+          "type": "org.bukkit.generator.WorldInfo"
+        },
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        },
+        {
+          "name": "z",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.block.Biome"
+    },
+    {
+      "name": "getBiome",
+      "parameters": [
+        {
+          "name": "worldInfo",
+          "type": "org.bukkit.generator.WorldInfo"
+        },
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        },
+        {
+          "name": "z",
+          "type": "int"
+        },
+        {
+          "name": "biomeParameterPoint",
+          "type": "org.bukkit.generator.BiomeParameterPoint"
+        }
+      ],
+      "return": "org.bukkit.block.Biome"
+    },
+    {
+      "name": "getBiomes",
+      "parameters": [{
+        "name": "worldInfo",
+        "type": "org.bukkit.generator.WorldInfo"
+      }],
+      "return": "java.util.List"
+    }
+  ],
+  "name": "org.bukkit.generator.BiomeProvider",
+  "simple-name": "BiomeProvider"
+}

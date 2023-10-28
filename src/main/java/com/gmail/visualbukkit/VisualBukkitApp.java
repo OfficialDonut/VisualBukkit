@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -80,9 +81,14 @@ public class VisualBukkitApp extends Application {
 
         rootPane.setTop(new MenuBar(
                 new Menu(localizedText("menu.file"), null,
-                        new ActionMenuItem(localizedText("menu.log"), e -> logWindow.show()),
+                        new Menu(localizedText("menu.open_folder"), null,
+                                new ActionMenuItem(localizedText("menu.project"), e -> openURI(ProjectManager.getCurrentProject().getDirectory().toUri())),
+                                new ActionMenuItem(localizedText("menu.extensions"), e -> openURI(dataDirectory.resolve("extensions").toUri())),
+                                new ActionMenuItem(localizedText("menu.themes"), e -> openURI(dataDirectory.resolve("themes").toUri()))),
+                        new ActionMenuItem(localizedText("menu.open_log"), e -> logWindow.show()),
+                        new SeparatorMenuItem(),
                         new ActionMenuItem(localizedText("menu.restart"), e -> {}),
-                        new ActionMenuItem(localizedText("menu.exit"), e -> {})),
+                        new ActionMenuItem(localizedText("menu.exit"), e -> Platform.exit())),
                 new Menu(localizedText("menu.edit"), null,
                         new ActionMenuItem(localizedText("menu.undo"), e -> UndoManager.undo()),
                         new ActionMenuItem(localizedText("menu.redo"), e -> UndoManager.redo())),

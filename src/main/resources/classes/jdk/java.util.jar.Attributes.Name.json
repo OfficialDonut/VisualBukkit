@@ -1,0 +1,149 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "name",
+      "type": "java.lang.String"
+    }]
+  }],
+  "package": "java.util.jar",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.util.jar.Attributes.Name",
+  "simple-name": "Name",
+  "fields": [
+    {
+      "static": true,
+      "name": "MANIFEST_VERSION",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "SIGNATURE_VERSION",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "CONTENT_TYPE",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "CLASS_PATH",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "MAIN_CLASS",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "SEALED",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "EXTENSION_LIST",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "EXTENSION_NAME",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "EXTENSION_INSTALLATION",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "IMPLEMENTATION_TITLE",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "IMPLEMENTATION_VERSION",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "IMPLEMENTATION_VENDOR",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "IMPLEMENTATION_VENDOR_ID",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "IMPLEMENTATION_URL",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "SPECIFICATION_TITLE",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "SPECIFICATION_VERSION",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "SPECIFICATION_VENDOR",
+      "type": "java.util.jar.Attributes.Name"
+    },
+    {
+      "static": true,
+      "name": "MULTI_RELEASE",
+      "type": "java.util.jar.Attributes.Name"
+    }
+  ]
+}

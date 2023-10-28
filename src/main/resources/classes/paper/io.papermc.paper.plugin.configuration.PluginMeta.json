@@ -1,0 +1,118 @@
+{
+  "package": "io.papermc.paper.plugin.configuration",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDisplayName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getMainClass",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getLoadOrder",
+      "return": "org.bukkit.plugin.PluginLoadOrder"
+    },
+    {
+      "name": "getVersion",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getLoggerPrefix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getPluginDependencies",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getPluginSoftDependencies",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getLoadBeforePlugins",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getProvidedPlugins",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getAuthors",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getContributors",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getDescription",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getWebsite",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getPermissions",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getPermissionDefault",
+      "return": "org.bukkit.permissions.PermissionDefault"
+    },
+    {
+      "name": "getAPIVersion",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "io.papermc.paper.plugin.configuration.PluginMeta",
+  "simple-name": "PluginMeta"
+}

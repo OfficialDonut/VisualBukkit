@@ -1,0 +1,92 @@
+{
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "asInterfaceInstance",
+      "parameters": [
+        {
+          "name": "intfc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "target",
+          "type": "java.lang.invoke.MethodHandle"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "isWrapperInstance",
+      "parameters": [{
+        "name": "x",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "wrapperInstanceTarget",
+      "parameters": [{
+        "name": "x",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "static": true,
+      "name": "wrapperInstanceType",
+      "parameters": [{
+        "name": "x",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Class"
+    }
+  ],
+  "name": "java.lang.invoke.MethodHandleProxies",
+  "simple-name": "MethodHandleProxies"
+}

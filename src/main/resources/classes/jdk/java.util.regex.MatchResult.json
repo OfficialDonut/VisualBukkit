@@ -1,0 +1,90 @@
+{
+  "package": "java.util.regex",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "start",
+      "return": "int"
+    },
+    {
+      "name": "start",
+      "parameters": [{
+        "name": "group",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "end",
+      "return": "int"
+    },
+    {
+      "name": "end",
+      "parameters": [{
+        "name": "group",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "group",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "group",
+      "parameters": [{
+        "name": "group",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "groupCount",
+      "return": "int"
+    }
+  ],
+  "name": "java.util.regex.MatchResult",
+  "simple-name": "MatchResult"
+}

@@ -1,0 +1,266 @@
+{
+  "package": "org.bukkit.event.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.event.inventory.InventoryType[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "name": "defaultTitle",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "getDefaultSize",
+      "return": "int"
+    },
+    {
+      "name": "getDefaultTitle",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isCreatable",
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.event.inventory.InventoryType",
+  "simple-name": "InventoryType",
+  "fields": [
+    {
+      "static": true,
+      "name": "CHEST",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "DISPENSER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "DROPPER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "FURNACE",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "WORKBENCH",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "CRAFTING",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "ENCHANTING",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "BREWING",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "PLAYER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "CREATIVE",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "MERCHANT",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "ENDER_CHEST",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "ANVIL",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "SMITHING",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "BEACON",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "HOPPER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_BOX",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "BARREL",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "BLAST_FURNACE",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "LECTERN",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "SMOKER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "LOOM",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "CARTOGRAPHY",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "GRINDSTONE",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "STONECUTTER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "COMPOSTER",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "CHISELED_BOOKSHELF",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "JUKEBOX",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "static": true,
+      "name": "SMITHING_NEW",
+      "type": "org.bukkit.event.inventory.InventoryType"
+    }
+  ]
+}

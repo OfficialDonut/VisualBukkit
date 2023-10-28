@@ -1,0 +1,512 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "world",
+        "type": "org.bukkit.World"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "seed",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "rand",
+        "type": "java.util.Random"
+      }]
+    }
+  ],
+  "package": "org.bukkit.util.noise",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "floor",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "noise",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        },
+        {
+          "name": "normalized",
+          "type": "boolean"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        },
+        {
+          "name": "normalized",
+          "type": "boolean"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        },
+        {
+          "name": "normalized",
+          "type": "boolean"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "return": "org.bukkit.util.noise.PerlinNoiseGenerator"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        },
+        {
+          "name": "octaves",
+          "type": "int"
+        },
+        {
+          "name": "frequency",
+          "type": "double"
+        },
+        {
+          "name": "amplitude",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [{
+        "name": "xin",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "xin",
+          "type": "double"
+        },
+        {
+          "name": "yin",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "xin",
+          "type": "double"
+        },
+        {
+          "name": "yin",
+          "type": "double"
+        },
+        {
+          "name": "zin",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getNoise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        },
+        {
+          "name": "w",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "xin",
+          "type": "double"
+        },
+        {
+          "name": "yin",
+          "type": "double"
+        },
+        {
+          "name": "zin",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "xin",
+          "type": "double"
+        },
+        {
+          "name": "yin",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "noise",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        },
+        {
+          "name": "w",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "return": "org.bukkit.util.noise.SimplexNoiseGenerator"
+    }
+  ],
+  "name": "org.bukkit.util.noise.SimplexNoiseGenerator",
+  "simple-name": "SimplexNoiseGenerator"
+}

@@ -1,0 +1,96 @@
+{
+  "package": "java.security.interfaces",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "destroy"},
+    {
+      "name": "isDestroyed",
+      "return": "boolean"
+    },
+    {
+      "name": "getModulus",
+      "return": "java.math.BigInteger"
+    },
+    {
+      "name": "getParams",
+      "return": "java.security.spec.AlgorithmParameterSpec"
+    },
+    {
+      "name": "getAlgorithm",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getFormat",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getEncoded",
+      "return": "byte[]"
+    },
+    {
+      "name": "getPrivateExponent",
+      "return": "java.math.BigInteger"
+    }
+  ],
+  "name": "java.security.interfaces.RSAPrivateKey",
+  "simple-name": "RSAPrivateKey",
+  "fields": [
+    {
+      "static": true,
+      "name": "serialVersionUID",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "serialVersionUID",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "serialVersionUID",
+      "type": "long"
+    }
+  ]
+}

@@ -1,0 +1,523 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "pattern",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "symbols",
+          "type": "java.text.DecimalFormatSymbols"
+        }
+      ]
+    }
+  ],
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.ParsePosition"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "number",
+        "type": "double"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "number",
+        "type": "long"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "parse",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Number"
+    },
+    {
+      "name": "isParseIntegerOnly",
+      "return": "boolean"
+    },
+    {
+      "name": "setParseIntegerOnly",
+      "parameters": [{
+        "name": "value",
+        "type": "boolean"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [{
+        "name": "inLocale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getNumberInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getNumberInstance",
+      "parameters": [{
+        "name": "inLocale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getIntegerInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getIntegerInstance",
+      "parameters": [{
+        "name": "inLocale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getCurrencyInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getCurrencyInstance",
+      "parameters": [{
+        "name": "inLocale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getPercentInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getPercentInstance",
+      "parameters": [{
+        "name": "inLocale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getCompactNumberInstance",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getCompactNumberInstance",
+      "parameters": [
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        },
+        {
+          "name": "formatStyle",
+          "type": "java.text.NumberFormat.Style"
+        }
+      ],
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "static": true,
+      "name": "getAvailableLocales",
+      "return": "java.util.Locale[]"
+    },
+    {
+      "name": "isGroupingUsed",
+      "return": "boolean"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "toAppendTo",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "double"
+        },
+        {
+          "name": "result",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "fieldPosition",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "number",
+          "type": "long"
+        },
+        {
+          "name": "result",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "fieldPosition",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "formatToCharacterIterator",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.text.AttributedCharacterIterator"
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.ParsePosition"
+        }
+      ],
+      "return": "java.lang.Number"
+    },
+    {
+      "name": "getDecimalFormatSymbols",
+      "return": "java.text.DecimalFormatSymbols"
+    },
+    {
+      "name": "setDecimalFormatSymbols",
+      "parameters": [{
+        "name": "newSymbols",
+        "type": "java.text.DecimalFormatSymbols"
+      }]
+    },
+    {
+      "name": "getPositivePrefix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setPositivePrefix",
+      "parameters": [{
+        "name": "newValue",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getNegativePrefix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setNegativePrefix",
+      "parameters": [{
+        "name": "newValue",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getPositiveSuffix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setPositiveSuffix",
+      "parameters": [{
+        "name": "newValue",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getNegativeSuffix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setNegativeSuffix",
+      "parameters": [{
+        "name": "newValue",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getMultiplier",
+      "return": "int"
+    },
+    {
+      "name": "setMultiplier",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setGroupingUsed",
+      "parameters": [{
+        "name": "newValue",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getGroupingSize",
+      "return": "int"
+    },
+    {
+      "name": "setGroupingSize",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "isDecimalSeparatorAlwaysShown",
+      "return": "boolean"
+    },
+    {
+      "name": "setDecimalSeparatorAlwaysShown",
+      "parameters": [{
+        "name": "newValue",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isParseBigDecimal",
+      "return": "boolean"
+    },
+    {
+      "name": "setParseBigDecimal",
+      "parameters": [{
+        "name": "newValue",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toPattern",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toLocalizedPattern",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "applyPattern",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "applyLocalizedPattern",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "setMaximumIntegerDigits",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setMinimumIntegerDigits",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setMaximumFractionDigits",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setMinimumFractionDigits",
+      "parameters": [{
+        "name": "newValue",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getMaximumIntegerDigits",
+      "return": "int"
+    },
+    {
+      "name": "getMinimumIntegerDigits",
+      "return": "int"
+    },
+    {
+      "name": "getMaximumFractionDigits",
+      "return": "int"
+    },
+    {
+      "name": "getMinimumFractionDigits",
+      "return": "int"
+    },
+    {
+      "name": "getCurrency",
+      "return": "java.util.Currency"
+    },
+    {
+      "name": "setCurrency",
+      "parameters": [{
+        "name": "currency",
+        "type": "java.util.Currency"
+      }]
+    },
+    {
+      "name": "getRoundingMode",
+      "return": "java.math.RoundingMode"
+    },
+    {
+      "name": "setRoundingMode",
+      "parameters": [{
+        "name": "roundingMode",
+        "type": "java.math.RoundingMode"
+      }]
+    }
+  ],
+  "name": "java.text.DecimalFormat",
+  "simple-name": "DecimalFormat",
+  "fields": [
+    {
+      "static": true,
+      "name": "INTEGER_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "FRACTION_FIELD",
+      "type": "int"
+    }
+  ]
+}

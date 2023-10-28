@@ -1,0 +1,78 @@
+{
+  "package": "org.bukkit.generator",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getUID",
+      "return": "java.util.UUID"
+    },
+    {
+      "name": "getEnvironment",
+      "return": "org.bukkit.World.Environment"
+    },
+    {
+      "name": "getSeed",
+      "return": "long"
+    },
+    {
+      "name": "getMinHeight",
+      "return": "int"
+    },
+    {
+      "name": "getMaxHeight",
+      "return": "int"
+    },
+    {
+      "name": "vanillaBiomeProvider",
+      "return": "org.bukkit.generator.BiomeProvider"
+    }
+  ],
+  "name": "org.bukkit.generator.WorldInfo",
+  "simple-name": "WorldInfo"
+}

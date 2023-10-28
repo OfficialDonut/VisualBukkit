@@ -1,0 +1,157 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "block",
+          "type": "org.bukkit.block.Block"
+        },
+        {
+          "name": "itemInHand",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "instaBreak",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "block",
+          "type": "org.bukkit.block.Block"
+        },
+        {
+          "name": "blockFace",
+          "type": "org.bukkit.block.BlockFace"
+        },
+        {
+          "name": "itemInHand",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "instaBreak",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.block",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getBlock",
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getInstaBreak",
+      "return": "boolean"
+    },
+    {
+      "name": "setInstaBreak",
+      "parameters": [{
+        "name": "bool",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getItemInHand",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getBlockFace",
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.block.BlockDamageEvent",
+  "simple-name": "BlockDamageEvent"
+}

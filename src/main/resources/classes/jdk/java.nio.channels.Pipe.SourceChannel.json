@@ -1,0 +1,157 @@
+{
+  "package": "java.nio.channels",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "dst",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "int"
+    },
+    {"name": "close"},
+    {
+      "name": "isOpen",
+      "return": "boolean"
+    },
+    {
+      "name": "read",
+      "parameters": [
+        {
+          "name": "dsts",
+          "type": "java.nio.ByteBuffer[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "dsts",
+        "type": "java.nio.ByteBuffer[]"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "register",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": "java.nio.channels.Selector"
+        },
+        {
+          "name": "ops",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "provider",
+      "return": "java.nio.channels.spi.SelectorProvider"
+    },
+    {
+      "name": "isRegistered",
+      "return": "boolean"
+    },
+    {
+      "name": "keyFor",
+      "parameters": [{
+        "name": "sel",
+        "type": "java.nio.channels.Selector"
+      }],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "register",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": "java.nio.channels.Selector"
+        },
+        {
+          "name": "ops",
+          "type": "int"
+        },
+        {
+          "name": "att",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "isBlocking",
+      "return": "boolean"
+    },
+    {
+      "name": "blockingLock",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "configureBlocking",
+      "parameters": [{
+        "name": "block",
+        "type": "boolean"
+      }],
+      "return": "java.nio.channels.SelectableChannel"
+    },
+    {
+      "name": "validOps",
+      "return": "int"
+    }
+  ],
+  "name": "java.nio.channels.Pipe.SourceChannel",
+  "simple-name": "SourceChannel"
+}

@@ -1,0 +1,145 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "plugin",
+      "type": "org.bukkit.plugin.Plugin"
+    }]
+  }],
+  "package": "org.bukkit.conversations",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "withModality",
+      "parameters": [{
+        "name": "modal",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withLocalEcho",
+      "parameters": [{
+        "name": "localEchoEnabled",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withPrefix",
+      "parameters": [{
+        "name": "prefix",
+        "type": "org.bukkit.conversations.ConversationPrefix"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withTimeout",
+      "parameters": [{
+        "name": "timeoutSeconds",
+        "type": "int"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withFirstPrompt",
+      "parameters": [{
+        "name": "firstPrompt",
+        "type": "org.bukkit.conversations.Prompt"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withInitialSessionData",
+      "parameters": [{
+        "name": "initialSessionData",
+        "type": "java.util.Map"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withEscapeSequence",
+      "parameters": [{
+        "name": "escapeSequence",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "withConversationCanceller",
+      "parameters": [{
+        "name": "canceller",
+        "type": "org.bukkit.conversations.ConversationCanceller"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "thatExcludesNonPlayersWithMessage",
+      "parameters": [{
+        "name": "playerOnlyMessage",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "addConversationAbandonedListener",
+      "parameters": [{
+        "name": "listener",
+        "type": "org.bukkit.conversations.ConversationAbandonedListener"
+      }],
+      "return": "org.bukkit.conversations.ConversationFactory"
+    },
+    {
+      "name": "buildConversation",
+      "parameters": [{
+        "name": "forWhom",
+        "type": "org.bukkit.conversations.Conversable"
+      }],
+      "return": "org.bukkit.conversations.Conversation"
+    }
+  ],
+  "name": "org.bukkit.conversations.ConversationFactory",
+  "simple-name": "ConversationFactory"
+}

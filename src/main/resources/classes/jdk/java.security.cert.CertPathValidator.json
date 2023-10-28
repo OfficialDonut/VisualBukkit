@@ -1,0 +1,120 @@
+{
+  "package": "java.security.cert",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [{
+        "name": "algorithm",
+        "type": "java.lang.String"
+      }],
+      "return": "java.security.cert.CertPathValidator"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [
+        {
+          "name": "algorithm",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "provider",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.security.cert.CertPathValidator"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [
+        {
+          "name": "algorithm",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "provider",
+          "type": "java.security.Provider"
+        }
+      ],
+      "return": "java.security.cert.CertPathValidator"
+    },
+    {
+      "name": "getProvider",
+      "return": "java.security.Provider"
+    },
+    {
+      "name": "getAlgorithm",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "validate",
+      "parameters": [
+        {
+          "name": "certPath",
+          "type": "java.security.cert.CertPath"
+        },
+        {
+          "name": "params",
+          "type": "java.security.cert.CertPathParameters"
+        }
+      ],
+      "return": "java.security.cert.CertPathValidatorResult"
+    },
+    {
+      "static": true,
+      "name": "getDefaultType",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getRevocationChecker",
+      "return": "java.security.cert.CertPathChecker"
+    }
+  ],
+  "name": "java.security.cert.CertPathValidator",
+  "simple-name": "CertPathValidator"
+}

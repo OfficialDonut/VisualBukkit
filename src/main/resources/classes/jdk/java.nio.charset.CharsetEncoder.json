@@ -1,0 +1,160 @@
+{
+  "package": "java.nio.charset",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "charset",
+      "return": "java.nio.charset.Charset"
+    },
+    {
+      "name": "replacement",
+      "return": "byte[]"
+    },
+    {
+      "name": "replaceWith",
+      "parameters": [{
+        "name": "newReplacement",
+        "type": "byte[]"
+      }],
+      "return": "java.nio.charset.CharsetEncoder"
+    },
+    {
+      "name": "isLegalReplacement",
+      "parameters": [{
+        "name": "repl",
+        "type": "byte[]"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "malformedInputAction",
+      "return": "java.nio.charset.CodingErrorAction"
+    },
+    {
+      "name": "onMalformedInput",
+      "parameters": [{
+        "name": "newAction",
+        "type": "java.nio.charset.CodingErrorAction"
+      }],
+      "return": "java.nio.charset.CharsetEncoder"
+    },
+    {
+      "name": "unmappableCharacterAction",
+      "return": "java.nio.charset.CodingErrorAction"
+    },
+    {
+      "name": "onUnmappableCharacter",
+      "parameters": [{
+        "name": "newAction",
+        "type": "java.nio.charset.CodingErrorAction"
+      }],
+      "return": "java.nio.charset.CharsetEncoder"
+    },
+    {
+      "name": "averageBytesPerChar",
+      "return": "float"
+    },
+    {
+      "name": "maxBytesPerChar",
+      "return": "float"
+    },
+    {
+      "name": "encode",
+      "parameters": [
+        {
+          "name": "in",
+          "type": "java.nio.CharBuffer"
+        },
+        {
+          "name": "out",
+          "type": "java.nio.ByteBuffer"
+        },
+        {
+          "name": "endOfInput",
+          "type": "boolean"
+        }
+      ],
+      "return": "java.nio.charset.CoderResult"
+    },
+    {
+      "name": "flush",
+      "parameters": [{
+        "name": "out",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "java.nio.charset.CoderResult"
+    },
+    {
+      "name": "reset",
+      "return": "java.nio.charset.CharsetEncoder"
+    },
+    {
+      "name": "encode",
+      "parameters": [{
+        "name": "in",
+        "type": "java.nio.CharBuffer"
+      }],
+      "return": "java.nio.ByteBuffer"
+    },
+    {
+      "name": "canEncode",
+      "parameters": [{
+        "name": "c",
+        "type": "char"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "canEncode",
+      "parameters": [{
+        "name": "cs",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "java.nio.charset.CharsetEncoder",
+  "simple-name": "CharsetEncoder"
+}

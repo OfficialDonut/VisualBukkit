@@ -1,0 +1,382 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "target",
+        "type": "java.lang.Runnable"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "java.lang.ThreadGroup"
+        },
+        {
+          "name": "target",
+          "type": "java.lang.Runnable"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "java.lang.ThreadGroup"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "target",
+          "type": "java.lang.Runnable"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "java.lang.ThreadGroup"
+        },
+        {
+          "name": "target",
+          "type": "java.lang.Runnable"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "java.lang.ThreadGroup"
+        },
+        {
+          "name": "target",
+          "type": "java.lang.Runnable"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "stackSize",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "group",
+          "type": "java.lang.ThreadGroup"
+        },
+        {
+          "name": "target",
+          "type": "java.lang.Runnable"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "stackSize",
+          "type": "long"
+        },
+        {
+          "name": "inheritThreadLocals",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "currentThread",
+      "return": "java.lang.Thread"
+    },
+    {
+      "static": true,
+      "name": "yield"
+    },
+    {
+      "static": true,
+      "name": "sleep",
+      "parameters": [{
+        "name": "millis",
+        "type": "long"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sleep",
+      "parameters": [
+        {
+          "name": "millis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "onSpinWait"
+    },
+    {"name": "start"},
+    {"name": "run"},
+    {"name": "stop"},
+    {"name": "interrupt"},
+    {
+      "static": true,
+      "name": "interrupted",
+      "return": "boolean"
+    },
+    {
+      "name": "isInterrupted",
+      "return": "boolean"
+    },
+    {
+      "name": "isAlive",
+      "return": "boolean"
+    },
+    {"name": "suspend"},
+    {"name": "resume"},
+    {
+      "name": "setPriority",
+      "parameters": [{
+        "name": "newPriority",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getPriority",
+      "return": "int"
+    },
+    {
+      "name": "setName",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getThreadGroup",
+      "return": "java.lang.ThreadGroup"
+    },
+    {
+      "static": true,
+      "name": "activeCount",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "enumerate",
+      "parameters": [{
+        "name": "tarray",
+        "type": "java.lang.Thread[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "countStackFrames",
+      "return": "int"
+    },
+    {
+      "name": "join",
+      "parameters": [{
+        "name": "millis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "join",
+      "parameters": [
+        {
+          "name": "millis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "join"},
+    {
+      "static": true,
+      "name": "dumpStack"
+    },
+    {
+      "name": "setDaemon",
+      "parameters": [{
+        "name": "on",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isDaemon",
+      "return": "boolean"
+    },
+    {"name": "checkAccess"},
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getContextClassLoader",
+      "return": "java.lang.ClassLoader"
+    },
+    {
+      "name": "setContextClassLoader",
+      "parameters": [{
+        "name": "cl",
+        "type": "java.lang.ClassLoader"
+      }]
+    },
+    {
+      "static": true,
+      "name": "holdsLock",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getStackTrace",
+      "return": "java.lang.StackTraceElement[]"
+    },
+    {
+      "static": true,
+      "name": "getAllStackTraces",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "getId",
+      "return": "long"
+    },
+    {
+      "name": "getState",
+      "return": "java.lang.Thread.State"
+    },
+    {
+      "static": true,
+      "name": "setDefaultUncaughtExceptionHandler",
+      "parameters": [{
+        "name": "eh",
+        "type": "java.lang.Thread.UncaughtExceptionHandler"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getDefaultUncaughtExceptionHandler",
+      "return": "java.lang.Thread.UncaughtExceptionHandler"
+    },
+    {
+      "name": "getUncaughtExceptionHandler",
+      "return": "java.lang.Thread.UncaughtExceptionHandler"
+    },
+    {
+      "name": "setUncaughtExceptionHandler",
+      "parameters": [{
+        "name": "eh",
+        "type": "java.lang.Thread.UncaughtExceptionHandler"
+      }]
+    }
+  ],
+  "name": "java.lang.Thread",
+  "simple-name": "Thread",
+  "fields": [
+    {
+      "static": true,
+      "name": "MIN_PRIORITY",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "NORM_PRIORITY",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MAX_PRIORITY",
+      "type": "int"
+    }
+  ]
+}

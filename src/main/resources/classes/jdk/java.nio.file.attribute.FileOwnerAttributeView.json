@@ -1,0 +1,65 @@
+{
+  "package": "java.nio.file.attribute",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getOwner",
+      "return": "java.nio.file.attribute.UserPrincipal"
+    },
+    {
+      "name": "setOwner",
+      "parameters": [{
+        "name": "owner",
+        "type": "java.nio.file.attribute.UserPrincipal"
+      }]
+    }
+  ],
+  "name": "java.nio.file.attribute.FileOwnerAttributeView",
+  "simple-name": "FileOwnerAttributeView"
+}

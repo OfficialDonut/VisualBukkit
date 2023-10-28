@@ -1,0 +1,143 @@
+{
+  "package": "org.bukkit.configuration.serialization",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "deserialize",
+      "parameters": [{
+        "name": "args",
+        "type": "java.util.Map"
+      }],
+      "return": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+    },
+    {
+      "static": true,
+      "name": "deserializeObject",
+      "parameters": [
+        {
+          "name": "args",
+          "type": "java.util.Map"
+        },
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+    },
+    {
+      "static": true,
+      "name": "deserializeObject",
+      "parameters": [{
+        "name": "args",
+        "type": "java.util.Map"
+      }],
+      "return": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+    },
+    {
+      "static": true,
+      "name": "registerClass",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }]
+    },
+    {
+      "static": true,
+      "name": "registerClass",
+      "parameters": [
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "alias",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "unregisterClass",
+      "parameters": [{
+        "name": "alias",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "static": true,
+      "name": "unregisterClass",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getClassByAlias",
+      "parameters": [{
+        "name": "alias",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Class"
+    },
+    {
+      "static": true,
+      "name": "getAlias",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "org.bukkit.configuration.serialization.ConfigurationSerialization",
+  "simple-name": "ConfigurationSerialization",
+  "fields": [{
+    "static": true,
+    "name": "SERIALIZED_TYPE_KEY",
+    "type": "java.lang.String"
+  }]
+}

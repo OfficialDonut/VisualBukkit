@@ -1,0 +1,304 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "setIn",
+      "parameters": [{
+        "name": "in",
+        "type": "java.io.InputStream"
+      }]
+    },
+    {
+      "static": true,
+      "name": "setOut",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.PrintStream"
+      }]
+    },
+    {
+      "static": true,
+      "name": "setErr",
+      "parameters": [{
+        "name": "err",
+        "type": "java.io.PrintStream"
+      }]
+    },
+    {
+      "static": true,
+      "name": "console",
+      "return": "java.io.Console"
+    },
+    {
+      "static": true,
+      "name": "inheritedChannel",
+      "return": "java.nio.channels.Channel"
+    },
+    {
+      "static": true,
+      "name": "setSecurityManager",
+      "parameters": [{
+        "name": "sm",
+        "type": "java.lang.SecurityManager"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getSecurityManager",
+      "return": "java.lang.SecurityManager"
+    },
+    {
+      "static": true,
+      "name": "currentTimeMillis",
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "nanoTime",
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "arraycopy",
+      "parameters": [
+        {
+          "name": "src",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "srcPos",
+          "type": "int"
+        },
+        {
+          "name": "dest",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "destPos",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "identityHashCode",
+      "parameters": [{
+        "name": "x",
+        "type": "java.lang.Object"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "getProperties",
+      "return": "java.util.Properties"
+    },
+    {
+      "static": true,
+      "name": "lineSeparator",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "setProperties",
+      "parameters": [{
+        "name": "props",
+        "type": "java.util.Properties"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getProperty",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getProperty",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "setProperty",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "clearProperty",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getenv",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getenv",
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "getLogger",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.System.Logger"
+    },
+    {
+      "static": true,
+      "name": "getLogger",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "bundle",
+          "type": "java.util.ResourceBundle"
+        }
+      ],
+      "return": "java.lang.System.Logger"
+    },
+    {
+      "static": true,
+      "name": "exit",
+      "parameters": [{
+        "name": "status",
+        "type": "int"
+      }]
+    },
+    {
+      "static": true,
+      "name": "gc"
+    },
+    {
+      "static": true,
+      "name": "runFinalization"
+    },
+    {
+      "static": true,
+      "name": "load",
+      "parameters": [{
+        "name": "filename",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "static": true,
+      "name": "loadLibrary",
+      "parameters": [{
+        "name": "libname",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "static": true,
+      "name": "mapLibraryName",
+      "parameters": [{
+        "name": "libname",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.System",
+  "simple-name": "System",
+  "fields": [
+    {
+      "static": true,
+      "name": "in",
+      "type": "java.io.InputStream"
+    },
+    {
+      "static": true,
+      "name": "out",
+      "type": "java.io.PrintStream"
+    },
+    {
+      "static": true,
+      "name": "err",
+      "type": "java.io.PrintStream"
+    }
+  ]
+}

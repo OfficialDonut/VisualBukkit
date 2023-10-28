@@ -1,0 +1,98 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "java.net.URL"
+        },
+        {
+          "name": "certs",
+          "type": "java.security.cert.Certificate[]"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "url",
+          "type": "java.net.URL"
+        },
+        {
+          "name": "signers",
+          "type": "java.security.CodeSigner[]"
+        }
+      ]
+    }
+  ],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getLocation",
+      "return": "java.net.URL"
+    },
+    {
+      "name": "getCertificates",
+      "return": "java.security.cert.Certificate[]"
+    },
+    {
+      "name": "getCodeSigners",
+      "return": "java.security.CodeSigner[]"
+    },
+    {
+      "name": "implies",
+      "parameters": [{
+        "name": "codesource",
+        "type": "java.security.CodeSource"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.security.CodeSource",
+  "simple-name": "CodeSource"
+}

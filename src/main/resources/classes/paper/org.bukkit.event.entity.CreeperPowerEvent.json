@@ -1,0 +1,130 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "creeper",
+          "type": "org.bukkit.entity.Creeper"
+        },
+        {
+          "name": "bolt",
+          "type": "org.bukkit.entity.LightningStrike"
+        },
+        {
+          "name": "cause",
+          "type": "org.bukkit.event.entity.CreeperPowerEvent.PowerCause"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "creeper",
+          "type": "org.bukkit.entity.Creeper"
+        },
+        {
+          "name": "cause",
+          "type": "org.bukkit.event.entity.CreeperPowerEvent.PowerCause"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Creeper"
+    },
+    {
+      "name": "getLightning",
+      "return": "org.bukkit.entity.LightningStrike"
+    },
+    {
+      "name": "getCause",
+      "return": "org.bukkit.event.entity.CreeperPowerEvent.PowerCause"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.CreeperPowerEvent",
+  "simple-name": "CreeperPowerEvent"
+}

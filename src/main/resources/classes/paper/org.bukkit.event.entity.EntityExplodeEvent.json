@@ -1,0 +1,130 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "what",
+        "type": "org.bukkit.entity.Entity"
+      },
+      {
+        "name": "location",
+        "type": "org.bukkit.Location"
+      },
+      {
+        "name": "blocks",
+        "type": "java.util.List"
+      },
+      {
+        "name": "yield",
+        "type": "float"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "blockList",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getLocation",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getYield",
+      "return": "float"
+    },
+    {
+      "name": "setYield",
+      "parameters": [{
+        "name": "yield",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.EntityExplodeEvent",
+  "simple-name": "EntityExplodeEvent"
+}

@@ -1,0 +1,153 @@
+{
+  "package": "org.bukkit",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.Rotation[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Rotation"
+    },
+    {
+      "name": "rotateClockwise",
+      "return": "org.bukkit.Rotation"
+    },
+    {
+      "name": "rotateCounterClockwise",
+      "return": "org.bukkit.Rotation"
+    }
+  ],
+  "name": "org.bukkit.Rotation",
+  "simple-name": "Rotation",
+  "fields": [
+    {
+      "static": true,
+      "name": "NONE",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "CLOCKWISE_45",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "CLOCKWISE",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "CLOCKWISE_135",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "FLIPPED",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "FLIPPED_45",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "COUNTER_CLOCKWISE",
+      "type": "org.bukkit.Rotation"
+    },
+    {
+      "static": true,
+      "name": "COUNTER_CLOCKWISE_45",
+      "type": "org.bukkit.Rotation"
+    }
+  ]
+}

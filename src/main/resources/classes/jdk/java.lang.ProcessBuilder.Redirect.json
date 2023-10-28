@@ -1,0 +1,102 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "type",
+      "return": "java.lang.ProcessBuilder.Redirect.Type"
+    },
+    {
+      "name": "file",
+      "return": "java.io.File"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "java.lang.ProcessBuilder.Redirect"
+    },
+    {
+      "static": true,
+      "name": "to",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "java.lang.ProcessBuilder.Redirect"
+    },
+    {
+      "static": true,
+      "name": "appendTo",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "java.lang.ProcessBuilder.Redirect"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    }
+  ],
+  "name": "java.lang.ProcessBuilder.Redirect",
+  "simple-name": "Redirect",
+  "fields": [
+    {
+      "static": true,
+      "name": "PIPE",
+      "type": "java.lang.ProcessBuilder.Redirect"
+    },
+    {
+      "static": true,
+      "name": "INHERIT",
+      "type": "java.lang.ProcessBuilder.Redirect"
+    },
+    {
+      "static": true,
+      "name": "DISCARD",
+      "type": "java.lang.ProcessBuilder.Redirect"
+    }
+  ]
+}

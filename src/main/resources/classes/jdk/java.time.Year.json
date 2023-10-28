@@ -1,0 +1,372 @@
+{
+  "package": "java.time",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "now",
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "now",
+      "parameters": [{
+        "name": "zone",
+        "type": "java.time.ZoneId"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "now",
+      "parameters": [{
+        "name": "clock",
+        "type": "java.time.Clock"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "isoYear",
+        "type": "int"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [{
+        "name": "text",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "formatter",
+          "type": "java.time.format.DateTimeFormatter"
+        }
+      ],
+      "return": "java.time.Year"
+    },
+    {
+      "static": true,
+      "name": "isLeap",
+      "parameters": [{
+        "name": "year",
+        "type": "long"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getValue",
+      "return": "int"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "unit",
+        "type": "java.time.temporal.TemporalUnit"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "range",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getLong",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "isLeap",
+      "return": "boolean"
+    },
+    {
+      "name": "isValidMonthDay",
+      "parameters": [{
+        "name": "monthDay",
+        "type": "java.time.MonthDay"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "length",
+      "return": "int"
+    },
+    {
+      "name": "with",
+      "parameters": [{
+        "name": "adjuster",
+        "type": "java.time.temporal.TemporalAdjuster"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "with",
+      "parameters": [
+        {
+          "name": "field",
+          "type": "java.time.temporal.TemporalField"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "plus",
+      "parameters": [{
+        "name": "amountToAdd",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        {
+          "name": "amountToAdd",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "plusYears",
+      "parameters": [{
+        "name": "yearsToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "minus",
+      "parameters": [{
+        "name": "amountToSubtract",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        {
+          "name": "amountToSubtract",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "minusYears",
+      "parameters": [{
+        "name": "yearsToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.Year"
+    },
+    {
+      "name": "query",
+      "parameters": [{
+        "name": "query",
+        "type": "java.time.temporal.TemporalQuery"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "until",
+      "parameters": [
+        {
+          "name": "endExclusive",
+          "type": "java.time.temporal.Temporal"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "formatter",
+        "type": "java.time.format.DateTimeFormatter"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "atDay",
+      "parameters": [{
+        "name": "dayOfYear",
+        "type": "int"
+      }],
+      "return": "java.time.LocalDate"
+    },
+    {
+      "name": "atMonth",
+      "parameters": [{
+        "name": "month",
+        "type": "java.time.Month"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "atMonth",
+      "parameters": [{
+        "name": "month",
+        "type": "int"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "atMonthDay",
+      "parameters": [{
+        "name": "monthDay",
+        "type": "java.time.MonthDay"
+      }],
+      "return": "java.time.LocalDate"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.Year"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "isAfter",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.Year"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isBefore",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.Year"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.Year",
+  "simple-name": "Year",
+  "fields": [
+    {
+      "static": true,
+      "name": "MIN_VALUE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MAX_VALUE",
+      "type": "int"
+    }
+  ]
+}

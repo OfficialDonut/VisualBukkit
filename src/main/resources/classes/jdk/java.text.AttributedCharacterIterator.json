@@ -1,0 +1,155 @@
+{
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "first",
+      "return": "char"
+    },
+    {
+      "name": "last",
+      "return": "char"
+    },
+    {
+      "name": "current",
+      "return": "char"
+    },
+    {
+      "name": "next",
+      "return": "char"
+    },
+    {
+      "name": "previous",
+      "return": "char"
+    },
+    {
+      "name": "setIndex",
+      "parameters": [{
+        "name": "position",
+        "type": "int"
+      }],
+      "return": "char"
+    },
+    {
+      "name": "getBeginIndex",
+      "return": "int"
+    },
+    {
+      "name": "getEndIndex",
+      "return": "int"
+    },
+    {
+      "name": "getIndex",
+      "return": "int"
+    },
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getRunStart",
+      "return": "int"
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.text.AttributedCharacterIterator.Attribute"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [{
+        "name": "attributes",
+        "type": "java.util.Set"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunLimit",
+      "return": "int"
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.text.AttributedCharacterIterator.Attribute"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [{
+        "name": "attributes",
+        "type": "java.util.Set"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getAttributes",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "getAttribute",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.text.AttributedCharacterIterator.Attribute"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getAllAttributeKeys",
+      "return": "java.util.Set"
+    }
+  ],
+  "name": "java.text.AttributedCharacterIterator",
+  "simple-name": "AttributedCharacterIterator",
+  "fields": [{
+    "static": true,
+    "name": "DONE",
+    "type": "char"
+  }]
+}

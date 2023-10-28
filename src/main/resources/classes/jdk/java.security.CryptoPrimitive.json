@@ -1,0 +1,155 @@
+{
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.security.CryptoPrimitive[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.security.CryptoPrimitive"
+    }
+  ],
+  "name": "java.security.CryptoPrimitive",
+  "simple-name": "CryptoPrimitive",
+  "fields": [
+    {
+      "static": true,
+      "name": "MESSAGE_DIGEST",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "SECURE_RANDOM",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CIPHER",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "STREAM_CIPHER",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "MAC",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "KEY_WRAP",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "PUBLIC_KEY_ENCRYPTION",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "SIGNATURE",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "KEY_ENCAPSULATION",
+      "type": "java.security.CryptoPrimitive"
+    },
+    {
+      "static": true,
+      "name": "KEY_AGREEMENT",
+      "type": "java.security.CryptoPrimitive"
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "package": "org.bukkit.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "spliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "name": "getSize",
+      "return": "int"
+    },
+    {
+      "name": "getMaxStackSize",
+      "return": "int"
+    },
+    {
+      "name": "setMaxStackSize",
+      "parameters": [{
+        "name": "size",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getItem",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "setItem",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "item",
+          "type": "org.bukkit.inventory.ItemStack"
+        }
+      ]
+    },
+    {
+      "name": "addItem",
+      "parameters": [{
+        "name": "items",
+        "type": "org.bukkit.inventory.ItemStack[]"
+      }],
+      "return": "java.util.HashMap"
+    },
+    {
+      "name": "removeItem",
+      "parameters": [{
+        "name": "items",
+        "type": "org.bukkit.inventory.ItemStack[]"
+      }],
+      "return": "java.util.HashMap"
+    },
+    {
+      "name": "removeItemAnySlot",
+      "parameters": [{
+        "name": "items",
+        "type": "org.bukkit.inventory.ItemStack[]"
+      }],
+      "return": "java.util.HashMap"
+    },
+    {
+      "name": "getContents",
+      "return": "org.bukkit.inventory.ItemStack []"
+    },
+    {
+      "name": "setContents",
+      "parameters": [{
+        "name": "items",
+        "type": "org.bukkit.inventory.ItemStack []"
+      }]
+    },
+    {
+      "name": "getStorageContents",
+      "return": "org.bukkit.inventory.ItemStack []"
+    },
+    {
+      "name": "setStorageContents",
+      "parameters": [{
+        "name": "items",
+        "type": "org.bukkit.inventory.ItemStack []"
+      }]
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "containsAtLeast",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "all",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "java.util.HashMap"
+    },
+    {
+      "name": "all",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "java.util.HashMap"
+    },
+    {
+      "name": "first",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "first",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "firstEmpty",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "clear",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }]
+    },
+    {"name": "clear"},
+    {
+      "name": "close",
+      "return": "int"
+    },
+    {
+      "name": "getViewers",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.event.inventory.InventoryType"
+    },
+    {
+      "name": "getHolder",
+      "parameters": [{
+        "name": "useSnapshot",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.inventory.InventoryHolder"
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.ListIterator"
+    },
+    {
+      "name": "iterator",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "java.util.ListIterator"
+    },
+    {
+      "name": "getLocation",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getIngredient",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "setIngredient",
+      "parameters": [{
+        "name": "ingredient",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "getFuel",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "setFuel",
+      "parameters": [{
+        "name": "fuel",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "getHolder",
+      "return": "org.bukkit.block.BrewingStand"
+    }
+  ],
+  "name": "org.bukkit.inventory.BrewerInventory",
+  "simple-name": "BrewerInventory"
+}

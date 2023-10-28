@@ -1,0 +1,467 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "length",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "array",
+        "type": "long[]"
+      }]
+    }
+  ],
+  "package": "java.util.concurrent.atomic",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "length",
+      "return": "int"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "set",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "lazySet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "getAndSet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "compareAndSet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "weakCompareAndSet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "weakCompareAndSetPlain",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "getAndIncrement",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getAndDecrement",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getAndAdd",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "delta",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "incrementAndGet",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "decrementAndGet",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "addAndGet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "delta",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "getAndUpdate",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "updateFunction",
+          "type": "java.util.function.LongUnaryOperator"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "updateAndGet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "updateFunction",
+          "type": "java.util.function.LongUnaryOperator"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "getAndAccumulate",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "accumulatorFunction",
+          "type": "java.util.function.LongBinaryOperator"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "accumulateAndGet",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "accumulatorFunction",
+          "type": "java.util.function.LongBinaryOperator"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getPlain",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "setPlain",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "getOpaque",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "setOpaque",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "getAcquire",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "setRelease",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "compareAndExchange",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "compareAndExchangeAcquire",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "compareAndExchangeRelease",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "weakCompareAndSetVolatile",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "weakCompareAndSetAcquire",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "weakCompareAndSetRelease",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int"
+        },
+        {
+          "name": "expectedValue",
+          "type": "long"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "boolean"
+    }
+  ],
+  "name": "java.util.concurrent.atomic.AtomicLongArray",
+  "simple-name": "AtomicLongArray"
+}

@@ -1,0 +1,175 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "byte"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "char"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "short"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "double"
+        }
+      ]
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "val",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.ObjectOutput"
+      }]
+    }
+  ],
+  "name": "java.io.ObjectOutputStream.PutField",
+  "simple-name": "PutField"
+}

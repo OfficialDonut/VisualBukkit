@@ -1,0 +1,506 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "pattern",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "pattern",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "formatSymbols",
+          "type": "java.text.DateFormatSymbols"
+        }
+      ]
+    }
+  ],
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "toAppendTo",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "fieldPosition",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "date",
+        "type": "java.util.Date"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "parse",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Date"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.ParsePosition"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "getTimeInstance",
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getTimeInstance",
+      "parameters": [{
+        "name": "style",
+        "type": "int"
+      }],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getTimeInstance",
+      "parameters": [
+        {
+          "name": "style",
+          "type": "int"
+        },
+        {
+          "name": "aLocale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateInstance",
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateInstance",
+      "parameters": [{
+        "name": "style",
+        "type": "int"
+      }],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateInstance",
+      "parameters": [
+        {
+          "name": "style",
+          "type": "int"
+        },
+        {
+          "name": "aLocale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateTimeInstance",
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateTimeInstance",
+      "parameters": [
+        {
+          "name": "dateStyle",
+          "type": "int"
+        },
+        {
+          "name": "timeStyle",
+          "type": "int"
+        }
+      ],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getDateTimeInstance",
+      "parameters": [
+        {
+          "name": "dateStyle",
+          "type": "int"
+        },
+        {
+          "name": "timeStyle",
+          "type": "int"
+        },
+        {
+          "name": "aLocale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "return": "java.text.DateFormat"
+    },
+    {
+      "static": true,
+      "name": "getAvailableLocales",
+      "return": "java.util.Locale[]"
+    },
+    {
+      "name": "setCalendar",
+      "parameters": [{
+        "name": "newCalendar",
+        "type": "java.util.Calendar"
+      }]
+    },
+    {
+      "name": "getCalendar",
+      "return": "java.util.Calendar"
+    },
+    {
+      "name": "setNumberFormat",
+      "parameters": [{
+        "name": "newNumberFormat",
+        "type": "java.text.NumberFormat"
+      }]
+    },
+    {
+      "name": "getNumberFormat",
+      "return": "java.text.NumberFormat"
+    },
+    {
+      "name": "setTimeZone",
+      "parameters": [{
+        "name": "zone",
+        "type": "java.util.TimeZone"
+      }]
+    },
+    {
+      "name": "getTimeZone",
+      "return": "java.util.TimeZone"
+    },
+    {
+      "name": "setLenient",
+      "parameters": [{
+        "name": "lenient",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isLenient",
+      "return": "boolean"
+    },
+    {
+      "name": "set2DigitYearStart",
+      "parameters": [{
+        "name": "startDate",
+        "type": "java.util.Date"
+      }]
+    },
+    {
+      "name": "get2DigitYearStart",
+      "return": "java.util.Date"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "date",
+          "type": "java.util.Date"
+        },
+        {
+          "name": "toAppendTo",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "formatToCharacterIterator",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.text.AttributedCharacterIterator"
+    },
+    {
+      "name": "parse",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.ParsePosition"
+        }
+      ],
+      "return": "java.util.Date"
+    },
+    {
+      "name": "toPattern",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toLocalizedPattern",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "applyPattern",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "applyLocalizedPattern",
+      "parameters": [{
+        "name": "pattern",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getDateFormatSymbols",
+      "return": "java.text.DateFormatSymbols"
+    },
+    {
+      "name": "setDateFormatSymbols",
+      "parameters": [{
+        "name": "newFormatSymbols",
+        "type": "java.text.DateFormatSymbols"
+      }]
+    },
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "java.text.SimpleDateFormat",
+  "simple-name": "SimpleDateFormat",
+  "fields": [
+    {
+      "static": true,
+      "name": "ERA_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "YEAR_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MONTH_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DATE_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "HOUR_OF_DAY1_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "HOUR_OF_DAY0_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MINUTE_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "SECOND_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MILLISECOND_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_WEEK_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_YEAR_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_WEEK_IN_MONTH_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "WEEK_OF_YEAR_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "WEEK_OF_MONTH_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "AM_PM_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "HOUR1_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "HOUR0_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "TIMEZONE_FIELD",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "FULL",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LONG",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MEDIUM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "SHORT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DEFAULT",
+      "type": "int"
+    }
+  ]
+}

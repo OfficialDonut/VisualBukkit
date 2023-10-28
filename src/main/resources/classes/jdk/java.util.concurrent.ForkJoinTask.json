@@ -1,0 +1,249 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "java.util.concurrent",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "fork",
+      "return": "java.util.concurrent.ForkJoinTask"
+    },
+    {
+      "name": "join",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "invoke",
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "invokeAll",
+      "parameters": [
+        {
+          "name": "t1",
+          "type": "java.util.concurrent.ForkJoinTask"
+        },
+        {
+          "name": "t2",
+          "type": "java.util.concurrent.ForkJoinTask"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "invokeAll",
+      "parameters": [{
+        "name": "tasks",
+        "type": "java.util.concurrent.ForkJoinTask[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "invokeAll",
+      "parameters": [{
+        "name": "tasks",
+        "type": "java.util.Collection"
+      }],
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "cancel",
+      "parameters": [{
+        "name": "mayInterruptIfRunning",
+        "type": "boolean"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isDone",
+      "return": "boolean"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "isCompletedAbnormally",
+      "return": "boolean"
+    },
+    {
+      "name": "isCompletedNormally",
+      "return": "boolean"
+    },
+    {
+      "name": "getException",
+      "return": "java.lang.Throwable"
+    },
+    {
+      "name": "completeExceptionally",
+      "parameters": [{
+        "name": "ex",
+        "type": "java.lang.Throwable"
+      }]
+    },
+    {
+      "name": "complete",
+      "parameters": [{
+        "name": "value",
+        "type": "java.lang.Object"
+      }]
+    },
+    {"name": "quietlyComplete"},
+    {
+      "name": "get",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        {
+          "name": "timeout",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.util.concurrent.TimeUnit"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {"name": "quietlyJoin"},
+    {"name": "quietlyInvoke"},
+    {
+      "static": true,
+      "name": "helpQuiesce"
+    },
+    {"name": "reinitialize"},
+    {
+      "static": true,
+      "name": "getPool",
+      "return": "java.util.concurrent.ForkJoinPool"
+    },
+    {
+      "static": true,
+      "name": "inForkJoinPool",
+      "return": "boolean"
+    },
+    {
+      "name": "tryUnfork",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "getQueuedTaskCount",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "getSurplusQueuedTaskCount",
+      "return": "int"
+    },
+    {
+      "name": "getRawResult",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getForkJoinTaskTag",
+      "return": "short"
+    },
+    {
+      "name": "setForkJoinTaskTag",
+      "parameters": [{
+        "name": "newValue",
+        "type": "short"
+      }],
+      "return": "short"
+    },
+    {
+      "name": "compareAndSetForkJoinTaskTag",
+      "parameters": [
+        {
+          "name": "expect",
+          "type": "short"
+        },
+        {
+          "name": "update",
+          "type": "short"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "adapt",
+      "parameters": [{
+        "name": "runnable",
+        "type": "java.lang.Runnable"
+      }],
+      "return": "java.util.concurrent.ForkJoinTask"
+    },
+    {
+      "static": true,
+      "name": "adapt",
+      "parameters": [
+        {
+          "name": "runnable",
+          "type": "java.lang.Runnable"
+        },
+        {
+          "name": "result",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.concurrent.ForkJoinTask"
+    },
+    {
+      "static": true,
+      "name": "adapt",
+      "parameters": [{
+        "name": "callable",
+        "type": "java.util.concurrent.Callable"
+      }],
+      "return": "java.util.concurrent.ForkJoinTask"
+    }
+  ],
+  "name": "java.util.concurrent.ForkJoinTask",
+  "simple-name": "ForkJoinTask"
+}

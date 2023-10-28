@@ -1,0 +1,114 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "codesource",
+          "type": "java.security.CodeSource"
+        },
+        {
+          "name": "permissions",
+          "type": "java.security.PermissionCollection"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "codesource",
+          "type": "java.security.CodeSource"
+        },
+        {
+          "name": "permissions",
+          "type": "java.security.PermissionCollection"
+        },
+        {
+          "name": "classloader",
+          "type": "java.lang.ClassLoader"
+        },
+        {
+          "name": "principals",
+          "type": "java.security.Principal[]"
+        }
+      ]
+    }
+  ],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getCodeSource",
+      "return": "java.security.CodeSource"
+    },
+    {
+      "name": "getClassLoader",
+      "return": "java.lang.ClassLoader"
+    },
+    {
+      "name": "getPrincipals",
+      "return": "java.security.Principal[]"
+    },
+    {
+      "name": "getPermissions",
+      "return": "java.security.PermissionCollection"
+    },
+    {
+      "name": "staticPermissionsOnly",
+      "return": "boolean"
+    },
+    {
+      "name": "implies",
+      "parameters": [{
+        "name": "perm",
+        "type": "java.security.Permission"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.security.ProtectionDomain",
+  "simple-name": "ProtectionDomain"
+}

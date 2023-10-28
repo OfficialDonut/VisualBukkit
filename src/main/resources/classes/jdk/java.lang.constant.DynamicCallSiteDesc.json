@@ -1,0 +1,153 @@
+{
+  "package": "java.lang.constant",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "bootstrapMethod",
+          "type": "java.lang.constant.DirectMethodHandleDesc"
+        },
+        {
+          "name": "invocationName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "invocationType",
+          "type": "java.lang.constant.MethodTypeDesc"
+        },
+        {
+          "name": "bootstrapArgs",
+          "type": "java.lang.constant.ConstantDesc[]"
+        }
+      ],
+      "return": "java.lang.constant.DynamicCallSiteDesc"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "bootstrapMethod",
+          "type": "java.lang.constant.DirectMethodHandleDesc"
+        },
+        {
+          "name": "invocationName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "invocationType",
+          "type": "java.lang.constant.MethodTypeDesc"
+        }
+      ],
+      "return": "java.lang.constant.DynamicCallSiteDesc"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "bootstrapMethod",
+          "type": "java.lang.constant.DirectMethodHandleDesc"
+        },
+        {
+          "name": "invocationType",
+          "type": "java.lang.constant.MethodTypeDesc"
+        }
+      ],
+      "return": "java.lang.constant.DynamicCallSiteDesc"
+    },
+    {
+      "name": "withArgs",
+      "parameters": [{
+        "name": "bootstrapArgs",
+        "type": "java.lang.constant.ConstantDesc[]"
+      }],
+      "return": "java.lang.constant.DynamicCallSiteDesc"
+    },
+    {
+      "name": "withNameAndType",
+      "parameters": [
+        {
+          "name": "invocationName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "invocationType",
+          "type": "java.lang.constant.MethodTypeDesc"
+        }
+      ],
+      "return": "java.lang.constant.DynamicCallSiteDesc"
+    },
+    {
+      "name": "invocationName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "invocationType",
+      "return": "java.lang.constant.MethodTypeDesc"
+    },
+    {
+      "name": "bootstrapMethod",
+      "return": "java.lang.constant.MethodHandleDesc"
+    },
+    {
+      "name": "bootstrapArgs",
+      "return": "java.lang.constant.ConstantDesc[]"
+    },
+    {
+      "name": "resolveCallSiteDesc",
+      "parameters": [{
+        "name": "lookup",
+        "type": "java.lang.invoke.MethodHandles.Lookup"
+      }],
+      "return": "java.lang.invoke.CallSite"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.constant.DynamicCallSiteDesc",
+  "simple-name": "DynamicCallSiteDesc"
+}

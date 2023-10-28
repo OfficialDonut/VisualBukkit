@@ -1,0 +1,119 @@
+{
+  "package": "org.bukkit.metadata",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setMetadata",
+      "parameters": [
+        {
+          "name": "subject",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "newMetadataValue",
+          "type": "org.bukkit.metadata.MetadataValue"
+        }
+      ]
+    },
+    {
+      "name": "getMetadata",
+      "parameters": [
+        {
+          "name": "subject",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.util.List"
+    },
+    {
+      "name": "hasMetadata",
+      "parameters": [
+        {
+          "name": "subject",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "removeMetadata",
+      "parameters": [
+        {
+          "name": "subject",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "owningPlugin",
+          "type": "org.bukkit.plugin.Plugin"
+        }
+      ]
+    },
+    {
+      "name": "invalidateAll",
+      "parameters": [{
+        "name": "owningPlugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }]
+    }
+  ],
+  "name": "org.bukkit.metadata.MetadataStore",
+  "simple-name": "MetadataStore"
+}

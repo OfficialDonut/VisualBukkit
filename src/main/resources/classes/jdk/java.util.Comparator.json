@@ -1,0 +1,201 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "o1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "o2",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "reversed",
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparing",
+      "parameters": [{
+        "name": "other",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparing",
+      "parameters": [
+        {
+          "name": "keyExtractor",
+          "type": "java.util.function.Function"
+        },
+        {
+          "name": "keyComparator",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparing",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparingInt",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToIntFunction"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparingLong",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToLongFunction"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "name": "thenComparingDouble",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToDoubleFunction"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "reverseOrder",
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "naturalOrder",
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "nullsFirst",
+      "parameters": [{
+        "name": "comparator",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "nullsLast",
+      "parameters": [{
+        "name": "comparator",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparing",
+      "parameters": [
+        {
+          "name": "keyExtractor",
+          "type": "java.util.function.Function"
+        },
+        {
+          "name": "keyComparator",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparing",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingInt",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToIntFunction"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingLong",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToLongFunction"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingDouble",
+      "parameters": [{
+        "name": "keyExtractor",
+        "type": "java.util.function.ToDoubleFunction"
+      }],
+      "return": "java.util.Comparator"
+    }
+  ],
+  "name": "java.util.Comparator",
+  "simple-name": "Comparator"
+}

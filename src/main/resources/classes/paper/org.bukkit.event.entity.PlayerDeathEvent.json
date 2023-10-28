@@ -1,0 +1,492 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "adventure$deathMessage",
+          "type": "net.kyori.adventure.text.Component"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "adventure$deathMessage",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "newTotalExp",
+          "type": "int"
+        },
+        {
+          "name": "newLevel",
+          "type": "int"
+        },
+        {
+          "name": "adventure$deathMessage",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "newTotalExp",
+          "type": "int"
+        },
+        {
+          "name": "newLevel",
+          "type": "int"
+        },
+        {
+          "name": "adventure$deathMessage",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "doExpDrop",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "newTotalExp",
+          "type": "int"
+        },
+        {
+          "name": "newLevel",
+          "type": "int"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "drops",
+          "type": "java.util.List"
+        },
+        {
+          "name": "droppedExp",
+          "type": "int"
+        },
+        {
+          "name": "newExp",
+          "type": "int"
+        },
+        {
+          "name": "newTotalExp",
+          "type": "int"
+        },
+        {
+          "name": "newLevel",
+          "type": "int"
+        },
+        {
+          "name": "deathMessage",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "doExpDrop",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getDroppedExp",
+      "return": "int"
+    },
+    {
+      "name": "setDroppedExp",
+      "parameters": [{
+        "name": "exp",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getDrops",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getReviveHealth",
+      "return": "double"
+    },
+    {
+      "name": "setReviveHealth",
+      "parameters": [{
+        "name": "reviveHealth",
+        "type": "double"
+      }]
+    },
+    {
+      "name": "shouldPlayDeathSound",
+      "return": "boolean"
+    },
+    {
+      "name": "setShouldPlayDeathSound",
+      "parameters": [{
+        "name": "playDeathSound",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getDeathSound",
+      "return": "org.bukkit.Sound"
+    },
+    {
+      "name": "setDeathSound",
+      "parameters": [{
+        "name": "sound",
+        "type": "org.bukkit.Sound"
+      }]
+    },
+    {
+      "name": "getDeathSoundCategory",
+      "return": "org.bukkit.SoundCategory"
+    },
+    {
+      "name": "setDeathSoundCategory",
+      "parameters": [{
+        "name": "soundCategory",
+        "type": "org.bukkit.SoundCategory"
+      }]
+    },
+    {
+      "name": "getDeathSoundVolume",
+      "return": "float"
+    },
+    {
+      "name": "setDeathSoundVolume",
+      "parameters": [{
+        "name": "volume",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "getDeathSoundPitch",
+      "return": "float"
+    },
+    {
+      "name": "setDeathSoundPitch",
+      "parameters": [{
+        "name": "pitch",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "getItemsToKeep",
+      "return": "java.util.List"
+    },
+    {
+      "name": "shouldDropExperience",
+      "return": "boolean"
+    },
+    {
+      "name": "setShouldDropExperience",
+      "parameters": [{
+        "name": "doExpDrop",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "deathMessage",
+      "parameters": [{
+        "name": "deathMessage",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "deathMessage",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "setDeathMessage",
+      "parameters": [{
+        "name": "deathMessage",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getDeathMessage",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getNewExp",
+      "return": "int"
+    },
+    {
+      "name": "setNewExp",
+      "parameters": [{
+        "name": "exp",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getNewLevel",
+      "return": "int"
+    },
+    {
+      "name": "setNewLevel",
+      "parameters": [{
+        "name": "level",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getNewTotalExp",
+      "return": "int"
+    },
+    {
+      "name": "setNewTotalExp",
+      "parameters": [{
+        "name": "totalExp",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getKeepLevel",
+      "return": "boolean"
+    },
+    {
+      "name": "setKeepLevel",
+      "parameters": [{
+        "name": "keepLevel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "setKeepInventory",
+      "parameters": [{
+        "name": "keepInventory",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getKeepInventory",
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.event.entity.PlayerDeathEvent",
+  "simple-name": "PlayerDeathEvent"
+}

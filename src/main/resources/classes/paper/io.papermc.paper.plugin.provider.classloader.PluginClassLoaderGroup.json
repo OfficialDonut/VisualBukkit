@@ -1,0 +1,86 @@
+{
+  "package": "io.papermc.paper.plugin.provider.classloader",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getClassByName",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "resolve",
+          "type": "boolean"
+        },
+        {
+          "name": "requester",
+          "type": "io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader"
+        }
+      ],
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "configuredPluginClassLoader",
+        "type": "io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader"
+      }]
+    },
+    {
+      "name": "add",
+      "parameters": [{
+        "name": "configuredPluginClassLoader",
+        "type": "io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader"
+      }]
+    },
+    {
+      "name": "getAccess",
+      "return": "io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess"
+    }
+  ],
+  "name": "io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup",
+  "simple-name": "PluginClassLoaderGroup"
+}

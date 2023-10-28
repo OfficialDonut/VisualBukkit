@@ -1,0 +1,152 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "enchanter",
+        "type": "org.bukkit.entity.Player"
+      },
+      {
+        "name": "view",
+        "type": "org.bukkit.inventory.InventoryView"
+      },
+      {
+        "name": "table",
+        "type": "org.bukkit.block.Block"
+      },
+      {
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      },
+      {
+        "name": "offers",
+        "type": "org.bukkit.enchantments.EnchantmentOffer []"
+      },
+      {
+        "name": "bonus",
+        "type": "int"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.enchantment",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getInventory",
+      "return": "org.bukkit.inventory.Inventory"
+    },
+    {
+      "name": "getViewers",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getView",
+      "return": "org.bukkit.inventory.InventoryView"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getEnchanter",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getEnchantBlock",
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getItem",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getExpLevelCostsOffered",
+      "return": "int[]"
+    },
+    {
+      "name": "getOffers",
+      "return": "org.bukkit.enchantments.EnchantmentOffer []"
+    },
+    {
+      "name": "getEnchantmentBonus",
+      "return": "int"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.enchantment.PrepareItemEnchantEvent",
+  "simple-name": "PrepareItemEnchantEvent"
+}

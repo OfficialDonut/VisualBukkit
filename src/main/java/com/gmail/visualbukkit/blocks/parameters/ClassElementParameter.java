@@ -1,6 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
-import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.blocks.classes.ClassInfo;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 
 import java.util.Collection;

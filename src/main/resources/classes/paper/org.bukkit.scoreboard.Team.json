@@ -1,0 +1,346 @@
+{
+  "package": "org.bukkit.scoreboard",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "displayName",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "displayName",
+      "parameters": [{
+        "name": "displayName",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "prefix",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "prefix",
+      "parameters": [{
+        "name": "prefix",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "suffix",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "suffix",
+      "parameters": [{
+        "name": "suffix",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "hasColor",
+      "return": "boolean"
+    },
+    {
+      "name": "color",
+      "return": "net.kyori.adventure.text.format.TextColor"
+    },
+    {
+      "name": "color",
+      "parameters": [{
+        "name": "color",
+        "type": "net.kyori.adventure.text.format.NamedTextColor"
+      }]
+    },
+    {
+      "name": "getDisplayName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setDisplayName",
+      "parameters": [{
+        "name": "displayName",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getPrefix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setPrefix",
+      "parameters": [{
+        "name": "prefix",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getSuffix",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setSuffix",
+      "parameters": [{
+        "name": "suffix",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getColor",
+      "return": "org.bukkit.ChatColor"
+    },
+    {
+      "name": "setColor",
+      "parameters": [{
+        "name": "color",
+        "type": "org.bukkit.ChatColor"
+      }]
+    },
+    {
+      "name": "allowFriendlyFire",
+      "return": "boolean"
+    },
+    {
+      "name": "setAllowFriendlyFire",
+      "parameters": [{
+        "name": "enabled",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "canSeeFriendlyInvisibles",
+      "return": "boolean"
+    },
+    {
+      "name": "setCanSeeFriendlyInvisibles",
+      "parameters": [{
+        "name": "enabled",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getNameTagVisibility",
+      "return": "org.bukkit.scoreboard.NameTagVisibility"
+    },
+    {
+      "name": "setNameTagVisibility",
+      "parameters": [{
+        "name": "visibility",
+        "type": "org.bukkit.scoreboard.NameTagVisibility"
+      }]
+    },
+    {
+      "name": "getPlayers",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "getEntries",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "getSize",
+      "return": "int"
+    },
+    {
+      "name": "getScoreboard",
+      "return": "org.bukkit.scoreboard.Scoreboard"
+    },
+    {
+      "name": "addPlayer",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.OfflinePlayer"
+      }]
+    },
+    {
+      "name": "addEntry",
+      "parameters": [{
+        "name": "entry",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "addEntities",
+      "parameters": [{
+        "name": "entities",
+        "type": "org.bukkit.entity.Entity []"
+      }]
+    },
+    {
+      "name": "addEntities",
+      "parameters": [{
+        "name": "entities",
+        "type": "java.util.Collection"
+      }]
+    },
+    {
+      "name": "addEntries",
+      "parameters": [{
+        "name": "entries",
+        "type": "java.lang.String[]"
+      }]
+    },
+    {
+      "name": "addEntries",
+      "parameters": [{
+        "name": "entries",
+        "type": "java.util.Collection"
+      }]
+    },
+    {
+      "name": "removePlayer",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.OfflinePlayer"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeEntry",
+      "parameters": [{
+        "name": "entry",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeEntities",
+      "parameters": [{
+        "name": "entities",
+        "type": "org.bukkit.entity.Entity []"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeEntities",
+      "parameters": [{
+        "name": "entities",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeEntries",
+      "parameters": [{
+        "name": "entries",
+        "type": "java.lang.String[]"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeEntries",
+      "parameters": [{
+        "name": "entries",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {"name": "unregister"},
+    {
+      "name": "hasPlayer",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.OfflinePlayer"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hasEntry",
+      "parameters": [{
+        "name": "entry",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getOption",
+      "parameters": [{
+        "name": "option",
+        "type": "org.bukkit.scoreboard.Team.Option"
+      }],
+      "return": "org.bukkit.scoreboard.Team.OptionStatus"
+    },
+    {
+      "name": "setOption",
+      "parameters": [
+        {
+          "name": "option",
+          "type": "org.bukkit.scoreboard.Team.Option"
+        },
+        {
+          "name": "status",
+          "type": "org.bukkit.scoreboard.Team.OptionStatus"
+        }
+      ]
+    },
+    {
+      "name": "addEntity",
+      "parameters": [{
+        "name": "entity",
+        "type": "org.bukkit.entity.Entity"
+      }]
+    },
+    {
+      "name": "removeEntity",
+      "parameters": [{
+        "name": "entity",
+        "type": "org.bukkit.entity.Entity"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hasEntity",
+      "parameters": [{
+        "name": "entity",
+        "type": "org.bukkit.entity.Entity"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.scoreboard.Team",
+  "simple-name": "Team"
+}

@@ -1,0 +1,197 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "what",
+        "type": "org.bukkit.inventory.InventoryView"
+      },
+      {
+        "name": "type",
+        "type": "org.bukkit.event.inventory.InventoryType.SlotType"
+      },
+      {
+        "name": "slot",
+        "type": "int"
+      },
+      {
+        "name": "newItem",
+        "type": "org.bukkit.inventory.ItemStack"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getInventory",
+      "return": "org.bukkit.inventory.Inventory"
+    },
+    {
+      "name": "getViewers",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getView",
+      "return": "org.bukkit.inventory.InventoryView"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getWhoClicked",
+      "return": "org.bukkit.entity.HumanEntity"
+    },
+    {
+      "name": "setResult",
+      "parameters": [{
+        "name": "newResult",
+        "type": "org.bukkit.event.Event.Result"
+      }]
+    },
+    {
+      "name": "getResult",
+      "return": "org.bukkit.event.Event.Result"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "toCancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getSlotType",
+      "return": "org.bukkit.event.inventory.InventoryType.SlotType"
+    },
+    {
+      "name": "getCurrentItem",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "isRightClick",
+      "return": "boolean"
+    },
+    {
+      "name": "isLeftClick",
+      "return": "boolean"
+    },
+    {
+      "name": "isShiftClick",
+      "return": "boolean"
+    },
+    {
+      "name": "setCurrentItem",
+      "parameters": [{
+        "name": "stack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "getClickedInventory",
+      "return": "org.bukkit.inventory.Inventory"
+    },
+    {
+      "name": "getSlot",
+      "return": "int"
+    },
+    {
+      "name": "getRawSlot",
+      "return": "int"
+    },
+    {
+      "name": "getHotbarButton",
+      "return": "int"
+    },
+    {
+      "name": "getAction",
+      "return": "org.bukkit.event.inventory.InventoryAction"
+    },
+    {
+      "name": "getClick",
+      "return": "org.bukkit.event.inventory.ClickType"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getCursor",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "setCursor",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    }
+  ],
+  "name": "org.bukkit.event.inventory.InventoryCreativeEvent",
+  "simple-name": "InventoryCreativeEvent"
+}

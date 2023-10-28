@@ -1,0 +1,93 @@
+{
+  "package": "java.nio.channels",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "isOpen",
+      "return": "boolean"
+    },
+    {"name": "close"},
+    {
+      "name": "bind",
+      "parameters": [{
+        "name": "local",
+        "type": "java.net.SocketAddress"
+      }],
+      "return": "java.nio.channels.NetworkChannel"
+    },
+    {
+      "name": "getLocalAddress",
+      "return": "java.net.SocketAddress"
+    },
+    {
+      "name": "setOption",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.net.SocketOption"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.nio.channels.NetworkChannel"
+    },
+    {
+      "name": "getOption",
+      "parameters": [{
+        "name": "name",
+        "type": "java.net.SocketOption"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "supportedOptions",
+      "return": "java.util.Set"
+    }
+  ],
+  "name": "java.nio.channels.NetworkChannel",
+  "simple-name": "NetworkChannel"
+}

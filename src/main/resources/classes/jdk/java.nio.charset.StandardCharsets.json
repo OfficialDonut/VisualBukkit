@@ -1,0 +1,82 @@
+{
+  "package": "java.nio.charset",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "name": "java.nio.charset.StandardCharsets",
+  "simple-name": "StandardCharsets",
+  "fields": [
+    {
+      "static": true,
+      "name": "US_ASCII",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "static": true,
+      "name": "ISO_8859_1",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "static": true,
+      "name": "UTF_8",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "static": true,
+      "name": "UTF_16BE",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "static": true,
+      "name": "UTF_16LE",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "static": true,
+      "name": "UTF_16",
+      "type": "java.nio.charset.Charset"
+    }
+  ]
+}

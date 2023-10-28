@@ -1,0 +1,455 @@
+{
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "lookupClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "previousLookupClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "lookupModes",
+      "return": "int"
+    },
+    {
+      "name": "in",
+      "parameters": [{
+        "name": "requestedLookupClass",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.lang.invoke.MethodHandles.Lookup"
+    },
+    {
+      "name": "dropLookupMode",
+      "parameters": [{
+        "name": "modeToDrop",
+        "type": "int"
+      }],
+      "return": "java.lang.invoke.MethodHandles.Lookup"
+    },
+    {
+      "name": "defineClass",
+      "parameters": [{
+        "name": "bytes",
+        "type": "byte[]"
+      }],
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "defineHiddenClass",
+      "parameters": [
+        {
+          "name": "bytes",
+          "type": "byte[]"
+        },
+        {
+          "name": "initialize",
+          "type": "boolean"
+        },
+        {
+          "name": "options",
+          "type": "java.lang.invoke.MethodHandles.Lookup.ClassOption[]"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandles.Lookup"
+    },
+    {
+      "name": "defineHiddenClassWithClassData",
+      "parameters": [
+        {
+          "name": "bytes",
+          "type": "byte[]"
+        },
+        {
+          "name": "classData",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "initialize",
+          "type": "boolean"
+        },
+        {
+          "name": "options",
+          "type": "java.lang.invoke.MethodHandles.Lookup.ClassOption[]"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandles.Lookup"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "findStatic",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findVirtual",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findConstructor",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findClass",
+      "parameters": [{
+        "name": "targetName",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "ensureInitialized",
+      "parameters": [{
+        "name": "targetClass",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "accessClass",
+      "parameters": [{
+        "name": "targetClass",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "findSpecial",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        },
+        {
+          "name": "specialCaller",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findGetter",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findSetter",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findVarHandle",
+      "parameters": [
+        {
+          "name": "recv",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.VarHandle"
+    },
+    {
+      "name": "findStaticGetter",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findStaticSetter",
+      "parameters": [
+        {
+          "name": "refc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "findStaticVarHandle",
+      "parameters": [
+        {
+          "name": "decl",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.VarHandle"
+    },
+    {
+      "name": "bind",
+      "parameters": [
+        {
+          "name": "receiver",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflect",
+      "parameters": [{
+        "name": "m",
+        "type": "java.lang.reflect.Method"
+      }],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflectSpecial",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "java.lang.reflect.Method"
+        },
+        {
+          "name": "specialCaller",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflectConstructor",
+      "parameters": [{
+        "name": "c",
+        "type": "java.lang.reflect.Constructor"
+      }],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflectGetter",
+      "parameters": [{
+        "name": "f",
+        "type": "java.lang.reflect.Field"
+      }],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflectSetter",
+      "parameters": [{
+        "name": "f",
+        "type": "java.lang.reflect.Field"
+      }],
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "unreflectVarHandle",
+      "parameters": [{
+        "name": "f",
+        "type": "java.lang.reflect.Field"
+      }],
+      "return": "java.lang.invoke.VarHandle"
+    },
+    {
+      "name": "revealDirect",
+      "parameters": [{
+        "name": "target",
+        "type": "java.lang.invoke.MethodHandle"
+      }],
+      "return": "java.lang.invoke.MethodHandleInfo"
+    },
+    {
+      "name": "hasPrivateAccess",
+      "return": "boolean"
+    },
+    {
+      "name": "hasFullPrivilegeAccess",
+      "return": "boolean"
+    }
+  ],
+  "name": "java.lang.invoke.MethodHandles.Lookup",
+  "simple-name": "Lookup",
+  "fields": [
+    {
+      "static": true,
+      "name": "PUBLIC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PRIVATE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PROTECTED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PACKAGE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "MODULE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "UNCONDITIONAL",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ORIGINAL",
+      "type": "int"
+    }
+  ]
+}

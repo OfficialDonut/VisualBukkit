@@ -1,0 +1,165 @@
+{
+  "package": "java.lang.annotation",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.lang.annotation.ElementType[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.annotation.ElementType"
+    }
+  ],
+  "name": "java.lang.annotation.ElementType",
+  "simple-name": "ElementType",
+  "fields": [
+    {
+      "static": true,
+      "name": "TYPE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "FIELD",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "METHOD",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "PARAMETER",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "CONSTRUCTOR",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "LOCAL_VARIABLE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "ANNOTATION_TYPE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "PACKAGE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "TYPE_PARAMETER",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "TYPE_USE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "MODULE",
+      "type": "java.lang.annotation.ElementType"
+    },
+    {
+      "static": true,
+      "name": "RECORD_COMPONENT",
+      "type": "java.lang.annotation.ElementType"
+    }
+  ]
+}

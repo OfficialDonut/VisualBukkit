@@ -1,0 +1,256 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionEffectType"
+        },
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "amplifier",
+          "type": "int"
+        },
+        {
+          "name": "ambient",
+          "type": "boolean"
+        },
+        {
+          "name": "particles",
+          "type": "boolean"
+        },
+        {
+          "name": "icon",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionEffectType"
+        },
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "amplifier",
+          "type": "int"
+        },
+        {
+          "name": "ambient",
+          "type": "boolean"
+        },
+        {
+          "name": "particles",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionEffectType"
+        },
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "amplifier",
+          "type": "int"
+        },
+        {
+          "name": "ambient",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionEffectType"
+        },
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "amplifier",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "map",
+        "type": "java.util.Map"
+      }]
+    }
+  ],
+  "package": "org.bukkit.potion",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "withType",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.potion.PotionEffectType"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "withDuration",
+      "parameters": [{
+        "name": "duration",
+        "type": "int"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "withAmplifier",
+      "parameters": [{
+        "name": "amplifier",
+        "type": "int"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "withAmbient",
+      "parameters": [{
+        "name": "ambient",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "withParticles",
+      "parameters": [{
+        "name": "particles",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "withIcon",
+      "parameters": [{
+        "name": "icon",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.potion.PotionEffect"
+    },
+    {
+      "name": "serialize",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "apply",
+      "parameters": [{
+        "name": "entity",
+        "type": "org.bukkit.entity.LivingEntity"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getAmplifier",
+      "return": "int"
+    },
+    {
+      "name": "getDuration",
+      "return": "int"
+    },
+    {
+      "name": "isInfinite",
+      "return": "boolean"
+    },
+    {
+      "name": "isShorterThan",
+      "parameters": [{
+        "name": "other",
+        "type": "org.bukkit.potion.PotionEffect"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.potion.PotionEffectType"
+    },
+    {
+      "name": "isAmbient",
+      "return": "boolean"
+    },
+    {
+      "name": "hasParticles",
+      "return": "boolean"
+    },
+    {
+      "name": "getColor",
+      "return": "org.bukkit.Color"
+    },
+    {
+      "name": "hasIcon",
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "org.bukkit.potion.PotionEffect",
+  "simple-name": "PotionEffect",
+  "fields": [{
+    "static": true,
+    "name": "INFINITE_DURATION",
+    "type": "int"
+  }]
+}

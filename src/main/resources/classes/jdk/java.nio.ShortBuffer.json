@@ -1,0 +1,401 @@
+{
+  "package": "java.nio",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "capacity",
+      "return": "int"
+    },
+    {
+      "name": "position",
+      "return": "int"
+    },
+    {
+      "name": "limit",
+      "return": "int"
+    },
+    {
+      "name": "remaining",
+      "return": "int"
+    },
+    {
+      "name": "hasRemaining",
+      "return": "boolean"
+    },
+    {
+      "name": "isReadOnly",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "allocate",
+      "parameters": [{
+        "name": "capacity",
+        "type": "int"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "static": true,
+      "name": "wrap",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "short[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "static": true,
+      "name": "wrap",
+      "parameters": [{
+        "name": "array",
+        "type": "short[]"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "slice",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "slice",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "duplicate",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "asReadOnlyBuffer",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "return": "short"
+    },
+    {
+      "name": "put",
+      "parameters": [{
+        "name": "s",
+        "type": "short"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "short"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "s",
+          "type": "short"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        {
+          "name": "dst",
+          "type": "short[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "dst",
+        "type": "short[]"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "dst",
+          "type": "short[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "dst",
+          "type": "short[]"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [{
+        "name": "src",
+        "type": "java.nio.ShortBuffer"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "src",
+          "type": "java.nio.ShortBuffer"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "src",
+          "type": "short[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [{
+        "name": "src",
+        "type": "short[]"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "src",
+          "type": "short[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "src",
+          "type": "short[]"
+        }
+      ],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "hasArray",
+      "return": "boolean"
+    },
+    {
+      "name": "array",
+      "return": "short[]"
+    },
+    {
+      "name": "arrayOffset",
+      "return": "int"
+    },
+    {
+      "name": "position",
+      "parameters": [{
+        "name": "newPosition",
+        "type": "int"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "limit",
+      "parameters": [{
+        "name": "newLimit",
+        "type": "int"
+      }],
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "mark",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "reset",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "clear",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "flip",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "rewind",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "compact",
+      "return": "java.nio.ShortBuffer"
+    },
+    {
+      "name": "isDirect",
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "ob",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "that",
+        "type": "java.nio.ShortBuffer"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "mismatch",
+      "parameters": [{
+        "name": "that",
+        "type": "java.nio.ShortBuffer"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "order",
+      "return": "java.nio.ByteOrder"
+    }
+  ],
+  "name": "java.nio.ShortBuffer",
+  "simple-name": "ShortBuffer"
+}

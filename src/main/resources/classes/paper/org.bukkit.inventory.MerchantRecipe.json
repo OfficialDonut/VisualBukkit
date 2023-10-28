@@ -1,0 +1,361 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "uses",
+          "type": "int"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        },
+        {
+          "name": "experienceReward",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "uses",
+          "type": "int"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        },
+        {
+          "name": "experienceReward",
+          "type": "boolean"
+        },
+        {
+          "name": "villagerExperience",
+          "type": "int"
+        },
+        {
+          "name": "priceMultiplier",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "uses",
+          "type": "int"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        },
+        {
+          "name": "experienceReward",
+          "type": "boolean"
+        },
+        {
+          "name": "villagerExperience",
+          "type": "int"
+        },
+        {
+          "name": "priceMultiplier",
+          "type": "float"
+        },
+        {
+          "name": "demand",
+          "type": "int"
+        },
+        {
+          "name": "specialPrice",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "uses",
+          "type": "int"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        },
+        {
+          "name": "experienceReward",
+          "type": "boolean"
+        },
+        {
+          "name": "villagerExperience",
+          "type": "int"
+        },
+        {
+          "name": "priceMultiplier",
+          "type": "float"
+        },
+        {
+          "name": "ignoreDiscounts",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "result",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "uses",
+          "type": "int"
+        },
+        {
+          "name": "maxUses",
+          "type": "int"
+        },
+        {
+          "name": "experienceReward",
+          "type": "boolean"
+        },
+        {
+          "name": "villagerExperience",
+          "type": "int"
+        },
+        {
+          "name": "priceMultiplier",
+          "type": "float"
+        },
+        {
+          "name": "demand",
+          "type": "int"
+        },
+        {
+          "name": "specialPrice",
+          "type": "int"
+        },
+        {
+          "name": "ignoreDiscounts",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "recipe",
+        "type": "org.bukkit.inventory.MerchantRecipe"
+      }]
+    }
+  ],
+  "package": "org.bukkit.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getResult",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "addIngredient",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "removeIngredient",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setIngredients",
+      "parameters": [{
+        "name": "ingredients",
+        "type": "java.util.List"
+      }]
+    },
+    {
+      "name": "getIngredients",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getAdjustedIngredient1",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "adjust",
+      "parameters": [{
+        "name": "itemStack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    },
+    {
+      "name": "getDemand",
+      "return": "int"
+    },
+    {
+      "name": "setDemand",
+      "parameters": [{
+        "name": "demand",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getSpecialPrice",
+      "return": "int"
+    },
+    {
+      "name": "setSpecialPrice",
+      "parameters": [{
+        "name": "specialPrice",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getUses",
+      "return": "int"
+    },
+    {
+      "name": "setUses",
+      "parameters": [{
+        "name": "uses",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getMaxUses",
+      "return": "int"
+    },
+    {
+      "name": "setMaxUses",
+      "parameters": [{
+        "name": "maxUses",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "hasExperienceReward",
+      "return": "boolean"
+    },
+    {
+      "name": "setExperienceReward",
+      "parameters": [{
+        "name": "flag",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getVillagerExperience",
+      "return": "int"
+    },
+    {
+      "name": "setVillagerExperience",
+      "parameters": [{
+        "name": "villagerExperience",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getPriceMultiplier",
+      "return": "float"
+    },
+    {
+      "name": "setPriceMultiplier",
+      "parameters": [{
+        "name": "priceMultiplier",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "shouldIgnoreDiscounts",
+      "return": "boolean"
+    },
+    {
+      "name": "setIgnoreDiscounts",
+      "parameters": [{
+        "name": "ignoreDiscounts",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "name": "org.bukkit.inventory.MerchantRecipe",
+  "simple-name": "MerchantRecipe"
+}

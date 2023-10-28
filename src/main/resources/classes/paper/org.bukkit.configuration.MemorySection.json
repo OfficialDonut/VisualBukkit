@@ -1,0 +1,752 @@
+{
+  "package": "org.bukkit.configuration",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getKeys",
+      "parameters": [{
+        "name": "deep",
+        "type": "boolean"
+      }],
+      "return": "java.util.Set"
+    },
+    {
+      "name": "getValues",
+      "parameters": [{
+        "name": "deep",
+        "type": "boolean"
+      }],
+      "return": "java.util.Map"
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "ignoreDefault",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "isSet",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getCurrentPath",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getRoot",
+      "return": "org.bukkit.configuration.Configuration"
+    },
+    {
+      "name": "getParent",
+      "return": "org.bukkit.configuration.ConfigurationSection"
+    },
+    {
+      "name": "addDefault",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "name": "getDefaultSection",
+      "return": "org.bukkit.configuration.ConfigurationSection"
+    },
+    {
+      "name": "set",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "get",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "createSection",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.configuration.ConfigurationSection"
+    },
+    {
+      "name": "createSection",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "map",
+          "type": "java.util.Map"
+        }
+      ],
+      "return": "org.bukkit.configuration.ConfigurationSection"
+    },
+    {
+      "name": "getString",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getString",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isString",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getInt",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getInt",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "isInt",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getBoolean",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getBoolean",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "isBoolean",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getDouble",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "double"
+    },
+    {
+      "name": "getDouble",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "name": "isDouble",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getLong",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getLong",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "isLong",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getList",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "java.util.List"
+        }
+      ],
+      "return": "java.util.List"
+    },
+    {
+      "name": "isList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getStringList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getIntegerList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getBooleanList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getDoubleList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getFloatList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getLongList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getByteList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getCharacterList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getShortList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getMapList",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getObject",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getObject",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "def",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getSerializable",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+    },
+    {
+      "name": "getSerializable",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "clazz",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+        }
+      ],
+      "return": "org.bukkit.configuration.serialization.ConfigurationSerializable"
+    },
+    {
+      "name": "getVector",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.util.Vector"
+    },
+    {
+      "name": "getVector",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.util.Vector"
+        }
+      ],
+      "return": "org.bukkit.util.Vector"
+    },
+    {
+      "name": "isVector",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getOfflinePlayer",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.OfflinePlayer"
+    },
+    {
+      "name": "getOfflinePlayer",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.OfflinePlayer"
+        }
+      ],
+      "return": "org.bukkit.OfflinePlayer"
+    },
+    {
+      "name": "isOfflinePlayer",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getItemStack",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getItemStack",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.inventory.ItemStack"
+        }
+      ],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "isItemStack",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getColor",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Color"
+    },
+    {
+      "name": "getColor",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.Color"
+        }
+      ],
+      "return": "org.bukkit.Color"
+    },
+    {
+      "name": "isColor",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getLocation",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getLocation",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "def",
+          "type": "org.bukkit.Location"
+        }
+      ],
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "isLocation",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getConfigurationSection",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.configuration.ConfigurationSection"
+    },
+    {
+      "name": "isConfigurationSection",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "createPath",
+      "parameters": [
+        {
+          "name": "section",
+          "type": "org.bukkit.configuration.ConfigurationSection"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "createPath",
+      "parameters": [
+        {
+          "name": "section",
+          "type": "org.bukkit.configuration.ConfigurationSection"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "relativeTo",
+          "type": "org.bukkit.configuration.ConfigurationSection"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getComments",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getInlineComments",
+      "parameters": [{
+        "name": "path",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "setComments",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "comments",
+          "type": "java.util.List"
+        }
+      ]
+    },
+    {
+      "name": "setInlineComments",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "comments",
+          "type": "java.util.List"
+        }
+      ]
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "org.bukkit.configuration.MemorySection",
+  "simple-name": "MemorySection"
+}

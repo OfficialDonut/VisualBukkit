@@ -1,0 +1,215 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "motd",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "numPlayers",
+          "type": "int"
+        },
+        {
+          "name": "maxPlayers",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "motd",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "numPlayers",
+          "type": "int"
+        },
+        {
+          "name": "maxPlayers",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "motd",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "numPlayers",
+          "type": "int"
+        },
+        {
+          "name": "maxPlayers",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.server",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "spliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "name": "motd",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "motd",
+      "parameters": [{
+        "name": "motd",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "getHostname",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getAddress",
+      "return": "java.net.InetAddress"
+    },
+    {
+      "name": "getMotd",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setMotd",
+      "parameters": [{
+        "name": "motd",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getNumPlayers",
+      "return": "int"
+    },
+    {
+      "name": "getMaxPlayers",
+      "return": "int"
+    },
+    {
+      "name": "shouldSendChatPreviews",
+      "return": "boolean"
+    },
+    {
+      "name": "setMaxPlayers",
+      "parameters": [{
+        "name": "maxPlayers",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setServerIcon",
+      "parameters": [{
+        "name": "icon",
+        "type": "org.bukkit.util.CachedServerIcon"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.Iterator"
+    }
+  ],
+  "name": "org.bukkit.event.server.ServerListPingEvent",
+  "simple-name": "ServerListPingEvent"
+}

@@ -1,0 +1,447 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "in",
+      "type": "java.io.InputStream"
+    }]
+  }],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "skip",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "nullInputStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "readAllBytes",
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [{
+        "name": "len",
+        "type": "int"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "skip",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "skipNBytes",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "mark",
+      "parameters": [{
+        "name": "readlimit",
+        "type": "int"
+      }]
+    },
+    {"name": "reset"},
+    {
+      "name": "markSupported",
+      "return": "boolean"
+    },
+    {
+      "name": "transferTo",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.OutputStream"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "readObject",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "readUnshared",
+      "return": "java.lang.Object"
+    },
+    {"name": "defaultReadObject"},
+    {
+      "name": "readFields",
+      "return": "java.io.ObjectInputStream.GetField"
+    },
+    {
+      "name": "registerValidation",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "java.io.ObjectInputValidation"
+        },
+        {
+          "name": "prio",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "return": "int"
+    },
+    {
+      "name": "read",
+      "parameters": [
+        {
+          "name": "buf",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "available",
+      "return": "int"
+    },
+    {"name": "close"},
+    {
+      "name": "readBoolean",
+      "return": "boolean"
+    },
+    {
+      "name": "readByte",
+      "return": "byte"
+    },
+    {
+      "name": "readUnsignedByte",
+      "return": "int"
+    },
+    {
+      "name": "readChar",
+      "return": "char"
+    },
+    {
+      "name": "readShort",
+      "return": "short"
+    },
+    {
+      "name": "readUnsignedShort",
+      "return": "int"
+    },
+    {
+      "name": "readInt",
+      "return": "int"
+    },
+    {
+      "name": "readLong",
+      "return": "long"
+    },
+    {
+      "name": "readFloat",
+      "return": "float"
+    },
+    {
+      "name": "readDouble",
+      "return": "double"
+    },
+    {
+      "name": "readFully",
+      "parameters": [{
+        "name": "buf",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "readFully",
+      "parameters": [
+        {
+          "name": "buf",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "skipBytes",
+      "parameters": [{
+        "name": "len",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "readLine",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "readUTF",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getObjectInputFilter",
+      "return": "java.io.ObjectInputFilter"
+    },
+    {
+      "name": "setObjectInputFilter",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.io.ObjectInputFilter"
+      }]
+    }
+  ],
+  "name": "java.io.ObjectInputStream",
+  "simple-name": "ObjectInputStream",
+  "fields": [
+    {
+      "static": true,
+      "name": "STREAM_MAGIC",
+      "type": "short"
+    },
+    {
+      "static": true,
+      "name": "STREAM_VERSION",
+      "type": "short"
+    },
+    {
+      "static": true,
+      "name": "TC_BASE",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_NULL",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_REFERENCE",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_CLASSDESC",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_OBJECT",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_STRING",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_ARRAY",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_CLASS",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_BLOCKDATA",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_ENDBLOCKDATA",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_RESET",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_BLOCKDATALONG",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_EXCEPTION",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_LONGSTRING",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_PROXYCLASSDESC",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_ENUM",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "TC_MAX",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "baseWireHandle",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "SC_WRITE_METHOD",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "SC_BLOCK_DATA",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "SC_SERIALIZABLE",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "SC_EXTERNALIZABLE",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "SC_ENUM",
+      "type": "byte"
+    },
+    {
+      "static": true,
+      "name": "SUBSTITUTION_PERMISSION",
+      "type": "java.io.SerializablePermission"
+    },
+    {
+      "static": true,
+      "name": "SUBCLASS_IMPLEMENTATION_PERMISSION",
+      "type": "java.io.SerializablePermission"
+    },
+    {
+      "static": true,
+      "name": "SERIAL_FILTER_PERMISSION",
+      "type": "java.io.SerializablePermission"
+    },
+    {
+      "static": true,
+      "name": "PROTOCOL_VERSION_1",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PROTOCOL_VERSION_2",
+      "type": "int"
+    }
+  ]
+}

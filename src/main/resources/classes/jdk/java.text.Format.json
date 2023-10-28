@@ -1,0 +1,110 @@
+{
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "format",
+      "parameters": [
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "toAppendTo",
+          "type": "java.lang.StringBuffer"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.FieldPosition"
+        }
+      ],
+      "return": "java.lang.StringBuffer"
+    },
+    {
+      "name": "formatToCharacterIterator",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.text.AttributedCharacterIterator"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "pos",
+          "type": "java.text.ParsePosition"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "parseObject",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "java.text.Format",
+  "simple-name": "Format"
+}

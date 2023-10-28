@@ -1,0 +1,259 @@
+{
+  "package": "java.lang.reflect",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "isPublic",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isPrivate",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isProtected",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isStatic",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isFinal",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isSynchronized",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isVolatile",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isTransient",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isNative",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isInterface",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isAbstract",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isStrict",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "mod",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "classModifiers",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "interfaceModifiers",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "constructorModifiers",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "methodModifiers",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "fieldModifiers",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "parameterModifiers",
+      "return": "int"
+    }
+  ],
+  "name": "java.lang.reflect.Modifier",
+  "simple-name": "Modifier",
+  "fields": [
+    {
+      "static": true,
+      "name": "PUBLIC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PRIVATE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "PROTECTED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "STATIC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "FINAL",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "SYNCHRONIZED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "VOLATILE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "TRANSIENT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "NATIVE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "INTERFACE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ABSTRACT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "STRICT",
+      "type": "int"
+    }
+  ]
+}

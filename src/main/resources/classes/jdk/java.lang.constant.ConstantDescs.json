@@ -1,0 +1,393 @@
+{
+  "package": "java.lang.constant",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "ofCallsiteBootstrap",
+      "parameters": [
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "returnType",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "paramTypes",
+          "type": "java.lang.constant.ClassDesc[]"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "ofConstantBootstrap",
+      "parameters": [
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "returnType",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "paramTypes",
+          "type": "java.lang.constant.ClassDesc[]"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    }
+  ],
+  "name": "java.lang.constant.ConstantDescs",
+  "simple-name": "ConstantDescs",
+  "fields": [
+    {
+      "static": true,
+      "name": "DEFAULT_NAME",
+      "type": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "CD_Object",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_String",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Class",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Number",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Integer",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Long",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Float",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Double",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Short",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Byte",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Character",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Boolean",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Void",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Throwable",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Exception",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Enum",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_VarHandle",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodHandles",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodHandles_Lookup",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodHandle",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodType",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_CallSite",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Collection",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_List",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Set",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_Map",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_ConstantDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_ClassDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_EnumDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodTypeDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodHandleDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_DirectMethodHandleDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_VarHandleDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_MethodHandleDesc_Kind",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_DynamicConstantDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_DynamicCallSiteDesc",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_ConstantBootstraps",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_PRIMITIVE_CLASS",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_ENUM_CONSTANT",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_GET_STATIC_FINAL",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_NULL_CONSTANT",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_VARHANDLE_FIELD",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_VARHANDLE_STATIC_FIELD",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_VARHANDLE_ARRAY",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_INVOKE",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "BSM_EXPLICIT_CAST",
+      "type": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_int",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_long",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_float",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_double",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_short",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_byte",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_char",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_boolean",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "CD_void",
+      "type": "java.lang.constant.ClassDesc"
+    },
+    {
+      "static": true,
+      "name": "NULL",
+      "type": "java.lang.constant.ConstantDesc"
+    },
+    {
+      "static": true,
+      "name": "TRUE",
+      "type": "java.lang.constant.DynamicConstantDesc"
+    },
+    {
+      "static": true,
+      "name": "FALSE",
+      "type": "java.lang.constant.DynamicConstantDesc"
+    }
+  ]
+}

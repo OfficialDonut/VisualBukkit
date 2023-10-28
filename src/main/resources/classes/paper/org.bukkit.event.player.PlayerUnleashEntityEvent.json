@@ -1,0 +1,166 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "entity",
+          "type": "org.bukkit.entity.Entity"
+        },
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hand",
+          "type": "org.bukkit.inventory.EquipmentSlot"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "entity",
+          "type": "org.bukkit.entity.Entity"
+        },
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hand",
+          "type": "org.bukkit.inventory.EquipmentSlot"
+        },
+        {
+          "name": "dropLeash",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "entity",
+          "type": "org.bukkit.entity.Entity"
+        },
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getReason",
+      "return": "org.bukkit.event.entity.EntityUnleashEvent.UnleashReason"
+    },
+    {
+      "name": "isDropLeash",
+      "return": "boolean"
+    },
+    {
+      "name": "setDropLeash",
+      "parameters": [{
+        "name": "dropLeash",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getHand",
+      "return": "org.bukkit.inventory.EquipmentSlot"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "name": "org.bukkit.event.player.PlayerUnleashEntityEvent",
+  "simple-name": "PlayerUnleashEntityEvent"
+}

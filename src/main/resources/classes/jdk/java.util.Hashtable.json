@@ -1,0 +1,322 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "initialCapacity",
+          "type": "int"
+        },
+        {
+          "name": "loadFactor",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "initialCapacity",
+        "type": "int"
+      }]
+    },
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "t",
+        "type": "java.util.Map"
+      }]
+    }
+  ],
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "size",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "keys",
+      "return": "java.util.Enumeration"
+    },
+    {
+      "name": "elements",
+      "return": "java.util.Enumeration"
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "value",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "containsValue",
+      "parameters": [{
+        "name": "value",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "containsKey",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "putAll",
+      "parameters": [{
+        "name": "t",
+        "type": "java.util.Map"
+      }]
+    },
+    {"name": "clear"},
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "keySet",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "entrySet",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "values",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "getOrDefault",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "defaultValue",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.BiConsumer"
+      }]
+    },
+    {
+      "name": "replaceAll",
+      "parameters": [{
+        "name": "function",
+        "type": "java.util.function.BiFunction"
+      }]
+    },
+    {
+      "name": "putIfAbsent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "oldValue",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "newValue",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "computeIfAbsent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "mappingFunction",
+          "type": "java.util.function.Function"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "computeIfPresent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "compute",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "merge",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "java.util.Hashtable",
+  "simple-name": "Hashtable"
+}

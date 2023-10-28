@@ -1,0 +1,134 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "furnace",
+          "type": "org.bukkit.block.Block"
+        },
+        {
+          "name": "source",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "recipe",
+          "type": "org.bukkit.inventory.CookingRecipe"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "furnace",
+          "type": "org.bukkit.block.Block"
+        },
+        {
+          "name": "source",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "recipe",
+          "type": "org.bukkit.inventory.CookingRecipe"
+        },
+        {
+          "name": "cookingTime",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getBlock",
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getSource",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getRecipe",
+      "return": "org.bukkit.inventory.CookingRecipe"
+    },
+    {
+      "name": "getTotalCookTime",
+      "return": "int"
+    },
+    {
+      "name": "setTotalCookTime",
+      "parameters": [{
+        "name": "cookTime",
+        "type": "int"
+      }]
+    }
+  ],
+  "name": "org.bukkit.event.inventory.FurnaceStartSmeltEvent",
+  "simple-name": "FurnaceStartSmeltEvent"
+}

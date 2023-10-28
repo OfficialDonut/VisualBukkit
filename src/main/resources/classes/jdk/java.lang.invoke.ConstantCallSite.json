@@ -1,0 +1,76 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "target",
+      "type": "java.lang.invoke.MethodHandle"
+    }]
+  }],
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "type",
+      "return": "java.lang.invoke.MethodType"
+    },
+    {
+      "name": "getTarget",
+      "return": "java.lang.invoke.MethodHandle"
+    },
+    {
+      "name": "setTarget",
+      "parameters": [{
+        "name": "ignore",
+        "type": "java.lang.invoke.MethodHandle"
+      }]
+    },
+    {
+      "name": "dynamicInvoker",
+      "return": "java.lang.invoke.MethodHandle"
+    }
+  ],
+  "name": "java.lang.invoke.ConstantCallSite",
+  "simple-name": "ConstantCallSite"
+}

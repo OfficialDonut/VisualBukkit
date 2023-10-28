@@ -1,0 +1,196 @@
+{
+  "package": "org.bukkit.material.types",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.material.types.MushroomBlockTexture[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "name": "getData",
+      "return": "byte"
+    },
+    {
+      "name": "getCapFace",
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "static": true,
+      "name": "getByData",
+      "parameters": [{
+        "name": "data",
+        "type": "byte"
+      }],
+      "return": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "getCapByFace",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "org.bukkit.material.types.MushroomBlockTexture"
+    }
+  ],
+  "name": "org.bukkit.material.types.MushroomBlockTexture",
+  "simple-name": "MushroomBlockTexture",
+  "fields": [
+    {
+      "static": true,
+      "name": "ALL_PORES",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_NORTH_WEST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_NORTH",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_NORTH_EAST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_WEST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_TOP",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_EAST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_SOUTH_WEST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_SOUTH",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "CAP_SOUTH_EAST",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "STEM_SIDES",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "ALL_CAP",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    },
+    {
+      "static": true,
+      "name": "ALL_STEM",
+      "type": "org.bukkit.material.types.MushroomBlockTexture"
+    }
+  ]
+}

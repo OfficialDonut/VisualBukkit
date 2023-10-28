@@ -1,0 +1,411 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "toArray",
+      "parameters": [{
+        "name": "generator",
+        "type": "java.util.function.IntFunction"
+      }],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "removeIf",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "stream",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "parallelStream",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.Iterator"
+    },
+    {
+      "name": "size",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toArray",
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "toArray",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "add",
+      "parameters": [{
+        "name": "e",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "containsAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "addAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "retainAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {"name": "clear"},
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "size",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "contains",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.Iterator"
+    },
+    {
+      "name": "toArray",
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "toArray",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "add",
+      "parameters": [{
+        "name": "e",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "containsAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "addAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "retainAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {"name": "clear"},
+    {
+      "name": "spliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "removeAll",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "noneOf",
+      "parameters": [{
+        "name": "elementType",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "allOf",
+      "parameters": [{
+        "name": "elementType",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [{
+        "name": "s",
+        "type": "java.util.EnumSet"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [{
+        "name": "c",
+        "type": "java.util.Collection"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "complementOf",
+      "parameters": [{
+        "name": "s",
+        "type": "java.util.EnumSet"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "e",
+        "type": "java.lang.Enum"
+      }],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "e1",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e2",
+          "type": "java.lang.Enum"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "e1",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e2",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e3",
+          "type": "java.lang.Enum"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "e1",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e2",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e3",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e4",
+          "type": "java.lang.Enum"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "e1",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e2",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e3",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e4",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "e5",
+          "type": "java.lang.Enum"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "first",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "rest",
+          "type": "java.lang.Enum[]"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "static": true,
+      "name": "range",
+      "parameters": [
+        {
+          "name": "from",
+          "type": "java.lang.Enum"
+        },
+        {
+          "name": "to",
+          "type": "java.lang.Enum"
+        }
+      ],
+      "return": "java.util.EnumSet"
+    },
+    {
+      "name": "clone",
+      "return": "java.util.EnumSet"
+    }
+  ],
+  "name": "java.util.EnumSet",
+  "simple-name": "EnumSet"
+}

@@ -1,0 +1,194 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "executor",
+          "type": "java.util.concurrent.Executor"
+        },
+        {
+          "name": "maxBufferCapacity",
+          "type": "int"
+        },
+        {
+          "name": "handler",
+          "type": "java.util.function.BiConsumer"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "executor",
+          "type": "java.util.concurrent.Executor"
+        },
+        {
+          "name": "maxBufferCapacity",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "<init>"}
+  ],
+  "package": "java.util.concurrent",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "subscribe",
+      "parameters": [{
+        "name": "subscriber",
+        "type": "java.util.concurrent.Flow.Subscriber"
+      }]
+    },
+    {
+      "name": "submit",
+      "parameters": [{
+        "name": "item",
+        "type": "java.lang.Object"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "offer",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "onDrop",
+          "type": "java.util.function.BiPredicate"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "offer",
+      "parameters": [
+        {
+          "name": "item",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "timeout",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.util.concurrent.TimeUnit"
+        },
+        {
+          "name": "onDrop",
+          "type": "java.util.function.BiPredicate"
+        }
+      ],
+      "return": "int"
+    },
+    {"name": "close"},
+    {
+      "name": "closeExceptionally",
+      "parameters": [{
+        "name": "error",
+        "type": "java.lang.Throwable"
+      }]
+    },
+    {
+      "name": "isClosed",
+      "return": "boolean"
+    },
+    {
+      "name": "getClosedException",
+      "return": "java.lang.Throwable"
+    },
+    {
+      "name": "hasSubscribers",
+      "return": "boolean"
+    },
+    {
+      "name": "getNumberOfSubscribers",
+      "return": "int"
+    },
+    {
+      "name": "getExecutor",
+      "return": "java.util.concurrent.Executor"
+    },
+    {
+      "name": "getMaxBufferCapacity",
+      "return": "int"
+    },
+    {
+      "name": "getSubscribers",
+      "return": "java.util.List"
+    },
+    {
+      "name": "isSubscribed",
+      "parameters": [{
+        "name": "subscriber",
+        "type": "java.util.concurrent.Flow.Subscriber"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "estimateMinimumDemand",
+      "return": "long"
+    },
+    {
+      "name": "estimateMaximumLag",
+      "return": "int"
+    },
+    {
+      "name": "consume",
+      "parameters": [{
+        "name": "consumer",
+        "type": "java.util.function.Consumer"
+      }],
+      "return": "java.util.concurrent.CompletableFuture"
+    }
+  ],
+  "name": "java.util.concurrent.SubmissionPublisher",
+  "simple-name": "SubmissionPublisher"
+}

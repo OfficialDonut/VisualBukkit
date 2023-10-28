@@ -1,0 +1,409 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "emptySpliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "emptyIntSpliterator",
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "emptyLongSpliterator",
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "emptyDoubleSpliterator",
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "additionalCharacteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "c",
+          "type": "java.util.Collection"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.Iterator"
+        },
+        {
+          "name": "size",
+          "type": "long"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliteratorUnknownSize",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.Iterator"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfInt"
+        },
+        {
+          "name": "size",
+          "type": "long"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliteratorUnknownSize",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfInt"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfLong"
+        },
+        {
+          "name": "size",
+          "type": "long"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliteratorUnknownSize",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfLong"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfDouble"
+        },
+        {
+          "name": "size",
+          "type": "long"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "spliteratorUnknownSize",
+      "parameters": [
+        {
+          "name": "iterator",
+          "type": "java.util.PrimitiveIterator.OfDouble"
+        },
+        {
+          "name": "characteristics",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "iterator",
+      "parameters": [{
+        "name": "spliterator",
+        "type": "java.util.Spliterator"
+      }],
+      "return": "java.util.Iterator"
+    },
+    {
+      "static": true,
+      "name": "iterator",
+      "parameters": [{
+        "name": "spliterator",
+        "type": "java.util.Spliterator.OfInt"
+      }],
+      "return": "java.util.PrimitiveIterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "iterator",
+      "parameters": [{
+        "name": "spliterator",
+        "type": "java.util.Spliterator.OfLong"
+      }],
+      "return": "java.util.PrimitiveIterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "iterator",
+      "parameters": [{
+        "name": "spliterator",
+        "type": "java.util.Spliterator.OfDouble"
+      }],
+      "return": "java.util.PrimitiveIterator.OfDouble"
+    }
+  ],
+  "name": "java.util.Spliterators",
+  "simple-name": "Spliterators"
+}

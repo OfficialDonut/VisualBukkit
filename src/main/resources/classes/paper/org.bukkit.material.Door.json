@@ -1,0 +1,247 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "face",
+          "type": "org.bukkit.block.BlockFace"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "face",
+          "type": "org.bukkit.block.BlockFace"
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "isHingeRight",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "species",
+          "type": "org.bukkit.TreeSpecies"
+        },
+        {
+          "name": "face",
+          "type": "org.bukkit.block.BlockFace"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "species",
+          "type": "org.bukkit.TreeSpecies"
+        },
+        {
+          "name": "face",
+          "type": "org.bukkit.block.BlockFace"
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "species",
+          "type": "org.bukkit.TreeSpecies"
+        },
+        {
+          "name": "isHingeRight",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "data",
+          "type": "byte"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.material",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getData",
+      "return": "byte"
+    },
+    {
+      "name": "setData",
+      "parameters": [{
+        "name": "data",
+        "type": "byte"
+      }]
+    },
+    {
+      "name": "getItemType",
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "toItemStack",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "toItemStack",
+      "parameters": [{
+        "name": "amount",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "getWoodDoorOfSpecies",
+      "parameters": [{
+        "name": "species",
+        "type": "org.bukkit.TreeSpecies"
+      }],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "isOpen",
+      "return": "boolean"
+    },
+    {
+      "name": "setOpen",
+      "parameters": [{
+        "name": "isOpen",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isTopHalf",
+      "return": "boolean"
+    },
+    {
+      "name": "setTopHalf",
+      "parameters": [{
+        "name": "isTopHalf",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHingeCorner",
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setFacingDirection",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }]
+    },
+    {
+      "name": "getFacing",
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "name": "getHinge",
+      "return": "boolean"
+    },
+    {
+      "name": "setHinge",
+      "parameters": [{
+        "name": "isHingeRight",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "clone",
+      "return": "org.bukkit.material.Door"
+    }
+  ],
+  "name": "org.bukkit.material.Door",
+  "simple-name": "Door"
+}

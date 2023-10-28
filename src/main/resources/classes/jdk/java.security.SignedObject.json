@@ -1,0 +1,93 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "object",
+        "type": "java.io.Serializable"
+      },
+      {
+        "name": "signingKey",
+        "type": "java.security.PrivateKey"
+      },
+      {
+        "name": "signingEngine",
+        "type": "java.security.Signature"
+      }
+    ]
+  }],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getObject",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getSignature",
+      "return": "byte[]"
+    },
+    {
+      "name": "getAlgorithm",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "verify",
+      "parameters": [
+        {
+          "name": "verificationKey",
+          "type": "java.security.PublicKey"
+        },
+        {
+          "name": "verificationEngine",
+          "type": "java.security.Signature"
+        }
+      ],
+      "return": "boolean"
+    }
+  ],
+  "name": "java.security.SignedObject",
+  "simple-name": "SignedObject"
+}

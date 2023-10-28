@@ -1,0 +1,203 @@
+{
+  "package": "java.security.cert",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "hasUnsupportedCriticalExtension",
+      "return": "boolean"
+    },
+    {
+      "name": "getCriticalExtensionOIDs",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "getNonCriticalExtensionOIDs",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "getExtensionValue",
+      "parameters": [{
+        "name": "oid",
+        "type": "java.lang.String"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "getType",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "getEncoded",
+      "return": "byte[]"
+    },
+    {
+      "name": "verify",
+      "parameters": [{
+        "name": "key",
+        "type": "java.security.PublicKey"
+      }]
+    },
+    {
+      "name": "verify",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.security.PublicKey"
+        },
+        {
+          "name": "sigProvider",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getPublicKey",
+      "return": "java.security.PublicKey"
+    },
+    {"name": "checkValidity"},
+    {
+      "name": "checkValidity",
+      "parameters": [{
+        "name": "date",
+        "type": "java.util.Date"
+      }]
+    },
+    {
+      "name": "getVersion",
+      "return": "int"
+    },
+    {
+      "name": "getSerialNumber",
+      "return": "java.math.BigInteger"
+    },
+    {
+      "name": "getIssuerDN",
+      "return": "java.security.Principal"
+    },
+    {
+      "name": "getIssuerX500Principal",
+      "return": "javax.security.auth.x500.X500Principal"
+    },
+    {
+      "name": "getSubjectDN",
+      "return": "java.security.Principal"
+    },
+    {
+      "name": "getSubjectX500Principal",
+      "return": "javax.security.auth.x500.X500Principal"
+    },
+    {
+      "name": "getNotBefore",
+      "return": "java.util.Date"
+    },
+    {
+      "name": "getNotAfter",
+      "return": "java.util.Date"
+    },
+    {
+      "name": "getTBSCertificate",
+      "return": "byte[]"
+    },
+    {
+      "name": "getSignature",
+      "return": "byte[]"
+    },
+    {
+      "name": "getSigAlgName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getSigAlgOID",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getSigAlgParams",
+      "return": "byte[]"
+    },
+    {
+      "name": "getIssuerUniqueID",
+      "return": "boolean[]"
+    },
+    {
+      "name": "getSubjectUniqueID",
+      "return": "boolean[]"
+    },
+    {
+      "name": "getKeyUsage",
+      "return": "boolean[]"
+    },
+    {
+      "name": "getExtendedKeyUsage",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getBasicConstraints",
+      "return": "int"
+    },
+    {
+      "name": "getSubjectAlternativeNames",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "getIssuerAlternativeNames",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "verify",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.security.PublicKey"
+        },
+        {
+          "name": "sigProvider",
+          "type": "java.security.Provider"
+        }
+      ]
+    }
+  ],
+  "name": "java.security.cert.X509Certificate",
+  "simple-name": "X509Certificate"
+}

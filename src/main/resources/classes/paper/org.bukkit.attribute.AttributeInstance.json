@@ -1,0 +1,98 @@
+{
+  "package": "org.bukkit.attribute",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getAttribute",
+      "return": "org.bukkit.attribute.Attribute"
+    },
+    {
+      "name": "getBaseValue",
+      "return": "double"
+    },
+    {
+      "name": "setBaseValue",
+      "parameters": [{
+        "name": "value",
+        "type": "double"
+      }]
+    },
+    {
+      "name": "getModifiers",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "addModifier",
+      "parameters": [{
+        "name": "modifier",
+        "type": "org.bukkit.attribute.AttributeModifier"
+      }]
+    },
+    {
+      "name": "addTransientModifier",
+      "parameters": [{
+        "name": "modifier",
+        "type": "org.bukkit.attribute.AttributeModifier"
+      }]
+    },
+    {
+      "name": "removeModifier",
+      "parameters": [{
+        "name": "modifier",
+        "type": "org.bukkit.attribute.AttributeModifier"
+      }]
+    },
+    {
+      "name": "getValue",
+      "return": "double"
+    },
+    {
+      "name": "getDefaultValue",
+      "return": "double"
+    }
+  ],
+  "name": "org.bukkit.attribute.AttributeInstance",
+  "simple-name": "AttributeInstance"
+}

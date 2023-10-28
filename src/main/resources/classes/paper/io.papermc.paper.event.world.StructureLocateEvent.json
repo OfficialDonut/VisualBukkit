@@ -1,0 +1,159 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "world",
+        "type": "org.bukkit.World"
+      },
+      {
+        "name": "origin",
+        "type": "org.bukkit.Location"
+      },
+      {
+        "name": "structureType",
+        "type": "org.bukkit.StructureType"
+      },
+      {
+        "name": "radius",
+        "type": "int"
+      },
+      {
+        "name": "findUnexplored",
+        "type": "boolean"
+      }
+    ]
+  }],
+  "package": "io.papermc.paper.event.world",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getWorld",
+      "return": "org.bukkit.World"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getResult",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "setResult",
+      "parameters": [{
+        "name": "result",
+        "type": "org.bukkit.Location"
+      }]
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.StructureType"
+    },
+    {
+      "name": "setType",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.StructureType"
+      }]
+    },
+    {
+      "name": "getOrigin",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getRadius",
+      "return": "int"
+    },
+    {
+      "name": "setRadius",
+      "parameters": [{
+        "name": "radius",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "shouldFindUnexplored",
+      "return": "boolean"
+    },
+    {
+      "name": "setFindUnexplored",
+      "parameters": [{
+        "name": "findUnexplored",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "name": "io.papermc.paper.event.world.StructureLocateEvent",
+  "simple-name": "StructureLocateEvent"
+}

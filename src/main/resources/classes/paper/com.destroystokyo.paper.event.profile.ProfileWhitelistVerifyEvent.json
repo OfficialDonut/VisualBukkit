@@ -1,0 +1,168 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "profile",
+          "type": "com.destroystokyo.paper.profile.PlayerProfile"
+        },
+        {
+          "name": "whitelistEnabled",
+          "type": "boolean"
+        },
+        {
+          "name": "whitelisted",
+          "type": "boolean"
+        },
+        {
+          "name": "isOp",
+          "type": "boolean"
+        },
+        {
+          "name": "kickMessage",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "profile",
+          "type": "com.destroystokyo.paper.profile.PlayerProfile"
+        },
+        {
+          "name": "whitelistEnabled",
+          "type": "boolean"
+        },
+        {
+          "name": "whitelisted",
+          "type": "boolean"
+        },
+        {
+          "name": "isOp",
+          "type": "boolean"
+        },
+        {
+          "name": "kickMessage",
+          "type": "Component"
+        }
+      ]
+    }
+  ],
+  "package": "com.destroystokyo.paper.event.profile",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getKickMessage",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setKickMessage",
+      "parameters": [{
+        "name": "kickMessage",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "kickMessage",
+      "return": "Component"
+    },
+    {
+      "name": "kickMessage",
+      "parameters": [{
+        "name": "kickMessage",
+        "type": "Component"
+      }]
+    },
+    {
+      "name": "getPlayerProfile",
+      "return": "com.destroystokyo.paper.profile.PlayerProfile"
+    },
+    {
+      "name": "isWhitelisted",
+      "return": "boolean"
+    },
+    {
+      "name": "setWhitelisted",
+      "parameters": [{
+        "name": "whitelisted",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isOp",
+      "return": "boolean"
+    },
+    {
+      "name": "isWhitelistEnabled",
+      "return": "boolean"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.profile.ProfileWhitelistVerifyEvent",
+  "simple-name": "ProfileWhitelistVerifyEvent"
+}

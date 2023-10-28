@@ -1,0 +1,128 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "empty",
+      "return": "java.util.OptionalDouble"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "value",
+        "type": "double"
+      }],
+      "return": "java.util.OptionalDouble"
+    },
+    {
+      "name": "getAsDouble",
+      "return": "double"
+    },
+    {
+      "name": "isPresent",
+      "return": "boolean"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "ifPresent",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.DoubleConsumer"
+      }]
+    },
+    {
+      "name": "ifPresentOrElse",
+      "parameters": [
+        {
+          "name": "action",
+          "type": "java.util.function.DoubleConsumer"
+        },
+        {
+          "name": "emptyAction",
+          "type": "java.lang.Runnable"
+        }
+      ]
+    },
+    {
+      "name": "stream",
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "name": "orElse",
+      "parameters": [{
+        "name": "other",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "name": "orElseGet",
+      "parameters": [{
+        "name": "supplier",
+        "type": "java.util.function.DoubleSupplier"
+      }],
+      "return": "double"
+    },
+    {
+      "name": "orElseThrow",
+      "return": "double"
+    },
+    {
+      "name": "orElseThrow",
+      "parameters": [{
+        "name": "exceptionSupplier",
+        "type": "java.util.function.Supplier"
+      }],
+      "return": "double"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.util.OptionalDouble",
+  "simple-name": "OptionalDouble"
+}

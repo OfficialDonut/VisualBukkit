@@ -2,15 +2,12 @@ package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
-import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.maven.shared.invoker.*;
-import org.eclipse.aether.artifact.DefaultArtifact;
-import org.eclipse.aether.repository.RemoteRepository;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -20,9 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PluginBuilder {
@@ -66,7 +61,7 @@ public class PluginBuilder {
                 JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, Resources.toString(PluginBuilder.class.getResource("/plugin/PluginMain.java"), StandardCharsets.UTF_8));
                 mainClass.setPackage(packageName);
 
-                if (Files.exists(project.getResourcesDirectory()) && Files.list(project.getResourcesDirectory()).findAny().isPresent()) {
+                if (Files.exists(project.getResourcesDirectory())) {
                     try (Stream<Path> stream = Files.walk(project.getResourcesDirectory())) {
                         for (Path path : stream.toArray(Path[]::new)) {
                             if (Files.isRegularFile(path) && !Files.isHidden(path)) {
@@ -83,9 +78,6 @@ public class PluginBuilder {
                 }
 
                 BuildInfo buildInfo = new BuildInfo(mainClass);
-                buildInfo.getMavenRepositories().addAll(ClassRegistry.getMavenRepositories());
-                buildInfo.getMavenDependencies().addAll(ClassRegistry.getMavenDependencies());
-
                 for (PluginComponentBlock block : project.getPluginComponents()) {
                     block.prepareBuild(buildInfo);
                 }
@@ -124,21 +116,8 @@ public class PluginBuilder {
         return Resources.toString(PluginBuilder.class.getResource("/plugin/pom.xml"), StandardCharsets.UTF_8)
                 .replace("{ARTIFACT_ID}", artifactId)
                 .replace("{VERSION}", version)
-                .replace("{REPOSITORIES}", buildInfo.getMavenRepositories().stream().map(PluginBuilder::getRepositoryString).collect(Collectors.joining("\n        ")))
-                .replace("{DEPENDENCIES}", buildInfo.getMavenDependencies().stream().map(PluginBuilder::getDependencyString).collect(Collectors.joining("\n        ")));
-    }
-
-    private static String getRepositoryString(RemoteRepository repo) {
-        return String.format("<repository><id>%s</id><url>%s</url></repository>", repo.getId(), repo.getUrl());
-    }
-
-    private static String getDependencyString(DefaultArtifact artifact) {
-        StringBuilder builder = new StringBuilder("<dependency>");
-        builder.append(String.format("<groupId>%s</groupId><artifactId>%s</artifactId><version>%s</version>", artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion()));
-        for (Map.Entry<String, String> entry : artifact.getProperties().entrySet()) {
-            builder.append("<").append(entry.getKey()).append(">").append(entry.getValue()).append("</").append(entry.getKey()).append(">");
-        }
-        return builder.append("</dependency>").toString();
+                .replace("{REPOSITORIES}", String.join("\n        ", buildInfo.getMavenRepositories()))
+                .replace("{DEPENDENCIES}", String.join("\n        ", buildInfo.getMavenDependencies()));
     }
 
     private static String createPluginYml(Project project, String pluginName, String version, String mainClassName) throws IOException {

@@ -1,0 +1,1416 @@
+{
+  "package": "com.destroystokyo.paper.entity.ai",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "shouldActivate",
+      "return": "boolean"
+    },
+    {
+      "name": "shouldStayActive",
+      "return": "boolean"
+    },
+    {"name": "start"},
+    {"name": "stop"},
+    {"name": "tick"},
+    {
+      "name": "getKey",
+      "return": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "name": "getTypes",
+      "return": "java.util.EnumSet"
+    }
+  ],
+  "name": "com.destroystokyo.paper.entity.ai.VanillaGoal",
+  "simple-name": "VanillaGoal",
+  "fields": [
+    {
+      "static": true,
+      "name": "AVOID_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEG",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BREAK_DOOR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BREATH_AIR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BREED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_LIE_ON_BED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_SIT_ON_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DOLPHIN_JUMP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EAT_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FLEE_SUN",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FLOAT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_BOAT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_FLOCK_LEADER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_MOB",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_OWNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_PARENT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GOLEM_RANDOM_STROLL_IN_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "INTERACT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LAND_ON_OWNERS_SHOULDER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LEAP_AT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LLAMA_FOLLOW_CARAVAN",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LOOK_AT_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LOOK_AT_TRADING_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MOVE_BACK_TO_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MOVE_THROUGH_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MOVE_TOWARDS_RESTRICTION",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MOVE_TOWARDS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OCELOT_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OFFER_FLOWER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OPEN_DOOR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PATHFIND_TO_RAID",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_LOOK_AROUND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_STAND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_STROLL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_SWIMMING",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANGED_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANGED_BOW_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANGED_CROSSBOW_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "REMOVE_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RESTRICT_SUN",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RUN_AROUND_LIKE_CRAZY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SIT_WHEN_ORDERED_TO",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "STROLL_THROUGH_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SWELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TEMPT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TRADE_WITH_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TRY_FIND_WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "USE_ITEM",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WATER_AVOIDING_RANDOM_FLYING",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WATER_AVOIDING_RANDOM_STROLL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ZOMBIE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DEFEND_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_ATTACKABLE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_ATTACKABLE_WITCH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_HEALABLE_RAIDER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NON_TAME_RANDOM",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OWNER_HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OWNER_HURT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RESET_UNIVERSAL_ANGER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FISH_SWIM",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_BECOME_ANGRY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_ENTER_HIVE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_GO_TO_HIVE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_GO_TO_KNOWN_FLOWER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_GROW_CROP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_HURT_BY_OTHER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_LOCATE_HIVE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_POLLINATE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BEE_WANDER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_AVOID_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_RELAX_ON_OWNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_TEMPT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DOLPHIN_SWIM_TO_TREASURE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DOLPHIN_SWIM_WITH_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PLAY_WITH_ITEMS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DEFEND_TRUSTED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FACEPLANT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_BREED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_EAT_BERRIES",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_FLOAT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_FOLLOW_PARENT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_LOOK_AT_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_POUNCE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_SEARCH_FOR_ITEMS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_STROLL_THROUGH_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PERCH_AND_SEARCH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SEEK_SHELTER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLEEP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "STALK_PREY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OCELOT_AVOID_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OCELOT_TEMPT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_AVOID",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_BREED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_LIE_ON_BACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_LOOK_AT_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_ROLL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_SIT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_SNEEZE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLAR_BEAR_ATTACK_PLAYERS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLAR_BEAR_HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLAR_BEAR_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLAR_BEAR_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PUFFERFISH_PUFF",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RABBIT_AVOID_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RABBIT_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAID_GARDEN",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SQUID_FLEE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SQUID_RANDOM_MOVEMENT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_BREED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_GO_HOME",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_GO_TO_WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_LAY_EGG",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_RANDOM_STROLL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_TRAVEL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WOLF_AVOID_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LLAMA_ATTACK_WOLF",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LLAMA_HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SKELETON_TRAP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TRADER_LLAMA_DEFEND_WANDERING_TRADER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WITHER_DO_NOTHING",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAIDER_OPEN_DOOR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SKELETON_MELEE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BLAZE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_GO_TO_BEACH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_GO_TO_WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_SWIM_UP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_TRIDENT_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_FREEZE_WHEN_LOOKED_AT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_LEAVE_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_LOOK_FOR_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_TAKE_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVOKER_ATTACK_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVOKER_CASTING_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVOKER_SUMMON_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVOKER_WOLOLO_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GHAST_LOOK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GHAST_SHOOT_FIREBALL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_FLOAT_AROUND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GUARDIAN_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ILLUSIONER_BLINDNESS_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ILLUSIONER_MIRROR_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LONG_DISTANCE_PATROL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PHANTOM_ATTACK_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PHANTOM_ATTACK_STRATEGY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PHANTOM_CIRCLE_AROUND_ANCHOR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PHANTOM_SWEEP_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_DEFENSE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_NEAREST_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_PEEK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SILVERFISH_MERGE_WITH_STONE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SILVERFISH_WAKE_UP_FRIENDS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_FLOAT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_KEEP_ON_JUMPING",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_RANDOM_DIRECTION",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPELLCASTER_CASTING_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPIDER_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPIDER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "STRIDER_GO_TO_LAVA",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VEX_CHARGE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VEX_COPY_OWNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VEX_RANDOM_MOVE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VINDICATOR_BREAK_DOOR",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VINDICATOR_JOHNNY_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ZOMBIE_ATTACK_TURTLE_EGG",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WANDER_TO_POSITION",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "HOLD_GROUND_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OBTAIN_RAID_LEADER_BANNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAIDER_CELEBRATION",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAIDER_MOVE_THROUGH_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PARROT_WANDER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CLIMB_ON_TOP_OF_POWDER_SNOW",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WOLF_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VINDICATOR_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAVAGER_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVIL_RABBIT_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ANGER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ANGER_OTHER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BLAZE_FIREBALL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TEMPT_CHANCE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DOLPHIN_PLAY_WITH_ITEMS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_GOTO_BEACH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DROWNED_GOTO_WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_PICKUP_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ENDERMAN_PLACE_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PLAYER_WHO_LOOKED_AT_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EVOKER_CAST_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_DEFEND_TRUSTED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_FACEPLANT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_PERCH_AND_SEARCH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_SLEEP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_SEEK_SHELTER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOX_STALK_PREY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GHAST_ATTACK_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GHAST_IDLE_MOVE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "GHAST_MOVE_TOWARDS_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPELLCASTER_CAST_SPELL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LLAMATRADER_DEFENDED_WANDERING_TRADER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PANDA_HURT_BY_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLARBEAR_ATTACK_PLAYERS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLARBEAR_HURT_BY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLARBEAR_MELEE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "POLARBEAR_PANIC",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EAT_CARROTS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "KILLER_RABBIT_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RABBIT_AVOID_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAIDER_HOLD_GROUND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAIDER_OBTAIN_BANNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_DEFENSE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SHULKER_NEAREST",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SILVERFISH_HIDE_IN_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SILVERFISH_WAKE_OTHERS",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_IDLE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_NEAREST_PLAYER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SLIME_RANDOM_JUMP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPIDER_MELEE_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SPIDER_NEAREST_ATTACKABLE_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SQUID",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_GOTO_WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TURTLE_TEMPT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VEX_COPY_TARGET_OF_OWNER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "VILLAGERTRADER_WANDER_TO_POSITION",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "ARROW_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "AVOID_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BOW_SHOOT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "BREATH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CAT_SIT_ON_BED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "CROSSBOW_ATTACK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "DOOR_OPEN",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "EAT_TILE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FISH_SCHOOL",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "FOLLOW_ENTITY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "HORSE_TRAP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "HURT_BY_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "JUMP_ON_BLOCK",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LEAP_AT_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "LLAMA_FOLLOW",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "MOVE_TOWARDS_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_ATTACKABLE_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_ATTACKABLE_TARGET_WITCH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "NEAREST_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OWNER_HURT_BY_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "OWNER_HURT_TARGET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "PERCH",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RAID",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_FLY",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_LOOKAROUND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_STROLL_LAND",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_SWIM",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "RANDOM_TARGET_NON_TAMED",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "SIT",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "STROLL_VILLAGE",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "TAME",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WATER",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "WATER_JUMP",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "STROLL_VILLAGE_GOLEM",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    },
+    {
+      "static": true,
+      "name": "UNIVERSAL_ANGER_RESET",
+      "type": "com.destroystokyo.paper.entity.ai.GoalKey"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "org.bukkit.command.CommandSender"
+        },
+        {
+          "name": "buffer",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "completions",
+          "type": "java.util.List"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "org.bukkit.command.CommandSender"
+        },
+        {
+          "name": "buffer",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "completions",
+          "type": "java.util.List"
+        },
+        {
+          "name": "isCommand",
+          "type": "boolean"
+        },
+        {
+          "name": "location",
+          "type": "org.bukkit.Location"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.server",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getSender",
+      "return": "org.bukkit.command.CommandSender"
+    },
+    {
+      "name": "getBuffer",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getCompletions",
+      "return": "java.util.List"
+    },
+    {
+      "name": "isCommand",
+      "return": "boolean"
+    },
+    {
+      "name": "getLocation",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "setCompletions",
+      "parameters": [{
+        "name": "completions",
+        "type": "java.util.List"
+      }]
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancelled",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.server.TabCompleteEvent",
+  "simple-name": "TabCompleteEvent"
+}

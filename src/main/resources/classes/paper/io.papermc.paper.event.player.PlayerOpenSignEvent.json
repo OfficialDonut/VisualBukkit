@@ -1,0 +1,119 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "editor",
+        "type": "org.bukkit.entity.Player"
+      },
+      {
+        "name": "sign",
+        "type": "org.bukkit.block.Sign"
+      },
+      {
+        "name": "side",
+        "type": "org.bukkit.block.sign.Side"
+      },
+      {
+        "name": "cause",
+        "type": "io.papermc.paper.event.player.PlayerOpenSignEvent.Cause"
+      }
+    ]
+  }],
+  "package": "io.papermc.paper.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getSign",
+      "return": "org.bukkit.block.Sign"
+    },
+    {
+      "name": "getSide",
+      "return": "org.bukkit.block.sign.Side"
+    },
+    {
+      "name": "getCause",
+      "return": "io.papermc.paper.event.player.PlayerOpenSignEvent.Cause"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "io.papermc.paper.event.player.PlayerOpenSignEvent",
+  "simple-name": "PlayerOpenSignEvent"
+}

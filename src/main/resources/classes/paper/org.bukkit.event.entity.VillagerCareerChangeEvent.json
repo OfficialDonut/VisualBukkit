@@ -1,0 +1,122 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "what",
+        "type": "org.bukkit.entity.Villager"
+      },
+      {
+        "name": "profession",
+        "type": "org.bukkit.entity.Villager.Profession"
+      },
+      {
+        "name": "reason",
+        "type": "org.bukkit.event.entity.VillagerCareerChangeEvent.ChangeReason"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Villager"
+    },
+    {
+      "name": "getProfession",
+      "return": "org.bukkit.entity.Villager.Profession"
+    },
+    {
+      "name": "setProfession",
+      "parameters": [{
+        "name": "profession",
+        "type": "org.bukkit.entity.Villager.Profession"
+      }]
+    },
+    {
+      "name": "getReason",
+      "return": "org.bukkit.event.entity.VillagerCareerChangeEvent.ChangeReason"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.VillagerCareerChangeEvent",
+  "simple-name": "VillagerCareerChangeEvent"
+}

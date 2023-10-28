@@ -1,0 +1,66 @@
+{
+  "package": "java.lang.module",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "service",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "providers",
+      "return": "java.util.List"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "that",
+        "type": "java.lang.module.ModuleDescriptor.Provides"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "ob",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.module.ModuleDescriptor.Provides",
+  "simple-name": "Provides"
+}

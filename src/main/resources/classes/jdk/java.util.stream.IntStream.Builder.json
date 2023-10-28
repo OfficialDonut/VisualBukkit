@@ -1,0 +1,77 @@
+{
+  "package": "java.util.stream",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "andThen",
+      "parameters": [{
+        "name": "after",
+        "type": "java.util.function.IntConsumer"
+      }],
+      "return": "java.util.function.IntConsumer"
+    },
+    {
+      "name": "accept",
+      "parameters": [{
+        "name": "t",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "add",
+      "parameters": [{
+        "name": "t",
+        "type": "int"
+      }],
+      "return": "java.util.stream.IntStream.Builder"
+    },
+    {
+      "name": "build",
+      "return": "java.util.stream.IntStream"
+    }
+  ],
+  "name": "java.util.stream.IntStream.Builder",
+  "simple-name": "Builder"
+}

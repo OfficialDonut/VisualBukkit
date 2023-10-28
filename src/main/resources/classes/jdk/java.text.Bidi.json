@@ -1,0 +1,242 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "paragraph",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "flags",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "paragraph",
+        "type": "java.text.AttributedCharacterIterator"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "char[]"
+        },
+        {
+          "name": "textStart",
+          "type": "int"
+        },
+        {
+          "name": "embeddings",
+          "type": "byte[]"
+        },
+        {
+          "name": "embStart",
+          "type": "int"
+        },
+        {
+          "name": "paragraphLength",
+          "type": "int"
+        },
+        {
+          "name": "flags",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "createLineBidi",
+      "parameters": [
+        {
+          "name": "lineStart",
+          "type": "int"
+        },
+        {
+          "name": "lineLimit",
+          "type": "int"
+        }
+      ],
+      "return": "java.text.Bidi"
+    },
+    {
+      "name": "isMixed",
+      "return": "boolean"
+    },
+    {
+      "name": "isLeftToRight",
+      "return": "boolean"
+    },
+    {
+      "name": "isRightToLeft",
+      "return": "boolean"
+    },
+    {
+      "name": "getLength",
+      "return": "int"
+    },
+    {
+      "name": "baseIsLeftToRight",
+      "return": "boolean"
+    },
+    {
+      "name": "getBaseLevel",
+      "return": "int"
+    },
+    {
+      "name": "getLevelAt",
+      "parameters": [{
+        "name": "offset",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunCount",
+      "return": "int"
+    },
+    {
+      "name": "getRunLevel",
+      "parameters": [{
+        "name": "run",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunStart",
+      "parameters": [{
+        "name": "run",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getRunLimit",
+      "parameters": [{
+        "name": "run",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "requiresBidi",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "char[]"
+        },
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "limit",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "reorderVisually",
+      "parameters": [
+        {
+          "name": "levels",
+          "type": "byte[]"
+        },
+        {
+          "name": "levelStart",
+          "type": "int"
+        },
+        {
+          "name": "objects",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "objectStart",
+          "type": "int"
+        },
+        {
+          "name": "count",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.text.Bidi",
+  "simple-name": "Bidi",
+  "fields": [
+    {
+      "static": true,
+      "name": "DIRECTION_LEFT_TO_RIGHT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DIRECTION_RIGHT_TO_LEFT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DIRECTION_DEFAULT_LEFT_TO_RIGHT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DIRECTION_DEFAULT_RIGHT_TO_LEFT",
+      "type": "int"
+    }
+  ]
+}

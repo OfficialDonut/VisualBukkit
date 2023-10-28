@@ -1,0 +1,392 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "pathname",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "parent",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "child",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "parent",
+          "type": "java.io.File"
+        },
+        {
+          "name": "child",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "uri",
+        "type": "java.net.URI"
+      }]
+    }
+  ],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getParent",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getParentFile",
+      "return": "java.io.File"
+    },
+    {
+      "name": "getPath",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAbsolute",
+      "return": "boolean"
+    },
+    {
+      "name": "getAbsolutePath",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getAbsoluteFile",
+      "return": "java.io.File"
+    },
+    {
+      "name": "getCanonicalPath",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getCanonicalFile",
+      "return": "java.io.File"
+    },
+    {
+      "name": "toURL",
+      "return": "java.net.URL"
+    },
+    {
+      "name": "toURI",
+      "return": "java.net.URI"
+    },
+    {
+      "name": "canRead",
+      "return": "boolean"
+    },
+    {
+      "name": "canWrite",
+      "return": "boolean"
+    },
+    {
+      "name": "exists",
+      "return": "boolean"
+    },
+    {
+      "name": "isDirectory",
+      "return": "boolean"
+    },
+    {
+      "name": "isFile",
+      "return": "boolean"
+    },
+    {
+      "name": "isHidden",
+      "return": "boolean"
+    },
+    {
+      "name": "lastModified",
+      "return": "long"
+    },
+    {
+      "name": "length",
+      "return": "long"
+    },
+    {
+      "name": "createNewFile",
+      "return": "boolean"
+    },
+    {
+      "name": "delete",
+      "return": "boolean"
+    },
+    {"name": "deleteOnExit"},
+    {
+      "name": "list",
+      "return": "java.lang.String[]"
+    },
+    {
+      "name": "list",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.io.FilenameFilter"
+      }],
+      "return": "java.lang.String[]"
+    },
+    {
+      "name": "listFiles",
+      "return": "java.io.File[]"
+    },
+    {
+      "name": "listFiles",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.io.FilenameFilter"
+      }],
+      "return": "java.io.File[]"
+    },
+    {
+      "name": "listFiles",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.io.FileFilter"
+      }],
+      "return": "java.io.File[]"
+    },
+    {
+      "name": "mkdir",
+      "return": "boolean"
+    },
+    {
+      "name": "mkdirs",
+      "return": "boolean"
+    },
+    {
+      "name": "renameTo",
+      "parameters": [{
+        "name": "dest",
+        "type": "java.io.File"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "setLastModified",
+      "parameters": [{
+        "name": "time",
+        "type": "long"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "setReadOnly",
+      "return": "boolean"
+    },
+    {
+      "name": "setWritable",
+      "parameters": [
+        {
+          "name": "writable",
+          "type": "boolean"
+        },
+        {
+          "name": "ownerOnly",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "setWritable",
+      "parameters": [{
+        "name": "writable",
+        "type": "boolean"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "setReadable",
+      "parameters": [
+        {
+          "name": "readable",
+          "type": "boolean"
+        },
+        {
+          "name": "ownerOnly",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "setReadable",
+      "parameters": [{
+        "name": "readable",
+        "type": "boolean"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "setExecutable",
+      "parameters": [
+        {
+          "name": "executable",
+          "type": "boolean"
+        },
+        {
+          "name": "ownerOnly",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "setExecutable",
+      "parameters": [{
+        "name": "executable",
+        "type": "boolean"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "canExecute",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "listRoots",
+      "return": "java.io.File[]"
+    },
+    {
+      "name": "getTotalSpace",
+      "return": "long"
+    },
+    {
+      "name": "getFreeSpace",
+      "return": "long"
+    },
+    {
+      "name": "getUsableSpace",
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "createTempFile",
+      "parameters": [
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "suffix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "directory",
+          "type": "java.io.File"
+        }
+      ],
+      "return": "java.io.File"
+    },
+    {
+      "static": true,
+      "name": "createTempFile",
+      "parameters": [
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "suffix",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.io.File"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "pathname",
+        "type": "java.io.File"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toPath",
+      "return": "java.nio.file.Path"
+    }
+  ],
+  "name": "java.io.File",
+  "simple-name": "File",
+  "fields": [
+    {
+      "static": true,
+      "name": "separatorChar",
+      "type": "char"
+    },
+    {
+      "static": true,
+      "name": "separator",
+      "type": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "pathSeparatorChar",
+      "type": "char"
+    },
+    {
+      "static": true,
+      "name": "pathSeparator",
+      "type": "java.lang.String"
+    }
+  ]
+}

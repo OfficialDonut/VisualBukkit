@@ -1,0 +1,76 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "com.destroystokyo.paper.event.executor.asm",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "generateEventExecutor",
+      "parameters": [
+        {
+          "name": "m",
+          "type": "java.lang.reflect.Method"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "byte[]"
+    },
+    {
+      "static": true,
+      "name": "generateName",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.executor.asm.ASMEventExecutorGenerator",
+  "simple-name": "ASMEventExecutorGenerator",
+  "fields": [{
+    "static": true,
+    "name": "NEXT_ID",
+    "type": "java.util.concurrent.atomic.AtomicInteger"
+  }]
+}

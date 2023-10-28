@@ -1,0 +1,304 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "org.bukkit.plugin.java",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getComponentLogger",
+      "return": "net.kyori.adventure.text.logger.slf4j.ComponentLogger"
+    },
+    {
+      "name": "getSLF4JLogger",
+      "return": "org.slf4j.Logger"
+    },
+    {
+      "name": "getLog4JLogger",
+      "return": "org.apache.logging.log4j.Logger"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDataFolder",
+      "return": "java.io.File"
+    },
+    {
+      "name": "getPluginLoader",
+      "return": "org.bukkit.plugin.PluginLoader"
+    },
+    {
+      "name": "getServer",
+      "return": "org.bukkit.Server"
+    },
+    {
+      "name": "isEnabled",
+      "return": "boolean"
+    },
+    {
+      "name": "getDescription",
+      "return": "org.bukkit.plugin.PluginDescriptionFile"
+    },
+    {
+      "name": "getPluginMeta",
+      "return": "io.papermc.paper.plugin.configuration.PluginMeta"
+    },
+    {
+      "name": "getConfig",
+      "return": "org.bukkit.configuration.file.FileConfiguration"
+    },
+    {"name": "reloadConfig"},
+    {"name": "saveConfig"},
+    {"name": "saveDefaultConfig"},
+    {
+      "name": "saveResource",
+      "parameters": [
+        {
+          "name": "resourcePath",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "replace",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "getResource",
+      "parameters": [{
+        "name": "filename",
+        "type": "java.lang.String"
+      }],
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "setEnabled",
+      "parameters": [{
+        "name": "enabled",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "init",
+      "parameters": [
+        {
+          "name": "loader",
+          "type": "org.bukkit.plugin.PluginLoader"
+        },
+        {
+          "name": "server",
+          "type": "org.bukkit.Server"
+        },
+        {
+          "name": "description",
+          "type": "org.bukkit.plugin.PluginDescriptionFile"
+        },
+        {
+          "name": "dataFolder",
+          "type": "java.io.File"
+        },
+        {
+          "name": "file",
+          "type": "java.io.File"
+        },
+        {
+          "name": "classLoader",
+          "type": "java.lang.ClassLoader"
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "parameters": [
+        {
+          "name": "server",
+          "type": "org.bukkit.Server"
+        },
+        {
+          "name": "description",
+          "type": "org.bukkit.plugin.PluginDescriptionFile"
+        },
+        {
+          "name": "dataFolder",
+          "type": "java.io.File"
+        },
+        {
+          "name": "file",
+          "type": "java.io.File"
+        },
+        {
+          "name": "classLoader",
+          "type": "java.lang.ClassLoader"
+        },
+        {
+          "name": "configuration",
+          "type": "io.papermc.paper.plugin.configuration.PluginMeta"
+        },
+        {
+          "name": "logger",
+          "type": "java.util.logging.Logger"
+        }
+      ]
+    },
+    {
+      "name": "onCommand",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "org.bukkit.command.CommandSender"
+        },
+        {
+          "name": "command",
+          "type": "org.bukkit.command.Command"
+        },
+        {
+          "name": "label",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "args",
+          "type": "java.lang.String[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "onTabComplete",
+      "parameters": [
+        {
+          "name": "sender",
+          "type": "org.bukkit.command.CommandSender"
+        },
+        {
+          "name": "command",
+          "type": "org.bukkit.command.Command"
+        },
+        {
+          "name": "alias",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "args",
+          "type": "java.lang.String[]"
+        }
+      ],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getCommand",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.command.PluginCommand"
+    },
+    {"name": "onLoad"},
+    {"name": "onDisable"},
+    {"name": "onEnable"},
+    {
+      "name": "getDefaultWorldGenerator",
+      "parameters": [
+        {
+          "name": "worldName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "id",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "org.bukkit.generator.ChunkGenerator"
+    },
+    {
+      "name": "getDefaultBiomeProvider",
+      "parameters": [
+        {
+          "name": "worldName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "id",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "org.bukkit.generator.BiomeProvider"
+    },
+    {
+      "name": "isNaggable",
+      "return": "boolean"
+    },
+    {
+      "name": "setNaggable",
+      "parameters": [{
+        "name": "canNag",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getLogger",
+      "return": "java.util.logging.Logger"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getPlugin",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }],
+      "return": "org.bukkit.plugin.java.JavaPlugin"
+    },
+    {
+      "static": true,
+      "name": "getProvidingPlugin",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }],
+      "return": "org.bukkit.plugin.java.JavaPlugin"
+    }
+  ],
+  "name": "org.bukkit.plugin.java.JavaPlugin",
+  "simple-name": "JavaPlugin"
+}

@@ -1,0 +1,140 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "player",
+        "type": "org.bukkit.entity.Player"
+      },
+      {
+        "name": "trade",
+        "type": "org.bukkit.inventory.MerchantRecipe"
+      },
+      {
+        "name": "rewardExp",
+        "type": "boolean"
+      },
+      {
+        "name": "increaseTradeUses",
+        "type": "boolean"
+      }
+    ]
+  }],
+  "package": "io.papermc.paper.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "getTrade",
+      "return": "org.bukkit.inventory.MerchantRecipe"
+    },
+    {
+      "name": "setTrade",
+      "parameters": [{
+        "name": "trade",
+        "type": "org.bukkit.inventory.MerchantRecipe"
+      }]
+    },
+    {
+      "name": "isRewardingExp",
+      "return": "boolean"
+    },
+    {
+      "name": "setRewardExp",
+      "parameters": [{
+        "name": "rewardExp",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "willIncreaseTradeUses",
+      "return": "boolean"
+    },
+    {
+      "name": "setIncreaseTradeUses",
+      "parameters": [{
+        "name": "increaseTradeUses",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "io.papermc.paper.event.player.PlayerPurchaseEvent",
+  "simple-name": "PlayerPurchaseEvent"
+}

@@ -1,0 +1,251 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "in",
+      "type": "java.io.InputStream"
+    }]
+  }],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "nullInputStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "readAllBytes",
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [{
+        "name": "len",
+        "type": "int"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "skipNBytes",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "transferTo",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.OutputStream"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "read",
+      "return": "int"
+    },
+    {
+      "name": "skip",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "available",
+      "return": "int"
+    },
+    {"name": "close"},
+    {
+      "name": "mark",
+      "parameters": [{
+        "name": "readlimit",
+        "type": "int"
+      }]
+    },
+    {"name": "reset"},
+    {
+      "name": "markSupported",
+      "return": "boolean"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "read",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "readFully",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "readFully",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "skipBytes",
+      "parameters": [{
+        "name": "n",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "readBoolean",
+      "return": "boolean"
+    },
+    {
+      "name": "readByte",
+      "return": "byte"
+    },
+    {
+      "name": "readUnsignedByte",
+      "return": "int"
+    },
+    {
+      "name": "readShort",
+      "return": "short"
+    },
+    {
+      "name": "readUnsignedShort",
+      "return": "int"
+    },
+    {
+      "name": "readChar",
+      "return": "char"
+    },
+    {
+      "name": "readInt",
+      "return": "int"
+    },
+    {
+      "name": "readLong",
+      "return": "long"
+    },
+    {
+      "name": "readFloat",
+      "return": "float"
+    },
+    {
+      "name": "readDouble",
+      "return": "double"
+    },
+    {
+      "name": "readLine",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "readUTF",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "readUTF",
+      "parameters": [{
+        "name": "in",
+        "type": "java.io.DataInput"
+      }],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.io.DataInputStream",
+  "simple-name": "DataInputStream"
+}

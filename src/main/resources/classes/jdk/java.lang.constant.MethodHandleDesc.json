@@ -1,0 +1,154 @@
+{
+  "package": "java.lang.constant",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "resolveConstantDesc",
+      "parameters": [{
+        "name": "lookup",
+        "type": "java.lang.invoke.MethodHandles.Lookup"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "kind",
+          "type": "java.lang.constant.DirectMethodHandleDesc.Kind"
+        },
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "lookupDescriptor",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "ofMethod",
+      "parameters": [
+        {
+          "name": "kind",
+          "type": "java.lang.constant.DirectMethodHandleDesc.Kind"
+        },
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "lookupMethodType",
+          "type": "java.lang.constant.MethodTypeDesc"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "ofField",
+      "parameters": [
+        {
+          "name": "kind",
+          "type": "java.lang.constant.DirectMethodHandleDesc.Kind"
+        },
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "fieldName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "fieldType",
+          "type": "java.lang.constant.ClassDesc"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "static": true,
+      "name": "ofConstructor",
+      "parameters": [
+        {
+          "name": "owner",
+          "type": "java.lang.constant.ClassDesc"
+        },
+        {
+          "name": "paramTypes",
+          "type": "java.lang.constant.ClassDesc[]"
+        }
+      ],
+      "return": "java.lang.constant.DirectMethodHandleDesc"
+    },
+    {
+      "name": "asType",
+      "parameters": [{
+        "name": "type",
+        "type": "java.lang.constant.MethodTypeDesc"
+      }],
+      "return": "java.lang.constant.MethodHandleDesc"
+    },
+    {
+      "name": "invocationType",
+      "return": "java.lang.constant.MethodTypeDesc"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "java.lang.constant.MethodHandleDesc",
+  "simple-name": "MethodHandleDesc"
+}

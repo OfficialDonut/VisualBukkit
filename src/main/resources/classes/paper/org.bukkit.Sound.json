@@ -1,0 +1,7538 @@
+{
+  "package": "org.bukkit",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.Sound[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Sound"
+    },
+    {
+      "name": "getKey",
+      "return": "org.bukkit.NamespacedKey"
+    },
+    {
+      "name": "key",
+      "return": "net.kyori.adventure.key.Key"
+    }
+  ],
+  "name": "org.bukkit.Sound",
+  "simple-name": "Sound",
+  "fields": [
+    {
+      "static": true,
+      "name": "AMBIENT_BASALT_DELTAS_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_BASALT_DELTAS_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_BASALT_DELTAS_MOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_CAVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_CRIMSON_FOREST_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_CRIMSON_FOREST_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_CRIMSON_FOREST_MOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_NETHER_WASTES_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_NETHER_WASTES_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_NETHER_WASTES_MOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_SOUL_SAND_VALLEY_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_SOUL_SAND_VALLEY_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_SOUL_SAND_VALLEY_MOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_ENTER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_EXIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_LOOP_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_LOOP_ADDITIONS_RARE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_UNDERWATER_LOOP_ADDITIONS_ULTRA_RARE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_WARPED_FOREST_ADDITIONS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_WARPED_FOREST_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "AMBIENT_WARPED_FOREST_MOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_CHIME",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_RESONATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_CLUSTER_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_CLUSTER_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_CLUSTER_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_CLUSTER_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AMETHYST_CLUSTER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANCIENT_DEBRIS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANCIENT_DEBRIS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANCIENT_DEBRIS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANCIENT_DEBRIS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANCIENT_DEBRIS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_DESTROY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ANVIL_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_LEAVES_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_LEAVES_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_LEAVES_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_LEAVES_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_LEAVES_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_AZALEA_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_SAPLING_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_SAPLING_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_SAPLING_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_BUTTON_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_DOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_DOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_FENCE_GATE_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_FENCE_GATE_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HANGING_SIGN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HANGING_SIGN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HANGING_SIGN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HANGING_SIGN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HANGING_SIGN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_TRAPDOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BAMBOO_WOOD_TRAPDOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BARREL_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BARREL_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BASALT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BASALT_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BASALT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BASALT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BASALT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEACON_ACTIVATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEACON_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEACON_DEACTIVATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEACON_POWER_SELECT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEEHIVE_DRIP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEEHIVE_ENTER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEEHIVE_EXIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEEHIVE_SHEAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BEEHIVE_WORK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BELL_RESONATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BELL_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_TILT_DOWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BIG_DRIPLEAF_TILT_UP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BLASTFURNACE_FIRE_CRACKLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BONE_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BONE_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BONE_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BONE_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BONE_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BREWING_STAND_BREW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BUBBLE_COLUMN_BUBBLE_POP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BUBBLE_COLUMN_UPWARDS_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BUBBLE_COLUMN_UPWARDS_INSIDE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_BUBBLE_COLUMN_WHIRLPOOL_INSIDE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAKE_ADD_CANDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CALCITE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CALCITE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CALCITE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CALCITE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CALCITE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAMPFIRE_CRACKLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_EXTINGUISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CANDLE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_PICK_BERRIES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CAVE_VINES_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHAIN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHAIN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHAIN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHAIN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHAIN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_LEAVES_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_LEAVES_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_LEAVES_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_LEAVES_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_LEAVES_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_SAPLING_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_SAPLING_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_SAPLING_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_SAPLING_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_SAPLING_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_BUTTON_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_BUTTON_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_DOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_DOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_FENCE_GATE_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_FENCE_GATE_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HANGING_SIGN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HANGING_SIGN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HANGING_SIGN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HANGING_SIGN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HANGING_SIGN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_TRAPDOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHERRY_WOOD_TRAPDOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHEST_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHEST_LOCKED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHEST_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_INSERT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_INSERT_ENCHANTED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_PICKUP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_PICKUP_ENCHANTED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHISELED_BOOKSHELF_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHORUS_FLOWER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CHORUS_FLOWER_GROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COMPARATOR_CLICK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COMPOSTER_EMPTY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COMPOSTER_FILL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COMPOSTER_FILL_SUCCESS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COMPOSTER_READY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CONDUIT_ACTIVATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CONDUIT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CONDUIT_AMBIENT_SHORT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CONDUIT_ATTACK_TARGET",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CONDUIT_DEACTIVATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COPPER_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COPPER_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COPPER_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COPPER_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_COPPER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CORAL_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CORAL_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CORAL_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CORAL_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CORAL_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_CROP_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_SHATTER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DECORATED_POT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BRICKS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BRICKS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BRICKS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BRICKS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_BRICKS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_TILES_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_TILES_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_TILES_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_TILES_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DEEPSLATE_TILES_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DISPENSER_DISPENSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DISPENSER_FAIL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DISPENSER_LAUNCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DRIPSTONE_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DRIPSTONE_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DRIPSTONE_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DRIPSTONE_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_DRIPSTONE_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ENCHANTMENT_TABLE_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ENDER_CHEST_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ENDER_CHEST_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_END_GATEWAY_SPAWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_END_PORTAL_FRAME_FILL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_END_PORTAL_SPAWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FENCE_GATE_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FENCE_GATE_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FIRE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FIRE_EXTINGUISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FLOWERING_AZALEA_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FLOWERING_AZALEA_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FLOWERING_AZALEA_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FLOWERING_AZALEA_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FLOWERING_AZALEA_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGLIGHT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGLIGHT_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGLIGHT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGLIGHT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGLIGHT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_HATCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FROGSPAWN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FUNGUS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FUNGUS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FUNGUS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FUNGUS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FUNGUS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_FURNACE_FIRE_CRACKLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GILDED_BLACKSTONE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GILDED_BLACKSTONE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GILDED_BLACKSTONE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GILDED_BLACKSTONE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GILDED_BLACKSTONE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GLASS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GLASS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GLASS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GLASS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GLASS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRASS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRASS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRASS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRASS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRASS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRAVEL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRAVEL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRAVEL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRAVEL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRAVEL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GRINDSTONE_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_GROWING_PLANT_CROP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_ROOTS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_ROOTS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_ROOTS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_ROOTS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_ROOTS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_SIGN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_SIGN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_SIGN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_SIGN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HANGING_SIGN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_SLIDE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_HONEY_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_IRON_DOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_IRON_DOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_IRON_TRAPDOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_IRON_TRAPDOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LADDER_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LADDER_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LADDER_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LADDER_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LADDER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LANTERN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LANTERN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LANTERN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LANTERN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LANTERN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LARGE_AMETHYST_BUD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LARGE_AMETHYST_BUD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LAVA_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LAVA_EXTINGUISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LAVA_POP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LEVER_CLICK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LILY_PAD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LODESTONE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LODESTONE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LODESTONE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LODESTONE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_LODESTONE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MANGROVE_ROOTS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MANGROVE_ROOTS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MANGROVE_ROOTS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MANGROVE_ROOTS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MANGROVE_ROOTS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MEDIUM_AMETHYST_BUD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MEDIUM_AMETHYST_BUD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_METAL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_CARPET_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_CARPET_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_CARPET_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_CARPET_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_CARPET_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MOSS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUDDY_MANGROVE_ROOTS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUDDY_MANGROVE_ROOTS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUDDY_MANGROVE_ROOTS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUDDY_MANGROVE_ROOTS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUDDY_MANGROVE_ROOTS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BRICKS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BRICKS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BRICKS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BRICKS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_BRICKS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_MUD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERITE_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERITE_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERITE_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERITE_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERITE_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERRACK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERRACK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERRACK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERRACK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHERRACK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_BRICKS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_BRICKS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_BRICKS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_BRICKS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_BRICKS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_GOLD_ORE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_GOLD_ORE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_GOLD_ORE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_GOLD_ORE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_GOLD_ORE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_ORE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_ORE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_ORE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_ORE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_ORE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_SPROUTS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_SPROUTS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_SPROUTS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_SPROUTS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_SPROUTS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WART_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_BUTTON_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_BUTTON_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_DOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_DOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_FENCE_GATE_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_FENCE_GATE_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HANGING_SIGN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HANGING_SIGN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HANGING_SIGN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HANGING_SIGN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HANGING_SIGN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_TRAPDOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NETHER_WOOD_TRAPDOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_BANJO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_BASEDRUM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_BASS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_BELL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_BIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_CHIME",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_COW_BELL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_DIDGERIDOO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_FLUTE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_GUITAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_HARP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_HAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_CREEPER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_PIGLIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_SKELETON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IMITATE_ZOMBIE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_IRON_XYLOPHONE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_PLING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_SNARE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NOTE_BLOCK_XYLOPHONE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NYLIUM_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NYLIUM_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NYLIUM_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NYLIUM_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_NYLIUM_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PACKED_MUD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PACKED_MUD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PACKED_MUD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PACKED_MUD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PACKED_MUD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PINK_PETALS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PINK_PETALS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PINK_PETALS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PINK_PETALS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PINK_PETALS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PISTON_CONTRACT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PISTON_EXTEND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_DRIP_LAVA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_DRIP_LAVA_INTO_CAULDRON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_DRIP_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POINTED_DRIPSTONE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POLISHED_DEEPSLATE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POLISHED_DEEPSLATE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POLISHED_DEEPSLATE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POLISHED_DEEPSLATE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POLISHED_DEEPSLATE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PORTAL_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PORTAL_TRAVEL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PORTAL_TRIGGER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POWDER_SNOW_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POWDER_SNOW_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POWDER_SNOW_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POWDER_SNOW_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_POWDER_SNOW_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_PUMPKIN_CARVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_REDSTONE_TORCH_BURNOUT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_RESPAWN_ANCHOR_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_RESPAWN_ANCHOR_CHARGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_RESPAWN_ANCHOR_DEPLETE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_RESPAWN_ANCHOR_SET_SPAWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTED_DIRT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTED_DIRT_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTED_DIRT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTED_DIRT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTED_DIRT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_ROOTS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SAND_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SAND_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SAND_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SAND_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SAND_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCAFFOLDING_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCAFFOLDING_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCAFFOLDING_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCAFFOLDING_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCAFFOLDING_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_BLOOM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CATALYST_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_CHARGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_CLICKING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_CLICKING_STOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SENSOR_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_SHRIEK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SHRIEKER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_SPREAD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_VEIN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_VEIN_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_VEIN_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_VEIN_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SCULK_VEIN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHROOMLIGHT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHROOMLIGHT_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHROOMLIGHT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHROOMLIGHT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHROOMLIGHT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHULKER_BOX_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SHULKER_BOX_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SIGN_WAXED_INTERACT_FAIL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SLIME_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SLIME_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SLIME_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SLIME_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SLIME_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_AMETHYST_BUD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_AMETHYST_BUD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_DRIPLEAF_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_DRIPLEAF_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_DRIPLEAF_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_DRIPLEAF_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMALL_DRIPLEAF_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMITHING_TABLE_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SMOKER_SMOKE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNIFFER_EGG_CRACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNIFFER_EGG_HATCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNIFFER_EGG_PLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNOW_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNOW_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNOW_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNOW_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SNOW_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SAND_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SAND_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SAND_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SAND_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SAND_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SOIL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SOIL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SOIL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SOIL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SOUL_SOIL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_ABSORB",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPONGE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPORE_BLOSSOM_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPORE_BLOSSOM_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPORE_BLOSSOM_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPORE_BLOSSOM_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SPORE_BLOSSOM_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STEM_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STEM_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STEM_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STEM_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STEM_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_BUTTON_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_BUTTON_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_STONE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_GRAVEL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_GRAVEL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_GRAVEL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_GRAVEL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_GRAVEL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_SAND_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_SAND_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_SAND_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_SAND_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SUSPICIOUS_SAND_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SWEET_BERRY_BUSH_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_SWEET_BERRY_BUSH_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TRIPWIRE_ATTACH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TRIPWIRE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TRIPWIRE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TRIPWIRE_DETACH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TUFF_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TUFF_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TUFF_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TUFF_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_TUFF_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_VINE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_VINE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_VINE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_VINE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_VINE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WART_BLOCK_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WART_BLOCK_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WART_BLOCK_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WART_BLOCK_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WART_BLOCK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WATER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WEEPING_VINES_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WEEPING_VINES_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WEEPING_VINES_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WEEPING_VINES_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WEEPING_VINES_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_GRASS_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_GRASS_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_GRASS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_GRASS_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_GRASS_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_SPONGE_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_SPONGE_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_SPONGE_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_SPONGE_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WET_SPONGE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_BUTTON_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_BUTTON_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_DOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_DOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_TRAPDOOR_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOODEN_TRAPDOOR_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOD_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOD_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOD_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOD_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOL_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOL_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOL_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "BLOCK_WOOL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENCHANT_THORNS_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_AMBIENT_WITH_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_ITEM_GIVEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_ITEM_TAKEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ALLAY_ITEM_THROWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARMOR_STAND_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARMOR_STAND_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARMOR_STAND_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARMOR_STAND_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARROW_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARROW_HIT_PLAYER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ARROW_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_IDLE_AIR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_IDLE_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_AXOLOTL_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BAT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BAT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BAT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BAT_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BAT_TAKEOFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_LOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_LOOP_AGGRESSIVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_POLLINATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BEE_STING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BLAZE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BLAZE_BURN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BLAZE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BLAZE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BLAZE_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BOAT_PADDLE_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_BOAT_PADDLE_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_DASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_DASH_READY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_SADDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_SIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_STAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAMEL_STEP_SAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_BEG_FOR_FOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_HISS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_PURR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_PURREOW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CAT_STRAY_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CHICKEN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CHICKEN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CHICKEN_EGG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CHICKEN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CHICKEN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COD_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COD_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COD_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COD_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COW_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COW_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COW_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COW_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_COW_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CREEPER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CREEPER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_CREEPER_PRIMED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_AMBIENT_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_PLAY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DOLPHIN_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_CHEST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DONKEY_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DRAGON_FIREBALL_EXPLODE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_AMBIENT_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_DEATH_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_HURT_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_DROWNED_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EGG_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_AMBIENT_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_CURSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_DEATH_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ELDER_GUARDIAN_HURT_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_SCREAM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_STARE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMAN_TELEPORT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMITE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMITE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMITE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDERMITE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_FLAP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_GROWL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_DRAGON_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_EYE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_EYE_LAUNCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ENDER_PEARL_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_CAST_SPELL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_FANGS_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_PREPARE_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_PREPARE_SUMMON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EVOKER_PREPARE_WOLOLO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EXPERIENCE_BOTTLE_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_EXPERIENCE_ORB_PICKUP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_BLAST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_BLAST_FAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_LARGE_BLAST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_LAUNCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_TWINKLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FIREWORK_ROCKET_TWINKLE_FAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FISHING_BOBBER_RETRIEVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FISHING_BOBBER_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FISHING_BOBBER_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FISH_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_AGGRO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_BITE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_SCREECH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_SLEEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_SNIFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_SPIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FOX_TELEPORT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_LAY_SPAWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_LONG_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_FROG_TONGUE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_BIG_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_BURN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_DRINK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_EXPLODE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_EXTINGUISH_FIRE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_SMALL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GENERIC_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_SCREAM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GHAST_WARN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_ITEM_FRAME_ADD_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_ITEM_FRAME_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_ITEM_FRAME_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_ITEM_FRAME_REMOVE_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_ITEM_FRAME_ROTATE_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_SQUID_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_SQUID_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_SQUID_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GLOW_SQUID_SQUIRT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_HORN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_LONG_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_PREPARE_RAM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_RAM_IMPACT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_HORN_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_LONG_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_PREPARE_RAM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_SCREAMING_RAM_IMPACT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GOAT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_AMBIENT_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_DEATH_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_GUARDIAN_HURT_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_CONVERTED_TO_ZOMBIFIED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_RETREAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOGLIN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_ARMOR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_BREATHE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_GALLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_SADDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HORSE_STEP_WOOD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_BIG_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_SMALL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HOSTILE_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HUSK_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HUSK_CONVERTED_TO_ZOMBIE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HUSK_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HUSK_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_HUSK_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_CAST_SPELL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_MIRROR_MOVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_PREPARE_BLINDNESS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ILLUSIONER_PREPARE_MIRROR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_DAMAGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_REPAIR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_IRON_GOLEM_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_FRAME_ADD_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_FRAME_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_FRAME_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_FRAME_REMOVE_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_FRAME_ROTATE_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ITEM_PICKUP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LEASH_KNOT_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LEASH_KNOT_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LIGHTNING_BOLT_IMPACT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LIGHTNING_BOLT_THUNDER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LINGERING_POTION_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_CHEST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_SPIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_LLAMA_SWAG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_DEATH_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_HURT_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_SQUISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MAGMA_CUBE_SQUISH_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MINECART_INSIDE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MINECART_INSIDE_UNDERWATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MINECART_RIDING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MOOSHROOM_CONVERT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MOOSHROOM_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MOOSHROOM_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MOOSHROOM_SHEAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MOOSHROOM_SUSPICIOUS_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_CHEST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_MULE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_OCELOT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_OCELOT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_OCELOT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PAINTING_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PAINTING_PLACE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_AGGRESSIVE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_BITE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_CANT_BREED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_PRE_SNEEZE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_SNEEZE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PANDA_WORRIED_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_FLY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_BLAZE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_CREEPER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_DROWNED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ELDER_GUARDIAN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ENDERMITE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ENDER_DRAGON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_EVOKER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_GHAST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_GUARDIAN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_HOGLIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_HUSK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ILLUSIONER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_MAGMA_CUBE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_PHANTOM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_PIGLIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_PIGLIN_BRUTE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_PILLAGER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_RAVAGER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_SHULKER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_SILVERFISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_SKELETON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_SLIME",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_SPIDER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_STRAY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_VEX",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_VINDICATOR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_WARDEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_WITCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_WITHER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_WITHER_SKELETON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ZOGLIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ZOMBIE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_IMITATE_ZOMBIE_VILLAGER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PARROT_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_BITE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_FLAP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PHANTOM_SWOOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_ADMIRING_ITEM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_BRUTE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_CONVERTED_TO_ZOMBIFIED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_JEALOUS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_RETREAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIGLIN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIG_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIG_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIG_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIG_SADDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PIG_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PILLAGER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PILLAGER_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PILLAGER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PILLAGER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_CRIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_KNOCKBACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_NODAMAGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_STRONG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_SWEEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_ATTACK_WEAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_BIG_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_BREATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_BURP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_HURT_DROWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_HURT_FREEZE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_HURT_ON_FIRE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_HURT_SWEET_BERRY_BUSH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_LEVELUP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_SMALL_FALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_SPLASH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_SPLASH_HIGH_SPEED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PLAYER_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_AMBIENT_BABY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_POLAR_BEAR_WARNING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_BLOW_OUT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_BLOW_UP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_PUFFER_FISH_STING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RABBIT_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RABBIT_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RABBIT_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RABBIT_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RABBIT_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_ROAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_RAVAGER_STUNNED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SALMON_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SALMON_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SALMON_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SALMON_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHEEP_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHEEP_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHEEP_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHEEP_SHEAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHEEP_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_BULLET_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_BULLET_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_HURT_CLOSED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_OPEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SHULKER_TELEPORT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SILVERFISH_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SILVERFISH_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SILVERFISH_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SILVERFISH_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_CONVERTED_TO_STRAY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_AMBIENT_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_GALLOP_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_JUMP_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_STEP_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HORSE_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SKELETON_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_DEATH_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_HURT_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_JUMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_JUMP_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_SQUISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SLIME_SQUISH_SMALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_DIGGING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_DIGGING_STOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_DROP_SEED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_HAPPY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_IDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_SCENTING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_SEARCHING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_SNIFFING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNIFFER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOWBALL_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOW_GOLEM_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOW_GOLEM_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOW_GOLEM_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOW_GOLEM_SHEAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SNOW_GOLEM_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPIDER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPIDER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPIDER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPIDER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPLASH_POTION_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SPLASH_POTION_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SQUID_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SQUID_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SQUID_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_SQUID_SQUIRT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRAY_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRAY_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRAY_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRAY_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_EAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_HAPPY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_RETREAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_SADDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_STRIDER_STEP_LAVA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TADPOLE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TADPOLE_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TADPOLE_GROW_UP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TADPOLE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TNT_PRIMED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TROPICAL_FISH_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TROPICAL_FISH_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TROPICAL_FISH_FLOP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TROPICAL_FISH_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_AMBIENT_LAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_DEATH_BABY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_EGG_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_EGG_CRACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_EGG_HATCH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_HURT_BABY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_LAY_EGG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_SHAMBLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_SHAMBLE_BABY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_TURTLE_SWIM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VEX_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VEX_CHARGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VEX_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VEX_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_NO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_TRADE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_ARMORER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_BUTCHER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_CARTOGRAPHER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_CLERIC",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_FARMER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_FISHERMAN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_FLETCHER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_LEATHERWORKER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_LIBRARIAN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_MASON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_SHEPHERD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_TOOLSMITH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_WORK_WEAPONSMITH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VILLAGER_YES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VINDICATOR_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VINDICATOR_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VINDICATOR_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_VINDICATOR_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_DISAPPEARED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_DRINK_MILK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_DRINK_POTION",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_NO",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_REAPPEARED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_TRADE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WANDERING_TRADER_YES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_AGITATED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_ATTACK_IMPACT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_DIG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_EMERGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_HEARTBEAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_LISTENING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_LISTENING_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_NEARBY_CLOSE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_NEARBY_CLOSER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_NEARBY_CLOSEST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_ROAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_SNIFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_SONIC_BOOM",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_SONIC_CHARGE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WARDEN_TENDRIL_CLICKS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_CELEBRATE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_DRINK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITCH_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_BREAK_BLOCK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SKELETON_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SKELETON_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SKELETON_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SKELETON_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WITHER_SPAWN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_GROWL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_HOWL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_PANT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_SHAKE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_WOLF_WHINE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_ATTACK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOGLIN_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_ATTACK_IRON_DOOR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_BREAK_WOODEN_DOOR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_CONVERTED_TO_DROWNED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_DESTROY_EGG",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_HORSE_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_HORSE_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_HORSE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_INFECT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_CONVERTED",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_CURE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIE_VILLAGER_STEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIFIED_PIGLIN_AMBIENT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIFIED_PIGLIN_ANGRY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIFIED_PIGLIN_DEATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ENTITY_ZOMBIFIED_PIGLIN_HURT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "EVENT_RAID_HORN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "INTENTIONALLY_EMPTY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_CHAIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_DIAMOND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_ELYTRA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_GENERIC",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_GOLD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_IRON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_LEATHER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_NETHERITE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ARMOR_EQUIP_TURTLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_AXE_SCRAPE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_AXE_STRIP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_AXE_WAX_OFF",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BONE_MEAL_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BOOK_PAGE_TURN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BOOK_PUT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BOTTLE_EMPTY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BOTTLE_FILL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BOTTLE_FILL_DRAGONBREATH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BRUSH_BRUSHING_GENERIC",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BRUSH_BRUSHING_GRAVEL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BRUSH_BRUSHING_GRAVEL_COMPLETE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BRUSH_BRUSHING_SAND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BRUSH_BRUSHING_SAND_COMPLETE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY_AXOLOTL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY_FISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY_LAVA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY_POWDER_SNOW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_EMPTY_TADPOLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL_AXOLOTL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL_FISH",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL_LAVA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL_POWDER_SNOW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUCKET_FILL_TADPOLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUNDLE_DROP_CONTENTS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUNDLE_INSERT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_BUNDLE_REMOVE_ONE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CHORUS_FRUIT_TELEPORT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROP_PLANT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_LOADING_END",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_LOADING_MIDDLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_LOADING_START",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_QUICK_CHARGE_1",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_QUICK_CHARGE_2",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_QUICK_CHARGE_3",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_CROSSBOW_SHOOT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_DYE_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_ELYTRA_FLYING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_FIRECHARGE_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_FLINTANDSTEEL_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GLOW_INK_SAC_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_PLAY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_0",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_1",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_2",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_3",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_4",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_5",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_6",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_GOAT_HORN_SOUND_7",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_HOE_TILL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_HONEYCOMB_WAX_ON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_HONEY_BOTTLE_DRINK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_INK_SAC_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_LODESTONE_COMPASS_LOCK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_NETHER_WART_PLANT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_SHIELD_BLOCK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_SHIELD_BREAK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_SHOVEL_FLATTEN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_SPYGLASS_STOP_USING",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_SPYGLASS_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TOTEM_USE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_HIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_HIT_GROUND",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_RETURN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_RIPTIDE_1",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_RIPTIDE_2",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_RIPTIDE_3",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_THROW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "ITEM_TRIDENT_THUNDER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_CREATIVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_CREDITS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_11",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_13",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_5",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_BLOCKS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_CAT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_CHIRP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_FAR",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_MALL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_MELLOHI",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_OTHERSIDE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_PIGSTEP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_RELIC",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_STAL",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_STRAD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_WAIT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DISC_WARD",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_DRAGON",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_END",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_GAME",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_MENU",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_NETHER_BASALT_DELTAS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_NETHER_CRIMSON_FOREST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_NETHER_NETHER_WASTES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_NETHER_SOUL_SAND_VALLEY",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_NETHER_WARPED_FOREST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_BADLANDS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_BAMBOO_JUNGLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_CHERRY_GROVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_DEEP_DARK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_DESERT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_DRIPSTONE_CAVES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_FLOWER_FOREST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_FOREST",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_FROZEN_PEAKS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_GROVE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_JAGGED_PEAKS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_JUNGLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_LUSH_CAVES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_MEADOW",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_OLD_GROWTH_TAIGA",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_SNOWY_SLOPES",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_SPARSE_JUNGLE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_STONY_PEAKS",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_OVERWORLD_SWAMP",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "MUSIC_UNDER_WATER",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "PARTICLE_SOUL_ESCAPE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_BUTTON_CLICK",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_CARTOGRAPHY_TABLE_TAKE_RESULT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_LOOM_SELECT_PATTERN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_LOOM_TAKE_RESULT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_STONECUTTER_SELECT_RECIPE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_STONECUTTER_TAKE_RESULT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_TOAST_CHALLENGE_COMPLETE",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_TOAST_IN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "UI_TOAST_OUT",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "WEATHER_RAIN",
+      "type": "org.bukkit.Sound"
+    },
+    {
+      "static": true,
+      "name": "WEATHER_RAIN_ABOVE",
+      "type": "org.bukkit.Sound"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "package": "com.destroystokyo.paper.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause",
+  "simple-name": "Cause",
+  "fields": [
+    {
+      "static": true,
+      "name": "BED",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "RESPAWN_ANCHOR",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "PLAYER_RESPAWN",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "COMMAND",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "PLUGIN",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "UNKNOWN",
+      "type": "com.destroystokyo.paper.event.player.PlayerSetSpawnEvent.Cause"
+    }
+  ]
+}

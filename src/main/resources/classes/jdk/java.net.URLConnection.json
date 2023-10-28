@@ -1,0 +1,401 @@
+{
+  "package": "java.net",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getFileNameMap",
+      "return": "java.net.FileNameMap"
+    },
+    {
+      "static": true,
+      "name": "setFileNameMap",
+      "parameters": [{
+        "name": "map",
+        "type": "java.net.FileNameMap"
+      }]
+    },
+    {"name": "connect"},
+    {
+      "name": "setConnectTimeout",
+      "parameters": [{
+        "name": "timeout",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getConnectTimeout",
+      "return": "int"
+    },
+    {
+      "name": "setReadTimeout",
+      "parameters": [{
+        "name": "timeout",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getReadTimeout",
+      "return": "int"
+    },
+    {
+      "name": "getURL",
+      "return": "java.net.URL"
+    },
+    {
+      "name": "getContentLength",
+      "return": "int"
+    },
+    {
+      "name": "getContentLengthLong",
+      "return": "long"
+    },
+    {
+      "name": "getContentType",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getContentEncoding",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getExpiration",
+      "return": "long"
+    },
+    {
+      "name": "getDate",
+      "return": "long"
+    },
+    {
+      "name": "getLastModified",
+      "return": "long"
+    },
+    {
+      "name": "getHeaderField",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getHeaderFields",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "getHeaderFieldInt",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Default",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "getHeaderFieldLong",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Default",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "getHeaderFieldDate",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "Default",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "getHeaderFieldKey",
+      "parameters": [{
+        "name": "n",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getHeaderField",
+      "parameters": [{
+        "name": "n",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getContent",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getContent",
+      "parameters": [{
+        "name": "classes",
+        "type": "java.lang.Class[]"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getPermission",
+      "return": "java.security.Permission"
+    },
+    {
+      "name": "getInputStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "getOutputStream",
+      "return": "java.io.OutputStream"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setDoInput",
+      "parameters": [{
+        "name": "doinput",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getDoInput",
+      "return": "boolean"
+    },
+    {
+      "name": "setDoOutput",
+      "parameters": [{
+        "name": "dooutput",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getDoOutput",
+      "return": "boolean"
+    },
+    {
+      "name": "setAllowUserInteraction",
+      "parameters": [{
+        "name": "allowuserinteraction",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getAllowUserInteraction",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "setDefaultAllowUserInteraction",
+      "parameters": [{
+        "name": "defaultallowuserinteraction",
+        "type": "boolean"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getDefaultAllowUserInteraction",
+      "return": "boolean"
+    },
+    {
+      "name": "setUseCaches",
+      "parameters": [{
+        "name": "usecaches",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getUseCaches",
+      "return": "boolean"
+    },
+    {
+      "name": "setIfModifiedSince",
+      "parameters": [{
+        "name": "ifmodifiedsince",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "getIfModifiedSince",
+      "return": "long"
+    },
+    {
+      "name": "getDefaultUseCaches",
+      "return": "boolean"
+    },
+    {
+      "name": "setDefaultUseCaches",
+      "parameters": [{
+        "name": "defaultusecaches",
+        "type": "boolean"
+      }]
+    },
+    {
+      "static": true,
+      "name": "setDefaultUseCaches",
+      "parameters": [
+        {
+          "name": "protocol",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "defaultVal",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getDefaultUseCaches",
+      "parameters": [{
+        "name": "protocol",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "setRequestProperty",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "addRequestProperty",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "getRequestProperty",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getRequestProperties",
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "setDefaultRequestProperty",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getDefaultRequestProperty",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "setContentHandlerFactory",
+      "parameters": [{
+        "name": "fac",
+        "type": "java.net.ContentHandlerFactory"
+      }]
+    },
+    {
+      "static": true,
+      "name": "guessContentTypeFromName",
+      "parameters": [{
+        "name": "fname",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "guessContentTypeFromStream",
+      "parameters": [{
+        "name": "is",
+        "type": "java.io.InputStream"
+      }],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.net.URLConnection",
+  "simple-name": "URLConnection"
+}

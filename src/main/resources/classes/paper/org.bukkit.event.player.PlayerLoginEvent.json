@@ -1,0 +1,219 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "realAddress",
+          "type": "java.net.InetAddress"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "result",
+          "type": "org.bukkit.event.player.PlayerLoginEvent.Result"
+        },
+        {
+          "name": "message",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "realAddress",
+          "type": "java.net.InetAddress"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "hostname",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "address",
+          "type": "java.net.InetAddress"
+        },
+        {
+          "name": "result",
+          "type": "org.bukkit.event.player.PlayerLoginEvent.Result"
+        },
+        {
+          "name": "message",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "realAddress",
+          "type": "java.net.InetAddress"
+        }
+      ]
+    }
+  ],
+  "package": "org.bukkit.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.entity.Player"
+    },
+    {
+      "name": "kickMessage",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "kickMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "getRealAddress",
+      "return": "java.net.InetAddress"
+    },
+    {
+      "name": "getResult",
+      "return": "org.bukkit.event.player.PlayerLoginEvent.Result"
+    },
+    {
+      "name": "setResult",
+      "parameters": [{
+        "name": "result",
+        "type": "org.bukkit.event.player.PlayerLoginEvent.Result"
+      }]
+    },
+    {
+      "name": "getKickMessage",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setKickMessage",
+      "parameters": [{
+        "name": "message",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getHostname",
+      "return": "java.lang.String"
+    },
+    {"name": "allow"},
+    {
+      "name": "getAddress",
+      "return": "java.net.InetAddress"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.player.PlayerLoginEvent",
+  "simple-name": "PlayerLoginEvent"
+}

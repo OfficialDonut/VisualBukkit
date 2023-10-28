@@ -1,0 +1,15 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "options",
+        "type": "DumperOptions"
+      }]
+    }
+  ],
+  "package": "org.bukkit.configuration.file",
+  "name": "org.bukkit.configuration.file.YamlRepresenter",
+  "simple-name": "YamlRepresenter"
+}

@@ -1,0 +1,70 @@
+{
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "descriptorString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isArray",
+      "return": "boolean"
+    },
+    {
+      "name": "isPrimitive",
+      "return": "boolean"
+    },
+    {
+      "name": "componentType",
+      "return": "java.lang.invoke.TypeDescriptor.OfField"
+    },
+    {
+      "name": "arrayType",
+      "return": "java.lang.invoke.TypeDescriptor.OfField"
+    }
+  ],
+  "name": "java.lang.invoke.TypeDescriptor.OfField",
+  "simple-name": "OfField"
+}

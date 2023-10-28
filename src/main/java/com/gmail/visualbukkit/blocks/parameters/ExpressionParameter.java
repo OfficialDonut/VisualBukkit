@@ -4,7 +4,7 @@ import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
-import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.blocks.classes.ClassInfo;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 import javafx.css.PseudoClass;
 import javafx.scene.input.TransferMode;
@@ -16,11 +16,11 @@ public class ExpressionParameter extends Region implements BlockParameter {
     private static final PseudoClass CONNECTING_STYLE_CLASS = PseudoClass.getPseudoClass("connecting");
     private static final PseudoClass DRAG_OVER_STYLE_CLASS = PseudoClass.getPseudoClass("drag-over");
 
-    private final Class<?> type;
+    private final ClassInfo type;
     private final PopOverSelector<ExpressionBlock.Factory> expressionSelector;
     private ExpressionBlock expression;
 
-    public ExpressionParameter(Class<?> type) {
+    public ExpressionParameter(ClassInfo type) {
         this.type = type;
         expressionSelector = new PopOverSelector<>(BlockRegistry.getExpressions());
         expressionSelector.getStyleClass().add("expression-parameter");
@@ -106,7 +106,7 @@ public class ExpressionParameter extends Region implements BlockParameter {
     public String generateJava() {
         return expression != null ?
                 ClassInfo.convert(expression.getReturnType(), type, expression.generateJava()) :
-                ClassInfo.convert(Object.class, type, "((Object) null)");
+                ClassInfo.convert(ClassInfo.of(Object.class), type, "((Object) null)");
     }
 
     @Override

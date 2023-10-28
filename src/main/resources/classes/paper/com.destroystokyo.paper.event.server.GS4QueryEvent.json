@@ -1,0 +1,107 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "queryType",
+        "type": "com.destroystokyo.paper.event.server.GS4QueryEvent.QueryType"
+      },
+      {
+        "name": "querierAddress",
+        "type": "java.net.InetAddress"
+      },
+      {
+        "name": "response",
+        "type": "com.destroystokyo.paper.event.server.GS4QueryEvent.QueryResponse"
+      }
+    ]
+  }],
+  "package": "com.destroystokyo.paper.event.server",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getQueryType",
+      "return": "com.destroystokyo.paper.event.server.GS4QueryEvent.QueryType"
+    },
+    {
+      "name": "getQuerierAddress",
+      "return": "java.net.InetAddress"
+    },
+    {
+      "name": "getResponse",
+      "return": "com.destroystokyo.paper.event.server.GS4QueryEvent.QueryResponse"
+    },
+    {
+      "name": "setResponse",
+      "parameters": [{
+        "name": "response",
+        "type": "com.destroystokyo.paper.event.server.GS4QueryEvent.QueryResponse"
+      }]
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.server.GS4QueryEvent",
+  "simple-name": "GS4QueryEvent"
+}

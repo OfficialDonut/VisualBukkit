@@ -1,0 +1,130 @@
+{
+  "package": "org.bukkit.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.entity.Horse.Style[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.entity.Horse.Style"
+    }
+  ],
+  "name": "org.bukkit.entity.Horse.Style",
+  "simple-name": "Style",
+  "fields": [
+    {
+      "static": true,
+      "name": "NONE",
+      "type": "org.bukkit.entity.Horse.Style"
+    },
+    {
+      "static": true,
+      "name": "WHITE",
+      "type": "org.bukkit.entity.Horse.Style"
+    },
+    {
+      "static": true,
+      "name": "WHITEFIELD",
+      "type": "org.bukkit.entity.Horse.Style"
+    },
+    {
+      "static": true,
+      "name": "WHITE_DOTS",
+      "type": "org.bukkit.entity.Horse.Style"
+    },
+    {
+      "static": true,
+      "name": "BLACK_DOTS",
+      "type": "org.bukkit.entity.Horse.Style"
+    }
+  ]
+}

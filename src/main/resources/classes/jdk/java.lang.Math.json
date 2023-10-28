@@ -1,0 +1,1014 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sin",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "cos",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "tan",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "asin",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "acos",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "atan",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "toRadians",
+      "parameters": [{
+        "name": "angdeg",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "toDegrees",
+      "parameters": [{
+        "name": "angrad",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "exp",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "log",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "log10",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "sqrt",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "cbrt",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "IEEEremainder",
+      "parameters": [
+        {
+          "name": "f1",
+          "type": "double"
+        },
+        {
+          "name": "f2",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "ceil",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "floor",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "rint",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "atan2",
+      "parameters": [
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "x",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "pow",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double"
+        },
+        {
+          "name": "b",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "round",
+      "parameters": [{
+        "name": "a",
+        "type": "float"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "round",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "random",
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "addExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "addExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "subtractExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "subtractExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "multiplyExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "multiplyExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "multiplyExact",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "incrementExact",
+      "parameters": [{
+        "name": "a",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "incrementExact",
+      "parameters": [{
+        "name": "a",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "decrementExact",
+      "parameters": [{
+        "name": "a",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "decrementExact",
+      "parameters": [{
+        "name": "a",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "negateExact",
+      "parameters": [{
+        "name": "a",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "negateExact",
+      "parameters": [{
+        "name": "a",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "toIntExact",
+      "parameters": [{
+        "name": "value",
+        "type": "long"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "multiplyFull",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "multiplyHigh",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "floorDiv",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "floorDiv",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "floorDiv",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "floorMod",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "floorMod",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "floorMod",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "long"
+        },
+        {
+          "name": "y",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "abs",
+      "parameters": [{
+        "name": "a",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "absExact",
+      "parameters": [{
+        "name": "a",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "abs",
+      "parameters": [{
+        "name": "a",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "absExact",
+      "parameters": [{
+        "name": "a",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "abs",
+      "parameters": [{
+        "name": "a",
+        "type": "float"
+      }],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "abs",
+      "parameters": [{
+        "name": "a",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "max",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "max",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long"
+        },
+        {
+          "name": "b",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "max",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "max",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double"
+        },
+        {
+          "name": "b",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "min",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "min",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long"
+        },
+        {
+          "name": "b",
+          "type": "long"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "min",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "name": "b",
+          "type": "float"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "min",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double"
+        },
+        {
+          "name": "b",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "fma",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double"
+        },
+        {
+          "name": "b",
+          "type": "double"
+        },
+        {
+          "name": "c",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "fma",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float"
+        },
+        {
+          "name": "b",
+          "type": "float"
+        },
+        {
+          "name": "c",
+          "type": "float"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "ulp",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "ulp",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "signum",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "signum",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "sinh",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "cosh",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "tanh",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "hypot",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "expm1",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "log1p",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "copySign",
+      "parameters": [
+        {
+          "name": "magnitude",
+          "type": "double"
+        },
+        {
+          "name": "sign",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "copySign",
+      "parameters": [
+        {
+          "name": "magnitude",
+          "type": "float"
+        },
+        {
+          "name": "sign",
+          "type": "float"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "getExponent",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "getExponent",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "nextAfter",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "double"
+        },
+        {
+          "name": "direction",
+          "type": "double"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "nextAfter",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "float"
+        },
+        {
+          "name": "direction",
+          "type": "double"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "nextUp",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "nextUp",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "nextDown",
+      "parameters": [{
+        "name": "d",
+        "type": "double"
+      }],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "nextDown",
+      "parameters": [{
+        "name": "f",
+        "type": "float"
+      }],
+      "return": "float"
+    },
+    {
+      "static": true,
+      "name": "scalb",
+      "parameters": [
+        {
+          "name": "d",
+          "type": "double"
+        },
+        {
+          "name": "scaleFactor",
+          "type": "int"
+        }
+      ],
+      "return": "double"
+    },
+    {
+      "static": true,
+      "name": "scalb",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float"
+        },
+        {
+          "name": "scaleFactor",
+          "type": "int"
+        }
+      ],
+      "return": "float"
+    }
+  ],
+  "name": "java.lang.Math",
+  "simple-name": "Math",
+  "fields": [
+    {
+      "static": true,
+      "name": "E",
+      "type": "double"
+    },
+    {
+      "static": true,
+      "name": "PI",
+      "type": "double"
+    }
+  ]
+}

@@ -1,0 +1,3832 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "int[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "long[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "short[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "char[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "float[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "double[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "char[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "short[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "int[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "long[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "float[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "double[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Comparable[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Comparable[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "c",
+          "type": "java.util.Comparator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "sort",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "c",
+          "type": "java.util.Comparator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.BinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.BinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.LongBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.LongBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.DoubleBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.DoubleBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.IntBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelPrefix",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "op",
+          "type": "java.util.function.IntBinaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "key",
+          "type": "long"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "long"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "key",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "key",
+          "type": "short"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "short"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "key",
+          "type": "char"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "char"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "key",
+          "type": "byte"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "byte"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "key",
+          "type": "double"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "double"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "key",
+          "type": "float"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "float"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "c",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "binarySearch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "c",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "a2",
+          "type": "long[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "a2",
+          "type": "int[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "a2",
+          "type": "short[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "a2",
+          "type": "char[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "char[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "a2",
+          "type": "byte[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "a2",
+          "type": "boolean[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "boolean[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "a2",
+          "type": "double[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "double[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "a2",
+          "type": "float[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "float[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "a2",
+          "type": "java.lang.Object[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "a2",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "equals",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "val",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "val",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "val",
+          "type": "short"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "short"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "val",
+          "type": "char"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "char"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "val",
+          "type": "byte"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "byte"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "val",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "val",
+          "type": "double"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "double"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "val",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "val",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "fill",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "fromIndex",
+          "type": "int"
+        },
+        {
+          "name": "toIndex",
+          "type": "int"
+        },
+        {
+          "name": "val",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        },
+        {
+          "name": "newType",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "byte[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "byte[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "short[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "short[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "int[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "int[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "long[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "long[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "char[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "char[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "float[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "float[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "double[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "double[]"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "boolean[]"
+        },
+        {
+          "name": "newLength",
+          "type": "int"
+        }
+      ],
+      "return": "boolean[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        },
+        {
+          "name": "newType",
+          "type": "java.lang.Class"
+        }
+      ],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "byte[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "byte[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "short[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "short[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "int[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "int[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "long[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "long[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "char[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "char[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "float[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "float[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "double[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "double[]"
+    },
+    {
+      "static": true,
+      "name": "copyOfRange",
+      "parameters": [
+        {
+          "name": "original",
+          "type": "boolean[]"
+        },
+        {
+          "name": "from",
+          "type": "int"
+        },
+        {
+          "name": "to",
+          "type": "int"
+        }
+      ],
+      "return": "boolean[]"
+    },
+    {
+      "static": true,
+      "name": "asList",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "long[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "int[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "short[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "char[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "boolean[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "float[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "double[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "deepHashCode",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "deepEquals",
+      "parameters": [
+        {
+          "name": "a1",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "a2",
+          "type": "java.lang.Object[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "long[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "int[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "short[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "char[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "byte[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "boolean[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "float[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "double[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "deepToString",
+      "parameters": [{
+        "name": "a",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "setAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSetAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "setAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntUnaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSetAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntUnaryOperator"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "setAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntToLongFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSetAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntToLongFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "setAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntToDoubleFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "parallelSetAll",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "generator",
+          "type": "java.util.function.IntToDoubleFunction"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [{
+        "name": "array",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [{
+        "name": "array",
+        "type": "int[]"
+      }],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfInt"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [{
+        "name": "array",
+        "type": "long[]"
+      }],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfLong"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [{
+        "name": "array",
+        "type": "double[]"
+      }],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "spliterator",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.Spliterator.OfDouble"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [{
+        "name": "array",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [{
+        "name": "array",
+        "type": "int[]"
+      }],
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "int[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [{
+        "name": "array",
+        "type": "long[]"
+      }],
+      "return": "java.util.stream.LongStream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "long[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.stream.LongStream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [{
+        "name": "array",
+        "type": "double[]"
+      }],
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "static": true,
+      "name": "stream",
+      "parameters": [
+        {
+          "name": "array",
+          "type": "double[]"
+        },
+        {
+          "name": "startInclusive",
+          "type": "int"
+        },
+        {
+          "name": "endExclusive",
+          "type": "int"
+        }
+      ],
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "b",
+          "type": "boolean[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "boolean[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "b",
+          "type": "char[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "char[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "b",
+          "type": "float[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "float[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "b",
+          "type": "double[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "double[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Comparable[]"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Comparable[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Comparable[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Comparable[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "b",
+          "type": "boolean[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "boolean[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "boolean[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "byte[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "b",
+          "type": "char[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "char[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "char[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "short[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "short[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "int[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "int[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "long[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "long[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "b",
+          "type": "float[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "float[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "float[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "b",
+          "type": "double[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "double[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "double[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "aFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "aToIndex",
+          "type": "int"
+        },
+        {
+          "name": "b",
+          "type": "java.lang.Object[]"
+        },
+        {
+          "name": "bFromIndex",
+          "type": "int"
+        },
+        {
+          "name": "bToIndex",
+          "type": "int"
+        },
+        {
+          "name": "cmp",
+          "type": "java.util.Comparator"
+        }
+      ],
+      "return": "int"
+    }
+  ],
+  "name": "java.util.Arrays",
+  "simple-name": "Arrays"
+}

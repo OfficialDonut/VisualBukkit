@@ -1,0 +1,273 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "client",
+          "type": "com.destroystokyo.paper.network.StatusClient"
+        },
+        {
+          "name": "motd",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "numPlayers",
+          "type": "int"
+        },
+        {
+          "name": "maxPlayers",
+          "type": "int"
+        },
+        {
+          "name": "version",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "protocolVersion",
+          "type": "int"
+        },
+        {
+          "name": "favicon",
+          "type": "org.bukkit.util.CachedServerIcon"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "client",
+          "type": "com.destroystokyo.paper.network.StatusClient"
+        },
+        {
+          "name": "motd",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "numPlayers",
+          "type": "int"
+        },
+        {
+          "name": "maxPlayers",
+          "type": "int"
+        },
+        {
+          "name": "version",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "protocolVersion",
+          "type": "int"
+        },
+        {
+          "name": "favicon",
+          "type": "org.bukkit.util.CachedServerIcon"
+        }
+      ]
+    }
+  ],
+  "package": "com.destroystokyo.paper.event.server",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "spliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "name": "motd",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "motd",
+      "parameters": [{
+        "name": "motd",
+        "type": "net.kyori.adventure.text.Component"
+      }]
+    },
+    {
+      "name": "getHostname",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getAddress",
+      "return": "java.net.InetAddress"
+    },
+    {
+      "name": "getMotd",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setMotd",
+      "parameters": [{
+        "name": "motd",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "shouldSendChatPreviews",
+      "return": "boolean"
+    },
+    {
+      "name": "setMaxPlayers",
+      "parameters": [{
+        "name": "maxPlayers",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getClient",
+      "return": "com.destroystokyo.paper.network.StatusClient"
+    },
+    {
+      "name": "getNumPlayers",
+      "return": "int"
+    },
+    {
+      "name": "setNumPlayers",
+      "parameters": [{
+        "name": "numPlayers",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getMaxPlayers",
+      "return": "int"
+    },
+    {
+      "name": "shouldHidePlayers",
+      "return": "boolean"
+    },
+    {
+      "name": "setHidePlayers",
+      "parameters": [{
+        "name": "hidePlayers",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getPlayerSample",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getVersion",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setVersion",
+      "parameters": [{
+        "name": "version",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "getProtocolVersion",
+      "return": "int"
+    },
+    {
+      "name": "setProtocolVersion",
+      "parameters": [{
+        "name": "protocolVersion",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getServerIcon",
+      "return": "org.bukkit.util.CachedServerIcon"
+    },
+    {
+      "name": "setServerIcon",
+      "parameters": [{
+        "name": "icon",
+        "type": "org.bukkit.util.CachedServerIcon"
+      }]
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.Iterator"
+    }
+  ],
+  "name": "com.destroystokyo.paper.event.server.PaperServerListPingEvent",
+  "simple-name": "PaperServerListPingEvent"
+}

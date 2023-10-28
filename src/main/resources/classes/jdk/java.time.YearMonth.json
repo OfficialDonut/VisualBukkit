@@ -1,0 +1,396 @@
+{
+  "package": "java.time",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "now",
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "now",
+      "parameters": [{
+        "name": "zone",
+        "type": "java.time.ZoneId"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "now",
+      "parameters": [{
+        "name": "clock",
+        "type": "java.time.Clock"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "year",
+          "type": "int"
+        },
+        {
+          "name": "month",
+          "type": "java.time.Month"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "year",
+          "type": "int"
+        },
+        {
+          "name": "month",
+          "type": "int"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [{
+        "name": "text",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [
+        {
+          "name": "text",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "formatter",
+          "type": "java.time.format.DateTimeFormatter"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "unit",
+        "type": "java.time.temporal.TemporalUnit"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "range",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getLong",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getYear",
+      "return": "int"
+    },
+    {
+      "name": "getMonthValue",
+      "return": "int"
+    },
+    {
+      "name": "getMonth",
+      "return": "java.time.Month"
+    },
+    {
+      "name": "isLeapYear",
+      "return": "boolean"
+    },
+    {
+      "name": "isValidDay",
+      "parameters": [{
+        "name": "dayOfMonth",
+        "type": "int"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "lengthOfMonth",
+      "return": "int"
+    },
+    {
+      "name": "lengthOfYear",
+      "return": "int"
+    },
+    {
+      "name": "with",
+      "parameters": [{
+        "name": "adjuster",
+        "type": "java.time.temporal.TemporalAdjuster"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "with",
+      "parameters": [
+        {
+          "name": "field",
+          "type": "java.time.temporal.TemporalField"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "withYear",
+      "parameters": [{
+        "name": "year",
+        "type": "int"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "withMonth",
+      "parameters": [{
+        "name": "month",
+        "type": "int"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "plus",
+      "parameters": [{
+        "name": "amountToAdd",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        {
+          "name": "amountToAdd",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "plusYears",
+      "parameters": [{
+        "name": "yearsToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "plusMonths",
+      "parameters": [{
+        "name": "monthsToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "minus",
+      "parameters": [{
+        "name": "amountToSubtract",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        {
+          "name": "amountToSubtract",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "minusYears",
+      "parameters": [{
+        "name": "yearsToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "minusMonths",
+      "parameters": [{
+        "name": "monthsToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.YearMonth"
+    },
+    {
+      "name": "query",
+      "parameters": [{
+        "name": "query",
+        "type": "java.time.temporal.TemporalQuery"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "until",
+      "parameters": [
+        {
+          "name": "endExclusive",
+          "type": "java.time.temporal.Temporal"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "formatter",
+        "type": "java.time.format.DateTimeFormatter"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "atDay",
+      "parameters": [{
+        "name": "dayOfMonth",
+        "type": "int"
+      }],
+      "return": "java.time.LocalDate"
+    },
+    {
+      "name": "atEndOfMonth",
+      "return": "java.time.LocalDate"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.YearMonth"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "isAfter",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.YearMonth"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isBefore",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.YearMonth"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.YearMonth",
+  "simple-name": "YearMonth"
+}

@@ -1,0 +1,155 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setLocale",
+      "parameters": [{
+        "name": "locale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setLanguageTag",
+      "parameters": [{
+        "name": "languageTag",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setLanguage",
+      "parameters": [{
+        "name": "language",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setScript",
+      "parameters": [{
+        "name": "script",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setRegion",
+      "parameters": [{
+        "name": "region",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setVariant",
+      "parameters": [{
+        "name": "variant",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setExtension",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "char"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "setUnicodeLocaleKeyword",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "addUnicodeLocaleAttribute",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "removeUnicodeLocaleAttribute",
+      "parameters": [{
+        "name": "attribute",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "clear",
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "clearExtensions",
+      "return": "java.util.Locale.Builder"
+    },
+    {
+      "name": "build",
+      "return": "java.util.Locale"
+    }
+  ],
+  "name": "java.util.Locale.Builder",
+  "simple-name": "Builder"
+}

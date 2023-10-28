@@ -1,0 +1,103 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "accumulatorFunction",
+        "type": "java.util.function.LongBinaryOperator"
+      },
+      {
+        "name": "identity",
+        "type": "long"
+      }
+    ]
+  }],
+  "package": "java.util.concurrent.atomic",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "byteValue",
+      "return": "byte"
+    },
+    {
+      "name": "shortValue",
+      "return": "short"
+    },
+    {
+      "name": "accumulate",
+      "parameters": [{
+        "name": "x",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "get",
+      "return": "long"
+    },
+    {"name": "reset"},
+    {
+      "name": "getThenReset",
+      "return": "long"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "longValue",
+      "return": "long"
+    },
+    {
+      "name": "intValue",
+      "return": "int"
+    },
+    {
+      "name": "floatValue",
+      "return": "float"
+    },
+    {
+      "name": "doubleValue",
+      "return": "double"
+    }
+  ],
+  "name": "java.util.concurrent.atomic.LongAccumulator",
+  "simple-name": "LongAccumulator"
+}

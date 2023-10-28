@@ -1,0 +1,146 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "child",
+        "type": "org.bukkit.entity.LivingEntity"
+      },
+      {
+        "name": "mother",
+        "type": "org.bukkit.entity.LivingEntity"
+      },
+      {
+        "name": "father",
+        "type": "org.bukkit.entity.LivingEntity"
+      },
+      {
+        "name": "breeder",
+        "type": "org.bukkit.entity.LivingEntity"
+      },
+      {
+        "name": "bredWith",
+        "type": "org.bukkit.inventory.ItemStack"
+      },
+      {
+        "name": "experience",
+        "type": "int"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.LivingEntity"
+    },
+    {
+      "name": "getMother",
+      "return": "org.bukkit.entity.LivingEntity"
+    },
+    {
+      "name": "getFather",
+      "return": "org.bukkit.entity.LivingEntity"
+    },
+    {
+      "name": "getBreeder",
+      "return": "org.bukkit.entity.LivingEntity"
+    },
+    {
+      "name": "getBredWith",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getExperience",
+      "return": "int"
+    },
+    {
+      "name": "setExperience",
+      "parameters": [{
+        "name": "experience",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.EntityBreedEvent",
+  "simple-name": "EntityBreedEvent"
+}

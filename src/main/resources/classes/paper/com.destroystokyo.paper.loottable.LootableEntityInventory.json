@@ -1,0 +1,190 @@
+{
+  "package": "com.destroystokyo.paper.loottable",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setLootTable",
+      "parameters": [{
+        "name": "table",
+        "type": "org.bukkit.loot.LootTable"
+      }]
+    },
+    {
+      "name": "getLootTable",
+      "return": "org.bukkit.loot.LootTable"
+    },
+    {
+      "name": "setLootTable",
+      "parameters": [
+        {
+          "name": "table",
+          "type": "org.bukkit.loot.LootTable"
+        },
+        {
+          "name": "seed",
+          "type": "long"
+        }
+      ]
+    },
+    {
+      "name": "hasLootTable",
+      "return": "boolean"
+    },
+    {"name": "clearLootTable"},
+    {
+      "name": "setSeed",
+      "parameters": [{
+        "name": "seed",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "getSeed",
+      "return": "long"
+    },
+    {
+      "name": "isRefillEnabled",
+      "return": "boolean"
+    },
+    {
+      "name": "hasBeenFilled",
+      "return": "boolean"
+    },
+    {
+      "name": "hasPlayerLooted",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.entity.Player"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "canPlayerLoot",
+      "parameters": [{
+        "name": "player",
+        "type": "java.util.UUID"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hasPlayerLooted",
+      "parameters": [{
+        "name": "player",
+        "type": "java.util.UUID"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getLastLooted",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.entity.Player"
+      }],
+      "return": "java.lang.Long"
+    },
+    {
+      "name": "getLastLooted",
+      "parameters": [{
+        "name": "player",
+        "type": "java.util.UUID"
+      }],
+      "return": "java.lang.Long"
+    },
+    {
+      "name": "setHasPlayerLooted",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "org.bukkit.entity.Player"
+        },
+        {
+          "name": "looted",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "setHasPlayerLooted",
+      "parameters": [
+        {
+          "name": "player",
+          "type": "java.util.UUID"
+        },
+        {
+          "name": "looted",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "hasPendingRefill",
+      "return": "boolean"
+    },
+    {
+      "name": "getLastFilled",
+      "return": "long"
+    },
+    {
+      "name": "getNextRefill",
+      "return": "long"
+    },
+    {
+      "name": "setNextRefill",
+      "parameters": [{
+        "name": "refillAt",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.Entity"
+    }
+  ],
+  "name": "com.destroystokyo.paper.loottable.LootableEntityInventory",
+  "simple-name": "LootableEntityInventory"
+}

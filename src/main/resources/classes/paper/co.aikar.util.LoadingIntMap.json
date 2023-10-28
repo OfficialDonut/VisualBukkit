@@ -1,0 +1,52 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "loader",
+        "type": "<any>"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "expectedSize",
+          "type": "int"
+        },
+        {
+          "name": "loader",
+          "type": "<any>"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "expectedSize",
+          "type": "int"
+        },
+        {
+          "name": "loadFactor",
+          "type": "float"
+        },
+        {
+          "name": "loader",
+          "type": "<any>"
+        }
+      ]
+    }
+  ],
+  "package": "co.aikar.util",
+  "methods": [{
+    "name": "get",
+    "parameters": [{
+      "name": "key",
+      "type": "int"
+    }],
+    "return": "java.lang.Object"
+  }],
+  "name": "co.aikar.util.LoadingIntMap",
+  "simple-name": "LoadingIntMap"
+}

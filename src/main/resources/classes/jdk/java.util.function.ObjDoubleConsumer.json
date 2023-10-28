@@ -1,0 +1,63 @@
+{
+  "package": "java.util.function",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "accept",
+      "parameters": [
+        {
+          "name": "t",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "double"
+        }
+      ]
+    }
+  ],
+  "name": "java.util.function.ObjDoubleConsumer",
+  "simple-name": "ObjDoubleConsumer"
+}

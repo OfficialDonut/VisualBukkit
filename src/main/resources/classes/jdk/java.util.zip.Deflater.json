@@ -1,0 +1,307 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "int"
+        },
+        {
+          "name": "nowrap",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "level",
+        "type": "int"
+      }]
+    },
+    {"name": "<init>"}
+  ],
+  "package": "java.util.zip",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setInput",
+      "parameters": [
+        {
+          "name": "input",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setInput",
+      "parameters": [{
+        "name": "input",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "setInput",
+      "parameters": [{
+        "name": "input",
+        "type": "java.nio.ByteBuffer"
+      }]
+    },
+    {
+      "name": "setDictionary",
+      "parameters": [
+        {
+          "name": "dictionary",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setDictionary",
+      "parameters": [{
+        "name": "dictionary",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "setDictionary",
+      "parameters": [{
+        "name": "dictionary",
+        "type": "java.nio.ByteBuffer"
+      }]
+    },
+    {
+      "name": "setStrategy",
+      "parameters": [{
+        "name": "strategy",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "setLevel",
+      "parameters": [{
+        "name": "level",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "needsInput",
+      "return": "boolean"
+    },
+    {"name": "finish"},
+    {
+      "name": "finished",
+      "return": "boolean"
+    },
+    {
+      "name": "deflate",
+      "parameters": [
+        {
+          "name": "output",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "deflate",
+      "parameters": [{
+        "name": "output",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "deflate",
+      "parameters": [{
+        "name": "output",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "deflate",
+      "parameters": [
+        {
+          "name": "output",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        },
+        {
+          "name": "flush",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "deflate",
+      "parameters": [
+        {
+          "name": "output",
+          "type": "java.nio.ByteBuffer"
+        },
+        {
+          "name": "flush",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "getAdler",
+      "return": "int"
+    },
+    {
+      "name": "getTotalIn",
+      "return": "int"
+    },
+    {
+      "name": "getBytesRead",
+      "return": "long"
+    },
+    {
+      "name": "getTotalOut",
+      "return": "int"
+    },
+    {
+      "name": "getBytesWritten",
+      "return": "long"
+    },
+    {"name": "reset"},
+    {"name": "end"}
+  ],
+  "name": "java.util.zip.Deflater",
+  "simple-name": "Deflater",
+  "fields": [
+    {
+      "static": true,
+      "name": "DEFLATED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "NO_COMPRESSION",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "BEST_SPEED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "BEST_COMPRESSION",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DEFAULT_COMPRESSION",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "FILTERED",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "HUFFMAN_ONLY",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "DEFAULT_STRATEGY",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "NO_FLUSH",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "SYNC_FLUSH",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "FULL_FLUSH",
+      "type": "int"
+    }
+  ]
+}

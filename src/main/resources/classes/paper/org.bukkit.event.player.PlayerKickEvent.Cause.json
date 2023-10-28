@@ -1,0 +1,240 @@
+{
+  "package": "org.bukkit.event.player",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.event.player.PlayerKickEvent.Cause[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    }
+  ],
+  "name": "org.bukkit.event.player.PlayerKickEvent.Cause",
+  "simple-name": "Cause",
+  "fields": [
+    {
+      "static": true,
+      "name": "PLUGIN",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "WHITELIST",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "BANNED",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "IP_BANNED",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "KICK_COMMAND",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "FLYING_PLAYER",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "FLYING_VEHICLE",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "TIMEOUT",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "IDLING",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "INVALID_VEHICLE_MOVEMENT",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "INVALID_PLAYER_MOVEMENT",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "INVALID_ENTITY_ATTACKED",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "INVALID_PAYLOAD",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "SPAM",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "ILLEGAL_ACTION",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "ILLEGAL_CHARACTERS",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "OUT_OF_ORDER_CHAT",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "UNSIGNED_CHAT",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "CHAT_VALIDATION_FAILED",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "EXPIRED_PROFILE_PUBLIC_KEY",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "INVALID_PUBLIC_KEY_SIGNATURE",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "TOO_MANY_PENDING_CHATS",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "SELF_INTERACTION",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "DUPLICATE_LOGIN",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "RESOURCE_PACK_REJECTION",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "RESTART_COMMAND",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    },
+    {
+      "static": true,
+      "name": "UNKNOWN",
+      "type": "org.bukkit.event.player.PlayerKickEvent.Cause"
+    }
+  ]
+}

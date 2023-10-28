@@ -1,0 +1,85 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "org.bukkit.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "copyPartialMatches",
+      "parameters": [
+        {
+          "name": "token",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "originals",
+          "type": "java.lang.Iterable"
+        },
+        {
+          "name": "collection",
+          "type": "java.util.Collection"
+        }
+      ],
+      "return": "java.util.Collection"
+    },
+    {
+      "static": true,
+      "name": "startsWithIgnoreCase",
+      "parameters": [
+        {
+          "name": "string",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.util.StringUtil",
+  "simple-name": "StringUtil"
+}

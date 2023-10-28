@@ -1,0 +1,167 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "parties",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "parent",
+        "type": "java.util.concurrent.Phaser"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "parent",
+          "type": "java.util.concurrent.Phaser"
+        },
+        {
+          "name": "parties",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "package": "java.util.concurrent",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "register",
+      "return": "int"
+    },
+    {
+      "name": "bulkRegister",
+      "parameters": [{
+        "name": "parties",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "arrive",
+      "return": "int"
+    },
+    {
+      "name": "arriveAndDeregister",
+      "return": "int"
+    },
+    {
+      "name": "arriveAndAwaitAdvance",
+      "return": "int"
+    },
+    {
+      "name": "awaitAdvance",
+      "parameters": [{
+        "name": "phase",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "awaitAdvanceInterruptibly",
+      "parameters": [{
+        "name": "phase",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "awaitAdvanceInterruptibly",
+      "parameters": [
+        {
+          "name": "phase",
+          "type": "int"
+        },
+        {
+          "name": "timeout",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.util.concurrent.TimeUnit"
+        }
+      ],
+      "return": "int"
+    },
+    {"name": "forceTermination"},
+    {
+      "name": "getPhase",
+      "return": "int"
+    },
+    {
+      "name": "getRegisteredParties",
+      "return": "int"
+    },
+    {
+      "name": "getArrivedParties",
+      "return": "int"
+    },
+    {
+      "name": "getUnarrivedParties",
+      "return": "int"
+    },
+    {
+      "name": "getParent",
+      "return": "java.util.concurrent.Phaser"
+    },
+    {
+      "name": "getRoot",
+      "return": "java.util.concurrent.Phaser"
+    },
+    {
+      "name": "isTerminated",
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.util.concurrent.Phaser",
+  "simple-name": "Phaser"
+}

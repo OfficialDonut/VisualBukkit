@@ -1,0 +1,194 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isLoggable",
+      "parameters": [{
+        "name": "level",
+        "type": "java.lang.System.Logger.Level"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "msg",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "msgSupplier",
+          "type": "java.util.function.Supplier"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "obj",
+          "type": "java.lang.Object"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "msg",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "thrown",
+          "type": "java.lang.Throwable"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "msgSupplier",
+          "type": "java.util.function.Supplier"
+        },
+        {
+          "name": "thrown",
+          "type": "java.lang.Throwable"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "format",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "params",
+          "type": "java.lang.Object[]"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "bundle",
+          "type": "java.util.ResourceBundle"
+        },
+        {
+          "name": "msg",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "thrown",
+          "type": "java.lang.Throwable"
+        }
+      ]
+    },
+    {
+      "name": "log",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "java.lang.System.Logger.Level"
+        },
+        {
+          "name": "bundle",
+          "type": "java.util.ResourceBundle"
+        },
+        {
+          "name": "format",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "params",
+          "type": "java.lang.Object[]"
+        }
+      ]
+    }
+  ],
+  "name": "java.lang.System.Logger",
+  "simple-name": "Logger"
+}

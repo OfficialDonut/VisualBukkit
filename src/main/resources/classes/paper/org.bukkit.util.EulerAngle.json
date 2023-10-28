@@ -1,0 +1,144 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "x",
+        "type": "double"
+      },
+      {
+        "name": "y",
+        "type": "double"
+      },
+      {
+        "name": "z",
+        "type": "double"
+      }
+    ]
+  }],
+  "package": "org.bukkit.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getX",
+      "return": "double"
+    },
+    {
+      "name": "getY",
+      "return": "double"
+    },
+    {
+      "name": "getZ",
+      "return": "double"
+    },
+    {
+      "name": "setX",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "org.bukkit.util.EulerAngle"
+    },
+    {
+      "name": "setY",
+      "parameters": [{
+        "name": "y",
+        "type": "double"
+      }],
+      "return": "org.bukkit.util.EulerAngle"
+    },
+    {
+      "name": "setZ",
+      "parameters": [{
+        "name": "z",
+        "type": "double"
+      }],
+      "return": "org.bukkit.util.EulerAngle"
+    },
+    {
+      "name": "add",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "org.bukkit.util.EulerAngle"
+    },
+    {
+      "name": "subtract",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "org.bukkit.util.EulerAngle"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    }
+  ],
+  "name": "org.bukkit.util.EulerAngle",
+  "simple-name": "EulerAngle",
+  "fields": [{
+    "static": true,
+    "name": "ZERO",
+    "type": "org.bukkit.util.EulerAngle"
+  }]
+}

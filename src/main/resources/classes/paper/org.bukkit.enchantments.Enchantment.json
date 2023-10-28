@@ -1,0 +1,380 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "key",
+      "type": "org.bukkit.NamespacedKey"
+    }]
+  }],
+  "package": "org.bukkit.enchantments",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "key",
+      "return": "net.kyori.adventure.key.Key"
+    },
+    {
+      "name": "getKey",
+      "return": "org.bukkit.NamespacedKey"
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getMaxLevel",
+      "return": "int"
+    },
+    {
+      "name": "getStartLevel",
+      "return": "int"
+    },
+    {
+      "name": "getItemTarget",
+      "return": "org.bukkit.enchantments.EnchantmentTarget"
+    },
+    {
+      "name": "isTreasure",
+      "return": "boolean"
+    },
+    {
+      "name": "isCursed",
+      "return": "boolean"
+    },
+    {
+      "name": "conflictsWith",
+      "parameters": [{
+        "name": "other",
+        "type": "org.bukkit.enchantments.Enchantment"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "canEnchantItem",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "displayName",
+      "parameters": [{
+        "name": "level",
+        "type": "int"
+      }],
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "isTradeable",
+      "return": "boolean"
+    },
+    {
+      "name": "isDiscoverable",
+      "return": "boolean"
+    },
+    {
+      "name": "getRarity",
+      "return": "io.papermc.paper.enchantments.EnchantmentRarity"
+    },
+    {
+      "name": "getDamageIncrease",
+      "parameters": [
+        {
+          "name": "level",
+          "type": "int"
+        },
+        {
+          "name": "entityCategory",
+          "type": "org.bukkit.entity.EntityCategory"
+        }
+      ],
+      "return": "float"
+    },
+    {
+      "name": "getActiveSlots",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "registerEnchantment",
+      "parameters": [{
+        "name": "enchantment",
+        "type": "org.bukkit.enchantments.Enchantment"
+      }]
+    },
+    {
+      "static": true,
+      "name": "isAcceptingRegistrations",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "stopAcceptingRegistrations"
+    },
+    {
+      "static": true,
+      "name": "getByKey",
+      "parameters": [{
+        "name": "key",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "getByName",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.enchantments.Enchantment[]"
+    }
+  ],
+  "name": "org.bukkit.enchantments.Enchantment",
+  "simple-name": "Enchantment",
+  "fields": [
+    {
+      "static": true,
+      "name": "PROTECTION_ENVIRONMENTAL",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "PROTECTION_FIRE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "PROTECTION_FALL",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "PROTECTION_EXPLOSIONS",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "PROTECTION_PROJECTILE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "OXYGEN",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "WATER_WORKER",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "THORNS",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DEPTH_STRIDER",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "FROST_WALKER",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "BINDING_CURSE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DAMAGE_ALL",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DAMAGE_UNDEAD",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DAMAGE_ARTHROPODS",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "KNOCKBACK",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "FIRE_ASPECT",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "LOOT_BONUS_MOBS",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "SWEEPING_EDGE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DIG_SPEED",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "SILK_TOUCH",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "DURABILITY",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "LOOT_BONUS_BLOCKS",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "ARROW_DAMAGE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "ARROW_KNOCKBACK",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "ARROW_FIRE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "ARROW_INFINITE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "LUCK",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "LURE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "LOYALTY",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "IMPALING",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "RIPTIDE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "CHANNELING",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "MULTISHOT",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "QUICK_CHARGE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "PIERCING",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "MENDING",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "VANISHING_CURSE",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "SOUL_SPEED",
+      "type": "org.bukkit.enchantments.Enchantment"
+    },
+    {
+      "static": true,
+      "name": "SWIFT_SNEAK",
+      "type": "org.bukkit.enchantments.Enchantment"
+    }
+  ]
+}

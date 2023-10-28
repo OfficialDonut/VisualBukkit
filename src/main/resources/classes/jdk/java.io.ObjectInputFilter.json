@@ -1,0 +1,112 @@
+{
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "checkInput",
+      "parameters": [{
+        "name": "filterInfo",
+        "type": "java.io.ObjectInputFilter.FilterInfo"
+      }],
+      "return": "java.io.ObjectInputFilter.Status"
+    },
+    {
+      "static": true,
+      "name": "allowFilter",
+      "parameters": [
+        {
+          "name": "predicate",
+          "type": "java.util.function.Predicate"
+        },
+        {
+          "name": "otherStatus",
+          "type": "java.io.ObjectInputFilter.Status"
+        }
+      ],
+      "return": "java.io.ObjectInputFilter"
+    },
+    {
+      "static": true,
+      "name": "rejectFilter",
+      "parameters": [
+        {
+          "name": "predicate",
+          "type": "java.util.function.Predicate"
+        },
+        {
+          "name": "otherStatus",
+          "type": "java.io.ObjectInputFilter.Status"
+        }
+      ],
+      "return": "java.io.ObjectInputFilter"
+    },
+    {
+      "static": true,
+      "name": "merge",
+      "parameters": [
+        {
+          "name": "filter",
+          "type": "java.io.ObjectInputFilter"
+        },
+        {
+          "name": "anotherFilter",
+          "type": "java.io.ObjectInputFilter"
+        }
+      ],
+      "return": "java.io.ObjectInputFilter"
+    },
+    {
+      "static": true,
+      "name": "rejectUndecidedClass",
+      "parameters": [{
+        "name": "filter",
+        "type": "java.io.ObjectInputFilter"
+      }],
+      "return": "java.io.ObjectInputFilter"
+    }
+  ],
+  "name": "java.io.ObjectInputFilter",
+  "simple-name": "ObjectInputFilter"
+}

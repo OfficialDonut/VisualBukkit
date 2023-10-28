@@ -1,0 +1,128 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "s",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "ex",
+        "type": "java.lang.Exception"
+      }
+    ]
+  }],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getLocalizedMessage",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "initCause",
+      "parameters": [{
+        "name": "cause",
+        "type": "java.lang.Throwable"
+      }],
+      "return": "java.lang.Throwable"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "printStackTrace"},
+    {
+      "name": "printStackTrace",
+      "parameters": [{
+        "name": "s",
+        "type": "java.io.PrintStream"
+      }]
+    },
+    {
+      "name": "printStackTrace",
+      "parameters": [{
+        "name": "s",
+        "type": "java.io.PrintWriter"
+      }]
+    },
+    {
+      "name": "fillInStackTrace",
+      "return": "java.lang.Throwable"
+    },
+    {
+      "name": "getStackTrace",
+      "return": "java.lang.StackTraceElement[]"
+    },
+    {
+      "name": "setStackTrace",
+      "parameters": [{
+        "name": "stackTrace",
+        "type": "java.lang.StackTraceElement[]"
+      }]
+    },
+    {
+      "name": "addSuppressed",
+      "parameters": [{
+        "name": "exception",
+        "type": "java.lang.Throwable"
+      }]
+    },
+    {
+      "name": "getSuppressed",
+      "return": "java.lang.Throwable[]"
+    },
+    {
+      "name": "getMessage",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getCause",
+      "return": "java.lang.Throwable"
+    }
+  ],
+  "name": "java.io.WriteAbortedException",
+  "simple-name": "WriteAbortedException",
+  "fields": [{
+    "name": "detail",
+    "type": "java.lang.Exception"
+  }]
+}

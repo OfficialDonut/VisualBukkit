@@ -1,0 +1,72 @@
+{
+  "package": "java.net",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "pathname",
+        "type": "java.lang.String"
+      }],
+      "return": "java.net.UnixDomainSocketAddress"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.net.UnixDomainSocketAddress"
+    },
+    {
+      "name": "getPath",
+      "return": "java.nio.file.Path"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.net.UnixDomainSocketAddress",
+  "simple-name": "UnixDomainSocketAddress"
+}

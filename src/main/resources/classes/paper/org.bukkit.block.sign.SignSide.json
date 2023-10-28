@@ -1,0 +1,122 @@
+{
+  "package": "org.bukkit.block.sign",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getColor",
+      "return": "org.bukkit.DyeColor"
+    },
+    {
+      "name": "setColor",
+      "parameters": [{
+        "name": "color",
+        "type": "org.bukkit.DyeColor"
+      }]
+    },
+    {
+      "name": "lines",
+      "return": "java.util.List"
+    },
+    {
+      "name": "line",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "line",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "line",
+          "type": "net.kyori.adventure.text.Component"
+        }
+      ]
+    },
+    {
+      "name": "getLines",
+      "return": "java.lang.String[]"
+    },
+    {
+      "name": "getLine",
+      "parameters": [{
+        "name": "index",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "setLine",
+      "parameters": [
+        {
+          "name": "index",
+          "type": "int"
+        },
+        {
+          "name": "line",
+          "type": "java.lang.String"
+        }
+      ]
+    },
+    {
+      "name": "isGlowingText",
+      "return": "boolean"
+    },
+    {
+      "name": "setGlowingText",
+      "parameters": [{
+        "name": "glowing",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "name": "org.bukkit.block.sign.SignSide",
+  "simple-name": "SignSide"
+}

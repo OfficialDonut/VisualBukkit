@@ -1,0 +1,81 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "parameters": [
+        {
+          "name": "keysize",
+          "type": "int"
+        },
+        {
+          "name": "random",
+          "type": "java.security.SecureRandom"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "parameters": [
+        {
+          "name": "params",
+          "type": "java.security.spec.AlgorithmParameterSpec"
+        },
+        {
+          "name": "random",
+          "type": "java.security.SecureRandom"
+        }
+      ]
+    },
+    {
+      "name": "generateKeyPair",
+      "return": "java.security.KeyPair"
+    }
+  ],
+  "name": "java.security.KeyPairGeneratorSpi",
+  "simple-name": "KeyPairGeneratorSpi"
+}

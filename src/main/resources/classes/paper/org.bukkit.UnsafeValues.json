@@ -1,0 +1,514 @@
+{
+  "package": "org.bukkit",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "componentFlattener",
+      "return": "net.kyori.adventure.text.flattener.ComponentFlattener"
+    },
+    {
+      "name": "plainComponentSerializer",
+      "return": "net.kyori.adventure.text.serializer.plain.PlainComponentSerializer"
+    },
+    {
+      "name": "plainTextSerializer",
+      "return": "net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer"
+    },
+    {
+      "name": "gsonComponentSerializer",
+      "return": "net.kyori.adventure.text.serializer.gson.GsonComponentSerializer"
+    },
+    {
+      "name": "colorDownsamplingGsonComponentSerializer",
+      "return": "net.kyori.adventure.text.serializer.gson.GsonComponentSerializer"
+    },
+    {
+      "name": "legacyComponentSerializer",
+      "return": "net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer"
+    },
+    {
+      "name": "resolveWithContext",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "net.kyori.adventure.text.Component"
+        },
+        {
+          "name": "context",
+          "type": "org.bukkit.command.CommandSender"
+        },
+        {
+          "name": "scoreboardSubject",
+          "type": "org.bukkit.entity.Entity"
+        },
+        {
+          "name": "bypassPermissions",
+          "type": "boolean"
+        }
+      ],
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {"name": "reportTimings"},
+    {
+      "name": "toLegacy",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "fromLegacy",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "fromLegacy",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.material.MaterialData"
+      }],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "fromLegacy",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "org.bukkit.material.MaterialData"
+        },
+        {
+          "name": "itemPriority",
+          "type": "boolean"
+        }
+      ],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "fromLegacy",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "data",
+          "type": "byte"
+        }
+      ],
+      "return": "org.bukkit.block.data.BlockData"
+    },
+    {
+      "name": "getMaterial",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "version",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "getDataVersion",
+      "return": "int"
+    },
+    {
+      "name": "modifyItemStack",
+      "parameters": [
+        {
+          "name": "stack",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "arguments",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "checkSupported",
+      "parameters": [{
+        "name": "pdf",
+        "type": "org.bukkit.plugin.PluginDescriptionFile"
+      }]
+    },
+    {
+      "name": "processClass",
+      "parameters": [
+        {
+          "name": "pdf",
+          "type": "org.bukkit.plugin.PluginDescriptionFile"
+        },
+        {
+          "name": "path",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "clazz",
+          "type": "byte[]"
+        }
+      ],
+      "return": "byte[]"
+    },
+    {
+      "name": "loadAdvancement",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "org.bukkit.NamespacedKey"
+        },
+        {
+          "name": "advancement",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "org.bukkit.advancement.Advancement"
+    },
+    {
+      "name": "removeAdvancement",
+      "parameters": [{
+        "name": "key",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getDefaultAttributeModifiers",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "slot",
+          "type": "org.bukkit.inventory.EquipmentSlot"
+        }
+      ],
+      "return": "<any>"
+    },
+    {
+      "name": "getCreativeCategory",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "org.bukkit.inventory.CreativeCategory"
+    },
+    {
+      "name": "getBlockTranslationKey",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getItemTranslationKey",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getTranslationKey",
+      "parameters": [{
+        "name": "entityType",
+        "type": "org.bukkit.entity.EntityType"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getTranslationKey",
+      "parameters": [{
+        "name": "itemStack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getFeatureFlag",
+      "parameters": [{
+        "name": "key",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.FeatureFlag"
+    },
+    {
+      "name": "getInternalPotionData",
+      "parameters": [{
+        "name": "key",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.potion.PotionType.InternalPotionData"
+    },
+    {
+      "name": "isSupportedApiVersion",
+      "parameters": [{
+        "name": "apiVersion",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isLegacyPlugin",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getTimingsServerName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getVersionFetcher",
+      "return": "com.destroystokyo.paper.util.VersionFetcher"
+    },
+    {
+      "name": "serializeItem",
+      "parameters": [{
+        "name": "item",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "deserializeItem",
+      "parameters": [{
+        "name": "data",
+        "type": "byte[]"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "serializeEntity",
+      "parameters": [{
+        "name": "entity",
+        "type": "org.bukkit.entity.Entity"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "deserializeEntity",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "byte[]"
+        },
+        {
+          "name": "world",
+          "type": "org.bukkit.World"
+        }
+      ],
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "deserializeEntity",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "byte[]"
+        },
+        {
+          "name": "world",
+          "type": "org.bukkit.World"
+        },
+        {
+          "name": "preserveUUID",
+          "type": "boolean"
+        }
+      ],
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "nextEntityId",
+      "return": "int"
+    },
+    {
+      "name": "getMainLevelName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getItemRarity",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "io.papermc.paper.inventory.ItemRarity"
+    },
+    {
+      "name": "getItemStackRarity",
+      "parameters": [{
+        "name": "itemStack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "io.papermc.paper.inventory.ItemRarity"
+    },
+    {
+      "name": "isValidRepairItemStack",
+      "parameters": [
+        {
+          "name": "itemToBeRepaired",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "repairMaterial",
+          "type": "org.bukkit.inventory.ItemStack"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "getItemAttributes",
+      "parameters": [
+        {
+          "name": "material",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "equipmentSlot",
+          "type": "org.bukkit.inventory.EquipmentSlot"
+        }
+      ],
+      "return": "<any>"
+    },
+    {
+      "name": "getProtocolVersion",
+      "return": "int"
+    },
+    {
+      "name": "hasDefaultEntityAttributes",
+      "parameters": [{
+        "name": "entityKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getDefaultEntityAttributes",
+      "parameters": [{
+        "name": "entityKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.attribute.Attributable"
+    },
+    {
+      "name": "isCollidable",
+      "parameters": [{
+        "name": "material",
+        "type": "org.bukkit.Material"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getBiomeKey",
+      "parameters": [
+        {
+          "name": "accessor",
+          "type": "org.bukkit.RegionAccessor"
+        },
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        },
+        {
+          "name": "z",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.NamespacedKey"
+    },
+    {
+      "name": "setBiomeKey",
+      "parameters": [
+        {
+          "name": "accessor",
+          "type": "org.bukkit.RegionAccessor"
+        },
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        },
+        {
+          "name": "z",
+          "type": "int"
+        },
+        {
+          "name": "biomeKey",
+          "type": "org.bukkit.NamespacedKey"
+        }
+      ]
+    },
+    {
+      "name": "getStatisticCriteriaKey",
+      "parameters": [{
+        "name": "statistic",
+        "type": "org.bukkit.Statistic"
+      }],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "org.bukkit.UnsafeValues",
+  "simple-name": "UnsafeValues"
+}

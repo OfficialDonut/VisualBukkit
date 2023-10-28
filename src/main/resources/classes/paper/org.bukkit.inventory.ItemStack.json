@@ -1,0 +1,486 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        },
+        {
+          "name": "damage",
+          "type": "short"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        },
+        {
+          "name": "damage",
+          "type": "short"
+        },
+        {
+          "name": "data",
+          "type": "java.lang.Byte"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "stack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }]
+    }
+  ],
+  "package": "org.bukkit.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "setType",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "getAmount",
+      "return": "int"
+    },
+    {
+      "name": "setAmount",
+      "parameters": [{
+        "name": "amount",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getData",
+      "return": "org.bukkit.material.MaterialData"
+    },
+    {
+      "name": "setData",
+      "parameters": [{
+        "name": "data",
+        "type": "org.bukkit.material.MaterialData"
+      }]
+    },
+    {
+      "name": "setDurability",
+      "parameters": [{
+        "name": "durability",
+        "type": "short"
+      }]
+    },
+    {
+      "name": "getDurability",
+      "return": "short"
+    },
+    {
+      "name": "getMaxStackSize",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isSimilar",
+      "parameters": [{
+        "name": "stack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "clone",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "containsEnchantment",
+      "parameters": [{
+        "name": "ench",
+        "type": "org.bukkit.enchantments.Enchantment"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getEnchantmentLevel",
+      "parameters": [{
+        "name": "ench",
+        "type": "org.bukkit.enchantments.Enchantment"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getEnchantments",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "addEnchantments",
+      "parameters": [{
+        "name": "enchantments",
+        "type": "java.util.Map"
+      }]
+    },
+    {
+      "name": "addEnchantment",
+      "parameters": [
+        {
+          "name": "ench",
+          "type": "org.bukkit.enchantments.Enchantment"
+        },
+        {
+          "name": "level",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "addUnsafeEnchantments",
+      "parameters": [{
+        "name": "enchantments",
+        "type": "java.util.Map"
+      }]
+    },
+    {
+      "name": "addUnsafeEnchantment",
+      "parameters": [
+        {
+          "name": "ench",
+          "type": "org.bukkit.enchantments.Enchantment"
+        },
+        {
+          "name": "level",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "removeEnchantment",
+      "parameters": [{
+        "name": "ench",
+        "type": "org.bukkit.enchantments.Enchantment"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "serialize",
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "deserialize",
+      "parameters": [{
+        "name": "args",
+        "type": "java.util.Map"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "editMeta",
+      "parameters": [{
+        "name": "consumer",
+        "type": "java.util.function.Consumer"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "editMeta",
+      "parameters": [
+        {
+          "name": "metaClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "consumer",
+          "type": "java.util.function.Consumer"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "getItemMeta",
+      "return": "org.bukkit.inventory.meta.ItemMeta"
+    },
+    {
+      "name": "hasItemMeta",
+      "return": "boolean"
+    },
+    {
+      "name": "setItemMeta",
+      "parameters": [{
+        "name": "itemMeta",
+        "type": "org.bukkit.inventory.meta.ItemMeta"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getTranslationKey",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "enchantWithLevels",
+      "parameters": [
+        {
+          "name": "levels",
+          "type": "int"
+        },
+        {
+          "name": "allowTreasure",
+          "type": "boolean"
+        },
+        {
+          "name": "random",
+          "type": "java.util.Random"
+        }
+      ],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "asHoverEvent",
+      "parameters": [{
+        "name": "op",
+        "type": "java.util.function.UnaryOperator"
+      }],
+      "return": "<any>"
+    },
+    {
+      "name": "displayName",
+      "return": "net.kyori.adventure.text.Component"
+    },
+    {
+      "name": "ensureServerConversions",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "static": true,
+      "name": "deserializeBytes",
+      "parameters": [{
+        "name": "bytes",
+        "type": "byte[]"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "serializeAsBytes",
+      "return": "byte[]"
+    },
+    {
+      "name": "getI18NDisplayName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getMaxItemUseDuration",
+      "return": "int"
+    },
+    {
+      "name": "asOne",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "asQuantity",
+      "parameters": [{
+        "name": "qty",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "add",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "add",
+      "parameters": [{
+        "name": "qty",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "subtract",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "subtract",
+      "parameters": [{
+        "name": "qty",
+        "type": "int"
+      }],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getLore",
+      "return": "java.util.List"
+    },
+    {
+      "name": "lore",
+      "return": "java.util.List"
+    },
+    {
+      "name": "setLore",
+      "parameters": [{
+        "name": "lore",
+        "type": "java.util.List"
+      }]
+    },
+    {
+      "name": "lore",
+      "parameters": [{
+        "name": "lore",
+        "type": "java.util.List"
+      }]
+    },
+    {
+      "name": "addItemFlags",
+      "parameters": [{
+        "name": "itemFlags",
+        "type": "org.bukkit.inventory.ItemFlag[]"
+      }]
+    },
+    {
+      "name": "removeItemFlags",
+      "parameters": [{
+        "name": "itemFlags",
+        "type": "org.bukkit.inventory.ItemFlag[]"
+      }]
+    },
+    {
+      "name": "getItemFlags",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "hasItemFlag",
+      "parameters": [{
+        "name": "flag",
+        "type": "org.bukkit.inventory.ItemFlag"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "translationKey",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getRarity",
+      "return": "io.papermc.paper.inventory.ItemRarity"
+    },
+    {
+      "name": "isRepairableBy",
+      "parameters": [{
+        "name": "repairMaterial",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "canRepair",
+      "parameters": [{
+        "name": "toBeRepaired",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "damage",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "int"
+        },
+        {
+          "name": "livingEntity",
+          "type": "org.bukkit.entity.LivingEntity"
+        }
+      ],
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "static": true,
+      "name": "empty",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.inventory.ItemStack",
+  "simple-name": "ItemStack"
+}

@@ -1,0 +1,87 @@
+{
+  "package": "java.lang.reflect",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "invoke",
+      "parameters": [
+        {
+          "name": "proxy",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "method",
+          "type": "java.lang.reflect.Method"
+        },
+        {
+          "name": "args",
+          "type": "java.lang.Object[]"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "invokeDefault",
+      "parameters": [
+        {
+          "name": "proxy",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "method",
+          "type": "java.lang.reflect.Method"
+        },
+        {
+          "name": "args",
+          "type": "java.lang.Object[]"
+        }
+      ],
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "java.lang.reflect.InvocationHandler",
+  "simple-name": "InvocationHandler"
+}

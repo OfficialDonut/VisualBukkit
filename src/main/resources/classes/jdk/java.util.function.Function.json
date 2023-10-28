@@ -1,0 +1,79 @@
+{
+  "package": "java.util.function",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "apply",
+      "parameters": [{
+        "name": "t",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "compose",
+      "parameters": [{
+        "name": "before",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.function.Function"
+    },
+    {
+      "name": "andThen",
+      "parameters": [{
+        "name": "after",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.function.Function"
+    },
+    {
+      "static": true,
+      "name": "identity",
+      "return": "java.util.function.Function"
+    }
+  ],
+  "name": "java.util.function.Function",
+  "simple-name": "Function"
+}

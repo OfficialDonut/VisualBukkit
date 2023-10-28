@@ -1,0 +1,82 @@
+{
+  "package": "org.bukkit.scoreboard",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getPlayer",
+      "return": "org.bukkit.OfflinePlayer"
+    },
+    {
+      "name": "getEntry",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getObjective",
+      "return": "org.bukkit.scoreboard.Objective"
+    },
+    {
+      "name": "getScore",
+      "return": "int"
+    },
+    {
+      "name": "setScore",
+      "parameters": [{
+        "name": "score",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "isScoreSet",
+      "return": "boolean"
+    },
+    {
+      "name": "getScoreboard",
+      "return": "org.bukkit.scoreboard.Scoreboard"
+    },
+    {"name": "resetScore"}
+  ],
+  "name": "org.bukkit.scoreboard.Score",
+  "simple-name": "Score"
+}

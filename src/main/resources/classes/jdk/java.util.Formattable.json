@@ -1,0 +1,71 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "formatTo",
+      "parameters": [
+        {
+          "name": "formatter",
+          "type": "java.util.Formatter"
+        },
+        {
+          "name": "flags",
+          "type": "int"
+        },
+        {
+          "name": "width",
+          "type": "int"
+        },
+        {
+          "name": "precision",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "name": "java.util.Formattable",
+  "simple-name": "Formattable"
+}

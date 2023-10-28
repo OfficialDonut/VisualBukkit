@@ -1,0 +1,59 @@
+{
+  "package": "io.papermc.paper.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "manifest",
+      "parameters": [{
+        "name": "clazz",
+        "type": "java.lang.Class"
+      }],
+      "return": "java.util.jar.Manifest"
+    }
+  ],
+  "name": "io.papermc.paper.util.JarManifests",
+  "simple-name": "JarManifests"
+}

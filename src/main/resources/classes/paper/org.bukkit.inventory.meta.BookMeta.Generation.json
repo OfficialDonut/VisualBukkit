@@ -1,0 +1,125 @@
+{
+  "package": "org.bukkit.inventory.meta",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.inventory.meta.BookMeta.Generation[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.Generation"
+    }
+  ],
+  "name": "org.bukkit.inventory.meta.BookMeta.Generation",
+  "simple-name": "Generation",
+  "fields": [
+    {
+      "static": true,
+      "name": "ORIGINAL",
+      "type": "org.bukkit.inventory.meta.BookMeta.Generation"
+    },
+    {
+      "static": true,
+      "name": "COPY_OF_ORIGINAL",
+      "type": "org.bukkit.inventory.meta.BookMeta.Generation"
+    },
+    {
+      "static": true,
+      "name": "COPY_OF_COPY",
+      "type": "org.bukkit.inventory.meta.BookMeta.Generation"
+    },
+    {
+      "static": true,
+      "name": "TATTERED",
+      "type": "org.bukkit.inventory.meta.BookMeta.Generation"
+    }
+  ]
+}

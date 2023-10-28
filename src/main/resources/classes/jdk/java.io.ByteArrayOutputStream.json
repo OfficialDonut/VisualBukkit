@@ -1,0 +1,145 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "size",
+        "type": "int"
+      }]
+    }
+  ],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "nullOutputStream",
+      "return": "java.io.OutputStream"
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }]
+    },
+    {"name": "flush"},
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "b",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "write",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "writeBytes",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "writeTo",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.OutputStream"
+      }]
+    },
+    {"name": "reset"},
+    {
+      "name": "toByteArray",
+      "return": "byte[]"
+    },
+    {
+      "name": "size",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toString",
+      "parameters": [{
+        "name": "charsetName",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toString",
+      "parameters": [{
+        "name": "charset",
+        "type": "java.nio.charset.Charset"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toString",
+      "parameters": [{
+        "name": "hibyte",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {"name": "close"}
+  ],
+  "name": "java.io.ByteArrayOutputStream",
+  "simple-name": "ByteArrayOutputStream"
+}

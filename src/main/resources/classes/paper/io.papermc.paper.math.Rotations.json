@@ -1,0 +1,146 @@
+{
+  "package": "io.papermc.paper.math",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "ofDegrees",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "io.papermc.paper.math.Rotations"
+    },
+    {
+      "name": "x",
+      "return": "double"
+    },
+    {
+      "name": "y",
+      "return": "double"
+    },
+    {
+      "name": "z",
+      "return": "double"
+    },
+    {
+      "name": "withX",
+      "parameters": [{
+        "name": "x",
+        "type": "double"
+      }],
+      "return": "io.papermc.paper.math.Rotations"
+    },
+    {
+      "name": "withY",
+      "parameters": [{
+        "name": "y",
+        "type": "double"
+      }],
+      "return": "io.papermc.paper.math.Rotations"
+    },
+    {
+      "name": "withZ",
+      "parameters": [{
+        "name": "z",
+        "type": "double"
+      }],
+      "return": "io.papermc.paper.math.Rotations"
+    },
+    {
+      "name": "add",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "io.papermc.paper.math.Rotations"
+    },
+    {
+      "name": "subtract",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "double"
+        },
+        {
+          "name": "y",
+          "type": "double"
+        },
+        {
+          "name": "z",
+          "type": "double"
+        }
+      ],
+      "return": "io.papermc.paper.math.Rotations"
+    }
+  ],
+  "name": "io.papermc.paper.math.Rotations",
+  "simple-name": "Rotations",
+  "fields": [{
+    "static": true,
+    "name": "ZERO",
+    "type": "io.papermc.paper.math.Rotations"
+  }]
+}

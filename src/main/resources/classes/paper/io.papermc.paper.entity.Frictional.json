@@ -1,0 +1,61 @@
+{
+  "package": "io.papermc.paper.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getFrictionState",
+      "return": "TriState"
+    },
+    {
+      "name": "setFrictionState",
+      "parameters": [{
+        "name": "state",
+        "type": "TriState"
+      }]
+    }
+  ],
+  "name": "io.papermc.paper.entity.Frictional",
+  "simple-name": "Frictional"
+}

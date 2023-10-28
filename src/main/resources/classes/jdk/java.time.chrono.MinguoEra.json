@@ -1,0 +1,190 @@
+{
+  "package": "java.time.chrono",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "range",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getLong",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "query",
+      "parameters": [{
+        "name": "query",
+        "type": "java.time.temporal.TemporalQuery"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.time.chrono.MinguoEra[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.time.chrono.MinguoEra"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "minguoEra",
+        "type": "int"
+      }],
+      "return": "java.time.chrono.MinguoEra"
+    },
+    {
+      "name": "getValue",
+      "return": "int"
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        {
+          "name": "style",
+          "type": "java.time.format.TextStyle"
+        },
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.chrono.MinguoEra",
+  "simple-name": "MinguoEra",
+  "fields": [
+    {
+      "static": true,
+      "name": "BEFORE_ROC",
+      "type": "java.time.chrono.MinguoEra"
+    },
+    {
+      "static": true,
+      "name": "ROC",
+      "type": "java.time.chrono.MinguoEra"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "package": "java.nio.channels.spi",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "channel",
+      "return": "java.nio.channels.SelectableChannel"
+    },
+    {
+      "name": "selector",
+      "return": "java.nio.channels.Selector"
+    },
+    {
+      "name": "interestOps",
+      "return": "int"
+    },
+    {
+      "name": "interestOps",
+      "parameters": [{
+        "name": "ops",
+        "type": "int"
+      }],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "interestOpsOr",
+      "parameters": [{
+        "name": "ops",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "interestOpsAnd",
+      "parameters": [{
+        "name": "ops",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "readyOps",
+      "return": "int"
+    },
+    {
+      "name": "isReadable",
+      "return": "boolean"
+    },
+    {
+      "name": "isWritable",
+      "return": "boolean"
+    },
+    {
+      "name": "isConnectable",
+      "return": "boolean"
+    },
+    {
+      "name": "isAcceptable",
+      "return": "boolean"
+    },
+    {
+      "name": "attach",
+      "parameters": [{
+        "name": "ob",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "attachment",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "isValid",
+      "return": "boolean"
+    },
+    {"name": "cancel"}
+  ],
+  "name": "java.nio.channels.spi.AbstractSelectionKey",
+  "simple-name": "AbstractSelectionKey",
+  "fields": [
+    {
+      "static": true,
+      "name": "OP_READ",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "OP_WRITE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "OP_CONNECT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "OP_ACCEPT",
+      "type": "int"
+    }
+  ]
+}

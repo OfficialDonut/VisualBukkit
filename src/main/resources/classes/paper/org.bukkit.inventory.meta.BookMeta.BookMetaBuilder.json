@@ -1,0 +1,94 @@
+{
+  "package": "org.bukkit.inventory.meta",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "title",
+      "parameters": [{
+        "name": "title",
+        "type": "net.kyori.adventure.text.Component"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder"
+    },
+    {
+      "name": "author",
+      "parameters": [{
+        "name": "author",
+        "type": "net.kyori.adventure.text.Component"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder"
+    },
+    {
+      "name": "addPage",
+      "parameters": [{
+        "name": "page",
+        "type": "net.kyori.adventure.text.Component"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder"
+    },
+    {
+      "name": "pages",
+      "parameters": [{
+        "name": "pages",
+        "type": "net.kyori.adventure.text.Component []"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder"
+    },
+    {
+      "name": "pages",
+      "parameters": [{
+        "name": "pages",
+        "type": "java.util.Collection"
+      }],
+      "return": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder"
+    },
+    {
+      "name": "build",
+      "return": "org.bukkit.inventory.meta.BookMeta"
+    }
+  ],
+  "name": "org.bukkit.inventory.meta.BookMeta.BookMetaBuilder",
+  "simple-name": "BookMetaBuilder"
+}

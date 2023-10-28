@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.project;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.VisualBukkitExtension;
 import com.gmail.visualbukkit.blocks.*;
-import com.gmail.visualbukkit.reflection.ClassRegistry;
+import com.gmail.visualbukkit.blocks.classes.ClassRegistry;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.gmail.visualbukkit.ui.PopupWindow;
 import javafx.application.Platform;
@@ -17,29 +17,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.SearchableComboBox;
-import org.eclipse.aether.artifact.DefaultArtifact;
-import org.eclipse.aether.repository.RemoteRepository;
-import org.eclipse.aether.resolution.DependencyResolutionException;
+import org.controlsfx.control.action.Action;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Project {
-
-    private static final DefaultArtifact PAPER_ARTIFACT = new DefaultArtifact("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT", Collections.singletonMap("scope", "provided"));
-    private static final RemoteRepository PAPER_REPO = new RemoteRepository.Builder("papermc", "default", "https://repo.papermc.io/repository/maven-public/").build();
 
     private final Path directory;
     private final Path dataFile;
@@ -99,7 +88,14 @@ public class Project {
             open();
         });
         moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> applyChangesButton.setDisable(false));
+        moduleSelector.setSourceHeader(new Label(VisualBukkitApp.localizedText("label.disabled_modules")));
+        moduleSelector.setTargetHeader(new Label(VisualBukkitApp.localizedText("label.enabled_modules")));
         moduleSelector.setSourceFooter(applyChangesButton);
+        for (Action action : moduleSelector.getActions()) {
+            action.graphicProperty().unbind();
+            action.setGraphic(null);
+            action.setText(action instanceof ListSelectionView.MoveToTarget ? ">" : action instanceof ListSelectionView.MoveToTargetAll ? ">>" : action instanceof ListSelectionView.MoveToSource ? "<" : "<<");
+        }
 
         Button addComponentButton = new Button(VisualBukkitApp.localizedText("button.add_plugin_component"));
         Button pluginComponentsButton = new Button(VisualBukkitApp.localizedText("button.plugin_components"));
@@ -150,27 +146,9 @@ public class Project {
                     data = new JSONObject(Files.readString(dataFile));
                 }
                 BlockRegistry.register(BlockRegistry.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions");
-                ClassRegistry.register(PAPER_ARTIFACT, PAPER_REPO, "org.bukkit", "com.destroystokyo.paper");
-                Pattern classPattern = Pattern.compile("/modules/java\\.base/(.+)\\.class");
-                FileSystem fileSystem = FileSystems.getFileSystem(URI.create("jrt:/"));
-                Files.walkFileTree(fileSystem.getPath("/modules/java.base/java"), new SimpleFileVisitor<>() {
-                    @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) {
-                        Matcher matcher = classPattern.matcher(file.toString());
-                        if (matcher.matches()) {
-                            try {
-                                Class<?> clazz = Class.forName(matcher.group(1).replace("/", "."));
-                                if (!clazz.isAnonymousClass()) {
-                                    ClassRegistry.register(clazz);
-                                }
-                            } catch (ClassNotFoundException e) {
-                                VisualBukkitApp.getLogger().log(Level.WARNING, "Failed to register class", e);
-                            }
-                        }
-                        return FileVisitResult.CONTINUE;
-                    }
-                });
-            } catch (IOException | MavenInvocationException | DependencyResolutionException | JSONException e) {
+                ClassRegistry.register(ClassRegistry.class.getClassLoader(), "classes/jdk");
+                ClassRegistry.register(ClassRegistry.class.getClassLoader(), "classes/paper");
+            } catch (IOException | JSONException e) {
                 Platform.runLater(() -> VisualBukkitApp.displayException(e));
             }
             JSONArray enabledModulesJson = data.optJSONArray("enabled-modules");

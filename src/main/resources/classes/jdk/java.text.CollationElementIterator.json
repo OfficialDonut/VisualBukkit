@@ -1,0 +1,124 @@
+{
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "reset"},
+    {
+      "name": "next",
+      "return": "int"
+    },
+    {
+      "name": "previous",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "primaryOrder",
+      "parameters": [{
+        "name": "order",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "secondaryOrder",
+      "parameters": [{
+        "name": "order",
+        "type": "int"
+      }],
+      "return": "short"
+    },
+    {
+      "static": true,
+      "name": "tertiaryOrder",
+      "parameters": [{
+        "name": "order",
+        "type": "int"
+      }],
+      "return": "short"
+    },
+    {
+      "name": "setOffset",
+      "parameters": [{
+        "name": "newOffset",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getOffset",
+      "return": "int"
+    },
+    {
+      "name": "getMaxExpansion",
+      "parameters": [{
+        "name": "order",
+        "type": "int"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "setText",
+      "parameters": [{
+        "name": "source",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "setText",
+      "parameters": [{
+        "name": "source",
+        "type": "java.text.CharacterIterator"
+      }]
+    }
+  ],
+  "name": "java.text.CollationElementIterator",
+  "simple-name": "CollationElementIterator",
+  "fields": [{
+    "static": true,
+    "name": "NULLORDER",
+    "type": "int"
+  }]
+}

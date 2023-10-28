@@ -1,0 +1,66 @@
+{
+  "package": "java.text",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "target",
+        "type": "java.text.CollationKey"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getSourceString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "toByteArray",
+      "return": "byte[]"
+    }
+  ],
+  "name": "java.text.CollationKey",
+  "simple-name": "CollationKey"
+}

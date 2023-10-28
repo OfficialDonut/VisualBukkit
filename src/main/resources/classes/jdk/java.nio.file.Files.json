@@ -1,0 +1,1103 @@
+{
+  "package": "java.nio.file",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "newInputStream",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.io.InputStream"
+    },
+    {
+      "static": true,
+      "name": "newOutputStream",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.io.OutputStream"
+    },
+    {
+      "static": true,
+      "name": "newByteChannel",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.util.Set"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.channels.SeekableByteChannel"
+    },
+    {
+      "static": true,
+      "name": "newByteChannel",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.channels.SeekableByteChannel"
+    },
+    {
+      "static": true,
+      "name": "newDirectoryStream",
+      "parameters": [{
+        "name": "dir",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.nio.file.DirectoryStream"
+    },
+    {
+      "static": true,
+      "name": "newDirectoryStream",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "glob",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.nio.file.DirectoryStream"
+    },
+    {
+      "static": true,
+      "name": "newDirectoryStream",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "filter",
+          "type": "java.nio.file.DirectoryStream.Filter"
+        }
+      ],
+      "return": "java.nio.file.DirectoryStream"
+    },
+    {
+      "static": true,
+      "name": "createFile",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createDirectory",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createDirectories",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createTempFile",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "suffix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createTempFile",
+      "parameters": [
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "suffix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createTempDirectory",
+      "parameters": [
+        {
+          "name": "dir",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createTempDirectory",
+      "parameters": [
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createSymbolicLink",
+      "parameters": [
+        {
+          "name": "link",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "target",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attrs",
+          "type": "java.nio.file.attribute.FileAttribute[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "createLink",
+      "parameters": [
+        {
+          "name": "link",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "existing",
+          "type": "java.nio.file.Path"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "delete",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }]
+    },
+    {
+      "static": true,
+      "name": "deleteIfExists",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "copy",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "target",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.CopyOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "move",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "target",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.CopyOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "readSymbolicLink",
+      "parameters": [{
+        "name": "link",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "getFileStore",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.nio.file.FileStore"
+    },
+    {
+      "static": true,
+      "name": "isSameFile",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "path2",
+          "type": "java.nio.file.Path"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "mismatch",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "path2",
+          "type": "java.nio.file.Path"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "isHidden",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "probeContentType",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "getFileAttributeView",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.nio.file.attribute.FileAttributeView"
+    },
+    {
+      "static": true,
+      "name": "readAttributes",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.nio.file.attribute.BasicFileAttributes"
+    },
+    {
+      "static": true,
+      "name": "setAttribute",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attribute",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "getAttribute",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attribute",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "readAttributes",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "attributes",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "getPosixFilePermissions",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.util.Set"
+    },
+    {
+      "static": true,
+      "name": "setPosixFilePermissions",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "perms",
+          "type": "java.util.Set"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "getOwner",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.nio.file.attribute.UserPrincipal"
+    },
+    {
+      "static": true,
+      "name": "setOwner",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "owner",
+          "type": "java.nio.file.attribute.UserPrincipal"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "isSymbolicLink",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isDirectory",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isRegularFile",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "getLastModifiedTime",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "java.nio.file.attribute.FileTime"
+    },
+    {
+      "static": true,
+      "name": "setLastModifiedTime",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "time",
+          "type": "java.nio.file.attribute.FileTime"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "size",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "exists",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "notExists",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.LinkOption[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isReadable",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isWritable",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "isExecutable",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "walkFileTree",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.util.Set"
+        },
+        {
+          "name": "maxDepth",
+          "type": "int"
+        },
+        {
+          "name": "visitor",
+          "type": "java.nio.file.FileVisitor"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "walkFileTree",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "visitor",
+          "type": "java.nio.file.FileVisitor"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "newBufferedReader",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        }
+      ],
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "static": true,
+      "name": "newBufferedReader",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "static": true,
+      "name": "newBufferedWriter",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.io.BufferedWriter"
+    },
+    {
+      "static": true,
+      "name": "newBufferedWriter",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.io.BufferedWriter"
+    },
+    {
+      "static": true,
+      "name": "copy",
+      "parameters": [
+        {
+          "name": "in",
+          "type": "java.io.InputStream"
+        },
+        {
+          "name": "target",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.CopyOption[]"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "copy",
+      "parameters": [
+        {
+          "name": "source",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "out",
+          "type": "java.io.OutputStream"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "readAllBytes",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "static": true,
+      "name": "readString",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "readString",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "readAllLines",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        }
+      ],
+      "return": "java.util.List"
+    },
+    {
+      "static": true,
+      "name": "readAllLines",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "static": true,
+      "name": "write",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "bytes",
+          "type": "byte[]"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "write",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "lines",
+          "type": "java.lang.Iterable"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "write",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "lines",
+          "type": "java.lang.Iterable"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "writeString",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "csq",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "writeString",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "csq",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.OpenOption[]"
+        }
+      ],
+      "return": "java.nio.file.Path"
+    },
+    {
+      "static": true,
+      "name": "list",
+      "parameters": [{
+        "name": "dir",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "walk",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "maxDepth",
+          "type": "int"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.FileVisitOption[]"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "walk",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.FileVisitOption[]"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "find",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "maxDepth",
+          "type": "int"
+        },
+        {
+          "name": "matcher",
+          "type": "java.util.function.BiPredicate"
+        },
+        {
+          "name": "options",
+          "type": "java.nio.file.FileVisitOption[]"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "lines",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "java.nio.file.Path"
+        },
+        {
+          "name": "cs",
+          "type": "java.nio.charset.Charset"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "lines",
+      "parameters": [{
+        "name": "path",
+        "type": "java.nio.file.Path"
+      }],
+      "return": "java.util.stream.Stream"
+    }
+  ],
+  "name": "java.nio.file.Files",
+  "simple-name": "Files"
+}

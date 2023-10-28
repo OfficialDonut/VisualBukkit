@@ -1,0 +1,79 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "com.destroystokyo.paper",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "fadeIn",
+      "parameters": [{
+        "name": "fadeIn",
+        "type": "int"
+      }],
+      "return": "com.destroystokyo.paper.Title.Builder"
+    },
+    {
+      "name": "stay",
+      "parameters": [{
+        "name": "stay",
+        "type": "int"
+      }],
+      "return": "com.destroystokyo.paper.Title.Builder"
+    },
+    {
+      "name": "fadeOut",
+      "parameters": [{
+        "name": "fadeOut",
+        "type": "int"
+      }],
+      "return": "com.destroystokyo.paper.Title.Builder"
+    },
+    {
+      "name": "build",
+      "return": "com.destroystokyo.paper.Title"
+    }
+  ],
+  "name": "com.destroystokyo.paper.Title.Builder",
+  "simple-name": "Builder"
+}

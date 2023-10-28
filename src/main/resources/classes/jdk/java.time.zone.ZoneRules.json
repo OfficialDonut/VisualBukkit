@@ -1,0 +1,184 @@
+{
+  "package": "java.time.zone",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "baseStandardOffset",
+          "type": "java.time.ZoneOffset"
+        },
+        {
+          "name": "baseWallOffset",
+          "type": "java.time.ZoneOffset"
+        },
+        {
+          "name": "standardOffsetTransitionList",
+          "type": "java.util.List"
+        },
+        {
+          "name": "transitionList",
+          "type": "java.util.List"
+        },
+        {
+          "name": "lastRules",
+          "type": "java.util.List"
+        }
+      ],
+      "return": "java.time.zone.ZoneRules"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "offset",
+        "type": "java.time.ZoneOffset"
+      }],
+      "return": "java.time.zone.ZoneRules"
+    },
+    {
+      "name": "isFixedOffset",
+      "return": "boolean"
+    },
+    {
+      "name": "getOffset",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.ZoneOffset"
+    },
+    {
+      "name": "getOffset",
+      "parameters": [{
+        "name": "localDateTime",
+        "type": "java.time.LocalDateTime"
+      }],
+      "return": "java.time.ZoneOffset"
+    },
+    {
+      "name": "getValidOffsets",
+      "parameters": [{
+        "name": "localDateTime",
+        "type": "java.time.LocalDateTime"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "getTransition",
+      "parameters": [{
+        "name": "localDateTime",
+        "type": "java.time.LocalDateTime"
+      }],
+      "return": "java.time.zone.ZoneOffsetTransition"
+    },
+    {
+      "name": "getStandardOffset",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.ZoneOffset"
+    },
+    {
+      "name": "getDaylightSavings",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.Duration"
+    },
+    {
+      "name": "isDaylightSavings",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isValidOffset",
+      "parameters": [
+        {
+          "name": "localDateTime",
+          "type": "java.time.LocalDateTime"
+        },
+        {
+          "name": "offset",
+          "type": "java.time.ZoneOffset"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "nextTransition",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.zone.ZoneOffsetTransition"
+    },
+    {
+      "name": "previousTransition",
+      "parameters": [{
+        "name": "instant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.zone.ZoneOffsetTransition"
+    },
+    {
+      "name": "getTransitions",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getTransitionRules",
+      "return": "java.util.List"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "otherRules",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.zone.ZoneRules",
+  "simple-name": "ZoneRules"
+}

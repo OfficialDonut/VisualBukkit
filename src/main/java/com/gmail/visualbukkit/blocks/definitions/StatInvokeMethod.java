@@ -4,13 +4,11 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.parameters.ClassElementParameter;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.blocks.classes.ClassInfo;
 import com.gmail.visualbukkit.blocks.StatementBlock;
-import com.gmail.visualbukkit.reflection.MethodInfo;
+import com.gmail.visualbukkit.blocks.classes.MethodInfo;
+import com.gmail.visualbukkit.blocks.classes.ParameterInfo;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.util.Collection;
 import java.util.StringJoiner;
 
@@ -30,7 +28,7 @@ public class StatInvokeMethod extends StatementBlock {
             }
             @Override
             public String generateJava() {
-                return getValue() != null ? getValue().method().getName() : null;
+                return getValue() != null ? getValue().getName() : null;
             }
             @Override
             public Object serialize() {
@@ -52,13 +50,13 @@ public class StatInvokeMethod extends StatementBlock {
         methodParameter.valueProperty().addListener((observable, oldValue, newValue) -> {
             removeParameters(2);
             if (newValue != null) {
-                if (!Modifier.isStatic(newValue.method().getModifiers())) {
-                    Class<?> clazz = classParameter.getSelectionModel().getSelectedItem().clazz();
-                    addParameter(ClassInfo.toString(clazz, false), clazz.getPackageName(), new ExpressionParameter(clazz));
+                if (!newValue.isStatic()) {
+                    ClassInfo clazz = classParameter.getSelectionModel().getSelectedItem();
+                    addParameter(clazz.getSimpleName(), clazz.getName(), new ExpressionParameter(clazz));
                 }
-                for (Parameter parameter : newValue.method().getParameters()) {
-                    Class<?> clazz = parameter.getType();
-                    addParameter(ClassInfo.toString(clazz, false), clazz.getPackageName(), new ExpressionParameter(clazz));
+                for (ParameterInfo parameter : newValue.getParameters()) {
+                    ClassInfo clazz = parameter.getType();
+                    addParameter(parameter.getName(), clazz.getName(), new ExpressionParameter(clazz));
                 }
             }
         });
@@ -74,15 +72,14 @@ public class StatInvokeMethod extends StatementBlock {
         if (classInfo == null || methodInfo == null) {
             return "";
         }
-        Method method = methodInfo.method();
         StringBuilder builder = new StringBuilder();
-        builder.append(arg(Modifier.isStatic(method.getModifiers()) ? 0 : 2))
+        builder.append(arg(methodInfo.isStatic() ? 0 : 2))
                 .append(".")
-                .append(method.getName())
+                .append(methodInfo.getName())
                 .append("(");
-        if (method.getParameterCount() > 0) {
+        if (!methodInfo.getParameters().isEmpty()) {
             StringJoiner joiner = new StringJoiner(",");
-            for (int i = Modifier.isStatic(method.getModifiers()) ? 2 : 3; i < parameters.size(); i++) {
+            for (int i = methodInfo.isStatic() ? 2 : 3; i < parameters.size(); i++) {
                 joiner.add(arg(i));
             }
             builder.append(joiner);

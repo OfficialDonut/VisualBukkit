@@ -1,0 +1,141 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "org.bukkit.scheduler",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {"name": "run"},
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {"name": "cancel"},
+    {
+      "name": "runTask",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "runTaskAsynchronously",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "runTaskLater",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "delay",
+          "type": "long"
+        }
+      ],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "runTaskLaterAsynchronously",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "delay",
+          "type": "long"
+        }
+      ],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "runTaskTimer",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "delay",
+          "type": "long"
+        },
+        {
+          "name": "period",
+          "type": "long"
+        }
+      ],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "runTaskTimerAsynchronously",
+      "parameters": [
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        },
+        {
+          "name": "delay",
+          "type": "long"
+        },
+        {
+          "name": "period",
+          "type": "long"
+        }
+      ],
+      "return": "org.bukkit.scheduler.BukkitTask"
+    },
+    {
+      "name": "getTaskId",
+      "return": "int"
+    }
+  ],
+  "name": "org.bukkit.scheduler.BukkitRunnable",
+  "simple-name": "BukkitRunnable"
+}

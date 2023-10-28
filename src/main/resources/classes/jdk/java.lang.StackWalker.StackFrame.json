@@ -1,0 +1,90 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getClassName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getMethodName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "getMethodType",
+      "return": "java.lang.invoke.MethodType"
+    },
+    {
+      "name": "getDescriptor",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getByteCodeIndex",
+      "return": "int"
+    },
+    {
+      "name": "getFileName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getLineNumber",
+      "return": "int"
+    },
+    {
+      "name": "isNativeMethod",
+      "return": "boolean"
+    },
+    {
+      "name": "toStackTraceElement",
+      "return": "java.lang.StackTraceElement"
+    }
+  ],
+  "name": "java.lang.StackWalker.StackFrame",
+  "simple-name": "StackFrame"
+}

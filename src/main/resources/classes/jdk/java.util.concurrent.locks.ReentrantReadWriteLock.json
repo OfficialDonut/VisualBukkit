@@ -1,0 +1,124 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "fair",
+        "type": "boolean"
+      }]
+    }
+  ],
+  "package": "java.util.concurrent.locks",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "writeLock",
+      "return": "java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock"
+    },
+    {
+      "name": "readLock",
+      "return": "java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock"
+    },
+    {
+      "name": "isFair",
+      "return": "boolean"
+    },
+    {
+      "name": "getReadLockCount",
+      "return": "int"
+    },
+    {
+      "name": "isWriteLocked",
+      "return": "boolean"
+    },
+    {
+      "name": "isWriteLockedByCurrentThread",
+      "return": "boolean"
+    },
+    {
+      "name": "getWriteHoldCount",
+      "return": "int"
+    },
+    {
+      "name": "getReadHoldCount",
+      "return": "int"
+    },
+    {
+      "name": "hasQueuedThreads",
+      "return": "boolean"
+    },
+    {
+      "name": "hasQueuedThread",
+      "parameters": [{
+        "name": "thread",
+        "type": "java.lang.Thread"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getQueueLength",
+      "return": "int"
+    },
+    {
+      "name": "hasWaiters",
+      "parameters": [{
+        "name": "condition",
+        "type": "java.util.concurrent.locks.Condition"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getWaitQueueLength",
+      "parameters": [{
+        "name": "condition",
+        "type": "java.util.concurrent.locks.Condition"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.util.concurrent.locks.ReentrantReadWriteLock",
+  "simple-name": "ReentrantReadWriteLock"
+}

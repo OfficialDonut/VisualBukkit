@@ -1,0 +1,84 @@
+{
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "csq",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.lang.Appendable"
+    },
+    {
+      "name": "append",
+      "parameters": [
+        {
+          "name": "csq",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.Appendable"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "c",
+        "type": "char"
+      }],
+      "return": "java.lang.Appendable"
+    }
+  ],
+  "name": "java.lang.Appendable",
+  "simple-name": "Appendable"
+}

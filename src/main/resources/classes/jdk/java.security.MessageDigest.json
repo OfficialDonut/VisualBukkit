@@ -1,0 +1,189 @@
+{
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [{
+        "name": "algorithm",
+        "type": "java.lang.String"
+      }],
+      "return": "java.security.MessageDigest"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [
+        {
+          "name": "algorithm",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "provider",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.security.MessageDigest"
+    },
+    {
+      "static": true,
+      "name": "getInstance",
+      "parameters": [
+        {
+          "name": "algorithm",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "provider",
+          "type": "java.security.Provider"
+        }
+      ],
+      "return": "java.security.MessageDigest"
+    },
+    {
+      "name": "getProvider",
+      "return": "java.security.Provider"
+    },
+    {
+      "name": "update",
+      "parameters": [{
+        "name": "input",
+        "type": "byte"
+      }]
+    },
+    {
+      "name": "update",
+      "parameters": [
+        {
+          "name": "input",
+          "type": "byte[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "update",
+      "parameters": [{
+        "name": "input",
+        "type": "byte[]"
+      }]
+    },
+    {
+      "name": "update",
+      "parameters": [{
+        "name": "input",
+        "type": "java.nio.ByteBuffer"
+      }]
+    },
+    {
+      "name": "digest",
+      "return": "byte[]"
+    },
+    {
+      "name": "digest",
+      "parameters": [
+        {
+          "name": "buf",
+          "type": "byte[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "digest",
+      "parameters": [{
+        "name": "input",
+        "type": "byte[]"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "isEqual",
+      "parameters": [
+        {
+          "name": "digesta",
+          "type": "byte[]"
+        },
+        {
+          "name": "digestb",
+          "type": "byte[]"
+        }
+      ],
+      "return": "boolean"
+    },
+    {"name": "reset"},
+    {
+      "name": "getAlgorithm",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDigestLength",
+      "return": "int"
+    },
+    {
+      "name": "clone",
+      "return": "java.lang.Object"
+    }
+  ],
+  "name": "java.security.MessageDigest",
+  "simple-name": "MessageDigest"
+}

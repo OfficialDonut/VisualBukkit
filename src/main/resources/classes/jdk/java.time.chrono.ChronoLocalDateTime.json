@@ -1,0 +1,276 @@
+{
+  "package": "java.time.chrono",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "range",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getLong",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "until",
+      "parameters": [
+        {
+          "name": "endExclusive",
+          "type": "java.time.temporal.Temporal"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "timeLineOrder",
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "getChronology",
+      "return": "java.time.chrono.Chronology"
+    },
+    {
+      "name": "toLocalDate",
+      "return": "java.time.chrono.ChronoLocalDate"
+    },
+    {
+      "name": "toLocalTime",
+      "return": "java.time.LocalTime"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "field",
+        "type": "java.time.temporal.TemporalField"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isSupported",
+      "parameters": [{
+        "name": "unit",
+        "type": "java.time.temporal.TemporalUnit"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "with",
+      "parameters": [{
+        "name": "adjuster",
+        "type": "java.time.temporal.TemporalAdjuster"
+      }],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "with",
+      "parameters": [
+        {
+          "name": "field",
+          "type": "java.time.temporal.TemporalField"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "plus",
+      "parameters": [{
+        "name": "amount",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "plus",
+      "parameters": [
+        {
+          "name": "amountToAdd",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "minus",
+      "parameters": [{
+        "name": "amount",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "minus",
+      "parameters": [
+        {
+          "name": "amountToSubtract",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.time.temporal.TemporalUnit"
+        }
+      ],
+      "return": "java.time.chrono.ChronoLocalDateTime"
+    },
+    {
+      "name": "query",
+      "parameters": [{
+        "name": "query",
+        "type": "java.time.temporal.TemporalQuery"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "format",
+      "parameters": [{
+        "name": "formatter",
+        "type": "java.time.format.DateTimeFormatter"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "atZone",
+      "parameters": [{
+        "name": "zone",
+        "type": "java.time.ZoneId"
+      }],
+      "return": "java.time.chrono.ChronoZonedDateTime"
+    },
+    {
+      "name": "toInstant",
+      "parameters": [{
+        "name": "offset",
+        "type": "java.time.ZoneOffset"
+      }],
+      "return": "java.time.Instant"
+    },
+    {
+      "name": "toEpochSecond",
+      "parameters": [{
+        "name": "offset",
+        "type": "java.time.ZoneOffset"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.chrono.ChronoLocalDateTime"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "isAfter",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.chrono.ChronoLocalDateTime"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isBefore",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.chrono.ChronoLocalDateTime"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isEqual",
+      "parameters": [{
+        "name": "other",
+        "type": "java.time.chrono.ChronoLocalDateTime"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.chrono.ChronoLocalDateTime",
+  "simple-name": "ChronoLocalDateTime"
+}

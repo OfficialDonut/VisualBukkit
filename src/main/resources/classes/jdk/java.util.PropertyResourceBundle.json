@@ -1,0 +1,268 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "stream",
+        "type": "java.io.InputStream"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "reader",
+        "type": "java.io.Reader"
+      }]
+    }
+  ],
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getBaseBundleName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getString",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getStringArray",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.String[]"
+    },
+    {
+      "name": "getObject",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getLocale",
+      "return": "java.util.Locale"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [{
+        "name": "baseName",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "control",
+          "type": "java.util.ResourceBundle.Control"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "module",
+          "type": "java.lang.Module"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "targetLocale",
+          "type": "java.util.Locale"
+        },
+        {
+          "name": "module",
+          "type": "java.lang.Module"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "targetLocale",
+          "type": "java.util.Locale"
+        },
+        {
+          "name": "control",
+          "type": "java.util.ResourceBundle.Control"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        },
+        {
+          "name": "loader",
+          "type": "java.lang.ClassLoader"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "getBundle",
+      "parameters": [
+        {
+          "name": "baseName",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "targetLocale",
+          "type": "java.util.Locale"
+        },
+        {
+          "name": "loader",
+          "type": "java.lang.ClassLoader"
+        },
+        {
+          "name": "control",
+          "type": "java.util.ResourceBundle.Control"
+        }
+      ],
+      "return": "java.util.ResourceBundle"
+    },
+    {
+      "static": true,
+      "name": "clearCache"
+    },
+    {
+      "static": true,
+      "name": "clearCache",
+      "parameters": [{
+        "name": "loader",
+        "type": "java.lang.ClassLoader"
+      }]
+    },
+    {
+      "name": "containsKey",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "keySet",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "handleGetObject",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getKeys",
+      "return": "java.util.Enumeration"
+    }
+  ],
+  "name": "java.util.PropertyResourceBundle",
+  "simple-name": "PropertyResourceBundle"
+}

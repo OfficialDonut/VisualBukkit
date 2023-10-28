@@ -1,0 +1,143 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "capturingClass",
+        "type": "java.lang.Class"
+      },
+      {
+        "name": "functionalInterfaceClass",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "functionalInterfaceMethodName",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "functionalInterfaceMethodSignature",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "implMethodKind",
+        "type": "int"
+      },
+      {
+        "name": "implClass",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "implMethodName",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "implMethodSignature",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "instantiatedMethodType",
+        "type": "java.lang.String"
+      },
+      {
+        "name": "capturedArgs",
+        "type": "java.lang.Object[]"
+      }
+    ]
+  }],
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getCapturingClass",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getFunctionalInterfaceClass",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getFunctionalInterfaceMethodName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getFunctionalInterfaceMethodSignature",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getImplClass",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getImplMethodName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getImplMethodSignature",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getImplMethodKind",
+      "return": "int"
+    },
+    {
+      "name": "getInstantiatedMethodType",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getCapturedArgCount",
+      "return": "int"
+    },
+    {
+      "name": "getCapturedArg",
+      "parameters": [{
+        "name": "i",
+        "type": "int"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.invoke.SerializedLambda",
+  "simple-name": "SerializedLambda"
+}

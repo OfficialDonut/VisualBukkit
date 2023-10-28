@@ -1,0 +1,591 @@
+{
+  "package": "org.bukkit.block",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "setMetadata",
+      "parameters": [
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "newMetadataValue",
+          "type": "org.bukkit.metadata.MetadataValue"
+        }
+      ]
+    },
+    {
+      "name": "getMetadata",
+      "parameters": [{
+        "name": "metadataKey",
+        "type": "java.lang.String"
+      }],
+      "return": "java.util.List"
+    },
+    {
+      "name": "hasMetadata",
+      "parameters": [{
+        "name": "metadataKey",
+        "type": "java.lang.String"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "removeMetadata",
+      "parameters": [
+        {
+          "name": "metadataKey",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "owningPlugin",
+          "type": "org.bukkit.plugin.Plugin"
+        }
+      ]
+    },
+    {
+      "name": "getData",
+      "return": "byte"
+    },
+    {
+      "name": "getBlockData",
+      "return": "org.bukkit.block.data.BlockData"
+    },
+    {
+      "name": "getRelative",
+      "parameters": [
+        {
+          "name": "modX",
+          "type": "int"
+        },
+        {
+          "name": "modY",
+          "type": "int"
+        },
+        {
+          "name": "modZ",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getRelative",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getRelative",
+      "parameters": [
+        {
+          "name": "face",
+          "type": "org.bukkit.block.BlockFace"
+        },
+        {
+          "name": "distance",
+          "type": "int"
+        }
+      ],
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.Material"
+    },
+    {
+      "name": "getLightLevel",
+      "return": "byte"
+    },
+    {
+      "name": "getLightFromSky",
+      "return": "byte"
+    },
+    {
+      "name": "getLightFromBlocks",
+      "return": "byte"
+    },
+    {
+      "name": "getWorld",
+      "return": "org.bukkit.World"
+    },
+    {
+      "name": "getX",
+      "return": "int"
+    },
+    {
+      "name": "getY",
+      "return": "int"
+    },
+    {
+      "name": "getZ",
+      "return": "int"
+    },
+    {
+      "name": "getBlockKey",
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "getBlockKey",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "int"
+        },
+        {
+          "name": "y",
+          "type": "int"
+        },
+        {
+          "name": "z",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "static": true,
+      "name": "getBlockKeyX",
+      "parameters": [{
+        "name": "packed",
+        "type": "long"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "getBlockKeyY",
+      "parameters": [{
+        "name": "packed",
+        "type": "long"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "getBlockKeyZ",
+      "parameters": [{
+        "name": "packed",
+        "type": "long"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "isValidTool",
+      "parameters": [{
+        "name": "itemStack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getLocation",
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getLocation",
+      "parameters": [{
+        "name": "loc",
+        "type": "org.bukkit.Location"
+      }],
+      "return": "org.bukkit.Location"
+    },
+    {
+      "name": "getChunk",
+      "return": "org.bukkit.Chunk"
+    },
+    {
+      "name": "setBlockData",
+      "parameters": [{
+        "name": "data",
+        "type": "org.bukkit.block.data.BlockData"
+      }]
+    },
+    {
+      "name": "setBlockData",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "org.bukkit.block.data.BlockData"
+        },
+        {
+          "name": "applyPhysics",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "setType",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "setType",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.Material"
+        },
+        {
+          "name": "applyPhysics",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "getFace",
+      "parameters": [{
+        "name": "block",
+        "type": "org.bukkit.block.Block"
+      }],
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "name": "getState",
+      "return": "org.bukkit.block.BlockState"
+    },
+    {
+      "name": "getState",
+      "parameters": [{
+        "name": "useSnapshot",
+        "type": "boolean"
+      }],
+      "return": "org.bukkit.block.BlockState"
+    },
+    {
+      "name": "getBiome",
+      "return": "org.bukkit.block.Biome"
+    },
+    {
+      "name": "getComputedBiome",
+      "return": "org.bukkit.block.Biome"
+    },
+    {
+      "name": "setBiome",
+      "parameters": [{
+        "name": "bio",
+        "type": "org.bukkit.block.Biome"
+      }]
+    },
+    {
+      "name": "isBlockPowered",
+      "return": "boolean"
+    },
+    {
+      "name": "isBlockIndirectlyPowered",
+      "return": "boolean"
+    },
+    {
+      "name": "isBlockFacePowered",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "isBlockFaceIndirectlyPowered",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getBlockPower",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getBlockPower",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "isLiquid",
+      "return": "boolean"
+    },
+    {
+      "name": "isBuildable",
+      "return": "boolean"
+    },
+    {
+      "name": "isBurnable",
+      "return": "boolean"
+    },
+    {
+      "name": "isReplaceable",
+      "return": "boolean"
+    },
+    {
+      "name": "isSolid",
+      "return": "boolean"
+    },
+    {
+      "name": "isCollidable",
+      "return": "boolean"
+    },
+    {
+      "name": "getTemperature",
+      "return": "double"
+    },
+    {
+      "name": "getHumidity",
+      "return": "double"
+    },
+    {
+      "name": "getPistonMoveReaction",
+      "return": "org.bukkit.block.PistonMoveReaction"
+    },
+    {
+      "name": "breakNaturally",
+      "return": "boolean"
+    },
+    {
+      "name": "breakNaturally",
+      "parameters": [{
+        "name": "tool",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "breakNaturally",
+      "parameters": [{
+        "name": "triggerEffect",
+        "type": "boolean"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "breakNaturally",
+      "parameters": [
+        {
+          "name": "triggerEffect",
+          "type": "boolean"
+        },
+        {
+          "name": "dropExperience",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "breakNaturally",
+      "parameters": [
+        {
+          "name": "tool",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "triggerEffect",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "breakNaturally",
+      "parameters": [
+        {
+          "name": "tool",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "triggerEffect",
+          "type": "boolean"
+        },
+        {
+          "name": "dropExperience",
+          "type": "boolean"
+        }
+      ],
+      "return": "boolean"
+    },
+    {"name": "tick"},
+    {"name": "randomTick"},
+    {
+      "name": "applyBoneMeal",
+      "parameters": [{
+        "name": "face",
+        "type": "org.bukkit.block.BlockFace"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getDrops",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "getDrops",
+      "parameters": [{
+        "name": "tool",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "getDrops",
+      "parameters": [
+        {
+          "name": "tool",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "entity",
+          "type": "org.bukkit.entity.Entity"
+        }
+      ],
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "isPreferredTool",
+      "parameters": [{
+        "name": "tool",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getBreakSpeed",
+      "parameters": [{
+        "name": "player",
+        "type": "org.bukkit.entity.Player"
+      }],
+      "return": "float"
+    },
+    {
+      "name": "isPassable",
+      "return": "boolean"
+    },
+    {
+      "name": "rayTrace",
+      "parameters": [
+        {
+          "name": "start",
+          "type": "org.bukkit.Location"
+        },
+        {
+          "name": "direction",
+          "type": "org.bukkit.util.Vector"
+        },
+        {
+          "name": "maxDistance",
+          "type": "double"
+        },
+        {
+          "name": "fluidCollisionMode",
+          "type": "org.bukkit.FluidCollisionMode"
+        }
+      ],
+      "return": "org.bukkit.util.RayTraceResult"
+    },
+    {
+      "name": "getBoundingBox",
+      "return": "org.bukkit.util.BoundingBox"
+    },
+    {
+      "name": "getCollisionShape",
+      "return": "org.bukkit.util.VoxelShape"
+    },
+    {
+      "name": "canPlace",
+      "parameters": [{
+        "name": "data",
+        "type": "org.bukkit.block.data.BlockData"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getSoundGroup",
+      "return": "com.destroystokyo.paper.block.BlockSoundGroup"
+    },
+    {
+      "name": "getBlockSoundGroup",
+      "return": "org.bukkit.SoundGroup"
+    },
+    {
+      "name": "getTranslationKey",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDestroySpeed",
+      "parameters": [{
+        "name": "itemStack",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "float"
+    },
+    {
+      "name": "getDestroySpeed",
+      "parameters": [
+        {
+          "name": "itemStack",
+          "type": "org.bukkit.inventory.ItemStack"
+        },
+        {
+          "name": "considerEnchants",
+          "type": "boolean"
+        }
+      ],
+      "return": "float"
+    }
+  ],
+  "name": "org.bukkit.block.Block",
+  "simple-name": "Block"
+}

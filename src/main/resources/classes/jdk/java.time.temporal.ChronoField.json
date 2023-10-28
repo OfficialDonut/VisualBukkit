@@ -1,0 +1,355 @@
+{
+  "package": "java.time.temporal",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "resolve",
+      "parameters": [
+        {
+          "name": "fieldValues",
+          "type": "java.util.Map"
+        },
+        {
+          "name": "partialTemporal",
+          "type": "java.time.temporal.TemporalAccessor"
+        },
+        {
+          "name": "resolverStyle",
+          "type": "java.time.format.ResolverStyle"
+        }
+      ],
+      "return": "java.time.temporal.TemporalAccessor"
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.time.temporal.ChronoField[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.time.temporal.ChronoField"
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [{
+        "name": "locale",
+        "type": "java.util.Locale"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getBaseUnit",
+      "return": "java.time.temporal.TemporalUnit"
+    },
+    {
+      "name": "getRangeUnit",
+      "return": "java.time.temporal.TemporalUnit"
+    },
+    {
+      "name": "range",
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "isDateBased",
+      "return": "boolean"
+    },
+    {
+      "name": "isTimeBased",
+      "return": "boolean"
+    },
+    {
+      "name": "checkValidValue",
+      "parameters": [{
+        "name": "value",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "checkValidIntValue",
+      "parameters": [{
+        "name": "value",
+        "type": "long"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "isSupportedBy",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "rangeRefinedBy",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "java.time.temporal.ValueRange"
+    },
+    {
+      "name": "getFrom",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "adjustInto",
+      "parameters": [
+        {
+          "name": "temporal",
+          "type": "java.time.temporal.Temporal"
+        },
+        {
+          "name": "newValue",
+          "type": "long"
+        }
+      ],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.temporal.ChronoField",
+  "simple-name": "ChronoField",
+  "fields": [
+    {
+      "static": true,
+      "name": "NANO_OF_SECOND",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "NANO_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MICRO_OF_SECOND",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MICRO_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MILLI_OF_SECOND",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MILLI_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "SECOND_OF_MINUTE",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "SECOND_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MINUTE_OF_HOUR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MINUTE_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "HOUR_OF_AMPM",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "CLOCK_HOUR_OF_AMPM",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "HOUR_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "CLOCK_HOUR_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "AMPM_OF_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_WEEK",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "ALIGNED_DAY_OF_WEEK_IN_MONTH",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "ALIGNED_DAY_OF_WEEK_IN_YEAR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_MONTH",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "DAY_OF_YEAR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "EPOCH_DAY",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "ALIGNED_WEEK_OF_MONTH",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "ALIGNED_WEEK_OF_YEAR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "MONTH_OF_YEAR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "PROLEPTIC_MONTH",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "YEAR_OF_ERA",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "YEAR",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "ERA",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "INSTANT_SECONDS",
+      "type": "java.time.temporal.ChronoField"
+    },
+    {
+      "static": true,
+      "name": "OFFSET_SECONDS",
+      "type": "java.time.temporal.ChronoField"
+    }
+  ]
+}

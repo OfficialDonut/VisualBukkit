@@ -1,0 +1,62 @@
+{
+  "package": "org.bukkit.scheduler",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getTaskId",
+      "return": "int"
+    },
+    {
+      "name": "getOwner",
+      "return": "org.bukkit.plugin.Plugin"
+    },
+    {
+      "name": "getThread",
+      "return": "java.lang.Thread"
+    }
+  ],
+  "name": "org.bukkit.scheduler.BukkitWorker",
+  "simple-name": "BukkitWorker"
+}

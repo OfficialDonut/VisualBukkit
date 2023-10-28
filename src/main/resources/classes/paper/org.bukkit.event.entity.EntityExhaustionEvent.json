@@ -1,0 +1,122 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "who",
+        "type": "org.bukkit.entity.HumanEntity"
+      },
+      {
+        "name": "exhaustionReason",
+        "type": "org.bukkit.event.entity.EntityExhaustionEvent.ExhaustionReason"
+      },
+      {
+        "name": "exhaustion",
+        "type": "float"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getExhaustionReason",
+      "return": "org.bukkit.event.entity.EntityExhaustionEvent.ExhaustionReason"
+    },
+    {
+      "name": "getExhaustion",
+      "return": "float"
+    },
+    {
+      "name": "setExhaustion",
+      "parameters": [{
+        "name": "exhaustion",
+        "type": "float"
+      }]
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.HumanEntity"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.EntityExhaustionEvent",
+  "simple-name": "EntityExhaustionEvent"
+}

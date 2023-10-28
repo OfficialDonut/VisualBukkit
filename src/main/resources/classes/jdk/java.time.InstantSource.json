@@ -1,0 +1,110 @@
+{
+  "package": "java.time",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "system",
+      "return": "java.time.InstantSource"
+    },
+    {
+      "static": true,
+      "name": "tick",
+      "parameters": [
+        {
+          "name": "baseSource",
+          "type": "java.time.InstantSource"
+        },
+        {
+          "name": "tickDuration",
+          "type": "java.time.Duration"
+        }
+      ],
+      "return": "java.time.InstantSource"
+    },
+    {
+      "static": true,
+      "name": "fixed",
+      "parameters": [{
+        "name": "fixedInstant",
+        "type": "java.time.Instant"
+      }],
+      "return": "java.time.InstantSource"
+    },
+    {
+      "static": true,
+      "name": "offset",
+      "parameters": [
+        {
+          "name": "baseSource",
+          "type": "java.time.InstantSource"
+        },
+        {
+          "name": "offsetDuration",
+          "type": "java.time.Duration"
+        }
+      ],
+      "return": "java.time.InstantSource"
+    },
+    {
+      "name": "instant",
+      "return": "java.time.Instant"
+    },
+    {
+      "name": "millis",
+      "return": "long"
+    },
+    {
+      "name": "withZone",
+      "parameters": [{
+        "name": "zone",
+        "type": "java.time.ZoneId"
+      }],
+      "return": "java.time.Clock"
+    }
+  ],
+  "name": "java.time.InstantSource",
+  "simple-name": "InstantSource"
+}

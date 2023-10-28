@@ -1,0 +1,270 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "value",
+        "type": "short"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.String"
+      }]
+    }
+  ],
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [{
+        "name": "s",
+        "type": "short"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "parseShort",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "radix",
+          "type": "int"
+        }
+      ],
+      "return": "short"
+    },
+    {
+      "static": true,
+      "name": "parseShort",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.String"
+      }],
+      "return": "short"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "s",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "radix",
+          "type": "int"
+        }
+      ],
+      "return": "java.lang.Short"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "s",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Short"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "s",
+        "type": "short"
+      }],
+      "return": "java.lang.Short"
+    },
+    {
+      "static": true,
+      "name": "decode",
+      "parameters": [{
+        "name": "nm",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.Short"
+    },
+    {
+      "name": "byteValue",
+      "return": "byte"
+    },
+    {
+      "name": "shortValue",
+      "return": "short"
+    },
+    {
+      "name": "intValue",
+      "return": "int"
+    },
+    {
+      "name": "longValue",
+      "return": "long"
+    },
+    {
+      "name": "floatValue",
+      "return": "float"
+    },
+    {
+      "name": "doubleValue",
+      "return": "double"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "hashCode",
+      "parameters": [{
+        "name": "value",
+        "type": "short"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "anotherShort",
+        "type": "java.lang.Short"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compare",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "compareUnsigned",
+      "parameters": [
+        {
+          "name": "x",
+          "type": "short"
+        },
+        {
+          "name": "y",
+          "type": "short"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "reverseBytes",
+      "parameters": [{
+        "name": "i",
+        "type": "short"
+      }],
+      "return": "short"
+    },
+    {
+      "static": true,
+      "name": "toUnsignedInt",
+      "parameters": [{
+        "name": "x",
+        "type": "short"
+      }],
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "toUnsignedLong",
+      "parameters": [{
+        "name": "x",
+        "type": "short"
+      }],
+      "return": "long"
+    }
+  ],
+  "name": "java.lang.Short",
+  "simple-name": "Short",
+  "fields": [
+    {
+      "static": true,
+      "name": "MIN_VALUE",
+      "type": "short"
+    },
+    {
+      "static": true,
+      "name": "MAX_VALUE",
+      "type": "short"
+    },
+    {
+      "static": true,
+      "name": "TYPE",
+      "type": "java.lang.Class"
+    },
+    {
+      "static": true,
+      "name": "SIZE",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "BYTES",
+      "type": "int"
+    }
+  ]
+}

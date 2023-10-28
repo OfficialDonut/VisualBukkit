@@ -1,0 +1,208 @@
+{
+  "package": "org.bukkit.structure",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getStructures",
+      "return": "java.util.Map"
+    },
+    {
+      "name": "getStructure",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "registerStructure",
+      "parameters": [
+        {
+          "name": "structureKey",
+          "type": "org.bukkit.NamespacedKey"
+        },
+        {
+          "name": "structure",
+          "type": "org.bukkit.structure.Structure"
+        }
+      ],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "unregisterStructure",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "loadStructure",
+      "parameters": [
+        {
+          "name": "structureKey",
+          "type": "org.bukkit.NamespacedKey"
+        },
+        {
+          "name": "register",
+          "type": "boolean"
+        }
+      ],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "loadStructure",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "saveStructure",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }]
+    },
+    {
+      "name": "saveStructure",
+      "parameters": [
+        {
+          "name": "structureKey",
+          "type": "org.bukkit.NamespacedKey"
+        },
+        {
+          "name": "structure",
+          "type": "org.bukkit.structure.Structure"
+        }
+      ]
+    },
+    {
+      "name": "deleteStructure",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }]
+    },
+    {
+      "name": "deleteStructure",
+      "parameters": [
+        {
+          "name": "structureKey",
+          "type": "org.bukkit.NamespacedKey"
+        },
+        {
+          "name": "unregister",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "getStructureFile",
+      "parameters": [{
+        "name": "structureKey",
+        "type": "org.bukkit.NamespacedKey"
+      }],
+      "return": "java.io.File"
+    },
+    {
+      "name": "loadStructure",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "loadStructure",
+      "parameters": [{
+        "name": "inputStream",
+        "type": "java.io.InputStream"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "saveStructure",
+      "parameters": [
+        {
+          "name": "file",
+          "type": "java.io.File"
+        },
+        {
+          "name": "structure",
+          "type": "org.bukkit.structure.Structure"
+        }
+      ]
+    },
+    {
+      "name": "saveStructure",
+      "parameters": [
+        {
+          "name": "outputStream",
+          "type": "java.io.OutputStream"
+        },
+        {
+          "name": "structure",
+          "type": "org.bukkit.structure.Structure"
+        }
+      ]
+    },
+    {
+      "name": "createStructure",
+      "return": "org.bukkit.structure.Structure"
+    },
+    {
+      "name": "copy",
+      "parameters": [{
+        "name": "structure",
+        "type": "org.bukkit.structure.Structure"
+      }],
+      "return": "org.bukkit.structure.Structure"
+    }
+  ],
+  "name": "org.bukkit.structure.StructureManager",
+  "simple-name": "StructureManager"
+}

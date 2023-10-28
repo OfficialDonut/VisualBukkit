@@ -1,0 +1,486 @@
+{
+  "package": "java.util.stream",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "iterator",
+      "return": "java.util.Iterator"
+    },
+    {
+      "name": "spliterator",
+      "return": "java.util.Spliterator"
+    },
+    {
+      "name": "isParallel",
+      "return": "boolean"
+    },
+    {
+      "name": "sequential",
+      "return": "java.util.stream.BaseStream"
+    },
+    {
+      "name": "parallel",
+      "return": "java.util.stream.BaseStream"
+    },
+    {
+      "name": "unordered",
+      "return": "java.util.stream.BaseStream"
+    },
+    {
+      "name": "onClose",
+      "parameters": [{
+        "name": "closeHandler",
+        "type": "java.lang.Runnable"
+      }],
+      "return": "java.util.stream.BaseStream"
+    },
+    {"name": "close"},
+    {
+      "name": "filter",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "map",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "mapToInt",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.ToIntFunction"
+      }],
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "mapToLong",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.ToLongFunction"
+      }],
+      "return": "java.util.stream.LongStream"
+    },
+    {
+      "name": "mapToDouble",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.ToDoubleFunction"
+      }],
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "name": "flatMap",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "flatMapToInt",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "flatMapToLong",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.stream.LongStream"
+    },
+    {
+      "name": "flatMapToDouble",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.Function"
+      }],
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "name": "mapMulti",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.BiConsumer"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "mapMultiToInt",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.BiConsumer"
+      }],
+      "return": "java.util.stream.IntStream"
+    },
+    {
+      "name": "mapMultiToLong",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.BiConsumer"
+      }],
+      "return": "java.util.stream.LongStream"
+    },
+    {
+      "name": "mapMultiToDouble",
+      "parameters": [{
+        "name": "mapper",
+        "type": "java.util.function.BiConsumer"
+      }],
+      "return": "java.util.stream.DoubleStream"
+    },
+    {
+      "name": "distinct",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "sorted",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "sorted",
+      "parameters": [{
+        "name": "comparator",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "peek",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.Consumer"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "limit",
+      "parameters": [{
+        "name": "maxSize",
+        "type": "long"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "skip",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "takeWhile",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "dropWhile",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "forEachOrdered",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.Consumer"
+      }]
+    },
+    {
+      "name": "toArray",
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "toArray",
+      "parameters": [{
+        "name": "generator",
+        "type": "java.util.function.IntFunction"
+      }],
+      "return": "java.lang.Object[]"
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        {
+          "name": "identity",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "accumulator",
+          "type": "java.util.function.BinaryOperator"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "reduce",
+      "parameters": [{
+        "name": "accumulator",
+        "type": "java.util.function.BinaryOperator"
+      }],
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "reduce",
+      "parameters": [
+        {
+          "name": "identity",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "accumulator",
+          "type": "java.util.function.BiFunction"
+        },
+        {
+          "name": "combiner",
+          "type": "java.util.function.BinaryOperator"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "collect",
+      "parameters": [
+        {
+          "name": "supplier",
+          "type": "java.util.function.Supplier"
+        },
+        {
+          "name": "accumulator",
+          "type": "java.util.function.BiConsumer"
+        },
+        {
+          "name": "combiner",
+          "type": "java.util.function.BiConsumer"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "collect",
+      "parameters": [{
+        "name": "collector",
+        "type": "java.util.stream.Collector"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "toList",
+      "return": "java.util.List"
+    },
+    {
+      "name": "min",
+      "parameters": [{
+        "name": "comparator",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "max",
+      "parameters": [{
+        "name": "comparator",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "count",
+      "return": "long"
+    },
+    {
+      "name": "anyMatch",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "allMatch",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "noneMatch",
+      "parameters": [{
+        "name": "predicate",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "findFirst",
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "findAny",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "builder",
+      "return": "java.util.stream.Stream.Builder"
+    },
+    {
+      "static": true,
+      "name": "empty",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "t",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "ofNullable",
+      "parameters": [{
+        "name": "t",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "values",
+        "type": "java.lang.Object[]"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "iterate",
+      "parameters": [
+        {
+          "name": "seed",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "f",
+          "type": "java.util.function.UnaryOperator"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "iterate",
+      "parameters": [
+        {
+          "name": "seed",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "hasNext",
+          "type": "java.util.function.Predicate"
+        },
+        {
+          "name": "next",
+          "type": "java.util.function.UnaryOperator"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "generate",
+      "parameters": [{
+        "name": "s",
+        "type": "java.util.function.Supplier"
+      }],
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "static": true,
+      "name": "concat",
+      "parameters": [
+        {
+          "name": "a",
+          "type": "java.util.stream.Stream"
+        },
+        {
+          "name": "b",
+          "type": "java.util.stream.Stream"
+        }
+      ],
+      "return": "java.util.stream.Stream"
+    }
+  ],
+  "name": "java.util.stream.Stream",
+  "simple-name": "Stream"
+}

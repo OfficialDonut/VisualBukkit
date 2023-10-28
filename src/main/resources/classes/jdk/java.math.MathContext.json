@@ -1,0 +1,109 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "setPrecision",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "setPrecision",
+          "type": "int"
+        },
+        {
+          "name": "setRoundingMode",
+          "type": "java.math.RoundingMode"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "val",
+        "type": "java.lang.String"
+      }]
+    }
+  ],
+  "package": "java.math",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getPrecision",
+      "return": "int"
+    },
+    {
+      "name": "getRoundingMode",
+      "return": "java.math.RoundingMode"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "x",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.math.MathContext",
+  "simple-name": "MathContext",
+  "fields": [
+    {
+      "static": true,
+      "name": "UNLIMITED",
+      "type": "java.math.MathContext"
+    },
+    {
+      "static": true,
+      "name": "DECIMAL32",
+      "type": "java.math.MathContext"
+    },
+    {
+      "static": true,
+      "name": "DECIMAL64",
+      "type": "java.math.MathContext"
+    },
+    {
+      "static": true,
+      "name": "DECIMAL128",
+      "type": "java.math.MathContext"
+    }
+  ]
+}

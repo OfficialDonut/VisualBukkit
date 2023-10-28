@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.blocks.classes.ClassInfo;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
@@ -45,7 +46,7 @@ public non-sealed abstract class ExpressionBlock extends Block {
 
     public abstract String generateJava();
 
-    public abstract Class<?> getReturnType();
+    public abstract ClassInfo getReturnType();
 
     public UndoManager.RevertibleAction delete() {
         return getExpressionParameter() != null ? getExpressionParameter().deleteExpression() : UndoManager.RevertibleAction.NOP;
@@ -79,8 +80,8 @@ public non-sealed abstract class ExpressionBlock extends Block {
         }
 
         @Override
-        public Class<?> getReturnType() {
-            return Object.class;
+        public ClassInfo getReturnType() {
+            return ClassInfo.of(Object.class);
         }
 
         @Override

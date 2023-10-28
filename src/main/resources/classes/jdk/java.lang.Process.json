@@ -1,0 +1,158 @@
+{
+  "constructors": [{"name": "<init>"}],
+  "package": "java.lang",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getOutputStream",
+      "return": "java.io.OutputStream"
+    },
+    {
+      "name": "getInputStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "getErrorStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "inputReader",
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "name": "inputReader",
+      "parameters": [{
+        "name": "charset",
+        "type": "java.nio.charset.Charset"
+      }],
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "name": "errorReader",
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "name": "errorReader",
+      "parameters": [{
+        "name": "charset",
+        "type": "java.nio.charset.Charset"
+      }],
+      "return": "java.io.BufferedReader"
+    },
+    {
+      "name": "outputWriter",
+      "return": "java.io.BufferedWriter"
+    },
+    {
+      "name": "outputWriter",
+      "parameters": [{
+        "name": "charset",
+        "type": "java.nio.charset.Charset"
+      }],
+      "return": "java.io.BufferedWriter"
+    },
+    {
+      "name": "waitFor",
+      "return": "int"
+    },
+    {
+      "name": "waitFor",
+      "parameters": [
+        {
+          "name": "timeout",
+          "type": "long"
+        },
+        {
+          "name": "unit",
+          "type": "java.util.concurrent.TimeUnit"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "exitValue",
+      "return": "int"
+    },
+    {"name": "destroy"},
+    {
+      "name": "destroyForcibly",
+      "return": "java.lang.Process"
+    },
+    {
+      "name": "supportsNormalTermination",
+      "return": "boolean"
+    },
+    {
+      "name": "isAlive",
+      "return": "boolean"
+    },
+    {
+      "name": "pid",
+      "return": "long"
+    },
+    {
+      "name": "onExit",
+      "return": "java.util.concurrent.CompletableFuture"
+    },
+    {
+      "name": "toHandle",
+      "return": "java.lang.ProcessHandle"
+    },
+    {
+      "name": "info",
+      "return": "java.lang.ProcessHandle.Info"
+    },
+    {
+      "name": "children",
+      "return": "java.util.stream.Stream"
+    },
+    {
+      "name": "descendants",
+      "return": "java.util.stream.Stream"
+    }
+  ],
+  "name": "java.lang.Process",
+  "simple-name": "Process"
+}

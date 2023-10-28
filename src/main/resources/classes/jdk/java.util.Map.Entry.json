@@ -1,0 +1,103 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getKey",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "getValue",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "setValue",
+      "parameters": [{
+        "name": "value",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "static": true,
+      "name": "comparingByKey",
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingByValue",
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingByKey",
+      "parameters": [{
+        "name": "cmp",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "comparingByValue",
+      "parameters": [{
+        "name": "cmp",
+        "type": "java.util.Comparator"
+      }],
+      "return": "java.util.Comparator"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [{
+        "name": "e",
+        "type": "java.util.Map.Entry"
+      }],
+      "return": "java.util.Map.Entry"
+    }
+  ],
+  "name": "java.util.Map.Entry",
+  "simple-name": "Entry"
+}

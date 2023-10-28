@@ -1,0 +1,204 @@
+{
+  "package": "java.lang.module",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "modifiers",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "isOpen",
+      "return": "boolean"
+    },
+    {
+      "name": "isAutomatic",
+      "return": "boolean"
+    },
+    {
+      "name": "requires",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "exports",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "opens",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "uses",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "provides",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "version",
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "rawVersion",
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "toNameAndVersion",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "mainClass",
+      "return": "java.util.Optional"
+    },
+    {
+      "name": "packages",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "that",
+        "type": "java.lang.module.ModuleDescriptor"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "ob",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "newModule",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "ms",
+          "type": "java.util.Set"
+        }
+      ],
+      "return": "java.lang.module.ModuleDescriptor.Builder"
+    },
+    {
+      "static": true,
+      "name": "newModule",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.module.ModuleDescriptor.Builder"
+    },
+    {
+      "static": true,
+      "name": "newOpenModule",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.module.ModuleDescriptor.Builder"
+    },
+    {
+      "static": true,
+      "name": "newAutomaticModule",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.lang.module.ModuleDescriptor.Builder"
+    },
+    {
+      "static": true,
+      "name": "read",
+      "parameters": [
+        {
+          "name": "in",
+          "type": "java.io.InputStream"
+        },
+        {
+          "name": "packageFinder",
+          "type": "java.util.function.Supplier"
+        }
+      ],
+      "return": "java.lang.module.ModuleDescriptor"
+    },
+    {
+      "static": true,
+      "name": "read",
+      "parameters": [{
+        "name": "in",
+        "type": "java.io.InputStream"
+      }],
+      "return": "java.lang.module.ModuleDescriptor"
+    },
+    {
+      "static": true,
+      "name": "read",
+      "parameters": [
+        {
+          "name": "bb",
+          "type": "java.nio.ByteBuffer"
+        },
+        {
+          "name": "packageFinder",
+          "type": "java.util.function.Supplier"
+        }
+      ],
+      "return": "java.lang.module.ModuleDescriptor"
+    },
+    {
+      "static": true,
+      "name": "read",
+      "parameters": [{
+        "name": "bb",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "java.lang.module.ModuleDescriptor"
+    }
+  ],
+  "name": "java.lang.module.ModuleDescriptor",
+  "simple-name": "ModuleDescriptor"
+}

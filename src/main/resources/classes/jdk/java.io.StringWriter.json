@@ -1,0 +1,160 @@
+{
+  "constructors": [
+    {"name": "<init>"},
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "initialSize",
+        "type": "int"
+      }]
+    }
+  ],
+  "package": "java.io",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "nullWriter",
+      "return": "java.io.Writer"
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "cbuf",
+        "type": "char[]"
+      }]
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "c",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "write",
+      "parameters": [
+        {
+          "name": "cbuf",
+          "type": "char[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "str",
+        "type": "java.lang.String"
+      }]
+    },
+    {
+      "name": "write",
+      "parameters": [
+        {
+          "name": "str",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "csq",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.io.StringWriter"
+    },
+    {
+      "name": "append",
+      "parameters": [
+        {
+          "name": "csq",
+          "type": "java.lang.CharSequence"
+        },
+        {
+          "name": "start",
+          "type": "int"
+        },
+        {
+          "name": "end",
+          "type": "int"
+        }
+      ],
+      "return": "java.io.StringWriter"
+    },
+    {
+      "name": "append",
+      "parameters": [{
+        "name": "c",
+        "type": "char"
+      }],
+      "return": "java.io.StringWriter"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getBuffer",
+      "return": "java.lang.StringBuffer"
+    },
+    {"name": "flush"},
+    {"name": "close"}
+  ],
+  "name": "java.io.StringWriter",
+  "simple-name": "StringWriter"
+}

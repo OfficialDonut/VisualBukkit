@@ -50,6 +50,10 @@ public class PluginMain extends JavaPlugin implements Listener {
         return ((Number) o).intValue();
     }
 
+    public static long resolve_long(Object o) {
+        return ((Number) o).longValue();
+    }
+
     public static float resolve_float(Object o) {
         return ((Number) o).floatValue();
     }
@@ -61,6 +65,9 @@ public class PluginMain extends JavaPlugin implements Listener {
     public static <T> T resolve_object(Object from, Class<T> to) {
         if (from == null) {
             return null;
+        }
+        if (to.isAssignableFrom(from.getClass())) {
+            return to.cast(from);
         }
         if (from instanceof Number num && Number.class.isAssignableFrom(to)) {
             return to.cast(num.doubleValue());

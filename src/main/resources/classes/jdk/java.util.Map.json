@@ -1,0 +1,820 @@
+{
+  "package": "java.util",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "size",
+      "return": "int"
+    },
+    {
+      "name": "isEmpty",
+      "return": "boolean"
+    },
+    {
+      "name": "containsKey",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "containsValue",
+      "parameters": [{
+        "name": "value",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "put",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "remove",
+      "parameters": [{
+        "name": "key",
+        "type": "java.lang.Object"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "putAll",
+      "parameters": [{
+        "name": "m",
+        "type": "java.util.Map"
+      }]
+    },
+    {"name": "clear"},
+    {
+      "name": "keySet",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "values",
+      "return": "java.util.Collection"
+    },
+    {
+      "name": "entrySet",
+      "return": "java.util.Set"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "getOrDefault",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "defaultValue",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "forEach",
+      "parameters": [{
+        "name": "action",
+        "type": "java.util.function.BiConsumer"
+      }]
+    },
+    {
+      "name": "replaceAll",
+      "parameters": [{
+        "name": "function",
+        "type": "java.util.function.BiFunction"
+      }]
+    },
+    {
+      "name": "putIfAbsent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "remove",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "oldValue",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "newValue",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "boolean"
+    },
+    {
+      "name": "replace",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "computeIfAbsent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "mappingFunction",
+          "type": "java.util.function.Function"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "computeIfPresent",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "compute",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "merge",
+      "parameters": [
+        {
+          "name": "key",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "remappingFunction",
+          "type": "java.util.function.BiFunction"
+        }
+      ],
+      "return": "java.lang.Object"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v6",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v7",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k8",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v8",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k8",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v8",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k9",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v9",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "k1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v1",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v2",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v3",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v4",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v5",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v6",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v7",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k8",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v8",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k9",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v9",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "k10",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v10",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "ofEntries",
+      "parameters": [{
+        "name": "entries",
+        "type": "java.util.Map.Entry[]"
+      }],
+      "return": "java.util.Map"
+    },
+    {
+      "static": true,
+      "name": "entry",
+      "parameters": [
+        {
+          "name": "k",
+          "type": "java.lang.Object"
+        },
+        {
+          "name": "v",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.util.Map.Entry"
+    },
+    {
+      "static": true,
+      "name": "copyOf",
+      "parameters": [{
+        "name": "map",
+        "type": "java.util.Map"
+      }],
+      "return": "java.util.Map"
+    }
+  ],
+  "name": "java.util.Map",
+  "simple-name": "Map"
+}

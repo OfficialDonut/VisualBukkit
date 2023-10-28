@@ -1,0 +1,120 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "choice",
+        "type": "org.bukkit.Material"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "choices",
+        "type": "org.bukkit.Material[]"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "choices",
+        "type": "org.bukkit.Tag"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "choices",
+        "type": "java.util.List"
+      }]
+    }
+  ],
+  "package": "org.bukkit.inventory",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "and",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "java.util.function.Predicate"
+    },
+    {
+      "name": "negate",
+      "return": "java.util.function.Predicate"
+    },
+    {
+      "name": "or",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.util.function.Predicate"
+      }],
+      "return": "java.util.function.Predicate"
+    },
+    {
+      "name": "test",
+      "parameters": [{
+        "name": "t",
+        "type": "org.bukkit.inventory.ItemStack"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "getItemStack",
+      "return": "org.bukkit.inventory.ItemStack"
+    },
+    {
+      "name": "getChoices",
+      "return": "java.util.List"
+    },
+    {
+      "name": "clone",
+      "return": "org.bukkit.inventory.RecipeChoice.MaterialChoice"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "org.bukkit.inventory.RecipeChoice.MaterialChoice",
+  "simple-name": "MaterialChoice"
+}

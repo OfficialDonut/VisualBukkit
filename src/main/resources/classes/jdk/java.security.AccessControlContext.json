@@ -1,0 +1,83 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "context",
+        "type": "java.security.ProtectionDomain[]"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "acc",
+          "type": "java.security.AccessControlContext"
+        },
+        {
+          "name": "combiner",
+          "type": "java.security.DomainCombiner"
+        }
+      ]
+    }
+  ],
+  "package": "java.security",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getDomainCombiner",
+      "return": "java.security.DomainCombiner"
+    },
+    {
+      "name": "checkPermission",
+      "parameters": [{
+        "name": "perm",
+        "type": "java.security.Permission"
+      }]
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    }
+  ],
+  "name": "java.security.AccessControlContext",
+  "simple-name": "AccessControlContext"
+}

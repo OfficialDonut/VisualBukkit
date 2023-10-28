@@ -1,0 +1,94 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "primePLen",
+          "type": "int"
+        },
+        {
+          "name": "subprimeQLen",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "primePLen",
+          "type": "int"
+        },
+        {
+          "name": "subprimeQLen",
+          "type": "int"
+        },
+        {
+          "name": "seedLen",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "package": "java.security.spec",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getPrimePLength",
+      "return": "int"
+    },
+    {
+      "name": "getSubprimeQLength",
+      "return": "int"
+    },
+    {
+      "name": "getSeedLength",
+      "return": "int"
+    }
+  ],
+  "name": "java.security.spec.DSAGenParameterSpec",
+  "simple-name": "DSAGenParameterSpec"
+}

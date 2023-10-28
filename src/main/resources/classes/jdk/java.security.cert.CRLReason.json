@@ -1,0 +1,160 @@
+{
+  "package": "java.security.cert",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "other",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "o",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "enumClass",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "java.security.cert.CRLReason[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "java.security.cert.CRLReason"
+    }
+  ],
+  "name": "java.security.cert.CRLReason",
+  "simple-name": "CRLReason",
+  "fields": [
+    {
+      "static": true,
+      "name": "UNSPECIFIED",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "KEY_COMPROMISE",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "CA_COMPROMISE",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "AFFILIATION_CHANGED",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "SUPERSEDED",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "CESSATION_OF_OPERATION",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "CERTIFICATE_HOLD",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "UNUSED",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "REMOVE_FROM_CRL",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "PRIVILEGE_WITHDRAWN",
+      "type": "java.security.cert.CRLReason"
+    },
+    {
+      "static": true,
+      "name": "AA_COMPROMISE",
+      "type": "java.security.cert.CRLReason"
+    }
+  ]
+}

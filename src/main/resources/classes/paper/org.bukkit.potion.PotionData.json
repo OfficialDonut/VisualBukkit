@@ -1,0 +1,88 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "org.bukkit.potion.PotionType"
+        },
+        {
+          "name": "extended",
+          "type": "boolean"
+        },
+        {
+          "name": "upgraded",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "type",
+        "type": "org.bukkit.potion.PotionType"
+      }]
+    }
+  ],
+  "package": "org.bukkit.potion",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getType",
+      "return": "org.bukkit.potion.PotionType"
+    },
+    {
+      "name": "isUpgraded",
+      "return": "boolean"
+    },
+    {
+      "name": "isExtended",
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    }
+  ],
+  "name": "org.bukkit.potion.PotionData",
+  "simple-name": "PotionData"
+}

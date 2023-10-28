@@ -1,0 +1,142 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [
+      {
+        "name": "bottle",
+        "type": "org.bukkit.entity.ThrownExpBottle"
+      },
+      {
+        "name": "exp",
+        "type": "int"
+      }
+    ]
+  }],
+  "package": "org.bukkit.event.entity",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "callEvent",
+      "return": "boolean"
+    },
+    {
+      "name": "getEventName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "isAsynchronous",
+      "return": "boolean"
+    },
+    {
+      "name": "getEntityType",
+      "return": "org.bukkit.entity.EntityType"
+    },
+    {
+      "name": "getHitBlock",
+      "return": "org.bukkit.block.Block"
+    },
+    {
+      "name": "getHitBlockFace",
+      "return": "org.bukkit.block.BlockFace"
+    },
+    {
+      "name": "getHitEntity",
+      "return": "org.bukkit.entity.Entity"
+    },
+    {
+      "name": "isCancelled",
+      "return": "boolean"
+    },
+    {
+      "name": "setCancelled",
+      "parameters": [{
+        "name": "cancel",
+        "type": "boolean"
+      }]
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "name": "getEntity",
+      "return": "org.bukkit.entity.ThrownExpBottle"
+    },
+    {
+      "name": "getShowEffect",
+      "return": "boolean"
+    },
+    {
+      "name": "setShowEffect",
+      "parameters": [{
+        "name": "showEffect",
+        "type": "boolean"
+      }]
+    },
+    {
+      "name": "getExperience",
+      "return": "int"
+    },
+    {
+      "name": "setExperience",
+      "parameters": [{
+        "name": "exp",
+        "type": "int"
+      }]
+    },
+    {
+      "name": "getHandlers",
+      "return": "org.bukkit.event.HandlerList"
+    },
+    {
+      "static": true,
+      "name": "getHandlerList",
+      "return": "org.bukkit.event.HandlerList"
+    }
+  ],
+  "name": "org.bukkit.event.entity.ExpBottleEvent",
+  "simple-name": "ExpBottleEvent"
+}

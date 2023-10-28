@@ -1,0 +1,167 @@
+{
+  "package": "java.lang.invoke",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getReferenceKind",
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "getName",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getMethodType",
+      "return": "java.lang.invoke.MethodType"
+    },
+    {
+      "name": "reflectAs",
+      "parameters": [
+        {
+          "name": "expected",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "lookup",
+          "type": "java.lang.invoke.MethodHandles.Lookup"
+        }
+      ],
+      "return": "java.lang.reflect.Member"
+    },
+    {
+      "name": "getModifiers",
+      "return": "int"
+    },
+    {
+      "name": "isVarArgs",
+      "return": "boolean"
+    },
+    {
+      "static": true,
+      "name": "referenceKindToString",
+      "parameters": [{
+        "name": "referenceKind",
+        "type": "int"
+      }],
+      "return": "java.lang.String"
+    },
+    {
+      "static": true,
+      "name": "toString",
+      "parameters": [
+        {
+          "name": "kind",
+          "type": "int"
+        },
+        {
+          "name": "defc",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "name",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "type",
+          "type": "java.lang.invoke.MethodType"
+        }
+      ],
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.lang.invoke.MethodHandleInfo",
+  "simple-name": "MethodHandleInfo",
+  "fields": [
+    {
+      "static": true,
+      "name": "REF_getField",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_getStatic",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_putField",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_putStatic",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_invokeVirtual",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_invokeStatic",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_invokeSpecial",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_newInvokeSpecial",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "REF_invokeInterface",
+      "type": "int"
+    }
+  ]
+}

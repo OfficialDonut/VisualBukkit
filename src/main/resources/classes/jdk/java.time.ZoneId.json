@@ -1,0 +1,139 @@
+{
+  "package": "java.time",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "systemDefault",
+      "return": "java.time.ZoneId"
+    },
+    {
+      "static": true,
+      "name": "getAvailableZoneIds",
+      "return": "java.util.Set"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "zoneId",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "aliasMap",
+          "type": "java.util.Map"
+        }
+      ],
+      "return": "java.time.ZoneId"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [{
+        "name": "zoneId",
+        "type": "java.lang.String"
+      }],
+      "return": "java.time.ZoneId"
+    },
+    {
+      "static": true,
+      "name": "ofOffset",
+      "parameters": [
+        {
+          "name": "prefix",
+          "type": "java.lang.String"
+        },
+        {
+          "name": "offset",
+          "type": "java.time.ZoneOffset"
+        }
+      ],
+      "return": "java.time.ZoneId"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.TemporalAccessor"
+      }],
+      "return": "java.time.ZoneId"
+    },
+    {
+      "name": "getId",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getDisplayName",
+      "parameters": [
+        {
+          "name": "style",
+          "type": "java.time.format.TextStyle"
+        },
+        {
+          "name": "locale",
+          "type": "java.util.Locale"
+        }
+      ],
+      "return": "java.lang.String"
+    },
+    {
+      "name": "getRules",
+      "return": "java.time.zone.ZoneRules"
+    },
+    {
+      "name": "normalized",
+      "return": "java.time.ZoneId"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.ZoneId",
+  "simple-name": "ZoneId",
+  "fields": [{
+    "static": true,
+    "name": "SHORT_IDS",
+    "type": "java.util.Map"
+  }]
+}

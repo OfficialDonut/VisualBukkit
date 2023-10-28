@@ -1,0 +1,288 @@
+{
+  "package": "java.nio.channels",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "getOption",
+      "parameters": [{
+        "name": "name",
+        "type": "java.net.SocketOption"
+      }],
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "supportedOptions",
+      "return": "java.util.Set"
+    },
+    {"name": "close"},
+    {
+      "name": "isOpen",
+      "return": "boolean"
+    },
+    {
+      "name": "register",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": "java.nio.channels.Selector"
+        },
+        {
+          "name": "ops",
+          "type": "int"
+        }
+      ],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "provider",
+      "return": "java.nio.channels.spi.SelectorProvider"
+    },
+    {
+      "name": "isRegistered",
+      "return": "boolean"
+    },
+    {
+      "name": "keyFor",
+      "parameters": [{
+        "name": "sel",
+        "type": "java.nio.channels.Selector"
+      }],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "register",
+      "parameters": [
+        {
+          "name": "sel",
+          "type": "java.nio.channels.Selector"
+        },
+        {
+          "name": "ops",
+          "type": "int"
+        },
+        {
+          "name": "att",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.nio.channels.SelectionKey"
+    },
+    {
+      "name": "isBlocking",
+      "return": "boolean"
+    },
+    {
+      "name": "blockingLock",
+      "return": "java.lang.Object"
+    },
+    {
+      "name": "configureBlocking",
+      "parameters": [{
+        "name": "block",
+        "type": "boolean"
+      }],
+      "return": "java.nio.channels.SelectableChannel"
+    },
+    {
+      "static": true,
+      "name": "open",
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "static": true,
+      "name": "open",
+      "parameters": [{
+        "name": "family",
+        "type": "java.net.ProtocolFamily"
+      }],
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "static": true,
+      "name": "open",
+      "parameters": [{
+        "name": "remote",
+        "type": "java.net.SocketAddress"
+      }],
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "name": "validOps",
+      "return": "int"
+    },
+    {
+      "name": "bind",
+      "parameters": [{
+        "name": "local",
+        "type": "java.net.SocketAddress"
+      }],
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "name": "setOption",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "java.net.SocketOption"
+        },
+        {
+          "name": "value",
+          "type": "java.lang.Object"
+        }
+      ],
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "name": "shutdownInput",
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "name": "shutdownOutput",
+      "return": "java.nio.channels.SocketChannel"
+    },
+    {
+      "name": "socket",
+      "return": "java.net.Socket"
+    },
+    {
+      "name": "isConnected",
+      "return": "boolean"
+    },
+    {
+      "name": "isConnectionPending",
+      "return": "boolean"
+    },
+    {
+      "name": "connect",
+      "parameters": [{
+        "name": "remote",
+        "type": "java.net.SocketAddress"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "finishConnect",
+      "return": "boolean"
+    },
+    {
+      "name": "getRemoteAddress",
+      "return": "java.net.SocketAddress"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "dst",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "read",
+      "parameters": [
+        {
+          "name": "dsts",
+          "type": "java.nio.ByteBuffer[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "dsts",
+        "type": "java.nio.ByteBuffer[]"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "src",
+        "type": "java.nio.ByteBuffer"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "write",
+      "parameters": [
+        {
+          "name": "srcs",
+          "type": "java.nio.ByteBuffer[]"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "length",
+          "type": "int"
+        }
+      ],
+      "return": "long"
+    },
+    {
+      "name": "write",
+      "parameters": [{
+        "name": "srcs",
+        "type": "java.nio.ByteBuffer[]"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getLocalAddress",
+      "return": "java.net.SocketAddress"
+    }
+  ],
+  "name": "java.nio.channels.SocketChannel",
+  "simple-name": "SocketChannel"
+}

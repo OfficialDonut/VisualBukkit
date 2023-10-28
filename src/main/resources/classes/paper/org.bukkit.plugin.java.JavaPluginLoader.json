@@ -1,0 +1,105 @@
+{
+  "constructors": [{
+    "name": "<init>",
+    "parameters": [{
+      "name": "instance",
+      "type": "org.bukkit.Server"
+    }]
+  }],
+  "package": "org.bukkit.plugin.java",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "loadPlugin",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "org.bukkit.plugin.Plugin"
+    },
+    {
+      "name": "getPluginDescription",
+      "parameters": [{
+        "name": "file",
+        "type": "java.io.File"
+      }],
+      "return": "org.bukkit.plugin.PluginDescriptionFile"
+    },
+    {
+      "name": "getPluginFileFilters",
+      "return": "java.util.regex.Pattern[]"
+    },
+    {
+      "name": "createRegisteredListeners",
+      "parameters": [
+        {
+          "name": "listener",
+          "type": "org.bukkit.event.Listener"
+        },
+        {
+          "name": "plugin",
+          "type": "org.bukkit.plugin.Plugin"
+        }
+      ],
+      "return": "java.util.Map"
+    },
+    {
+      "name": "enablePlugin",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }]
+    },
+    {
+      "name": "disablePlugin",
+      "parameters": [{
+        "name": "plugin",
+        "type": "org.bukkit.plugin.Plugin"
+      }]
+    }
+  ],
+  "name": "org.bukkit.plugin.java.JavaPluginLoader",
+  "simple-name": "JavaPluginLoader"
+}

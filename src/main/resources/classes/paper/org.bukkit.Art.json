@@ -1,0 +1,293 @@
+{
+  "package": "org.bukkit",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "arg0",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "long"
+        },
+        {
+          "name": "arg1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "key",
+      "return": "net.kyori.adventure.key.Key"
+    },
+    {
+      "name": "name",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "ordinal",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "compareTo",
+      "parameters": [{
+        "name": "arg0",
+        "type": "java.lang.Enum"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "getDeclaringClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "describeConstable",
+      "return": "java.util.Optional"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [
+        {
+          "name": "arg0",
+          "type": "java.lang.Class"
+        },
+        {
+          "name": "arg1",
+          "type": "java.lang.String"
+        }
+      ],
+      "return": "java.lang.Enum"
+    },
+    {
+      "static": true,
+      "name": "values",
+      "return": "org.bukkit.Art[]"
+    },
+    {
+      "static": true,
+      "name": "valueOf",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Art"
+    },
+    {
+      "name": "getBlockWidth",
+      "return": "int"
+    },
+    {
+      "name": "getBlockHeight",
+      "return": "int"
+    },
+    {
+      "name": "getId",
+      "return": "int"
+    },
+    {
+      "name": "getKey",
+      "return": "org.bukkit.NamespacedKey"
+    },
+    {
+      "static": true,
+      "name": "getById",
+      "parameters": [{
+        "name": "id",
+        "type": "int"
+      }],
+      "return": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "getByName",
+      "parameters": [{
+        "name": "name",
+        "type": "java.lang.String"
+      }],
+      "return": "org.bukkit.Art"
+    }
+  ],
+  "name": "org.bukkit.Art",
+  "simple-name": "Art",
+  "fields": [
+    {
+      "static": true,
+      "name": "KEBAB",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "AZTEC",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "ALBAN",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "AZTEC2",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "BOMB",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "PLANT",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "WASTELAND",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "POOL",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "COURBET",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "SEA",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "SUNSET",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "CREEBET",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "WANDERER",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "GRAHAM",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "MATCH",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "BUST",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "STAGE",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "VOID",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "SKULL_AND_ROSES",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "WITHER",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "FIGHTERS",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "POINTER",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "PIGSCENE",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "BURNING_SKULL",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "SKELETON",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "DONKEY_KONG",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "EARTH",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "WIND",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "WATER",
+      "type": "org.bukkit.Art"
+    },
+    {
+      "static": true,
+      "name": "FIRE",
+      "type": "org.bukkit.Art"
+    }
+  ]
+}

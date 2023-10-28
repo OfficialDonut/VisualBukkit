@@ -90,6 +90,11 @@ HBox {
     -fx-spacing: 0.5em;
 }
 
+.list-selection-view {
+    -fx-pref-height: 30em;
+    -fx-pref-width: 40em;
+}
+
 .log-window {
     -fx-font-family: "JetBrains Mono Regular" !important;
     -fx-pref-height: 50em;

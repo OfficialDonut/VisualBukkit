@@ -1,0 +1,303 @@
+{
+  "package": "java.time",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "ofYears",
+      "parameters": [{
+        "name": "years",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "ofMonths",
+      "parameters": [{
+        "name": "months",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "ofWeeks",
+      "parameters": [{
+        "name": "weeks",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "ofDays",
+      "parameters": [{
+        "name": "days",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "of",
+      "parameters": [
+        {
+          "name": "years",
+          "type": "int"
+        },
+        {
+          "name": "months",
+          "type": "int"
+        },
+        {
+          "name": "days",
+          "type": "int"
+        }
+      ],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "from",
+      "parameters": [{
+        "name": "amount",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "parse",
+      "parameters": [{
+        "name": "text",
+        "type": "java.lang.CharSequence"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "static": true,
+      "name": "between",
+      "parameters": [
+        {
+          "name": "startDateInclusive",
+          "type": "java.time.LocalDate"
+        },
+        {
+          "name": "endDateExclusive",
+          "type": "java.time.LocalDate"
+        }
+      ],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "get",
+      "parameters": [{
+        "name": "unit",
+        "type": "java.time.temporal.TemporalUnit"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "getUnits",
+      "return": "java.util.List"
+    },
+    {
+      "name": "getChronology",
+      "return": "java.time.chrono.IsoChronology"
+    },
+    {
+      "name": "isZero",
+      "return": "boolean"
+    },
+    {
+      "name": "isNegative",
+      "return": "boolean"
+    },
+    {
+      "name": "getYears",
+      "return": "int"
+    },
+    {
+      "name": "getMonths",
+      "return": "int"
+    },
+    {
+      "name": "getDays",
+      "return": "int"
+    },
+    {
+      "name": "withYears",
+      "parameters": [{
+        "name": "years",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "withMonths",
+      "parameters": [{
+        "name": "months",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "withDays",
+      "parameters": [{
+        "name": "days",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "plus",
+      "parameters": [{
+        "name": "amountToAdd",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "plusYears",
+      "parameters": [{
+        "name": "yearsToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "plusMonths",
+      "parameters": [{
+        "name": "monthsToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "plusDays",
+      "parameters": [{
+        "name": "daysToAdd",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "minus",
+      "parameters": [{
+        "name": "amountToSubtract",
+        "type": "java.time.temporal.TemporalAmount"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "minusYears",
+      "parameters": [{
+        "name": "yearsToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "minusMonths",
+      "parameters": [{
+        "name": "monthsToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "minusDays",
+      "parameters": [{
+        "name": "daysToSubtract",
+        "type": "long"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "multipliedBy",
+      "parameters": [{
+        "name": "scalar",
+        "type": "int"
+      }],
+      "return": "java.time.Period"
+    },
+    {
+      "name": "negated",
+      "return": "java.time.Period"
+    },
+    {
+      "name": "normalized",
+      "return": "java.time.Period"
+    },
+    {
+      "name": "toTotalMonths",
+      "return": "long"
+    },
+    {
+      "name": "addTo",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "subtractFrom",
+      "parameters": [{
+        "name": "temporal",
+        "type": "java.time.temporal.Temporal"
+      }],
+      "return": "java.time.temporal.Temporal"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    }
+  ],
+  "name": "java.time.Period",
+  "simple-name": "Period",
+  "fields": [{
+    "static": true,
+    "name": "ZERO",
+    "type": "java.time.Period"
+  }]
+}

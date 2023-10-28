@@ -1,0 +1,384 @@
+{
+  "constructors": [
+    {
+      "name": "<init>",
+      "parameters": [{
+        "name": "in",
+        "type": "java.io.InputStream"
+      }]
+    },
+    {
+      "name": "<init>",
+      "parameters": [
+        {
+          "name": "in",
+          "type": "java.io.InputStream"
+        },
+        {
+          "name": "charset",
+          "type": "java.nio.charset.Charset"
+        }
+      ]
+    }
+  ],
+  "package": "java.util.zip",
+  "methods": [
+    {
+      "name": "getClass",
+      "return": "java.lang.Class"
+    },
+    {
+      "name": "hashCode",
+      "return": "int"
+    },
+    {
+      "name": "equals",
+      "parameters": [{
+        "name": "obj",
+        "type": "java.lang.Object"
+      }],
+      "return": "boolean"
+    },
+    {
+      "name": "toString",
+      "return": "java.lang.String"
+    },
+    {"name": "notify"},
+    {"name": "notifyAll"},
+    {"name": "wait"},
+    {
+      "name": "wait",
+      "parameters": [{
+        "name": "timeoutMillis",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "wait",
+      "parameters": [
+        {
+          "name": "timeoutMillis",
+          "type": "long"
+        },
+        {
+          "name": "nanos",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "static": true,
+      "name": "nullInputStream",
+      "return": "java.io.InputStream"
+    },
+    {
+      "name": "readAllBytes",
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [{
+        "name": "len",
+        "type": "int"
+      }],
+      "return": "byte[]"
+    },
+    {
+      "name": "readNBytes",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "skipNBytes",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }]
+    },
+    {
+      "name": "transferTo",
+      "parameters": [{
+        "name": "out",
+        "type": "java.io.OutputStream"
+      }],
+      "return": "long"
+    },
+    {
+      "name": "read",
+      "parameters": [{
+        "name": "b",
+        "type": "byte[]"
+      }],
+      "return": "int"
+    },
+    {
+      "name": "read",
+      "return": "int"
+    },
+    {
+      "name": "markSupported",
+      "return": "boolean"
+    },
+    {
+      "name": "mark",
+      "parameters": [{
+        "name": "readlimit",
+        "type": "int"
+      }]
+    },
+    {"name": "reset"},
+    {
+      "name": "getNextEntry",
+      "return": "java.util.zip.ZipEntry"
+    },
+    {"name": "closeEntry"},
+    {
+      "name": "available",
+      "return": "int"
+    },
+    {
+      "name": "read",
+      "parameters": [
+        {
+          "name": "b",
+          "type": "byte[]"
+        },
+        {
+          "name": "off",
+          "type": "int"
+        },
+        {
+          "name": "len",
+          "type": "int"
+        }
+      ],
+      "return": "int"
+    },
+    {
+      "name": "skip",
+      "parameters": [{
+        "name": "n",
+        "type": "long"
+      }],
+      "return": "long"
+    },
+    {"name": "close"}
+  ],
+  "name": "java.util.zip.ZipInputStream",
+  "simple-name": "ZipInputStream",
+  "fields": [
+    {
+      "static": true,
+      "name": "LOCSIG",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "EXTSIG",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "CENSIG",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "ENDSIG",
+      "type": "long"
+    },
+    {
+      "static": true,
+      "name": "LOCHDR",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "EXTHDR",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENHDR",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDHDR",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCVER",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCFLG",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCHOW",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCTIM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCCRC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCSIZ",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCLEN",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCNAM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "LOCEXT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "EXTCRC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "EXTSIZ",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "EXTLEN",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENVEM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENVER",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENFLG",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENHOW",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENTIM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENCRC",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENSIZ",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENLEN",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENNAM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENEXT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENCOM",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENDSK",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENATT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENATX",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "CENOFF",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDSUB",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDTOT",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDSIZ",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDOFF",
+      "type": "int"
+    },
+    {
+      "static": true,
+      "name": "ENDCOM",
+      "type": "int"
+    }
+  ]
+}
