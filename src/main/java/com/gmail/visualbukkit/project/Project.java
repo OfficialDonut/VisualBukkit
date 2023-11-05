@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.project;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.VisualBukkitExtension;
 import com.gmail.visualbukkit.blocks.*;
-import com.gmail.visualbukkit.blocks.classes.ClassRegistry;
+import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.gmail.visualbukkit.ui.PopupWindow;
 import javafx.application.Platform;
@@ -20,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.action.Action;
+import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.repository.RemoteRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +44,7 @@ public class Project {
     private final VBox placeholderPane = new VBox();
     private final TabPane tabPane = new TabPane();
     private final StatementSelector statementSelector = new StatementSelector();
+    private final ListView<MavenModule> mavenListView = new ListView<>();
     private final ListSelectionView<PluginModule> moduleSelector = new ListSelectionView<>();
     private final Map<String, PluginComponentBlock> pluginComponents = new HashMap<>();
 
@@ -55,6 +58,8 @@ public class Project {
     private final TextField pluginSoftDependField = new TextField();
     private final TextField pluginLoadBeforeField = new TextField();
     private final TextArea pluginPermissionsField = new TextArea();
+
+    private boolean reloadRequired;
 
     public Project(Path directory) {
         this.directory = directory;
@@ -76,41 +81,64 @@ public class Project {
         pluginSettingsGrid.addRow(9, new Label(VisualBukkitApp.localizedText("label.plugin_settings_loadbefore")), pluginLoadBeforeField);
         pluginSettingsGrid.addRow(10, new Label(VisualBukkitApp.localizedText("label.plugin_settings_permissions")), pluginPermissionsField);
         pluginSettingsGrid.getStyleClass().add("plugin-settings-grid");
-        PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), pluginSettingsGrid);
 
-        PopupWindow moduleSelectorWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_modules"), moduleSelector);
-        Button applyChangesButton = new Button(VisualBukkitApp.localizedText("button.apply_changes"));
-        applyChangesButton.setDisable(true);
-        applyChangesButton.setOnAction(e -> {
-            applyChangesButton.setDisable(true);
-            moduleSelectorWindow.close();
-            save();
-            open();
+        Button addDependButton = new Button(VisualBukkitApp.localizedText("button.add_dependency"));
+        Button addRepoButton = new Button(VisualBukkitApp.localizedText("button.add_repository"));
+        Button editButton = new Button(VisualBukkitApp.localizedText("button.edit"));
+        Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
+        addDependButton.setOnAction(e -> promptAddMavenDependency(null));
+        addRepoButton.setOnAction(e -> promptAddMavenRepository(null));
+        editButton.setOnAction(e -> {
+            MavenModule selectedMavenModule = mavenListView.getSelectionModel().getSelectedItem();
+            if (selectedMavenModule instanceof MavenDependencyModule mavenDependency) {
+                promptAddMavenDependency(mavenDependency);
+            } else if (selectedMavenModule instanceof MavenRepositoryModule mavenRepository) {
+                promptAddMavenRepository(mavenRepository);
+            }
         });
-        moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> applyChangesButton.setDisable(false));
+        deleteButton.setOnAction(e -> {
+            mavenListView.getItems().remove(mavenListView.getSelectionModel().getSelectedItem());
+            reloadRequired = true;
+        });
+        editButton.disableProperty().bind(mavenListView.getSelectionModel().selectedItemProperty().isNull());
+        deleteButton.disableProperty().bind(editButton.disableProperty());
+        VBox mavenPane = new VBox(new Label(VisualBukkitApp.localizedText("label.maven_settings")), mavenListView, new HBox(addDependButton, addRepoButton, editButton, deleteButton));
+        mavenPane.getStyleClass().add("maven-settings-pane");
+
+        moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> reloadRequired = true);
         moduleSelector.setSourceHeader(new Label(VisualBukkitApp.localizedText("label.disabled_modules")));
         moduleSelector.setTargetHeader(new Label(VisualBukkitApp.localizedText("label.enabled_modules")));
-        moduleSelector.setSourceFooter(applyChangesButton);
         for (Action action : moduleSelector.getActions()) {
             action.graphicProperty().unbind();
             action.setGraphic(null);
             action.setText(action instanceof ListSelectionView.MoveToTarget ? ">" : action instanceof ListSelectionView.MoveToTargetAll ? ">>" : action instanceof ListSelectionView.MoveToSource ? "<" : "<<");
         }
 
-        Button addComponentButton = new Button(VisualBukkitApp.localizedText("button.add_plugin_component"));
+        Tab pluginYmlTab = new Tab(VisualBukkitApp.localizedText("label.plugin_attributes"), pluginSettingsGrid);
+        Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
+        Tab modulesTab = new Tab(VisualBukkitApp.localizedText("label.extension_modules"), moduleSelector);
+        TabPane settingsTabPane = new TabPane(pluginYmlTab, mavenTab, modulesTab);
+        PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), settingsTabPane);
+        pluginSettingsWindow.setOnHidden(e -> {
+            if (reloadRequired) {
+                reloadRequired = false;
+                save();
+                open();
+            }
+        });
+
+        Button addComponentButton = new Button(VisualBukkitApp.localizedText("button.add_component"));
         Button pluginComponentsButton = new Button(VisualBukkitApp.localizedText("button.plugin_components"));
         Button pluginSettingsButton = new Button(VisualBukkitApp.localizedText("button.plugin_settings"));
         Button buildPluginButton = new Button(VisualBukkitApp.localizedText("button.build_plugin"));
-        Button pluginModulesButton = new Button(VisualBukkitApp.localizedText("button.plugin_modules"));
         addComponentButton.setOnAction(e -> promptAddPluginComponent());
         pluginComponentsButton.setOnAction(e -> showPluginComponents());
         pluginSettingsButton.setOnAction(e -> pluginSettingsWindow.show());
-        pluginModulesButton.setOnAction(e -> moduleSelectorWindow.show());
         buildPluginButton.setOnAction(e -> PluginBuilder.build(this));
-        HBox buttonBar = new HBox(addComponentButton, pluginComponentsButton, pluginSettingsButton, pluginModulesButton, buildPluginButton);
+        HBox buttonBar = new HBox(addComponentButton, pluginComponentsButton, pluginSettingsButton, buildPluginButton);
         buttonBar.getStyleClass().add("button-bar");
 
-        placeholderPane.getChildren().add(new Label(VisualBukkitApp.localizedText("label.add_plugin_component")));
+        placeholderPane.getChildren().add(new Label(VisualBukkitApp.localizedText("label.add_component")));
         placeholderPane.setAlignment(Pos.CENTER);
         placeholderPane.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -134,6 +162,7 @@ public class Project {
     public void open() {
         tabPane.getTabs().clear();
         pluginComponents.clear();
+        mavenListView.getItems().clear();
         moduleSelector.getSourceItems().clear();
         moduleSelector.getTargetItems().clear();
         BlockRegistry.clear();
@@ -155,10 +184,26 @@ public class Project {
             List<Object> enabledModules = enabledModulesJson != null ? enabledModulesJson.toList() : Collections.emptyList();
             for (PluginModule module : PluginModuleRegistry.getPluginModules()) {
                 if (enabledModules.contains(module.getUID())) {
-                    Platform.runLater(() -> moduleSelector.getTargetItems().add(module));
                     module.enable();
+                    Platform.runLater(() -> moduleSelector.getTargetItems().add(module));
                 } else {
                     Platform.runLater(() -> moduleSelector.getSourceItems().add(module));
+                }
+            }
+            JSONArray mavenRepoJson = data.optJSONArray("maven-repositories");
+            if (mavenRepoJson != null) {
+                for (Object o : mavenRepoJson) {
+                    MavenRepositoryModule mavenRepository = MavenRepositoryModule.deserialize((JSONObject) o);
+                    mavenRepository.enable();
+                    Platform.runLater(() -> mavenListView.getItems().add(mavenRepository));
+                }
+            }
+            JSONArray mavenDependJson = data.optJSONArray("maven-dependencies");
+            if (mavenDependJson != null) {
+                for (Object o : mavenDependJson) {
+                    MavenDependencyModule mavenDependency = MavenDependencyModule.deserialize((JSONObject) o);
+                    mavenDependency.enable();
+                    Platform.runLater(() -> mavenListView.getItems().add(mavenDependency));
                 }
             }
         });
@@ -217,6 +262,11 @@ public class Project {
             for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
                 extension.save(this);
             }
+            data.remove("maven-repositories");
+            data.remove("maven-dependencies");
+            for (MavenModule mavenModule : mavenListView.getItems()) {
+                data.append(mavenModule instanceof MavenDependencyModule ? "maven-dependencies" : "maven-repositories", mavenModule.serialize());
+            }
             Files.createDirectories(directory);
             Files.writeString(dataFile, data.toString(2));
             for (Map.Entry<String, PluginComponentBlock> entry : pluginComponents.entrySet()) {
@@ -245,9 +295,7 @@ public class Project {
         Button openAllButton = new Button(VisualBukkitApp.localizedText("button.open_all"));
         Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
         Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
-        HBox buttonBar = new HBox(addButton, openAllButton, openButton, deleteButton);
-        buttonBar.getStyleClass().add("button-bar");
-        VBox vBox = new VBox(listView, buttonBar);
+        VBox vBox = new VBox(listView, new HBox(addButton, openAllButton, openButton, deleteButton));
         vBox.getStyleClass().add("plugin-component-list");
         PopupWindow popupWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), vBox);
         addButton.setOnAction(e -> {
@@ -356,6 +404,7 @@ public class Project {
         gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("dialog.add_component_name")), nameField);
         gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("dialog.add_component_type")), typeComboBox);
         Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle(VisualBukkitApp.localizedText("window.add_component"));
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setContent(gridPane);
         dialog.showAndWait().ifPresent(buttonType -> {
@@ -404,6 +453,74 @@ public class Project {
             return false;
         }
         return true;
+    }
+
+    public void promptAddMavenDependency(MavenDependencyModule dependToEdit) {
+        TextField groupIdField = new TextField();
+        TextField artifactIdField = new TextField();
+        TextField versionField = new TextField();
+        TextField scopeField = new TextField("provided");
+        if (dependToEdit != null) {
+            groupIdField.setText(dependToEdit.getArtifact().getGroupId());
+            artifactIdField.setText(dependToEdit.getArtifact().getArtifactId());
+            versionField.setText(dependToEdit.getArtifact().getVersion());
+            scopeField.setText(dependToEdit.getArtifact().getProperty("scope", "provided"));
+        }
+        GridPane gridPane = new GridPane();
+        gridPane.addRow(0, new Label("groupId"), groupIdField);
+        gridPane.addRow(1, new Label("artifactId"), artifactIdField);
+        gridPane.addRow(2, new Label("version"), versionField);
+        gridPane.addRow(3, new Label("scope"), scopeField);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle(VisualBukkitApp.localizedText("window.add_maven_dependency"));
+        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().setContent(gridPane);
+        dialog.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                if (groupIdField.getText().isBlank() || artifactIdField.getText().isBlank() || versionField.getText().isBlank() || scopeField.getText().isBlank()) {
+                    VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.invalid_maven_dependency"));
+                    return;
+                }
+                if (dependToEdit != null) {
+                    mavenListView.getItems().remove(dependToEdit);
+                }
+                DefaultArtifact artifact = new DefaultArtifact(String.format("%s:%s:%s", groupIdField.getText(), artifactIdField.getText(), versionField.getText()), Collections.singletonMap("scope", scopeField.getText()));
+                mavenListView.getItems().add(new MavenDependencyModule(artifact));
+                Collections.sort(mavenListView.getItems());
+                reloadRequired = true;
+            }
+        });
+    }
+
+    public void promptAddMavenRepository(MavenRepositoryModule repoToEdit) {
+        TextField idField = new TextField();
+        TextField urlField = new TextField();
+        if (repoToEdit != null) {
+            idField.setText(repoToEdit.getRepository().getId());
+            urlField.setText(repoToEdit.getRepository().getUrl());
+        }
+        GridPane gridPane = new GridPane();
+        gridPane.addRow(0, new Label("id"), idField);
+        gridPane.addRow(1, new Label("url"), urlField);
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle(VisualBukkitApp.localizedText("window.add_maven_repository"));
+        dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().setContent(gridPane);
+        dialog.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                if (idField.getText().isBlank() || urlField.getText().isBlank()) {
+                    VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.invalid_maven_repository"));
+                    return;
+                }
+                if (repoToEdit != null) {
+                    mavenListView.getItems().remove(repoToEdit);
+                }
+                RemoteRepository repository = new RemoteRepository.Builder(idField.getText(), "default", urlField.getText()).build();
+                mavenListView.getItems().add(new MavenRepositoryModule(repository));
+                Collections.sort(mavenListView.getItems());
+                reloadRequired = true;
+            }
+        });
     }
 
     private Tab getTab(String name) {

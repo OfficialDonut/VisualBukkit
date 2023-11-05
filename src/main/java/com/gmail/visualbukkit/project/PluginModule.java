@@ -2,15 +2,17 @@ package com.gmail.visualbukkit.project;
 
 public abstract class PluginModule implements Comparable<PluginModule> {
 
-    private final String name;
     private final String uid;
+    private final String name;
 
-    public PluginModule(String name, String uid) {
-        this.name = name;
+    public PluginModule(String uid, String name) {
         this.uid = uid;
+        this.name = name;
     }
 
     public void enable() {}
+
+    public void prepareBuild(BuildInfo buildInfo) {}
 
     @Override
     public int compareTo(PluginModule other) {

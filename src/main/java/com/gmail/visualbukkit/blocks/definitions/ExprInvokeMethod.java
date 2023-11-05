@@ -5,9 +5,9 @@ import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ClassElementParameter;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.blocks.classes.ClassInfo;
-import com.gmail.visualbukkit.blocks.classes.MethodInfo;
-import com.gmail.visualbukkit.blocks.classes.ParameterInfo;
+import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.reflection.MethodInfo;
+import com.gmail.visualbukkit.reflection.ParameterInfo;
 
 import java.util.Collection;
 import java.util.StringJoiner;

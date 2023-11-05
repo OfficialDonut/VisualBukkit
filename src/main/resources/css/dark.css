@@ -1,0 +1,17 @@
+@import "default.css"
+
+.project-pane > .button-bar {
+    -fx-border-color: gray;
+    -fx-border-width: 1 0 0 0;
+}
+
+.root {
+    -fx-accent: rgb(63, 81, 181);
+    -fx-background: rgb(45, 45, 45);
+    -fx-base: rgb(45, 45, 45);
+    -fx-color: rgb(65, 65, 65);
+    -fx-control-inner-background: rgb(25, 25, 25);
+    -fx-control-inner-background-alt: rgb(30, 30, 30);
+    -fx-default-button: rgb(65, 65, 65);
+    -fx-light-text-color: white;
+}

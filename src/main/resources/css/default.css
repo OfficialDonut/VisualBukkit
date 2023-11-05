@@ -106,8 +106,9 @@ HBox {
     -fx-vbar-policy: always;
 }
 
-.menu-bar {
-    -fx-background-color: rgb(35, 43, 50);
+.maven-settings-pane {
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
 }
 
 .plugin-component-block {
@@ -116,11 +117,7 @@ HBox {
     -fx-border-radius: 1em 1em 0 0;
 }
 
-.plugin-component-list {
-    -fx-pref-width: 25em;
-}
-
-.plugin-component-list > .button-bar {
+.plugin-component-list > HBox {
     -fx-padding: 0.5em;
 }
 
@@ -135,7 +132,6 @@ HBox {
 
 .plugin-settings-grid .text-area {
     -fx-pref-height: 5em;
-    -fx-pref-width: 10em;
 }
 
 .pop-over-selector {
@@ -169,14 +165,8 @@ HBox {
 }
 
 .root {
-    -fx-accent: rgb(63, 81, 181);
-    -fx-background: rgb(32, 34, 37);
-    -fx-base: rgb(48, 51, 56);
-    -fx-control-inner-background: rgb(20, 20, 20);
-    -fx-control-inner-background-alt: rgb(25, 25, 25);
     -fx-font-family: "Noto Sans";
     -fx-font-size: 16;
-    -fx-light-text-color: white;
 }
 
 .scroll-pane {

@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
-import com.gmail.visualbukkit.blocks.classes.ClassInfo;
-import com.gmail.visualbukkit.blocks.classes.ClassRegistry;
+import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 
 public class ClassParameter extends PopOverSelector<ClassInfo> implements BlockParameter {

@@ -4,7 +4,7 @@ import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
-import com.gmail.visualbukkit.blocks.classes.ClassInfo;
+import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 import javafx.css.PseudoClass;
 import javafx.scene.input.TransferMode;

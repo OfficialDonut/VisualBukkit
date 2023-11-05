@@ -32,7 +32,9 @@ public abstract class BlockFactory<T extends Block> implements Comparable<BlockF
             return block;
         } catch (Exception e) {
             VisualBukkitApp.getLogger().log(Level.WARNING, "Failed to deserialize block", e);
-            return createUnknown();
+            T block = createUnknown();
+            block.deserialize(json);
+            return block;
         }
     }
 

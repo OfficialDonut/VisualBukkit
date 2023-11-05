@@ -20,7 +20,8 @@ public class ThemesMenu extends Menu {
         super(VisualBukkitApp.localizedText("menu.themes"));
         try {
             Map<String, String> themeMap = new TreeMap<>();
-            themeMap.put(VisualBukkitApp.localizedText("menu.default"), "css/default.css");
+            themeMap.put("Dark", "css/dark.css");
+            themeMap.put("Light", "css/light.css");
             Path themeDir = VisualBukkitApp.getDataDirectory().resolve("themes");
             Files.createDirectories(themeDir);
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(themeDir)) {

@@ -2,7 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.UndoManager;
-import com.gmail.visualbukkit.blocks.classes.ClassInfo;
+import com.gmail.visualbukkit.reflection.ClassInfo;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
