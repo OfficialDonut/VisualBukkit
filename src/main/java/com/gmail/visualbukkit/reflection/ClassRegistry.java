@@ -7,7 +7,6 @@ import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.RepositorySystem;
-import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.collection.CollectRequest;
 import org.eclipse.aether.connector.basic.BasicRepositoryConnectorFactory;
 import org.eclipse.aether.graph.Dependency;
@@ -22,7 +21,6 @@ import org.eclipse.aether.spi.connector.RepositoryConnectorFactory;
 import org.eclipse.aether.spi.connector.transport.TransporterFactory;
 import org.eclipse.aether.transport.file.FileTransporterFactory;
 import org.eclipse.aether.transport.http.HttpTransporterFactory;
-import org.eclipse.aether.util.artifact.JavaScopes;
 import org.eclipse.aether.util.filter.DependencyFilterUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -43,7 +41,6 @@ public class ClassRegistry {
 
     private static final Map<String, ClassInfo> classes = new HashMap<>();
     private static final Set<RemoteRepository> mavenRepositories = new HashSet<>();
-    private static final Set<DefaultArtifact> mavenDependencies = new HashSet<>();
 
     public static void register(JSONObject json) {
         classes.putIfAbsent(json.getString("name"), new JsonClassInfo(json));
@@ -67,8 +64,7 @@ public class ClassRegistry {
         mavenRepositories.add(repository);
     }
 
-    public static void register(DefaultArtifact artifact) throws IOException, MavenInvocationException, DependencyResolutionException {
-        mavenDependencies.add(artifact);
+    public static void register(Dependency dependency) throws IOException, MavenInvocationException, DependencyResolutionException {
         DefaultServiceLocator serviceLocator = MavenRepositorySystemUtils.newServiceLocator();
         serviceLocator.addService(RepositoryConnectorFactory.class, BasicRepositoryConnectorFactory.class);
         serviceLocator.addService(TransporterFactory.class, FileTransporterFactory.class);
@@ -79,10 +75,11 @@ public class ClassRegistry {
         session.setLocalRepositoryManager(repositorySystem.newLocalRepositoryManager(session, new LocalRepository(PluginBuilder.getMavenHome())));
 
         CollectRequest collectRequest = new CollectRequest();
-        collectRequest.setRoot(new Dependency(artifact, JavaScopes.COMPILE));
+        collectRequest.setRoot(dependency);
         collectRequest.setRepositories(new ArrayList<>(mavenRepositories));
+        collectRequest.getRepositories().add(new RemoteRepository.Builder("Maven Central", "default", "https://repo.maven.apache.org/maven2/").build());
 
-        DependencyResult dependencyResult = repositorySystem.resolveDependencies(session, new DependencyRequest(collectRequest, DependencyFilterUtils.classpathFilter(JavaScopes.COMPILE)));
+        DependencyResult dependencyResult = repositorySystem.resolveDependencies(session, new DependencyRequest(collectRequest, DependencyFilterUtils.classpathFilter(dependency.getScope())));
         List<URL> jarURLs = new ArrayList<>(dependencyResult.getArtifactResults().size());
         for (ArtifactResult artifactResult : dependencyResult.getArtifactResults()) {
             jarURLs.add(artifactResult.getArtifact().getFile().toURI().toURL());
@@ -111,7 +108,6 @@ public class ClassRegistry {
     public static void clear() {
         classes.clear();
         mavenRepositories.clear();
-        mavenDependencies.clear();
     }
 
     public static Optional<ClassInfo> getClass(String name) {
@@ -124,13 +120,5 @@ public class ClassRegistry {
 
     public static Set<ClassInfo> getClasses(Predicate<ClassInfo> filter) {
         return classes.values().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
-    }
-
-    public static Set<RemoteRepository> getMavenRepositories() {
-        return mavenRepositories;
-    }
-
-    public static Set<DefaultArtifact> getMavenDependencies() {
-        return mavenDependencies;
     }
 }

@@ -2,7 +2,6 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.project.PluginBuilder;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;

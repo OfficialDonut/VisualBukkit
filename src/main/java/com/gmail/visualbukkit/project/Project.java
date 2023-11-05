@@ -21,7 +21,9 @@ import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.action.Action;
 import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.repository.RemoteRepository;
+import org.eclipse.aether.util.artifact.JavaScopes;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -459,12 +461,14 @@ public class Project {
         TextField groupIdField = new TextField();
         TextField artifactIdField = new TextField();
         TextField versionField = new TextField();
-        TextField scopeField = new TextField("provided");
+        SearchableComboBox<String> scopeField = new SearchableComboBox<>();
+        scopeField.getItems().setAll(JavaScopes.COMPILE, JavaScopes.PROVIDED, JavaScopes.RUNTIME, JavaScopes.TEST, JavaScopes.SYSTEM);
+        scopeField.setValue(JavaScopes.PROVIDED);
         if (dependToEdit != null) {
-            groupIdField.setText(dependToEdit.getArtifact().getGroupId());
-            artifactIdField.setText(dependToEdit.getArtifact().getArtifactId());
-            versionField.setText(dependToEdit.getArtifact().getVersion());
-            scopeField.setText(dependToEdit.getArtifact().getProperty("scope", "provided"));
+            groupIdField.setText(dependToEdit.getDependency().getArtifact().getGroupId());
+            artifactIdField.setText(dependToEdit.getDependency().getArtifact().getArtifactId());
+            versionField.setText(dependToEdit.getDependency().getArtifact().getVersion());
+            scopeField.setValue(dependToEdit.getDependency().getScope());
         }
         GridPane gridPane = new GridPane();
         gridPane.addRow(0, new Label("groupId"), groupIdField);
@@ -477,15 +481,15 @@ public class Project {
         dialog.getDialogPane().setContent(gridPane);
         dialog.showAndWait().ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
-                if (groupIdField.getText().isBlank() || artifactIdField.getText().isBlank() || versionField.getText().isBlank() || scopeField.getText().isBlank()) {
+                if (groupIdField.getText().isBlank() || artifactIdField.getText().isBlank() || versionField.getText().isBlank()) {
                     VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.invalid_maven_dependency"));
                     return;
                 }
                 if (dependToEdit != null) {
                     mavenListView.getItems().remove(dependToEdit);
                 }
-                DefaultArtifact artifact = new DefaultArtifact(String.format("%s:%s:%s", groupIdField.getText(), artifactIdField.getText(), versionField.getText()), Collections.singletonMap("scope", scopeField.getText()));
-                mavenListView.getItems().add(new MavenDependencyModule(artifact));
+                DefaultArtifact artifact = new DefaultArtifact(String.format("%s:%s:%s", groupIdField.getText(), artifactIdField.getText(), versionField.getText()));
+                mavenListView.getItems().add(new MavenDependencyModule(new Dependency(artifact, scopeField.getValue())));
                 Collections.sort(mavenListView.getItems());
                 reloadRequired = true;
             }

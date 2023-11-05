@@ -2,14 +2,13 @@ package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
-import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.maven.shared.invoker.*;
-import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.jboss.forge.roaster.Roaster;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
@@ -20,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -83,9 +81,6 @@ public class PluginBuilder {
                 }
 
                 BuildInfo buildInfo = new BuildInfo(mainClass);
-                buildInfo.getMavenRepositories().addAll(ClassRegistry.getMavenRepositories());
-                buildInfo.getMavenDependencies().addAll(ClassRegistry.getMavenDependencies());
-
                 for (PluginComponentBlock block : project.getPluginComponents()) {
                     block.prepareBuild(buildInfo);
                 }
@@ -132,13 +127,13 @@ public class PluginBuilder {
         return String.format("<repository><id>%s</id><url>%s</url></repository>", repository.getId(), repository.getUrl());
     }
 
-    private static String getDependencyString(DefaultArtifact artifact) {
-        StringBuilder builder = new StringBuilder("<dependency>");
-        builder.append(String.format("<groupId>%s</groupId><artifactId>%s</artifactId><version>%s</version>", artifact.getGroupId(), artifact.getArtifactId(), artifact.getVersion()));
-        for (Map.Entry<String, String> entry : artifact.getProperties().entrySet()) {
-            builder.append("<").append(entry.getKey()).append(">").append(entry.getValue()).append("</").append(entry.getKey()).append(">");
-        }
-        return builder.append("</dependency>").toString();
+    private static String getDependencyString(Dependency dependency) {
+        return "<dependency>" +
+                "<groupId>" + dependency.getArtifact().getGroupId() + "</groupId>" +
+                "<artifactId>" + dependency.getArtifact().getArtifactId() + "</artifactId>" +
+                "<version>" + dependency.getArtifact().getVersion() + "</version>" +
+                "<scope>" + dependency.getScope() + "</scope>" +
+                "</dependency>";
     }
 
     private static String createPluginYml(Project project, String pluginName, String version, String mainClassName) throws IOException {

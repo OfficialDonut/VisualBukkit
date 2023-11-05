@@ -9,13 +9,18 @@ public class MavenRepositoryModule extends MavenModule {
     private final RemoteRepository repository;
 
     public MavenRepositoryModule(RemoteRepository repository) {
-        super(repository.toString(), String.format("%s:%s", repository.getId(), repository.getUrl()));
+        super(repository.toString(), String.format("%s %s", repository.getId(), repository.getUrl()));
         this.repository = repository;
     }
 
     @Override
     public void enable() {
         ClassRegistry.register(repository);
+    }
+
+    @Override
+    public void prepareBuild(BuildInfo buildInfo) {
+        buildInfo.getMavenRepositories().add(repository);
     }
 
     @Override
