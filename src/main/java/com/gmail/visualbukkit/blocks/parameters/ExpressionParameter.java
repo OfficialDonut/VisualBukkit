@@ -24,6 +24,7 @@ public class ExpressionParameter extends Region implements BlockParameter {
         this.type = type;
         expressionSelector = new PopOverSelector<>(BlockRegistry.getExpressions());
         expressionSelector.getStyleClass().add("expression-parameter");
+        expressionSelector.setPromptText("<" + type.getSimpleName() + ">");
 
         expressionSelector.setOnAction(e -> {
             ExpressionBlock.Factory factory = expressionSelector.getValue();

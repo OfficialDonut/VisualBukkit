@@ -81,6 +81,9 @@ public class PluginBuilder {
                 }
 
                 BuildInfo buildInfo = new BuildInfo(mainClass);
+                for (PluginModule pluginModule : project.getPluginModules()) {
+                    pluginModule.prepareBuild(buildInfo);
+                }
                 for (PluginComponentBlock block : project.getPluginComponents()) {
                     block.prepareBuild(buildInfo);
                 }

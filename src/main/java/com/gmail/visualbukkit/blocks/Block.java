@@ -23,8 +23,10 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public Block() {
         getStyleClass().add("block");
+        Label blockTitle = new Label(getDefinition().name());
+        blockTitle.getStyleClass().add("block-title");
         header.getStyleClass().add("block-header");
-        header.getChildren().add(new Label(getDefinition().name()));
+        header.getChildren().add(blockTitle);
         getChildren().add(header);
     }
 

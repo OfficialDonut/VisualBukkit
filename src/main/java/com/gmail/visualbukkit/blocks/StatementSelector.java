@@ -2,24 +2,36 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.UndoManager;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.*;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
+import org.controlsfx.control.textfield.CustomTextField;
+
+import java.util.Set;
 
 public class StatementSelector extends VBox {
 
-    private final VBox statementListBox = new VBox();
+    private final ObservableList<StatementSource> statements = FXCollections.observableArrayList();
 
     public StatementSelector() {
         getStyleClass().add("statement-selector");
 
-        TextField searchField = new TextField();
+        FilteredList<StatementSource> filteredList = new FilteredList<>(statements);
+        ListView<StatementSource> listView = new ListView<>(filteredList);
+        listView.prefHeightProperty().bind(heightProperty());
 
-        getChildren().addAll(new VBox(new HBox(new Label(VisualBukkitApp.localizedText("label.search")), searchField)), new Separator(), new ScrollPane(statementListBox));
+        CustomTextField searchField = new CustomTextField();
+        Button clearButton = new Button("✕");
+        clearButton.setOnAction(e -> searchField.clear());
+        searchField.setRight(clearButton);
+        searchField.textProperty().addListener((o, oldValue, newValue) -> filteredList.setPredicate(s -> StringUtils.containsIgnoreCase(s.getFactory().getBlockDefinition().name(), searchField.getText())));
+
+        getChildren().addAll(new HBox(new Label(VisualBukkitApp.localizedText("label.search")), searchField), new Separator(), listView);
 
         setOnDragOver(e -> {
             if (e.getGestureSource() instanceof StatementBlock || e.getGestureSource() instanceof ExpressionBlock) {
@@ -35,10 +47,10 @@ public class StatementSelector extends VBox {
         });
     }
 
-    public void refreshStatements() {
-        statementListBox.getChildren().clear();
-        for (StatementBlock.Factory factory : BlockRegistry.getStatements()) {
-            statementListBox.getChildren().add(new StatementSource(factory));
+    public void setStatements(Set<StatementBlock.Factory> statements) {
+        this.statements.clear();
+        for (StatementBlock.Factory factory : statements) {
+            this.statements.add(new StatementSource(factory));
         }
     }
 }

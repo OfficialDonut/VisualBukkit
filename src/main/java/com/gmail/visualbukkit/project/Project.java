@@ -118,8 +118,8 @@ public class Project {
 
         Tab pluginYmlTab = new Tab(VisualBukkitApp.localizedText("label.plugin_attributes"), pluginSettingsGrid);
         Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
-        Tab modulesTab = new Tab(VisualBukkitApp.localizedText("label.extension_modules"), moduleSelector);
-        TabPane settingsTabPane = new TabPane(pluginYmlTab, mavenTab, modulesTab);
+        Tab modulesTab = new Tab(VisualBukkitApp.localizedText("label.modules"), moduleSelector);
+        TabPane settingsTabPane = new TabPane(pluginYmlTab, modulesTab, mavenTab);
         PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), settingsTabPane);
         pluginSettingsWindow.setOnHidden(e -> {
             if (reloadRequired) {
@@ -149,7 +149,7 @@ public class Project {
         });
 
         splitPane.getItems().addAll(statementSelector, placeholderPane);
-        splitPane.widthProperty().addListener((o, oldValue, newValue) -> Platform.runLater(() -> splitPane.setDividerPositions(0.15)));
+        splitPane.widthProperty().addListener((o, oldValue, newValue) -> Platform.runLater(() -> splitPane.setDividerPositions(0.175)));
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);
         projectPane.setCenter(splitPane);
@@ -235,7 +235,7 @@ public class Project {
             extension.open(this);
         }
 
-        statementSelector.refreshStatements();
+        statementSelector.setStatements(BlockRegistry.getStatements());
         VisualBukkitApp.getRootPane().setCenter(projectPane);
         VisualBukkitApp.getData().put("current-project", getName());
     }
@@ -281,7 +281,7 @@ public class Project {
 
     private void savePluginComponent(String name, PluginComponentBlock block) throws IOException {
         Files.createDirectories(pluginComponentDirectory);
-        Files.writeString(pluginComponentDirectory.resolve(name), block.serialize().toString());
+        Files.writeString(pluginComponentDirectory.resolve(name), block.serialize().toString(2));
     }
 
     public void showPluginComponents() {
@@ -534,6 +534,13 @@ public class Project {
             }
         }
         return null;
+    }
+
+    public Set<PluginModule> getPluginModules() {
+        Set<PluginModule> pluginModules = new HashSet<>();
+        pluginModules.addAll(moduleSelector.getTargetItems());
+        pluginModules.addAll(mavenListView.getItems());
+        return pluginModules;
     }
 
     public String getName() {

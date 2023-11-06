@@ -20,6 +20,20 @@
     -fx-spacing: 0.5em;
 }
 
+.block .check-box {
+    -fx-cursor: default;
+    -fx-text-fill: black;
+}
+
+.block .check-box .box {
+    -fx-border-color: black;
+    -fx-color: lightgray;
+}
+
+.block .check-box .box:hover {
+    -fx-color: derive(lightgray, 25%);
+}
+
 .block .combo-box {
     -fx-border-color: black;
     -fx-color: lightgray;
@@ -45,7 +59,7 @@
     -fx-text-fill: black;
 }
 
-.block-header {
+.block-title {
     -fx-font-family: "JetBrains Mono Bold";
 }
 
@@ -70,6 +84,10 @@
 
 .expression-block:nested {
     -fx-background-color: derive(orange, 50%);
+}
+
+.expression-parameter > .list-cell {
+    -fx-text-fill: red !important;
 }
 
 .expression-parameter:connecting {
@@ -192,9 +210,35 @@ HBox {
     -fx-pref-height: 0;
 }
 
-.statement-selector VBox {
+.statement-selector {
     -fx-padding: 1em;
     -fx-spacing: 1em;
+}
+
+.statement-selector .custom-text-field .button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0.1em 0 0;
+}
+
+.statement-selector .custom-text-field .button:hover {
+    -fx-cursor: default;
+    -fx-opacity: 0.75;
+}
+
+.statement-selector .custom-text-field .button:pressed {
+    -fx-opacity: 0.5;
+}
+
+.statement-selector .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 1em 0;
+}
+
+.statement-selector > .list-view {
+    -fx-background-color: transparent;
+    -fx-focus-traversable: false;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
 }
 
 .statement-source {
