@@ -1,6 +1,9 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.project.*;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,29 +11,49 @@ import java.util.StringJoiner;
 
 public non-sealed abstract class PluginComponentBlock extends Block {
 
-    private final StatementHolder statementHolder = new StatementHolder();
+    private final StatementHolder childStatementHolder = new StatementHolder();
 
     public PluginComponentBlock() {
         getStyleClass().add("plugin-component-block");
+
+        ActionMenuItem pasteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_after"), e -> UndoManager.current().execute(() -> childStatementHolder.addFirst(CopyPasteManager.pasteStatement())));
+        ActionMenuItem collapseItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.collapse_all"), e -> childStatementHolder.setCollapsedRecursive(true));
+        ActionMenuItem expandItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.expand_all"), e -> childStatementHolder.setCollapsedRecursive(false));
+        ActionMenuItem deleteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> delete());
+        pasteItem.disableProperty().bind(CopyPasteManager.statementCopiedProperty().not());
+        getContextMenu().getItems().addAll(pasteItem, collapseItem, expandItem, new SeparatorMenuItem(), deleteItem);
+
+        getContextMenu().setOnShowing(e -> {
+            collapseItem.setDisable(childStatementHolder.isEmpty());
+            expandItem.setDisable(collapseItem.isDisable());
+        });
+    }
+
+    @Override
+    public void delete() {
+        Project project = ProjectManager.current();
+        if (project.getOpenTab() != null) {
+            project.promptDeletePluginComponent(project.getOpenTab().getText());
+        }
     }
 
     @Override
     public void updateState() {
         super.updateState();
-        statementHolder.forEach(StatementBlock::updateState);
+        childStatementHolder.forEach(StatementBlock::updateState);
     }
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
         super.prepareBuild(buildInfo);
-        for (StatementBlock block : statementHolder) {
+        for (StatementBlock block : childStatementHolder) {
             block.prepareBuild(buildInfo);
         }
     }
 
     public String generateChildrenJava() {
         StringJoiner joiner = new StringJoiner(System.lineSeparator());
-        for (StatementBlock block : statementHolder) {
+        for (StatementBlock block : childStatementHolder) {
             joiner.add(block.generateJava());
         }
         return joiner.toString();
@@ -39,7 +62,7 @@ public non-sealed abstract class PluginComponentBlock extends Block {
     @Override
     public JSONObject serialize() {
         JSONObject json = super.serialize();
-        for (StatementBlock block : statementHolder) {
+        for (StatementBlock block : childStatementHolder) {
             json.append("statements", block.serialize());
         }
         return json;
@@ -52,33 +75,19 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         if (statements != null) {
             for (Object obj : statements) {
                 if (obj instanceof JSONObject statementJson) {
-                    StatementBlock block = BlockRegistry.getStatement(statementJson.optString("uid")).newBlock(statementJson);
-                    statementHolder.addLast(block).execute();
+                    childStatementHolder.addLast(BlockRegistry.newStatement(statementJson));
                 }
             }
         }
     }
 
-    public StatementHolder getStatementHolder() {
-        return statementHolder;
-    }
-
-    public static class Factory extends BlockFactory<PluginComponentBlock> {
-
-        public Factory(Class<?> clazz) {
-            super(clazz);
-        }
-
-        @Override
-        protected PluginComponentBlock createUnknown() {
-            return new Unknown();
-        }
+    public StatementHolder getChildStatementHolder() {
+        return childStatementHolder;
     }
 
     @BlockDefinition(uid = "unknown-plugin-component", name = "Unknown Plugin Component")
     public static class Unknown extends PluginComponentBlock {
 
-        protected static final Factory factory = new Factory(Unknown.class);
         private JSONObject json;
 
         @Override

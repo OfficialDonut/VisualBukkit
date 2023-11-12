@@ -1,12 +1,17 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.blocks.BlockFactory;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.project.ProjectManager;
+import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 import javafx.css.PseudoClass;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Region;
 import org.json.JSONObject;
@@ -17,7 +22,7 @@ public class ExpressionParameter extends Region implements BlockParameter {
     private static final PseudoClass DRAG_OVER_STYLE_CLASS = PseudoClass.getPseudoClass("drag-over");
 
     private final ClassInfo type;
-    private final PopOverSelector<ExpressionBlock.Factory> expressionSelector;
+    private final PopOverSelector<BlockFactory<ExpressionBlock>> expressionSelector;
     private ExpressionBlock expression;
 
     public ExpressionParameter(ClassInfo type) {
@@ -25,13 +30,11 @@ public class ExpressionParameter extends Region implements BlockParameter {
         expressionSelector = new PopOverSelector<>(BlockRegistry.getExpressions());
         expressionSelector.getStyleClass().add("expression-parameter");
         expressionSelector.setPromptText("<" + type.getSimpleName() + ">");
+        expressionSelector.setTooltip(new Tooltip(type.getName()));
 
-        expressionSelector.setOnAction(e -> {
-            ExpressionBlock.Factory factory = expressionSelector.getValue();
-            if (factory != null) {
-                UndoManager.execute(setExpression(factory.newBlock()));
-                expression.requestFocus();
-            }
+        expressionSelector.setSelectAction(factory -> {
+            UndoManager.current().execute(() -> setExpression(factory.newBlock()));
+            expression.requestFocus();
         });
 
         expressionSelector.setOnDragOver(e -> {
@@ -44,7 +47,7 @@ public class ExpressionParameter extends Region implements BlockParameter {
 
         expressionSelector.setOnDragDropped(e -> {
             expressionSelector.pseudoClassStateChanged(DRAG_OVER_STYLE_CLASS, false);
-            UndoManager.execute(setExpression((ExpressionBlock) e.getGestureSource()));
+            UndoManager.current().execute(() -> setExpression((ExpressionBlock) e.getGestureSource()));
             e.setDropCompleted(true);
             e.consume();
         });
@@ -54,46 +57,24 @@ public class ExpressionParameter extends Region implements BlockParameter {
             e.consume();
         });
 
+        ActionMenuItem pasteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste"), e -> UndoManager.current().execute(() -> setExpression(CopyPasteManager.pasteExpression())));
+        pasteItem.disableProperty().bind(CopyPasteManager.expressionCopiedProperty().not());
+        expressionSelector.setContextMenu(new ContextMenu(pasteItem));
+
         ExpressionBlock.DRAGGING_PROPERTY.addListener((observable, oldValue, newValue) -> expressionSelector.pseudoClassStateChanged(CONNECTING_STYLE_CLASS, newValue));
         getChildren().add(expressionSelector);
     }
 
-    public UndoManager.RevertibleAction setExpression(ExpressionBlock block) {
-        return new UndoManager.RevertibleAction() {
-            private UndoManager.RevertibleAction deleteAction;
-            @Override
-            public void execute() {
-                (deleteAction = block.delete()).execute();
-                expression = block;
-                getChildren().setAll(block);
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-            @Override
-            public void revert() {
-                deleteExpression().execute();
-                deleteAction.revert();
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-        };
+    public void setExpression(ExpressionBlock block) {
+        expression = block;
+        block.delete();
+        getChildren().setAll(block);
     }
 
-    public UndoManager.RevertibleAction deleteExpression() {
-        return new UndoManager.RevertibleAction() {
-            private ExpressionBlock oldExpression;
-            @Override
-            public void execute() {
-                oldExpression = expression;
-                expression = null;
-                expressionSelector.setValue(null);
-                getChildren().setAll(expressionSelector);
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-            @Override
-            public void revert() {
-                setExpression(oldExpression).execute();
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-        };
+    public void deleteExpression() {
+        expression = null;
+        expressionSelector.setValue(null);
+        getChildren().setAll(expressionSelector);
     }
 
     @Override
@@ -118,7 +99,7 @@ public class ExpressionParameter extends Region implements BlockParameter {
     @Override
     public void deserialize(Object obj) {
         if (obj instanceof JSONObject json) {
-            setExpression(BlockRegistry.getExpression(json.optString("uid")).newBlock(json)).execute();
+            setExpression(BlockRegistry.newExpression(json));
         }
     }
 }

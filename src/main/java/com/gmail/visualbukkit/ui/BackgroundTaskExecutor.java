@@ -43,6 +43,7 @@ public class BackgroundTaskExecutor {
                 Platform.runLater(stage::close);
             }
         });
+
         stage.showAndWait();
     }
 }

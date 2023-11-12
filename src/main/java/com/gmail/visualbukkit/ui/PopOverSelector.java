@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -14,10 +15,12 @@ import org.controlsfx.control.PopOver;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.function.Consumer;
 
 public class PopOverSelector<T> extends ComboBox<T> {
 
     private final ObservableList<T> itemList;
+    private Consumer<T> selectAction = this::setValue;
 
     public PopOverSelector() {
         this(Collections.emptyList());
@@ -45,8 +48,7 @@ public class PopOverSelector<T> extends ComboBox<T> {
                 };
                 cell.setOnMouseClicked(e -> {
                     popOver.hide();
-                    setValue(cell.getItem());
-                    requestFocus();
+                    selectAction.accept(cell.getItem());
                 });
                 return cell;
             }
@@ -61,11 +63,17 @@ public class PopOverSelector<T> extends ComboBox<T> {
         });
 
         addEventFilter(MouseEvent.MOUSE_RELEASED, e -> {
-            popOver.setArrowLocation(2 * e.getSceneY() > VisualBukkitApp.getPrimaryStage().getScene().getHeight() ? PopOver.ArrowLocation.BOTTOM_CENTER : PopOver.ArrowLocation.TOP_CENTER);
-            popOver.show(this);
-            searchField.requestFocus();
+            if (e.getButton() == MouseButton.PRIMARY) {
+                popOver.setArrowLocation(2 * e.getSceneY() > VisualBukkitApp.getPrimaryStage().getScene().getHeight() ? PopOver.ArrowLocation.BOTTOM_CENTER : PopOver.ArrowLocation.TOP_CENTER);
+                popOver.show(this);
+                searchField.requestFocus();
+            }
             e.consume();
         });
+    }
+
+    public void setSelectAction(Consumer<T> selectAction) {
+        this.selectAction = selectAction;
     }
 
     public ObservableList<T> getItemList() {

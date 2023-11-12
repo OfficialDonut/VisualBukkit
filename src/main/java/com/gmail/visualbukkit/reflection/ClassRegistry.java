@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit.reflection;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.project.PluginBuilder;
+import com.gmail.visualbukkit.project.maven.MavenUtil;
 import com.google.common.reflect.ClassPath;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.shared.invoker.MavenInvocationException;
@@ -72,7 +72,7 @@ public class ClassRegistry {
 
         RepositorySystem repositorySystem = serviceLocator.getService(RepositorySystem.class);
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
-        session.setLocalRepositoryManager(repositorySystem.newLocalRepositoryManager(session, new LocalRepository(PluginBuilder.getMavenHome())));
+        session.setLocalRepositoryManager(repositorySystem.newLocalRepositoryManager(session, new LocalRepository(MavenUtil.getMavenHome())));
 
         CollectRequest collectRequest = new CollectRequest();
         collectRequest.setRoot(dependency);

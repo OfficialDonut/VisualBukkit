@@ -5,15 +5,13 @@ import org.json.JSONObject;
 
 import java.util.logging.Level;
 
-public abstract class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>> {
+public class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>> {
 
     private final Class<?> blockClass;
 
     public BlockFactory(Class<?> blockClass) {
         this.blockClass = blockClass;
     }
-
-    protected abstract T createUnknown();
 
     @SuppressWarnings("unchecked")
     public T newBlock() {
@@ -36,6 +34,20 @@ public abstract class BlockFactory<T extends Block> implements Comparable<BlockF
             block.deserialize(json);
             return block;
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private T createUnknown() {
+        if (PluginComponentBlock.class.isAssignableFrom(blockClass)) {
+            return (T) new PluginComponentBlock.Unknown();
+        }
+        if (StatementBlock.class.isAssignableFrom(blockClass)) {
+            return (T) new StatementBlock.Unknown();
+        }
+        if (ExpressionBlock.class.isAssignableFrom(blockClass)) {
+            return (T) new ExpressionBlock.Unknown();
+        }
+        throw new IllegalStateException();
     }
 
     @Override

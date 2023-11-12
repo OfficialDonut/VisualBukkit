@@ -1,9 +1,14 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.css.PseudoClass;
+import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -16,10 +21,19 @@ import org.json.JSONObject;
 
 public non-sealed abstract class ExpressionBlock extends Block {
 
+    private static final PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
     public static final SimpleBooleanProperty DRAGGING_PROPERTY = new SimpleBooleanProperty();
 
     public ExpressionBlock() {
         getStyleClass().add("expression-block");
+
+        getContextMenu().getItems().addAll(
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy"), e -> CopyPasteManager.copyExpression(this)),
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.cut"), e -> {
+                    CopyPasteManager.copyExpression(this);
+                    UndoManager.current().execute(this::delete);
+                }),
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)));
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -44,34 +58,38 @@ public non-sealed abstract class ExpressionBlock extends Block {
         });
     }
 
+    @Override
+    public void updateState() {
+        super.updateState();
+        int level = 0;
+        Parent parent = getParent();
+        while (parent != null) {
+            if (parent instanceof ExpressionBlock) {
+                level++;
+            }
+            parent = parent.getParent();
+        }
+        pseudoClassStateChanged(NESTED_STYLE_CLASS, level % 2 == 1);
+    }
+
     public abstract String generateJava();
 
     public abstract ClassInfo getReturnType();
 
-    public UndoManager.RevertibleAction delete() {
-        return getExpressionParameter() != null ? getExpressionParameter().deleteExpression() : UndoManager.RevertibleAction.NOP;
+    @Override
+    public void delete() {
+        if (getExpressionParameter() != null) {
+            getExpressionParameter().deleteExpression();
+        }
     }
 
     public ExpressionParameter getExpressionParameter() {
         return (ExpressionParameter) getParent();
     }
 
-    public static class Factory extends BlockFactory<ExpressionBlock> {
-
-        public Factory(Class<?> clazz) {
-            super(clazz);
-        }
-
-        @Override
-        protected ExpressionBlock createUnknown() {
-            return new ExpressionBlock.Unknown();
-        }
-    }
-
     @BlockDefinition(uid = "unknown-expression", name = "Unknown Expression")
     public static class Unknown extends ExpressionBlock {
 
-        protected static final Factory factory = new Factory(Unknown.class);
         private JSONObject json;
 
         @Override

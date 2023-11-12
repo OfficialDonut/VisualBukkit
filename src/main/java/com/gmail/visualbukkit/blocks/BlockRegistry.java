@@ -2,15 +2,19 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.google.common.reflect.ClassPath;
+import org.json.JSONObject;
 
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class BlockRegistry {
 
-    private static final Map<String, PluginComponentBlock.Factory> pluginComponents = new HashMap<>();
-    private static final Map<String, StatementBlock.Factory> statements = new HashMap<>();
-    private static final Map<String, ExpressionBlock.Factory> expressions = new HashMap<>();
+    private static final Map<String, BlockFactory<PluginComponentBlock>> pluginComponents = new HashMap<>();
+    private static final Map<String, BlockFactory<StatementBlock>> statements = new HashMap<>();
+    private static final Map<String, BlockFactory<ExpressionBlock>> expressions = new HashMap<>();
 
     public static void register(ClassLoader classLoader, String packageName) {
         try {
@@ -28,11 +32,11 @@ public class BlockRegistry {
     public static void register(Class<?> clazz) {
         BlockDefinition definition = clazz.getAnnotation(BlockDefinition.class);
         if (PluginComponentBlock.class.isAssignableFrom(clazz)) {
-            pluginComponents.put(definition.uid(), new PluginComponentBlock.Factory(clazz));
+            pluginComponents.put(definition.uid(), new BlockFactory<>(clazz));
         } else if (StatementBlock.class.isAssignableFrom(clazz)) {
-            statements.put(definition.uid(), new StatementBlock.Factory(clazz));
+            statements.put(definition.uid(), new BlockFactory<>(clazz));
         } else if (ExpressionBlock.class.isAssignableFrom(clazz)) {
-            expressions.put(definition.uid(), new ExpressionBlock.Factory(clazz));
+            expressions.put(definition.uid(), new BlockFactory<>(clazz));
         } else {
             throw new UnsupportedOperationException();
         }
@@ -44,27 +48,39 @@ public class BlockRegistry {
         expressions.clear();
     }
 
-    public static PluginComponentBlock.Factory getPluginComponent(String id) {
-        return pluginComponents.computeIfAbsent(id, k -> PluginComponentBlock.Unknown.factory);
+    public static PluginComponentBlock newPluginComponent(JSONObject json) {
+        return getPluginComponent(json.optString("uid")).newBlock(json);
     }
 
-    public static StatementBlock.Factory getStatement(String id) {
-        return statements.computeIfAbsent(id, k -> StatementBlock.Unknown.factory);
+    public static StatementBlock newStatement(JSONObject json) {
+        return getStatement(json.optString("uid")).newBlock(json);
     }
 
-    public static ExpressionBlock.Factory getExpression(String id) {
-        return expressions.computeIfAbsent(id, k -> ExpressionBlock.Unknown.factory);
+    public static ExpressionBlock newExpression(JSONObject json) {
+        return getExpression(json.optString("uid")).newBlock(json);
     }
 
-    public static Set<PluginComponentBlock.Factory> getPluginComponents() {
+    public static BlockFactory<PluginComponentBlock> getPluginComponent(String id) {
+        return pluginComponents.computeIfAbsent(id, k -> new BlockFactory<>(PluginComponentBlock.Unknown.class));
+    }
+
+    public static BlockFactory<StatementBlock> getStatement(String id) {
+        return statements.computeIfAbsent(id, k -> new BlockFactory<>(StatementBlock.Unknown.class));
+    }
+
+    public static BlockFactory<ExpressionBlock> getExpression(String id) {
+        return expressions.computeIfAbsent(id, k -> new BlockFactory<>(ExpressionBlock.Unknown.class));
+    }
+
+    public static Set<BlockFactory<PluginComponentBlock>> getPluginComponents() {
         return new TreeSet<>(pluginComponents.values());
     }
 
-    public static Set<StatementBlock.Factory> getStatements() {
+    public static Set<BlockFactory<StatementBlock>> getStatements() {
         return new TreeSet<>(statements.values());
     }
 
-    public static Set<ExpressionBlock.Factory> getExpressions() {
+    public static Set<BlockFactory<ExpressionBlock>> getExpressions() {
         return new TreeSet<>(expressions.values());
     }
 }

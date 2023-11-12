@@ -11,7 +11,7 @@ public class StatementConnector extends VBox implements Consumer<StatementBlock>
     private static StatementConnector current;
     private final StatementHolder statementHolder;
 
-    public StatementConnector(StatementHolder statementHolder) {
+    protected StatementConnector(StatementHolder statementHolder) {
         this.statementHolder = statementHolder;
         getStyleClass().add("statement-connector");
         setDisable(true);
@@ -32,7 +32,15 @@ public class StatementConnector extends VBox implements Consumer<StatementBlock>
 
     @Override
     public void accept(StatementBlock block) {
-        UndoManager.execute(statementHolder.add(statementHolder.getChildren().indexOf(this) + 1, block));
+        UndoManager.current().execute(() -> {
+            int oldIndex = statementHolder.getChildren().indexOf(block);
+            int newIndex = statementHolder.getChildren().indexOf(this) + 1;
+            if (oldIndex > 0 && oldIndex < newIndex) {
+                newIndex -= 2;
+            }
+            block.delete();
+            statementHolder.add(newIndex, block);
+        });
     }
 
     public void show() {
@@ -50,7 +58,7 @@ public class StatementConnector extends VBox implements Consumer<StatementBlock>
         }
     }
 
-    public static StatementConnector getCurrent() {
+    public static StatementConnector current() {
         return current;
     }
 }

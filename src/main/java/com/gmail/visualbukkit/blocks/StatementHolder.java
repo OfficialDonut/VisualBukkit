@@ -1,11 +1,11 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.project.ProjectManager;
-import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.blocks.definitions.StatComment;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.StringJoiner;
+import java.util.List;
 
 public class StatementHolder extends VBox implements Iterable<StatementBlock> {
 
@@ -28,46 +28,77 @@ public class StatementHolder extends VBox implements Iterable<StatementBlock> {
         ((StatementConnector) getChildren().get(getChildren().indexOf(block) + (after ? 1 : -1))).show();
     }
 
-    public UndoManager.RevertibleAction addLast(StatementBlock block) {
-        return add(getChildren().size(), block);
+    public void addFirst(StatementBlock... blocks) {
+        for (int i = blocks.length - 1; i >= 0; i--) {
+            add(1, blocks[i]);
+        }
     }
 
-    public UndoManager.RevertibleAction add(int index, StatementBlock block) {
-        int oldIndex = getChildren().indexOf(block);
-        int newIndex = oldIndex > 0 && oldIndex < index ? index - 2 : index;
-        return new UndoManager.RevertibleAction() {
-            private UndoManager.RevertibleAction deleteAction;
-            @Override
-            public void execute() {
-                (deleteAction = block.delete()).execute();
-                getChildren().add(newIndex, block);
-                getChildren().add(newIndex + 1, new StatementConnector(StatementHolder.this));
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-            @Override
-            public void revert() {
-                getChildren().remove(newIndex, newIndex + 2);
-                deleteAction.revert();
-                ProjectManager.getCurrentProject().updateBlockStates();
-            }
-        };
+    public void addLast(StatementBlock... blocks) {
+        for (StatementBlock block : blocks) {
+            add(getChildren().size(), block);
+        }
     }
 
-    public UndoManager.RevertibleAction remove(StatementBlock block) {
-        return new UndoManager.RevertibleAction() {
-            private int index;
-            @Override
-            public void execute() {
-                index = getChildren().indexOf(block);
-                getChildren().remove(index, index + 2);
-                ProjectManager.getCurrentProject().updateBlockStates();
+    public void addBefore(StatementBlock block, StatementBlock... blocks) {
+        for (StatementBlock b : blocks) {
+            add(getChildren().indexOf(block), b);
+        }
+    }
+
+    public void addAfter(StatementBlock block, StatementBlock... blocks) {
+        for (StatementBlock b : blocks) {
+            add(getChildren().indexOf(block) + 2, b);
+            block = b;
+        }
+    }
+
+    protected void add(int index, StatementBlock block) {
+        getChildren().add(index, block);
+        getChildren().add(index + 1, new StatementConnector(this));
+    }
+
+    public void remove(StatementBlock block) {
+        int index = getChildren().indexOf(block);
+        getChildren().remove(index, index + 2);
+    }
+
+    public void removeStack(StatementBlock block) {
+        getChildren().remove(getChildren().indexOf(block), getChildren().size());
+    }
+
+    public List<StatementBlock> getStack(StatementBlock block) {
+        List<StatementBlock> blocks = new ArrayList<>();
+        for (int i = getChildren().indexOf(block); i < getChildren().size(); i += 2) {
+            blocks.add((StatementBlock) getChildren().get(i));
+        }
+        return blocks;
+    }
+
+    public StatementBlock getPrevious(StatementBlock block) {
+        StatementBlock prev = null;
+        for (StatementBlock b : this) {
+            if (b.equals(block)) {
+                return prev;
             }
-            @Override
-            public void revert() {
-                add(index, block).execute();
-                ProjectManager.getCurrentProject().updateBlockStates();
+            if (!(b instanceof StatComment)) {
+                prev = b;
             }
-        };
+        }
+        return null;
+    }
+
+    public void setCollapsedRecursive(boolean collapsed) {
+        for (StatementBlock block : this) {
+            block.setCollapsed(collapsed);
+            if (block instanceof ContainerBlock c) {
+                c.getChildStatementHolder().setCollapsedRecursive(collapsed);
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return getChildren().size() == 1;
     }
 
     @Override

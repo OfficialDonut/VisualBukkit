@@ -2,7 +2,8 @@ package com.gmail.visualbukkit.reflection;
 
 import com.google.common.primitives.Primitives;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

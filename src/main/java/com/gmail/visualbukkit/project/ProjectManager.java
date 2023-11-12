@@ -1,6 +1,8 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.reflection.ClassRegistry;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +21,7 @@ public class ProjectManager {
     private static final Path projectsDirectory = VisualBukkitApp.getDataDirectory().resolve("projects");
     private static Project currentProject;
 
-    public static Project getCurrentProject() {
+    public static Project current() {
         return currentProject;
     }
 
@@ -54,11 +56,17 @@ public class ProjectManager {
     }
 
     public static void open(String projectName) {
-        if (currentProject != null) {
-            currentProject.save();
+        try {
+            if (currentProject != null) {
+                currentProject.save();
+            }
+            BlockRegistry.clear();
+            ClassRegistry.clear();
+            currentProject = new Project(projectsDirectory.resolve(projectName));
+            currentProject.open();
+        } catch (IOException e) {
+            VisualBukkitApp.displayException(e);
         }
-        currentProject = new Project(projectsDirectory.resolve(projectName));
-        currentProject.open();
     }
 
     public static void promptCreate(boolean canCancel) {

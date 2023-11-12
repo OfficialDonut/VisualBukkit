@@ -10,9 +10,9 @@ import javafx.scene.paint.Color;
 
 public class StatementSource extends Label {
 
-    private final StatementBlock.Factory factory;
+    private final BlockFactory<StatementBlock> factory;
 
-    public StatementSource(StatementBlock.Factory factory) {
+    public StatementSource(BlockFactory<StatementBlock> factory) {
         super(factory.getBlockDefinition().name());
         this.factory = factory;
         getStyleClass().add("statement-source");

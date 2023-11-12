@@ -1,5 +1,7 @@
-package com.gmail.visualbukkit.project;
+package com.gmail.visualbukkit.project.maven;
 
+import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.project.PluginModule;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.json.JSONObject;
@@ -33,6 +35,11 @@ public class MavenRepositoryModule extends MavenModule {
 
     public static MavenRepositoryModule deserialize(JSONObject json) {
         return new MavenRepositoryModule(new RemoteRepository.Builder(json.getString("id"), "default", json.getString("url")).build());
+    }
+
+    @Override
+    public int compareTo(PluginModule other) {
+        return other instanceof MavenDependencyModule ? -1 : super.compareTo(other);
     }
 
     public RemoteRepository getRepository() {

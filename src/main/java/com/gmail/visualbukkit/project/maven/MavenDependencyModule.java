@@ -1,6 +1,8 @@
-package com.gmail.visualbukkit.project;
+package com.gmail.visualbukkit.project.maven;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.project.PluginModule;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.eclipse.aether.artifact.DefaultArtifact;
@@ -44,6 +46,11 @@ public class MavenDependencyModule extends MavenModule {
 
     public static MavenDependencyModule deserialize(JSONObject json) {
         return new MavenDependencyModule(new Dependency(new DefaultArtifact(json.getString("coords")), json.getString("scope")));
+    }
+
+    @Override
+    public int compareTo(PluginModule other) {
+        return other instanceof MavenRepositoryModule ? 1 : super.compareTo(other);
     }
 
     public Dependency getDependency() {

@@ -20,6 +20,14 @@
     -fx-spacing: 0.5em;
 }
 
+.block:focused {
+    -fx-border-color: yellow;
+}
+
+.block:invalid {
+    -fx-background-color: red !important;
+}
+
 .block .check-box {
     -fx-cursor: default;
     -fx-text-fill: black;
@@ -59,17 +67,21 @@
     -fx-text-fill: black;
 }
 
+.block .text-icon-button {
+    -fx-text-fill: black;
+}
+
 .block-title {
     -fx-font-family: "JetBrains Mono Bold";
 }
 
 .container-block {
-    -fx-background-color: lightblue !important;
+    -fx-background-color: lightblue;
     -fx-padding: 0.5em 0.5em 2em 0.5em;
 }
 
 .container-block:nested {
-    -fx-background-color: cornflowerblue !important;
+    -fx-background-color: cornflowerblue;
 }
 
 .expression-block {
@@ -86,16 +98,21 @@
     -fx-background-color: derive(orange, 50%);
 }
 
-.expression-parameter > .list-cell {
-    -fx-text-fill: red !important;
-}
-
-.expression-parameter:connecting {
-    -fx-border-color: yellow;
+.expression-parameter {
+    -fx-background-color: derive(pink, -15%);
+    -fx-background-insets: 1;
+    -fx-background-radius: 1em;
+    -fx-border-color: black;
+    -fx-border-radius: 1em;
+    -fx-cursor: default;
 }
 
 .expression-parameter:drag-over {
-    -fx-opacity: 50%;
+    -fx-background-color: yellow;
+}
+
+.expression-parameter:hover {
+    -fx-background-color: derive(pink, -5%);
 }
 
 GridPane {
@@ -179,6 +196,7 @@ HBox {
 }
 
 .project-pane > .button-bar {
+    -fx-background-color: derive(-fx-base, 5%);
     -fx-padding: 1em;
 }
 
@@ -211,34 +229,25 @@ HBox {
 }
 
 .statement-selector {
-    -fx-padding: 1em;
-    -fx-spacing: 1em;
-}
-
-.statement-selector .custom-text-field .button {
-    -fx-background-color: transparent;
-    -fx-padding: 0 0.1em 0 0;
-}
-
-.statement-selector .custom-text-field .button:hover {
-    -fx-cursor: default;
-    -fx-opacity: 0.75;
-}
-
-.statement-selector .custom-text-field .button:pressed {
-    -fx-opacity: 0.5;
+    -fx-background-color: derive(-fx-base, 5%);
 }
 
 .statement-selector .list-cell {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 1em 0;
+    -fx-padding: 0 1em 1em 1em;
 }
 
 .statement-selector > .list-view {
     -fx-background-color: transparent;
+    -fx-background-insets: 0;
     -fx-focus-traversable: false;
     -fx-selection-bar: transparent;
     -fx-selection-bar-non-focused: transparent;
+}
+
+.statement-selector > VBox {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
 }
 
 .statement-source {
@@ -253,4 +262,18 @@ HBox {
 
 .statement-source:hover {
     -fx-cursor: closed-hand;
+}
+
+.text-icon-button {
+    -fx-background-color: transparent !important;
+    -fx-padding: 0.1em;
+}
+
+.text-icon-button:hover {
+    -fx-cursor: default;
+    -fx-opacity: 0.75;
+}
+
+.text-icon-button:pressed {
+    -fx-opacity: 0.5;
 }

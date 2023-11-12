@@ -34,9 +34,15 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashSet;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.jar.JarFile;
-import java.util.logging.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class VisualBukkitApp extends Application {
 
@@ -82,7 +88,7 @@ public class VisualBukkitApp extends Application {
         rootPane.setTop(new MenuBar(
                 new Menu(localizedText("menu.file"), null,
                         new Menu(localizedText("menu.open_folder"), null,
-                                new ActionMenuItem(localizedText("menu.project"), e -> openURI(ProjectManager.getCurrentProject().getDirectory().toUri())),
+                                new ActionMenuItem(localizedText("menu.project"), e -> openURI(ProjectManager.current().getDirectory().toUri())),
                                 new ActionMenuItem(localizedText("menu.extensions"), e -> openURI(dataDirectory.resolve("extensions").toUri())),
                                 new ActionMenuItem(localizedText("menu.themes"), e -> openURI(dataDirectory.resolve("themes").toUri()))),
                         new ActionMenuItem(localizedText("menu.open_log"), e -> logWindow.show()),
@@ -90,8 +96,8 @@ public class VisualBukkitApp extends Application {
                         new ActionMenuItem(localizedText("menu.restart"), e -> {}),
                         new ActionMenuItem(localizedText("menu.exit"), e -> Platform.exit())),
                 new Menu(localizedText("menu.edit"), null,
-                        new ActionMenuItem(localizedText("menu.undo"), e -> UndoManager.undo()),
-                        new ActionMenuItem(localizedText("menu.redo"), e -> UndoManager.redo())),
+                        new ActionMenuItem(localizedText("menu.undo"), e -> UndoManager.current().undo()),
+                        new ActionMenuItem(localizedText("menu.redo"), e -> UndoManager.current().redo())),
                 new Menu(localizedText("menu.settings"), null,
                         new ThemesMenu()),
                 new Menu(localizedText("menu.help"), null,
@@ -102,9 +108,9 @@ public class VisualBukkitApp extends Application {
         primaryStage.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.isShortcutDown() && e.getCode() == KeyCode.Z && !(primaryStage.getScene().getFocusOwner() instanceof TextField)) {
                 if (e.isShiftDown()) {
-                    UndoManager.redo();
+                    UndoManager.current().redo();
                 } else {
-                    UndoManager.undo();
+                    UndoManager.current().undo();
                 }
             }
         });
@@ -140,8 +146,12 @@ public class VisualBukkitApp extends Application {
     @Override
     public void stop() {
         logger.info("Shutting down");
-        if (ProjectManager.getCurrentProject() != null) {
-            ProjectManager.getCurrentProject().save();
+        if (ProjectManager.current() != null) {
+            try {
+                ProjectManager.current().save();
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, "Failed to save project", e);
+            }
         }
         try {
             Files.createDirectories(dataDirectory);

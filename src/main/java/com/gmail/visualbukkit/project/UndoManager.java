@@ -1,6 +1,9 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.blocks.PluginComponentPane;
+import org.json.JSONObject;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -8,53 +11,52 @@ import java.util.Deque;
 public class UndoManager {
 
     private static final int CAPACITY = 10;
-    private static final Deque<RevertibleAction> undoQueue = new ArrayDeque<>(CAPACITY);
-    private static final Deque<RevertibleAction> redoQueue = new ArrayDeque<>(CAPACITY);
+    private final Deque<JSONObject> undoQueue = new ArrayDeque<>(CAPACITY);
+    private final Deque<JSONObject> redoQueue = new ArrayDeque<>(CAPACITY);
+    private final PluginComponentPane pluginComponent;
 
-    public static void execute(RevertibleAction action) {
-        action.execute();
+    public UndoManager(PluginComponentPane pluginComponent) {
+        this.pluginComponent = pluginComponent;
+    }
+
+    public void execute(Runnable runnable) {
+        captureState();
+        runnable.run();
+        pluginComponent.getBlock().updateState();
+    }
+
+    public void captureState() {
         if (undoQueue.size() == CAPACITY) {
             undoQueue.removeLast();
         }
-        undoQueue.addFirst(action);
+        undoQueue.addFirst(pluginComponent.getBlock().serialize());
     }
 
-    public static void undo() {
-        if (undoQueue.isEmpty()) {
-            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.undo_failure"));
+    public void undo() {
+        restore(undoQueue, redoQueue, VisualBukkitApp.localizedText("notification.undo_failure"));
+    }
+
+    public void redo() {
+        restore(redoQueue, undoQueue, VisualBukkitApp.localizedText("notification.redo_failure"));
+    }
+
+    private void restore(Deque<JSONObject> queue, Deque<JSONObject> backupQueue, String errorMessage) {
+        if (queue.isEmpty()) {
+            VisualBukkitApp.displayError(errorMessage);
             return;
         }
-        RevertibleAction action = undoQueue.removeFirst();
-        action.revert();
-        redoQueue.addFirst(action);
+        backupQueue.addFirst(pluginComponent.getBlock().serialize());
+        pluginComponent.setBlock(BlockRegistry.newPluginComponent(queue.removeFirst()));
+        pluginComponent.getBlock().updateState();
     }
 
-    public static void redo() {
-        if (redoQueue.isEmpty()) {
-            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.redo_failure"));
-            return;
-        }
-        RevertibleAction action = redoQueue.removeFirst();
-        action.execute();
-        undoQueue.addFirst(action);
+    public static UndoManager current() {
+        Project project = ProjectManager.current();
+        return project != null && project.getOpenPluginComponent() != null ? project.getOpenPluginComponent().getUndoManager() : defaultUndoManager;
     }
 
-    public static void clear() {
-        undoQueue.clear();
-        redoQueue.clear();
-    }
-
-    public interface RevertibleAction {
-
-        void execute();
-
-        void revert();
-
-        RevertibleAction NOP = new RevertibleAction() {
-            @Override
-            public void execute() {}
-            @Override
-            public void revert() {}
-        };
-    }
+    private static final UndoManager defaultUndoManager = new UndoManager(null) {
+        @Override
+        public void captureState() {}
+    };
 }

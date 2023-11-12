@@ -3,7 +3,8 @@ package com.gmail.visualbukkit.reflection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class JsonClassInfo extends ClassInfo {
 

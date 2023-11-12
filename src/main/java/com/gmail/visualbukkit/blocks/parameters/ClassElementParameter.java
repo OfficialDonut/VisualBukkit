@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 
@@ -9,6 +10,7 @@ public abstract class ClassElementParameter<T> extends PopOverSelector<T> implem
 
     public ClassElementParameter(ClassParameter classParameter) {
         disableProperty().bind(classParameter.valueProperty().isNull());
+        setSelectAction(t -> UndoManager.current().execute(() -> setValue(t)));
         classParameter.valueProperty().addListener((observable, oldValue, newValue) -> {
             setValue(null);
             if (newValue != null) {

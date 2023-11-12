@@ -2,10 +2,13 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.ui.TextIconButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Separator;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,12 +29,11 @@ public class StatementSelector extends VBox {
         listView.prefHeightProperty().bind(heightProperty());
 
         CustomTextField searchField = new CustomTextField();
-        Button clearButton = new Button("✕");
-        clearButton.setOnAction(e -> searchField.clear());
-        searchField.setRight(clearButton);
+        TextIconButton clearButton = new TextIconButton("✕", e -> searchField.clear());
         searchField.textProperty().addListener((o, oldValue, newValue) -> filteredList.setPredicate(s -> StringUtils.containsIgnoreCase(s.getFactory().getBlockDefinition().name(), searchField.getText())));
+        searchField.setRight(clearButton);
 
-        getChildren().addAll(new HBox(new Label(VisualBukkitApp.localizedText("label.search")), searchField), new Separator(), listView);
+        getChildren().addAll(new VBox(new HBox(new Label(VisualBukkitApp.localizedText("label.search")), searchField), new Separator()), listView);
 
         setOnDragOver(e -> {
             if (e.getGestureSource() instanceof StatementBlock || e.getGestureSource() instanceof ExpressionBlock) {
@@ -41,15 +43,15 @@ public class StatementSelector extends VBox {
         });
 
         setOnDragDropped(e -> {
-            UndoManager.execute(e.getGestureSource() instanceof StatementBlock s ? s.delete() : ((ExpressionBlock) e.getGestureSource()).delete());
+            UndoManager.current().execute(() -> ((Block) e.getGestureSource()).delete());
             e.setDropCompleted(true);
             e.consume();
         });
     }
 
-    public void setStatements(Set<StatementBlock.Factory> statements) {
+    public void setStatements(Set<BlockFactory<StatementBlock>> statements) {
         this.statements.clear();
-        for (StatementBlock.Factory factory : statements) {
+        for (BlockFactory<StatementBlock> factory : statements) {
             this.statements.add(new StatementSource(factory));
         }
     }

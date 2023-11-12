@@ -1,7 +1,11 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
@@ -15,6 +19,24 @@ public non-sealed abstract class StatementBlock extends Block {
 
     public StatementBlock() {
         getStyleClass().add("statement-block");
+
+        ActionMenuItem copyItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy"), e -> CopyPasteManager.copyStatement(this, false));
+        ActionMenuItem cutItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.cut"), e -> {
+            CopyPasteManager.copyStatement(this, false);
+            UndoManager.current().execute(this::delete);
+        });
+        ActionMenuItem deleteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete));
+        ActionMenuItem copyStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy_stack"), e -> CopyPasteManager.copyStatement(this, true));
+        ActionMenuItem cutStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.cut_stack"), e -> {
+            CopyPasteManager.copyStatement(this, true);
+            UndoManager.current().execute(() -> getParentStatementHolder().removeStack(this));
+        });
+        ActionMenuItem deleteStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete_stack"), e -> UndoManager.current().execute(() -> getParentStatementHolder().removeStack(this)));
+        ActionMenuItem pasteBeforeItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_before"), e -> UndoManager.current().execute(() -> getParentStatementHolder().addBefore(this, CopyPasteManager.pasteStatement())));
+        ActionMenuItem pasteAfterItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_after"), e -> UndoManager.current().execute(() -> getParentStatementHolder().addAfter(this, CopyPasteManager.pasteStatement())));
+        pasteBeforeItem.disableProperty().bind(CopyPasteManager.statementCopiedProperty().not());
+        pasteAfterItem.disableProperty().bind(pasteBeforeItem.disableProperty());
+        getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, new SeparatorMenuItem(), copyStackItem, cutStackItem, deleteStackItem, new SeparatorMenuItem(), pasteBeforeItem, pasteAfterItem);
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -41,7 +63,7 @@ public non-sealed abstract class StatementBlock extends Block {
 
         setOnDragOver(e -> {
             if (e.getGestureSource() instanceof StatementSource || e.getGestureSource() instanceof StatementBlock) {
-                getStatementHolder().showConnector(this, 2 * e.getY() > getHeight());
+                getParentStatementHolder().showConnector(this, 2 * e.getY() > getHeight());
                 e.acceptTransferModes(TransferMode.ANY);
                 e.consume();
             }
@@ -49,7 +71,7 @@ public non-sealed abstract class StatementBlock extends Block {
 
         setOnDragDropped(e -> {
             StatementBlock block = e.getGestureSource() instanceof StatementSource s ? s.getFactory().newBlock() : (StatementBlock) e.getGestureSource();
-            StatementConnector.getCurrent().accept(block);
+            StatementConnector.current().accept(block);
             e.setDropCompleted(true);
             e.consume();
         });
@@ -57,30 +79,20 @@ public non-sealed abstract class StatementBlock extends Block {
 
     public abstract String generateJava();
 
-    public UndoManager.RevertibleAction delete() {
-        return getStatementHolder() != null ? getStatementHolder().remove(this) : UndoManager.RevertibleAction.NOP;
+    @Override
+    public void delete() {
+        if (getParentStatementHolder() != null) {
+            getParentStatementHolder().remove(this);
+        }
     }
 
-    public StatementHolder getStatementHolder() {
+    public StatementHolder getParentStatementHolder() {
         return (StatementHolder) getParent();
-    }
-
-    public static class Factory extends BlockFactory<StatementBlock> {
-
-        public Factory(Class<?> clazz) {
-            super(clazz);
-        }
-
-        @Override
-        protected StatementBlock createUnknown() {
-            return new StatementBlock.Unknown();
-        }
     }
 
     @BlockDefinition(uid = "unknown-statement", name = "Unknown Statement")
     public static class Unknown extends StatementBlock {
 
-        protected static final Factory factory = new Factory(Unknown.class);
         private JSONObject json;
 
         @Override
