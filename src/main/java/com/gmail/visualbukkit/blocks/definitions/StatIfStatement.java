@@ -12,8 +12,8 @@ public class StatIfStatement extends ContainerBlock {
     private final CheckBoxParameter modeParameter = new CheckBoxParameter("Negated");
 
     public StatIfStatement() {
-        addParameter("Condition", new ExpressionParameter(ClassInfo.of(boolean.class)));
         addParameter("Mode", modeParameter);
+        addParameter("Condition", new ExpressionParameter(ClassInfo.of(boolean.class)));
     }
 
     @Override

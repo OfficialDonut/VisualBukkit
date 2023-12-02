@@ -130,6 +130,10 @@ HBox {
     -fx-pref-width: 40em;
 }
 
+.local-variable-field {
+    -fx-control-inner-background: gold !important;
+}
+
 .log-window {
     -fx-font-family: "JetBrains Mono Regular" !important;
     -fx-pref-height: 50em;
@@ -202,7 +206,6 @@ HBox {
 
 .root {
     -fx-font-family: "Noto Sans";
-    -fx-font-size: 16;
 }
 
 .scroll-pane {

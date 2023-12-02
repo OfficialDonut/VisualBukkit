@@ -66,7 +66,7 @@ public class PluginSettings {
             builder.append("prefix: \"").append(getPluginPrefix()).append("\"\n");
         }
         if (!getPluginPermissions().isBlank()) {
-            builder.append("permissions:\\n  ").append(getPluginPermissions().replace("\n", "\n  ")).append("\n");
+            builder.append("permissions:\n  ").append(getPluginPermissions().replace("\n", "\n  ")).append("\n");
         }
         return builder.toString();
     }

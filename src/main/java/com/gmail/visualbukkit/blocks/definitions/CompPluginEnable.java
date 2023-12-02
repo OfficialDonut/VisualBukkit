@@ -13,6 +13,6 @@ public class CompPluginEnable extends PluginComponentBlock {
     public void prepareBuild(BuildInfo buildInfo) {
         super.prepareBuild(buildInfo);
         MethodSource<JavaClassSource> enableMethod = buildInfo.getMainClass().getMethod("onEnable");
-        enableMethod.setBody(enableMethod.getBody() + "try {" + generateChildrenJava() + "} catch (Exception e) { e.printStackTrace(); }");
+        enableMethod.setBody(enableMethod.getBody() + "try {" + buildInfo.getLocalVariableDeclarations() + generateChildrenJava() + "} catch (Exception e) { e.printStackTrace(); }");
     }
 }

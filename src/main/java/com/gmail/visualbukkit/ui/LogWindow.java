@@ -5,6 +5,7 @@ import com.google.common.base.Throwables;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.time.ZoneId;
@@ -24,6 +25,7 @@ public class LogWindow extends Stage {
         textArea.setEditable(false);
 
         initOwner(VisualBukkitApp.getPrimaryStage());
+        initModality(Modality.APPLICATION_MODAL);
         setTitle(VisualBukkitApp.localizedText("window.log"));
         setScene(new Scene(textArea));
         setAlwaysOnTop(true);

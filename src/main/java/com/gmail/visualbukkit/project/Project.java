@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.project;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.VisualBukkitExtension;
 import com.gmail.visualbukkit.blocks.*;
+import com.gmail.visualbukkit.blocks.definitions.CompCommand;
 import com.gmail.visualbukkit.project.maven.MavenDependencyModule;
 import com.gmail.visualbukkit.project.maven.MavenModule;
 import com.gmail.visualbukkit.project.maven.MavenRepositoryModule;
@@ -59,7 +60,7 @@ public class Project {
     private final Path pluginComponentDirectory;
     private final Path resourcesDirectory;
     private final Path buildDirectory;
-    private JSONObject data;
+    private JSONObject data = new JSONObject();
     private boolean reloadRequired;
 
     private final BorderPane projectPane = new BorderPane();
@@ -146,7 +147,11 @@ public class Project {
 
     protected void open() throws IOException {
         if (Files.exists(dataFile)) {
-            data = new JSONObject(Files.readString(dataFile));
+            try {
+                data = new JSONObject(Files.readString(dataFile));
+            } catch (IOException | JSONException e) {
+                VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to load data file", e);
+            }
         }
 
         pluginSettings.deserialize(data.optJSONObject("plugin-settings", new JSONObject()));
@@ -198,6 +203,7 @@ public class Project {
         statementSelector.setStatements(BlockRegistry.getStatements());
         VisualBukkitApp.getRootPane().setCenter(projectPane);
         VisualBukkitApp.getData().put("current-project", getName());
+        VisualBukkitApp.getPrimaryStage().setTitle("Visual Bukkit - " + getName());
     }
 
     public void save() throws IOException {
@@ -375,7 +381,7 @@ public class Project {
 
     public void promptDeletePluginComponent(String name) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete_plugin_component"), name));
+        alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), name));
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.CANCEL);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.YES)).setDefaultButton(false);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
@@ -527,13 +533,33 @@ public class Project {
                 for (MavenModule module : mavenListView.getItems()) {
                     module.prepareBuild(buildInfo);
                 }
+
+                StringBuilder commandsBuilder = new StringBuilder("commands:\n");
                 for (PluginComponentBlock block : loadAllPluginComponents()) {
                     block.prepareBuild(buildInfo);
+                    if (block instanceof CompCommand command && !command.getName().isBlank()) {
+                        commandsBuilder.append("  ").append(command.getName()).append(":\n");
+                        if (!command.getAliases().isBlank()) {
+                            commandsBuilder.append("    aliases: [").append(command.getAliases()).append("]\n");
+                        }
+                        if (!command.getDescription().isBlank()) {
+                            commandsBuilder.append("    description: \"").append(command.getDescription()).append("\"\n");
+                        }
+                        if (!command.getPermission().isBlank()) {
+                            commandsBuilder.append("    permission: \"").append(command.getPermission()).append("\"\n");
+                        }
+                        if (!command.getPermissionMessage().isBlank()) {
+                            commandsBuilder.append("    permission-message: \"").append(command.getPermissionMessage()).append("\"\n");
+                        }
+                        if (!command.getUsage().isBlank()) {
+                            commandsBuilder.append("    usage: \"").append(command.getUsage()).append("\"\n");
+                        }
+                    }
                 }
 
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString());
                 Files.writeString(buildDirectory.resolve("pom.xml"), MavenUtil.createPom(name.toLowerCase(), version, buildInfo));
-                Files.writeString(resourcesDir.resolve("plugin.yml"), pluginSettings.createPluginYml(name, version, mainClass.getQualifiedName()));
+                Files.writeString(resourcesDir.resolve("plugin.yml"), pluginSettings.createPluginYml(name, version, mainClass.getQualifiedName()) + "\n" + commandsBuilder);
 
                 InvocationRequest request = new DefaultInvocationRequest();
                 request.setOutputHandler(s -> VisualBukkitApp.getLogger().info(s));

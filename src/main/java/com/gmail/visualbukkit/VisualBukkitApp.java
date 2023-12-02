@@ -4,7 +4,7 @@ import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.LogWindow;
-import com.gmail.visualbukkit.ui.ThemesMenu;
+import com.gmail.visualbukkit.ui.SettingsManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -87,6 +87,11 @@ public class VisualBukkitApp extends Application {
 
         rootPane.setTop(new MenuBar(
                 new Menu(localizedText("menu.file"), null,
+                        new ActionMenuItem(localizedText("menu.new_project"), e -> ProjectManager.promptCreate(true)),
+                        new ActionMenuItem(localizedText("menu.open_project"), e -> ProjectManager.promptOpen(true)),
+                        new ActionMenuItem(localizedText("menu.rename_project"), e -> ProjectManager.promptRename()),
+                        new ActionMenuItem(localizedText("menu.delete_project"), e -> ProjectManager.promptDelete()),
+                        new SeparatorMenuItem(),
                         new Menu(localizedText("menu.open_folder"), null,
                                 new ActionMenuItem(localizedText("menu.project"), e -> openURI(ProjectManager.current().getDirectory().toUri())),
                                 new ActionMenuItem(localizedText("menu.extensions"), e -> openURI(dataDirectory.resolve("extensions").toUri())),
@@ -99,7 +104,8 @@ public class VisualBukkitApp extends Application {
                         new ActionMenuItem(localizedText("menu.undo"), e -> UndoManager.current().undo()),
                         new ActionMenuItem(localizedText("menu.redo"), e -> UndoManager.current().redo())),
                 new Menu(localizedText("menu.settings"), null,
-                        new ThemesMenu()),
+                        SettingsManager.createThemesMenu(),
+                        SettingsManager.createFontSizeMenu()),
                 new Menu(localizedText("menu.help"), null,
                         new ActionMenuItem("Github", e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),

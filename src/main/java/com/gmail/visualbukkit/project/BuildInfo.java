@@ -9,12 +9,26 @@ import java.util.Set;
 
 public class BuildInfo {
 
+    private final Set<String> localVariables = new HashSet<>();
     private final Set<RemoteRepository> mavenRepositories = new HashSet<>();
     private final Set<Dependency> mavenDependencies = new HashSet<>();
     private final JavaClassSource mainClass;
 
     public BuildInfo(JavaClassSource mainClass) {
         this.mainClass = mainClass;
+    }
+
+    public void addLocalVariable(String varName) {
+        localVariables.add(varName);
+    }
+
+    public String getLocalVariableDeclarations() {
+        StringBuilder builder = new StringBuilder();
+        for (String varName : localVariables) {
+            builder.append("Object ").append(varName).append(" = null;");
+        }
+        localVariables.clear();
+        return builder.toString();
     }
 
     public Set<RemoteRepository> getMavenRepositories() {

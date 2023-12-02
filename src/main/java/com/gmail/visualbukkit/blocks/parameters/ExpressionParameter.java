@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockFactory;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
@@ -81,6 +82,13 @@ public class ExpressionParameter extends Region implements BlockParameter {
     public void updateState() {
         if (expression != null) {
             expression.updateState();
+        }
+    }
+
+    @Override
+    public void prepareBuild(BuildInfo buildInfo) {
+        if (expression != null) {
+            expression.prepareBuild(buildInfo);
         }
     }
 
