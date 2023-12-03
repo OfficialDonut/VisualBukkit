@@ -6,14 +6,21 @@ import com.gmail.visualbukkit.reflection.MethodInfo;
 import com.gmail.visualbukkit.reflection.ParameterInfo;
 
 import java.util.Collection;
+import java.util.function.Predicate;
 
 public class MethodParameter extends ClassElementParameter<MethodInfo> {
 
     private final Block block;
+    private final Predicate<MethodInfo> filter;
 
     public MethodParameter(Block block, ClassParameter classParameter) {
+        this(block, classParameter, null);
+    }
+
+    public MethodParameter(Block block, ClassParameter classParameter, Predicate<MethodInfo> filter) {
         super(classParameter);
         this.block = block;
+        this.filter = filter;
 
         valueProperty().addListener((observable, oldValue, newValue) -> {
             block.removeParameters(2);
@@ -33,7 +40,7 @@ public class MethodParameter extends ClassElementParameter<MethodInfo> {
     @Override
     public Collection<MethodInfo> generateItems(ClassInfo classInfo) {
         block.removeParameters(2);
-        return classInfo.getMethods();
+        return filter != null ? classInfo.getMethods(filter) : classInfo.getMethods();
     }
 
     @Override

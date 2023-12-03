@@ -17,7 +17,7 @@ import java.util.StringJoiner;
 public abstract class ContainerBlock extends StatementBlock {
 
     private static final PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
-    private final StatementHolder childStatementHolder = new StatementHolder();
+    private final StatementHolder childStatementHolder = new StatementHolder(this);
 
     public ContainerBlock() {
         getStyleClass().remove("statement-block");

@@ -11,7 +11,7 @@ import java.util.StringJoiner;
 
 public non-sealed abstract class PluginComponentBlock extends Block {
 
-    private final StatementHolder childStatementHolder = new StatementHolder();
+    private final StatementHolder childStatementHolder = new StatementHolder(this);
 
     public PluginComponentBlock() {
         getStyleClass().add("plugin-component-block");

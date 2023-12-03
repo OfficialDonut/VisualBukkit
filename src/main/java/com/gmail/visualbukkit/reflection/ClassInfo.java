@@ -55,7 +55,7 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
     }
 
     public static String convert(ClassInfo from, ClassInfo to, String java) {
-        if (from.equals(to)) {
+        if (from == null || to == null || from.equals(to) || (to.getName().equals("java.lang.Object") && !from.isPrimitive())) {
             return java;
         }
         if (to.getName().equals("java.lang.String")) {

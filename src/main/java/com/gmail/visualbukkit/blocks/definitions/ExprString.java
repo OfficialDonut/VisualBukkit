@@ -19,13 +19,13 @@ public class ExprString extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
-        return arg(0);
+    public ClassInfo getReturnType() {
+        return ClassInfo.of(String.class);
     }
 
     @Override
-    public ClassInfo getReturnType() {
-        return ClassInfo.of(String.class);
+    public String generateJava() {
+        return arg(0);
     }
 
     @Override

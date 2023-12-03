@@ -10,8 +10,10 @@ import java.util.List;
 public class StatementHolder extends VBox implements Iterable<StatementBlock> {
 
     private final StatementConnector initialConnector = new StatementConnector(this);
+    private final Block owner;
 
-    public StatementHolder() {
+    public StatementHolder(Block owner) {
+        this.owner = owner;
         getStyleClass().add("statement-holder");
         getChildren().add(initialConnector);
     }
@@ -116,5 +118,9 @@ public class StatementHolder extends VBox implements Iterable<StatementBlock> {
                 return block;
             }
         };
+    }
+
+    public Block getOwner() {
+        return owner;
     }
 }

@@ -393,6 +393,9 @@ public class Project {
                     Files.deleteIfExists(pluginComponentDirectory.resolve(name));
                     openPluginComponents.remove(name);
                     tabPane.getTabs().removeIf(tab -> name.equals(tab.getText()));
+                    if (tabPane.getTabs().isEmpty()) {
+                        splitPane.getItems().set(1, placeholderPane);
+                    }
                     VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_deleted"));
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);

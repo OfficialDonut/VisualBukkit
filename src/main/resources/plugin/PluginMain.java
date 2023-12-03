@@ -30,6 +30,12 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
+    public static void procedure(String procedure, List args) throws Exception {}
+
+    public static Object function(String function, List args) throws Exception {
+        return null;
+    }
+
     public static char resolve_char(Object o) {
         return o instanceof String s ? s.charAt(0) : (char) o;
     }

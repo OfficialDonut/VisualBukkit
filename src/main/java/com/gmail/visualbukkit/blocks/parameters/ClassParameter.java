@@ -5,10 +5,21 @@ import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.PopOverSelector;
 
+import java.util.Collection;
+import java.util.function.Predicate;
+
 public class ClassParameter extends PopOverSelector<ClassInfo> implements BlockParameter {
 
     public ClassParameter() {
-        super(ClassRegistry.getClasses());
+        this(ClassRegistry.getClasses());
+    }
+
+    public ClassParameter(Predicate<ClassInfo> filter) {
+        this(ClassRegistry.getClasses(filter));
+    }
+
+    public ClassParameter(Collection<ClassInfo> classes) {
+        super(classes);
         setSelectAction(clazz -> UndoManager.current().execute(() -> setValue(clazz)));
     }
 

@@ -62,7 +62,7 @@
 }
 
 .block .text-field {
-    -fx-control-inner-background: lightgray;
+    -fx-control-inner-background: white;
     -fx-min-width: 7em;
     -fx-text-fill: black;
 }
@@ -150,6 +150,10 @@ HBox {
     -fx-spacing: 0.5em;
 }
 
+.number-field {
+    -fx-control-inner-background: lightgray !important;
+}
+
 .plugin-component-block {
     -fx-background-color: rgb(180, 96, 235);
     -fx-background-radius: 1em 1em 0 0;
@@ -206,6 +210,7 @@ HBox {
 
 .root {
     -fx-font-family: "Noto Sans";
+    -fx-font-size: 16;
 }
 
 .scroll-pane {

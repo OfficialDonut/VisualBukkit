@@ -22,7 +22,7 @@ public class LoadedMethodInfo extends MethodInfo {
 
     @Override
     public ClassInfo getReturnType() {
-        return ClassInfo.of(method.getReturnType().getCanonicalName());
+        return method.getReturnType() != void.class ? ClassInfo.of(method.getReturnType().getCanonicalName()) : null;
     }
 
     @Override

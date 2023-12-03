@@ -9,6 +9,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -103,6 +104,11 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
         while (index < parameters.size()) {
             parameters.remove(index);
         }
+        if (parameters.isEmpty()) {
+            parameters = null;
+            getChildren().remove(parameterGrid);
+            header.getChildren().remove(header.getChildren().size() - 1);
+        }
     }
 
     public void updateState() {
@@ -168,5 +174,19 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public BlockDefinition getDefinition() {
         return getClass().getAnnotation(BlockDefinition.class);
+    }
+
+    public PluginComponentBlock getPluginComponentBlock() {
+        Parent parent = getParent();
+        while (parent != null) {
+            if (parent instanceof PluginComponentBlock b) {
+                return b;
+            }
+            if (parent instanceof StatementHolder s && s.getOwner() instanceof PluginComponentBlock b) {
+                return b;
+            }
+            parent = parent.getParent();
+        }
+        return null;
     }
 }

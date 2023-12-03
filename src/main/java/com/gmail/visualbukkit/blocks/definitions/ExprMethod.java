@@ -17,7 +17,7 @@ public class ExprMethod extends ExpressionBlock {
 
     public ExprMethod() {
         addParameter("Class", classParameter = new ClassParameter());
-        addParameter("Method", methodParameter = new MethodParameter(this, classParameter));
+        addParameter("Method", methodParameter = new MethodParameter(this, classParameter, m -> m.getReturnType() != null));
     }
 
     @Override

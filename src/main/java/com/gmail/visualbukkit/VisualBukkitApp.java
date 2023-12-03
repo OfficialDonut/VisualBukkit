@@ -146,7 +146,10 @@ public class VisualBukkitApp extends Application {
         primaryStage.show();
         Thread.setDefaultUncaughtExceptionHandler((thread, e) -> displayException(e));
         logger.info("Loading initial project");
-        Platform.runLater(ProjectManager::openInitial);
+        Platform.runLater(() -> {
+            ProjectManager.openInitial();
+            rootPane.requestFocus();
+        });
     }
 
     @Override
