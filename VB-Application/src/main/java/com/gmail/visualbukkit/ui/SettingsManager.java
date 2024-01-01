@@ -23,10 +23,13 @@ public class SettingsManager {
     static {
         LANGUAGES.put("System Default", "System Default");
         LANGUAGES.put("zh-CN", "Chinese");
+        LANGUAGES.put("nl-NL", "Dutch");
         LANGUAGES.put("en-US", "English");
         LANGUAGES.put("fr-FR", "French");
         LANGUAGES.put("de-DE", "German");
+        LANGUAGES.put("it-IT", "Italian");
         LANGUAGES.put("ja-JP", "Japanese");
+        LANGUAGES.put("pl-PL", "Polish");
         LANGUAGES.put("ru-RU", "Russian");
         LANGUAGES.put("es-ES", "Spanish");
     }
