@@ -319,7 +319,7 @@ public class PluginBuilder {
                     <dependency>
                         <groupId>org.spigotmc</groupId>
                         <artifactId>spigot-api</artifactId>
-                        <version>1.19-R0.1-SNAPSHOT</version>
+                        <version>1.20.1-R0.1-SNAPSHOT</version>
                         <scope>provided</scope>
                     </dependency>
             {DEPENDENCIES}

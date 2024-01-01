@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>visual-bukkit</artifactId>
-        <version>5.4.0</version>
+        <version>5.5.0</version>
     </parent>
 
     <artifactId>vb-plugin</artifactId>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20211205</version>
+            <version>20230227</version>
         </dependency>
 
         <dependency>

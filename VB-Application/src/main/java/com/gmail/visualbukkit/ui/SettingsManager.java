@@ -24,6 +24,7 @@ public class SettingsManager {
         LANGUAGES.put("System Default", "System Default");
         LANGUAGES.put("zh-CN", "Chinese");
         LANGUAGES.put("en-US", "English");
+        LANGUAGES.put("fr-FR", "French");
         LANGUAGES.put("de-DE", "German");
         LANGUAGES.put("ja-JP", "Japanese");
         LANGUAGES.put("ru-RU", "Russian");

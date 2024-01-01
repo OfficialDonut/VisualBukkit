@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.gmail.visualbukkit</groupId>
         <artifactId>visual-bukkit</artifactId>
-        <version>5.4.0</version>
+        <version>5.5.0</version>
     </parent>
 
     <artifactId>vb-application</artifactId>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>32.0.0-jre</version>
         </dependency>
 
         <dependency>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20211205</version>
+            <version>20230227</version>
         </dependency>
 
         <dependency>
