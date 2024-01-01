@@ -9,7 +9,7 @@ import com.gmail.visualbukkit.project.PluginModule;
 public class StatSetPlayerSkin extends Statement {
 
     public StatSetPlayerSkin() {
-        super("stat-set-player-skin", "Set Skin", "Player", "Sets the skin of a player");
+        super("stat-set-player-skin", "Set Player Skin", "Player", "Sets the skin of a player");
     }
 
     @Override
