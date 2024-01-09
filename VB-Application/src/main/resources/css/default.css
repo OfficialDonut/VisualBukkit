@@ -1,0 +1,298 @@
+@import "modena.css"
+
+@font-face {
+    src: url("/fonts/JetBrainsMono-Bold.ttf");
+}
+
+@font-face {
+    src: url("/fonts/JetBrainsMono-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url("/fonts/NotoSansCJK-Regular.otf");
+}
+
+.block {
+    -fx-border-color: black;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
+}
+
+.block:focused {
+    -fx-border-color: yellow;
+}
+
+.block:invalid {
+    -fx-background-color: red !important;
+}
+
+.block .check-box {
+    -fx-cursor: default;
+    -fx-text-fill: black;
+}
+
+.block .check-box .box {
+    -fx-border-color: black;
+    -fx-color: lightgray;
+}
+
+.block .check-box .box:hover {
+    -fx-color: derive(lightgray, 25%);
+}
+
+.block .combo-box {
+    -fx-border-color: black;
+    -fx-color: lightgray;
+    -fx-cursor: default;
+    -fx-min-width: 10em;
+}
+
+.block .combo-box:hover {
+    -fx-color: derive(lightgray, 25%);
+}
+
+.block .combo-box > .list-cell {
+    -fx-text-fill: black;
+}
+
+.block .label {
+    -fx-text-fill: black;
+}
+
+.block .text-area {
+    -fx-control-inner-background: white;
+    -fx-pref-height: 5em;
+    -fx-text-fill: black;
+}
+
+.block .text-area .scroll-pane {
+    -fx-hbar-policy: NEVER;
+    -fx-vbar-policy: NEVER;
+}
+
+.block .text-field {
+    -fx-control-inner-background: white;
+    -fx-min-width: 7em;
+    -fx-text-fill: black;
+}
+
+.block .text-icon-button {
+    -fx-text-fill: black;
+}
+
+.block-title {
+    -fx-font-family: "JetBrains Mono Bold";
+}
+
+.container-block {
+    -fx-background-color: lightblue;
+    -fx-padding: 0.5em 0.5em 2em 0.5em;
+}
+
+.container-block:nested {
+    -fx-background-color: cornflowerblue;
+}
+
+.expression-block {
+    -fx-background-color: rgb(255, 179, 71);
+    -fx-background-radius: 0.5em;
+    -fx-border-radius: 0.5em;
+}
+
+.expression-block:hover {
+    -fx-cursor: closed-hand;
+}
+
+.expression-block:nested {
+    -fx-background-color: derive(orange, 50%);
+}
+
+.expression-parameter {
+    -fx-background-color: derive(pink, -15%);
+    -fx-background-insets: 1;
+    -fx-background-radius: 1em;
+    -fx-border-color: black;
+    -fx-border-radius: 1em;
+    -fx-cursor: default;
+}
+
+.expression-parameter:drag-over {
+    -fx-background-color: yellow;
+}
+
+.expression-parameter:hover {
+    -fx-background-color: derive(pink, -5%);
+}
+
+GridPane {
+    -fx-hgap: 0.5em;
+    -fx-vgap: 0.5em;
+}
+
+HBox {
+    -fx-alignment: center-left;
+    -fx-spacing: 0.5em;
+}
+
+.list-selection-view {
+    -fx-pref-height: 30em;
+    -fx-pref-width: 40em;
+}
+
+.local-variable-field {
+    -fx-control-inner-background: gold !important;
+}
+
+.log-window {
+    -fx-font-family: "JetBrains Mono Regular" !important;
+    -fx-pref-height: 50em;
+    -fx-pref-width: 85em;
+}
+
+.log-window > .scroll-pane {
+    -fx-hbar-policy: always;
+    -fx-vbar-policy: always;
+}
+
+.maven-settings-pane {
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
+}
+
+.number-field {
+    -fx-control-inner-background: lightgray !important;
+}
+
+.plugin-component-block {
+    -fx-background-color: rgb(180, 96, 235);
+    -fx-background-radius: 1em 1em 0 0;
+    -fx-border-radius: 1em 1em 0 0;
+}
+
+.plugin-component-list > HBox {
+    -fx-padding: 0.5em;
+}
+
+.plugin-component-pane VBox {
+    -fx-padding: 1em;
+}
+
+.plugin-settings-grid {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
+}
+
+.plugin-settings-grid .text-area {
+    -fx-pref-height: 5em;
+}
+
+.pop-over-selector {
+    -fx-color: -fx-base;
+}
+
+.pop-over-selector HBox {
+    -fx-background-color: white;
+    -fx-padding: 0.5em;
+}
+
+.pop-over-selector HBox > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 0 0.1em 0;
+    -fx-pref-width: 25em;
+}
+
+.pop-over-selector VBox {
+    -fx-padding: 0;
+}
+
+.progress-indicator .spinner {
+    -fx-pref-width: 8em;
+    -fx-pref-height: 8em;
+}
+
+.project-pane > .button-bar {
+    -fx-background-color: derive(-fx-base, 5%);
+    -fx-padding: 1em;
+}
+
+.root {
+    -fx-font-family: "Noto Sans";
+    -fx-font-size: 16;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.statement-block {
+    -fx-background-color: rgb(0, 230, 154);
+}
+
+.statement-block:hover {
+    -fx-cursor: closed-hand;
+}
+
+.statement-connector {
+    -fx-background-color: yellow;
+    -fx-border-color: black;
+    -fx-pref-height: 2em;
+}
+
+.statement-connector:disabled {
+    -fx-border-width: 0;
+    -fx-pref-height: 0;
+}
+
+.statement-selector {
+    -fx-background-color: derive(-fx-base, 5%);
+}
+
+.statement-selector .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0 1em 1em 1em;
+}
+
+.statement-selector > .list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-focus-traversable: false;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.statement-selector > VBox {
+    -fx-padding: 1em;
+    -fx-spacing: 1em;
+}
+
+.statement-source {
+    -fx-background-color: rgb(0, 230, 154);
+    -fx-background-radius: 0.4em;
+    -fx-border-color: black;
+    -fx-border-radius: 0.4em;
+    -fx-font-family: "JetBrains Mono Bold";
+    -fx-padding: 0.5em;
+    -fx-text-fill: black;
+}
+
+.statement-source:hover {
+    -fx-cursor: closed-hand;
+}
+
+.text-icon-button {
+    -fx-background-color: transparent !important;
+    -fx-padding: 0.1em;
+}
+
+.text-icon-button:hover {
+    -fx-cursor: default;
+    -fx-opacity: 0.75;
+}
+
+.text-icon-button:pressed {
+    -fx-opacity: 0.5;
+}
