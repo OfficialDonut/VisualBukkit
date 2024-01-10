@@ -1,12 +1,17 @@
 syntax = "proto3";
 option java_package = "com.gmail.visualbukkit.rpc";
 
-message Response {}
+message Response {
+  optional string message = 1;
+}
+
+message PingRequest {}
 
 message ImportItemStackRequest {
   string yaml = 1;
 }
 
 service VisualBukkit {
+  rpc Ping(PingRequest) returns (Response);
   rpc ImportItemStack(ImportItemStackRequest) returns (Response);
 }

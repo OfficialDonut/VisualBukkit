@@ -5,8 +5,6 @@ import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.LogWindow;
 import com.gmail.visualbukkit.ui.SettingsManager;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -57,7 +55,6 @@ public class VisualBukkitApp extends Application {
     private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_beta"); // todo: remove beta
     private static final Path dataFile = dataDirectory.resolve("data.json");
     private static JSONObject data = new JSONObject();
-    private static Server grpcServer;
 
     private static final BorderPane rootPane = new BorderPane();
     private static final LogWindow logWindow = new LogWindow();
@@ -127,6 +124,7 @@ public class VisualBukkitApp extends Application {
             }
         });
 
+        logger.info("Loading extensions");
         Path extensionsDir = dataDirectory.resolve("extensions");
         Files.createDirectories(extensionsDir);
         try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(extensionsDir, "*.jar")) {
@@ -156,8 +154,8 @@ public class VisualBukkitApp extends Application {
             ProjectManager.openInitial();
             rootPane.requestFocus();
             try {
-                grpcServer = ServerBuilder.forPort(50051).addService(new VisualBukkitGrpcServer()).build().start();
-            } catch (IOException e) {
+                VisualBukkitGrpcServer.getInstance().start();
+            } catch (Exception e) {
                 displayException(e);
             }
         });
@@ -180,9 +178,7 @@ public class VisualBukkitApp extends Application {
             logger.log(Level.SEVERE, "Failed to save data file", e);
         }
         DiscordRPC.discordShutdown();
-        if (grpcServer != null) {
-            grpcServer.shutdownNow();
-        }
+        VisualBukkitGrpcServer.getInstance().stop();
     }
 
     public static String localizedText(String key) {

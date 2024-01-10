@@ -1,2 +1,8 @@
-host: "localhost"
-port: 50051
+grpc:
+  host: localhost
+  port: 50051
+  tls:
+    enabled: false
+    truststore:
+      file: C:\Users\Example\Desktop\VisualBukkit-Certs.p12
+      password: password

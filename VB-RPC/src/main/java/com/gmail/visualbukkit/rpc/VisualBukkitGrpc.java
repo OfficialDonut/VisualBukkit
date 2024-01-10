@@ -15,6 +15,37 @@ public final class VisualBukkitGrpc {
   public static final java.lang.String SERVICE_NAME = "VisualBukkit";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getPingMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Ping",
+      requestType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest.class,
+      responseType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getPingMethod() {
+    io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getPingMethod;
+    if ((getPingMethod = VisualBukkitGrpc.getPingMethod) == null) {
+      synchronized (VisualBukkitGrpc.class) {
+        if ((getPingMethod = VisualBukkitGrpc.getPingMethod) == null) {
+          VisualBukkitGrpc.getPingMethod = getPingMethod =
+              io.grpc.MethodDescriptor.<com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Ping"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.getDefaultInstance()))
+              .setSchemaDescriptor(new VisualBukkitMethodDescriptorSupplier("Ping"))
+              .build();
+        }
+      }
+    }
+    return getPingMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest,
       com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportItemStackMethod;
 
@@ -96,6 +127,13 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    default void ping(com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPingMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void importItemStack(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest request,
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getImportItemStackMethod(), responseObserver);
@@ -131,6 +169,14 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    public void ping(com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getPingMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void importItemStack(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest request,
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -152,6 +198,13 @@ public final class VisualBukkitGrpc {
     protected VisualBukkitBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new VisualBukkitBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response ping(com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getPingMethod(), getCallOptions(), request);
     }
 
     /**
@@ -180,6 +233,14 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> ping(
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getPingMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> importItemStack(
         com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -187,7 +248,8 @@ public final class VisualBukkitGrpc {
     }
   }
 
-  private static final int METHODID_IMPORT_ITEM_STACK = 0;
+  private static final int METHODID_PING = 0;
+  private static final int METHODID_IMPORT_ITEM_STACK = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -206,6 +268,10 @@ public final class VisualBukkitGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_PING:
+          serviceImpl.ping((com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest) request,
+              (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
+          break;
         case METHODID_IMPORT_ITEM_STACK:
           serviceImpl.importItemStack((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest) request,
               (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
@@ -228,6 +294,13 @@ public final class VisualBukkitGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getPingMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest,
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
+                service, METHODID_PING)))
         .addMethod(
           getImportItemStackMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -283,6 +356,7 @@ public final class VisualBukkitGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new VisualBukkitFileDescriptorSupplier())
+              .addMethod(getPingMethod())
               .addMethod(getImportItemStackMethod())
               .build();
         }
