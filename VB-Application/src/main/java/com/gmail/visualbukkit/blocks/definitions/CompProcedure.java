@@ -9,7 +9,7 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 
 import java.util.List;
 
-@BlockDefinition(uid = "comp-procedure", name = "Procedure")
+@BlockDefinition(id = "comp-procedure", name = "Procedure")
 public class CompProcedure extends PluginComponentBlock {
 
     public CompProcedure() {
@@ -18,12 +18,10 @@ public class CompProcedure extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
         MethodSource<JavaClassSource> procedureMethod = buildInfo.getMainClass().getMethod("procedure", String.class, List.class);
         procedureMethod.setBody(
-                "if (procedure.equalsIgnoreCase(" + arg(0) + ")) {" +
-                buildInfo.getLocalVariableDeclarations() +
-                generateChildrenJava() +
+                "if (procedure.equalsIgnoreCase(" + arg(0, buildInfo) + ")) {" +
+                generateChildrenJava(buildInfo) +
                 "return;" +
                 "}" +
                 procedureMethod.getBody());

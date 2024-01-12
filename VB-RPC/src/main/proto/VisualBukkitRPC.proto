@@ -11,7 +11,13 @@ message ImportItemStackRequest {
   string yaml = 1;
 }
 
+message ReportExceptionRequest {
+  string blockUUID = 1;
+  string stacktrace = 2;
+}
+
 service VisualBukkit {
   rpc Ping(PingRequest) returns (Response);
   rpc ImportItemStack(ImportItemStackRequest) returns (Response);
+  rpc ReportException(ReportExceptionRequest) returns (Response);
 }

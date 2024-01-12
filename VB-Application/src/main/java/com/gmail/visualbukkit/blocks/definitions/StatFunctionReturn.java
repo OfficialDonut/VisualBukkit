@@ -3,9 +3,10 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(uid = "stat-function-return", name = "Function Return")
+@BlockDefinition(id = "stat-function-return", name = "Function Return")
 public class StatFunctionReturn extends StatementBlock {
 
     public StatFunctionReturn() {
@@ -21,7 +22,7 @@ public class StatFunctionReturn extends StatementBlock {
     }
 
     @Override
-    public String generateJava() {
-        return "if (true) return " + arg(0) + ";";
+    public String generateJava(BuildInfo buildInfo) {
+        return "if (true) return " + arg(0, buildInfo) + ";";
     }
 }

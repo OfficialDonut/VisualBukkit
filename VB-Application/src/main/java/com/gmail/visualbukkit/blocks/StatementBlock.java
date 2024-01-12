@@ -1,6 +1,7 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
@@ -13,6 +14,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONObject;
 
 public non-sealed abstract class StatementBlock extends Block {
@@ -77,7 +79,13 @@ public non-sealed abstract class StatementBlock extends Block {
         });
     }
 
-    public abstract String generateJava();
+    public String generateDebugJava(BuildInfo buildInfo) {
+        String exceptionVar = RandomStringUtils.randomAlphanumeric(16);
+        String reportMethod = "Class.forName(\"com.gmail.visualbukkit.plugin.VisualBukkitPlugin\").getDeclaredMethod(\"reportException\", String.class, Throwable.class)";
+        return "try { %s } catch (Exception $%s) { %s.invoke(null, \"%s\", $%s); }".formatted(generateJava(buildInfo), exceptionVar, reportMethod, getUUID(), exceptionVar);
+    }
+
+    public abstract String generateJava(BuildInfo buildInfo);
 
     @Override
     public void delete() {
@@ -90,13 +98,13 @@ public non-sealed abstract class StatementBlock extends Block {
         return (StatementHolder) getParent();
     }
 
-    @BlockDefinition(uid = "unknown-statement", name = "Unknown Statement")
+    @BlockDefinition(id = "unknown-statement", name = "Unknown Statement")
     public static class Unknown extends StatementBlock {
 
         private JSONObject json;
 
         @Override
-        public String generateJava() {
+        public String generateJava(BuildInfo buildInfo) {
             return "";
         }
 

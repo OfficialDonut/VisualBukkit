@@ -599,23 +599,6 @@ public final class VisualBukkitRPC {
   public interface PingRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:PingRequest)
       com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string message = 1;</code>
-     * @return Whether the message field is set.
-     */
-    boolean hasMessage();
-    /**
-     * <code>optional string message = 1;</code>
-     * @return The message.
-     */
-    java.lang.String getMessage();
-    /**
-     * <code>optional string message = 1;</code>
-     * @return The bytes for message.
-     */
-    com.google.protobuf.ByteString
-        getMessageBytes();
   }
   /**
    * Protobuf type {@code PingRequest}
@@ -630,7 +613,6 @@ public final class VisualBukkitRPC {
       super(builder);
     }
     private PingRequest() {
-      message_ = "";
     }
 
     @java.lang.Override
@@ -653,54 +635,6 @@ public final class VisualBukkitRPC {
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int MESSAGE_FIELD_NUMBER = 1;
-    @SuppressWarnings("serial")
-    private volatile java.lang.Object message_ = "";
-    /**
-     * <code>optional string message = 1;</code>
-     * @return Whether the message field is set.
-     */
-    @java.lang.Override
-    public boolean hasMessage() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>optional string message = 1;</code>
-     * @return The message.
-     */
-    @java.lang.Override
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string message = 1;</code>
-     * @return The bytes for message.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -715,9 +649,6 @@ public final class VisualBukkitRPC {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) != 0)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -727,9 +658,6 @@ public final class VisualBukkitRPC {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) != 0)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
-      }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
       return size;
@@ -745,11 +673,6 @@ public final class VisualBukkitRPC {
       }
       com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest other = (com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest) obj;
 
-      if (hasMessage() != other.hasMessage()) return false;
-      if (hasMessage()) {
-        if (!getMessage()
-            .equals(other.getMessage())) return false;
-      }
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -761,10 +684,6 @@ public final class VisualBukkitRPC {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasMessage()) {
-        hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-        hash = (53 * hash) + getMessage().hashCode();
-      }
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -895,8 +814,6 @@ public final class VisualBukkitRPC {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        bitField0_ = 0;
-        message_ = "";
         return this;
       }
 
@@ -923,19 +840,8 @@ public final class VisualBukkitRPC {
       @java.lang.Override
       public com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest buildPartial() {
         com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest result = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest(this);
-        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
-      }
-
-      private void buildPartial0(com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest result) {
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) != 0)) {
-          result.message_ = message_;
-          to_bitField0_ |= 0x00000001;
-        }
-        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -982,11 +888,6 @@ public final class VisualBukkitRPC {
 
       public Builder mergeFrom(com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest other) {
         if (other == com.gmail.visualbukkit.rpc.VisualBukkitRPC.PingRequest.getDefaultInstance()) return this;
-        if (other.hasMessage()) {
-          message_ = other.message_;
-          bitField0_ |= 0x00000001;
-          onChanged();
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -1013,11 +914,6 @@ public final class VisualBukkitRPC {
               case 0:
                 done = true;
                 break;
-              case 10: {
-                message_ = input.readStringRequireUtf8();
-                bitField0_ |= 0x00000001;
-                break;
-              } // case 10
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -1031,86 +927,6 @@ public final class VisualBukkitRPC {
         } finally {
           onChanged();
         } // finally
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object message_ = "";
-      /**
-       * <code>optional string message = 1;</code>
-       * @return Whether the message field is set.
-       */
-      public boolean hasMessage() {
-        return ((bitField0_ & 0x00000001) != 0);
-      }
-      /**
-       * <code>optional string message = 1;</code>
-       * @return The message.
-       */
-      public java.lang.String getMessage() {
-        java.lang.Object ref = message_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          message_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string message = 1;</code>
-       * @return The bytes for message.
-       */
-      public com.google.protobuf.ByteString
-          getMessageBytes() {
-        java.lang.Object ref = message_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          message_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string message = 1;</code>
-       * @param value The message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) { throw new NullPointerException(); }
-        message_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string message = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMessage() {
-        message_ = getDefaultInstance().getMessage();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string message = 1;</code>
-       * @param value The bytes for message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessageBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) { throw new NullPointerException(); }
-        checkByteStringIsUtf8(value);
-        message_ = value;
-        bitField0_ |= 0x00000001;
-        onChanged();
         return this;
       }
       @java.lang.Override
@@ -1729,6 +1545,706 @@ public final class VisualBukkitRPC {
 
   }
 
+  public interface ReportExceptionRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ReportExceptionRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string blockUUID = 1;</code>
+     * @return The blockUUID.
+     */
+    java.lang.String getBlockUUID();
+    /**
+     * <code>string blockUUID = 1;</code>
+     * @return The bytes for blockUUID.
+     */
+    com.google.protobuf.ByteString
+        getBlockUUIDBytes();
+
+    /**
+     * <code>string stacktrace = 2;</code>
+     * @return The stacktrace.
+     */
+    java.lang.String getStacktrace();
+    /**
+     * <code>string stacktrace = 2;</code>
+     * @return The bytes for stacktrace.
+     */
+    com.google.protobuf.ByteString
+        getStacktraceBytes();
+  }
+  /**
+   * Protobuf type {@code ReportExceptionRequest}
+   */
+  public static final class ReportExceptionRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ReportExceptionRequest)
+      ReportExceptionRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ReportExceptionRequest.newBuilder() to construct.
+    private ReportExceptionRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ReportExceptionRequest() {
+      blockUUID_ = "";
+      stacktrace_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ReportExceptionRequest();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_ReportExceptionRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_ReportExceptionRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.Builder.class);
+    }
+
+    public static final int BLOCKUUID_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object blockUUID_ = "";
+    /**
+     * <code>string blockUUID = 1;</code>
+     * @return The blockUUID.
+     */
+    @java.lang.Override
+    public java.lang.String getBlockUUID() {
+      java.lang.Object ref = blockUUID_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        blockUUID_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string blockUUID = 1;</code>
+     * @return The bytes for blockUUID.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getBlockUUIDBytes() {
+      java.lang.Object ref = blockUUID_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        blockUUID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STACKTRACE_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object stacktrace_ = "";
+    /**
+     * <code>string stacktrace = 2;</code>
+     * @return The stacktrace.
+     */
+    @java.lang.Override
+    public java.lang.String getStacktrace() {
+      java.lang.Object ref = stacktrace_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        stacktrace_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string stacktrace = 2;</code>
+     * @return The bytes for stacktrace.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getStacktraceBytes() {
+      java.lang.Object ref = stacktrace_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        stacktrace_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(blockUUID_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, blockUUID_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(stacktrace_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, stacktrace_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(blockUUID_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, blockUUID_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(stacktrace_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, stacktrace_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest)) {
+        return super.equals(obj);
+      }
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest other = (com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest) obj;
+
+      if (!getBlockUUID()
+          .equals(other.getBlockUUID())) return false;
+      if (!getStacktrace()
+          .equals(other.getStacktrace())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + BLOCKUUID_FIELD_NUMBER;
+      hash = (53 * hash) + getBlockUUID().hashCode();
+      hash = (37 * hash) + STACKTRACE_FIELD_NUMBER;
+      hash = (53 * hash) + getStacktrace().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ReportExceptionRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ReportExceptionRequest)
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_ReportExceptionRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_ReportExceptionRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.Builder.class);
+      }
+
+      // Construct using com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        blockUUID_ = "";
+        stacktrace_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_ReportExceptionRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest getDefaultInstanceForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest build() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest buildPartial() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest result = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.blockUUID_ = blockUUID_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.stacktrace_ = stacktrace_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest) {
+          return mergeFrom((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest other) {
+        if (other == com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.getDefaultInstance()) return this;
+        if (!other.getBlockUUID().isEmpty()) {
+          blockUUID_ = other.blockUUID_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getStacktrace().isEmpty()) {
+          stacktrace_ = other.stacktrace_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                blockUUID_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                stacktrace_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object blockUUID_ = "";
+      /**
+       * <code>string blockUUID = 1;</code>
+       * @return The blockUUID.
+       */
+      public java.lang.String getBlockUUID() {
+        java.lang.Object ref = blockUUID_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          blockUUID_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string blockUUID = 1;</code>
+       * @return The bytes for blockUUID.
+       */
+      public com.google.protobuf.ByteString
+          getBlockUUIDBytes() {
+        java.lang.Object ref = blockUUID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          blockUUID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string blockUUID = 1;</code>
+       * @param value The blockUUID to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBlockUUID(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        blockUUID_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string blockUUID = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBlockUUID() {
+        blockUUID_ = getDefaultInstance().getBlockUUID();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string blockUUID = 1;</code>
+       * @param value The bytes for blockUUID to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBlockUUIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        blockUUID_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object stacktrace_ = "";
+      /**
+       * <code>string stacktrace = 2;</code>
+       * @return The stacktrace.
+       */
+      public java.lang.String getStacktrace() {
+        java.lang.Object ref = stacktrace_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          stacktrace_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string stacktrace = 2;</code>
+       * @return The bytes for stacktrace.
+       */
+      public com.google.protobuf.ByteString
+          getStacktraceBytes() {
+        java.lang.Object ref = stacktrace_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          stacktrace_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string stacktrace = 2;</code>
+       * @param value The stacktrace to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStacktrace(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        stacktrace_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string stacktrace = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearStacktrace() {
+        stacktrace_ = getDefaultInstance().getStacktrace();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string stacktrace = 2;</code>
+       * @param value The bytes for stacktrace to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStacktraceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        stacktrace_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ReportExceptionRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ReportExceptionRequest)
+    private static final com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest();
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ReportExceptionRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ReportExceptionRequest>() {
+      @java.lang.Override
+      public ReportExceptionRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<ReportExceptionRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ReportExceptionRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Response_descriptor;
   private static final 
@@ -1744,6 +2260,11 @@ public final class VisualBukkitRPC {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ImportItemStackRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ReportExceptionRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ReportExceptionRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1754,13 +2275,15 @@ public final class VisualBukkitRPC {
   static {
     java.lang.String[] descriptorData = {
       "\n\025VisualBukkitRPC.proto\",\n\010Response\022\024\n\007m" +
-      "essage\030\001 \001(\tH\000\210\001\001B\n\n\010_message\"/\n\013PingReq" +
-      "uest\022\024\n\007message\030\001 \001(\tH\000\210\001\001B\n\n\010_message\"&" +
-      "\n\026ImportItemStackRequest\022\014\n\004yaml\030\001 \001(\t2f" +
-      "\n\014VisualBukkit\022\037\n\004Ping\022\014.PingRequest\032\t.R" +
-      "esponse\0225\n\017ImportItemStack\022\027.ImportItemS" +
-      "tackRequest\032\t.ResponseB\034\n\032com.gmail.visu" +
-      "albukkit.rpcb\006proto3"
+      "essage\030\001 \001(\tH\000\210\001\001B\n\n\010_message\"\r\n\013PingReq" +
+      "uest\"&\n\026ImportItemStackRequest\022\014\n\004yaml\030\001" +
+      " \001(\t\"?\n\026ReportExceptionRequest\022\021\n\tblockU" +
+      "UID\030\001 \001(\t\022\022\n\nstacktrace\030\002 \001(\t2\235\001\n\014Visual" +
+      "Bukkit\022\037\n\004Ping\022\014.PingRequest\032\t.Response\022" +
+      "5\n\017ImportItemStack\022\027.ImportItemStackRequ" +
+      "est\032\t.Response\0225\n\017ReportException\022\027.Repo" +
+      "rtExceptionRequest\032\t.ResponseB\034\n\032com.gma" +
+      "il.visualbukkit.rpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1777,13 +2300,19 @@ public final class VisualBukkitRPC {
     internal_static_PingRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PingRequest_descriptor,
-        new java.lang.String[] { "Message", });
+        new java.lang.String[] { });
     internal_static_ImportItemStackRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_ImportItemStackRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImportItemStackRequest_descriptor,
         new java.lang.String[] { "Yaml", });
+    internal_static_ReportExceptionRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ReportExceptionRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ReportExceptionRequest_descriptor,
+        new java.lang.String[] { "BlockUUID", "Stacktrace", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

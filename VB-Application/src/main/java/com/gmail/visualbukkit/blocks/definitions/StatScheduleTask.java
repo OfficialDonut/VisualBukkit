@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -11,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-@BlockDefinition(uid = "stat-schedule-task", name = "Schedule Task")
+@BlockDefinition(id = "stat-schedule-task", name = "Schedule Task")
 public class StatScheduleTask extends ContainerBlock {
 
     private final CheckBoxParameter typeParameter = new CheckBoxParameter("Asynchronous");
@@ -24,8 +25,8 @@ public class StatScheduleTask extends ContainerBlock {
     }
 
     @Override
-    public String generateJava() {
-        String childrenJava = generateChildrenJava();
+    public String generateJava(BuildInfo buildInfo) {
+        String childrenJava = generateChildrenJava(buildInfo);
         Set<String> localVars = new HashSet<>();
         StringBuilder tempVars = new StringBuilder();
         StringBuilder finalVars = new StringBuilder();
@@ -43,9 +44,9 @@ public class StatScheduleTask extends ContainerBlock {
 
         String method;
         if (modeParameter.isSelected()) {
-            method = (typeParameter.isSelected() ? "runTaskTimerAsynchronously" : "runTaskTimer") + "(PluginMain.getInstance(),0," + arg(2) + ");";
+            method = (typeParameter.isSelected() ? "runTaskTimerAsynchronously" : "runTaskTimer") + "(PluginMain.getInstance(),0," + arg(2, buildInfo) + ");";
         } else {
-            method = (typeParameter.isSelected() ? "runTaskLaterAsynchronously" : "runTaskLater") + "(PluginMain.getInstance()," + arg(2) + ");";
+            method = (typeParameter.isSelected() ? "runTaskLaterAsynchronously" : "runTaskLater") + "(PluginMain.getInstance()," + arg(2, buildInfo) + ");";
         }
 
         return tempVars +

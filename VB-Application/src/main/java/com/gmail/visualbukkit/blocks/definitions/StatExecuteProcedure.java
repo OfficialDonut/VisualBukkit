@@ -4,11 +4,12 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.List;
 
-@BlockDefinition(uid = "stat-execute-procedure", name = "Execute Procedure")
+@BlockDefinition(id = "stat-execute-procedure", name = "Execute Procedure")
 public class StatExecuteProcedure extends StatementBlock {
 
     public StatExecuteProcedure() {
@@ -17,7 +18,7 @@ public class StatExecuteProcedure extends StatementBlock {
     }
 
     @Override
-    public String generateJava() {
-        return "PluginMain.procedure(" + arg(0) + "," + arg(1) + ");";
+    public String generateJava(BuildInfo buildInfo) {
+        return "PluginMain.procedure(" + arg(0, buildInfo) + "," + arg(1, buildInfo) + ");";
     }
 }

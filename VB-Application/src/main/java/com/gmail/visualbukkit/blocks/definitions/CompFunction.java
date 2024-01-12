@@ -9,7 +9,7 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 
 import java.util.List;
 
-@BlockDefinition(uid = "comp-function", name = "Function")
+@BlockDefinition(id = "comp-function", name = "Function")
 public class CompFunction extends PluginComponentBlock {
 
     public CompFunction() {
@@ -18,12 +18,10 @@ public class CompFunction extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
         MethodSource<JavaClassSource> functionMethod = buildInfo.getMainClass().getMethod("function", String.class, List.class);
         functionMethod.setBody(
-                "if (function.equalsIgnoreCase(" + arg(0) + ")) {" +
-                buildInfo.getLocalVariableDeclarations() +
-                generateChildrenJava() +
+                "if (function.equalsIgnoreCase(" + arg(0, buildInfo) + ")) {" +
+                generateChildrenJava(buildInfo) +
                 "return null;" +
                 "}" +
                 functionMethod.getBody());

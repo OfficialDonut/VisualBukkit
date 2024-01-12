@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.blocks.definitions.StatComment;
+import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class StatementHolder extends VBox implements Iterable<StatementBlock> {
 
@@ -101,6 +103,14 @@ public class StatementHolder extends VBox implements Iterable<StatementBlock> {
 
     public boolean isEmpty() {
         return getChildren().size() == 1;
+    }
+
+    public String generateJava(BuildInfo buildInfo) {
+        StringJoiner joiner = new StringJoiner(System.lineSeparator());
+        for (StatementBlock block : this) {
+            joiner.add(buildInfo.isDebugMode() ? block.generateDebugJava(buildInfo) : block.generateJava(buildInfo));
+        }
+        return joiner.toString();
     }
 
     @Override

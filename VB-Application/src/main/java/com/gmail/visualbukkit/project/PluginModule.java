@@ -2,11 +2,11 @@ package com.gmail.visualbukkit.project;
 
 public abstract class PluginModule implements Comparable<PluginModule> {
 
-    private final String uid;
+    private final String id;
     private final String name;
 
-    public PluginModule(String uid, String name) {
-        this.uid = uid;
+    public PluginModule(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -21,12 +21,12 @@ public abstract class PluginModule implements Comparable<PluginModule> {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof PluginModule other && uid.equals(other.uid);
+        return o instanceof PluginModule other && id.equals(other.id);
     }
 
     @Override
     public int hashCode() {
-        return uid.hashCode();
+        return id.hashCode();
     }
 
     @Override
@@ -38,7 +38,7 @@ public abstract class PluginModule implements Comparable<PluginModule> {
         return name;
     }
 
-    public String getUID() {
-        return uid;
+    public String getID() {
+        return id;
     }
 }

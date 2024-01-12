@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.plugin;
 
 import com.gmail.visualbukkit.rpc.VisualBukkitGrpc;
 import com.gmail.visualbukkit.rpc.VisualBukkitRPC;
+import com.google.common.base.Throwables;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import org.bukkit.Bukkit;
@@ -19,11 +20,14 @@ import java.security.KeyStore;
 
 public class VisualBukkitPlugin extends JavaPlugin {
 
+    private static VisualBukkitPlugin plugin;
     private static ManagedChannel grpcChannel;
     private static VisualBukkitGrpc.VisualBukkitStub grpcStub;
+    private static VisualBukkitRPC.ReportExceptionRequest reportExceptionRequest;
 
     @Override
     public void onEnable() {
+        plugin = this;
         saveDefaultConfig();
         setupGrpc();
     }
@@ -64,6 +68,15 @@ public class VisualBukkitPlugin extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
+            sendColored("&b=== Visual Bukkit Commands ===", sender);
+            sendColored("&9/vb &3reload", sender);
+            sendColored("&9/vb &3ping", sender);
+            sendColored("&9/vb &3export item", sender);
+            sendColored("&9/vb &3export error", sender);
+            return true;
+        }
+
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             reloadConfig();
             setupGrpc();
@@ -122,7 +135,41 @@ public class VisualBukkitPlugin extends JavaPlugin {
             return true;
         }
 
+        if (args.length == 2 && args[0].equalsIgnoreCase("export") && args[1].equalsIgnoreCase("error")) {
+            if (reportExceptionRequest != null) {
+                sendFormatted("&eExporting error...", sender);
+                grpcStub.reportException(reportExceptionRequest, new StreamObserver<>() {
+                    @Override
+                    public void onNext(VisualBukkitRPC.Response response) {
+                        Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&aSuccessfully exported error.", sender));
+                    }
+                    @Override
+                    public void onError(Throwable throwable) {
+                        Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&cFailed to export error: " + throwable.getMessage(), sender));
+                        throwable.printStackTrace();
+                    }
+                    @Override
+                    public void onCompleted() {}
+                });
+            } else {
+                sendFormatted("&cThere is no error to export.", sender);
+            }
+            return true;
+        }
+
         return false;
+    }
+
+    public static void reportException(String blockUUID, Throwable throwable) {
+        reportExceptionRequest = VisualBukkitRPC.ReportExceptionRequest.newBuilder()
+                .setBlockUUID(blockUUID)
+                .setStacktrace(Throwables.getStackTraceAsString(throwable))
+                .build();
+        throwable.printStackTrace();
+        plugin.getLogger().severe("========================================================");
+        plugin.getLogger().severe("An error has occurred in a Visual Bukkit plugin.");
+        plugin.getLogger().severe("Use '/vb export error' to view the block that caused it.");
+        plugin.getLogger().severe("========================================================");
     }
 
     private void sendFormatted(String str, CommandSender sender) {

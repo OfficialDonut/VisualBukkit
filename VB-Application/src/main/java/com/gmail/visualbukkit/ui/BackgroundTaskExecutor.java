@@ -13,6 +13,10 @@ import java.util.concurrent.CompletableFuture;
 
 public class BackgroundTaskExecutor {
 
+    public static CompletableFuture<Void> execute(Runnable task) {
+        return CompletableFuture.runAsync(task);
+    }
+
     public static void executeAndWait(Runnable task) {
         Stage stage = new Stage();
         ProgressIndicator progressIndicator = new ProgressIndicator();

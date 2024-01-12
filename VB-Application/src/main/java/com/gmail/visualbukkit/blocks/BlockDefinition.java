@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface BlockDefinition {
 
-    String uid();
+    String id();
     String name();
 }

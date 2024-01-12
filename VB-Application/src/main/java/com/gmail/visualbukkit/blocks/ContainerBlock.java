@@ -12,8 +12,6 @@ import javafx.scene.input.TransferMode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.StringJoiner;
-
 public abstract class ContainerBlock extends StatementBlock {
 
     private static final PseudoClass NESTED_STYLE_CLASS = PseudoClass.getPseudoClass("nested");
@@ -72,19 +70,12 @@ public abstract class ContainerBlock extends StatementBlock {
     }
 
     @Override
-    public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
-        for (StatementBlock block : childStatementHolder) {
-            block.prepareBuild(buildInfo);
-        }
+    public String generateDebugJava(BuildInfo buildInfo) {
+        return generateJava(buildInfo);
     }
 
-    public String generateChildrenJava() {
-        StringJoiner joiner = new StringJoiner(System.lineSeparator());
-        for (StatementBlock block : childStatementHolder) {
-            joiner.add(block.generateJava());
-        }
-        return joiner.toString();
+    public String generateChildrenJava(BuildInfo buildInfo) {
+        return childStatementHolder.generateJava(buildInfo);
     }
 
     @Override

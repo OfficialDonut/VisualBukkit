@@ -86,6 +86,11 @@
     -fx-font-family: "JetBrains Mono Bold";
 }
 
+.build-settings-pane {
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
+}
+
 .container-block {
     -fx-background-color: lightblue;
     -fx-padding: 0.5em 0.5em 2em 0.5em;
@@ -93,6 +98,11 @@
 
 .container-block:nested {
     -fx-background-color: cornflowerblue;
+}
+
+.exception-popover {
+    -fx-pref-height: 15em;
+    -fx-pref-width: 40em;
 }
 
 .expression-block {
@@ -171,12 +181,16 @@ HBox {
     -fx-border-radius: 1em 1em 0 0;
 }
 
+.plugin-component-list {
+    -fx-pref-width: 25em;
+}
+
 .plugin-component-list > HBox {
     -fx-padding: 0.5em;
 }
 
-.plugin-component-pane VBox {
-    -fx-padding: 1em;
+.plugin-component-pane {
+    -fx-padding: 1em !important;
 }
 
 .plugin-settings-grid {

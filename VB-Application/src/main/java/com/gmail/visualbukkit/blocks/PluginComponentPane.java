@@ -1,6 +1,5 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.project.UndoManager;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Region;
@@ -10,15 +9,12 @@ public class PluginComponentPane extends ScrollPane {
 
     private final VBox content = new VBox();
     private final Region spacer = new Region();
-    private final UndoManager undoManager;
     private PluginComponentBlock block;
 
-    public PluginComponentPane(PluginComponentBlock block) {
+    public PluginComponentPane() {
         getStyleClass().add("plugin-component-pane");
         setContent(content);
-        setBlock(block);
         spacer.setPrefHeight(1000);
-        undoManager = new UndoManager(this);
 
         content.setOnDragOver(e -> {
             if (e.getGestureSource() instanceof StatementSource || e.getGestureSource() instanceof StatementBlock) {
@@ -49,9 +45,5 @@ public class PluginComponentPane extends ScrollPane {
 
     public PluginComponentBlock getBlock() {
         return block;
-    }
-
-    public UndoManager getUndoManager() {
-        return undoManager;
     }
 }

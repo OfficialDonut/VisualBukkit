@@ -2,7 +2,7 @@ package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
-import com.gmail.visualbukkit.blocks.PluginComponentPane;
+import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import org.json.JSONObject;
 
 import java.util.ArrayDeque;
@@ -13,23 +13,25 @@ public class UndoManager {
     private static final int CAPACITY = 10;
     private final Deque<JSONObject> undoQueue = new ArrayDeque<>(CAPACITY);
     private final Deque<JSONObject> redoQueue = new ArrayDeque<>(CAPACITY);
-    private final PluginComponentPane pluginComponent;
+    private final PluginComponent pluginComponent;
 
-    public UndoManager(PluginComponentPane pluginComponent) {
+    public UndoManager(PluginComponent pluginComponent) {
         this.pluginComponent = pluginComponent;
     }
 
     public void execute(Runnable runnable) {
         captureState();
         runnable.run();
-        pluginComponent.getBlock().updateState();
+        pluginComponent.getBlock().ifPresent(PluginComponentBlock::updateState);
     }
 
     public void captureState() {
-        if (undoQueue.size() == CAPACITY) {
-            undoQueue.removeLast();
-        }
-        undoQueue.addFirst(pluginComponent.getBlock().serialize());
+        pluginComponent.getBlock().ifPresent(b -> {
+            if (undoQueue.size() == CAPACITY) {
+                undoQueue.removeLast();
+            }
+            undoQueue.addFirst(b.serialize());
+        });
     }
 
     public void undo() {
@@ -45,9 +47,12 @@ public class UndoManager {
             VisualBukkitApp.displayError(errorMessage);
             return;
         }
-        backupQueue.addFirst(pluginComponent.getBlock().serialize());
-        pluginComponent.setBlock(BlockRegistry.newPluginComponent(queue.removeFirst()));
-        pluginComponent.getBlock().updateState();
+        pluginComponent.getBlock().ifPresent(b -> {
+            backupQueue.addFirst(b.serialize());
+            PluginComponentBlock restoredBlock = BlockRegistry.newPluginComponent(queue.removeFirst());
+            pluginComponent.setBlock(restoredBlock);
+            restoredBlock.updateState();
+        });
     }
 
     public static UndoManager current() {
@@ -56,6 +61,8 @@ public class UndoManager {
     }
 
     private static final UndoManager defaultUndoManager = new UndoManager(null) {
+        @Override
+        public void execute(Runnable runnable) {}
         @Override
         public void captureState() {}
     };

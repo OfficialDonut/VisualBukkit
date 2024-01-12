@@ -13,9 +13,11 @@ public class BuildInfo {
     private final Set<RemoteRepository> mavenRepositories = new HashSet<>();
     private final Set<Dependency> mavenDependencies = new HashSet<>();
     private final JavaClassSource mainClass;
+    private final boolean debugMode;
 
-    public BuildInfo(JavaClassSource mainClass) {
+    public BuildInfo(JavaClassSource mainClass, boolean debugMode) {
         this.mainClass = mainClass;
+        this.debugMode = debugMode;
     }
 
     public void addLocalVariable(String varName) {
@@ -41,5 +43,9 @@ public class BuildInfo {
 
     public JavaClassSource getMainClass() {
         return mainClass;
+    }
+
+    public boolean isDebugMode() {
+        return debugMode;
     }
 }

@@ -4,9 +4,10 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(uid = "stat-if-statement", name = "If Statement")
+@BlockDefinition(id = "stat-if-statement", name = "If Statement")
 public class StatIfStatement extends ContainerBlock {
 
     private final CheckBoxParameter modeParameter = new CheckBoxParameter("Negated");
@@ -17,7 +18,7 @@ public class StatIfStatement extends ContainerBlock {
     }
 
     @Override
-    public String generateJava() {
-        return "if (" + (modeParameter.isSelected() ? "!" : "") + arg(1) + ") {" + generateChildrenJava() + "}";
+    public String generateJava(BuildInfo buildInfo) {
+        return "if (" + (modeParameter.isSelected() ? "!" : "") + arg(1, buildInfo) + ") {" + getChildStatementHolder().generateJava(buildInfo) + "}";
     }
 }

@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,10 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public sealed abstract class Block extends VBox permits PluginComponentBlock, StatementBlock, ExpressionBlock {
 
-    protected static final PseudoClass INVALID_STYLE_CLASS = PseudoClass.getPseudoClass("invalid");
+    public static final PseudoClass INVALID_STYLE_CLASS = PseudoClass.getPseudoClass("invalid");
 
     private final HBox header = new HBox();
     private final ContextMenu contextMenu = new ContextMenu();
@@ -35,15 +35,6 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
     protected List<BlockParameter> parameters;
 
     private final BooleanProperty collapsed = new SimpleBooleanProperty(false);
-
-    static {
-        VisualBukkitApp.getPrimaryStage().getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            Node node = VisualBukkitApp.getPrimaryStage().getScene().getFocusOwner();
-            if (node instanceof Block b) {
-                b.handleSelectedAction(e);
-            }
-        });
-    }
 
     public Block() {
         getStyleClass().add("block");
@@ -61,6 +52,7 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
         setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
+                getPluginComponentBlock().updateState();
                 requestFocus();
                 e.consume();
             }
@@ -118,17 +110,10 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
         }
     }
 
-    public void prepareBuild(BuildInfo buildInfo) {
-        if (parameters != null) {
-            for (BlockParameter parameter : parameters) {
-                parameter.prepareBuild(buildInfo);
-            }
-        }
-    }
-
     public JSONObject serialize() {
         JSONObject json = new JSONObject();
-        json.put("uid", getDefinition().uid());
+        json.put("type", getDefinition().id());
+        json.put("uuid", getUUID());
         if (parameters != null) {
             for (BlockParameter parameter : parameters) {
                 json.append("params", parameter.serialize());
@@ -141,6 +126,7 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
     }
 
     public void deserialize(JSONObject json) {
+        setId(json.optString("uuid", null));
         JSONArray parameterJson = json.optJSONArray("params");
         if (parameterJson != null && parameters != null) {
             for (int i = 0; i < Math.min(parameters.size(), parameterJson.length()); i++) {
@@ -154,10 +140,8 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public abstract void delete();
 
-    protected void handleSelectedAction(KeyEvent e) {}
-
-    public String arg(int i) {
-        return parameters.get(i).generateJava();
+    public String arg(int i, BuildInfo buildInfo) {
+        return parameters.get(i).generateJava(buildInfo);
     }
 
     public boolean isCollapsed() {
@@ -174,6 +158,14 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public BlockDefinition getDefinition() {
         return getClass().getAnnotation(BlockDefinition.class);
+    }
+
+    public String getUUID() {
+        String id = getId();
+        if (id == null) {
+            setId(id = UUID.randomUUID().toString());
+        }
+        return id;
     }
 
     public PluginComponentBlock getPluginComponentBlock() {

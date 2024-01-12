@@ -2,9 +2,10 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(uid = "expr-current-event", name = "Current Event")
+@BlockDefinition(id = "expr-current-event", name = "Current Event")
 public class ExprCurrentEvent extends ExpressionBlock {
 
     @Override
@@ -21,7 +22,7 @@ public class ExprCurrentEvent extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return "event";
     }
 }

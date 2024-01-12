@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-@BlockDefinition(uid = "expr-local-variable", name = "Local Variable")
+@BlockDefinition(id = "expr-local-variable", name = "Local Variable")
 public class ExprLocalVariable extends ExpressionBlock {
 
     protected static final Pattern VAR_PATTERN = Pattern.compile("\\$[a-z0-9]{32}");
@@ -30,14 +30,9 @@ public class ExprLocalVariable extends ExpressionBlock {
     }
 
     @Override
-    public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
-        buildInfo.addLocalVariable(getVariable(arg(0)));
-    }
-
-    @Override
-    public String generateJava() {
-        return getVariable(arg(0));
+    public String generateJava(BuildInfo buildInfo) {
+        buildInfo.addLocalVariable(getVariable(arg(0, buildInfo)));
+        return getVariable(arg(0, buildInfo));
     }
 
     @Override

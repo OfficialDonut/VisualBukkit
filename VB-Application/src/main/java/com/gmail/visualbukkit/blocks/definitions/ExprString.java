@@ -3,11 +3,12 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.Collections;
 
-@BlockDefinition(uid = "expr-string", name = "String")
+@BlockDefinition(id = "expr-string", name = "String")
 public class ExprString extends ExpressionBlock {
 
     private final StringParameter parameter = new StringParameter();
@@ -24,8 +25,8 @@ public class ExprString extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
-        return arg(0);
+    public String generateJava(BuildInfo buildInfo) {
+        return arg(0, buildInfo);
     }
 
     @Override

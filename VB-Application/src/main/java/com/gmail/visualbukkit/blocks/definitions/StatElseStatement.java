@@ -2,8 +2,9 @@ package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
+import com.gmail.visualbukkit.project.BuildInfo;
 
-@BlockDefinition(uid = "stat-else-statement", name = "Else Statement")
+@BlockDefinition(id = "stat-else-statement", name = "Else Statement")
 public class StatElseStatement extends ContainerBlock {
 
     @Override
@@ -15,7 +16,7 @@ public class StatElseStatement extends ContainerBlock {
     }
 
     @Override
-    public String generateJava() {
-        return "else {" + generateChildrenJava() + "}";
+    public String generateJava(BuildInfo buildInfo) {
+        return "else {" + generateChildrenJava(buildInfo) + "}";
     }
 }

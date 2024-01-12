@@ -8,6 +8,7 @@ commands:
     aliases: [vb]
     description: The main Visual Bukkit command
     permission: vb.command
+    usage: "Usage: /vb help"
 
 permissions:
   vb.command:

@@ -1,8 +1,9 @@
 package com.gmail.visualbukkit.blocks.definitions;
 
 import com.gmail.visualbukkit.blocks.BlockDefinition;
+import com.gmail.visualbukkit.project.BuildInfo;
 
-@BlockDefinition(uid = "stat-else-if-statement", name = "Else If Statement")
+@BlockDefinition(id = "stat-else-if-statement", name = "Else If Statement")
 public class StatElseIfStatement extends StatIfStatement {
 
     @Override
@@ -14,7 +15,7 @@ public class StatElseIfStatement extends StatIfStatement {
     }
 
     @Override
-    public String generateJava() {
-        return "else " + super.generateJava();
+    public String generateJava(BuildInfo buildInfo) {
+        return "else " + super.generateJava(buildInfo);
     }
 }

@@ -28,7 +28,6 @@ public class LogWindow extends Stage {
         initModality(Modality.APPLICATION_MODAL);
         setTitle(VisualBukkitApp.localizedText("window.log"));
         setScene(new Scene(textArea));
-        setAlwaysOnTop(true);
 
         handler = new Handler() {
             @Override

@@ -77,6 +77,37 @@ public final class VisualBukkitGrpc {
     return getImportItemStackMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getReportExceptionMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ReportException",
+      requestType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.class,
+      responseType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getReportExceptionMethod() {
+    io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getReportExceptionMethod;
+    if ((getReportExceptionMethod = VisualBukkitGrpc.getReportExceptionMethod) == null) {
+      synchronized (VisualBukkitGrpc.class) {
+        if ((getReportExceptionMethod = VisualBukkitGrpc.getReportExceptionMethod) == null) {
+          VisualBukkitGrpc.getReportExceptionMethod = getReportExceptionMethod =
+              io.grpc.MethodDescriptor.<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ReportException"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.getDefaultInstance()))
+              .setSchemaDescriptor(new VisualBukkitMethodDescriptorSupplier("ReportException"))
+              .build();
+        }
+      }
+    }
+    return getReportExceptionMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +169,13 @@ public final class VisualBukkitGrpc {
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getImportItemStackMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReportExceptionMethod(), responseObserver);
+    }
   }
 
   /**
@@ -182,6 +220,14 @@ public final class VisualBukkitGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getImportItemStackMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getReportExceptionMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -212,6 +258,13 @@ public final class VisualBukkitGrpc {
     public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response importItemStack(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getImportItemStackMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReportExceptionMethod(), getCallOptions(), request);
     }
   }
 
@@ -246,10 +299,19 @@ public final class VisualBukkitGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getImportItemStackMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> reportException(
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getReportExceptionMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PING = 0;
   private static final int METHODID_IMPORT_ITEM_STACK = 1;
+  private static final int METHODID_REPORT_EXCEPTION = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -274,6 +336,10 @@ public final class VisualBukkitGrpc {
           break;
         case METHODID_IMPORT_ITEM_STACK:
           serviceImpl.importItemStack((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest) request,
+              (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
+          break;
+        case METHODID_REPORT_EXCEPTION:
+          serviceImpl.reportException((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest) request,
               (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
           break;
         default:
@@ -308,6 +374,13 @@ public final class VisualBukkitGrpc {
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest,
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
                 service, METHODID_IMPORT_ITEM_STACK)))
+        .addMethod(
+          getReportExceptionMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest,
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
+                service, METHODID_REPORT_EXCEPTION)))
         .build();
   }
 
@@ -358,6 +431,7 @@ public final class VisualBukkitGrpc {
               .setSchemaDescriptor(new VisualBukkitFileDescriptorSupplier())
               .addMethod(getPingMethod())
               .addMethod(getImportItemStackMethod())
+              .addMethod(getReportExceptionMethod())
               .build();
         }
       }

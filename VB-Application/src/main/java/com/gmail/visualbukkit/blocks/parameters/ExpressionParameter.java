@@ -86,16 +86,9 @@ public class ExpressionParameter extends Region implements BlockParameter {
     }
 
     @Override
-    public void prepareBuild(BuildInfo buildInfo) {
-        if (expression != null) {
-            expression.prepareBuild(buildInfo);
-        }
-    }
-
-    @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return expression != null ?
-                ClassInfo.convert(expression.getReturnType(), type, expression.generateJava()) :
+                ClassInfo.convert(expression.getReturnType(), type, expression.generateJava(buildInfo)) :
                 ClassInfo.convert(ClassInfo.of(Object.class), type, "((Object) null)");
     }
 

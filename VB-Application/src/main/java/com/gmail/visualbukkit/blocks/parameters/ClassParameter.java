@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
@@ -24,13 +25,13 @@ public class ClassParameter extends PopOverSelector<ClassInfo> implements BlockP
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return getValue() != null ? getValue().getName() : null;
     }
 
     @Override
     public Object serialize() {
-        return generateJava();
+        return getValue() != null ? getValue().getName() : null;
     }
 
     @Override

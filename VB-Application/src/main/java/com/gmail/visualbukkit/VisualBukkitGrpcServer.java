@@ -1,13 +1,19 @@
 package com.gmail.visualbukkit;
 
+import com.gmail.visualbukkit.blocks.Block;
 import com.gmail.visualbukkit.blocks.definitions.ExprSerializedItemStack;
 import com.gmail.visualbukkit.project.CopyPasteManager;
+import com.gmail.visualbukkit.project.PluginComponent;
+import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.rpc.VisualBukkitGrpc;
 import com.gmail.visualbukkit.rpc.VisualBukkitRPC;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import javafx.application.Platform;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import org.controlsfx.control.PopOver;
 
 import javax.net.ssl.KeyManagerFactory;
 import java.io.File;
@@ -110,8 +116,65 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
 
     private VisualBukkitRPC.Response importItemStack(VisualBukkitRPC.ImportItemStackRequest request) {
         Platform.runLater(() -> {
-            CopyPasteManager.copyExpression(new ExprSerializedItemStack(request.getYaml()));
-            VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_item"));
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_item"));
+            alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == ButtonType.YES) {
+                    CopyPasteManager.copyExpression(new ExprSerializedItemStack(request.getYaml()));
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_item"));
+                }
+            });
+        });
+        return VisualBukkitRPC.Response.newBuilder().build();
+    }
+
+    @Override
+    public void reportException(VisualBukkitRPC.ReportExceptionRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
+        VisualBukkitApp.getLogger().info("Received ReportExceptionRequest: {" + request + "}");
+        responseObserver.onNext(reportException(request));
+        responseObserver.onCompleted();
+    }
+
+    private VisualBukkitRPC.Response reportException(VisualBukkitRPC.ReportExceptionRequest request) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_report_exception"));
+            alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == ButtonType.YES) {
+                    for (PluginComponent pluginComponent : ProjectManager.current().getPluginComponents()) {
+                        if (pluginComponent.containsBlock(request.getBlockUUID())) {
+                            ProjectManager.current().openPluginComponent(pluginComponent);
+                            Platform.runLater(() -> {
+                                Node node = VisualBukkitApp.getPrimaryStage().getScene().lookup("#" + request.getBlockUUID());
+                                if (node instanceof Block block) {
+                                    Parent parent = block.getParent();
+                                    while (parent != null && !(parent instanceof ScrollPane)) {
+                                        parent = parent.getParent();
+                                    }
+                                    ScrollPane scrollPane = (ScrollPane) parent;
+                                    double height = scrollPane.getViewportBounds().getHeight();
+                                    scrollPane.setVvalue(scrollPane.getVmax() * ((((block.getBoundsInParent().getMaxY() + block.getBoundsInParent().getMinY()) / 2) - 0.5 * height) / (scrollPane.getContent().getBoundsInLocal().getHeight() - height)));
+                                    PopOver popOver = new PopOver(new TextArea(request.getStacktrace()));
+                                    popOver.getStyleClass().add("exception-popover");
+                                    popOver.setAnimated(false);
+                                    popOver.setDetachable(false);
+                                    popOver.show(block);
+                                    block.pseudoClassStateChanged(Block.INVALID_STYLE_CLASS, true);
+                                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.reported_exception"));
+                                }
+                            });
+                            return;
+                        }
+                    }
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.reported_exception_failure"));
+                }
+            });
         });
         return VisualBukkitRPC.Response.newBuilder().build();
     }

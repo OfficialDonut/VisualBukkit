@@ -3,11 +3,12 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.MultilineStringParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.Collections;
 
-@BlockDefinition(uid = "expr-multiline-string", name = "Multiline String")
+@BlockDefinition(id = "expr-multiline-string", name = "Multiline String")
 public class ExprMultilineString extends ExpressionBlock {
 
     private final MultilineStringParameter parameter = new MultilineStringParameter();
@@ -24,8 +25,8 @@ public class ExprMultilineString extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
-        return arg(0);
+    public String generateJava(BuildInfo buildInfo) {
+        return arg(0, buildInfo);
     }
 
     @Override

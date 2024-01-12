@@ -6,9 +6,7 @@ public interface BlockParameter {
 
     default void updateState() {}
 
-    default void prepareBuild(BuildInfo buildInfo) {}
-
-    String generateJava();
+    String generateJava(BuildInfo buildInfo);
 
     Object serialize();
 

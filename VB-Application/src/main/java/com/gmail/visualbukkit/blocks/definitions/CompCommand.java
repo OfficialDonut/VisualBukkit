@@ -10,7 +10,7 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 
 import java.util.regex.Pattern;
 
-@BlockDefinition(uid = "comp-command", name = "Command")
+@BlockDefinition(id = "comp-command", name = "Command")
 public class CompCommand extends PluginComponentBlock {
 
     private static final Pattern WHITE_SPACE_PATTERN = Pattern.compile("\\S*");
@@ -38,13 +38,11 @@ public class CompCommand extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
         MethodSource<JavaClassSource> commandMethod = buildInfo.getMainClass().getMethod("onCommand", "CommandSender", "Command", "String", "String[]");
         commandMethod.setBody(
-                "if (command.getName().equalsIgnoreCase(\"" + StringEscapeUtils.escapeJava(arg(0)) + "\")) {" +
+                "if (command.getName().equalsIgnoreCase(\"" + StringEscapeUtils.escapeJava(arg(0, buildInfo)) + "\")) {" +
                 "try {" +
-                buildInfo.getLocalVariableDeclarations() +
-                generateChildrenJava() +
+                generateChildrenJava(buildInfo) +
                 "} catch (Exception e) { e.printStackTrace(); }" +
                 "return true;" +
                 "}" +

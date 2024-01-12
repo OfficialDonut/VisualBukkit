@@ -7,8 +7,6 @@ import javafx.scene.control.SeparatorMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.StringJoiner;
-
 public non-sealed abstract class PluginComponentBlock extends Block {
 
     private final StatementHolder childStatementHolder = new StatementHolder(this);
@@ -31,10 +29,7 @@ public non-sealed abstract class PluginComponentBlock extends Block {
 
     @Override
     public void delete() {
-        Project project = ProjectManager.current();
-        if (project.getOpenTab() != null) {
-            project.promptDeletePluginComponent(project.getOpenTab().getText());
-        }
+        ProjectManager.current().promptDeletePluginComponent(this);
     }
 
     @Override
@@ -43,20 +38,11 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         childStatementHolder.forEach(StatementBlock::updateState);
     }
 
-    @Override
-    public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
-        for (StatementBlock block : childStatementHolder) {
-            block.prepareBuild(buildInfo);
-        }
-    }
+    public abstract void prepareBuild(BuildInfo buildInfo);
 
-    public String generateChildrenJava() {
-        StringJoiner joiner = new StringJoiner(System.lineSeparator());
-        for (StatementBlock block : childStatementHolder) {
-            joiner.add(block.generateJava());
-        }
-        return joiner.toString();
+    public String generateChildrenJava(BuildInfo buildInfo) {
+        String childrenJava = childStatementHolder.generateJava(buildInfo);
+        return buildInfo.getLocalVariableDeclarations() + childrenJava;
     }
 
     @Override
@@ -85,10 +71,13 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         return childStatementHolder;
     }
 
-    @BlockDefinition(uid = "unknown-plugin-component", name = "Unknown Plugin Component")
+    @BlockDefinition(id = "unknown-plugin-component", name = "Unknown Plugin Component")
     public static class Unknown extends PluginComponentBlock {
 
         private JSONObject json;
+
+        @Override
+        public void prepareBuild(BuildInfo buildInfo) {}
 
         @Override
         public JSONObject serialize() {

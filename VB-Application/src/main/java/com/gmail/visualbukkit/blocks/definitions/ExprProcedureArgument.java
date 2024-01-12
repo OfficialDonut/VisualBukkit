@@ -3,9 +3,10 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(uid = "expr-procedure-argument", name = "Procedure Argument")
+@BlockDefinition(id = "expr-procedure-argument", name = "Procedure Argument")
 public class ExprProcedureArgument extends ExpressionBlock {
 
     public ExprProcedureArgument() {
@@ -26,7 +27,7 @@ public class ExprProcedureArgument extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
-        return "args.get(" + arg(0) + ")";
+    public String generateJava(BuildInfo buildInfo) {
+        return "args.get(" + arg(0, buildInfo) + ")";
     }
 }

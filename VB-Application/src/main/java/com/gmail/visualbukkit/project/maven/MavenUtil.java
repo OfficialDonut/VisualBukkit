@@ -27,8 +27,8 @@ public class MavenUtil {
         }
     }
 
-    public static void execute(InvocationRequest request) throws MavenInvocationException {
-        mavenInvoker.execute(request);
+    public static InvocationResult execute(InvocationRequest request) throws MavenInvocationException {
+        return mavenInvoker.execute(request);
     }
 
     public static String getMavenHome() throws MavenInvocationException {

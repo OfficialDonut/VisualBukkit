@@ -1,6 +1,7 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
 import com.gmail.visualbukkit.blocks.Block;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.MethodInfo;
 import com.gmail.visualbukkit.reflection.ParameterInfo;
@@ -44,7 +45,7 @@ public class MethodParameter extends ClassElementParameter<MethodInfo> {
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return getValue() != null ? getValue().getName() : null;
     }
 

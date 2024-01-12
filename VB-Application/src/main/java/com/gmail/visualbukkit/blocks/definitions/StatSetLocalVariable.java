@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(uid = "stat-set-local-variable", name = "Set Local Variable")
+@BlockDefinition(id = "stat-set-local-variable", name = "Set Local Variable")
 public class StatSetLocalVariable extends StatementBlock {
 
     public StatSetLocalVariable() {
@@ -18,13 +18,8 @@ public class StatSetLocalVariable extends StatementBlock {
     }
 
     @Override
-    public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
-        buildInfo.addLocalVariable(ExprLocalVariable.getVariable(arg(0)));
-    }
-
-    @Override
-    public String generateJava() {
-        return ExprLocalVariable.getVariable(arg(0)) + " = " + arg(1) + ";";
+    public String generateJava(BuildInfo buildInfo) {
+        buildInfo.addLocalVariable(ExprLocalVariable.getVariable(arg(0, buildInfo)));
+        return ExprLocalVariable.getVariable(arg(0, buildInfo)) + " = " + arg(1, buildInfo) + ";";
     }
 }

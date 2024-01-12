@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
@@ -72,7 +73,7 @@ public non-sealed abstract class ExpressionBlock extends Block {
         pseudoClassStateChanged(NESTED_STYLE_CLASS, level % 2 == 1);
     }
 
-    public abstract String generateJava();
+    public abstract String generateJava(BuildInfo buildInfo);
 
     public abstract ClassInfo getReturnType();
 
@@ -87,13 +88,13 @@ public non-sealed abstract class ExpressionBlock extends Block {
         return (ExpressionParameter) getParent();
     }
 
-    @BlockDefinition(uid = "unknown-expression", name = "Unknown Expression")
+    @BlockDefinition(id = "unknown-expression", name = "Unknown Expression")
     public static class Unknown extends ExpressionBlock {
 
         private JSONObject json;
 
         @Override
-        public String generateJava() {
+        public String generateJava(BuildInfo buildInfo) {
             return "((Object) null)";
         }
 

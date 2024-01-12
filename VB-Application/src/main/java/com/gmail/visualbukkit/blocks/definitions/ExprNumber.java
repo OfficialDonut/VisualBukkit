@@ -3,12 +3,13 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-@BlockDefinition(uid = "expr-number", name = "Number")
+@BlockDefinition(id = "expr-number", name = "Number")
 public class ExprNumber extends ExpressionBlock {
 
     private static final Pattern NUM_PATTERN = Pattern.compile("-?\\d*\\.?\\d*");
@@ -32,10 +33,10 @@ public class ExprNumber extends ExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         try {
-            String number = arg(0);
-            if (parameter.getText().contains(".")) {
+            String number = parameter.getText();
+            if (number.contains(".")) {
                 Double.parseDouble(number);
                 return "(" + number + "D)";
             } else {

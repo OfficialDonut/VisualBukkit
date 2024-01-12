@@ -4,12 +4,13 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.SizedExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
+import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.List;
 import java.util.StringJoiner;
 
-@BlockDefinition(uid = "expr-list", name = "List")
+@BlockDefinition(id = "expr-list", name = "List")
 public class ExprList extends SizedExpressionBlock {
 
     @Override
@@ -28,13 +29,13 @@ public class ExprList extends SizedExpressionBlock {
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         if (parameters == null) {
             return "Collections.emptyList()";
         }
         StringJoiner joiner = new StringJoiner(",");
         for (BlockParameter parameter : parameters) {
-            joiner.add(parameter.generateJava());
+            joiner.add(parameter.generateJava(buildInfo));
         }
         return "List.of(" + joiner + ")";
     }

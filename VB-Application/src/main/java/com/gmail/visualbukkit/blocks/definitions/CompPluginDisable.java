@@ -6,17 +6,15 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
 
-@BlockDefinition(uid = "comp-plugin-disable", name = "Plugin Disable")
+@BlockDefinition(id = "comp-plugin-disable", name = "Plugin Disable")
 public class CompPluginDisable extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
         MethodSource<JavaClassSource> disableMethod = buildInfo.getMainClass().getMethod("onDisable");
         disableMethod.setBody(disableMethod.getBody() +
                 "try {" +
-                buildInfo.getLocalVariableDeclarations() +
-                generateChildrenJava() +
+                generateChildrenJava(buildInfo) +
                 "} catch (Exception e) { e.printStackTrace(); }");
     }
 }

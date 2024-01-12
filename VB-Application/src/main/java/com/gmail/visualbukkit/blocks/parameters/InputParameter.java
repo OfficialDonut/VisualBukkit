@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.event.Event;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
@@ -15,7 +16,7 @@ public class InputParameter extends TextField implements BlockParameter {
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return getText();
     }
 

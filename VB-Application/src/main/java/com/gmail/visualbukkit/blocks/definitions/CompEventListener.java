@@ -8,7 +8,7 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 
-@BlockDefinition(uid = "comp-event-listener", name = "Event Listener")
+@BlockDefinition(id = "comp-event-listener", name = "Event Listener")
 public class CompEventListener extends PluginComponentBlock {
 
     private final ClassParameter eventParameter = new ClassParameter(c -> !c.getMethods(m -> m.getName().equals("getHandlerList")).isEmpty());
@@ -20,12 +20,10 @@ public class CompEventListener extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        super.prepareBuild(buildInfo);
         buildInfo.getMainClass().addMethod(
-                "@EventHandler(priority=EventPriority." + arg(1) + ")" +
+                "@EventHandler(priority=EventPriority." + arg(1, buildInfo) + ")" +
                 "public void $event_" + RandomStringUtils.randomAlphabetic(16) + "(" + getEvent().getName() + " event) throws Exception {" +
-                buildInfo.getLocalVariableDeclarations() +
-                generateChildrenJava() +
+                generateChildrenJava(buildInfo) +
                 "}");
     }
 

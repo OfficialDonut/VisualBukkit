@@ -12,23 +12,25 @@ import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.ActionButton;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.gmail.visualbukkit.ui.PopupWindow;
+import com.gmail.visualbukkit.ui.TextIconButton;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.InvocationRequest;
+import org.apache.maven.shared.invoker.InvocationResult;
+import org.controlsfx.control.CheckTreeView;
 import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.action.Action;
@@ -43,14 +45,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Project {
@@ -71,7 +72,10 @@ public class Project {
     private final PluginSettings pluginSettings = new PluginSettings();
     private final ListView<MavenModule> mavenListView = new ListView<>();
     private final ListSelectionView<PluginModule> moduleSelector = new ListSelectionView<>();
-    private final Map<String, PluginComponentPane> openPluginComponents = new HashMap<>();
+    private final Set<PluginComponent> pluginComponents = new TreeSet<>();
+    private final Map<PluginComponent, Tab> openPluginComponents = new HashMap<>();
+    private final TextField jarOutputField = new TextField();
+    private final CheckBox debugModeCheckBox = new CheckBox(VisualBukkitApp.localizedText("label.enabled"));
 
     public Project(Path directory) {
         this.directory = directory;
@@ -81,8 +85,8 @@ public class Project {
         buildDirectory = directory.resolve("build");
 
         moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> reloadRequired = true);
-        moduleSelector.setSourceHeader(new Label(VisualBukkitApp.localizedText("label.disabled_modules")));
-        moduleSelector.setTargetHeader(new Label(VisualBukkitApp.localizedText("label.enabled_modules")));
+        moduleSelector.setSourceHeader(new Label(VisualBukkitApp.localizedText("label.disabled")));
+        moduleSelector.setTargetHeader(new Label(VisualBukkitApp.localizedText("label.enabled")));
         for (Action action : moduleSelector.getActions()) {
             action.graphicProperty().unbind();
             action.setGraphic(null);
@@ -111,9 +115,34 @@ public class Project {
         Tab pluginYmlTab = new Tab(VisualBukkitApp.localizedText("label.plugin_attributes"), pluginSettings.getGrid());
         Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
         Tab modulesTab = new Tab(VisualBukkitApp.localizedText("label.modules"), moduleSelector);
-        TabPane settingsTabPane = new TabPane(pluginYmlTab, modulesTab, mavenTab);
+        TabPane settingsTabPane = new TabPane(pluginYmlTab, modulesTab, mavenTab, new Tab());
         settingsTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
         PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), settingsTabPane);
+        pluginSettingsWindow.setOnShowing(e -> {
+            CheckBoxTreeItem<Object> rootItem = new CheckBoxTreeItem<>(VisualBukkitApp.localizedText("label.plugin_components"));
+            rootItem.setSelected(true);
+            rootItem.setExpanded(true);
+            for (PluginComponent pluginComponent : pluginComponents) {
+                CheckBoxTreeItem<Object> treeItem = new CheckBoxTreeItem<>(pluginComponent);
+                treeItem.setSelected(!pluginComponent.isDisabled());
+                pluginComponent.disabledProperty().bind(treeItem.selectedProperty().not());
+                rootItem.getChildren().add(treeItem);
+            }
+            Label label = new Label(VisualBukkitApp.localizedText("label.included"));
+            GridPane.setValignment(label, VPos.TOP);
+            GridPane gridPane = new GridPane();
+            gridPane.addRow(2, label, new CheckTreeView<>(rootItem));
+            gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("label.jar_output")), new HBox(jarOutputField, new TextIconButton("\uD83D\uDCC1", e2 -> {
+                File dir = new DirectoryChooser().showDialog(pluginSettingsWindow);
+                if (dir != null) {
+                    jarOutputField.setText(dir.getAbsolutePath());
+                }
+            })));
+            gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("label.debug_mode")), debugModeCheckBox);
+            gridPane.getStyleClass().add("build-settings-pane");
+            settingsTabPane.getTabs().set(3, new Tab(VisualBukkitApp.localizedText("label.build"), gridPane));
+        });
         pluginSettingsWindow.setOnHidden(e -> {
             if (reloadRequired) {
                 reloadRequired = false;
@@ -121,11 +150,17 @@ public class Project {
             }
         });
 
+        Button buildButton = new Button(VisualBukkitApp.localizedText("button.build_plugin"));
+        buildButton.setOnAction(e -> {
+            buildButton.setDisable(true);
+            build().whenComplete((u, t) -> Platform.runLater(() -> buildButton.setDisable(false)));
+        });
+
         HBox buttonBar = new HBox(
                 new ActionButton(VisualBukkitApp.localizedText("button.add_component"), e -> promptAddPluginComponent()),
                 new ActionButton(VisualBukkitApp.localizedText("button.plugin_components"), e -> showPluginComponents()),
                 new ActionButton(VisualBukkitApp.localizedText("button.plugin_settings"), e -> pluginSettingsWindow.show()),
-                new ActionButton(VisualBukkitApp.localizedText("button.build_plugin"), e -> build()));
+                buildButton);
         buttonBar.getStyleClass().add("button-bar");
 
         placeholderPane.getChildren().add(new Label(VisualBukkitApp.localizedText("label.add_component")));
@@ -154,12 +189,14 @@ public class Project {
             }
         }
 
+        debugModeCheckBox.setSelected(data.optBoolean("debug-mode"));
+        jarOutputField.setText(data.optString("jar-output", buildDirectory.resolve("target").toString()));
         pluginSettings.deserialize(data.optJSONObject("plugin-settings", new JSONObject()));
 
         JSONArray enabledModulesJson = data.optJSONArray("enabled-modules");
         List<Object> enabledModules = enabledModulesJson != null ? enabledModulesJson.toList() : Collections.emptyList();
         for (PluginModule module : PluginModuleRegistry.getPluginModules()) {
-            (enabledModules.contains(module.getUID()) ? moduleSelector.getTargetItems() : moduleSelector.getSourceItems()).add(module);
+            (enabledModules.contains(module.getID()) ? moduleSelector.getTargetItems() : moduleSelector.getSourceItems()).add(module);
         }
         JSONArray mavenRepoJson = data.optJSONArray("maven-repositories");
         if (mavenRepoJson != null) {
@@ -190,15 +227,32 @@ public class Project {
             extension.open(this);
         }
 
-        JSONArray openPluginComponents = data.optJSONArray("open-plugin-components");
-        if (openPluginComponents != null) {
-            for (Object object : openPluginComponents) {
-                if (object instanceof String name) {
-                    openPluginComponent(name);
+        JSONArray disabledPluginComponentsJson = data.optJSONArray("disabled-plugin-components");
+        List<Object> disabledPluginComponents = disabledPluginComponentsJson != null ? disabledPluginComponentsJson.toList() : Collections.emptyList();
+        if (Files.exists(pluginComponentDirectory)) {
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
+                for (Path path : stream) {
+                    PluginComponent pluginComponent = new PluginComponent(this, path);
+                    pluginComponents.add(pluginComponent);
+                    if (disabledPluginComponents.contains(pluginComponent.getName())) {
+                        pluginComponent.setDisabled(true);
+                    }
                 }
             }
-            tabPane.getSelectionModel().select(data.optInt("selected-tab"));
         }
+
+        JSONArray openPluginComponentsJson = data.optJSONArray("open-plugin-components");
+        if (openPluginComponentsJson != null) {
+            for (Object obj : openPluginComponentsJson) {
+                for (PluginComponent pluginComponent : pluginComponents) {
+                    if (pluginComponent.getName().equals(obj)) {
+                        openPluginComponent(pluginComponent);
+                        break;
+                    }
+                }
+            }
+        }
+        tabPane.getSelectionModel().select(data.optInt("selected-tab"));
 
         statementSelector.setStatements(BlockRegistry.getStatements());
         VisualBukkitApp.getRootPane().setCenter(projectPane);
@@ -208,16 +262,19 @@ public class Project {
 
     public void save() throws IOException {
         data.remove("open-plugin-components");
+        data.remove("disabled-plugin-components");
         data.remove("enabled-modules");
         data.remove("maven-repositories");
         data.remove("maven-dependencies");
         data.put("selected-tab", tabPane.getSelectionModel().getSelectedIndex());
         data.put("plugin-settings", pluginSettings.serialize());
+        data.put("debug-mode", debugModeCheckBox.isSelected());
+        data.put("jar-output", jarOutputField.getText());
         for (Tab tab : tabPane.getTabs()) {
             data.append("open-plugin-components", tab.getText());
         }
         for (PluginModule module : moduleSelector.getTargetItems()) {
-            data.append("enabled-modules", module.getUID());
+            data.append("enabled-modules", module.getID());
         }
         for (MavenModule mavenModule : mavenListView.getItems()) {
             data.append(mavenModule instanceof MavenDependencyModule ? "maven-dependencies" : "maven-repositories", mavenModule.serialize());
@@ -225,86 +282,48 @@ public class Project {
         for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
             extension.save(this);
         }
+        for (PluginComponent pluginComponent : pluginComponents) {
+            pluginComponent.save();
+            if (pluginComponent.isDisabled()) {
+                data.append("disabled-plugin-components", pluginComponent.getName());
+            }
+        }
         Files.createDirectories(directory);
         Files.writeString(dataFile, data.toString(2));
-        for (Map.Entry<String, PluginComponentPane> entry : openPluginComponents.entrySet()) {
-            savePluginComponent(entry.getKey(), entry.getValue().getBlock());
-        }
     }
 
-    private void savePluginComponent(String name, PluginComponentBlock block) throws IOException {
-        Files.createDirectories(pluginComponentDirectory);
-        Files.writeString(pluginComponentDirectory.resolve(name), block.serialize().toString());
-    }
-
-    private PluginComponentBlock loadPluginComponent(String name) throws IOException, JSONException {
-        PluginComponentBlock block = BlockRegistry.newPluginComponent(new JSONObject(Files.readString(pluginComponentDirectory.resolve(name))));
-        block.updateState();
-        return block;
-    }
-
-    public Set<PluginComponentBlock> loadAllPluginComponents() throws IOException {
-        Set<PluginComponentBlock> blocks = openPluginComponents.values().stream().map(PluginComponentPane::getBlock).collect(Collectors.toSet());
-        if (Files.exists(pluginComponentDirectory)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
-                for (Path path : stream) {
-                    String name = path.getFileName().toString();
-                    if (!openPluginComponents.containsKey(name)) {
-                        blocks.add(loadPluginComponent(name));
+    public void openPluginComponent(PluginComponent pluginComponent) {
+        tabPane.getSelectionModel().select(openPluginComponents.computeIfAbsent(pluginComponent, k -> {
+            try {
+                pluginComponent.load();
+                Tab newTab = new Tab(k.getName(), pluginComponent.getPane());
+                tabPane.getTabs().add(newTab);
+                splitPane.getItems().set(1, tabPane);
+                newTab.setOnClosed(e -> {
+                    try {
+                        openPluginComponents.remove(pluginComponent);
+                        if (tabPane.getTabs().isEmpty()) {
+                            splitPane.getItems().set(1, placeholderPane);
+                        }
+                        pluginComponent.unload();
+                        VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_saved"));
+                    } catch (IOException ex) {
+                        VisualBukkitApp.displayException(ex);
                     }
-                }
-            }
-        }
-        return blocks;
-    }
-
-    private void openPluginComponent(String name) {
-        if (!openPluginComponents.containsKey(name)) {
-            try {
-                addPluginComponent(name, loadPluginComponent(name));
-            } catch (IOException | JSONException e) {
+                });
+                return newTab;
+            } catch (IOException e) {
                 VisualBukkitApp.displayException(e);
+                return null;
             }
-        }
-        for (Tab tab : tabPane.getTabs()) {
-            if (name.equals(tab.getText())) {
-                tabPane.getSelectionModel().select(tab);
-                return;
-            }
-        }
-    }
-
-    private void addPluginComponent(String name, PluginComponentBlock block) {
-        PluginComponentPane pluginComponentPane = new PluginComponentPane(block);
-        Tab tab = new Tab(name, pluginComponentPane);
-        openPluginComponents.put(name, pluginComponentPane);
-        tabPane.getTabs().add(tab);
-        tabPane.getSelectionModel().select(tab);
-        splitPane.getItems().set(1, tabPane);
-        tab.setOnClosed(e -> {
-            try {
-                savePluginComponent(name, block);
-                openPluginComponents.remove(name);
-                if (tabPane.getTabs().isEmpty()) {
-                    splitPane.getItems().set(1, placeholderPane);
-                }
-                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_saved"));
-            } catch (IOException ex) {
-                VisualBukkitApp.displayException(ex);
-            }
-        });
+        }));
     }
 
     public void showPluginComponents() {
-        ListView<String> listView = new ListView<>();
+        ListView<PluginComponent> listView = new ListView<>();
+        listView.getItems().setAll(pluginComponents);
         listView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_plugin_components")));
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        if (Files.exists(pluginComponentDirectory)) {
-            String[] files = pluginComponentDirectory.toFile().list();
-            if (files != null) {
-                listView.getItems().setAll(new TreeSet<>(Arrays.asList(files)));
-            }
-        }
         Button addButton = new Button(VisualBukkitApp.localizedText("button.add"));
         Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
         Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
@@ -317,13 +336,13 @@ public class Project {
         });
         openButton.setOnAction(e -> {
             popupWindow.close();
-            for (String pluginComponent : listView.getSelectionModel().getSelectedItems()) {
+            for (PluginComponent pluginComponent : listView.getSelectionModel().getSelectedItems()) {
                 openPluginComponent(pluginComponent);
             }
         });
         deleteButton.setOnAction(e -> {
             popupWindow.close();
-            for (String pluginComponent : listView.getSelectionModel().getSelectedItems()) {
+            for (PluginComponent pluginComponent : listView.getSelectionModel().getSelectedItems()) {
                 promptDeletePluginComponent(pluginComponent);
             }
         });
@@ -331,12 +350,12 @@ public class Project {
         deleteButton.disableProperty().bind(openButton.disableProperty());
         listView.setCellFactory(new Callback<>() {
             @Override
-            public ListCell<String> call(ListView<String> param) {
-                ListCell<String> cell = new ListCell<>() {
+            public ListCell<PluginComponent> call(ListView<PluginComponent> param) {
+                ListCell<PluginComponent> cell = new ListCell<>() {
                     @Override
-                    protected void updateItem(String item, boolean empty) {
+                    protected void updateItem(PluginComponent item, boolean empty) {
                         super.updateItem(item, empty);
-                        setText(item != null ? item : "");
+                        setText(item != null ? item.getName() : "");
                     }
                 };
                 cell.setOnMouseClicked(e -> {
@@ -366,9 +385,10 @@ public class Project {
         dialog.showAndWait().ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK && isPluginComponentNameValid(nameField.getText())) {
                 try {
-                    PluginComponentBlock block = typeComboBox.getValue().newBlock();
-                    savePluginComponent(nameField.getText(), block);
-                    addPluginComponent(nameField.getText(), block);
+                    PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(nameField.getText()), typeComboBox.getValue().newBlock());
+                    pluginComponent.save();
+                    pluginComponents.add(pluginComponent);
+                    openPluginComponent(pluginComponent);
                     VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_added"));
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
@@ -377,9 +397,9 @@ public class Project {
         });
     }
 
-    public void promptDeletePluginComponent(String name) {
+    public void promptDeletePluginComponent(PluginComponent pluginComponent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), name));
+        alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), pluginComponent.getName()));
         alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.CANCEL);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.YES)).setDefaultButton(false);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
@@ -388,9 +408,9 @@ public class Project {
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == ButtonType.YES) {
                 try {
-                    Files.deleteIfExists(pluginComponentDirectory.resolve(name));
-                    openPluginComponents.remove(name);
-                    tabPane.getTabs().removeIf(tab -> name.equals(tab.getText()));
+                    pluginComponent.delete();
+                    pluginComponents.remove(pluginComponent);
+                    tabPane.getTabs().remove(openPluginComponents.remove(pluginComponent));
                     if (tabPane.getTabs().isEmpty()) {
                         splitPane.getItems().set(1, placeholderPane);
                     }
@@ -400,6 +420,15 @@ public class Project {
                 }
             }
         });
+    }
+
+    public void promptDeletePluginComponent(PluginComponentBlock block) {
+        for (PluginComponent pluginComponent : new HashSet<>(openPluginComponents.keySet())) {
+            if (block.equals(pluginComponent.getBlock().orElse(null))) {
+                promptDeletePluginComponent(pluginComponent);
+                return;
+            }
+        }
     }
 
     private boolean isPluginComponentNameValid(String name) {
@@ -484,10 +513,10 @@ public class Project {
         });
     }
 
-    public void build() {
+    public CompletableFuture<Void> build() {
         VisualBukkitApp.getLogger().info("Building plugin...");
         VisualBukkitApp.getLogWindow().show();
-        BackgroundTaskExecutor.executeAndWait(() -> {
+        return BackgroundTaskExecutor.execute(() -> {
             try {
                 String name = pluginSettings.getPluginName();
                 String version = pluginSettings.getPluginVersion();
@@ -527,7 +556,7 @@ public class Project {
                     }
                 }
 
-                BuildInfo buildInfo = new BuildInfo(mainClass);
+                BuildInfo buildInfo = new BuildInfo(mainClass, debugModeCheckBox.isSelected());
                 for (PluginModule module : moduleSelector.getTargetItems()) {
                     module.prepareBuild(buildInfo);
                 }
@@ -536,7 +565,11 @@ public class Project {
                 }
 
                 StringBuilder commandsBuilder = new StringBuilder("commands:\n");
-                for (PluginComponentBlock block : loadAllPluginComponents()) {
+                for (PluginComponent pluginComponent : pluginComponents) {
+                    if (pluginComponent.isDisabled()) {
+                        continue;
+                    }
+                    PluginComponentBlock block = pluginComponent.load();
                     block.prepareBuild(buildInfo);
                     if (block instanceof CompCommand command && !command.getName().isBlank()) {
                         commandsBuilder.append("  ").append(command.getName()).append(":\n");
@@ -556,6 +589,7 @@ public class Project {
                             commandsBuilder.append("    usage: \"").append(command.getUsage()).append("\"\n");
                         }
                     }
+                    pluginComponent.unload();
                 }
 
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString());
@@ -568,19 +602,43 @@ public class Project {
                 request.setBaseDirectory(buildDirectory.toFile());
                 request.setGoals(Arrays.asList("clean", "package"));
                 request.setBatchMode(true);
-                MavenUtil.execute(request);
+                InvocationResult result = MavenUtil.execute(request);
+                if (result.getExecutionException() != null) {
+                    VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to execute maven", result.getExecutionException());
+                } else if (result.getExitCode() == 0 && !jarOutputField.getText().isBlank()) {
+                    Path outputDir = Paths.get(jarOutputField.getText());
+                    if (Files.exists(outputDir) && !outputDir.equals(buildDirectory.resolve("target"))) {
+                        try (DirectoryStream<Path> stream = Files.newDirectoryStream(buildDirectory.resolve("target"), "*.jar")) {
+                            for (Path path : stream) {
+                                String fileName = path.getFileName().toString();
+                                if (!fileName.startsWith("original-")) {
+                                    Files.copy(path, outputDir.resolve(path.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+                                }
+                            }
+                        }
+                    }
+                }
             } catch (Exception e) {
                 VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to build plugin", e);
             }
         });
     }
 
-    public Tab getOpenTab() {
-        return tabPane.getSelectionModel().getSelectedItem();
+    public boolean isOpen(PluginComponent pluginComponent) {
+        return openPluginComponents.containsKey(pluginComponent);
     }
 
-    public PluginComponentPane getOpenPluginComponent() {
-        return getOpenTab() != null ? (PluginComponentPane) getOpenTab().getContent() : null;
+    public PluginComponent getOpenPluginComponent() {
+        for (Map.Entry<PluginComponent, Tab> entry : openPluginComponents.entrySet()) {
+            if (entry.getValue().equals(tabPane.getSelectionModel().getSelectedItem())) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    public Set<PluginComponent> getPluginComponents() {
+        return pluginComponents;
     }
 
     public String getName() {
@@ -589,5 +647,9 @@ public class Project {
 
     public Path getDirectory() {
         return directory;
+    }
+
+    public JSONObject getData() {
+        return data;
     }
 }

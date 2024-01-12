@@ -32,11 +32,11 @@ public class BlockRegistry {
     public static void register(Class<?> clazz) {
         BlockDefinition definition = clazz.getAnnotation(BlockDefinition.class);
         if (PluginComponentBlock.class.isAssignableFrom(clazz)) {
-            pluginComponents.put(definition.uid(), new BlockFactory<>(clazz));
+            pluginComponents.put(definition.id(), new BlockFactory<>(clazz));
         } else if (StatementBlock.class.isAssignableFrom(clazz)) {
-            statements.put(definition.uid(), new BlockFactory<>(clazz));
+            statements.put(definition.id(), new BlockFactory<>(clazz));
         } else if (ExpressionBlock.class.isAssignableFrom(clazz)) {
-            expressions.put(definition.uid(), new BlockFactory<>(clazz));
+            expressions.put(definition.id(), new BlockFactory<>(clazz));
         } else {
             throw new UnsupportedOperationException();
         }
@@ -49,15 +49,15 @@ public class BlockRegistry {
     }
 
     public static PluginComponentBlock newPluginComponent(JSONObject json) {
-        return getPluginComponent(json.optString("uid")).newBlock(json);
+        return getPluginComponent(json.optString("type")).newBlock(json);
     }
 
     public static StatementBlock newStatement(JSONObject json) {
-        return getStatement(json.optString("uid")).newBlock(json);
+        return getStatement(json.optString("type")).newBlock(json);
     }
 
     public static ExpressionBlock newExpression(JSONObject json) {
-        return getExpression(json.optString("uid")).newBlock(json);
+        return getExpression(json.optString("type")).newBlock(json);
     }
 
     public static BlockFactory<PluginComponentBlock> getPluginComponent(String id) {

@@ -5,8 +5,8 @@ import org.json.JSONObject;
 
 public abstract class MavenModule extends PluginModule {
 
-    public MavenModule(String uid, String name) {
-        super(uid, name);
+    public MavenModule(String id, String name) {
+        super(id, name);
     }
 
     public abstract JSONObject serialize();

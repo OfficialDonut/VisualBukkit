@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.event.Event;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.ContextMenuEvent;
@@ -16,7 +17,7 @@ public class MultilineStringParameter extends TextArea implements BlockParameter
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return '"' + StringEscapeUtils.escapeJava(getText()) + '"';
     }
 

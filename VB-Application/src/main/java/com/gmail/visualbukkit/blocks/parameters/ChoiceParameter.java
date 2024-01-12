@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.scene.control.ComboBox;
 
 public class ChoiceParameter extends ComboBox<String> implements BlockParameter {
@@ -10,7 +11,7 @@ public class ChoiceParameter extends ComboBox<String> implements BlockParameter 
     }
 
     @Override
-    public String generateJava() {
+    public String generateJava(BuildInfo buildInfo) {
         return getValue();
     }
 
