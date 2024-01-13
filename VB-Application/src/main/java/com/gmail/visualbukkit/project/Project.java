@@ -24,6 +24,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -306,7 +307,7 @@ public class Project {
                             splitPane.getItems().set(1, placeholderPane);
                         }
                         pluginComponent.unload();
-                        VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_saved"));
+                        VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.saved_plugin_component"));
                     } catch (IOException ex) {
                         VisualBukkitApp.displayException(ex);
                     }
@@ -325,28 +326,46 @@ public class Project {
         listView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_plugin_components")));
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         Button addButton = new Button(VisualBukkitApp.localizedText("button.add"));
+        Button importButton = new Button(VisualBukkitApp.localizedText("button.import"));
+        Button exportButton = new Button(VisualBukkitApp.localizedText("button.export"));
         Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
+        Button renameButton = new Button(VisualBukkitApp.localizedText("button.rename"));
         Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
-        VBox vBox = new VBox(listView, new HBox(addButton, openButton, deleteButton));
+        VBox vBox = new VBox(listView, new HBox(addButton, importButton, exportButton, openButton, renameButton, deleteButton));
         vBox.getStyleClass().add("plugin-component-list");
         PopupWindow popupWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), vBox);
         addButton.setOnAction(e -> {
             popupWindow.close();
             promptAddPluginComponent();
         });
+        importButton.setOnAction(e -> {
+            popupWindow.close();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+            File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
+            if (file != null) {
+                promptImportPluginComponent(file.toPath());
+            }
+        });
+        exportButton.setOnAction(e -> {
+            popupWindow.close();
+            listView.getSelectionModel().getSelectedItems().forEach(this::promptExportPluginComponent);
+        });
         openButton.setOnAction(e -> {
             popupWindow.close();
-            for (PluginComponent pluginComponent : listView.getSelectionModel().getSelectedItems()) {
-                openPluginComponent(pluginComponent);
-            }
+            listView.getSelectionModel().getSelectedItems().forEach(this::openPluginComponent);
+        });
+        renameButton.setOnAction(e -> {
+            popupWindow.close();
+            listView.getSelectionModel().getSelectedItems().forEach(this::promptRenamePluginComponent);
         });
         deleteButton.setOnAction(e -> {
             popupWindow.close();
-            for (PluginComponent pluginComponent : listView.getSelectionModel().getSelectedItems()) {
-                promptDeletePluginComponent(pluginComponent);
-            }
+            listView.getSelectionModel().getSelectedItems().forEach(this::promptDeletePluginComponent);
         });
         openButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
+        exportButton.disableProperty().bind(openButton.disableProperty());
+        renameButton.disableProperty().bind(openButton.disableProperty());
         deleteButton.disableProperty().bind(openButton.disableProperty());
         listView.setCellFactory(new Callback<>() {
             @Override
@@ -389,7 +408,7 @@ public class Project {
                     pluginComponent.save();
                     pluginComponents.add(pluginComponent);
                     openPluginComponent(pluginComponent);
-                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_added"));
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.added_plugin_component"));
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
                 }
@@ -414,7 +433,7 @@ public class Project {
                     if (tabPane.getTabs().isEmpty()) {
                         splitPane.getItems().set(1, placeholderPane);
                     }
-                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.plugin_component_deleted"));
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.deleted_plugin_component"));
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
                 }
@@ -429,6 +448,69 @@ public class Project {
                 return;
             }
         }
+    }
+
+    public void promptExportPluginComponent(PluginComponent pluginComponent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+        File file = fileChooser.showSaveDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            try {
+                Files.copy(pluginComponent.getFile(), file.toPath());
+                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.exported_plugin_component"));
+            } catch (IOException ex) {
+                VisualBukkitApp.displayException(ex);
+            }
+        }
+    }
+
+    public void promptImportPluginComponent(Path file) {
+        TextInputDialog importDialog = new TextInputDialog();
+        importDialog.setTitle(VisualBukkitApp.localizedText("window.import_plugin_component"));
+        importDialog.setContentText(VisualBukkitApp.localizedText("dialog.import_plugin_component"));
+        importDialog.setHeaderText(null);
+        importDialog.setGraphic(null);
+        importDialog.showAndWait().ifPresent(name -> {
+            if (isPluginComponentNameValid(name)) {
+                try {
+                    Files.copy(file, pluginComponentDirectory.resolve(name));
+                    PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
+                    pluginComponents.add(pluginComponent);
+                    openPluginComponent(pluginComponent);
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_plugin_component"));
+                } catch (IOException e) {
+                    VisualBukkitApp.displayException(e);
+                }
+            } else {
+                promptImportPluginComponent(file);
+            }
+        });
+    }
+
+    public void promptRenamePluginComponent(PluginComponent pluginComponent) {
+        TextInputDialog renameDialog = new TextInputDialog();
+        renameDialog.setTitle(VisualBukkitApp.localizedText("window.rename_plugin_component"));
+        renameDialog.setContentText(VisualBukkitApp.localizedText("dialog.rename_plugin_component"));
+        renameDialog.setHeaderText(null);
+        renameDialog.setGraphic(null);
+        renameDialog.showAndWait().ifPresent(name -> {
+            if (isPluginComponentNameValid(name)) {
+                try {
+                    pluginComponent.save();
+                    Files.move(pluginComponent.getFile(), pluginComponentDirectory.resolve(name));
+                    pluginComponents.remove(pluginComponent);
+                    tabPane.getTabs().remove(openPluginComponents.remove(pluginComponent));
+                    PluginComponent renamedPluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
+                    pluginComponents.add(renamedPluginComponent);
+                    openPluginComponent(renamedPluginComponent);
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.renamed_plugin_component"));
+                } catch (IOException e) {
+                    VisualBukkitApp.displayException(e);
+                }
+            } else {
+                promptRenamePluginComponent(pluginComponent);
+            }
+        });
     }
 
     private boolean isPluginComponentNameValid(String name) {

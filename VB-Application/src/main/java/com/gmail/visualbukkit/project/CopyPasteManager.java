@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class CopyPasteManager {
 
@@ -35,11 +36,16 @@ public class CopyPasteManager {
     }
 
     public static ExpressionBlock pasteExpression() {
-        return BlockRegistry.newExpression(serializedBlocks.get(0));
+        ExpressionBlock block = BlockRegistry.newExpression(serializedBlocks.get(0));
+        block.setId(UUID.randomUUID().toString());
+        return block;
     }
 
     public static StatementBlock[] pasteStatement() {
-        return serializedBlocks.stream().map(BlockRegistry::newStatement).toArray(StatementBlock[]::new);
+        return serializedBlocks.stream()
+                .map(BlockRegistry::newStatement)
+                .peek(b -> b.setId(UUID.randomUUID().toString()))
+                .toArray(StatementBlock[]::new);
     }
 
     public static ReadOnlyBooleanProperty statementCopiedProperty() {

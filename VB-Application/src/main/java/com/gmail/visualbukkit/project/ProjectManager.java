@@ -6,8 +6,11 @@ import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import org.apache.commons.lang3.StringUtils;
+import org.zeroturnaround.zip.ZipUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -140,6 +143,42 @@ public class ProjectManager {
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
                 }
+            }
+        });
+    }
+
+    public static void promptExport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+        File file = fileChooser.showSaveDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            ZipUtil.pack(ProjectManager.current().getDirectory().toFile(), file);
+            VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.exported_project"));
+        }
+    }
+
+    public static void promptImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+        File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            promptImport(file);
+        }
+    }
+
+    public static void promptImport(File file) {
+        TextInputDialog importDialog = new TextInputDialog();
+        importDialog.setTitle(VisualBukkitApp.localizedText("window.import_project"));
+        importDialog.setContentText(VisualBukkitApp.localizedText("dialog.create_project"));
+        importDialog.setHeaderText(null);
+        importDialog.setGraphic(null);
+        importDialog.showAndWait().ifPresent(name -> {
+            if (isProjectNameValid(name)) {
+                ZipUtil.unpack(file, projectsDirectory.resolve(name).toFile());
+                open(name);
+                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_project"));
+            } else {
+                promptImport(file);
             }
         });
     }

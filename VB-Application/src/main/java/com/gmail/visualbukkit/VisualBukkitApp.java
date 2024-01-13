@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -89,17 +88,26 @@ public class VisualBukkitApp extends Application {
 
         rootPane.setTop(new MenuBar(
                 new Menu(localizedText("menu.file"), null,
-                        new ActionMenuItem(localizedText("menu.new_project"), e -> ProjectManager.promptCreate(true)),
-                        new ActionMenuItem(localizedText("menu.open_project"), e -> ProjectManager.promptOpen(true)),
-                        new ActionMenuItem(localizedText("menu.rename_project"), e -> ProjectManager.promptRename()),
-                        new ActionMenuItem(localizedText("menu.delete_project"), e -> ProjectManager.promptDelete()),
-                        new SeparatorMenuItem(),
-                        new Menu(localizedText("menu.open_folder"), null,
+                        new Menu(localizedText("menu.project"), null,
+                            new ActionMenuItem(localizedText("menu.new"), e -> ProjectManager.promptCreate(true)),
+                            new ActionMenuItem(localizedText("menu.open"), e -> ProjectManager.promptOpen(true)),
+                            new ActionMenuItem(localizedText("menu.import"), e -> ProjectManager.promptImport()),
+                            new ActionMenuItem(localizedText("menu.export"), e -> ProjectManager.promptExport()),
+                            new ActionMenuItem(localizedText("menu.rename"), e -> ProjectManager.promptRename()),
+                            new ActionMenuItem(localizedText("menu.delete"), e -> ProjectManager.promptDelete()),
+                            new ActionMenuItem(localizedText("menu.save"), e -> {
+                                try {
+                                    ProjectManager.current().save();
+                                    displayInfo(localizedText("notification.saved_project"));
+                                } catch (IOException ex) {
+                                    displayException(ex);
+                                }
+                            })),
+                        new Menu(localizedText("menu.folder"), null,
                                 new ActionMenuItem(localizedText("menu.project"), e -> openURI(ProjectManager.current().getDirectory().toUri())),
                                 new ActionMenuItem(localizedText("menu.extensions"), e -> openURI(dataDirectory.resolve("extensions").toUri())),
                                 new ActionMenuItem(localizedText("menu.themes"), e -> openURI(dataDirectory.resolve("themes").toUri()))),
-                        new ActionMenuItem(localizedText("menu.open_log"), e -> logWindow.show()),
-                        new SeparatorMenuItem(),
+                        new ActionMenuItem(localizedText("menu.log"), e -> logWindow.show()),
                         new ActionMenuItem(localizedText("menu.restart"), e -> {}),
                         new ActionMenuItem(localizedText("menu.exit"), e -> Platform.exit())),
                 new Menu(localizedText("menu.edit"), null,
@@ -120,6 +128,14 @@ public class VisualBukkitApp extends Application {
                     UndoManager.current().redo();
                 } else {
                     UndoManager.current().undo();
+                }
+            }
+            if (e.isShortcutDown() && e.getCode() == KeyCode.S) {
+                try {
+                    ProjectManager.current().save();
+                    displayInfo(localizedText("notification.saved_project"));
+                } catch (IOException ex) {
+                    displayException(ex);
                 }
             }
         });

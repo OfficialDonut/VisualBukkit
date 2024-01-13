@@ -110,6 +110,10 @@ public class PluginComponent implements Comparable<PluginComponent> {
         return file.getFileName().toString();
     }
 
+    public Path getFile() {
+        return file;
+    }
+
     public SimpleBooleanProperty disabledProperty() {
         return disabled;
     }
