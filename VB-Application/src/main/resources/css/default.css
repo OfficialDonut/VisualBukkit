@@ -146,6 +146,20 @@ HBox {
     -fx-spacing: 0.5em;
 }
 
+.icon-button {
+    -fx-background-color: transparent !important;
+    -fx-padding: 0.1em;
+}
+
+.icon-button:hover {
+    -fx-cursor: default;
+    -fx-opacity: 0.75;
+}
+
+.icon-button:pressed {
+    -fx-opacity: 0.5;
+}
+
 .list-selection-view {
     -fx-pref-height: 30em;
     -fx-pref-width: 40em;
@@ -292,18 +306,4 @@ HBox {
 
 .statement-source:hover {
     -fx-cursor: closed-hand;
-}
-
-.text-icon-button {
-    -fx-background-color: transparent !important;
-    -fx-padding: 0.1em;
-}
-
-.text-icon-button:hover {
-    -fx-cursor: default;
-    -fx-opacity: 0.75;
-}
-
-.text-icon-button:pressed {
-    -fx-opacity: 0.5;
 }

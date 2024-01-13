@@ -56,7 +56,7 @@ public class VisualBukkitApp extends Application {
     private static JSONObject data = new JSONObject();
 
     private static final BorderPane rootPane = new BorderPane();
-    private static final LogWindow logWindow = new LogWindow();
+    private static LogWindow logWindow;
     private static Stage primaryStage;
 
     @Override
@@ -68,7 +68,7 @@ public class VisualBukkitApp extends Application {
         logFileHandler.setFormatter(new SimpleFormatter());
         logFileHandler.setLevel(Level.ALL);
         logger.addHandler(logFileHandler);
-        logger.addHandler(logWindow.getHandler());
+        logger.addHandler((logWindow = new LogWindow()).getHandler());
         logger.info("Visual Bukkit v" + version);
 
         DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);

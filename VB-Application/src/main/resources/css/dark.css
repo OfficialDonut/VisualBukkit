@@ -1,5 +1,13 @@
 @import "default.css"
 
+.block .ikonli-font-icon {
+   -fx-icon-color: black;
+}
+
+.ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
 .project-pane > .button-bar {
     -fx-border-color: gray;
     -fx-border-width: 1 0 0 0;

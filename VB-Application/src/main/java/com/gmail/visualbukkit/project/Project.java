@@ -12,7 +12,7 @@ import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.gmail.visualbukkit.ui.ActionButton;
 import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
 import com.gmail.visualbukkit.ui.PopupWindow;
-import com.gmail.visualbukkit.ui.TextIconButton;
+import com.gmail.visualbukkit.ui.IconButton;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
@@ -45,6 +45,9 @@ import org.jboss.forge.roaster.model.source.MethodSource;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeRegular;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 import java.io.IOException;
@@ -134,7 +137,7 @@ public class Project {
             GridPane.setValignment(label, VPos.TOP);
             GridPane gridPane = new GridPane();
             gridPane.addRow(2, label, new CheckTreeView<>(rootItem));
-            gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("label.jar_output")), new HBox(jarOutputField, new TextIconButton("\uD83D\uDCC1", e2 -> {
+            gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("label.jar_output")), new HBox(jarOutputField, new IconButton(FontAwesomeRegular.FOLDER_OPEN, e2 -> {
                 File dir = new DirectoryChooser().showDialog(pluginSettingsWindow);
                 if (dir != null) {
                     jarOutputField.setText(dir.getAbsolutePath());
@@ -152,15 +155,16 @@ public class Project {
         });
 
         Button buildButton = new Button(VisualBukkitApp.localizedText("button.build_plugin"));
+        buildButton.setGraphic(new FontIcon(FontAwesomeSolid.HAMMER));
         buildButton.setOnAction(e -> {
             buildButton.setDisable(true);
             build().whenComplete((u, t) -> Platform.runLater(() -> buildButton.setDisable(false)));
         });
 
         HBox buttonBar = new HBox(
-                new ActionButton(VisualBukkitApp.localizedText("button.add_component"), e -> promptAddPluginComponent()),
-                new ActionButton(VisualBukkitApp.localizedText("button.plugin_components"), e -> showPluginComponents()),
-                new ActionButton(VisualBukkitApp.localizedText("button.plugin_settings"), e -> pluginSettingsWindow.show()),
+                new ActionButton(VisualBukkitApp.localizedText("button.add_component"), FontAwesomeSolid.PLUS, e -> promptAddPluginComponent()),
+                new ActionButton(VisualBukkitApp.localizedText("button.plugin_components"), FontAwesomeSolid.LIST, e -> showPluginComponents()),
+                new ActionButton(VisualBukkitApp.localizedText("button.plugin_settings"), FontAwesomeSolid.COG, e -> pluginSettingsWindow.show()),
                 buildButton);
         buttonBar.getStyleClass().add("button-bar");
 

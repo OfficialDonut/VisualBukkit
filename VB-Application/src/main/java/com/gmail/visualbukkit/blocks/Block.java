@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.ui.TextIconButton;
+import com.gmail.visualbukkit.ui.IconButton;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -20,6 +20,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,10 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
         setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
-                getPluginComponentBlock().updateState();
+                PluginComponentBlock block = getPluginComponentBlock();
+                if (block != null) {
+                    block.updateState();
+                }
                 requestFocus();
                 e.consume();
             }
@@ -74,8 +78,8 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public <T extends Node & BlockParameter> void addParameter(String labelText, String tooltip, T parameter) {
         if (parameters == null) {
-            TextIconButton toggleCollapseButton = new TextIconButton("▼", e -> collapsed.set(!isCollapsed()));
-            toggleCollapseButton.textProperty().bind(Bindings.when(collapsed).then("▶").otherwise("▼"));
+            IconButton toggleCollapseButton = new IconButton(FontAwesomeSolid.CARET_DOWN, e -> collapsed.set(!isCollapsed()));
+            toggleCollapseButton.getIcon().iconCodeProperty().bind(Bindings.when(collapsed).then(FontAwesomeSolid.CARET_RIGHT).otherwise(FontAwesomeSolid.CARET_DOWN));
             addToHeader(toggleCollapseButton);
             getChildren().add(1, parameterGrid = new GridPane());
             parameterGrid.getStyleClass().add("parameter-grid");

@@ -2,7 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.UndoManager;
-import com.gmail.visualbukkit.ui.TextIconButton;
+import com.gmail.visualbukkit.ui.IconButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.textfield.CustomTextField;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class StatementSelector extends VBox {
         listView.prefHeightProperty().bind(heightProperty());
 
         CustomTextField searchField = new CustomTextField();
-        TextIconButton clearButton = new TextIconButton("✕", e -> searchField.clear());
+        IconButton clearButton = new IconButton(FontAwesomeSolid.TIMES, e -> searchField.clear());
         searchField.textProperty().addListener((o, oldValue, newValue) -> filteredList.setPredicate(s -> StringUtils.containsIgnoreCase(s.getFactory().getBlockDefinition().name(), searchField.getText())));
         searchField.setRight(clearButton);
 
