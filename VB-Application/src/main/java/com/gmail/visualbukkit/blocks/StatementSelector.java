@@ -2,10 +2,12 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.IconButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
@@ -15,8 +17,8 @@ import javafx.scene.layout.VBox;
 import org.apache.commons.lang3.StringUtils;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
-
-import java.util.Set;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.lineawesome.LineAwesomeSolid;
 
 public class StatementSelector extends VBox {
 
@@ -50,10 +52,23 @@ public class StatementSelector extends VBox {
         });
     }
 
-    public void setStatements(Set<BlockFactory<StatementBlock>> statements) {
-        this.statements.clear();
-        for (BlockFactory<StatementBlock> factory : statements) {
-            this.statements.add(new StatementSource(factory));
+    public void reloadStatements() {
+        statements.clear();
+        for (BlockFactory<StatementBlock> factory : BlockRegistry.getStatements()) {
+            StatementSource statementSource = new StatementSource(factory);
+            statements.add(statementSource);
+            if (factory.isPinned()) {
+                statementSource.setGraphic(new FontIcon(LineAwesomeSolid.THUMBTACK));
+                statementSource.setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.unpin"), e -> {
+                    BlockRegistry.setPinned(factory, false);
+                    reloadStatements();
+                })));
+            } else {
+                statementSource.setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.pin"), e -> {
+                    BlockRegistry.setPinned(factory, true);
+                    reloadStatements();
+                })));
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit;
 
+import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
@@ -25,6 +26,8 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.control.action.Action;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 import java.awt.*;
 import java.io.IOException;
@@ -117,9 +120,9 @@ public class VisualBukkitApp extends Application {
                         SettingsManager.createThemesMenu(),
                         SettingsManager.createFontSizeMenu()),
                 new Menu(localizedText("menu.help"), null,
-                        new ActionMenuItem("Github", e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
-                        new ActionMenuItem("Spigot", e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
-                        new ActionMenuItem("Discord", e -> openURI(URI.create("https://discord.gg/ugkvGpu"))))));
+                        new ActionMenuItem("Github", FontAwesomeBrands.GITHUB, e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
+                        new ActionMenuItem("Spigot", FontAwesomeSolid.FAUCET, e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
+                        new ActionMenuItem("Discord", FontAwesomeBrands.DISCORD, e -> openURI(URI.create("https://discord.gg/ugkvGpu"))))));
 
         primaryStage.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             Node focusOwner = primaryStage.getScene().getFocusOwner();
@@ -180,6 +183,7 @@ public class VisualBukkitApp extends Application {
     @Override
     public void stop() {
         logger.info("Shutting down");
+        BlockRegistry.save();
         if (ProjectManager.current() != null) {
             try {
                 ProjectManager.current().save();

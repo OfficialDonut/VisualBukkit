@@ -9,10 +9,7 @@ import com.gmail.visualbukkit.project.maven.MavenModule;
 import com.gmail.visualbukkit.project.maven.MavenRepositoryModule;
 import com.gmail.visualbukkit.project.maven.MavenUtil;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
-import com.gmail.visualbukkit.ui.ActionButton;
-import com.gmail.visualbukkit.ui.BackgroundTaskExecutor;
-import com.gmail.visualbukkit.ui.PopupWindow;
-import com.gmail.visualbukkit.ui.IconButton;
+import com.gmail.visualbukkit.ui.*;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
@@ -113,8 +110,9 @@ public class Project {
         });
         editButton.disableProperty().bind(mavenListView.getSelectionModel().selectedItemProperty().isNull());
         deleteButton.disableProperty().bind(editButton.disableProperty());
-        VBox mavenPane = new VBox(new Label(VisualBukkitApp.localizedText("label.maven_settings")), mavenListView, new HBox(addDependButton, addRepoButton, editButton, deleteButton));
+        HBox mavenPane = new HBox(mavenListView, new ButtonVBox(addDependButton, addRepoButton, editButton, deleteButton));
         mavenPane.getStyleClass().add("maven-settings-pane");
+        mavenListView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_maven_dependencies")));
 
         Tab pluginYmlTab = new Tab(VisualBukkitApp.localizedText("label.plugin_attributes"), pluginSettings.getGrid());
         Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
@@ -259,7 +257,7 @@ public class Project {
         }
         tabPane.getSelectionModel().select(data.optInt("selected-tab"));
 
-        statementSelector.setStatements(BlockRegistry.getStatements());
+        statementSelector.reloadStatements();
         VisualBukkitApp.getRootPane().setCenter(projectPane);
         VisualBukkitApp.getData().put("current-project", getName());
         VisualBukkitApp.getPrimaryStage().setTitle("Visual Bukkit - " + getName());
@@ -335,9 +333,9 @@ public class Project {
         Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
         Button renameButton = new Button(VisualBukkitApp.localizedText("button.rename"));
         Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
-        VBox vBox = new VBox(listView, new HBox(addButton, importButton, exportButton, openButton, renameButton, deleteButton));
-        vBox.getStyleClass().add("plugin-component-list");
-        PopupWindow popupWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), vBox);
+        HBox hBox = new HBox(listView, new ButtonVBox(addButton, importButton, exportButton, openButton, renameButton, deleteButton));
+        hBox.getStyleClass().add("plugin-component-list");
+        PopupWindow popupWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), hBox);
         addButton.setOnAction(e -> {
             popupWindow.close();
             promptAddPluginComponent();

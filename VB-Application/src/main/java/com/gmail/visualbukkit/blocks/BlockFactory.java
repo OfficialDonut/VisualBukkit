@@ -8,9 +8,15 @@ import java.util.logging.Level;
 public class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>> {
 
     private final Class<?> blockClass;
+    private boolean pinned;
 
-    public BlockFactory(Class<?> blockClass) {
+    protected BlockFactory(Class<?> blockClass) {
         this.blockClass = blockClass;
+    }
+
+    protected BlockFactory(Class<?> blockClass, boolean pinned) {
+        this(blockClass);
+        this.pinned = pinned;
     }
 
     @SuppressWarnings("unchecked")
@@ -52,12 +58,26 @@ public class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>
 
     @Override
     public int compareTo(BlockFactory o) {
+        if (pinned && !o.pinned) {
+            return -1;
+        }
+        if (o.pinned && !pinned) {
+            return 1;
+        }
         return getBlockDefinition().name().compareTo(o.getBlockDefinition().name());
     }
 
     @Override
     public String toString() {
         return getBlockDefinition().name();
+    }
+
+    protected void setPinned(boolean pinned) {
+        this.pinned = pinned;
+    }
+
+    public boolean isPinned() {
+        return pinned;
     }
 
     public BlockDefinition getBlockDefinition() {

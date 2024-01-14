@@ -2,19 +2,29 @@ package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.google.common.reflect.ClassPath;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class BlockRegistry {
 
     private static final Map<String, BlockFactory<PluginComponentBlock>> pluginComponents = new HashMap<>();
     private static final Map<String, BlockFactory<StatementBlock>> statements = new HashMap<>();
     private static final Map<String, BlockFactory<ExpressionBlock>> expressions = new HashMap<>();
+    private static final Set<String> pinnedBlocks = new HashSet<>();
+
+    static {
+        JSONArray pinnedBlocksJson = VisualBukkitApp.getData().optJSONArray("pinned-blocks");
+        if (pinnedBlocksJson != null) {
+            for (Object o : pinnedBlocksJson) {
+                if (o instanceof String s) {
+                    pinnedBlocks.add(s);
+                }
+            }
+        }
+    }
 
     public static void register(ClassLoader classLoader, String packageName) {
         try {
@@ -32,11 +42,11 @@ public class BlockRegistry {
     public static void register(Class<?> clazz) {
         BlockDefinition definition = clazz.getAnnotation(BlockDefinition.class);
         if (PluginComponentBlock.class.isAssignableFrom(clazz)) {
-            pluginComponents.put(definition.id(), new BlockFactory<>(clazz));
+            pluginComponents.put(definition.id(), new BlockFactory<>(clazz, pinnedBlocks.contains(definition.id())));
         } else if (StatementBlock.class.isAssignableFrom(clazz)) {
-            statements.put(definition.id(), new BlockFactory<>(clazz));
+            statements.put(definition.id(), new BlockFactory<>(clazz, pinnedBlocks.contains(definition.id())));
         } else if (ExpressionBlock.class.isAssignableFrom(clazz)) {
-            expressions.put(definition.id(), new BlockFactory<>(clazz));
+            expressions.put(definition.id(), new BlockFactory<>(clazz, pinnedBlocks.contains(definition.id())));
         } else {
             throw new UnsupportedOperationException();
         }
@@ -46,6 +56,20 @@ public class BlockRegistry {
         pluginComponents.clear();
         statements.clear();
         expressions.clear();
+    }
+
+    public static void save() {
+        VisualBukkitApp.getData().remove("pinned-blocks");
+        pinnedBlocks.forEach(s -> VisualBukkitApp.getData().append("pinned-blocks", s));
+    }
+
+    public static void setPinned(BlockFactory<?> factory, boolean pinned) {
+        factory.setPinned(pinned);
+        if (pinned) {
+            pinnedBlocks.add(factory.getBlockDefinition().id());
+        } else {
+            pinnedBlocks.remove(factory.getBlockDefinition().id());
+        }
     }
 
     public static PluginComponentBlock newPluginComponent(JSONObject json) {

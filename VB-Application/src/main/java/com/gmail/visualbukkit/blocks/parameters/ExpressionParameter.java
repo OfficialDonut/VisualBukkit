@@ -1,18 +1,16 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.blocks.BlockFactory;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
+import com.gmail.visualbukkit.blocks.ExpressionSelector;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
-import com.gmail.visualbukkit.ui.PopOverSelector;
 import javafx.css.PseudoClass;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Region;
 import org.json.JSONObject;
@@ -23,15 +21,12 @@ public class ExpressionParameter extends Region implements BlockParameter {
     private static final PseudoClass DRAG_OVER_STYLE_CLASS = PseudoClass.getPseudoClass("drag-over");
 
     private final ClassInfo type;
-    private final PopOverSelector<BlockFactory<ExpressionBlock>> expressionSelector;
+    private final ExpressionSelector expressionSelector;
     private ExpressionBlock expression;
 
     public ExpressionParameter(ClassInfo type) {
         this.type = type;
-        expressionSelector = new PopOverSelector<>(BlockRegistry.getExpressions());
-        expressionSelector.getStyleClass().add("expression-parameter");
-        expressionSelector.setPromptText("<" + type.getSimpleName() + ">");
-        expressionSelector.setTooltip(new Tooltip(type.getName()));
+        expressionSelector = new ExpressionSelector(type);
 
         expressionSelector.setSelectAction(factory -> {
             UndoManager.current().execute(() -> setExpression(factory.newBlock()));

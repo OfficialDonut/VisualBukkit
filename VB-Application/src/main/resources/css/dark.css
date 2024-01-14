@@ -4,6 +4,10 @@
    -fx-icon-color: black;
 }
 
+.block .list-view .ikonli-font-icon {
+   -fx-icon-color: white;
+}
+
 .ikonli-font-icon {
     -fx-icon-color: white;
 }
@@ -22,4 +26,8 @@
     -fx-control-inner-background-alt: rgb(30, 30, 30);
     -fx-default-button: rgb(65, 65, 65);
     -fx-light-text-color: white;
+}
+
+.statement-source .ikonli-font-icon {
+    -fx-icon-color: black;
 }

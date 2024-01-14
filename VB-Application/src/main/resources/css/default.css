@@ -91,6 +91,10 @@
     -fx-spacing: 0.5em;
 }
 
+.button-vbox {
+    -fx-spacing: 0.5em;
+}
+
 .container-block {
     -fx-background-color: lightblue;
     -fx-padding: 0.5em 0.5em 2em 0.5em;
@@ -183,6 +187,10 @@ HBox {
 .maven-settings-pane {
     -fx-padding: 0.5em;
     -fx-spacing: 0.5em;
+}
+
+.maven-settings-pane > .list-view {
+    -fx-pref-width: 25em;
 }
 
 .number-field {
