@@ -208,6 +208,10 @@ HBox {
     -fx-spacing: 0.5em;
 }
 
+.plugin-component-list .list-view {
+    -fx-pref-width: 15em;
+}
+
 .plugin-component-pane {
     -fx-padding: 1em !important;
 }

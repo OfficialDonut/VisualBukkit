@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.blocks.parameters.PluginComponentParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class ExprFunctionValue extends ExpressionBlock {
 
     public ExprFunctionValue() {
-        addParameter("Function", new StringParameter());
+        addParameter("Function", new PluginComponentParameter(CompFunction.class));
         addParameter("Arguments", new ExpressionParameter(ClassInfo.of(List.class)));
     }
 

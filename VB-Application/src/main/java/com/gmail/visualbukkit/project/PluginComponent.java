@@ -2,6 +2,8 @@ package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.*;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import org.json.JSONException;
@@ -18,17 +20,32 @@ public class PluginComponent implements Comparable<PluginComponent> {
 
     private final SimpleBooleanProperty disabled = new SimpleBooleanProperty(false);
     private final Project project;
-    private final Path file;
+    private final Path directory;
+    private final Path dataFile;
+    private final Path blockFile;
     private final UndoManager undoManager;
     private final PluginComponentPane pane;
     private PluginComponentBlock block;
+    private String blockType;
 
-    protected PluginComponent(Project project, Path file) {
+    protected PluginComponent(Project project, Path directory) {
         this.project = project;
-        this.file = file;
+        this.directory = directory;
+        dataFile = directory.resolve("data.json");
+        blockFile = directory.resolve("block.json");
         undoManager = new UndoManager(this);
         pane = new PluginComponentPane();
         pane.opacityProperty().bind(Bindings.when(disabled).then(0.5).otherwise(1));
+
+        if (Files.exists(dataFile)) {
+            try {
+                JSONObject json = new JSONObject(Files.readString(dataFile));
+                disabled.set(json.optBoolean("disabled"));
+                blockType = json.optString("block-type", null);
+            } catch (IOException | JSONException e) {
+                VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to load data file", e);
+            }
+        }
     }
 
     public PluginComponent(Project project, Path file, PluginComponentBlock block) {
@@ -39,7 +56,7 @@ public class PluginComponent implements Comparable<PluginComponent> {
     public PluginComponentBlock load() throws IOException, JSONException {
         if (!isLoaded()) {
             VisualBukkitApp.getLogger().info("Loading plugin component: " + getName());
-            setBlock(BlockRegistry.newPluginComponent(new JSONObject(Files.readString(file))));
+            setBlock(BlockRegistry.newPluginComponent(new JSONObject(Files.readString(blockFile))));
             block.updateState();
         }
         return block;
@@ -48,20 +65,24 @@ public class PluginComponent implements Comparable<PluginComponent> {
     public void unload() throws IOException {
         if (isLoaded() && !project.isOpen(this)) {
             save();
-            block = null;
+            setBlock(null);
         }
     }
 
     public void save() throws IOException {
+        Files.createDirectories(directory);
+        JSONObject json = new JSONObject();
+        json.put("disabled", isDisabled());
+        json.put("block-type", blockType);
+        Files.writeString(dataFile, json.toString());
         if (isLoaded()) {
-            Files.createDirectories(file.getParent());
-            Files.writeString(file, block.serialize().toString());
+            Files.writeString(blockFile, block.serialize().toString());
         }
     }
 
     public void delete() throws IOException {
-        Files.deleteIfExists(file);
-        block = null;
+        MoreFiles.deleteRecursively(directory, RecursiveDeleteOption.ALLOW_INSECURE);
+        setBlock(null);
     }
 
     public boolean containsBlock(String blockUUID) {
@@ -69,7 +90,7 @@ public class PluginComponent implements Comparable<PluginComponent> {
             return (VisualBukkitApp.getPrimaryStage().getScene().lookup("#" + blockUUID) instanceof Block b) && b.getPluginComponentBlock().equals(block);
         } else {
             try {
-                return Files.readString(file, StandardCharsets.UTF_8).contains(blockUUID);
+                return Files.readString(blockFile, StandardCharsets.UTF_8).contains(blockUUID);
             } catch (IOException e) {
                 VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to read file", e);
                 return false;
@@ -77,12 +98,9 @@ public class PluginComponent implements Comparable<PluginComponent> {
         }
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled.set(disabled);
-    }
-
     public void setBlock(PluginComponentBlock block) {
         this.block = block;
+        blockType = block != null ? block.getDefinition().id() : null;
         pane.setBlock(block);
     }
 
@@ -98,6 +116,10 @@ public class PluginComponent implements Comparable<PluginComponent> {
         return Optional.ofNullable(block);
     }
 
+    public Optional<String> getBlockType() {
+        return Optional.ofNullable(blockType);
+    }
+
     public PluginComponentPane getPane() {
         return pane;
     }
@@ -107,11 +129,11 @@ public class PluginComponent implements Comparable<PluginComponent> {
     }
 
     public String getName() {
-        return file.getFileName().toString();
+        return directory.getFileName().toString();
     }
 
-    public Path getFile() {
-        return file;
+    public Path getDirectory() {
+        return directory;
     }
 
     public SimpleBooleanProperty disabledProperty() {
@@ -132,11 +154,11 @@ public class PluginComponent implements Comparable<PluginComponent> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PluginComponent that)) return false;
-        return file.equals(that.file);
+        return directory.equals(that.directory);
     }
 
     @Override
     public int hashCode() {
-        return file.hashCode();
+        return directory.hashCode();
     }
 }

@@ -40,7 +40,11 @@ public class PluginComponentPane extends ScrollPane {
 
     public void setBlock(PluginComponentBlock block) {
         this.block = block;
-        content.getChildren().setAll(block, block.getChildStatementHolder(), spacer);
+        if (block != null) {
+            content.getChildren().setAll(block, block.getChildStatementHolder(), spacer);
+        } else {
+            content.getChildren().clear();
+        }
     }
 
     public PluginComponentBlock getBlock() {

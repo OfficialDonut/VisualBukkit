@@ -45,6 +45,7 @@ import org.json.JSONObject;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeRegular;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +54,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Project {
@@ -230,16 +232,11 @@ public class Project {
             extension.open(this);
         }
 
-        JSONArray disabledPluginComponentsJson = data.optJSONArray("disabled-plugin-components");
-        List<Object> disabledPluginComponents = disabledPluginComponentsJson != null ? disabledPluginComponentsJson.toList() : Collections.emptyList();
         if (Files.exists(pluginComponentDirectory)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
                 for (Path path : stream) {
                     PluginComponent pluginComponent = new PluginComponent(this, path);
                     pluginComponents.add(pluginComponent);
-                    if (disabledPluginComponents.contains(pluginComponent.getName())) {
-                        pluginComponent.setDisabled(true);
-                    }
                 }
             }
         }
@@ -287,9 +284,6 @@ public class Project {
         }
         for (PluginComponent pluginComponent : pluginComponents) {
             pluginComponent.save();
-            if (pluginComponent.isDisabled()) {
-                data.append("disabled-plugin-components", pluginComponent.getName());
-            }
         }
         Files.createDirectories(directory);
         Files.writeString(dataFile, data.toString(2));
@@ -343,7 +337,7 @@ public class Project {
         importButton.setOnAction(e -> {
             popupWindow.close();
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
             File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
             if (file != null) {
                 promptImportPluginComponent(file.toPath());
@@ -454,14 +448,15 @@ public class Project {
 
     public void promptExportPluginComponent(PluginComponent pluginComponent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
         File file = fileChooser.showSaveDialog(VisualBukkitApp.getPrimaryStage());
         if (file != null) {
             try {
-                Files.copy(pluginComponent.getFile(), file.toPath());
+                pluginComponent.save();
+                ZipUtil.pack(pluginComponent.getDirectory().toFile(), file);
                 VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.exported_plugin_component"));
-            } catch (IOException ex) {
-                VisualBukkitApp.displayException(ex);
+            } catch (IOException e) {
+                VisualBukkitApp.displayException(e);
             }
         }
     }
@@ -474,15 +469,11 @@ public class Project {
         importDialog.setGraphic(null);
         importDialog.showAndWait().ifPresent(name -> {
             if (isPluginComponentNameValid(name)) {
-                try {
-                    Files.copy(file, pluginComponentDirectory.resolve(name));
-                    PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
-                    pluginComponents.add(pluginComponent);
-                    openPluginComponent(pluginComponent);
-                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_plugin_component"));
-                } catch (IOException e) {
-                    VisualBukkitApp.displayException(e);
-                }
+                ZipUtil.unpack(file.toFile(), pluginComponentDirectory.resolve(name).toFile());
+                PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
+                pluginComponents.add(pluginComponent);
+                openPluginComponent(pluginComponent);
+                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_plugin_component"));
             } else {
                 promptImportPluginComponent(file);
             }
@@ -499,7 +490,7 @@ public class Project {
             if (isPluginComponentNameValid(name)) {
                 try {
                     pluginComponent.save();
-                    Files.move(pluginComponent.getFile(), pluginComponentDirectory.resolve(name));
+                    Files.move(pluginComponent.getDirectory(), pluginComponentDirectory.resolve(name));
                     pluginComponents.remove(pluginComponent);
                     tabPane.getTabs().remove(openPluginComponents.remove(pluginComponent));
                     PluginComponent renamedPluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
@@ -719,6 +710,13 @@ public class Project {
             }
         }
         return null;
+    }
+
+    public Set<String> getPluginComponents(String type) {
+        return pluginComponents.stream()
+                .filter(p -> type.equals(p.getBlockType().orElse(null)))
+                .map(PluginComponent::getName)
+                .collect(Collectors.toSet());
     }
 
     public Set<PluginComponent> getPluginComponents() {

@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.blocks.definitions;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
-import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.blocks.parameters.PluginComponentParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class StatExecuteProcedure extends StatementBlock {
 
     public StatExecuteProcedure() {
-        addParameter("Procedure", new StringParameter());
+        addParameter("Procedure", new PluginComponentParameter(CompProcedure.class));
         addParameter("Arguments", new ExpressionParameter(ClassInfo.of(List.class)));
     }
 
