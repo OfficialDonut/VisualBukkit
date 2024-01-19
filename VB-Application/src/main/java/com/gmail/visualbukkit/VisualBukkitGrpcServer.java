@@ -1,7 +1,7 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.Block;
-import com.gmail.visualbukkit.blocks.definitions.ExprSerializedItemStack;
+import com.gmail.visualbukkit.blocks.definitions.core.ExprSerializedItemStack;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.PluginComponent;
 import com.gmail.visualbukkit.project.ProjectManager;
@@ -118,7 +118,6 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_item"));
-            alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
             alert.setHeaderText(null);
             alert.setGraphic(null);
             alert.showAndWait().ifPresent(buttonType -> {
@@ -142,7 +141,6 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_report_exception"));
-            alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
             alert.setHeaderText(null);
             alert.setGraphic(null);
             alert.showAndWait().ifPresent(buttonType -> {

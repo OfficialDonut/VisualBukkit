@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.blocks;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
@@ -34,6 +35,8 @@ public class StatementSource extends Label {
             StatementConnector.hideCurrent();
             e.consume();
         });
+
+        Tooltip.install(this, new Tooltip(factory.getBlockDefinition().description()));
     }
 
     public BlockFactory<StatementBlock> getFactory() {

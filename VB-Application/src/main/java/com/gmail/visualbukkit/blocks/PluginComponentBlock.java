@@ -29,7 +29,7 @@ public non-sealed abstract class PluginComponentBlock extends Block {
 
     @Override
     public void delete() {
-        ProjectManager.current().promptDeletePluginComponent(this);
+        ProjectManager.current().promptDeletePluginComponent(ProjectManager.current().getPluginComponent(this));
     }
 
     @Override

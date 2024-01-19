@@ -10,9 +10,9 @@ public abstract class PluginModule implements Comparable<PluginModule> {
         this.name = name;
     }
 
-    public void enable() {}
+    public abstract void enable();
 
-    public void prepareBuild(BuildInfo buildInfo) {}
+    public abstract void prepareBuild(BuildInfo buildInfo);
 
     @Override
     public int compareTo(PluginModule other) {

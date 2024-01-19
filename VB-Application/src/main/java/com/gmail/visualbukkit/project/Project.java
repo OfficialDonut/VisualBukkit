@@ -3,7 +3,7 @@ package com.gmail.visualbukkit.project;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.VisualBukkitExtension;
 import com.gmail.visualbukkit.blocks.*;
-import com.gmail.visualbukkit.blocks.definitions.CompCommand;
+import com.gmail.visualbukkit.blocks.definitions.core.CompCommand;
 import com.gmail.visualbukkit.project.maven.MavenDependencyModule;
 import com.gmail.visualbukkit.project.maven.MavenModule;
 import com.gmail.visualbukkit.project.maven.MavenRepositoryModule;
@@ -87,7 +87,6 @@ public class Project {
         resourcesDirectory = directory.resolve("resource_files");
         buildDirectory = directory.resolve("build");
 
-        moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> reloadRequired = true);
         moduleSelector.setSourceHeader(new Label(VisualBukkitApp.localizedText("label.disabled")));
         moduleSelector.setTargetHeader(new Label(VisualBukkitApp.localizedText("label.enabled")));
         for (Action action : moduleSelector.getActions()) {
@@ -136,21 +135,37 @@ public class Project {
             Label label = new Label(VisualBukkitApp.localizedText("label.included"));
             GridPane.setValignment(label, VPos.TOP);
             GridPane gridPane = new GridPane();
-            gridPane.addRow(2, label, new CheckTreeView<>(rootItem));
             gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("label.jar_output")), new HBox(jarOutputField, new IconButton(FontAwesomeRegular.FOLDER_OPEN, e2 -> {
                 File dir = new DirectoryChooser().showDialog(pluginSettingsWindow);
                 if (dir != null) {
                     jarOutputField.setText(dir.getAbsolutePath());
                 }
             })));
-            gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("label.debug_mode")), debugModeCheckBox);
+            gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("label.resources")), new ActionButton(VisualBukkitApp.localizedText("button.open_folder"), e2 -> {
+                try {
+                    Files.createDirectories(resourcesDirectory);
+                    VisualBukkitApp.openURI(resourcesDirectory.toUri());
+                } catch (IOException ioe) {
+                    VisualBukkitApp.displayException(ioe);
+                }
+            }));
+            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), debugModeCheckBox);
+            gridPane.addRow(3, label, new CheckTreeView<>(rootItem));
             gridPane.getStyleClass().add("build-settings-pane");
             settingsTabPane.getTabs().set(3, new Tab(VisualBukkitApp.localizedText("label.build"), gridPane));
         });
         pluginSettingsWindow.setOnHidden(e -> {
             if (reloadRequired) {
-                reloadRequired = false;
-                ProjectManager.open(getName());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_reload")));
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == ButtonType.OK) {
+                        reloadRequired = false;
+                        ProjectManager.open(getName());
+                    }
+                });
             }
         });
 
@@ -215,10 +230,15 @@ public class Project {
                 mavenListView.getItems().add(MavenDependencyModule.deserialize((JSONObject) o));
             }
         }
+        moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> {
+            if (c.next() && (c.wasAdded() || c.wasRemoved())) {
+                reloadRequired = true;
+            }
+        });
 
         BackgroundTaskExecutor.executeAndWait(() -> {
             try {
-                BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions");
+                BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core");
                 ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk");
                 ClassRegistry.register(Project.class.getClassLoader(), "classes/paper");
                 moduleSelector.getTargetItems().forEach(PluginModule::enable);
@@ -415,13 +435,10 @@ public class Project {
     public void promptDeletePluginComponent(PluginComponent pluginComponent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), pluginComponent.getName()));
-        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.CANCEL);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.YES)).setDefaultButton(false);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
         alert.setHeaderText(null);
         alert.setGraphic(null);
         alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == ButtonType.YES) {
+            if (buttonType == ButtonType.OK) {
                 try {
                     pluginComponent.delete();
                     pluginComponents.remove(pluginComponent);
@@ -435,15 +452,6 @@ public class Project {
                 }
             }
         });
-    }
-
-    public void promptDeletePluginComponent(PluginComponentBlock block) {
-        for (PluginComponent pluginComponent : new HashSet<>(openPluginComponents.keySet())) {
-            if (block.equals(pluginComponent.getBlock().orElse(null))) {
-                promptDeletePluginComponent(pluginComponent);
-                return;
-            }
-        }
     }
 
     public void promptExportPluginComponent(PluginComponent pluginComponent) {
@@ -615,8 +623,8 @@ public class Project {
                 JavaClassSource mainClass = Roaster.parse(JavaClassSource.class, Resources.toString(Project.class.getResource("/plugin/PluginMain.java"), StandardCharsets.UTF_8));
                 mainClass.setPackage(packageName);
 
-                if (Files.exists(resourcesDir)) {
-                    try (Stream<Path> stream = Files.walk(resourcesDir)) {
+                if (Files.exists(resourcesDirectory)) {
+                    try (Stream<Path> stream = Files.walk(resourcesDirectory)) {
                         for (Path path : stream.toArray(Path[]::new)) {
                             if (Files.isRegularFile(path) && !Files.isHidden(path)) {
                                 Path relativePath = resourcesDirectory.relativize(path);
@@ -665,6 +673,11 @@ public class Project {
                         }
                     }
                     pluginComponent.unload();
+                }
+
+                for (JavaClassSource clazz : buildInfo.getClasses()) {
+                    clazz.setPackage(packageName);
+                    Files.writeString(packageDir.resolve(clazz.getName() + ".java"), clazz.toString());
                 }
 
                 Files.writeString(packageDir.resolve(mainClass.getName() + ".java"), mainClass.toString());
@@ -717,6 +730,15 @@ public class Project {
                 .filter(p -> type.equals(p.getBlockType().orElse(null)))
                 .map(PluginComponent::getName)
                 .collect(Collectors.toSet());
+    }
+
+    public PluginComponent getPluginComponent(PluginComponentBlock block) {
+        for (PluginComponent pluginComponent : pluginComponents) {
+            if (block.equals(pluginComponent.getBlock().orElse(null))) {
+                return pluginComponent;
+            }
+        }
+        return null;
     }
 
     public Set<PluginComponent> getPluginComponents() {

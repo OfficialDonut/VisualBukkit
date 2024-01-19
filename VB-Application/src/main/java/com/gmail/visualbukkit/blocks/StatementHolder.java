@@ -1,6 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.blocks.definitions.StatComment;
+import com.gmail.visualbukkit.blocks.definitions.core.StatComment;
 import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.scene.layout.VBox;
 

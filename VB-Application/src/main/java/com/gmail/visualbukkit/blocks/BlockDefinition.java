@@ -11,4 +11,5 @@ public @interface BlockDefinition {
 
     String id();
     String name();
+    String description() default "No description provided";
 }

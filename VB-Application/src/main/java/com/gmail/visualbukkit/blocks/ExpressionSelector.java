@@ -21,8 +21,9 @@ public class ExpressionSelector extends PopOverSelector<BlockFactory<ExpressionB
             @Override
             protected void updateItem(BlockFactory<ExpressionBlock> item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(item != null ? item.toString() : "");
                 if (item != null) {
+                    setText(item.toString());
+                    setTooltip(new Tooltip(item.getBlockDefinition().description()));
                     if (item.isPinned()) {
                         setGraphic(new FontIcon(LineAwesomeSolid.THUMBTACK));
                         setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.unpin"), e -> {
@@ -36,6 +37,9 @@ public class ExpressionSelector extends PopOverSelector<BlockFactory<ExpressionB
                             getItemList().setAll(BlockRegistry.getExpressions());
                         })));
                     }
+                } else {
+                    setText("");
+                    setTooltip(null);
                 }
             }
         });

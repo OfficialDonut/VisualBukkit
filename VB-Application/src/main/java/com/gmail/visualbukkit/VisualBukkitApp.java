@@ -219,10 +219,14 @@ public class VisualBukkitApp extends Application {
     }
 
     public static void displayException(Throwable e) {
-        logger.log(Level.SEVERE, "An unexpected error occurred", e);
-        createNotification(localizedText("notification.error_title"), localizedText("notification.unexpected_error"))
-                .action(new Action(localizedText("button.show_error"), action -> logWindow.show()))
-                .showError();
+        if (Platform.isFxApplicationThread()) {
+            logger.log(Level.SEVERE, "An unexpected error occurred", e);
+            createNotification(localizedText("notification.error_title"), localizedText("notification.unexpected_error"))
+                    .action(new Action(localizedText("button.show_error"), action -> logWindow.show()))
+                    .showError();
+        } else {
+            Platform.runLater(() -> displayException(e));
+        }
     }
 
     private static Notifications createNotification(String title, String text) {

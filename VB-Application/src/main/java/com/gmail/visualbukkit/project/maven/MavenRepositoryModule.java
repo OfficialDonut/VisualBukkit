@@ -22,7 +22,7 @@ public class MavenRepositoryModule extends MavenModule {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        buildInfo.getMavenRepositories().add(repository);
+        buildInfo.addMavenRepository(repository);
     }
 
     @Override

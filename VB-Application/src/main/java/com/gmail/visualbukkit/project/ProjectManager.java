@@ -124,13 +124,10 @@ public class ProjectManager {
     public static void promptDelete() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), currentProject.getName()));
-        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.CANCEL);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.YES)).setDefaultButton(false);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
         alert.setHeaderText(null);
         alert.setGraphic(null);
         alert.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == ButtonType.YES) {
+            if (buttonType == ButtonType.OK) {
                 try {
                     MoreFiles.deleteRecursively(currentProject.getDirectory(), RecursiveDeleteOption.ALLOW_INSECURE);
                     currentProject = null;

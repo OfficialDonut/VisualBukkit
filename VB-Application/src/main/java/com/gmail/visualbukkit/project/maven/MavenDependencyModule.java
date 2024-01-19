@@ -33,7 +33,7 @@ public class MavenDependencyModule extends MavenModule {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        buildInfo.getMavenDependencies().add(dependency);
+        buildInfo.addMavenDependency(dependency);
     }
 
     @Override

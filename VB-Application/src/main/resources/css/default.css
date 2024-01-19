@@ -319,3 +319,7 @@ HBox {
 .statement-source:hover {
     -fx-cursor: closed-hand;
 }
+
+.statement-source .tooltip {
+    -fx-font-family: "Noto Sans";
+}

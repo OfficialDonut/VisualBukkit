@@ -12,12 +12,25 @@ public class BuildInfo {
     private final Set<String> localVariables = new HashSet<>();
     private final Set<RemoteRepository> mavenRepositories = new HashSet<>();
     private final Set<Dependency> mavenDependencies = new HashSet<>();
+    private final Set<JavaClassSource> classes = new HashSet<>();
     private final JavaClassSource mainClass;
     private final boolean debugMode;
 
     public BuildInfo(JavaClassSource mainClass, boolean debugMode) {
         this.mainClass = mainClass;
         this.debugMode = debugMode;
+    }
+
+    public void addMavenRepository(RemoteRepository repository) {
+        mavenRepositories.add(repository);
+    }
+
+    public void addMavenDependency(Dependency dependency) {
+        mavenDependencies.add(dependency);
+    }
+
+    public void addClass(JavaClassSource clazz) {
+        classes.add(clazz);
     }
 
     public void addLocalVariable(String varName) {
@@ -39,6 +52,10 @@ public class BuildInfo {
 
     public Set<Dependency> getMavenDependencies() {
         return mavenDependencies;
+    }
+
+    public Set<JavaClassSource> getClasses() {
+        return classes;
     }
 
     public JavaClassSource getMainClass() {
