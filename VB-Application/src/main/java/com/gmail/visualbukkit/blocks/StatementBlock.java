@@ -104,6 +104,12 @@ public non-sealed abstract class StatementBlock extends Block {
         private JSONObject json;
 
         @Override
+        public void updateState() {
+            super.updateState();
+            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+        }
+
+        @Override
         public String generateJava(BuildInfo buildInfo) {
             return "";
         }

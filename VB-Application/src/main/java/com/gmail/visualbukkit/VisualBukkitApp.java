@@ -1,6 +1,7 @@
 package com.gmail.visualbukkit;
 
-import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.blocks.*;
+import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
@@ -10,6 +11,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
@@ -26,11 +28,13 @@ import org.controlsfx.control.Notifications;
 import org.controlsfx.control.action.Action;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 import java.awt.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -122,7 +126,8 @@ public class VisualBukkitApp extends Application {
                 new Menu(localizedText("menu.help"), null,
                         new ActionMenuItem("Github", FontAwesomeBrands.GITHUB, e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", FontAwesomeSolid.FAUCET, e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
-                        new ActionMenuItem("Discord", FontAwesomeBrands.DISCORD, e -> openURI(URI.create("https://discord.gg/ugkvGpu"))))));
+                        new ActionMenuItem("Discord", FontAwesomeBrands.DISCORD, e -> openURI(URI.create("https://discord.gg/ugkvGpu"))),
+                        new ActionMenuItem(localizedText("menu.check_for_update"), FontAwesomeSolid.CLOUD_DOWNLOAD_ALT, e -> checkForUpdate(true)))));
 
         primaryStage.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             Node focusOwner = primaryStage.getScene().getFocusOwner();
@@ -139,6 +144,27 @@ public class VisualBukkitApp extends Application {
                     displayInfo(localizedText("notification.saved_project"));
                 } catch (IOException ex) {
                     displayException(ex);
+                }
+            }
+            if (e.isShortcutDown() && e.getCode() == KeyCode.C) {
+                if (focusOwner instanceof StatementBlock block) {
+                    CopyPasteManager.copyStatement(block, false);
+                } else if (focusOwner instanceof ExpressionBlock block) {
+                    CopyPasteManager.copyExpression(block);
+                }
+            }
+            if (e.isShortcutDown() && e.getCode() == KeyCode.V) {
+                if (focusOwner instanceof StatementBlock block && CopyPasteManager.statementCopiedProperty().get()) {
+                    block.getParentStatementHolder().addAfter(block, CopyPasteManager.pasteStatement());
+                }
+            }
+            if (e.getCode() == KeyCode.DELETE) {
+                if (focusOwner instanceof Block block) {
+                    if (focusOwner instanceof PluginComponentBlock p) {
+                        ProjectManager.current().promptDeletePluginComponent(ProjectManager.current().getPluginComponent(p));
+                    } else {
+                        UndoManager.current().execute(block::delete);
+                    }
                 }
             }
         });
@@ -177,6 +203,7 @@ public class VisualBukkitApp extends Application {
             } catch (Exception e) {
                 displayException(e);
             }
+            checkForUpdate(false);
         });
     }
 
@@ -199,6 +226,34 @@ public class VisualBukkitApp extends Application {
         }
         DiscordRPC.discordShutdown();
         VisualBukkitGrpcServer.getInstance().stop();
+    }
+
+    private void checkForUpdate(boolean wasCheckRequested) {
+        try (InputStream inputStream = new URL("https://api.github.com/repos/OfficialDonut/VisualBukkit/releases/latest").openStream()) {
+            String latestVersion = new JSONObject(new JSONTokener(inputStream)).getString("tag_name");
+            if (version != null && !version.equals(latestVersion)) {
+                if (wasCheckRequested || !latestVersion.equals(data.optString("ignore_update"))) {
+                    ButtonType viewButton = new ButtonType(localizedText("button.view"));
+                    ButtonType ignoreButton = new ButtonType(localizedText("button.ignore"));
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, String.format(localizedText("dialog.update_available"), version, latestVersion), viewButton, ignoreButton);
+                    alert.getDialogPane().getScene().getWindow().setOnCloseRequest(e -> alert.getDialogPane().getScene().getWindow().hide());
+                    alert.setTitle(localizedText("window.update_checker"));
+                    alert.setHeaderText(null);
+                    alert.setGraphic(null);
+                    alert.showAndWait().ifPresent(buttonType -> {
+                        if (buttonType == viewButton) {
+                            openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/releases"));
+                        } else if (buttonType == ignoreButton) {
+                            data.put("ignore_update", latestVersion);
+                        }
+                    });
+                }
+            } else if (wasCheckRequested) {
+                VisualBukkitApp.displayInfo(localizedText("notification.no_update_available"));
+            }
+        } catch (IOException | JSONException e) {
+            VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to get latest version", e);
+        }
     }
 
     public static String localizedText(String key) {

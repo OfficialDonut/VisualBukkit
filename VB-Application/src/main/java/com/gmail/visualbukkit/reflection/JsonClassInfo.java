@@ -9,6 +9,8 @@ import java.util.TreeSet;
 public class JsonClassInfo extends ClassInfo {
 
     private final JSONObject json;
+    private Set<FieldInfo> fields;
+    private Set<ConstructorInfo> constructors;
     private Set<MethodInfo> methods;
 
     protected JsonClassInfo(JSONObject json) {
@@ -28,6 +30,34 @@ public class JsonClassInfo extends ClassInfo {
     @Override
     public String getPackage() {
         return json.getString("package");
+    }
+
+    @Override
+    public Set<FieldInfo> getFields() {
+        if (fields == null) {
+            fields = new TreeSet<>();
+            JSONArray fieldsJson = json.optJSONArray("fields");
+            if (fieldsJson != null) {
+                for (Object o : fieldsJson) {
+                    fields.add(new JsonFieldInfo((JSONObject) o));
+                }
+            }
+        }
+        return fields;
+    }
+
+    @Override
+    public Set<ConstructorInfo> getConstructors() {
+        if (constructors == null) {
+            constructors = new TreeSet<>();
+            JSONArray constructorsJson = json.optJSONArray("constructors");
+            if (constructorsJson != null) {
+                for (Object o : constructorsJson) {
+                    constructors.add(new JsonConstructorInfo(this, (JSONObject) o));
+                }
+            }
+        }
+        return constructors;
     }
 
     @Override

@@ -77,6 +77,12 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         private JSONObject json;
 
         @Override
+        public void updateState() {
+            super.updateState();
+            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+        }
+
+        @Override
         public void prepareBuild(BuildInfo buildInfo) {}
 
         @Override

@@ -37,6 +37,16 @@ public class UnknownClassInfo extends ClassInfo {
     }
 
     @Override
+    public Set<FieldInfo> getFields() {
+        return Collections.emptySet();
+    }
+
+    @Override
+    public Set<ConstructorInfo> getConstructors() {
+        return Collections.emptySet();
+    }
+
+    @Override
     public Set<MethodInfo> getMethods() {
         return Collections.emptySet();
     }

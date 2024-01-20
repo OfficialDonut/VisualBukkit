@@ -15,7 +15,19 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
 
     public abstract String getPackage();
 
+    public abstract Set<FieldInfo> getFields();
+
+    public abstract Set<ConstructorInfo> getConstructors();
+
     public abstract Set<MethodInfo> getMethods();
+
+    public Set<FieldInfo> getFields(Predicate<FieldInfo> filter) {
+        return getFields().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public Set<ConstructorInfo> getConstructors(Predicate<ConstructorInfo> filter) {
+        return getConstructors().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
+    }
 
     public Set<MethodInfo> getMethods(Predicate<MethodInfo> filter) {
         return getMethods().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
