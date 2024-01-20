@@ -32,7 +32,7 @@
     </dependencies>
 
     <build>
-        <finalName>VisualBukkitDoclet-${project.version}</finalName>
+        <finalName>VisualBukkitDoclet</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

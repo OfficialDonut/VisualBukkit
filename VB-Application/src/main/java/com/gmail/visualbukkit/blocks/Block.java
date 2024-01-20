@@ -160,6 +160,10 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
         return contextMenu;
     }
 
+    public List<BlockParameter> getParameters() {
+        return parameters;
+    }
+
     public BlockDefinition getDefinition() {
         return getClass().getAnnotation(BlockDefinition.class);
     }

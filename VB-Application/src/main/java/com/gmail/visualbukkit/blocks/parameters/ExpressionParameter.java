@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockRegistry;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.ExpressionSelector;
+import com.gmail.visualbukkit.blocks.definitions.core.*;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.UndoManager;
@@ -11,6 +12,7 @@ import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
 import javafx.css.PseudoClass;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Region;
 import org.json.JSONObject;
@@ -55,7 +57,14 @@ public class ExpressionParameter extends Region implements BlockParameter {
 
         ActionMenuItem pasteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste"), e -> UndoManager.current().execute(() -> setExpression(CopyPasteManager.pasteExpression())));
         pasteItem.disableProperty().bind(CopyPasteManager.expressionCopiedProperty().not());
-        expressionSelector.setContextMenu(new ContextMenu(pasteItem));
+        expressionSelector.setContextMenu(new ContextMenu(
+                new Menu(VisualBukkitApp.localizedText("menu.insert"), null,
+                    new ActionMenuItem("Variable", e -> UndoManager.current().execute(() -> setExpression(new ExprLocalVariable()))),
+                    new ActionMenuItem("Method", e -> UndoManager.current().execute(() -> setExpression(new ExprMethod()))),
+                    new ActionMenuItem("String", e -> UndoManager.current().execute(() -> setExpression(new ExprString()))),
+                    new ActionMenuItem("Number", e -> UndoManager.current().execute(() -> setExpression(new ExprNumber()))),
+                    new ActionMenuItem("List", e -> UndoManager.current().execute(() -> setExpression(new ExprList())))),
+                pasteItem));
 
         ExpressionBlock.DRAGGING_PROPERTY.addListener((observable, oldValue, newValue) -> expressionSelector.pseudoClassStateChanged(CONNECTING_STYLE_CLASS, newValue));
         getChildren().add(expressionSelector);

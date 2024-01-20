@@ -7,6 +7,9 @@ import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -135,6 +138,69 @@ public class VisualBukkitPlugin extends JavaPlugin {
             return true;
         }
 
+        if (args.length == 2 && args[0].equalsIgnoreCase("export") && args[1].equalsIgnoreCase("loc")) {
+            if (sender instanceof Player player) {
+                sendFormatted("&eExporting location...", player);
+                exportLocation(player.getLocation(), player);
+            } else {
+                sendFormatted("&cThis command must be executed by a player.", sender);
+            }
+            return true;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("export") && args[1].equalsIgnoreCase("block-loc")) {
+            if (sender instanceof Player player) {
+                Block targetBlock = player.getTargetBlockExact(10);
+                if (targetBlock != null) {
+                    sendFormatted("&eExporting block location...", player);
+                    exportLocation(targetBlock.getLocation(), player);
+                } else {
+                    sendFormatted("&cYou must be looking at a block.", player);
+                }
+            } else {
+                sendFormatted("&cThis command must be executed by a player.", sender);
+            }
+            return true;
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("export") && args[1].equalsIgnoreCase("chest-inv")) {
+            if (sender instanceof Player player) {
+                Block targetBlock = player.getTargetBlockExact(10);
+                if (targetBlock != null && targetBlock.getState() instanceof Chest chest) {
+                    VisualBukkitRPC.ImportInventoryRequest.Builder requestBuilder = VisualBukkitRPC.ImportInventoryRequest.newBuilder();
+                    requestBuilder.setTitle(chest.getCustomName() != null ? chest.getCustomName() : "Chest").setSize(chest.getBlockInventory().getSize());
+                    ItemStack[] contents = chest.getBlockInventory().getContents();
+                    for (int i = 0; i < contents.length; i++) {
+                        ItemStack item = contents[i];
+                        if (item != null && !item.getType().isAir()) {
+                            YamlConfiguration yaml = new YamlConfiguration();
+                            yaml.set("item", item);
+                            requestBuilder.addSlot(VisualBukkitRPC.InventorySlot.newBuilder().setSlot(i).setYaml(yaml.saveToString()).build());
+                        }
+                    }
+                    sendFormatted("&eExporting chest inventory...", player);
+                    grpcStub.importInventory(requestBuilder.build(), new StreamObserver<>() {
+                        @Override
+                        public void onNext(VisualBukkitRPC.Response response) {
+                            Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&aSuccessfully exported chest inventory.", player));
+                        }
+                        @Override
+                        public void onError(Throwable throwable) {
+                            Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&cFailed to export chest inventory: " + throwable.getMessage(), player));
+                            throwable.printStackTrace();
+                        }
+                        @Override
+                        public void onCompleted() {}
+                    });
+                } else {
+                    sendFormatted("&cYou must be looking at a chest.", player);
+                }
+            } else {
+                sendFormatted("&cThis command must be executed by a player.", sender);
+            }
+            return true;
+        }
+
         if (args.length == 2 && args[0].equalsIgnoreCase("export") && args[1].equalsIgnoreCase("error")) {
             if (reportExceptionRequest != null) {
                 sendFormatted("&eExporting error...", sender);
@@ -170,6 +236,33 @@ public class VisualBukkitPlugin extends JavaPlugin {
         plugin.getLogger().severe("An error has occurred in a Visual Bukkit plugin.");
         plugin.getLogger().severe("Use '/vb export error' to view the block that caused it.");
         plugin.getLogger().severe("========================================================");
+    }
+
+    private void exportLocation(Location loc, Player player) {
+        VisualBukkitRPC.ImportLocationRequest request = VisualBukkitRPC.ImportLocationRequest.newBuilder()
+                .setWorld(loc.getWorld().getName())
+                .setX(loc.getX())
+                .setY(loc.getY())
+                .setZ(loc.getZ())
+                .setYaw(loc.getYaw())
+                .setPitch(loc.getPitch())
+                .build();
+        grpcStub.importLocation(request, new StreamObserver<>() {
+            @Override
+            public void onNext(VisualBukkitRPC.Response response) {
+                Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&aSuccessfully exported location.", player));
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                Bukkit.getScheduler().runTask(VisualBukkitPlugin.this, () -> sendFormatted("&cFailed to export location: " + throwable.getMessage(), player));
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onCompleted() {
+            }
+        });
     }
 
     private void sendFormatted(String str, CommandSender sender) {

@@ -5,7 +5,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.60.1)",
+    value = "by gRPC proto compiler (version 1.61.0)",
     comments = "Source: VisualBukkitRPC.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class VisualBukkitGrpc {
@@ -75,6 +75,68 @@ public final class VisualBukkitGrpc {
       }
     }
     return getImportItemStackMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportLocationMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ImportLocation",
+      requestType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest.class,
+      responseType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportLocationMethod() {
+    io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportLocationMethod;
+    if ((getImportLocationMethod = VisualBukkitGrpc.getImportLocationMethod) == null) {
+      synchronized (VisualBukkitGrpc.class) {
+        if ((getImportLocationMethod = VisualBukkitGrpc.getImportLocationMethod) == null) {
+          VisualBukkitGrpc.getImportLocationMethod = getImportLocationMethod =
+              io.grpc.MethodDescriptor.<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ImportLocation"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.getDefaultInstance()))
+              .setSchemaDescriptor(new VisualBukkitMethodDescriptorSupplier("ImportLocation"))
+              .build();
+        }
+      }
+    }
+    return getImportLocationMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportInventoryMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ImportInventory",
+      requestType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest.class,
+      responseType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportInventoryMethod() {
+    io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> getImportInventoryMethod;
+    if ((getImportInventoryMethod = VisualBukkitGrpc.getImportInventoryMethod) == null) {
+      synchronized (VisualBukkitGrpc.class) {
+        if ((getImportInventoryMethod = VisualBukkitGrpc.getImportInventoryMethod) == null) {
+          VisualBukkitGrpc.getImportInventoryMethod = getImportInventoryMethod =
+              io.grpc.MethodDescriptor.<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ImportInventory"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response.getDefaultInstance()))
+              .setSchemaDescriptor(new VisualBukkitMethodDescriptorSupplier("ImportInventory"))
+              .build();
+        }
+      }
+    }
+    return getImportInventoryMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest,
@@ -172,6 +234,20 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    default void importLocation(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getImportLocationMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void importInventory(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getImportInventoryMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request,
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReportExceptionMethod(), responseObserver);
@@ -223,6 +299,22 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    public void importLocation(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getImportLocationMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void importInventory(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getImportInventoryMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request,
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -258,6 +350,20 @@ public final class VisualBukkitGrpc {
     public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response importItemStack(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getImportItemStackMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response importLocation(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getImportLocationMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response importInventory(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getImportInventoryMethod(), getCallOptions(), request);
     }
 
     /**
@@ -302,6 +408,22 @@ public final class VisualBukkitGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> importLocation(
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getImportLocationMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> importInventory(
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getImportInventoryMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> reportException(
         com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -311,7 +433,9 @@ public final class VisualBukkitGrpc {
 
   private static final int METHODID_PING = 0;
   private static final int METHODID_IMPORT_ITEM_STACK = 1;
-  private static final int METHODID_REPORT_EXCEPTION = 2;
+  private static final int METHODID_IMPORT_LOCATION = 2;
+  private static final int METHODID_IMPORT_INVENTORY = 3;
+  private static final int METHODID_REPORT_EXCEPTION = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -336,6 +460,14 @@ public final class VisualBukkitGrpc {
           break;
         case METHODID_IMPORT_ITEM_STACK:
           serviceImpl.importItemStack((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest) request,
+              (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
+          break;
+        case METHODID_IMPORT_LOCATION:
+          serviceImpl.importLocation((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest) request,
+              (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
+          break;
+        case METHODID_IMPORT_INVENTORY:
+          serviceImpl.importInventory((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest) request,
               (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
           break;
         case METHODID_REPORT_EXCEPTION:
@@ -374,6 +506,20 @@ public final class VisualBukkitGrpc {
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportItemStackRequest,
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
                 service, METHODID_IMPORT_ITEM_STACK)))
+        .addMethod(
+          getImportLocationMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportLocationRequest,
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
+                service, METHODID_IMPORT_LOCATION)))
+        .addMethod(
+          getImportInventoryMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.ImportInventoryRequest,
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
+                service, METHODID_IMPORT_INVENTORY)))
         .addMethod(
           getReportExceptionMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -431,6 +577,8 @@ public final class VisualBukkitGrpc {
               .setSchemaDescriptor(new VisualBukkitFileDescriptorSupplier())
               .addMethod(getPingMethod())
               .addMethod(getImportItemStackMethod())
+              .addMethod(getImportLocationMethod())
+              .addMethod(getImportInventoryMethod())
               .addMethod(getReportExceptionMethod())
               .build();
         }

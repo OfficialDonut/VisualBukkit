@@ -19,12 +19,14 @@ public class CopyPasteManager {
     private static final BooleanProperty expressionCopied = new SimpleBooleanProperty(false);
     private static List<JSONObject> serializedBlocks;
 
-    public static void copyStatement(StatementBlock block, boolean copyStack) {
-        if (copyStack) {
-            serializedBlocks = block.getParentStatementHolder().getStack(block).stream().map(Block::serialize).toList();
-        } else {
-            serializedBlocks = Collections.singletonList(block.serialize());
-        }
+    public static void copyStatement(StatementBlock block) {
+        serializedBlocks = Collections.singletonList(block.serialize());
+        statementCopied.set(true);
+        expressionCopied.set(false);
+    }
+
+    public static void copyStatements(List<StatementBlock> blocks) {
+        serializedBlocks = blocks.stream().map(Block::serialize).toList();
         statementCopied.set(true);
         expressionCopied.set(false);
     }

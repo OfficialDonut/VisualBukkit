@@ -1,8 +1,10 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
 import com.gmail.visualbukkit.blocks.BlockDefinition;
+import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
+import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.MethodParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
@@ -19,6 +21,15 @@ public class StatMethod extends StatementBlock {
     public StatMethod() {
         addParameter("Class", classParameter = new ClassParameter());
         addParameter("Method", methodParameter = new MethodParameter(this, classParameter));
+    }
+
+    public StatMethod(ClassInfo clazz, MethodInfo method, ExpressionBlock... parameterExpressions) {
+        this();
+        classParameter.setValue(clazz);
+        methodParameter.setValue(method);
+        for (int i = 0; i < parameterExpressions.length; i++) {
+            ((ExpressionParameter) parameters.get(i + 2)).setExpression(parameterExpressions[i]);
+        }
     }
 
     @Override

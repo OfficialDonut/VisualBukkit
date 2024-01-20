@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.reflection;
 
 import com.google.common.primitives.Primitives;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
@@ -31,6 +32,33 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
 
     public Set<MethodInfo> getMethods(Predicate<MethodInfo> filter) {
         return getMethods().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    public Optional<FieldInfo> getField(String name) {
+        for (FieldInfo field : getFields()) {
+            if (field.getName().equals(name)) {
+                return Optional.of(field);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<ConstructorInfo> getConstructor(ClassInfo... parameterTypes) {
+        for (ConstructorInfo constructor : getConstructors()) {
+            if (constructor.checkParameterTypes(parameterTypes)) {
+                return Optional.of(constructor);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<MethodInfo> getMethod(String name, ClassInfo... parameterTypes) {
+        for (MethodInfo method : getMethods()) {
+            if (method.getName().equals(name) && method.checkParameterTypes(parameterTypes)) {
+                return Optional.of(method);
+            }
+        }
+        return Optional.empty();
     }
 
     private boolean isPrimitive() {

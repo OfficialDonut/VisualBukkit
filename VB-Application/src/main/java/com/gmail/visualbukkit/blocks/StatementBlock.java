@@ -22,15 +22,15 @@ public non-sealed abstract class StatementBlock extends Block {
     public StatementBlock() {
         getStyleClass().add("statement-block");
 
-        ActionMenuItem copyItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy"), e -> CopyPasteManager.copyStatement(this, false));
+        ActionMenuItem copyItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy"), e -> CopyPasteManager.copyStatement(this));
         ActionMenuItem cutItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.cut"), e -> {
-            CopyPasteManager.copyStatement(this, false);
+            CopyPasteManager.copyStatement(this);
             UndoManager.current().execute(this::delete);
         });
         ActionMenuItem deleteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete));
-        ActionMenuItem copyStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy_stack"), e -> CopyPasteManager.copyStatement(this, true));
+        ActionMenuItem copyStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.copy_stack"), e -> CopyPasteManager.copyStatements(getParentStatementHolder().getStack(this)));
         ActionMenuItem cutStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.cut_stack"), e -> {
-            CopyPasteManager.copyStatement(this, true);
+            CopyPasteManager.copyStatements(getParentStatementHolder().getStack(this));
             UndoManager.current().execute(() -> getParentStatementHolder().removeStack(this));
         });
         ActionMenuItem deleteStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete_stack"), e -> UndoManager.current().execute(() -> getParentStatementHolder().removeStack(this)));

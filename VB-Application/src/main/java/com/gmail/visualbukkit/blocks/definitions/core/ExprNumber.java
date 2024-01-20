@@ -27,6 +27,11 @@ public class ExprNumber extends ExpressionBlock {
         });
     }
 
+    public ExprNumber(Number num) {
+        this();
+        parameter.setText(num instanceof Double || num instanceof Float ? String.format("%.3f", num.doubleValue()) : String.format("%d", num.longValue()));
+    }
+
     @Override
     public ClassInfo getReturnType() {
         return parameter.getText().contains(".") ? ClassInfo.of(double.class) : ClassInfo.of(long.class);

@@ -18,10 +18,12 @@ import java.nio.file.Path;
 public class JsonGenerator {
 
     private final Path outputDirectory;
+    private final boolean prettyPrint;
     private final Reporter reporter;
 
-    public JsonGenerator(Path outputDirectory, Reporter reporter) {
+    public JsonGenerator(Path outputDirectory, boolean prettyPrint, Reporter reporter) {
         this.outputDirectory = outputDirectory;
+        this.prettyPrint = prettyPrint;
         this.reporter = reporter;
     }
 
@@ -31,7 +33,8 @@ public class JsonGenerator {
             for (Element element : environment.getIncludedElements()) {
                 if (element instanceof TypeElement clazz && clazz.getModifiers().contains(Modifier.PUBLIC)) {
                     Path outputFile = outputDirectory.resolve(clazz.getQualifiedName() + ".json");
-                    Files.writeString(outputFile, generateClass(environment, clazz).toString(2), StandardCharsets.UTF_8);
+                    JSONObject json = generateClass(environment, clazz);
+                    Files.writeString(outputFile, prettyPrint ? json.toString(2) : json.toString(), StandardCharsets.UTF_8);
                     reporter.print(Diagnostic.Kind.NOTE, "Created " + outputFile.getFileName());
                 }
             }

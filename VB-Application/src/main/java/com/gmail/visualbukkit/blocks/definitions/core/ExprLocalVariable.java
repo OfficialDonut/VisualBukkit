@@ -24,6 +24,11 @@ public class ExprLocalVariable extends ExpressionBlock {
         parameter.getStyleClass().add("local-variable-field");
     }
 
+    public ExprLocalVariable(String var) {
+        this();
+        parameter.setText(var);
+    }
+
     @Override
     public ClassInfo getReturnType() {
         return ClassInfo.of(Object.class);

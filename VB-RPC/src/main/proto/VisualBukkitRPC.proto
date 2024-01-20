@@ -11,6 +11,26 @@ message ImportItemStackRequest {
   string yaml = 1;
 }
 
+message ImportLocationRequest {
+  string world = 1;
+  double x = 2;
+  double y = 3;
+  double z = 4;
+  float yaw = 5;
+  float pitch = 6;
+}
+
+message ImportInventoryRequest {
+  string title = 1;
+  int32 size = 2;
+  repeated InventorySlot slot = 3;
+}
+
+message InventorySlot {
+  int32 slot = 1;
+  string yaml = 2;
+}
+
 message ReportExceptionRequest {
   string blockUUID = 1;
   string stacktrace = 2;
@@ -19,5 +39,7 @@ message ReportExceptionRequest {
 service VisualBukkit {
   rpc Ping(PingRequest) returns (Response);
   rpc ImportItemStack(ImportItemStackRequest) returns (Response);
+  rpc ImportLocation(ImportLocationRequest) returns (Response);
+  rpc ImportInventory(ImportInventoryRequest) returns (Response);
   rpc ReportException(ReportExceptionRequest) returns (Response);
 }

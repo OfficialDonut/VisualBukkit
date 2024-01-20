@@ -4,6 +4,7 @@ import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
 import com.gmail.visualbukkit.blocks.parameters.ConstructorParameter;
+import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.ConstructorInfo;
@@ -19,6 +20,15 @@ public class ExprNewObject extends ExpressionBlock {
     public ExprNewObject() {
         addParameter("Class", classParameter = new ClassParameter(c -> !c.getConstructors().isEmpty()));
         addParameter("Constructor", constructorParameter = new ConstructorParameter(this, classParameter));
+    }
+
+    public ExprNewObject(ClassInfo clazz, ConstructorInfo constructor, ExpressionBlock... parameterExpressions) {
+        this();
+        classParameter.setValue(clazz);
+        constructorParameter.setValue(constructor);
+        for (int i = 0; i < parameterExpressions.length; i++) {
+            ((ExpressionParameter) parameters.get(i + 2)).setExpression(parameterExpressions[i]);
+        }
     }
 
     @Override

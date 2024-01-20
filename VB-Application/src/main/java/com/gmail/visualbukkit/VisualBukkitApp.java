@@ -148,7 +148,7 @@ public class VisualBukkitApp extends Application {
             }
             if (e.isShortcutDown() && e.getCode() == KeyCode.C) {
                 if (focusOwner instanceof StatementBlock block) {
-                    CopyPasteManager.copyStatement(block, false);
+                    CopyPasteManager.copyStatement(block);
                 } else if (focusOwner instanceof ExpressionBlock block) {
                     CopyPasteManager.copyExpression(block);
                 }

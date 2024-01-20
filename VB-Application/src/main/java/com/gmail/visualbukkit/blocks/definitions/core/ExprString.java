@@ -19,6 +19,11 @@ public class ExprString extends ExpressionBlock {
         parameters = Collections.singletonList(parameter);
     }
 
+    public ExprString(String string) {
+        this();
+        parameter.setText(string);
+    }
+
     @Override
     public ClassInfo getReturnType() {
         return ClassInfo.of(String.class);

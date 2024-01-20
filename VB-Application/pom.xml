@@ -152,7 +152,7 @@
     </dependencies>
 
     <build>
-        <finalName>VisualBukkitApp-${project.version}</finalName>
+        <finalName>VisualBukkitApp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -3,7 +3,6 @@ package com.gmail.visualbukkit.blocks;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.*;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -17,9 +16,8 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         ActionMenuItem pasteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_after"), e -> UndoManager.current().execute(() -> childStatementHolder.addFirst(CopyPasteManager.pasteStatement())));
         ActionMenuItem collapseItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.collapse_all"), e -> childStatementHolder.setCollapsedRecursive(true));
         ActionMenuItem expandItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.expand_all"), e -> childStatementHolder.setCollapsedRecursive(false));
-        ActionMenuItem deleteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> delete());
         pasteItem.disableProperty().bind(CopyPasteManager.statementCopiedProperty().not());
-        getContextMenu().getItems().addAll(pasteItem, collapseItem, expandItem, new SeparatorMenuItem(), deleteItem);
+        getContextMenu().getItems().addAll(collapseItem, expandItem, pasteItem);
 
         getContextMenu().setOnShowing(e -> {
             collapseItem.setDisable(childStatementHolder.isEmpty());

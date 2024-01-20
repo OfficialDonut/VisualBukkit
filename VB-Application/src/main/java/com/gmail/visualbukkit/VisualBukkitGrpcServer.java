@@ -1,10 +1,14 @@
 package com.gmail.visualbukkit;
 
 import com.gmail.visualbukkit.blocks.Block;
-import com.gmail.visualbukkit.blocks.definitions.core.ExprSerializedItemStack;
+import com.gmail.visualbukkit.blocks.StatementBlock;
+import com.gmail.visualbukkit.blocks.definitions.core.*;
 import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.PluginComponent;
 import com.gmail.visualbukkit.project.ProjectManager;
+import com.gmail.visualbukkit.reflection.ClassInfo;
+import com.gmail.visualbukkit.reflection.ConstructorInfo;
+import com.gmail.visualbukkit.reflection.MethodInfo;
 import com.gmail.visualbukkit.rpc.VisualBukkitGrpc;
 import com.gmail.visualbukkit.rpc.VisualBukkitRPC;
 import io.grpc.*;
@@ -27,6 +31,9 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -83,7 +90,6 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
 
     @Override
     public void ping(VisualBukkitRPC.PingRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        VisualBukkitApp.getLogger().info("Received PingRequest: {" + request + "}");
         responseObserver.onNext(ping(request));
         responseObserver.onCompleted();
     }
@@ -109,7 +115,6 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
 
     @Override
     public void importItemStack(VisualBukkitRPC.ImportItemStackRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        VisualBukkitApp.getLogger().info("Received ImportItemStackRequest: {" + request + "}");
         responseObserver.onNext(importItemStack(request));
         responseObserver.onCompleted();
     }
@@ -131,8 +136,66 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
     }
 
     @Override
+    public void importLocation(VisualBukkitRPC.ImportLocationRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
+        responseObserver.onNext(importLocation(request));
+        responseObserver.onCompleted();
+    }
+
+    private VisualBukkitRPC.Response importLocation(VisualBukkitRPC.ImportLocationRequest request) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_location"));
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == ButtonType.OK) {
+                    ClassInfo bukkitClass = ClassInfo.of("org.bukkit.Bukkit");
+                    ClassInfo locationClass = ClassInfo.of("org.bukkit.Location");
+                    ClassInfo worldClass = ClassInfo.of("org.bukkit.World");
+                    ConstructorInfo locationConstructor = locationClass.getConstructor(worldClass, ClassInfo.of(double.class), ClassInfo.of(double.class), ClassInfo.of(double.class), ClassInfo.of(float.class), ClassInfo.of(float.class)).orElseThrow();
+                    ExprMethod getWorldMethod = new ExprMethod(bukkitClass, bukkitClass.getMethod("getWorld", ClassInfo.of(String.class)).orElseThrow(), new ExprString(request.getWorld()));
+                    ExprNewObject newLocation = new ExprNewObject(locationClass, locationConstructor, getWorldMethod, new ExprNumber(request.getX()), new ExprNumber(request.getY()), new ExprNumber(request.getZ()), new ExprNumber(request.getYaw()), new ExprNumber(request.getPitch()));
+                    CopyPasteManager.copyExpression(newLocation);
+                }
+            });
+        });
+        return VisualBukkitRPC.Response.newBuilder().build();
+    }
+
+    @Override
+    public void importInventory(VisualBukkitRPC.ImportInventoryRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
+        responseObserver.onNext(importInventory(request));
+        responseObserver.onCompleted();
+    }
+
+    private VisualBukkitRPC.Response importInventory(VisualBukkitRPC.ImportInventoryRequest request) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_inventory"));
+            alert.setHeaderText(null);
+            alert.setGraphic(null);
+            alert.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == ButtonType.OK) {
+                    List<StatementBlock> blocks = new ArrayList<>();
+                    ClassInfo bukkitClass = ClassInfo.of("org.bukkit.Bukkit");
+                    ClassInfo invClass = ClassInfo.of("org.bukkit.inventory.Inventory");
+                    ClassInfo invHolderClass = ClassInfo.of("org.bukkit.inventory.InventoryHolder");
+                    ClassInfo itemstackClass = ClassInfo.of("org.bukkit.inventory.ItemStack");
+                    MethodInfo createInvMethod = bukkitClass.getMethod("createInventory", invHolderClass, ClassInfo.of(int.class), ClassInfo.of(String.class)).orElseThrow();
+                    MethodInfo setItemMethod = invClass.getMethod("setItem", ClassInfo.of(int.class), itemstackClass).orElseThrow();
+                    blocks.add(new StatSetLocalVariable("exported-inventory", new ExprMethod(bukkitClass, createInvMethod, new ExprNull(), new ExprNumber(request.getSize()), new ExprString(request.getTitle()))));
+                    for (VisualBukkitRPC.InventorySlot slot : request.getSlotList()) {
+                        blocks.add(new StatMethod(invClass, setItemMethod, new ExprLocalVariable("exported-inventory"), new ExprNumber(slot.getSlot()), new ExprSerializedItemStack(slot.getYaml())));
+                    }
+                    CopyPasteManager.copyStatements(blocks);
+                }
+            });
+        });
+        return VisualBukkitRPC.Response.newBuilder().build();
+    }
+
+    @Override
     public void reportException(VisualBukkitRPC.ReportExceptionRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        VisualBukkitApp.getLogger().info("Received ReportExceptionRequest: {" + request + "}");
         responseObserver.onNext(reportException(request));
         responseObserver.onCompleted();
     }
