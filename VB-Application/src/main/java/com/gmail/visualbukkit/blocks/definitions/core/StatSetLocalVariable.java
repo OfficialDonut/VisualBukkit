@@ -18,7 +18,7 @@ public class StatSetLocalVariable extends StatementBlock {
         varParameter = new InputParameter();
         varParameter.getStyleClass().add("local-variable-field");
         addParameter("Var", varParameter);
-        addParameter("Value", valueParameter = new ExpressionParameter(ClassInfo.of(Object.class)));
+        addParameter("Value", valueParameter = new ExpressionParameter(ClassInfo.OBJECT_OR_PRIMITIVE));
     }
 
     public StatSetLocalVariable(String var, ExpressionBlock value) {

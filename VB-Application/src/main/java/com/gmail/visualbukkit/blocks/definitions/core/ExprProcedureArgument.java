@@ -6,7 +6,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(id = "expr-procedure-argument", name = "Procedure Argument", description = "An argument passed to a procedure (must be used in a Procedure plugin component)")
+@BlockDefinition(id = "expr-procedure-argument", name = "Procedure Argument", description = "An argument passed to a procedure (must be used in a 'Procedure' plugin component)")
 public class ExprProcedureArgument extends ExpressionBlock {
 
     public ExprProcedureArgument() {
@@ -16,9 +16,7 @@ public class ExprProcedureArgument extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getPluginComponentBlock() instanceof CompProcedure)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPluginComponent(CompProcedure.class);
     }
 
     @Override

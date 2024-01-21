@@ -11,9 +11,7 @@ public class ExprGUIInventoryClickEvent extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getPluginComponentBlock() instanceof CompGUIClickHandler)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPluginComponent(CompGUIClickHandler.class);
     }
 
     @Override

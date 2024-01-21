@@ -114,6 +114,35 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
         }
     }
 
+    @SafeVarargs
+    public final void checkForPluginComponent(Class<? extends PluginComponentBlock>... classes) {
+        PluginComponentBlock block = getPluginComponentBlock();
+        if (block != null) {
+            for (Class<?> clazz : classes) {
+                if (clazz.isAssignableFrom(block.getClass())) {
+                    return;
+                }
+            }
+        }
+        pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+    }
+
+    @SafeVarargs
+    public final void checkForContainer(Class<? extends ContainerBlock>... classes) {
+        Parent parent = getParent();
+        while (parent != null) {
+            if (parent instanceof ContainerBlock) {
+                for (Class<?> clazz : classes) {
+                    if (clazz.isAssignableFrom(parent.getClass())) {
+                        return;
+                    }
+                }
+            }
+            parent = parent.getParent();
+        }
+        pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+    }
+
     public JSONObject serialize() {
         JSONObject json = new JSONObject();
         json.put("type", getDefinition().id());

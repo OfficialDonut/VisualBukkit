@@ -193,7 +193,7 @@ HBox {
 }
 
 .number-field {
-    -fx-control-inner-background: lightgray !important;
+    -fx-control-inner-background: beige !important;
 }
 
 .plugin-component-block {

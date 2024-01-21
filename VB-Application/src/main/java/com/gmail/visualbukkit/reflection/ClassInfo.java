@@ -2,6 +2,7 @@ package com.gmail.visualbukkit.reflection;
 
 import com.google.common.primitives.Primitives;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -95,7 +96,7 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
     }
 
     public static String convert(ClassInfo from, ClassInfo to, String java) {
-        if (from == null || to == null || from.equals(to) || (to.getName().equals("java.lang.Object") && !from.isPrimitive())) {
+        if (from == null || to == null || from.equals(to) || from == OBJECT_OR_PRIMITIVE || to == OBJECT_OR_PRIMITIVE || (to.getName().equals("java.lang.Object") && !from.isPrimitive())) {
             return java;
         }
         if (to.getName().equals("java.lang.String")) {
@@ -117,4 +118,36 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
     public static ClassInfo of(Class<?> clazz) {
         return of(clazz.getCanonicalName());
     }
+
+    public static final ClassInfo OBJECT_OR_PRIMITIVE = new ClassInfo() {
+        @Override
+        public String getName() {
+            return "anything";
+        }
+
+        @Override
+        public String getSimpleName() {
+            return "anything";
+        }
+
+        @Override
+        public String getPackage() {
+            return "";
+        }
+
+        @Override
+        public Set<FieldInfo> getFields() {
+            return Collections.emptySet();
+        }
+
+        @Override
+        public Set<ConstructorInfo> getConstructors() {
+            return Collections.emptySet();
+        }
+
+        @Override
+        public Set<MethodInfo> getMethods() {
+            return Collections.emptySet();
+        }
+    };
 }

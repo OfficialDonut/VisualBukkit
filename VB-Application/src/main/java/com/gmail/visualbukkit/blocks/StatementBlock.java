@@ -79,6 +79,19 @@ public non-sealed abstract class StatementBlock extends Block {
         });
     }
 
+    @SafeVarargs
+    public final void checkForPrevious(Class<? extends StatementBlock>... classes) {
+        StatementBlock block = getParentStatementHolder().getPrevious(this);
+        if (block != null) {
+            for (Class<?> clazz : classes) {
+                if (clazz.isAssignableFrom(block.getClass())) {
+                    return;
+                }
+            }
+        }
+        pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
+    }
+
     public String generateDebugJava(BuildInfo buildInfo) {
         String exceptionVar = RandomStringUtils.randomAlphanumeric(16);
         String reportMethod = "Class.forName(\"com.gmail.visualbukkit.plugin.VisualBukkitPlugin\").getDeclaredMethod(\"reportException\", String.class, Throwable.class)";

@@ -9,9 +9,7 @@ public class StatElseIfStatement extends StatIfStatement {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getParentStatementHolder().getPrevious(this) instanceof StatIfStatement)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPrevious(StatIfStatement.class);
     }
 
     @Override

@@ -13,9 +13,7 @@ public class ExprProcedureArguments extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getPluginComponentBlock() instanceof CompProcedure)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPluginComponent(CompProcedure.class);
     }
 
     @Override

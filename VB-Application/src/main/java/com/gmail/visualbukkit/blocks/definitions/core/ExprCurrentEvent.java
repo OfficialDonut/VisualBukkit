@@ -11,9 +11,7 @@ public class ExprCurrentEvent extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getPluginComponentBlock() instanceof CompEventListener)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPluginComponent(CompEventListener.class);
     }
 
     @Override

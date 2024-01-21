@@ -11,9 +11,7 @@ public class ExprGUIPlayer extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        if (!(getPluginComponentBlock() instanceof CompGUI)) {
-            pseudoClassStateChanged(INVALID_STYLE_CLASS, true);
-        }
+        checkForPluginComponent(CompGUI.class);
     }
 
     @Override
