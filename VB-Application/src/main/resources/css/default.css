@@ -46,7 +46,6 @@
     -fx-border-color: black;
     -fx-color: lightgray;
     -fx-cursor: default;
-    -fx-min-width: 10em;
 }
 
 .block .combo-box:hover {
@@ -225,25 +224,28 @@ HBox {
     -fx-pref-height: 5em;
 }
 
-.pop-over-selector {
+.popover {
     -fx-color: -fx-base;
 }
 
-.pop-over-selector HBox {
+.popover HBox {
     -fx-background-color: white;
     -fx-padding: 0.5em;
 }
 
-.pop-over-selector HBox > .text-field {
+.popover HBox > .text-field {
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-border-radius: 0;
     -fx-border-width: 0 0 0.1em 0;
-    -fx-pref-width: 25em;
 }
 
-.pop-over-selector VBox {
+.popover VBox {
     -fx-padding: 0;
+}
+
+.popover-selector {
+    -fx-min-width: 15em;
 }
 
 .progress-indicator .spinner {

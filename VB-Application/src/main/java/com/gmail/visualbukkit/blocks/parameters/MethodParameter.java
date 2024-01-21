@@ -19,7 +19,7 @@ public class MethodParameter extends ClassElementParameter<MethodInfo> {
     }
 
     public MethodParameter(Block block, ClassParameter classParameter, Predicate<MethodInfo> filter) {
-        super(classParameter);
+        super("pinned-methods", classParameter);
         this.block = block;
         this.filter = filter;
 

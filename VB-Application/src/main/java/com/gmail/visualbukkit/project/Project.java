@@ -408,7 +408,7 @@ public class Project {
     public void promptAddPluginComponent() {
         TextField nameField = new TextField();
         SearchableComboBox<BlockFactory<PluginComponentBlock>> typeComboBox = new SearchableComboBox<>();
-        typeComboBox.getItems().addAll(BlockRegistry.getPluginComponents());
+        typeComboBox.getItems().addAll(new TreeSet<>(BlockRegistry.getPluginComponents()));
         typeComboBox.getSelectionModel().selectFirst();
         GridPane gridPane = new GridPane();
         gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("dialog.add_component_name")), nameField);

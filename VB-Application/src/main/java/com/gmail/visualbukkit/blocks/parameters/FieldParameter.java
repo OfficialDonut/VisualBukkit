@@ -18,7 +18,7 @@ public class FieldParameter extends ClassElementParameter<FieldInfo> {
     }
 
     public FieldParameter(Block block, ClassParameter classParameter, Predicate<FieldInfo> filter) {
-        super(classParameter);
+        super("pinned-fields", classParameter);
         this.block = block;
         this.filter = filter;
 

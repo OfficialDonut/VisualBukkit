@@ -114,11 +114,11 @@ public class ClassRegistry {
         return Optional.ofNullable(classes.get(name));
     }
 
-    public static Set<ClassInfo> getClasses() {
-        return new TreeSet<>(classes.values());
+    public static Collection<ClassInfo> getClasses() {
+        return classes.values();
     }
 
-    public static Set<ClassInfo> getClasses(Predicate<ClassInfo> filter) {
-        return classes.values().stream().filter(filter).collect(Collectors.toCollection(TreeSet::new));
+    public static Collection<ClassInfo> getClasses(Predicate<ClassInfo> filter) {
+        return classes.values().stream().filter(filter).collect(Collectors.toSet());
     }
 }

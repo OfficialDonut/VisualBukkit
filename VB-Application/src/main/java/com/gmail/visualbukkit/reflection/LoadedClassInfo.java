@@ -3,8 +3,8 @@ package com.gmail.visualbukkit.reflection;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class LoadedClassInfo extends ClassInfo {
 
@@ -35,7 +35,7 @@ public class LoadedClassInfo extends ClassInfo {
     @Override
     public Set<FieldInfo> getFields() {
         if (fields == null) {
-            fields = new TreeSet<>();
+            fields = new HashSet<>();
             for (Field field : clazz.getFields()) {
                 fields.add(new LoadedFieldInfo(field));
             }
@@ -46,7 +46,7 @@ public class LoadedClassInfo extends ClassInfo {
     @Override
     public Set<ConstructorInfo> getConstructors() {
         if (constructors == null) {
-            constructors = new TreeSet<>();
+            constructors = new HashSet<>();
             for (Constructor<?> constructor : clazz.getConstructors()) {
                 constructors.add(new LoadedConstructorInfo(constructor));
             }
@@ -57,7 +57,7 @@ public class LoadedClassInfo extends ClassInfo {
     @Override
     public Set<MethodInfo> getMethods() {
         if (methods == null) {
-            methods = new TreeSet<>();
+            methods = new HashSet<>();
             for (Method method : clazz.getMethods()) {
                 methods.add(new LoadedMethodInfo(method));
             }

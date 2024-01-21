@@ -19,7 +19,7 @@ public class ConstructorParameter extends ClassElementParameter<ConstructorInfo>
     }
 
     public ConstructorParameter(Block block, ClassParameter classParameter, Predicate<ConstructorInfo> filter) {
-        super(classParameter);
+        super("pinned-constructors", classParameter);
         this.block = block;
         this.filter = filter;
 

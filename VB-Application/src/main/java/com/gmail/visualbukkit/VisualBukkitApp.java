@@ -210,7 +210,6 @@ public class VisualBukkitApp extends Application {
     @Override
     public void stop() {
         logger.info("Shutting down");
-        BlockRegistry.save();
         if (ProjectManager.current() != null) {
             try {
                 ProjectManager.current().save();

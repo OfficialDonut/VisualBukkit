@@ -20,7 +20,7 @@ public class ClassParameter extends PopOverSelector<ClassInfo> implements BlockP
     }
 
     public ClassParameter(Collection<ClassInfo> classes) {
-        super(classes);
+        super("pinned-classes", classes);
         setSelectAction(clazz -> UndoManager.current().execute(() -> setValue(clazz)));
     }
 

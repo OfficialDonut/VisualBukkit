@@ -8,13 +8,14 @@ import java.util.Collection;
 
 public abstract class ClassElementParameter<T> extends PopOverSelector<T> implements BlockParameter {
 
-    public ClassElementParameter(ClassParameter classParameter) {
+    public ClassElementParameter(String pinnedDataKey, ClassParameter classParameter) {
+        super(pinnedDataKey);
         disableProperty().bind(classParameter.valueProperty().isNull());
         setSelectAction(t -> UndoManager.current().execute(() -> setValue(t)));
         classParameter.valueProperty().addListener((observable, oldValue, newValue) -> {
             setValue(null);
             if (newValue != null) {
-                getItemList().setAll(generateItems(newValue));
+                setItems(generateItems(newValue));
             }
         });
     }

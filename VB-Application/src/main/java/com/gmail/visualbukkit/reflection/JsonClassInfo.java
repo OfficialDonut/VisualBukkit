@@ -3,8 +3,8 @@ package com.gmail.visualbukkit.reflection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class JsonClassInfo extends ClassInfo {
 
@@ -35,7 +35,7 @@ public class JsonClassInfo extends ClassInfo {
     @Override
     public Set<FieldInfo> getFields() {
         if (fields == null) {
-            fields = new TreeSet<>();
+            fields = new HashSet<>();
             JSONArray fieldsJson = json.optJSONArray("fields");
             if (fieldsJson != null) {
                 for (Object o : fieldsJson) {
@@ -49,7 +49,7 @@ public class JsonClassInfo extends ClassInfo {
     @Override
     public Set<ConstructorInfo> getConstructors() {
         if (constructors == null) {
-            constructors = new TreeSet<>();
+            constructors = new HashSet<>();
             JSONArray constructorsJson = json.optJSONArray("constructors");
             if (constructorsJson != null) {
                 for (Object o : constructorsJson) {
@@ -63,7 +63,7 @@ public class JsonClassInfo extends ClassInfo {
     @Override
     public Set<MethodInfo> getMethods() {
         if (methods == null) {
-            methods = new TreeSet<>();
+            methods = new HashSet<>();
             JSONArray methodsJson = json.optJSONArray("methods");
             if (methodsJson != null) {
                 for (Object o : methodsJson) {
