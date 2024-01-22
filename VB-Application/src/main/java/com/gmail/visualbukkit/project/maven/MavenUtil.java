@@ -8,7 +8,6 @@ import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.repository.RemoteRepository;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -21,10 +20,6 @@ public class MavenUtil {
 
     static {
         mavenInvoker.setLogger(new MavenInvokerLogger());
-        String installDir = System.getProperty("install4j.appDir");
-        if (installDir != null) {
-            mavenInvoker.setMavenHome(new File(installDir, "apache-maven"));
-        }
     }
 
     public static InvocationResult execute(InvocationRequest request) throws MavenInvocationException {

@@ -24,11 +24,9 @@ import org.eclipse.aether.transport.http.HttpTransporterFactory;
 import org.eclipse.aether.util.filter.DependencyFilterUtils;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.zeroturnaround.zip.ZipUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -46,14 +44,8 @@ public class ClassRegistry {
         classes.putIfAbsent(json.getString("name"), new JsonClassInfo(json));
     }
 
-    public static void register(ClassLoader classLoader, String resourceDir) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(classLoader.getResourceAsStream(resourceDir)))) {
-            for (String resource = reader.readLine(); resource != null; resource = reader.readLine()) {
-                try (InputStream stream = classLoader.getResourceAsStream(resourceDir + "/" + resource)) {
-                    register(new JSONObject(new JSONTokener(stream)));
-                }
-            }
-        }
+    public static void register(ClassLoader classLoader, String zipFile) {
+        ZipUtil.iterate(classLoader.getResourceAsStream(zipFile), (inputStream, zipEntry) -> register(new JSONObject(new JSONTokener(inputStream))));
     }
 
     public static void register(Class<?> clazz) {

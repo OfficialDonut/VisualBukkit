@@ -237,15 +237,11 @@ public class Project {
         });
 
         BackgroundTaskExecutor.executeAndWait(() -> {
-            try {
-                BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core");
-                ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk");
-                ClassRegistry.register(Project.class.getClassLoader(), "classes/paper");
-                moduleSelector.getTargetItems().forEach(PluginModule::enable);
-                mavenListView.getItems().forEach(MavenModule::enable);
-            } catch (IOException | JSONException e) {
-                Platform.runLater(() -> VisualBukkitApp.displayException(e));
-            }
+            BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core");
+            ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk.zip");
+            ClassRegistry.register(Project.class.getClassLoader(), "classes/paper.zip");
+            moduleSelector.getTargetItems().forEach(PluginModule::enable);
+            mavenListView.getItems().forEach(MavenModule::enable);
         });
 
         for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {

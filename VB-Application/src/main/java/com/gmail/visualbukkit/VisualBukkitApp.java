@@ -7,6 +7,7 @@ import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.LogWindow;
 import com.google.common.io.MoreFiles;
+import com.install4j.api.launcher.ApplicationLauncher;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -17,6 +18,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -34,10 +36,8 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeBrands;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -51,15 +51,13 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class VisualBukkitApp extends Application {
 
     private static final String version = VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static final Logger logger = Logger.getLogger("Visual Bukkit");
     private static final Set<VisualBukkitExtension> extensions = new HashSet<>();
-    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_beta"); // todo: remove beta
+    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_alpha"); // todo: remove alpha
     private static final Path dataFile = dataDirectory.resolve("data.json");
     private static JSONObject data = new JSONObject();
 
@@ -70,6 +68,7 @@ public class VisualBukkitApp extends Application {
     private static final String DEFAULT_THEME = "css/dark.css";
     private static final int DEFAULT_FONT_SIZE = 16;
     private static final Locale DEFAULT_LANGUAGE = Locale.getDefault();
+    private static final String[] SUPPORTED_LANGUAGES = {"de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "ja-JP", "nl-NL", "pl-PL", "ru-RU", "zh-CN"};
     private static final StringProperty theme = new SimpleStringProperty();
     private static final IntegerProperty fontSize = new SimpleIntegerProperty();
     private static final ObjectProperty<Locale> language = new SimpleObjectProperty<>();
@@ -101,6 +100,10 @@ public class VisualBukkitApp extends Application {
         primaryStage.setScene(new Scene(rootPane, 750, 750));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Visual Bukkit");
+
+        try (InputStream is = VisualBukkitApp.class.getResourceAsStream("/images/bucket.png")) {
+            primaryStage.getIcons().add(new Image(is));
+        }
 
         theme.addListener((observable, oldValue, newValue) -> {
             Application.setUserAgentStylesheet(newValue);
@@ -143,7 +146,14 @@ public class VisualBukkitApp extends Application {
                                 new ActionMenuItem(localizedText("menu.extensions"), e -> openURI(dataDirectory.resolve("extensions").toUri())),
                                 new ActionMenuItem(localizedText("menu.themes"), e -> openURI(dataDirectory.resolve("themes").toUri()))),
                         new ActionMenuItem(localizedText("menu.log"), e -> logWindow.show()),
-                        new ActionMenuItem(localizedText("menu.restart"), e -> {}),
+                        new ActionMenuItem(localizedText("menu.restart"), e -> {
+                            try {
+                                shutdown();
+                                ApplicationLauncher.launchApplication("restarter", null, false, null);
+                            } catch (IOException ioe) {
+                                displayException(ioe);
+                            }
+                        }),
                         new ActionMenuItem(localizedText("menu.exit"), e -> Platform.exit())),
                 new Menu(localizedText("menu.edit"), null,
                         new ActionMenuItem(localizedText("menu.undo"), e -> UndoManager.current().undo()),
@@ -238,6 +248,10 @@ public class VisualBukkitApp extends Application {
 
     @Override
     public void stop() {
+        shutdown();
+    }
+
+    private void shutdown() {
         logger.info("Shutting down");
         if (ProjectManager.current() != null) {
             try {
@@ -380,17 +394,9 @@ public class VisualBukkitApp extends Application {
         Menu menu = new Menu(localizedText("menu.language"));
         Map<String, Locale> languages = new TreeMap<>();
         languages.put("System Default", DEFAULT_LANGUAGE);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(VisualBukkitApp.class.getResourceAsStream("/lang")))) {
-            Pattern pattern = Pattern.compile(".+_(.{2})_(.{2})\\.properties");
-            for (String file = reader.readLine(); file != null; file = reader.readLine()) {
-                Matcher matcher = pattern.matcher(file);
-                if (matcher.matches()) {
-                    Locale locale = Locale.forLanguageTag(matcher.group(1) + "-" + matcher.group(2));
-                    languages.put(locale.getDisplayLanguage(), locale);
-                }
-            }
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to load language files", e);
+        for (String language : SUPPORTED_LANGUAGES) {
+            Locale locale = Locale.forLanguageTag(language);
+            languages.put(locale.getDisplayLanguage(), locale);
         }
         ToggleGroup toggleGroup = new ToggleGroup();
         for (Map.Entry<String, Locale> entry : languages.entrySet()) {
