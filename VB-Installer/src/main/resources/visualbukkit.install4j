@@ -15,7 +15,7 @@
       </modules>
     </jreBundles>
   </application>
-  <files>
+  <files defaultFileMode="744">
     <mountPoints>
       <mountPoint id="38" />
     </mountPoints>
