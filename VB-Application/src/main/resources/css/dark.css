@@ -31,3 +31,7 @@
 .statement-source .ikonli-font-icon {
     -fx-icon-color: black;
 }
+
+.text-field {
+    -fx-prompt-text-fill: lightgray;
+}

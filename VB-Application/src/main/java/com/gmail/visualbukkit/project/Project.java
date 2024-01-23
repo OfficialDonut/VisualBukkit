@@ -23,7 +23,6 @@ import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.InvocationRequest;
@@ -406,6 +405,7 @@ public class Project {
         SearchableComboBox<BlockFactory<PluginComponentBlock>> typeComboBox = new SearchableComboBox<>();
         typeComboBox.getItems().addAll(new TreeSet<>(BlockRegistry.getPluginComponents()));
         typeComboBox.getSelectionModel().selectFirst();
+        nameField.promptTextProperty().bind(typeComboBox.valueProperty().asString());
         GridPane gridPane = new GridPane();
         gridPane.addRow(0, new Label(VisualBukkitApp.localizedText("dialog.add_component_name")), nameField);
         gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("dialog.add_component_type")), typeComboBox);
@@ -414,15 +414,24 @@ public class Project {
         dialog.getDialogPane().getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setContent(gridPane);
         dialog.showAndWait().ifPresent(buttonType -> {
-            if (buttonType == ButtonType.OK && isPluginComponentNameValid(nameField.getText())) {
-                try {
-                    PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(nameField.getText()), typeComboBox.getValue().newBlock());
-                    pluginComponent.save();
-                    pluginComponents.add(pluginComponent);
-                    openPluginComponent(pluginComponent);
-                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.added_plugin_component"));
-                } catch (IOException e) {
-                    VisualBukkitApp.displayException(e);
+            if (buttonType == ButtonType.OK) {
+                String name = nameField.getText();
+                if (name.isBlank()) {
+                    int i = 1;
+                    do {
+                        name = nameField.getPromptText() + "_" + i++;
+                    } while (Files.exists(pluginComponentDirectory.resolve(name)) && i < 999);
+                }
+                if (isPluginComponentNameValid(name)) {
+                    try {
+                        PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name), typeComboBox.getValue().newBlock());
+                        pluginComponent.save();
+                        pluginComponents.add(pluginComponent);
+                        openPluginComponent(pluginComponent);
+                        VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.added_plugin_component"));
+                    } catch (IOException e) {
+                        VisualBukkitApp.displayException(e);
+                    }
                 }
             }
         });
@@ -511,7 +520,7 @@ public class Project {
     }
 
     private boolean isPluginComponentNameValid(String name) {
-        if (name.isBlank() || !StringUtils.isAlphanumeric(name)) {
+        if (!name.matches("[-_a-zA-Z0-9]+")) {
             VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.plugin_component_invalid_name"));
             return false;
         }

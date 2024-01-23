@@ -7,7 +7,6 @@ import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import org.apache.commons.lang3.StringUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
@@ -181,7 +180,7 @@ public class ProjectManager {
     }
 
     private static boolean isProjectNameValid(String name) {
-        if (name.isBlank() || !StringUtils.isAlphanumeric(name)) {
+        if (!name.matches("[-_a-zA-Z0-9]+")) {
             VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.project_invalid_name"));
             return false;
         }
