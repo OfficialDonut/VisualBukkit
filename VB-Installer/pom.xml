@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.gmail.visualbukkit</groupId>
+        <artifactId>visual-bukkit</artifactId>
+        <version>6.0.0</version>
+    </parent>
+
+    <artifactId>VB-Installer</artifactId>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.gmail.visualbukkit</groupId>
+            <artifactId>VB-Application</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.visualbukkit</groupId>
+            <artifactId>VB-Doclet</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.visualbukkit</groupId>
+            <artifactId>VB-Plugin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ej-technologies</id>
+            <url>https://maven.ej-technologies.com/repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.install4j</groupId>
+                <artifactId>install4j-maven</artifactId>
+                <version>10.0.6</version>
+                <executions>
+                    <execution>
+                        <id>compile-installers</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <installDir>${install4j.home}</installDir>
+                            <projectFile>${project.basedir}/src/main/resources/visualbukkit.install4j</projectFile>
+                            <destination>${project.build.directory}</destination>
+                            <release>${project.version}</release>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
