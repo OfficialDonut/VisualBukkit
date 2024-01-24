@@ -79,8 +79,12 @@ public class ProjectManager {
         createDialog.setHeaderText(null);
         createDialog.setGraphic(null);
         Optional<String> name = createDialog.showAndWait();
-        if (name.isPresent() && isProjectNameValid(name.get())) {
-            open(name.get());
+        if (name.isPresent()) {
+            if (isProjectNameValid(name.get())) {
+                open(name.get());
+            } else {
+                promptCreate(canCancel);
+            }
         } else if (!canCancel) {
             promptCreate(false);
         }
@@ -116,6 +120,8 @@ public class ProjectManager {
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
                 }
+            } else {
+                promptRename();
             }
         });
     }

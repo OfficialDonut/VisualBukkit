@@ -14,7 +14,9 @@ import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
@@ -74,7 +76,7 @@ public class Project {
     private final PluginSettings pluginSettings = new PluginSettings();
     private final ListView<MavenModule> mavenListView = new ListView<>();
     private final ListSelectionView<PluginModule> moduleSelector = new ListSelectionView<>();
-    private final Set<PluginComponent> pluginComponents = new TreeSet<>();
+    private final ObservableList<PluginComponent> pluginComponents = FXCollections.observableArrayList();
     private final Map<PluginComponent, Tab> openPluginComponents = new HashMap<>();
     private final TextField jarOutputField = new TextField();
     private final CheckBox debugModeCheckBox = new CheckBox(VisualBukkitApp.localizedText("label.enabled"));
@@ -110,7 +112,8 @@ public class Project {
         });
         editButton.disableProperty().bind(mavenListView.getSelectionModel().selectedItemProperty().isNull());
         deleteButton.disableProperty().bind(editButton.disableProperty());
-        HBox mavenPane = new HBox(mavenListView, new ButtonVBox(addDependButton, addRepoButton, editButton, deleteButton));
+        ButtonVBox mavenButtons = new ButtonVBox(addDependButton, addRepoButton, editButton, deleteButton);
+        HBox mavenPane = new HBox(mavenListView, mavenButtons);
         mavenPane.getStyleClass().add("maven-settings-pane");
         mavenListView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_maven_dependencies")));
 
@@ -168,6 +171,52 @@ public class Project {
             }
         });
 
+        ListView<PluginComponent> pluginComponentListView = new ListView<>(pluginComponents.sorted());
+        pluginComponentListView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_plugin_components")));
+        pluginComponentListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        HBox pluginComponentHBox = new HBox(pluginComponentListView);
+        pluginComponentHBox.getStyleClass().add("plugin-component-list");
+        PopupWindow pluginComponentWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), pluginComponentHBox);
+        ButtonVBox pluginComponentButtons = new ButtonVBox(
+                new ActionButton(VisualBukkitApp.localizedText("button.add"), e -> {
+                    pluginComponentWindow.close();
+                    promptAddPluginComponent();
+                }),
+                new ActionButton(VisualBukkitApp.localizedText("button.import"), e -> {
+                    pluginComponentWindow.close();
+                    promptImportPluginComponent();
+                }),
+                new ActionButton(VisualBukkitApp.localizedText("button.export"), e -> pluginComponentListView.getSelectionModel().getSelectedItems().forEach(this::promptExportPluginComponent)),
+                new ActionButton(VisualBukkitApp.localizedText("button.open"), e -> {
+                    pluginComponentWindow.close();
+                    pluginComponentListView.getSelectionModel().getSelectedItems().forEach(this::openPluginComponent);
+                }),
+                new ActionButton(VisualBukkitApp.localizedText("button.rename"), e -> new ArrayList<>(pluginComponentListView.getSelectionModel().getSelectedItems()).forEach(this::promptRenamePluginComponent)),
+                new ActionButton(VisualBukkitApp.localizedText("button.delete"), e -> new ArrayList<>(pluginComponentListView.getSelectionModel().getSelectedItems()).forEach(this::promptDeletePluginComponent)));
+        pluginComponentHBox.getChildren().add(pluginComponentButtons);
+        for (int i = 2; i < pluginComponentButtons.getChildren().size(); i++) {
+            pluginComponentButtons.getChildren().get(i).disableProperty().bind(pluginComponentListView.getSelectionModel().selectedItemProperty().isNull());
+        }
+        pluginComponentListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<PluginComponent> call(ListView<PluginComponent> param) {
+                ListCell<PluginComponent> cell = new ListCell<>() {
+                    @Override
+                    protected void updateItem(PluginComponent item, boolean empty) {
+                        super.updateItem(item, empty);
+                        setText(item != null ? item.getName() : "");
+                    }
+                };
+                cell.setOnMouseClicked(e -> {
+                    if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
+                        pluginComponentWindow.close();
+                        openPluginComponent(pluginComponentListView.getSelectionModel().getSelectedItem());
+                    }
+                });
+                return cell;
+            }
+        });
+
         Button buildButton = new Button(VisualBukkitApp.localizedText("button.build_plugin"));
         buildButton.setGraphic(new FontIcon(FontAwesomeSolid.HAMMER));
         buildButton.setOnAction(e -> {
@@ -177,8 +226,14 @@ public class Project {
 
         HBox buttonBar = new HBox(
                 new ActionButton(VisualBukkitApp.localizedText("button.add_component"), FontAwesomeSolid.PLUS, e -> promptAddPluginComponent()),
-                new ActionButton(VisualBukkitApp.localizedText("button.plugin_components"), FontAwesomeSolid.LIST, e -> showPluginComponents()),
-                new ActionButton(VisualBukkitApp.localizedText("button.plugin_settings"), FontAwesomeSolid.COG, e -> pluginSettingsWindow.show()),
+                new ActionButton(VisualBukkitApp.localizedText("button.plugin_components"), FontAwesomeSolid.LIST, e -> {
+                    pluginComponentWindow.show();
+                    pluginComponentButtons.bindSizes();
+                }),
+                new ActionButton(VisualBukkitApp.localizedText("button.plugin_settings"), FontAwesomeSolid.COG, e -> {
+                    pluginSettingsWindow.show();
+                    mavenButtons.bindSizes();
+                }),
                 buildButton);
         buttonBar.getStyleClass().add("button-bar");
 
@@ -331,75 +386,6 @@ public class Project {
         }));
     }
 
-    public void showPluginComponents() {
-        ListView<PluginComponent> listView = new ListView<>();
-        listView.getItems().setAll(pluginComponents);
-        listView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_plugin_components")));
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        Button addButton = new Button(VisualBukkitApp.localizedText("button.add"));
-        Button importButton = new Button(VisualBukkitApp.localizedText("button.import"));
-        Button exportButton = new Button(VisualBukkitApp.localizedText("button.export"));
-        Button openButton = new Button(VisualBukkitApp.localizedText("button.open"));
-        Button renameButton = new Button(VisualBukkitApp.localizedText("button.rename"));
-        Button deleteButton = new Button(VisualBukkitApp.localizedText("button.delete"));
-        HBox hBox = new HBox(listView, new ButtonVBox(addButton, importButton, exportButton, openButton, renameButton, deleteButton));
-        hBox.getStyleClass().add("plugin-component-list");
-        PopupWindow popupWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_components"), hBox);
-        addButton.setOnAction(e -> {
-            popupWindow.close();
-            promptAddPluginComponent();
-        });
-        importButton.setOnAction(e -> {
-            popupWindow.close();
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
-            File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
-            if (file != null) {
-                promptImportPluginComponent(file.toPath());
-            }
-        });
-        exportButton.setOnAction(e -> {
-            popupWindow.close();
-            listView.getSelectionModel().getSelectedItems().forEach(this::promptExportPluginComponent);
-        });
-        openButton.setOnAction(e -> {
-            popupWindow.close();
-            listView.getSelectionModel().getSelectedItems().forEach(this::openPluginComponent);
-        });
-        renameButton.setOnAction(e -> {
-            popupWindow.close();
-            listView.getSelectionModel().getSelectedItems().forEach(this::promptRenamePluginComponent);
-        });
-        deleteButton.setOnAction(e -> {
-            popupWindow.close();
-            listView.getSelectionModel().getSelectedItems().forEach(this::promptDeletePluginComponent);
-        });
-        openButton.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
-        exportButton.disableProperty().bind(openButton.disableProperty());
-        renameButton.disableProperty().bind(openButton.disableProperty());
-        deleteButton.disableProperty().bind(openButton.disableProperty());
-        listView.setCellFactory(new Callback<>() {
-            @Override
-            public ListCell<PluginComponent> call(ListView<PluginComponent> param) {
-                ListCell<PluginComponent> cell = new ListCell<>() {
-                    @Override
-                    protected void updateItem(PluginComponent item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setText(item != null ? item.getName() : "");
-                    }
-                };
-                cell.setOnMouseClicked(e -> {
-                    if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
-                        popupWindow.close();
-                        openPluginComponent(listView.getSelectionModel().getSelectedItem());
-                    }
-                });
-                return cell;
-            }
-        });
-        popupWindow.show();
-    }
-
     public void promptAddPluginComponent() {
         TextField nameField = new TextField();
         SearchableComboBox<BlockFactory<PluginComponentBlock>> typeComboBox = new SearchableComboBox<>();
@@ -432,6 +418,8 @@ public class Project {
                     } catch (IOException e) {
                         VisualBukkitApp.displayException(e);
                     }
+                } else {
+                    promptAddPluginComponent();
                 }
             }
         });
@@ -471,6 +459,15 @@ public class Project {
             } catch (IOException e) {
                 VisualBukkitApp.displayException(e);
             }
+        }
+    }
+
+    public void promptImportPluginComponent() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+        File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            promptImportPluginComponent(file.toPath());
         }
     }
 
@@ -746,7 +743,7 @@ public class Project {
         return null;
     }
 
-    public Set<PluginComponent> getPluginComponents() {
+    public ObservableList<PluginComponent> getPluginComponents() {
         return pluginComponents;
     }
 
