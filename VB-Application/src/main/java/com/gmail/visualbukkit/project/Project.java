@@ -419,7 +419,7 @@ public class Project {
                 if (name.isBlank()) {
                     int i = 1;
                     do {
-                        name = nameField.getPromptText() + "_" + i++;
+                        name = nameField.getPromptText().replace(" ", "_") + "_" + i++;
                     } while (Files.exists(pluginComponentDirectory.resolve(name)) && i < 999);
                 }
                 if (isPluginComponentNameValid(name)) {
