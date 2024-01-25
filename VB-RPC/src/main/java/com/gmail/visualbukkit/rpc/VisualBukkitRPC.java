@@ -4793,6 +4793,1028 @@ public final class VisualBukkitRPC {
 
   }
 
+  public interface DeployPluginRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DeployPluginRequest)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code DeployPluginRequest}
+   */
+  public static final class DeployPluginRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DeployPluginRequest)
+      DeployPluginRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use DeployPluginRequest.newBuilder() to construct.
+    private DeployPluginRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DeployPluginRequest() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new DeployPluginRequest();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_DeployPluginRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_DeployPluginRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest)) {
+        return super.equals(obj);
+      }
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest other = (com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest) obj;
+
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DeployPluginRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DeployPluginRequest)
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_DeployPluginRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_DeployPluginRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.Builder.class);
+      }
+
+      // Construct using com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_DeployPluginRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest getDefaultInstanceForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest build() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest buildPartial() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest result = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest) {
+          return mergeFrom((com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest other) {
+        if (other == com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:DeployPluginRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:DeployPluginRequest)
+    private static final com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest();
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DeployPluginRequest>
+        PARSER = new com.google.protobuf.AbstractParser<DeployPluginRequest>() {
+      @java.lang.Override
+      public DeployPluginRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<DeployPluginRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DeployPluginRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JarFileOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JarFile)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string name = 1;</code>
+     * @return The name.
+     */
+    java.lang.String getName();
+    /**
+     * <code>string name = 1;</code>
+     * @return The bytes for name.
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>bytes contents = 2;</code>
+     * @return The contents.
+     */
+    com.google.protobuf.ByteString getContents();
+  }
+  /**
+   * Protobuf type {@code JarFile}
+   */
+  public static final class JarFile extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JarFile)
+      JarFileOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JarFile.newBuilder() to construct.
+    private JarFile(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JarFile() {
+      name_ = "";
+      contents_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new JarFile();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_JarFile_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_JarFile_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.Builder.class);
+    }
+
+    public static final int NAME_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object name_ = "";
+    /**
+     * <code>string name = 1;</code>
+     * @return The name.
+     */
+    @java.lang.Override
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string name = 1;</code>
+     * @return The bytes for name.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTENTS_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString contents_ = com.google.protobuf.ByteString.EMPTY;
+    /**
+     * <code>bytes contents = 2;</code>
+     * @return The contents.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getContents() {
+      return contents_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      if (!contents_.isEmpty()) {
+        output.writeBytes(2, contents_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (!contents_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, contents_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile)) {
+        return super.equals(obj);
+      }
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile other = (com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile) obj;
+
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (!getContents()
+          .equals(other.getContents())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + CONTENTS_FIELD_NUMBER;
+      hash = (53 * hash) + getContents().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code JarFile}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JarFile)
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFileOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_JarFile_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_JarFile_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.class, com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.Builder.class);
+      }
+
+      // Construct using com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        name_ = "";
+        contents_ = com.google.protobuf.ByteString.EMPTY;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.internal_static_JarFile_descriptor;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile getDefaultInstanceForType() {
+        return com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile build() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile buildPartial() {
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile result = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.name_ = name_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.contents_ = contents_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile) {
+          return mergeFrom((com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile other) {
+        if (other == com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.getDefaultInstance()) return this;
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (other.getContents() != com.google.protobuf.ByteString.EMPTY) {
+          setContents(other.getContents());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                name_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                contents_ = input.readBytes();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>string name = 1;</code>
+       * @return The name.
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string name = 1;</code>
+       * @return The bytes for name.
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string name = 1;</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        name_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string name = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearName() {
+        name_ = getDefaultInstance().getName();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string name = 1;</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        name_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString contents_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes contents = 2;</code>
+       * @return The contents.
+       */
+      @java.lang.Override
+      public com.google.protobuf.ByteString getContents() {
+        return contents_;
+      }
+      /**
+       * <code>bytes contents = 2;</code>
+       * @param value The contents to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContents(com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        contents_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes contents = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearContents() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        contents_ = getDefaultInstance().getContents();
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JarFile)
+    }
+
+    // @@protoc_insertion_point(class_scope:JarFile)
+    private static final com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile();
+    }
+
+    public static com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<JarFile>
+        PARSER = new com.google.protobuf.AbstractParser<JarFile>() {
+      @java.lang.Override
+      public JarFile parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<JarFile> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JarFile> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Response_descriptor;
   private static final 
@@ -4828,6 +5850,16 @@ public final class VisualBukkitRPC {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ReportExceptionRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DeployPluginRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_DeployPluginRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JarFile_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JarFile_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4847,15 +5879,18 @@ public final class VisualBukkitRPC {
       "\022\034\n\004slot\030\003 \003(\0132\016.InventorySlot\"+\n\rInvent" +
       "orySlot\022\014\n\004slot\030\001 \001(\005\022\014\n\004yaml\030\002 \001(\t\"?\n\026R" +
       "eportExceptionRequest\022\021\n\tblockUUID\030\001 \001(\t" +
-      "\022\022\n\nstacktrace\030\002 \001(\t2\211\002\n\014VisualBukkit\022\037\n" +
-      "\004Ping\022\014.PingRequest\032\t.Response\0225\n\017Import" +
-      "ItemStack\022\027.ImportItemStackRequest\032\t.Res" +
-      "ponse\0223\n\016ImportLocation\022\026.ImportLocation" +
-      "Request\032\t.Response\0225\n\017ImportInventory\022\027." +
-      "ImportInventoryRequest\032\t.Response\0225\n\017Rep" +
-      "ortException\022\027.ReportExceptionRequest\032\t." +
-      "ResponseB\034\n\032com.gmail.visualbukkit.rpcb\006" +
-      "proto3"
+      "\022\022\n\nstacktrace\030\002 \001(\t\"\025\n\023DeployPluginRequ" +
+      "est\")\n\007JarFile\022\014\n\004name\030\001 \001(\t\022\020\n\010contents" +
+      "\030\002 \001(\0142\273\002\n\014VisualBukkit\022\037\n\004Ping\022\014.PingRe" +
+      "quest\032\t.Response\0225\n\017ImportItemStack\022\027.Im" +
+      "portItemStackRequest\032\t.Response\0223\n\016Impor" +
+      "tLocation\022\026.ImportLocationRequest\032\t.Resp" +
+      "onse\0225\n\017ImportInventory\022\027.ImportInventor" +
+      "yRequest\032\t.Response\0225\n\017ReportException\022\027" +
+      ".ReportExceptionRequest\032\t.Response\0220\n\014De" +
+      "ployPlugin\022\024.DeployPluginRequest\032\010.JarFi" +
+      "le0\001B\034\n\032com.gmail.visualbukkit.rpcb\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4903,6 +5938,18 @@ public final class VisualBukkitRPC {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ReportExceptionRequest_descriptor,
         new java.lang.String[] { "BlockUUID", "Stacktrace", });
+    internal_static_DeployPluginRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_DeployPluginRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_DeployPluginRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_JarFile_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_JarFile_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JarFile_descriptor,
+        new java.lang.String[] { "Name", "Contents", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

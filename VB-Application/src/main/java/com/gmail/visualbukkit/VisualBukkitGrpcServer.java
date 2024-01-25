@@ -11,6 +11,7 @@ import com.gmail.visualbukkit.reflection.ConstructorInfo;
 import com.gmail.visualbukkit.reflection.MethodInfo;
 import com.gmail.visualbukkit.rpc.VisualBukkitGrpc;
 import com.gmail.visualbukkit.rpc.VisualBukkitRPC;
+import com.google.protobuf.ByteString;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import javafx.application.Platform;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.KeyStore;
@@ -31,12 +33,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.*;
 import java.util.logging.Level;
 
 public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBase {
@@ -90,58 +87,42 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
 
     @Override
     public void ping(VisualBukkitRPC.PingRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        responseObserver.onNext(ping(request));
-        responseObserver.onCompleted();
-    }
-
-    private VisualBukkitRPC.Response ping(VisualBukkitRPC.PingRequest request) {
-        CompletableFuture<VisualBukkitRPC.Response> future = new CompletableFuture<>();
         Platform.runLater(() -> {
-            VisualBukkitRPC.Response.Builder response = VisualBukkitRPC.Response.newBuilder();
-            TextInputDialog responseDialog = new TextInputDialog();
-            responseDialog.setTitle("Ping Request");
-            responseDialog.setContentText("Response:");
-            responseDialog.setHeaderText(null);
-            responseDialog.setGraphic(null);
-            responseDialog.showAndWait().ifPresent(response::setMessage);
-            future.complete(response.build());
+            try {
+                VisualBukkitRPC.Response.Builder response = VisualBukkitRPC.Response.newBuilder();
+                TextInputDialog responseDialog = new TextInputDialog();
+                responseDialog.setTitle("Ping Request");
+                responseDialog.setContentText("Response:");
+                responseDialog.setHeaderText(null);
+                responseDialog.setGraphic(null);
+                responseDialog.showAndWait().ifPresent(response::setMessage);
+                responseObserver.onNext(response.build());
+            } finally {
+                responseObserver.onCompleted();
+            }
         });
-        try {
-            return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            return VisualBukkitRPC.Response.newBuilder().build();
-        }
     }
 
     @Override
     public void importItemStack(VisualBukkitRPC.ImportItemStackRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        responseObserver.onNext(importItemStack(request));
-        responseObserver.onCompleted();
-    }
-
-    private VisualBukkitRPC.Response importItemStack(VisualBukkitRPC.ImportItemStackRequest request) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_item"));
             alert.setHeaderText(null);
             alert.setGraphic(null);
             alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == ButtonType.YES) {
+                if (buttonType == ButtonType.OK) {
                     CopyPasteManager.copyExpression(new ExprSerializedItemStack(request.getYaml()));
                     VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_item"));
                 }
             });
         });
-        return VisualBukkitRPC.Response.newBuilder().build();
+        responseObserver.onNext(VisualBukkitRPC.Response.newBuilder().build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void importLocation(VisualBukkitRPC.ImportLocationRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        responseObserver.onNext(importLocation(request));
-        responseObserver.onCompleted();
-    }
-
-    private VisualBukkitRPC.Response importLocation(VisualBukkitRPC.ImportLocationRequest request) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_location"));
@@ -159,16 +140,12 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
                 }
             });
         });
-        return VisualBukkitRPC.Response.newBuilder().build();
+        responseObserver.onNext(VisualBukkitRPC.Response.newBuilder().build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void importInventory(VisualBukkitRPC.ImportInventoryRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        responseObserver.onNext(importInventory(request));
-        responseObserver.onCompleted();
-    }
-
-    private VisualBukkitRPC.Response importInventory(VisualBukkitRPC.ImportInventoryRequest request) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_import_inventory"));
@@ -191,23 +168,19 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
                 }
             });
         });
-        return VisualBukkitRPC.Response.newBuilder().build();
+        responseObserver.onNext(VisualBukkitRPC.Response.newBuilder().build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void reportException(VisualBukkitRPC.ReportExceptionRequest request, StreamObserver<VisualBukkitRPC.Response> responseObserver) {
-        responseObserver.onNext(reportException(request));
-        responseObserver.onCompleted();
-    }
-
-    private VisualBukkitRPC.Response reportException(VisualBukkitRPC.ReportExceptionRequest request) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_report_exception"));
             alert.setHeaderText(null);
             alert.setGraphic(null);
             alert.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == ButtonType.YES) {
+                if (buttonType == ButtonType.OK) {
                     for (PluginComponent pluginComponent : ProjectManager.current().getPluginComponents()) {
                         if (pluginComponent.containsBlock(request.getBlockUUID())) {
                             ProjectManager.current().openPluginComponent(pluginComponent);
@@ -237,6 +210,54 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
                 }
             });
         });
-        return VisualBukkitRPC.Response.newBuilder().build();
+        responseObserver.onNext(VisualBukkitRPC.Response.newBuilder().build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void deployPlugin(VisualBukkitRPC.DeployPluginRequest request, StreamObserver<VisualBukkitRPC.JarFile> responseObserver) {
+        Platform.runLater(() -> {
+            try {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText(VisualBukkitApp.localizedText("dialog.confirm_deploy_plugin"));
+                alert.setHeaderText(null);
+                alert.setGraphic(null);
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == ButtonType.OK) {
+                        Path buildDir = ProjectManager.current().getBuildDirectory().resolve("target");
+                        if (Files.exists(buildDir)) {
+                            try (DirectoryStream<Path> stream = Files.newDirectoryStream(buildDir, "*.jar")) {
+                                for (Path path : stream) {
+                                    if (!path.getFileName().toString().startsWith("original-")) {
+                                        deployPlugin(path, responseObserver);
+                                        return;
+                                    }
+                                }
+                                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
+                            } catch (IOException e) {
+                                VisualBukkitApp.displayException(e);
+                            }
+                        } else {
+                            VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
+                        }
+                    }
+                });
+            } finally {
+                responseObserver.onCompleted();
+            }
+        });
+    }
+
+    private void deployPlugin(Path jarPath, StreamObserver<VisualBukkitRPC.JarFile> responseObserver) throws IOException {
+        try (InputStream is = Files.newInputStream(jarPath)) {
+            byte[] bytes = new byte[1024 * 1024];
+            int bytesRead;
+            while ((bytesRead = is.read(bytes)) != -1) {
+                responseObserver.onNext(VisualBukkitRPC.JarFile.newBuilder()
+                        .setName(jarPath.getFileName().toString())
+                        .setContents(ByteString.copyFrom(bytes, 0, bytesRead))
+                        .build());
+            }
+        }
     }
 }

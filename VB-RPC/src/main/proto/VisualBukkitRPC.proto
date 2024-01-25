@@ -36,10 +36,18 @@ message ReportExceptionRequest {
   string stacktrace = 2;
 }
 
+message DeployPluginRequest {}
+
+message JarFile {
+  string name = 1;
+  bytes contents = 2;
+}
+
 service VisualBukkit {
   rpc Ping(PingRequest) returns (Response);
   rpc ImportItemStack(ImportItemStackRequest) returns (Response);
   rpc ImportLocation(ImportLocationRequest) returns (Response);
   rpc ImportInventory(ImportInventoryRequest) returns (Response);
   rpc ReportException(ReportExceptionRequest) returns (Response);
+  rpc DeployPlugin(DeployPluginRequest) returns (stream JarFile);
 }

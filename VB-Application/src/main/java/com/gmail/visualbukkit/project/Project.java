@@ -755,6 +755,10 @@ public class Project {
         return directory;
     }
 
+    public Path getBuildDirectory() {
+        return buildDirectory;
+    }
+
     public JSONObject getData() {
         return data;
     }

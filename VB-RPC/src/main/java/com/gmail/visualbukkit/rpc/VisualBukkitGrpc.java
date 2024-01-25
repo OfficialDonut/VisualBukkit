@@ -170,6 +170,37 @@ public final class VisualBukkitGrpc {
     return getReportExceptionMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> getDeployPluginMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "DeployPlugin",
+      requestType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.class,
+      responseType = com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest,
+      com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> getDeployPluginMethod() {
+    io.grpc.MethodDescriptor<com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> getDeployPluginMethod;
+    if ((getDeployPluginMethod = VisualBukkitGrpc.getDeployPluginMethod) == null) {
+      synchronized (VisualBukkitGrpc.class) {
+        if ((getDeployPluginMethod = VisualBukkitGrpc.getDeployPluginMethod) == null) {
+          VisualBukkitGrpc.getDeployPluginMethod = getDeployPluginMethod =
+              io.grpc.MethodDescriptor.<com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest, com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeployPlugin"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile.getDefaultInstance()))
+              .setSchemaDescriptor(new VisualBukkitMethodDescriptorSupplier("DeployPlugin"))
+              .build();
+        }
+      }
+    }
+    return getDeployPluginMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -252,6 +283,13 @@ public final class VisualBukkitGrpc {
         io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReportExceptionMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void deployPlugin(com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeployPluginMethod(), responseObserver);
+    }
   }
 
   /**
@@ -320,6 +358,14 @@ public final class VisualBukkitGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getReportExceptionMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void deployPlugin(com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest request,
+        io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getDeployPluginMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -371,6 +417,14 @@ public final class VisualBukkitGrpc {
     public com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response reportException(com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getReportExceptionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile> deployPlugin(
+        com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getDeployPluginMethod(), getCallOptions(), request);
     }
   }
 
@@ -436,6 +490,7 @@ public final class VisualBukkitGrpc {
   private static final int METHODID_IMPORT_LOCATION = 2;
   private static final int METHODID_IMPORT_INVENTORY = 3;
   private static final int METHODID_REPORT_EXCEPTION = 4;
+  private static final int METHODID_DEPLOY_PLUGIN = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -473,6 +528,10 @@ public final class VisualBukkitGrpc {
         case METHODID_REPORT_EXCEPTION:
           serviceImpl.reportException((com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest) request,
               (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>) responseObserver);
+          break;
+        case METHODID_DEPLOY_PLUGIN:
+          serviceImpl.deployPlugin((com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest) request,
+              (io.grpc.stub.StreamObserver<com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -527,6 +586,13 @@ public final class VisualBukkitGrpc {
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.ReportExceptionRequest,
               com.gmail.visualbukkit.rpc.VisualBukkitRPC.Response>(
                 service, METHODID_REPORT_EXCEPTION)))
+        .addMethod(
+          getDeployPluginMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.DeployPluginRequest,
+              com.gmail.visualbukkit.rpc.VisualBukkitRPC.JarFile>(
+                service, METHODID_DEPLOY_PLUGIN)))
         .build();
   }
 
@@ -580,6 +646,7 @@ public final class VisualBukkitGrpc {
               .addMethod(getImportLocationMethod())
               .addMethod(getImportInventoryMethod())
               .addMethod(getReportExceptionMethod())
+              .addMethod(getDeployPluginMethod())
               .build();
         }
       }

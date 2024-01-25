@@ -223,6 +223,12 @@ public class VisualBukkitPlugin extends JavaPlugin {
             return true;
         }
 
+        if (args.length == 1 && args[0].equalsIgnoreCase("deploy")) {
+            sendFormatted("&eDeploying plugin...", sender);
+            grpcStub.deployPlugin(VisualBukkitRPC.DeployPluginRequest.newBuilder().build(), new JarStreamObserver(this, sender));
+            return true;
+        }
+
         return false;
     }
 
@@ -265,11 +271,11 @@ public class VisualBukkitPlugin extends JavaPlugin {
         });
     }
 
-    private void sendFormatted(String str, CommandSender sender) {
+    protected void sendFormatted(String str, CommandSender sender) {
         sendColored("&7[&9VisualBukkit&7]&r " + str, sender);
     }
 
-    private void sendColored(String str, CommandSender sender) {
+    protected void sendColored(String str, CommandSender sender) {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', str));
     }
 }
