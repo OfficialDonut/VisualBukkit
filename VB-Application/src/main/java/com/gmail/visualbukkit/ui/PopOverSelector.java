@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class PopOverSelector<T> extends ComboBox<T> {
+public class PopOverSelector<T extends PopOverSelectable> extends ComboBox<T> {
 
     private static final Multimap<String, String> pinnedItems = HashMultimap.create();
     private final PopOver popOver;
@@ -49,15 +49,15 @@ public class PopOverSelector<T> extends ComboBox<T> {
         }
 
         FilteredList<T> filteredItemList = new FilteredList<>(observableList.sorted((o1, o2) -> {
-            String text1 = o1.toString();
-            String text2 = o2.toString();
-            if (pinnedItems.containsValue(text1) && !pinnedItems.containsValue(text2)) {
+            String id1 = o1.getPinID();
+            String id2 = o2.getPinID();
+            if (pinnedItems.containsValue(id1) && !pinnedItems.containsValue(id2)) {
                 return -1;
             }
-            if (pinnedItems.containsValue(text2) && !pinnedItems.containsValue(text1)) {
+            if (pinnedItems.containsValue(id2) && !pinnedItems.containsValue(id1)) {
                 return 1;
             }
-            return text1.compareTo(text2);
+            return o1.toString().compareTo(o2.toString());
         }));
 
         getStyleClass().add("popover-selector");
@@ -81,26 +81,26 @@ public class PopOverSelector<T> extends ComboBox<T> {
                     protected void updateItem(T item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
-                            String text = item.toString();
-                            setText(text);
+                            String pinID = item.getPinID();
                             setTooltip(cellTooltip.apply(item));
-                            if (pinnedItems.containsValue(text)) {
-                                setGraphic(new FontIcon(LineAwesomeSolid.THUMBTACK));
+                            if (pinnedItems.containsValue(pinID)) {
+                                HBox hBox = new HBox(new FontIcon(LineAwesomeSolid.THUMBTACK));
+                                hBox.getChildren().addAll(item.getDisplayNodes());
+                                setGraphic(hBox);
                                 setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.unpin"), e -> {
-                                    pinnedItems.remove(pinnedItemsKey, text);
+                                    pinnedItems.remove(pinnedItemsKey, pinID);
                                     observableList.setAll(PopOverSelector.this.items);
                                     VisualBukkitApp.getData().put(pinnedItemsKey, pinnedItems.get(pinnedItemsKey));
                                 })));
                             } else {
-                                setGraphic(null);
+                                setGraphic(new HBox(item.getDisplayNodes()));
                                 setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.pin"), e -> {
-                                    pinnedItems.put(pinnedItemsKey, text);
+                                    pinnedItems.put(pinnedItemsKey, pinID);
                                     observableList.setAll(PopOverSelector.this.items);
-                                    VisualBukkitApp.getData().append(pinnedItemsKey, text);
+                                    VisualBukkitApp.getData().append(pinnedItemsKey, pinID);
                                 })));
                             }
                         } else {
-                            setText("");
                             setTooltip(null);
                             setGraphic(null);
                         }

@@ -1,12 +1,19 @@
 package com.gmail.visualbukkit.reflection;
 
-public abstract class FieldInfo implements Comparable<FieldInfo> {
+import com.gmail.visualbukkit.ui.PopOverSelectable;
+
+public abstract class FieldInfo implements PopOverSelectable, Comparable<FieldInfo> {
 
     public abstract String getName();
 
     public abstract ClassInfo getType();
 
     public abstract boolean isStatic();
+
+    @Override
+    public String getPinID() {
+        return getName();
+    }
 
     @Override
     public int compareTo(FieldInfo o) {

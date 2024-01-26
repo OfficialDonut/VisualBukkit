@@ -79,7 +79,7 @@ public class StatementSelector extends VBox {
         statements.clear();
         for (BlockFactory<StatementBlock> factory : BlockRegistry.getStatements()) {
             StatementSource statementSource = new StatementSource(factory);
-            String id = factory.getBlockDefinition().id();
+            String id = factory.getPinID();
             if (pinnedStatements.contains(id)) {
                 statementSource.setGraphic(new FontIcon(LineAwesomeSolid.THUMBTACK));
                 statementSource.setContextMenu(new ContextMenu(new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.unpin"), e -> {

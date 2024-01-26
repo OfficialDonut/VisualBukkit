@@ -1,6 +1,10 @@
 package com.gmail.visualbukkit.reflection;
 
-public abstract class MethodInfo implements Parameterizable, Comparable<MethodInfo> {
+import com.gmail.visualbukkit.ui.PopOverSelectable;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+
+public abstract class MethodInfo implements Parameterizable, PopOverSelectable, Comparable<MethodInfo> {
 
     public abstract String getName();
 
@@ -10,6 +14,23 @@ public abstract class MethodInfo implements Parameterizable, Comparable<MethodIn
 
     public String getSignature() {
         return String.format("%s(%s)", getName(), getParameterString(p -> p.getType().getName()));
+    }
+
+    @Override
+    public String getPinID() {
+        return getSignature();
+    }
+
+    @Override
+    public Node[] getDisplayNodes() {
+        if (getReturnType() == null) {
+            return PopOverSelectable.super.getDisplayNodes();
+        }
+        Label nameLabel = new Label(getName() + "(" + getParameterString(p -> p.getType().getSimpleName()) + ")");
+        Label returnTypeLabel = new Label("→ (" + getReturnType().getSimpleName() + ")");
+        nameLabel.getStyleClass().add("method-name-label");
+        returnTypeLabel.getStyleClass().add("method-return-label");
+        return new Node[]{nameLabel, returnTypeLabel};
     }
 
     @Override

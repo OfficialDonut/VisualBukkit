@@ -1,6 +1,8 @@
 package com.gmail.visualbukkit.reflection;
 
-public abstract class ConstructorInfo implements Parameterizable, Comparable<ConstructorInfo> {
+import com.gmail.visualbukkit.ui.PopOverSelectable;
+
+public abstract class ConstructorInfo implements Parameterizable, PopOverSelectable, Comparable<ConstructorInfo> {
 
     private final ClassInfo clazz;
 
@@ -10,6 +12,11 @@ public abstract class ConstructorInfo implements Parameterizable, Comparable<Con
 
     public String getSignature() {
         return String.format("<init>(%s)", getParameterString(p -> p.getType().getName()));
+    }
+
+    @Override
+    public String getPinID() {
+        return getSignature();
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.ui.PopOverSelectable;
 import org.json.JSONObject;
 
 import java.util.logging.Level;
 
-public class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>> {
+public class BlockFactory<T extends Block> implements PopOverSelectable, Comparable<BlockFactory<T>> {
 
     private final Class<?> blockClass;
 
@@ -62,5 +63,10 @@ public class BlockFactory<T extends Block> implements Comparable<BlockFactory<T>
 
     public BlockDefinition getBlockDefinition() {
         return blockClass.getAnnotation(BlockDefinition.class);
+    }
+
+    @Override
+    public String getPinID() {
+        return getBlockDefinition().id();
     }
 }

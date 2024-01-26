@@ -1,6 +1,9 @@
 package com.gmail.visualbukkit.reflection;
 
+import com.gmail.visualbukkit.ui.PopOverSelectable;
 import com.google.common.primitives.Primitives;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -9,7 +12,7 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public abstract class ClassInfo implements Comparable<ClassInfo> {
+public abstract class ClassInfo implements PopOverSelectable, Comparable<ClassInfo> {
 
     public abstract String getName();
 
@@ -60,6 +63,20 @@ public abstract class ClassInfo implements Comparable<ClassInfo> {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public String getPinID() {
+        return getName();
+    }
+
+    @Override
+    public Node[] getDisplayNodes() {
+        Label nameLabel = new Label(getSimpleName());
+        Label packageLabel = new Label("(" + getPackage() + ")");
+        nameLabel.getStyleClass().add("class-name-label");
+        packageLabel.getStyleClass().add("class-package-label");
+        return new Node[]{nameLabel, packageLabel};
     }
 
     private boolean isPrimitive() {

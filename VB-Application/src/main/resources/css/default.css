@@ -94,6 +94,10 @@
     -fx-spacing: 0.5em;
 }
 
+.class-package-label {
+    -fx-text-fill: gray !important;
+}
+
 .container-block {
     -fx-background-color: lightblue;
     -fx-padding: 0.5em 0.5em 2em 0.5em;
@@ -192,6 +196,10 @@ HBox {
     -fx-pref-width: 25em;
 }
 
+.method-return-label {
+    -fx-text-fill: gray !important;
+}
+
 .number-field {
     -fx-control-inner-background: beige !important;
 }
@@ -228,20 +236,22 @@ HBox {
     -fx-color: -fx-base;
 }
 
-.popover HBox {
-    -fx-background-color: white;
-    -fx-padding: 0.5em;
-}
-
 .popover HBox > .text-field {
     -fx-background-color: transparent;
     -fx-border-color: black;
     -fx-border-radius: 0;
     -fx-border-width: 0 0 0.1em 0;
+    -fx-pref-width: 12em;
 }
 
 .popover VBox {
     -fx-padding: 0;
+    -fx-min-width: 20em;
+}
+
+.popover VBox > HBox {
+    -fx-background-color: white;
+    -fx-padding: 0.5em;
 }
 
 .popover-selector {

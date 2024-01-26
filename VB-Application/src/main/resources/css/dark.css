@@ -12,6 +12,10 @@
     -fx-icon-color: white;
 }
 
+.popover .list-cell .label {
+    -fx-text-fill: white;
+}
+
 .project-pane > .button-bar {
     -fx-border-color: gray;
     -fx-border-width: 1 0 0 0;
