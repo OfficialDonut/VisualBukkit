@@ -29,7 +29,7 @@ public abstract class MethodInfo implements Parameterizable, PopOverSelectable, 
         Label nameLabel = new Label(getName() + "(" + getParameterString(p -> p.getType().getSimpleName()) + ")");
         Label returnTypeLabel = new Label("→ (" + getReturnType().getSimpleName() + ")");
         nameLabel.getStyleClass().add("method-name-label");
-        returnTypeLabel.getStyleClass().add("method-return-label");
+        returnTypeLabel.getStyleClass().add("return-type-label");
         return new Node[]{nameLabel, returnTypeLabel};
     }
 

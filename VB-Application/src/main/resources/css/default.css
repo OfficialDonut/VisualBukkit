@@ -196,10 +196,6 @@ HBox {
     -fx-pref-width: 25em;
 }
 
-.method-return-label {
-    -fx-text-fill: gray !important;
-}
-
 .number-field {
     -fx-control-inner-background: beige !important;
 }
@@ -266,6 +262,10 @@ HBox {
 .project-pane > .button-bar {
     -fx-background-color: derive(-fx-base, 5%);
     -fx-padding: 1em;
+}
+
+.return-type-label {
+    -fx-text-fill: gray !important;
 }
 
 .root {
