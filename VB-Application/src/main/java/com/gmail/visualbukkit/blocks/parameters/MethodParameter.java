@@ -63,6 +63,7 @@ public class MethodParameter extends ClassElementParameter<MethodInfo> {
                     return;
                 }
             }
+            throw new IllegalStateException();
         }
     }
 }

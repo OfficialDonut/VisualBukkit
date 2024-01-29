@@ -30,7 +30,7 @@ public class BlockFactory<T extends Block> implements PopOverSelectable, Compara
             block.deserialize(json);
             return block;
         } catch (Exception e) {
-            VisualBukkitApp.getLogger().log(Level.WARNING, "Failed to deserialize block", e);
+            VisualBukkitApp.getLogger().log(Level.FINE, "Failed to deserialize block", e);
             T block = createUnknown();
             block.deserialize(json);
             return block;

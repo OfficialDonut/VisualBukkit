@@ -1,7 +1,6 @@
 package com.gmail.visualbukkit.project.maven;
 
 import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.project.PluginModule;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.json.JSONObject;
@@ -10,14 +9,16 @@ public class MavenRepositoryModule extends MavenModule {
 
     private final RemoteRepository repository;
 
-    public MavenRepositoryModule(RemoteRepository repository) {
-        super(repository.toString(), String.format("%s %s", repository.getId(), repository.getUrl()));
+    public MavenRepositoryModule(RemoteRepository repository, boolean userDefined) {
+        super(repository.toString(), String.format("Repo: %s (%s)", repository.getId(), repository.getUrl()), userDefined);
         this.repository = repository;
     }
 
     @Override
     public void enable() {
-        ClassRegistry.register(repository);
+        if (isUserDefined()) {
+            ClassRegistry.register(repository);
+        }
     }
 
     @Override
@@ -34,12 +35,7 @@ public class MavenRepositoryModule extends MavenModule {
     }
 
     public static MavenRepositoryModule deserialize(JSONObject json) {
-        return new MavenRepositoryModule(new RemoteRepository.Builder(json.getString("id"), "default", json.getString("url")).build());
-    }
-
-    @Override
-    public int compareTo(PluginModule other) {
-        return other instanceof MavenDependencyModule ? -1 : super.compareTo(other);
+        return new MavenRepositoryModule(new RemoteRepository.Builder(json.getString("id"), "default", json.getString("url")).build(), true);
     }
 
     public RemoteRepository getRepository() {

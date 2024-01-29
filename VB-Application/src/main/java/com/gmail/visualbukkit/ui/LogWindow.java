@@ -22,25 +22,30 @@ public class LogWindow extends Stage {
         TextArea textArea = new TextArea();
         textArea.getStyleClass().add("log-window");
         textArea.setEditable(false);
+        textArea.setWrapText(true);
 
         initOwner(VisualBukkitApp.getPrimaryStage());
         setTitle(VisualBukkitApp.localizedText("window.log"));
         setScene(new Scene(textArea));
+        setMaximized(false);
+        setFullScreen(false);
 
         handler = new Handler() {
             @Override
             public void publish(LogRecord record) {
-                if (Platform.isFxApplicationThread()) {
-                    if (record.getMessage().matches("\\[[A-Z]+].+")) {
-                        textArea.appendText(String.format("[%s] %s\n", FORMATTER.format(record.getInstant()), record.getMessage()));
+                if (isLoggable(record)) {
+                    if (Platform.isFxApplicationThread()) {
+                        if (record.getMessage().matches("\\[[A-Z]+].+")) {
+                            textArea.appendText(String.format("[%s] %s\n", FORMATTER.format(record.getInstant()), record.getMessage()));
+                        } else {
+                            textArea.appendText(String.format("[%s] [%s] %s\n", FORMATTER.format(record.getInstant()), record.getLevel().toString(), record.getMessage()));
+                        }
+                        if (record.getThrown() != null) {
+                            textArea.appendText(Throwables.getStackTraceAsString(record.getThrown()) + "\n");
+                        }
                     } else {
-                        textArea.appendText(String.format("[%s] [%s] %s\n", FORMATTER.format(record.getInstant()), record.getLevel().toString(), record.getMessage()));
+                        Platform.runLater(() -> publish(record));
                     }
-                    if (record.getThrown() != null) {
-                        textArea.appendText(Throwables.getStackTraceAsString(record.getThrown()) + "\n");
-                    }
-                } else {
-                    Platform.runLater(() -> publish(record));
                 }
             }
             @Override

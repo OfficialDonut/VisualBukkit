@@ -58,6 +58,7 @@ public class FieldParameter extends ClassElementParameter<FieldInfo> {
                     return;
                 }
             }
+            throw new IllegalStateException();
         }
     }
 }

@@ -73,7 +73,7 @@ public abstract class ClassInfo implements PopOverSelectable, Comparable<ClassIn
     @Override
     public Node[] getDisplayNodes() {
         Label nameLabel = new Label(getSimpleName());
-        Label packageLabel = new Label("(" + getPackage() + ")");
+        Label packageLabel = new Label("(" + getName() + ")");
         nameLabel.getStyleClass().add("class-name-label");
         packageLabel.getStyleClass().add("class-package-label");
         return new Node[]{nameLabel, packageLabel};

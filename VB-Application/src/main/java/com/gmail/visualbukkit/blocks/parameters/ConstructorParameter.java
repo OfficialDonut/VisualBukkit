@@ -59,6 +59,7 @@ public class ConstructorParameter extends ClassElementParameter<ConstructorInfo>
                     return;
                 }
             }
+            throw new IllegalStateException();
         }
     }
 }

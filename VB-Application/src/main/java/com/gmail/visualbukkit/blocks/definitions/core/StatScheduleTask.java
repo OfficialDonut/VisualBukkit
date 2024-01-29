@@ -34,8 +34,8 @@ public class StatScheduleTask extends ContainerBlock {
         while (matcher.find()) {
             String variable = matcher.group();
             if (localVars.add(variable)) {
-                String tempVar = "$TEMP_" + RandomStringUtils.randomAlphabetic(16);
-                String finalVar = "$FINAL_" + RandomStringUtils.randomAlphabetic(16);
+                String tempVar = "$TEMP_" + RandomStringUtils.randomAlphanumeric(16);
+                String finalVar = "$FINAL_" + RandomStringUtils.randomAlphanumeric(16);
                 tempVars.append("Object ").append(tempVar).append(" = ").append(variable).append(";");
                 finalVars.append("Object ").append(finalVar).append(" = ").append(tempVar).append(";");
                 childrenJava = childrenJava.replace(variable, finalVar);

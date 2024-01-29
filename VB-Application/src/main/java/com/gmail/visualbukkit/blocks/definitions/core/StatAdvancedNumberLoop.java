@@ -20,7 +20,7 @@ public class StatAdvancedNumberLoop extends ContainerBlock {
 
     @Override
     public String generateJava(BuildInfo buildInfo) {
-        String loopVar = "loopNumber" + (StatNumberLoop.getNestedLoops(this) + 1);
+        String loopVar = "loopNumber" + getNestedContainers(StatNumberLoop.class, StatAdvancedNumberLoop.class);
         return "for (int %1$s = %2$s; %1$s %3$s %4$s; %1$s %5$s= %6$s) { int $FINAL_%1$s = %1$s; %7$s }".formatted(loopVar, arg(0, buildInfo), arg(4, buildInfo), arg(1, buildInfo), arg(3, buildInfo), arg(2, buildInfo), generateChildrenJava(buildInfo));
     }
 }

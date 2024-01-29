@@ -92,6 +92,15 @@ public class StatementHolder extends VBox implements Iterable<StatementBlock> {
         return null;
     }
 
+    public StatementBlock getNext(StatementBlock block) {
+        for (int i = getChildren().indexOf(block) + 1; i < getChildren().size(); i++) {
+            if (getChildren().get(i) instanceof StatementBlock b && !(b instanceof StatComment)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
     public void setCollapsedRecursive(boolean collapsed) {
         for (StatementBlock block : this) {
             block.setCollapsed(collapsed);

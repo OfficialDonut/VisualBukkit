@@ -2,7 +2,6 @@ package com.gmail.visualbukkit.project.maven;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.project.PluginModule;
 import com.gmail.visualbukkit.reflection.ClassRegistry;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.eclipse.aether.artifact.DefaultArtifact;
@@ -17,17 +16,19 @@ public class MavenDependencyModule extends MavenModule {
 
     private final Dependency dependency;
 
-    public MavenDependencyModule(Dependency dependency) {
-        super(dependency.toString(), String.format("%s:%s:%s [%s]", dependency.getArtifact().getGroupId(),dependency.getArtifact().getArtifactId(), dependency.getArtifact().getVersion(), dependency.getScope()));
+    public MavenDependencyModule(Dependency dependency, boolean userDefined) {
+        super(dependency.toString(), String.format("Depend: %s:%s:%s [%s]", dependency.getArtifact().getGroupId(),dependency.getArtifact().getArtifactId(), dependency.getArtifact().getVersion(), dependency.getScope()), userDefined);
         this.dependency = dependency;
     }
 
     @Override
     public void enable() {
-        try {
-            ClassRegistry.register(dependency);
-        } catch (IOException | MavenInvocationException | DependencyResolutionException e) {
-            VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to register dependency", e);
+        if (isUserDefined()) {
+            try {
+                ClassRegistry.register(dependency);
+            } catch (IOException | MavenInvocationException | DependencyResolutionException e) {
+                VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to register dependency", e);
+            }
         }
     }
 
@@ -45,12 +46,7 @@ public class MavenDependencyModule extends MavenModule {
     }
 
     public static MavenDependencyModule deserialize(JSONObject json) {
-        return new MavenDependencyModule(new Dependency(new DefaultArtifact(json.getString("coords")), json.getString("scope")));
-    }
-
-    @Override
-    public int compareTo(PluginModule other) {
-        return other instanceof MavenRepositoryModule ? 1 : super.compareTo(other);
+        return new MavenDependencyModule(new Dependency(new DefaultArtifact(json.getString("coords")), json.getString("scope")), true);
     }
 
     public Dependency getDependency() {

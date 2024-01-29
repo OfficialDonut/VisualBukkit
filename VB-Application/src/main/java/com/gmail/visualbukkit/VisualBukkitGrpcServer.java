@@ -233,12 +233,12 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
                                         return;
                                     }
                                 }
-                                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
+                                VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
                             } catch (IOException e) {
                                 VisualBukkitApp.displayException(e);
                             }
                         } else {
-                            VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
+                            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.no_plugin_jar"));
                         }
                     }
                 });

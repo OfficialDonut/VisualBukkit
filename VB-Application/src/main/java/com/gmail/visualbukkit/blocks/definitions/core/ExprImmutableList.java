@@ -7,15 +7,15 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
-@BlockDefinition(id = "expr-list", name = "List", description = "A new list")
-public class ExprList extends SizedExpressionBlock {
+@BlockDefinition(id = "expr-immutable-list", name = "Immutable List", description = "A new immutable list")
+public class ExprImmutableList extends SizedExpressionBlock {
 
     @Override
     public ClassInfo getReturnType() {
-        return ClassInfo.of(ArrayList.class);
+        return ClassInfo.of(List.class);
     }
 
     @Override
@@ -31,12 +31,12 @@ public class ExprList extends SizedExpressionBlock {
     @Override
     public String generateJava(BuildInfo buildInfo) {
         if (parameters == null) {
-            return "new ArrayList()";
+            return "Collections.emptyList()";
         }
         StringJoiner joiner = new StringJoiner(",");
         for (BlockParameter parameter : parameters) {
             joiner.add(parameter.generateJava(buildInfo));
         }
-        return "new ArrayList(Arrays.asList(" + joiner + "))";
+        return "List.of(" + joiner + ")";
     }
 }

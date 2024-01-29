@@ -1,5 +1,7 @@
 package com.gmail.visualbukkit.project;
 
+import java.nio.file.Path;
+
 public abstract class PluginModule implements Comparable<PluginModule> {
 
     private final String id;
@@ -12,7 +14,9 @@ public abstract class PluginModule implements Comparable<PluginModule> {
 
     public abstract void enable();
 
-    public abstract void prepareBuild(BuildInfo buildInfo);
+    public void prepareBuild(BuildInfo buildInfo) {}
+
+    public void prepareBuildDirectory(Path buildDir) {}
 
     @Override
     public int compareTo(PluginModule other) {

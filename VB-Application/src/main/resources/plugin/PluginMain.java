@@ -118,7 +118,7 @@ public class PluginMain extends JavaPlugin implements Listener {
         }
     }
 
-    private static void createResourceFile(String path) {
+    public static void createResourceFile(String path) {
         Path file = getInstance().getDataFolder().toPath().resolve(path);
         if (Files.notExists(file)) {
             try (InputStream inputStream = PluginMain.class.getResourceAsStream("/" + path)) {

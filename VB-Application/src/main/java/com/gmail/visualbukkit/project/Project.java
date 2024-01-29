@@ -14,6 +14,7 @@ import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
 import com.google.common.io.Resources;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -50,6 +51,7 @@ import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
@@ -59,6 +61,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Project {
+
+    private static final RemoteRepository PAPER_REPOSITORY = new RemoteRepository.Builder("papermc", "default", "https://repo.papermc.io/repository/maven-public/").build();
+    private static final Dependency PAPER_DEPENDENCY = new Dependency(new DefaultArtifact("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"), "provided");
 
     private final Path directory;
     private final Path dataFile;
@@ -110,12 +115,33 @@ public class Project {
             mavenListView.getItems().remove(mavenListView.getSelectionModel().getSelectedItem());
             reloadRequired = true;
         });
-        editButton.disableProperty().bind(mavenListView.getSelectionModel().selectedItemProperty().isNull());
+        editButton.disableProperty().bind(mavenListView.getSelectionModel().selectedItemProperty().isNull().or(Bindings.selectBoolean(mavenListView.getSelectionModel().selectedItemProperty(), "userDefined").not()));
         deleteButton.disableProperty().bind(editButton.disableProperty());
         ButtonVBox mavenButtons = new ButtonVBox(addDependButton, addRepoButton, editButton, deleteButton);
         HBox mavenPane = new HBox(mavenListView, mavenButtons);
         mavenPane.getStyleClass().add("maven-settings-pane");
         mavenListView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_maven_dependencies")));
+        mavenListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<MavenModule> call(ListView<MavenModule> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(MavenModule item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.toString());
+                            setGraphic(item.isUserDefined() ? null : new FontIcon(FontAwesomeSolid.LOCK));
+                        } else {
+                            setGraphic(null);
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+
+        addMavenRepository(PAPER_REPOSITORY);
+        addMavenDependency(PAPER_DEPENDENCY);
 
         Tab pluginYmlTab = new Tab(VisualBukkitApp.localizedText("label.plugin_attributes"), pluginSettings.getGrid());
         Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
@@ -151,8 +177,9 @@ public class Project {
                     VisualBukkitApp.displayException(ioe);
                 }
             }));
-            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), debugModeCheckBox);
-            gridPane.addRow(3, label, new CheckTreeView<>(rootItem));
+            CheckTreeView<Object> treeView = new CheckTreeView<>(rootItem);
+            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), new HBox(debugModeCheckBox, new IconButton(FontAwesomeRegular.QUESTION_CIRCLE, e2 -> VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/VB-Development-Plugin")))));
+            gridPane.addRow(3, label, treeView);
             gridPane.getStyleClass().add("build-settings-pane");
             settingsTabPane.getTabs().set(3, new Tab(VisualBukkitApp.localizedText("label.build"), gridPane));
         });
@@ -263,6 +290,10 @@ public class Project {
             }
         }
 
+        for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
+            extension.open(this);
+        }
+
         debugModeCheckBox.setSelected(data.optBoolean("debug-mode"));
         jarOutputField.setText(data.optString("jar-output", buildDirectory.resolve("target").toString()));
         pluginSettings.deserialize(data.optJSONObject("plugin-settings", new JSONObject()));
@@ -284,6 +315,8 @@ public class Project {
                 mavenListView.getItems().add(MavenDependencyModule.deserialize((JSONObject) o));
             }
         }
+        Collections.sort(mavenListView.getItems());
+
         moduleSelector.getTargetItems().addListener((ListChangeListener<PluginModule>) c -> {
             if (c.next() && (c.wasAdded() || c.wasRemoved())) {
                 reloadRequired = true;
@@ -294,13 +327,10 @@ public class Project {
             BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core");
             ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk.zip");
             ClassRegistry.register(Project.class.getClassLoader(), "classes/paper.zip");
+            ClassRegistry.register(Project.class.getClassLoader(), "classes/bungee.zip");
             moduleSelector.getTargetItems().forEach(PluginModule::enable);
             mavenListView.getItems().forEach(MavenModule::enable);
         });
-
-        for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
-            extension.open(this);
-        }
 
         if (Files.exists(pluginComponentDirectory)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
@@ -322,8 +352,8 @@ public class Project {
                 }
             }
         }
-        tabPane.getSelectionModel().select(data.optInt("selected-tab"));
 
+        tabPane.getSelectionModel().select(data.optInt("selected-tab"));
         statementSelector.reloadStatements();
         VisualBukkitApp.getRootPane().setCenter(projectPane);
         VisualBukkitApp.getData().put("current-project", getName());
@@ -347,7 +377,9 @@ public class Project {
             data.append("enabled-modules", module.getID());
         }
         for (MavenModule mavenModule : mavenListView.getItems()) {
-            data.append(mavenModule instanceof MavenDependencyModule ? "maven-dependencies" : "maven-repositories", mavenModule.serialize());
+            if (mavenModule.isUserDefined()) {
+                data.append(mavenModule instanceof MavenDependencyModule ? "maven-dependencies" : "maven-repositories", mavenModule.serialize());
+            }
         }
         for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
             extension.save(this);
@@ -560,7 +592,7 @@ public class Project {
                     mavenListView.getItems().remove(dependToEdit);
                 }
                 DefaultArtifact artifact = new DefaultArtifact(String.format("%s:%s:%s", groupIdField.getText(), artifactIdField.getText(), versionField.getText()));
-                mavenListView.getItems().add(new MavenDependencyModule(new Dependency(artifact, scopeField.getValue())));
+                mavenListView.getItems().add(new MavenDependencyModule(new Dependency(artifact, scopeField.getValue()), true));
                 Collections.sort(mavenListView.getItems());
                 reloadRequired = true;
             }
@@ -591,7 +623,7 @@ public class Project {
                     mavenListView.getItems().remove(repoToEdit);
                 }
                 RemoteRepository repository = new RemoteRepository.Builder(idField.getText(), "default", urlField.getText()).build();
-                mavenListView.getItems().add(new MavenRepositoryModule(repository));
+                mavenListView.getItems().add(new MavenRepositoryModule(repository, true));
                 Collections.sort(mavenListView.getItems());
                 reloadRequired = true;
             }
@@ -686,6 +718,10 @@ public class Project {
                 Files.writeString(buildDirectory.resolve("pom.xml"), MavenUtil.createPom(name.toLowerCase(), version, buildInfo));
                 Files.writeString(resourcesDir.resolve("plugin.yml"), pluginSettings.createPluginYml(name, version, mainClass.getQualifiedName()) + "\n" + commandsBuilder);
 
+                for (PluginModule module : moduleSelector.getTargetItems()) {
+                    module.prepareBuildDirectory(buildDirectory);
+                }
+
                 InvocationRequest request = new DefaultInvocationRequest();
                 request.setOutputHandler(s -> VisualBukkitApp.getLogger().info(s));
                 request.setErrorHandler(s -> VisualBukkitApp.getLogger().info(s));
@@ -712,6 +748,16 @@ public class Project {
                 VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to build plugin", e);
             }
         });
+    }
+
+    public void addMavenDependency(Dependency dependency) {
+        mavenListView.getItems().add(new MavenDependencyModule(dependency, false));
+        Collections.sort(mavenListView.getItems());
+    }
+
+    public void addMavenRepository(RemoteRepository repository) {
+        mavenListView.getItems().add(new MavenRepositoryModule(repository, false));
+        Collections.sort(mavenListView.getItems());
     }
 
     public boolean isOpen(PluginComponent pluginComponent) {

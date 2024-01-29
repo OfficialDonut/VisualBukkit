@@ -17,7 +17,7 @@ public class CompGUIClickHandler extends PluginComponentBlock {
     public void prepareBuild(BuildInfo buildInfo) {
         buildInfo.getMainClass().addMethod(
                 "@EventHandler\n" +
-                "public void $event_" + RandomStringUtils.randomAlphabetic(16) + "(GUIClickEvent guiClickEvent) throws Exception {" +
+                "public void $event_" + RandomStringUtils.randomAlphanumeric(16) + "(GUIClickEvent guiClickEvent) throws Exception {" +
                 "if (guiClickEvent.getID().equals(" + arg(0, buildInfo) + ")) {" +
                 generateChildrenJava(buildInfo) +
                 "}}");

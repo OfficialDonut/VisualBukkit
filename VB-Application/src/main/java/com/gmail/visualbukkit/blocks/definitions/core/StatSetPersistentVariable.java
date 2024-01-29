@@ -6,17 +6,17 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(id = "stat-set-global-variable", name = "Set Global Variable", description = "Sets the value of a global variable")
-public class StatSetGlobalVariable extends StatementBlock {
+@BlockDefinition(id = "stat-set-persistent-variable", name = "Set Persistent Variable", description = "Sets the value of a persistent variable")
+public class StatSetPersistentVariable extends StatementBlock {
 
-    public StatSetGlobalVariable() {
+    public StatSetPersistentVariable() {
         addParameter("Variable", new ExpressionParameter(ClassInfo.of(String.class)));
         addParameter("Value", new ExpressionParameter(ClassInfo.of(Object.class)));
     }
 
     @Override
     public String generateJava(BuildInfo buildInfo) {
-        ExprGlobalVariable.prepareClass(buildInfo.getMainClass());
-        return "PluginMain.globalVariables.put(" + arg(0, buildInfo) + "," + arg(1, buildInfo) + ");";
+        ExprPersistentVariable.prepareClass(buildInfo.getMainClass());
+        return "PluginMain.persistentData.set(" + arg(0, buildInfo) + "," + arg(1, buildInfo) + ");";
     }
 }

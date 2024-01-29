@@ -39,6 +39,20 @@ public class PluginModuleRegistry {
                 enableMethod.setBody(enableMethod.getBody() + "Bukkit.getPluginManager().registerEvents(GUIManager.getInstance(), this);");
             }
         });
+
+        register(new PluginModule("bungeecord", "BungeeCord") {
+            @Override
+            public void enable() {
+                BlockRegistry.register(PluginModuleRegistry.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.bungee");
+            }
+            @Override
+            public void prepareBuild(BuildInfo buildInfo) {
+                MethodSource<JavaClassSource> enableMethod = buildInfo.getMainClass().getMethod("onEnable");
+                MethodSource<JavaClassSource> disableMethod = buildInfo.getMainClass().getMethod("onDisable");
+                enableMethod.setBody(enableMethod.getBody() + "Bukkit.getMessenger().registerOutgoingPluginChannel(this, \"BungeeCord\");");
+                disableMethod.setBody(disableMethod.getBody() + "Bukkit.getMessenger().unregisterOutgoingPluginChannel(this);");
+            }
+        });
     }
 
     private static JavaClassSource loadClass(String file) {

@@ -218,4 +218,20 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
         }
         return null;
     }
+
+    @SafeVarargs
+    public final int getNestedContainers(Class<? extends ContainerBlock>... classes) {
+        int n = 0;
+        Node node = this;
+        while (node != null) {
+            for (Class<? extends ContainerBlock> clazz : classes) {
+                if (clazz.isAssignableFrom(node.getClass())) {
+                    n++;
+                    break;
+                }
+            }
+            node = node.getParent();
+        }
+        return n;
+    }
 }

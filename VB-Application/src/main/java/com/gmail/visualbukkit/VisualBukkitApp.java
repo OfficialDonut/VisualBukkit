@@ -81,7 +81,7 @@ public class VisualBukkitApp extends Application {
         Files.createDirectories(dataDirectory);
         FileHandler logFileHandler = new FileHandler(dataDirectory.resolve("visualbukkit.log").toString(), 10 * 1024 * 1024, 1);
         logFileHandler.setFormatter(new SimpleFormatter());
-        logFileHandler.setLevel(Level.ALL);
+        logger.setLevel(Level.ALL);
         logger.addHandler(logFileHandler);
         logger.addHandler((logWindow = new LogWindow()).getHandler());
         logger.info("Visual Bukkit v" + version);
@@ -206,6 +206,9 @@ public class VisualBukkitApp extends Application {
                     }
                 }
             }
+            if (e.getCode() == KeyCode.F11) {
+                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+            }
         });
 
         logger.info("Loading extensions");
@@ -216,13 +219,12 @@ public class VisualBukkitApp extends Application {
                 try (JarFile jarFile = new JarFile(path.toFile())) {
                     String mainClassName = jarFile.getManifest().getMainAttributes().getValue("main-class");
                     if (mainClassName != null) {
-                        try (URLClassLoader classLoader = new URLClassLoader(new URL[]{path.toUri().toURL()})) {
-                            Class<?> mainClass = Class.forName(mainClassName, true, classLoader);
-                            if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
-                                VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
-                                extensions.add(extension);
-                                logger.info("Loaded extension: " + extension.getName() + " " + extension.getVersion());
-                            }
+                        URLClassLoader classLoader = new URLClassLoader(new URL[]{path.toUri().toURL()});
+                        Class<?> mainClass = Class.forName(mainClassName, true, classLoader);
+                        if (VisualBukkitExtension.class.isAssignableFrom(mainClass)) {
+                            VisualBukkitExtension extension = (VisualBukkitExtension) mainClass.getConstructor().newInstance();
+                            extensions.add(extension);
+                            logger.info("Loaded extension: " + extension.getName() + " " + extension.getVersion());
                         }
                     }
                 } catch (Throwable e) {

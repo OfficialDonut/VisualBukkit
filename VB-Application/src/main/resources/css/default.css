@@ -90,6 +90,10 @@
     -fx-spacing: 0.5em;
 }
 
+.build-settings-pane .text-field {
+    -fx-pref-width: 25em;
+}
+
 .button-vbox {
     -fx-spacing: 0.5em;
 }
@@ -105,6 +109,10 @@
 
 .container-block:nested {
     -fx-background-color: cornflowerblue;
+}
+
+.container-block > .statement-holder {
+    -fx-padding: 0em 0em 0em 3em;
 }
 
 .exception-popover {
@@ -193,7 +201,7 @@ HBox {
 }
 
 .maven-settings-pane > .list-view {
-    -fx-pref-width: 25em;
+    -fx-pref-width: 35em;
 }
 
 .number-field {

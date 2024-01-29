@@ -147,7 +147,7 @@ public class PopOverSelector<T extends PopOverSelectable> extends ComboBox<T> {
         this.items = items;
     }
 
-    public ObservableList<T> getItemList() {
-        return observableList;
+    public Collection<? extends T> getItemList() {
+        return items;
     }
 }

@@ -21,6 +21,6 @@ public class ExprLoopNumber extends ExpressionBlock {
 
     @Override
     public String generateJava(BuildInfo buildInfo) {
-        return "$FINAL_loopNumber" + StatNumberLoop.getNestedLoops(this);
+        return "$FINAL_loopNumber" + getNestedContainers(StatNumberLoop.class, StatAdvancedNumberLoop.class);
     }
 }

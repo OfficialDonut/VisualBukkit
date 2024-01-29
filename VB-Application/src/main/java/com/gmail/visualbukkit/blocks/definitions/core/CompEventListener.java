@@ -22,7 +22,7 @@ public class CompEventListener extends PluginComponentBlock {
     public void prepareBuild(BuildInfo buildInfo) {
         buildInfo.getMainClass().addMethod(
                 "@EventHandler(priority=EventPriority." + arg(1, buildInfo) + ")\n" +
-                "public void $event_" + RandomStringUtils.randomAlphabetic(16) + "(" + getEvent().getName() + " event) throws Exception {" +
+                "public void $event_" + RandomStringUtils.randomAlphanumeric(16) + "(" + getEvent().getName() + " event) throws Exception {" +
                 generateChildrenJava(buildInfo) +
                 "}");
     }
