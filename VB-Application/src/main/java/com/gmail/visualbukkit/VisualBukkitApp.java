@@ -27,6 +27,7 @@ import javafx.util.Duration;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
+import org.apache.commons.lang3.SystemUtils;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.action.Action;
 import org.json.JSONException;
@@ -57,7 +58,7 @@ public class VisualBukkitApp extends Application {
     private static final String version = VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static final Logger logger = Logger.getLogger("Visual Bukkit");
     private static final Set<VisualBukkitExtension> extensions = new HashSet<>();
-    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_alpha"); // todo: remove alpha
+    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_beta"); // todo: remove beta
     private static final Path dataFile = dataDirectory.resolve("data.json");
     private static JSONObject data = new JSONObject();
 
@@ -124,7 +125,7 @@ public class VisualBukkitApp extends Application {
         fontSize.set(data.optInt("font-size", DEFAULT_FONT_SIZE));
         language.set(Locale.forLanguageTag(data.optString("language", DEFAULT_LANGUAGE.toLanguageTag())));
 
-        rootPane.setTop(new MenuBar(
+        MenuBar menuBar = new MenuBar(
                 new Menu(localizedText("menu.file"), null,
                         new Menu(localizedText("menu.project"), null,
                             new ActionMenuItem(localizedText("menu.new"), e -> ProjectManager.promptCreate(true)),
@@ -166,7 +167,13 @@ public class VisualBukkitApp extends Application {
                         new ActionMenuItem("Github", FontAwesomeBrands.GITHUB, e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", FontAwesomeSolid.FAUCET, e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
                         new ActionMenuItem("Discord", FontAwesomeBrands.DISCORD, e -> openURI(URI.create("https://discord.gg/ugkvGpu"))),
-                        new ActionMenuItem(localizedText("menu.check_for_update"), FontAwesomeSolid.CLOUD_DOWNLOAD_ALT, e -> checkForUpdate(true)))));
+                        new ActionMenuItem(localizedText("menu.check_for_update"), FontAwesomeSolid.CLOUD_DOWNLOAD_ALT, e -> checkForUpdate(true))));
+
+        if (SystemUtils.IS_OS_MAC) {
+            menuBar.setUseSystemMenuBar(true);
+        }
+
+        rootPane.setTop(menuBar);
 
         primaryStage.getScene().addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             Node focusOwner = primaryStage.getScene().getFocusOwner();

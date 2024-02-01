@@ -731,18 +731,23 @@ public class Project {
                 InvocationResult result = MavenUtil.execute(request);
                 if (result.getExecutionException() != null) {
                     VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to execute maven", result.getExecutionException());
-                } else if (result.getExitCode() == 0 && !jarOutputField.getText().isBlank()) {
-                    Path outputDir = Paths.get(jarOutputField.getText());
-                    if (Files.exists(outputDir) && !outputDir.equals(buildDirectory.resolve("target"))) {
-                        try (DirectoryStream<Path> stream = Files.newDirectoryStream(buildDirectory.resolve("target"), "*.jar")) {
-                            for (Path path : stream) {
-                                String fileName = path.getFileName().toString();
-                                if (!fileName.startsWith("original-")) {
-                                    Files.copy(path, outputDir.resolve(path.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+                } else if (result.getExitCode() == 0) {
+                    Path jarOutputDir = buildDirectory.resolve("target");
+                    if (!jarOutputField.getText().isBlank()) {
+                        Path requestedOutputDir = Paths.get(jarOutputField.getText());
+                        if (Files.exists(requestedOutputDir) && !requestedOutputDir.equals(jarOutputDir)) {
+                            try (DirectoryStream<Path> stream = Files.newDirectoryStream(buildDirectory.resolve("target"), "*.jar")) {
+                                for (Path path : stream) {
+                                    String fileName = path.getFileName().toString();
+                                    if (!fileName.startsWith("original-")) {
+                                        Files.copy(path, requestedOutputDir.resolve(path.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+                                        jarOutputDir = requestedOutputDir;
+                                    }
                                 }
                             }
                         }
                     }
+                    VisualBukkitApp.getLogger().info("Plugin jar location: " + jarOutputDir);
                 }
             } catch (Exception e) {
                 VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to build plugin", e);
