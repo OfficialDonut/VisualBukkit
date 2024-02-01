@@ -2,7 +2,7 @@
 <install4j version="10.0.6" transformSequenceNumber="10">
   <directoryPresets config="./icons" />
   <application name="Visual Bukkit" applicationId="9206-6364-2713-7274" shrinkRuntime="false" shortName="Visual Bukkit" publisherWeb="https://github.com/OfficialDonut/VisualBukkit" allPathsRelative="true" macVolumeId="597baac4812038fb">
-    <jreBundles jdkProviderId="Liberica" release="17/latest">
+    <jreBundles jdkProviderId="Liberica" release="21/latest">
       <modules>
         <defaultModules set="jre" />
         <module name="javafx.base" />

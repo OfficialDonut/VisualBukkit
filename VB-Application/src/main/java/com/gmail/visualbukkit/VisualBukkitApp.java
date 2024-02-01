@@ -344,8 +344,19 @@ public class VisualBukkitApp extends Application {
         try {
             Desktop.getDesktop().browse(uri);
         } catch (Exception e) {
+            if (openURI(uri, "xdg-open")) return;
+            if (openURI(uri, "gnome-open")) return;
+            if (openURI(uri, "kde-open")) return;
+            if (openURI(uri, "open")) return;
             displayException(e);
         }
+    }
+
+    private static boolean openURI(URI uri, String command) {
+        try {
+            return Runtime.getRuntime().exec(command + " " + uri).waitFor() == 0;
+        } catch (IOException | InterruptedException ignored) {}
+        return false;
     }
 
     public Menu createThemesMenu() {
