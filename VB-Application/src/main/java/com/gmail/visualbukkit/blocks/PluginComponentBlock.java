@@ -69,6 +69,10 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         return childStatementHolder;
     }
 
+    public PluginComponent getPluginComponent() {
+        return ProjectManager.current().getPluginComponent(this);
+    }
+
     @BlockDefinition(id = "unknown-plugin-component", name = "Unknown Plugin Component")
     public static class Unknown extends PluginComponentBlock {
 

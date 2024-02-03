@@ -5,7 +5,6 @@ import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 import org.jboss.forge.roaster.model.source.MethodSource;
@@ -23,7 +22,7 @@ public class CompGUI extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {
-        String id = "\"" + ProjectManager.current().getPluginComponent(this).getName() + "\"";
+        String id = "\"" + getPluginComponent().getName() + "\"";
         MethodSource<JavaClassSource> enableMethod = buildInfo.getMainClass().getMethod("onEnable");
         enableMethod.setBody(enableMethod.getBody() +
                 "GUIManager.getInstance().register(" + id + "," + modeParameter.isSelected() + ", guiPlayer -> {" +

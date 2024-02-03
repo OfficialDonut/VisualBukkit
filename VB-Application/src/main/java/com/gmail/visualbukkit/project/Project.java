@@ -549,7 +549,7 @@ public class Project {
     }
 
     private boolean isPluginComponentNameValid(String name) {
-        if (!name.matches("[-_a-zA-Z0-9]+")) {
+        if (!name.matches("[_a-zA-Z0-9]+")) {
             VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.plugin_component_invalid_name"));
             return false;
         }

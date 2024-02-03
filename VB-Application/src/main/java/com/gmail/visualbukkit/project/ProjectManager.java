@@ -186,7 +186,7 @@ public class ProjectManager {
     }
 
     private static boolean isProjectNameValid(String name) {
-        if (!name.matches("[-_a-zA-Z0-9]+")) {
+        if (!name.matches("[_a-zA-Z0-9]+")) {
             VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.project_invalid_name"));
             return false;
         }
