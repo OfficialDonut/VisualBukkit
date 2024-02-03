@@ -12,6 +12,8 @@
     <artifactId>VB-Application</artifactId>
 
     <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <mavenresolver.version>1.9.16</mavenresolver.version>
     </properties>
 
@@ -50,7 +52,7 @@
         <dependency>
             <groupId>com.install4j</groupId>
             <artifactId>install4j-runtime</artifactId>
-            <version>10.0.6</version>
+            <version>10.0.7</version>
             <scope>provided</scope>
         </dependency>
 

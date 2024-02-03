@@ -3,11 +3,13 @@ package com.gmail.visualbukkit.project.maven;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.google.common.io.Resources;
+import com.install4j.api.launcher.Variables;
 import org.apache.maven.shared.invoker.*;
 import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.repository.RemoteRepository;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +25,9 @@ public class MavenUtil {
     }
 
     public static InvocationResult execute(InvocationRequest request) throws MavenInvocationException {
+        if (System.getProperty("install4j.appDir") != null && Variables.getInstallerVariable("sys.javaHome") instanceof String s) {
+            request.setJavaHome(new File(s));
+        }
         return mavenInvoker.execute(request);
     }
 
@@ -35,7 +40,7 @@ public class MavenUtil {
         request.setQuiet(true);
         request.setBatchMode(true);
         request.setOutputHandler(new PrintStreamHandler(new PrintStream(baos), false));
-        mavenInvoker.execute(request);
+        execute(request);
         return baos.toString(StandardCharsets.UTF_8).strip();
     }
 
