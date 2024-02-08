@@ -44,16 +44,16 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.Vatuu</groupId>
-            <artifactId>discord-rpc</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.install4j</groupId>
             <artifactId>install4j-runtime</artifactId>
             <version>10.0.7</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>5.14.0</version>
         </dependency>
 
         <dependency>

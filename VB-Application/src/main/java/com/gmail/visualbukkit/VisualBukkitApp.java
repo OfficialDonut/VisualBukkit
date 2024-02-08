@@ -8,6 +8,7 @@ import com.gmail.visualbukkit.ui.ActionMenuItem;
 import com.gmail.visualbukkit.ui.LogWindow;
 import com.google.common.io.MoreFiles;
 import com.install4j.api.launcher.ApplicationLauncher;
+import discord_game_sdk.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.*;
@@ -24,9 +25,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import net.arikia.dev.drpc.DiscordEventHandlers;
-import net.arikia.dev.drpc.DiscordRPC;
-import net.arikia.dev.drpc.DiscordRichPresence;
 import org.apache.commons.lang3.SystemUtils;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.action.Action;
@@ -47,6 +45,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.jar.JarFile;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -86,9 +86,6 @@ public class VisualBukkitApp extends Application {
         logger.addHandler(logFileHandler);
         logger.addHandler((logWindow = new LogWindow()).getHandler());
         logger.info("Visual Bukkit v" + version);
-
-        DiscordRPC.discordInitialize("799336716027691059", new DiscordEventHandlers(), true);
-        DiscordRPC.discordUpdatePresence(new DiscordRichPresence.Builder("Developing plugins").setStartTimestamps(System.currentTimeMillis()).build());
 
         if (Files.exists(dataFile)) {
             try {
@@ -252,6 +249,7 @@ public class VisualBukkitApp extends Application {
                 displayException(e);
             }
             checkForUpdate(false);
+            updateDiscordActivity();
         });
     }
 
@@ -275,7 +273,6 @@ public class VisualBukkitApp extends Application {
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Failed to save data file", e);
         }
-        DiscordRPC.discordShutdown();
         VisualBukkitGrpcServer.getInstance().stop();
     }
 
@@ -432,6 +429,24 @@ public class VisualBukkitApp extends Application {
             }
         }
         return menu;
+    }
+
+    private void updateDiscordActivity() {
+        DiscordCreateParams params = new DiscordCreateParams();
+        params.client_id = 799336716027691059L;
+        IDiscordCore.ByReference[] core = (IDiscordCore.ByReference[]) new IDiscordCore.ByReference().toArray(1);
+        Discord_game_sdkLibrary.INSTANCE.DiscordCreate(3, params, core);
+        DiscordActivityTimestamps activityTimestamps = new DiscordActivityTimestamps();
+        activityTimestamps.start = System.currentTimeMillis() / 1000;
+        DiscordActivity activity = new DiscordActivity();
+        activity.timestamps = activityTimestamps;
+        IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
+        activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
+        Executors.newSingleThreadScheduledExecutor(r -> {
+            Thread thread = Executors.defaultThreadFactory().newThread(r);
+            thread.setDaemon(true);
+            return thread;
+        }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
     }
 
     public static Logger getLogger() {
