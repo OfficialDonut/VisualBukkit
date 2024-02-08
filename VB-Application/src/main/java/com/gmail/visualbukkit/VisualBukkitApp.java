@@ -197,8 +197,21 @@ public class VisualBukkitApp extends Application {
                 }
             }
             if (e.isShortcutDown() && e.getCode() == KeyCode.V) {
-                if (focusOwner instanceof StatementBlock block && CopyPasteManager.statementCopiedProperty().get()) {
-                    block.getParentStatementHolder().addAfter(block, CopyPasteManager.pasteStatement());
+                if (CopyPasteManager.statementCopiedProperty().get()) {
+                    if (focusOwner instanceof StatementBlock block) {
+                        UndoManager.current().execute(() -> block.getParentStatementHolder().addAfter(block, CopyPasteManager.pasteStatement()));
+                    } else if (focusOwner instanceof PluginComponentBlock block) {
+                        UndoManager.current().execute(() -> block.getChildStatementHolder().addFirst(CopyPasteManager.pasteStatement()));
+                    }
+                }
+            }
+            if (e.isShortcutDown() && e.getCode() == KeyCode.X) {
+                if (focusOwner instanceof StatementBlock block) {
+                    CopyPasteManager.copyStatement(block);
+                    UndoManager.current().execute(block::delete);
+                } else if (focusOwner instanceof ExpressionBlock block) {
+                    CopyPasteManager.copyExpression(block);
+                    UndoManager.current().execute(block::delete);
                 }
             }
             if (e.getCode() == KeyCode.DELETE) {

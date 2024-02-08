@@ -186,8 +186,8 @@ HBox {
 
 .log-window {
     -fx-font-family: "JetBrains Mono Regular" !important;
-    -fx-pref-height: 50em;
-    -fx-pref-width: 85em;
+    -fx-pref-height: 600;
+    -fx-pref-width: 1000;
 }
 
 .log-window > .scroll-pane {

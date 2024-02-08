@@ -2,7 +2,7 @@ package com.gmail.visualbukkit.blocks.definitions.core;
 
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
-import com.gmail.visualbukkit.blocks.parameters.StringParameter;
+import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.google.common.hash.Hashing;
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class ExprLocalVariable extends ExpressionBlock {
 
     protected static final Pattern VAR_PATTERN = Pattern.compile("\\$[a-z0-9]{32}");
-    private final StringParameter parameter = new StringParameter();
+    private final InputParameter parameter = new InputParameter();
 
     public ExprLocalVariable() {
         getStyleClass().clear();
