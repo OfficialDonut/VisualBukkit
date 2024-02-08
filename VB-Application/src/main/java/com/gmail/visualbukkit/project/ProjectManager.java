@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -51,7 +52,7 @@ public class ProjectManager {
             return Collections.emptySet();
         }
         try (Stream<Path> stream = Files.list(projectsDirectory)) {
-            return stream.filter(Files::isDirectory).map(p -> p.getFileName().toString()).collect(Collectors.toSet());
+            return stream.filter(Files::isDirectory).map(p -> p.getFileName().toString()).collect(Collectors.toCollection(TreeSet::new));
         } catch (IOException e) {
             VisualBukkitApp.displayException(e);
             return Collections.emptySet();
