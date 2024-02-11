@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(id = "expr-consumer-input", name = "Consumer Input", description = "The input to a consumer (must be used in a 'Consumer' plugin component")
+@BlockDefinition(id = "expr-consumer-input", name = "Consumer Input", description = "The input to a consumer (must be used in a 'Consumer' plugin component)")
 public class ExprConsumerInput extends ExpressionBlock {
 
     @Override
