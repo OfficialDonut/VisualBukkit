@@ -183,7 +183,7 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
                 if (buttonType == ButtonType.OK) {
                     for (PluginComponent pluginComponent : ProjectManager.current().getPluginComponents()) {
                         if (pluginComponent.containsBlock(request.getBlockUUID())) {
-                            ProjectManager.current().openPluginComponent(pluginComponent);
+                            ProjectManager.current().openPluginComponent(pluginComponent, true);
                             Platform.runLater(() -> {
                                 Node node = VisualBukkitApp.getPrimaryStage().getScene().lookup("#" + request.getBlockUUID());
                                 if (node instanceof Block block) {

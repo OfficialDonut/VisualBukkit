@@ -6,12 +6,13 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BlockRegistry {
 
-    private static final Map<String, BlockFactory<PluginComponentBlock>> pluginComponents = new HashMap<>();
-    private static final Map<String, BlockFactory<StatementBlock>> statements = new HashMap<>();
-    private static final Map<String, BlockFactory<ExpressionBlock>> expressions = new HashMap<>();
+    private static final Map<String, BlockFactory<PluginComponentBlock>> pluginComponents = new ConcurrentHashMap<>();
+    private static final Map<String, BlockFactory<StatementBlock>> statements = new ConcurrentHashMap<>();
+    private static final Map<String, BlockFactory<ExpressionBlock>> expressions = new ConcurrentHashMap<>();
 
     public static void register(ClassLoader classLoader, String packageName) {
         try {

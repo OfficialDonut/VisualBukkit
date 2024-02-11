@@ -31,14 +31,15 @@ import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class ClassRegistry {
 
-    private static final Map<String, ClassInfo> classes = new HashMap<>();
-    private static final Set<RemoteRepository> mavenRepositories = new HashSet<>();
+    private static final Map<String, ClassInfo> classes = new ConcurrentHashMap<>();
+    private static final Set<RemoteRepository> mavenRepositories = ConcurrentHashMap.newKeySet();
 
     public static void register(JSONObject json) {
         classes.putIfAbsent(json.getString("name"), new JsonClassInfo(json));

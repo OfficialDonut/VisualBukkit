@@ -9,6 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 public class BackgroundTaskExecutor {
@@ -17,7 +18,7 @@ public class BackgroundTaskExecutor {
         return CompletableFuture.runAsync(task);
     }
 
-    public static void executeAndWait(Runnable task) {
+    public static void executeAndWait(Runnable... tasks) {
         Stage stage = new Stage();
         ProgressIndicator progressIndicator = new ProgressIndicator();
         progressIndicator.setStyle("-fx-background-color: transparent;");
@@ -29,15 +30,7 @@ public class BackgroundTaskExecutor {
         stage.setScene(scene);
         stage.setResizable(false);
 
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-            try {
-                task.run();
-            } catch (Exception e) {
-                Platform.runLater(() -> VisualBukkitApp.displayException(e));
-            } finally {
-                Platform.runLater(stage::close);
-            }
-        });
+        CompletableFuture<Void> future = CompletableFuture.allOf(Arrays.stream(tasks).map(CompletableFuture::runAsync).toArray(CompletableFuture[]::new)).whenComplete((r, e) -> Platform.runLater(stage::close));
 
         stage.setOnShown(e -> {
             Stage primaryStage = VisualBukkitApp.getPrimaryStage();

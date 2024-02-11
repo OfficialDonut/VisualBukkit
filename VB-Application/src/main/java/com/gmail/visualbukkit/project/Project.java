@@ -216,7 +216,7 @@ public class Project {
                 new ActionButton(VisualBukkitApp.localizedText("button.export"), e -> pluginComponentListView.getSelectionModel().getSelectedItems().forEach(this::promptExportPluginComponent)),
                 new ActionButton(VisualBukkitApp.localizedText("button.open"), e -> {
                     pluginComponentWindow.close();
-                    pluginComponentListView.getSelectionModel().getSelectedItems().forEach(this::openPluginComponent);
+                    pluginComponentListView.getSelectionModel().getSelectedItems().forEach(p -> openPluginComponent(p, true));
                 }),
                 new ActionButton(VisualBukkitApp.localizedText("button.rename"), e -> new ArrayList<>(pluginComponentListView.getSelectionModel().getSelectedItems()).forEach(this::promptRenamePluginComponent)),
                 new ActionButton(VisualBukkitApp.localizedText("button.delete"), e -> new ArrayList<>(pluginComponentListView.getSelectionModel().getSelectedItems()).forEach(this::promptDeletePluginComponent)));
@@ -237,7 +237,7 @@ public class Project {
                 cell.setOnMouseClicked(e -> {
                     if (e.getButton() == MouseButton.PRIMARY && e.getClickCount() == 2) {
                         pluginComponentWindow.close();
-                        openPluginComponent(pluginComponentListView.getSelectionModel().getSelectedItem());
+                        openPluginComponent(pluginComponentListView.getSelectionModel().getSelectedItem(), true);
                     }
                 });
                 return cell;
@@ -279,6 +279,18 @@ public class Project {
         projectPane.setCenter(splitPane);
         projectPane.getStyleClass().add("project-pane");
         projectPane.setBottom(buttonBar);
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            for (PluginComponent pluginComponent : pluginComponents) {
+                if (pluginComponent.getName().equals(newValue.getText())) {
+                    try {
+                        pluginComponent.load();
+                    } catch (IOException e) {
+                        VisualBukkitApp.displayException(e);
+                    }
+                }
+            }
+        });
     }
 
     protected void open() throws IOException {
@@ -323,14 +335,13 @@ public class Project {
             }
         });
 
-        BackgroundTaskExecutor.executeAndWait(() -> {
-            BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core");
-            ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk.zip");
-            ClassRegistry.register(Project.class.getClassLoader(), "classes/paper.zip");
-            ClassRegistry.register(Project.class.getClassLoader(), "classes/bungee.zip");
-            moduleSelector.getTargetItems().forEach(PluginModule::enable);
-            mavenListView.getItems().forEach(MavenModule::enable);
-        });
+        BackgroundTaskExecutor.executeAndWait(
+                () -> BlockRegistry.register(Project.class.getClassLoader(), "com.gmail.visualbukkit.blocks.definitions.core"),
+                () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk.zip"),
+                () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/paper.zip"),
+                () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/bungee.zip"),
+                () -> moduleSelector.getTargetItems().stream().parallel().forEach(PluginModule::enable),
+                () -> mavenListView.getItems().stream().parallel().forEach(MavenModule::enable));
 
         if (Files.exists(pluginComponentDirectory)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
@@ -346,7 +357,7 @@ public class Project {
             for (Object obj : openPluginComponentsJson) {
                 for (PluginComponent pluginComponent : pluginComponents) {
                     if (pluginComponent.getName().equals(obj)) {
-                        openPluginComponent(pluginComponent);
+                        openPluginComponent(pluginComponent, false);
                         break;
                     }
                 }
@@ -391,31 +402,28 @@ public class Project {
         Files.writeString(dataFile, data.toString(2));
     }
 
-    public void openPluginComponent(PluginComponent pluginComponent) {
-        tabPane.getSelectionModel().select(openPluginComponents.computeIfAbsent(pluginComponent, k -> {
-            try {
-                pluginComponent.load();
-                Tab newTab = new Tab(k.getName(), pluginComponent.getPane());
-                tabPane.getTabs().add(newTab);
-                splitPane.getItems().set(1, tabPane);
-                newTab.setOnClosed(e -> {
-                    try {
-                        openPluginComponents.remove(pluginComponent);
-                        if (tabPane.getTabs().isEmpty()) {
-                            splitPane.getItems().set(1, placeholderPane);
-                        }
-                        pluginComponent.unload();
-                        VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.saved_plugin_component"));
-                    } catch (IOException ex) {
-                        VisualBukkitApp.displayException(ex);
+    public void openPluginComponent(PluginComponent pluginComponent, boolean selectTab) {
+        Tab tab = openPluginComponents.computeIfAbsent(pluginComponent, k -> {
+            Tab newTab = new Tab(k.getName(), pluginComponent.getPane());
+            tabPane.getTabs().add(newTab);
+            splitPane.getItems().set(1, tabPane);
+            newTab.setOnClosed(e -> {
+                try {
+                    openPluginComponents.remove(pluginComponent);
+                    if (tabPane.getTabs().isEmpty()) {
+                        splitPane.getItems().set(1, placeholderPane);
                     }
-                });
-                return newTab;
-            } catch (IOException e) {
-                VisualBukkitApp.displayException(e);
-                return null;
-            }
-        }));
+                    pluginComponent.unload();
+                    VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.saved_plugin_component"));
+                } catch (IOException ex) {
+                    VisualBukkitApp.displayException(ex);
+                }
+            });
+            return newTab;
+        });
+        if (selectTab) {
+            tabPane.getSelectionModel().select(tab);
+        }
     }
 
     public void promptAddPluginComponent() {
@@ -445,7 +453,7 @@ public class Project {
                         PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name), typeComboBox.getValue().newBlock());
                         pluginComponent.save();
                         pluginComponents.add(pluginComponent);
-                        openPluginComponent(pluginComponent);
+                        openPluginComponent(pluginComponent, true);
                         VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.added_plugin_component"));
                     } catch (IOException e) {
                         VisualBukkitApp.displayException(e);
@@ -514,7 +522,7 @@ public class Project {
                 ZipUtil.unpack(file.toFile(), pluginComponentDirectory.resolve(name).toFile());
                 PluginComponent pluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
                 pluginComponents.add(pluginComponent);
-                openPluginComponent(pluginComponent);
+                openPluginComponent(pluginComponent, true);
                 VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_plugin_component"));
             } else {
                 promptImportPluginComponent(file);
@@ -537,7 +545,7 @@ public class Project {
                     tabPane.getTabs().remove(openPluginComponents.remove(pluginComponent));
                     PluginComponent renamedPluginComponent = new PluginComponent(this, pluginComponentDirectory.resolve(name));
                     pluginComponents.add(renamedPluginComponent);
-                    openPluginComponent(renamedPluginComponent);
+                    openPluginComponent(renamedPluginComponent, true);
                     VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.renamed_plugin_component"));
                 } catch (IOException e) {
                     VisualBukkitApp.displayException(e);
