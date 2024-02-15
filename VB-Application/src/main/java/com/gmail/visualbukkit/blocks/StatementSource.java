@@ -1,17 +1,21 @@
 package com.gmail.visualbukkit.blocks;
 
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 
-public class StatementSource extends BlockSource<Statement> {
+public class StatementSource extends Label {
 
-    public StatementSource(Statement statement) {
-        super(statement);
+    private final BlockFactory<StatementBlock> factory;
 
+    public StatementSource(BlockFactory<StatementBlock> factory) {
+        super(factory.getBlockDefinition().name());
+        this.factory = factory;
         getStyleClass().add("statement-source");
 
         setOnDragDetected(e -> {
@@ -31,5 +35,11 @@ public class StatementSource extends BlockSource<Statement> {
             StatementConnector.hideCurrent();
             e.consume();
         });
+
+        Tooltip.install(this, new Tooltip(factory.getBlockDefinition().description()));
+    }
+
+    public BlockFactory<StatementBlock> getFactory() {
+        return factory;
     }
 }

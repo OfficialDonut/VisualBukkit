@@ -1,14 +1,14 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
+import com.gmail.visualbukkit.project.BuildInfo;
 import javafx.event.Event;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ContextMenuEvent;
 
-public class InputParameter extends BlockParameter<TextField> {
+public class InputParameter extends TextField implements BlockParameter {
 
-    public InputParameter(String label) {
-        super(label, new TextField());
-        control.prefColumnCountProperty().bind(control.textProperty().length().add(1));
+    public InputParameter() {
+        prefColumnCountProperty().bind(textProperty().length().add(1));
         addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, e -> {
             Event.fireEvent(getParent(), e);
             e.consume();
@@ -16,19 +16,19 @@ public class InputParameter extends BlockParameter<TextField> {
     }
 
     @Override
-    public String toJava() {
-        return control.getText();
+    public String generateJava(BuildInfo buildInfo) {
+        return getText();
     }
 
     @Override
     public Object serialize() {
-        return control.getText();
+        return getText();
     }
 
     @Override
     public void deserialize(Object obj) {
-        if (obj instanceof String) {
-            control.setText((String) obj);
+        if (obj instanceof String s) {
+            setText(s);
         }
     }
 }

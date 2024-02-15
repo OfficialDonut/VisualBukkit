@@ -1,40 +1,14 @@
 package com.gmail.visualbukkit.blocks.parameters;
 
-import com.gmail.visualbukkit.project.BuildContext;
-import com.gmail.visualbukkit.ui.StyleableHBox;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
+import com.gmail.visualbukkit.project.BuildInfo;
 
-public abstract class BlockParameter<T extends Node> extends StyleableHBox {
+public interface BlockParameter {
 
-    protected String labelText;
-    protected Label label;
-    protected T control;
+    default void updateState() {}
 
-    public BlockParameter(String labelText, T control) {
-        this.labelText = labelText;
-        getChildren().addAll(label = new Label(), this.control = control);
-    }
+    String generateJava(BuildInfo buildInfo);
 
-    public String getLabelText() {
-        return labelText;
-    }
+    Object serialize();
 
-    public Label getLabel() {
-        return label;
-    }
-
-    public T getControl() {
-        return control;
-    }
-
-    public abstract String toJava();
-
-    public abstract Object serialize();
-
-    public abstract void deserialize(Object obj);
-
-    public void update() {}
-
-    public void prepareBuild(BuildContext buildContext) {}
+    void deserialize(Object obj);
 }

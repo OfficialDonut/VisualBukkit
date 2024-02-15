@@ -1,17 +1,12 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.ui.LanguageManager;
-import com.gmail.visualbukkit.ui.NotificationManager;
+import com.gmail.visualbukkit.blocks.BlockRegistry;
+import com.gmail.visualbukkit.reflection.ClassRegistry;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.RecursiveDeleteOption;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.TextInputDialog;
-import javafx.stage.DirectoryChooser;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import org.apache.commons.lang3.StringUtils;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.File;
@@ -19,182 +14,187 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProjectManager {
 
-    private static Path projectsDir = VisualBukkitApp.getDataDir().resolve("Projects");
+    private static final Path projectsDirectory = VisualBukkitApp.getDataDirectory().resolve("projects");
     private static Project currentProject;
 
-    public static void openLast() {
-        Set<String> projects = getProjects();
+    public static Project current() {
+        return currentProject;
+    }
+
+    public static void openInitial() {
+        Set<String> projects = findProjects();
         if (projects.isEmpty()) {
-            promptCreateProject(false);
+            open("DefaultProject");
+            return;
+        }
+        if (projects.size() == 1) {
+            open(projects.iterator().next());
+            return;
+        }
+        String projectName = VisualBukkitApp.getData().optString("current-project", "");
+        if (projects.contains(projectName)) {
+            open(projectName);
         } else {
-            String lastProject = VisualBukkitApp.getData().optString("last-project", "");
-            open(projects.contains(lastProject) ? lastProject : projects.iterator().next());
+            promptOpen(false);
+        }
+    }
+
+    public static Set<String> findProjects() {
+        if (Files.notExists(projectsDirectory)) {
+            return Collections.emptySet();
+        }
+        try (Stream<Path> stream = Files.list(projectsDirectory)) {
+            return stream.filter(Files::isDirectory).map(p -> p.getFileName().toString()).collect(Collectors.toCollection(TreeSet::new));
+        } catch (IOException e) {
+            VisualBukkitApp.displayException(e);
+            return Collections.emptySet();
         }
     }
 
     public static void open(String projectName) {
-        if (currentProject != null) {
-            try {
-                currentProject.close();
-            } catch (IOException e) {
-                NotificationManager.displayException("Failed to save current project", e);
-                return;
-            }
-        }
         try {
-            currentProject = new Project(projectsDir.resolve(projectName));
+            if (currentProject != null) {
+                currentProject.save();
+            }
+            BlockRegistry.clear();
+            ClassRegistry.clear();
+            currentProject = new Project(projectsDirectory.resolve(projectName));
             currentProject.open();
         } catch (IOException e) {
-            NotificationManager.displayException("Failed to load project", e);
+            VisualBukkitApp.displayException(e);
         }
     }
 
-    public static void promptCreateProject(boolean canCancel) {
-        TextInputDialog newDialog = new TextInputDialog();
-        VisualBukkitApp.getSettingsManager().style(newDialog.getDialogPane());
-        newDialog.setTitle(LanguageManager.get("dialog.new_project.title"));
-        newDialog.setContentText(LanguageManager.get("dialog.new_project.content"));
-        newDialog.setHeaderText(null);
-        newDialog.setGraphic(null);
-
-        String name = newDialog.showAndWait().orElse("");
-        if (isNameValid(name)) {
-            open(name);
+    public static void promptCreate(boolean canCancel) {
+        TextInputDialog createDialog = new TextInputDialog();
+        createDialog.setTitle(VisualBukkitApp.localizedText("window.create_project"));
+        createDialog.setContentText(VisualBukkitApp.localizedText("dialog.create_project"));
+        createDialog.setHeaderText(null);
+        createDialog.setGraphic(null);
+        Optional<String> name = createDialog.showAndWait();
+        if (name.isPresent()) {
+            if (isProjectNameValid(name.get())) {
+                open(name.get());
+            } else {
+                promptCreate(canCancel);
+            }
         } else if (!canCancel) {
-            promptCreateProject(false);
+            promptCreate(false);
         }
     }
 
-    public static void promptOpenProject(boolean canCancel) {
+    public static void promptOpen(boolean canCancel) {
         ChoiceDialog<String> openDialog = new ChoiceDialog<>();
-        VisualBukkitApp.getSettingsManager().style(openDialog.getDialogPane());
-        openDialog.getItems().addAll(getProjects());
-        openDialog.setTitle(LanguageManager.get("dialog.open_project.title"));
-        openDialog.setContentText(LanguageManager.get("dialog.open_project.content"));
+        openDialog.setTitle(VisualBukkitApp.localizedText("window.open_project"));
+        openDialog.setContentText(VisualBukkitApp.localizedText("dialog.open_project"));
         openDialog.setHeaderText(null);
         openDialog.setGraphic(null);
+        openDialog.getItems().addAll(findProjects());
         openDialog.showAndWait().ifPresentOrElse(ProjectManager::open, () -> {
             if (!canCancel) {
-                promptOpenProject(false);
+                promptOpen(false);
             }
         });
     }
 
-    public static void promptRenameProject() {
+    public static void promptRename() {
         TextInputDialog renameDialog = new TextInputDialog();
-        VisualBukkitApp.getSettingsManager().style(renameDialog.getDialogPane());
-        renameDialog.setTitle(LanguageManager.get("dialog.rename_project.title"));
-        renameDialog.setContentText(LanguageManager.get("dialog.rename_project.content"));
+        renameDialog.setTitle(VisualBukkitApp.localizedText("window.rename_project"));
+        renameDialog.setContentText(VisualBukkitApp.localizedText("dialog.rename_project"));
         renameDialog.setHeaderText(null);
         renameDialog.setGraphic(null);
         renameDialog.showAndWait().ifPresent(name -> {
-            if (isNameValid(name)) {
+            if (isProjectNameValid(name)) {
                 try {
                     currentProject.save();
-                    if (Files.exists(currentProject.getDir())) {
-                        Files.move(currentProject.getDir(), projectsDir.resolve(name));
-                    }
+                    Files.move(currentProject.getDirectory(), projectsDirectory.resolve(name));
                     currentProject = null;
                     open(name);
                 } catch (IOException e) {
-                    NotificationManager.displayException("Failed to rename project", e);
+                    VisualBukkitApp.displayException(e);
                 }
+            } else {
+                promptRename();
             }
         });
     }
 
-    @SuppressWarnings("UnstableApiUsage")
-    public static void promptDeleteProject() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, LanguageManager.get("dialog.confirm_delete_project"));
-        VisualBukkitApp.getSettingsManager().style(alert.getDialogPane());
+    public static void promptDelete() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(String.format(VisualBukkitApp.localizedText("dialog.confirm_delete"), currentProject.getName()));
         alert.setHeaderText(null);
         alert.setGraphic(null);
         alert.showAndWait().ifPresent(buttonType -> {
             if (buttonType == ButtonType.OK) {
                 try {
-                    if (Files.exists(currentProject.getDir())) {
-                        MoreFiles.deleteRecursively(currentProject.getDir(), RecursiveDeleteOption.ALLOW_INSECURE);
-                    }
+                    MoreFiles.deleteRecursively(currentProject.getDirectory(), RecursiveDeleteOption.ALLOW_INSECURE);
                     currentProject = null;
-                    if (getProjects().isEmpty()) {
-                        promptCreateProject(false);
+                    Set<String> projects = findProjects();
+                    if (projects.isEmpty()) {
+                        promptCreate(false);
                     } else {
-                        promptOpenProject(false);
+                        promptOpen(false);
                     }
                 } catch (IOException e) {
-                    NotificationManager.displayException("Failed to delete project", e);
+                    VisualBukkitApp.displayException(e);
                 }
             }
         });
     }
 
-    public static void promptImportProject() {
+    public static void promptExport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+        File file = fileChooser.showSaveDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            ZipUtil.pack(ProjectManager.current().getDirectory().toFile(), file);
+            VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.exported_project"));
+        }
+    }
+
+    public static void promptImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
+        File file = fileChooser.showOpenDialog(VisualBukkitApp.getPrimaryStage());
+        if (file != null) {
+            promptImport(file);
+        }
+    }
+
+    public static void promptImport(File file) {
         TextInputDialog importDialog = new TextInputDialog();
-        VisualBukkitApp.getSettingsManager().style(importDialog.getDialogPane());
-        importDialog.setTitle(LanguageManager.get("dialog.import_project.title"));
-        importDialog.setContentText(LanguageManager.get("dialog.import_project.content"));
+        importDialog.setTitle(VisualBukkitApp.localizedText("window.import_project"));
+        importDialog.setContentText(VisualBukkitApp.localizedText("dialog.create_project"));
         importDialog.setHeaderText(null);
         importDialog.setGraphic(null);
         importDialog.showAndWait().ifPresent(name -> {
-            if (isNameValid(name)) {
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Zip", "*.zip"));
-                File zipFile = fileChooser.showOpenDialog(VisualBukkitApp.getStage());
-                if (zipFile != null) {
-                    ZipUtil.unpack(zipFile, projectsDir.resolve(name).toFile());
-                    open(name);
-                }
+            if (isProjectNameValid(name)) {
+                ZipUtil.unpack(file, projectsDirectory.resolve(name).toFile());
+                open(name);
+                VisualBukkitApp.displayInfo(VisualBukkitApp.localizedText("notification.imported_project"));
+            } else {
+                promptImport(file);
             }
         });
     }
 
-    public static void promptExportProject() {
-        try {
-            currentProject.save();
-            DirectoryChooser directoryChooser = new DirectoryChooser();
-            File outputDir = directoryChooser.showDialog(VisualBukkitApp.getStage());
-            if (outputDir != null) {
-                File zipFile = new File(outputDir, UUID.randomUUID() + ".zip");
-                ZipUtil.pack(currentProject.getDir().toFile(), zipFile);
-                VisualBukkitApp.openDirectory(zipFile.toPath());
-            }
-        } catch (IOException e) {
-            NotificationManager.displayException("Failed to export project", e);
-        }
-    }
-
-    private static boolean isNameValid(String name) {
-        if (name.isBlank()) {
+    private static boolean isProjectNameValid(String name) {
+        if (!name.matches("[_a-zA-Z0-9]+")) {
+            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.project_invalid_name"));
             return false;
         }
-        if (!StringUtils.isAlphanumeric(name)) {
-            NotificationManager.displayError(LanguageManager.get("error.invalid_project_name.title"), LanguageManager.get("error.invalid_project_name.content"));
-            return false;
-        }
-        if (Files.exists(projectsDir.resolve(name))) {
-            NotificationManager.displayError(LanguageManager.get("error.duplicate_project.title"), LanguageManager.get("error.duplicate_project.content"));
+        if (Files.exists(projectsDirectory.resolve(name))) {
+            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.project_duplicate"));
             return false;
         }
         return true;
-    }
-
-    private static Set<String> getProjects() {
-        try (Stream<Path> pathStream = Files.list(projectsDir)) {
-            return pathStream.filter(Files::isDirectory).map(path -> path.getFileName().toString()).collect(Collectors.toSet());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Collections.emptySet();
-        }
-    }
-
-    public static Project getCurrentProject() {
-        return currentProject;
     }
 }
