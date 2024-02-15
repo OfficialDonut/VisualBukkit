@@ -58,7 +58,7 @@ public class VisualBukkitApp extends Application {
     private static final String version = VisualBukkitLauncher.class.getPackage().getSpecificationVersion();
     private static final Logger logger = Logger.getLogger("Visual Bukkit");
     private static final Set<VisualBukkitExtension> extensions = new HashSet<>();
-    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6_beta"); // todo: remove beta
+    private static final Path dataDirectory = Paths.get(System.getProperty("user.home"), "VisualBukkit6");
     private static final Path dataFile = dataDirectory.resolve("data.json");
     private static JSONObject data = new JSONObject();
 
