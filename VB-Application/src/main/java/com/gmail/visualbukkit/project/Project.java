@@ -340,8 +340,9 @@ public class Project {
                 () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/jdk.zip"),
                 () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/paper.zip"),
                 () -> ClassRegistry.register(Project.class.getClassLoader(), "classes/bungee.zip"),
-                () -> moduleSelector.getTargetItems().stream().parallel().forEach(PluginModule::enable),
                 () -> mavenListView.getItems().stream().parallel().forEach(MavenModule::enable));
+
+        moduleSelector.getTargetItems().stream().forEach(PluginModule::enable);
 
         if (Files.exists(pluginComponentDirectory)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(pluginComponentDirectory)) {
