@@ -76,6 +76,9 @@ public class VisualBukkitPlugin extends JavaPlugin {
             sendColored("&9/vb &3reload", sender);
             sendColored("&9/vb &3ping", sender);
             sendColored("&9/vb &3export item", sender);
+            sendColored("&9/vb &3export loc", sender);
+            sendColored("&9/vb &3export block-loc", sender);
+            sendColored("&9/vb &3export chest-inv", sender);
             sendColored("&9/vb &3export error", sender);
             return true;
         }

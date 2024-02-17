@@ -178,7 +178,7 @@ public class Project {
                 }
             }));
             CheckTreeView<Object> treeView = new CheckTreeView<>(rootItem);
-            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), new HBox(debugModeCheckBox, new IconButton(FontAwesomeRegular.QUESTION_CIRCLE, e2 -> VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/VB-Development-Plugin")))));
+            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), new HBox(debugModeCheckBox, new IconButton(FontAwesomeRegular.QUESTION_CIRCLE, e2 -> VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Development-Assistance-Plugin#debug-mode")))));
             gridPane.addRow(3, label, treeView);
             gridPane.getStyleClass().add("build-settings-pane");
             settingsTabPane.getTabs().set(3, new Tab(VisualBukkitApp.localizedText("label.build"), gridPane));
