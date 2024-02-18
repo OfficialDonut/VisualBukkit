@@ -22,7 +22,7 @@
   <launchers>
     <launcher name="VisualBukkit" id="34">
       <executable name="VisualBukkit" iconSet="true" executableMode="gui" singleInstance="true" windowsSessionSingleInstance="false" />
-      <java mainClass="com.gmail.visualbukkit.VisualBukkitLauncher" vmParameters="-Dmaven.home=apache-maven-3.9.6">
+      <java mainClass="com.gmail.visualbukkit.VisualBukkitLauncher" vmParameters="-Dmaven.home=&quot;${launcher:sys.launcherDirectory}${compiler:sys.mediaFileSeparator}apache-maven-3.9.6&quot;">
         <classPath>
           <archive location="VisualBukkitApp.jar" failOnError="false" />
         </classPath>
