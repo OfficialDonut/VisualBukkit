@@ -23,7 +23,7 @@ public class IDiscordApplicationManager extends Structure {
 	/** C type : get_ticket_callback* */
 	public IDiscordApplicationManager.get_ticket_callback get_ticket;
 	/** <i>native declaration : discord_game_sdk.h:393</i> */
-	public interface validate_or_exit_callback_callback_callback extends StdCallCallback {
+	public interface validate_or_exit_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -39,7 +39,7 @@ public class IDiscordApplicationManager extends Structure {
 		void apply(IDiscordApplicationManager manager, Pointer branch);
 	};
 	/** <i>native declaration : discord_game_sdk.h:396</i> */
-	public interface get_oauth2_token_callback_callback_callback extends StdCallCallback {
+	public interface get_oauth2_token_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, DiscordOAuth2Token oauth2_token);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -47,7 +47,7 @@ public class IDiscordApplicationManager extends Structure {
 		void apply(IDiscordApplicationManager manager, Pointer callback_data, IDiscordApplicationManager.get_oauth2_token_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:397</i> */
-	public interface get_ticket_callback_callback_callback extends StdCallCallback {
+	public interface get_ticket_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, Pointer data);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

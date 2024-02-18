@@ -40,7 +40,7 @@ public class IDiscordStorageManager extends Structure {
 		int apply(IDiscordStorageManager manager, Pointer name, Pointer data, int data_length, IntByReference read);
 	};
 	/** <i>native declaration : discord_game_sdk.h:565</i> */
-	public interface read_async_callback_callback_callback extends StdCallCallback {
+	public interface read_async_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, Pointer data, int data_length);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -48,7 +48,7 @@ public class IDiscordStorageManager extends Structure {
 		void apply(IDiscordStorageManager manager, Pointer name, Pointer callback_data, IDiscordStorageManager.read_async_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:566</i> */
-	public interface read_async_partial_callback_callback_callback extends StdCallCallback {
+	public interface read_async_partial_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, Pointer data, int data_length);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -60,7 +60,7 @@ public class IDiscordStorageManager extends Structure {
 		int apply(IDiscordStorageManager manager, Pointer name, Pointer data, int data_length);
 	};
 	/** <i>native declaration : discord_game_sdk.h:568</i> */
-	public interface write_async_callback_callback_callback extends StdCallCallback {
+	public interface write_async_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

@@ -26,7 +26,7 @@ public class IDiscordUserManager extends Structure {
 		int apply(IDiscordUserManager manager, DiscordUser current_user);
 	};
 	/** <i>native declaration : discord_game_sdk.h:406</i> */
-	public interface get_user_callback_callback_callback extends StdCallCallback {
+	public interface get_user_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, DiscordUser user);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

@@ -94,7 +94,7 @@ public class IDiscordLobbyManager extends Structure {
 		int apply(IDiscordLobbyManager manager, long lobby_id, long user_id, PointerByReference transaction);
 	};
 	/** <i>native declaration : discord_game_sdk.h:463</i> */
-	public interface create_lobby_callback_callback_callback extends StdCallCallback {
+	public interface create_lobby_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, DiscordLobby lobby);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -102,7 +102,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, IDiscordLobbyTransaction transaction, Pointer callback_data, IDiscordLobbyManager.create_lobby_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:464</i> */
-	public interface update_lobby_callback_callback_callback extends StdCallCallback {
+	public interface update_lobby_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -110,7 +110,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, long lobby_id, IDiscordLobbyTransaction transaction, Pointer callback_data, IDiscordLobbyManager.update_lobby_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:465</i> */
-	public interface delete_lobby_callback_callback_callback extends StdCallCallback {
+	public interface delete_lobby_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -118,7 +118,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, long lobby_id, Pointer callback_data, IDiscordLobbyManager.delete_lobby_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:466</i> */
-	public interface connect_lobby_callback_callback_callback extends StdCallCallback {
+	public interface connect_lobby_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, DiscordLobby lobby);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -126,7 +126,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, long lobby_id, Pointer secret, Pointer callback_data, IDiscordLobbyManager.connect_lobby_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:467</i> */
-	public interface connect_lobby_with_activity_secret_callback_callback_callback extends StdCallCallback {
+	public interface connect_lobby_with_activity_secret_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, DiscordLobby lobby);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -134,7 +134,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, Pointer activity_secret, Pointer callback_data, IDiscordLobbyManager.connect_lobby_with_activity_secret_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:468</i> */
-	public interface disconnect_lobby_callback_callback_callback extends StdCallCallback {
+	public interface disconnect_lobby_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -186,7 +186,7 @@ public class IDiscordLobbyManager extends Structure {
 		int apply(IDiscordLobbyManager manager, long lobby_id, long user_id, IntByReference count);
 	};
 	/** <i>native declaration : discord_game_sdk.h:480</i> */
-	public interface update_member_callback_callback_callback extends StdCallCallback {
+	public interface update_member_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -194,7 +194,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, long lobby_id, long user_id, IDiscordLobbyMemberTransaction transaction, Pointer callback_data, IDiscordLobbyManager.update_member_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:481</i> */
-	public interface send_lobby_message_callback_callback_callback extends StdCallCallback {
+	public interface send_lobby_message_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -206,7 +206,7 @@ public class IDiscordLobbyManager extends Structure {
 		int apply(IDiscordLobbyManager manager, PointerByReference query);
 	};
 	/** <i>native declaration : discord_game_sdk.h:483</i> */
-	public interface search_callback_callback_callback extends StdCallCallback {
+	public interface search_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -222,7 +222,7 @@ public class IDiscordLobbyManager extends Structure {
 		int apply(IDiscordLobbyManager manager, int index, LongByReference lobby_id);
 	};
 	/** <i>native declaration : discord_game_sdk.h:486</i> */
-	public interface connect_voice_callback_callback_callback extends StdCallCallback {
+	public interface connect_voice_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -230,7 +230,7 @@ public class IDiscordLobbyManager extends Structure {
 		void apply(IDiscordLobbyManager manager, long lobby_id, Pointer callback_data, IDiscordLobbyManager.connect_voice_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:487</i> */
-	public interface disconnect_voice_callback_callback_callback extends StdCallCallback {
+	public interface disconnect_voice_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

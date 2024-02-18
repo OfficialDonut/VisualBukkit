@@ -51,7 +51,7 @@ public class IDiscordCore extends Structure {
 		int apply(IDiscordCore core);
 	};
 	/** <i>native declaration : discord_game_sdk.h:629</i> */
-	public interface set_log_hook_callback_hook_callback extends StdCallCallback {
+	public interface set_log_hook_callback_hook_callback extends Callback {
 		void apply(Pointer hook_data, int level, Pointer message);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

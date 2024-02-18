@@ -34,7 +34,7 @@ public class IDiscordStoreManager extends Structure {
 	/** C type : start_purchase_callback* */
 	public IDiscordStoreManager.start_purchase_callback start_purchase;
 	/** <i>native declaration : discord_game_sdk.h:583</i> */
-	public interface fetch_skus_callback_callback_callback extends StdCallCallback {
+	public interface fetch_skus_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -54,7 +54,7 @@ public class IDiscordStoreManager extends Structure {
 		int apply(IDiscordStoreManager manager, int index, DiscordSku sku);
 	};
 	/** <i>native declaration : discord_game_sdk.h:587</i> */
-	public interface fetch_entitlements_callback_callback_callback extends StdCallCallback {
+	public interface fetch_entitlements_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -78,7 +78,7 @@ public class IDiscordStoreManager extends Structure {
 		int apply(IDiscordStoreManager manager, long sku_id, Pointer has_entitlement);
 	};
 	/** <i>native declaration : discord_game_sdk.h:592</i> */
-	public interface start_purchase_callback_callback_callback extends StdCallCallback {
+	public interface start_purchase_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
