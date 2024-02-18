@@ -3,28 +3,25 @@ package com.gmail.visualbukkit.ui;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import org.kordamp.ikonli.Ikon;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class IconButton extends Button {
 
-    private static Map<String, Image> imageCache = new HashMap<>();
+    private final FontIcon icon = new FontIcon();
 
-    public IconButton(String iconName, String label, EventHandler<ActionEvent> clickAction) {
-        super(label);
-        setOnAction(clickAction);
-        setGraphic(new ImageView(imageCache.computeIfAbsent("/images/" + iconName + ".png", k -> {
-            try (InputStream inputStream = IconButton.class.getResourceAsStream(k)) {
-                return new Image(inputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        })));
+    public IconButton(Ikon ikon) {
+        getStyleClass().add("icon-button");
+        icon.setIconCode(ikon);
+        setGraphic(icon);
+    }
+
+    public IconButton(Ikon ikon, EventHandler<ActionEvent> action) {
+        this(ikon);
+        setOnAction(action);
+    }
+
+    public FontIcon getIcon() {
+        return icon;
     }
 }

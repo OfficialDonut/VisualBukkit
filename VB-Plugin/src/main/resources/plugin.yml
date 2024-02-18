@@ -1,6 +1,6 @@
 name: VisualBukkit
 version: ${project.version}
-api-version: 1.13
+api-version: 1.20
 main: com.gmail.visualbukkit.plugin.VisualBukkitPlugin
 
 commands:
@@ -8,6 +8,7 @@ commands:
     aliases: [vb]
     description: The main Visual Bukkit command
     permission: vb.command
+    usage: "Usage: /vb help"
 
 permissions:
   vb.command:

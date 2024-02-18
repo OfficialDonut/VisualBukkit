@@ -1,230 +1,145 @@
 package com.gmail.visualbukkit.blocks;
 
-import com.gmail.visualbukkit.blocks.definitions.StatComment;
-import com.gmail.visualbukkit.project.ProjectManager;
-import com.gmail.visualbukkit.ui.StyleableVBox;
-import com.gmail.visualbukkit.ui.UndoManager;
-import javafx.scene.Node;
-import org.apache.commons.lang3.RandomStringUtils;
+import com.gmail.visualbukkit.blocks.definitions.core.StatComment;
+import com.gmail.visualbukkit.project.BuildInfo;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.StringJoiner;
 
-public class StatementHolder extends StyleableVBox {
+public class StatementHolder extends VBox implements Iterable<StatementBlock> {
 
-    private BlockNode owner;
-    private StatementConnector ownerConnector;
-    private boolean debugMode;
+    private final StatementConnector initialConnector = new StatementConnector(this);
+    private final Block owner;
 
-    public StatementHolder(BlockNode owner, StatementConnector ownerConnector) {
+    public StatementHolder(Block owner) {
         this.owner = owner;
-        this.ownerConnector = ownerConnector;
+        getStyleClass().add("statement-holder");
+        getChildren().add(initialConnector);
     }
 
-    public UndoManager.RevertableAction addFirst(Statement.Block... blocks) {
-        return add(null, blocks);
+    public void showFirstConnector() {
+        initialConnector.show();
     }
 
-    public UndoManager.RevertableAction addLast(Statement.Block... blocks) {
-        return add(getChildren().isEmpty() ? null : (Statement.Block) getChildren().get(getChildren().size() - 1), blocks);
+    public void showLastConnector() {
+        ((StatementConnector) getChildren().get(getChildren().size() - 1)).show();
     }
 
-    public UndoManager.RevertableAction add(Statement.Block prev, Statement.Block... blocks) {
-        if (blocks.length == 1) {
-            StatementHolder statementHolder = blocks[0].getStatementHolder();
-            if (statementHolder != null) {
-                return addStack(prev, blocks[0], statementHolder);
-            } else {
-                return addSingle(prev, blocks[0]);
-            }
-        } else {
-            return addMultiple(prev, blocks);
+    public void showConnector(StatementBlock block, boolean after) {
+        ((StatementConnector) getChildren().get(getChildren().indexOf(block) + (after ? 1 : -1))).show();
+    }
+
+    public void addFirst(StatementBlock... blocks) {
+        for (int i = blocks.length - 1; i >= 0; i--) {
+            add(1, blocks[i]);
         }
     }
 
-    private UndoManager.RevertableAction addSingle(Statement.Block prev, Statement.Block block) {
-        return new UndoManager.RevertableAction() {
-            @Override
-            public void run() {
-                getChildren().add(prev != null ? getChildren().indexOf(prev) + 1 : 0, block);
-                updateBlocks();
-            }
-            @Override
-            public void revert() {
-                getChildren().remove(block);
-                updateBlocks();
-            }
-        };
-    }
-
-    private UndoManager.RevertableAction addMultiple(Statement.Block prev, Statement.Block... blocks) {
-        return new UndoManager.RevertableAction() {
-            @Override
-            public void run() {
-                getChildren().addAll(prev != null ? getChildren().indexOf(prev) + 1 : 0, Arrays.asList(blocks));
-                updateBlocks();
-            }
-            @Override
-            public void revert() {
-                getChildren().removeAll(blocks);
-                updateBlocks();
-            }
-        };
-    }
-
-    private UndoManager.RevertableAction addStack(Statement.Block prev, Statement.Block block, StatementHolder statementHolder) {
-        return new UndoManager.RevertableAction() {
-            int oldIndex;
-            List<Node> stack;
-            @Override
-            public void run() {
-                oldIndex = statementHolder.getChildren().indexOf(block);
-                List<Node> subList = statementHolder.getChildren().subList(oldIndex, statementHolder.getChildren().size());
-                stack = new ArrayList<>(subList);
-                subList.clear();
-                getChildren().addAll(prev != null ? getChildren().indexOf(prev) + 1 : 0, stack);
-                updateBlocks();
-                if (statementHolder != StatementHolder.this) {
-                    statementHolder.updateBlocks();
-                }
-            }
-            @Override
-            public void revert() {
-                getChildren().removeAll(stack);
-                statementHolder.getChildren().addAll(oldIndex, stack);
-                updateBlocks();
-                if (statementHolder != StatementHolder.this) {
-                    statementHolder.updateBlocks();
-                }
-            }
-        };
-    }
-
-    public UndoManager.RevertableAction remove(Statement.Block block) {
-        return new UndoManager.RevertableAction() {
-            int oldIndex;
-            @Override
-            public void run() {
-                getChildren().remove(oldIndex = getChildren().indexOf(block));
-                updateBlocks();
-            }
-            @Override
-            public void revert() {
-                getChildren().add(oldIndex, block);
-                updateBlocks();
-            }
-        };
-    }
-
-    public UndoManager.RevertableAction removeStack(Statement.Block block) {
-        return new UndoManager.RevertableAction() {
-            int oldIndex;
-            List<Node> stack;
-            @Override
-            public void run() {
-                oldIndex = getChildren().indexOf(block);
-                List<Node> subList = getChildren().subList(oldIndex, getChildren().size());
-                stack = new ArrayList<>(subList);
-                subList.clear();
-                updateBlocks();
-            }
-            @Override
-            public void revert() {
-                getChildren().addAll(oldIndex, stack);
-                updateBlocks();
-            }
-        };
-    }
-
-    public UndoManager.RevertableAction replace(Statement.Block blockToReplace, Statement.Block block) {
-        return new UndoManager.RevertableAction() {
-            @Override
-            public void run() {
-                getChildren().set(getChildren().indexOf(blockToReplace), block);
-                updateBlocks();
-            }
-            @Override
-            public void revert() {
-                getChildren().set(getChildren().indexOf(block), blockToReplace);
-                updateBlocks();
-            }
-        };
-    }
-
-    private void updateBlocks() {
-        for (Statement.Block block : getBlocks()) {
-            block.update();
+    public void addLast(StatementBlock... blocks) {
+        for (StatementBlock block : blocks) {
+            add(getChildren().size(), block);
         }
     }
 
-    public StatementConnector getPreviousConnector(Statement.Block block) {
-        Statement.Block prev = getPrevious(block);
-        return prev != null ? prev.getConnector() : ownerConnector;
+    public void addBefore(StatementBlock block, StatementBlock... blocks) {
+        for (StatementBlock b : blocks) {
+            add(getChildren().indexOf(block), b);
+        }
     }
 
-    public Statement.Block getPrevious(Statement.Block block) {
-        int i = getChildren().indexOf(block) - 1;
-        return i >= 0 ? (Statement.Block) getChildren().get(i) : null;
+    public void addAfter(StatementBlock block, StatementBlock... blocks) {
+        for (StatementBlock b : blocks) {
+            add(getChildren().indexOf(block) + 2, b);
+            block = b;
+        }
     }
 
-    public Statement.Block getNext(Statement.Block block) {
-        int i = getChildren().indexOf(block) + 1;
-        return i < getChildren().size() ? (Statement.Block) getChildren().get(i) : null;
+    protected void add(int index, StatementBlock block) {
+        getChildren().add(index, block);
+        getChildren().add(index + 1, new StatementConnector(this));
     }
 
-    public StatementConnector getLastEnabledConnector() {
-        if (!getChildren().isEmpty()) {
-            for (int i = getChildren().size() - 1; i >= 0; i--) {
-                Statement.Block block = (Statement.Block) getChildren().get(i);
-                if (!block.isDisabled()) {
-                    return block.getConnector();
-                }
+    public void remove(StatementBlock block) {
+        int index = getChildren().indexOf(block);
+        getChildren().remove(index, index + 2);
+    }
+
+    public void removeStack(StatementBlock block) {
+        getChildren().remove(getChildren().indexOf(block), getChildren().size());
+    }
+
+    public List<StatementBlock> getStack(StatementBlock block) {
+        List<StatementBlock> blocks = new ArrayList<>();
+        for (int i = getChildren().indexOf(block); i < getChildren().size(); i += 2) {
+            blocks.add((StatementBlock) getChildren().get(i));
+        }
+        return blocks;
+    }
+
+    public StatementBlock getPrevious(StatementBlock block) {
+        StatementBlock prev = null;
+        for (StatementBlock b : this) {
+            if (b.equals(block)) {
+                return prev;
+            }
+            if (!(b instanceof StatComment)) {
+                prev = b;
             }
         }
-        return ownerConnector;
+        return null;
     }
 
-    public BlockNode getOwner() {
+    public StatementBlock getNext(StatementBlock block) {
+        for (int i = getChildren().indexOf(block) + 1; i < getChildren().size(); i++) {
+            if (getChildren().get(i) instanceof StatementBlock b && !(b instanceof StatComment)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public void setCollapsedRecursive(boolean collapsed) {
+        for (StatementBlock block : this) {
+            block.setCollapsed(collapsed);
+            if (block instanceof ContainerBlock c) {
+                c.getChildStatementHolder().setCollapsedRecursive(collapsed);
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return getChildren().size() == 1;
+    }
+
+    public String generateJava(BuildInfo buildInfo) {
+        StringJoiner joiner = new StringJoiner(System.lineSeparator());
+        for (StatementBlock block : this) {
+            joiner.add(buildInfo.isDebugMode() ? block.generateDebugJava(buildInfo) : block.generateJava(buildInfo));
+        }
+        return joiner.toString();
+    }
+
+    @Override
+    public Iterator<StatementBlock> iterator() {
+        return new Iterator<>() {
+            private int i = 1;
+            @Override
+            public boolean hasNext() {
+                return i < StatementHolder.this.getChildren().size();
+            }
+            @Override
+            public StatementBlock next() {
+                StatementBlock block = (StatementBlock) getChildren().get(i);
+                i += 2;
+                return block;
+            }
+        };
+    }
+
+    public Block getOwner() {
         return owner;
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<Statement.Block> getBlocks() {
-        return (List<Statement.Block>) (Object) getChildrenUnmodifiable();
-    }
-
-    public void setDebugMode(boolean debugMode) {
-        this.debugMode = debugMode;
-    }
-
-    public String toJava() {
-        List<Statement.Block> blocks = getBlocks();
-        if (debugMode) {
-            String java = "";
-            for (int i = blocks.size() - 1; i >= 0; i--) {
-                Statement.Block block = blocks.get(i);
-                if (block instanceof Container.Block) {
-                    java = block.toJava() + java;
-                } else if (block.getDefinition().getClass() != StatComment.class) {
-                    String id = RandomStringUtils.randomAlphanumeric(16);
-                    ProjectManager.getCurrentProject().getDebugMap().put(id, block);
-                    java = new StringBuilder()
-                            .append("try {")
-                            .append(block.toJava())
-                            .append(java)
-                            .append("} catch (Exception $").append(id).append(") {")
-                            .append("PluginMain.reportError(\"").append(id).append("\",$").append(id).append(");")
-                            .append("}")
-                            .toString();
-                }
-            }
-            return java;
-        }
-        StringBuilder builder = new StringBuilder();
-        for (Statement.Block block : blocks) {
-            builder.append(block.toJava());
-        }
-        return builder.toString();
     }
 }

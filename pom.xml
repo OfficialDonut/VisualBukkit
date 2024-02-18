@@ -6,17 +6,28 @@
 
     <groupId>com.gmail.visualbukkit</groupId>
     <artifactId>visual-bukkit</artifactId>
-    <version>5.6.0</version>
+    <version>6.0.1</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>VB-Application</module>
-        <module>VB-Block-Generator</module>
+        <module>VB-Doclet</module>
         <module>VB-Plugin</module>
+        <module>VB-RPC</module>
+        <module>VB-Installer</module>
     </modules>
 
     <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
 </project>
