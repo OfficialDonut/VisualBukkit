@@ -455,8 +455,7 @@ public class VisualBukkitApp extends Application {
             DiscordActivity activity = new DiscordActivity();
             activity.timestamps = activityTimestamps;
             IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
-            activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {
-            });
+            activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
             Executors.newSingleThreadScheduledExecutor(r -> {
                 Thread thread = Executors.defaultThreadFactory().newThread(r);
                 thread.setDaemon(true);
