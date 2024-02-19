@@ -445,22 +445,36 @@ public class VisualBukkitApp extends Application {
     }
 
     private void updateDiscordActivity() {
-        DiscordCreateParams params = new DiscordCreateParams();
-        params.client_id = 799336716027691059L;
-        IDiscordCore.ByReference[] core = (IDiscordCore.ByReference[]) new IDiscordCore.ByReference().toArray(1);
-        Discord_game_sdkLibrary.INSTANCE.DiscordCreate(3, params, core);
-        DiscordActivityTimestamps activityTimestamps = new DiscordActivityTimestamps();
-        activityTimestamps.start = System.currentTimeMillis() / 1000;
-        DiscordActivity activity = new DiscordActivity();
-        activity.timestamps = activityTimestamps;
-        IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
-        activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
-        Executors.newSingleThreadScheduledExecutor(r -> {
-            Thread thread = Executors.defaultThreadFactory().newThread(r);
-            thread.setDaemon(true);
-            return thread;
-        }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+    DiscordCreateParams params = new DiscordCreateParams();
+    params.client_id = 799336716027691059L;
+    IDiscordCore.ByReference[] core = (IDiscordCore.ByReference[]) new IDiscordCore.ByReference().toArray(1);
+    
+    // Error handling for DiscordCreate method
+    int result = Discord_game_sdkLibrary.INSTANCE.DiscordCreate(3, params, core);
+    if (result != 0 || core[0] == null) {
+        System.err.println("Error creating Discord core.");
+        return;
     }
+    
+    DiscordActivityTimestamps activityTimestamps = new DiscordActivityTimestamps();
+    activityTimestamps.start = System.currentTimeMillis() / 1000;
+    DiscordActivity activity = new DiscordActivity();
+    activity.timestamps = activityTimestamps;
+    
+    IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
+    if (activityManager == null) {
+        System.err.println("Error getting activity manager.");
+        return;
+    }
+    
+    // Assuming update_activity and run_callbacks are non-null
+    activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
+    Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread thread = Executors.defaultThreadFactory().newThread(r);
+        thread.setDaemon(true);
+        return thread;
+    }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+}
 
     public static Logger getLogger() {
         return logger;
