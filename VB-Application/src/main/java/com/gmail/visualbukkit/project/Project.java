@@ -147,6 +147,7 @@ public class Project {
         Tab mavenTab = new Tab(VisualBukkitApp.localizedText("label.maven"), mavenPane);
         Tab modulesTab = new Tab(VisualBukkitApp.localizedText("label.modules"), moduleSelector);
         TabPane settingsTabPane = new TabPane(pluginYmlTab, modulesTab, mavenTab, new Tab());
+        settingsTabPane.getStyleClass().add("plugin-settings-tab-pane");
         settingsTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         PopupWindow pluginSettingsWindow = new PopupWindow(VisualBukkitApp.localizedText("window.plugin_settings"), settingsTabPane);
