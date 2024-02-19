@@ -449,17 +449,20 @@ public class VisualBukkitApp extends Application {
         params.client_id = 799336716027691059L;
         IDiscordCore.ByReference[] core = (IDiscordCore.ByReference[]) new IDiscordCore.ByReference().toArray(1);
         Discord_game_sdkLibrary.INSTANCE.DiscordCreate(3, params, core);
-        DiscordActivityTimestamps activityTimestamps = new DiscordActivityTimestamps();
-        activityTimestamps.start = System.currentTimeMillis() / 1000;
-        DiscordActivity activity = new DiscordActivity();
-        activity.timestamps = activityTimestamps;
-        IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
-        activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
-        Executors.newSingleThreadScheduledExecutor(r -> {
-            Thread thread = Executors.defaultThreadFactory().newThread(r);
-            thread.setDaemon(true);
-            return thread;
-        }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+        if (core[0] != null && core[0].get_activity_manager != null) {
+            DiscordActivityTimestamps activityTimestamps = new DiscordActivityTimestamps();
+            activityTimestamps.start = System.currentTimeMillis() / 1000;
+            DiscordActivity activity = new DiscordActivity();
+            activity.timestamps = activityTimestamps;
+            IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
+            activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {
+            });
+            Executors.newSingleThreadScheduledExecutor(r -> {
+                Thread thread = Executors.defaultThreadFactory().newThread(r);
+                thread.setDaemon(true);
+                return thread;
+            }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+        }
     }
 
     public static Logger getLogger() {
