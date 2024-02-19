@@ -37,7 +37,7 @@ public class IDiscordVoiceManager extends Structure {
 		int apply(IDiscordVoiceManager manager, DiscordInputMode input_mode);
 	};
 	/** <i>native declaration : discord_game_sdk.h:601</i> */
-	public interface set_input_mode_callback_callback_callback extends StdCallCallback {
+	public interface set_input_mode_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

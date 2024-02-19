@@ -63,7 +63,8 @@ public class ExpressionParameter extends Region implements BlockParameter {
                     new ActionMenuItem("Method", e -> UndoManager.current().execute(() -> setExpression(new ExprMethod()))),
                     new ActionMenuItem("String", e -> UndoManager.current().execute(() -> setExpression(new ExprString()))),
                     new ActionMenuItem("Number", e -> UndoManager.current().execute(() -> setExpression(new ExprNumber()))),
-                    new ActionMenuItem("List", e -> UndoManager.current().execute(() -> setExpression(new ExprList())))),
+                    new ActionMenuItem("List", e -> UndoManager.current().execute(() -> setExpression(new ExprList()))),
+                    new ActionMenuItem("Boolean", e -> UndoManager.current().execute(() -> setExpression(new ExprBoolean())))),
                 pasteItem));
 
         ExpressionBlock.DRAGGING_PROPERTY.addListener((observable, oldValue, newValue) -> expressionSelector.pseudoClassStateChanged(CONNECTING_STYLE_CLASS, newValue));

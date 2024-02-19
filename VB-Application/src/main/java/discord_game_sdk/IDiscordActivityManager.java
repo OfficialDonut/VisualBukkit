@@ -35,7 +35,7 @@ public class IDiscordActivityManager extends Structure {
 		int apply(IDiscordActivityManager manager, int steam_id);
 	};
 	/** <i>native declaration : discord_game_sdk.h:429</i> */
-	public interface update_activity_callback_callback_callback extends StdCallCallback {
+	public interface update_activity_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -43,7 +43,7 @@ public class IDiscordActivityManager extends Structure {
 		void apply(IDiscordActivityManager manager, DiscordActivity activity, Pointer callback_data, IDiscordActivityManager.update_activity_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:430</i> */
-	public interface clear_activity_callback_callback_callback extends StdCallCallback {
+	public interface clear_activity_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -51,7 +51,7 @@ public class IDiscordActivityManager extends Structure {
 		void apply(IDiscordActivityManager manager, Pointer callback_data, IDiscordActivityManager.clear_activity_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:431</i> */
-	public interface send_request_reply_callback_callback_callback extends StdCallCallback {
+	public interface send_request_reply_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -59,7 +59,7 @@ public class IDiscordActivityManager extends Structure {
 		void apply(IDiscordActivityManager manager, long user_id, int reply, Pointer callback_data, IDiscordActivityManager.send_request_reply_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:432</i> */
-	public interface send_invite_callback_callback_callback extends StdCallCallback {
+	public interface send_invite_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -67,7 +67,7 @@ public class IDiscordActivityManager extends Structure {
 		void apply(IDiscordActivityManager manager, long user_id, int type, Pointer content, Pointer callback_data, IDiscordActivityManager.send_invite_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:433</i> */
-	public interface accept_invite_callback_callback_callback extends StdCallCallback {
+	public interface accept_invite_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

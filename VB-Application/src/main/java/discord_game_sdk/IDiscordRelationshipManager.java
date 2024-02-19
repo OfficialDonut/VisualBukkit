@@ -22,7 +22,7 @@ public class IDiscordRelationshipManager extends Structure {
 	/** C type : get_at_callback* */
 	public IDiscordRelationshipManager.get_at_callback get_at;
 	/** <i>native declaration : discord_game_sdk.h:442</i> */
-	public interface filter_callback_filter_callback extends StdCallCallback {
+	public interface filter_callback_filter_callback extends Callback {
 		byte apply(Pointer filter_data, DiscordRelationship relationship);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

@@ -19,7 +19,7 @@ public class IDiscordImageManager extends Structure {
 	/** C type : get_data_callback* */
 	public IDiscordImageManager.get_data_callback get_data;
 	/** <i>native declaration : discord_game_sdk.h:414</i> */
-	public interface fetch_callback_callback_callback extends StdCallCallback {
+	public interface fetch_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result, discord_game_sdk.DiscordImageHandle.ByValue handle_result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

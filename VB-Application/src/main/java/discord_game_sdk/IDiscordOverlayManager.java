@@ -61,7 +61,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager, Pointer locked);
 	};
 	/** <i>native declaration : discord_game_sdk.h:542</i> */
-	public interface set_locked_callback_callback_callback extends StdCallCallback {
+	public interface set_locked_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -69,7 +69,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager, byte locked, Pointer callback_data, IDiscordOverlayManager.set_locked_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:543</i> */
-	public interface open_activity_invite_callback_callback_callback extends StdCallCallback {
+	public interface open_activity_invite_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -77,7 +77,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager, int type, Pointer callback_data, IDiscordOverlayManager.open_activity_invite_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:544</i> */
-	public interface open_guild_invite_callback_callback_callback extends StdCallCallback {
+	public interface open_guild_invite_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -85,7 +85,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager, Pointer code, Pointer callback_data, IDiscordOverlayManager.open_guild_invite_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:545</i> */
-	public interface open_voice_settings_callback_callback_callback extends StdCallCallback {
+	public interface open_voice_settings_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -133,7 +133,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager);
 	};
 	/** <i>native declaration : discord_game_sdk.h:556</i> */
-	public interface set_ime_composition_range_callback_callback_on_ime_composition_range_changed_callback extends StdCallCallback {
+	public interface set_ime_composition_range_callback_callback_on_ime_composition_range_changed_callback extends Callback {
 		void apply(Pointer on_ime_composition_range_changed_data, int from, int to, DiscordRect bounds, int bounds_length);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -141,7 +141,7 @@ public class IDiscordOverlayManager extends Structure {
 		void apply(IDiscordOverlayManager manager, Pointer on_ime_composition_range_changed_data, IDiscordOverlayManager.set_ime_composition_range_callback_callback_on_ime_composition_range_changed_callback on_ime_composition_range_changed);
 	};
 	/** <i>native declaration : discord_game_sdk.h:557</i> */
-	public interface set_ime_selection_bounds_callback_callback_on_ime_selection_bounds_changed_callback extends StdCallCallback {
+	public interface set_ime_selection_bounds_callback_callback_on_ime_selection_bounds_changed_callback extends Callback {
 		void apply(Pointer on_ime_selection_bounds_changed_data, DiscordRect.ByValue anchor, DiscordRect.ByValue focus, byte is_anchor_first);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */

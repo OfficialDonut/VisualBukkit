@@ -24,7 +24,7 @@ public class IDiscordAchievementManager extends Structure {
 	/** C type : get_user_achievement_at_callback* */
 	public IDiscordAchievementManager.get_user_achievement_at_callback get_user_achievement_at;
 	/** <i>native declaration : discord_game_sdk.h:617</i> */
-	public interface set_user_achievement_callback_callback_callback extends StdCallCallback {
+	public interface set_user_achievement_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
@@ -32,7 +32,7 @@ public class IDiscordAchievementManager extends Structure {
 		void apply(IDiscordAchievementManager manager, long achievement_id, byte percent_complete, Pointer callback_data, IDiscordAchievementManager.set_user_achievement_callback_callback_callback callback);
 	};
 	/** <i>native declaration : discord_game_sdk.h:618</i> */
-	public interface fetch_user_achievements_callback_callback_callback extends StdCallCallback {
+	public interface fetch_user_achievements_callback_callback_callback extends Callback {
 		void apply(Pointer callback_data, int result);
 	};
 	/** <i>native declaration : discord_game_sdk.h</i> */
