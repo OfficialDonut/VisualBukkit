@@ -696,7 +696,15 @@ public class Project {
                     if (pluginComponent.isDisabled()) {
                         continue;
                     }
-                    PluginComponentBlock block = pluginComponent.load();
+                    CompletableFuture<PluginComponentBlock> future = new CompletableFuture<>();
+                    Platform.runLater(() -> {
+                        try {
+                            future.complete(pluginComponent.load());
+                        } catch (IOException e) {
+                            future.completeExceptionally(e);
+                        }
+                    });
+                    PluginComponentBlock block = future.get();
                     block.prepareBuild(buildInfo);
                     if (block instanceof CompCommand command && !command.getName().isBlank()) {
                         commandsBuilder.append("  ").append(command.getName()).append(":\n");
