@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
 import java.security.KeyStore;
@@ -46,14 +47,17 @@ public class VisualBukkitPlugin extends JavaPlugin {
             String host = getConfig().getString("grpc.host");
             int port = getConfig().getInt("grpc.port");
             if (getConfig().getBoolean("grpc.tls.enabled")) {
-                if (getConfig().isSet("grpc.tls.truststore.file")) {
-                    TrustManagerFactory tmFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-                    tmFactory.init(KeyStore.getInstance(new File(getConfig().getString("grpc.tls.truststore.file")), getConfig().getString("grpc.tls.truststore.password").toCharArray()));
-                    ChannelCredentials credentials = TlsChannelCredentials.newBuilder().trustManager(tmFactory.getTrustManagers()).build();
-                    grpcChannel = Grpc.newChannelBuilderForAddress(host, port, credentials).build();
-                } else {
-                    grpcChannel = ManagedChannelBuilder.forAddress(host, port).build();
+                TlsChannelCredentials.Builder credentialsBuilder = TlsChannelCredentials.newBuilder();
+                TrustManagerFactory tmFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+                tmFactory.init(KeyStore.getInstance(new File(getConfig().getString("grpc.tls.truststore.file")), getConfig().getString("grpc.tls.truststore.password").toCharArray()));
+                credentialsBuilder.trustManager(tmFactory.getTrustManagers());
+                if (getConfig().getBoolean("grpc.tls.client-auth.enabled")) {
+                    KeyStore keyStore = KeyStore.getInstance(new File(getConfig().getString("grpc.tls.client-auth.keystore.file")), getConfig().getString("grpc.tls.client-auth.keystore.password").toCharArray());
+                    KeyManagerFactory kmFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+                    kmFactory.init(keyStore, getConfig().getString("grpc.tls.client-auth.key.password").toCharArray());
+                    credentialsBuilder.keyManager(kmFactory.getKeyManagers());
                 }
+                grpcChannel = Grpc.newChannelBuilderForAddress(host, port, credentialsBuilder.build()).build();
             } else {
                 grpcChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
             }

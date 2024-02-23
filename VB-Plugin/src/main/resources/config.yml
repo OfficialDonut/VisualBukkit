@@ -6,3 +6,10 @@ grpc:
     truststore:
       file: C:\Users\Example\Desktop\VisualBukkit-Certs.p12
       password: password
+    client-auth:
+      enabled: false
+      keystore:
+        file: C:\Users\Example\Desktop\VisualBukkit-Plugin-Private.p12
+        password: password
+      key:
+        password: password

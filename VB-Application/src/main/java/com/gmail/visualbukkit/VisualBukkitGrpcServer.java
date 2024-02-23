@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import org.controlsfx.control.PopOver;
 
 import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,11 +68,17 @@ public class VisualBukkitGrpcServer extends VisualBukkitGrpc.VisualBukkitImplBas
         int port = Integer.parseInt(properties.getProperty("port"));
         boolean useTls = "true".equalsIgnoreCase(properties.getProperty("tls.enabled"));
         if (useTls) {
+            TlsServerCredentials.Builder credentialsBuilder = TlsServerCredentials.newBuilder();
             KeyStore keyStore = KeyStore.getInstance(new File(properties.getProperty("tls.keystore.file")), properties.getProperty("tls.keystore.password").toCharArray());
             KeyManagerFactory kmFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             kmFactory.init(keyStore, properties.getProperty("tls.key.password").toCharArray());
-            ServerCredentials credentials = TlsServerCredentials.newBuilder().keyManager(kmFactory.getKeyManagers()).build();
-            server = Grpc.newServerBuilderForPort(port, credentials).addService(this).build();
+            credentialsBuilder.keyManager(kmFactory.getKeyManagers());
+            if ("true".equals(properties.getProperty("tls.client_auth.enabled"))) {
+                TrustManagerFactory tmFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+                tmFactory.init(KeyStore.getInstance(new File(properties.getProperty("tls.client_auth.truststore.file")), properties.getProperty("tls.client_auth.truststore.password").toCharArray()));
+                credentialsBuilder.trustManager(tmFactory.getTrustManagers()).clientAuth(TlsServerCredentials.ClientAuth.REQUIRE);
+            }
+            server = Grpc.newServerBuilderForPort(port, credentialsBuilder.build()).addService(this).build();
         } else {
             server = ServerBuilder.forPort(port).addService(this).build();
         }
