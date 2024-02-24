@@ -447,6 +447,7 @@ public class VisualBukkitApp extends Application {
     private void updateDiscordActivity() {
         DiscordCreateParams params = new DiscordCreateParams();
         params.client_id = 799336716027691059L;
+        params.flags = 1; // don't require Discord to be running
         IDiscordCore.ByReference[] core = (IDiscordCore.ByReference[]) new IDiscordCore.ByReference().toArray(1);
         Discord_game_sdkLibrary.INSTANCE.DiscordCreate(3, params, core);
         if (core[0] != null && core[0].get_activity_manager != null) {
