@@ -40,6 +40,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -455,6 +456,7 @@ public class VisualBukkitApp extends Application {
             activityTimestamps.start = System.currentTimeMillis() / 1000;
             DiscordActivity activity = new DiscordActivity();
             activity.timestamps = activityTimestamps;
+            activity.assets.small_image = "activity-icon".getBytes(StandardCharsets.UTF_8);
             IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
             activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
             Executors.newSingleThreadScheduledExecutor(r -> {
