@@ -43,7 +43,7 @@ public class PluginSettings {
 
     public String createPluginYml(String pluginName, String version, String mainClassName) throws IOException {
         String template = Resources.toString(PluginSettings.class.getResource("/plugin/plugin.yml"), StandardCharsets.UTF_8);
-        StringBuilder builder = new StringBuilder(template.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName));
+        StringBuilder builder = new StringBuilder(template.replace("{NAME}", pluginName).replace("{VERSION}", version).replace("{MAIN_CLASS}", mainClassName) + "\n");
         if (!getPluginAuthors().isBlank()) {
             builder.append("authors: [").append(getPluginAuthors()).append("]\n");
         }
