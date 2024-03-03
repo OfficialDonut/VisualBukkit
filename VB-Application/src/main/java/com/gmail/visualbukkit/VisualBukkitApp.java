@@ -123,6 +123,9 @@ public class VisualBukkitApp extends Application {
         fontSize.set(data.optInt("font-size", DEFAULT_FONT_SIZE));
         language.set(Locale.forLanguageTag(data.optString("language", DEFAULT_LANGUAGE.toLanguageTag())));
 
+        resourceBundle = ResourceBundle.getBundle("lang.gui");
+        logWindow.setTitle(VisualBukkitApp.localizedText("window.log"));
+
         MenuBar menuBar = new MenuBar(
                 new Menu(localizedText("menu.file"), null,
                         new Menu(localizedText("menu.project"), null,
@@ -319,9 +322,6 @@ public class VisualBukkitApp extends Application {
     }
 
     public static String localizedText(String key) {
-        if (resourceBundle == null) {
-            resourceBundle = ResourceBundle.getBundle("lang.gui");
-        }
         try {
             return resourceBundle.getString(key);
         } catch (MissingResourceException e) {

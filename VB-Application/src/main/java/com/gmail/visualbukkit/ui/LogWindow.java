@@ -25,7 +25,6 @@ public class LogWindow extends Stage {
         textArea.setWrapText(true);
 
         initOwner(VisualBukkitApp.getPrimaryStage());
-        setTitle(VisualBukkitApp.localizedText("window.log"));
         setScene(new Scene(textArea));
         setMaximized(false);
         setFullScreen(false);
