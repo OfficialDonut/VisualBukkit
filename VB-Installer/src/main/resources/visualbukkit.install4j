@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install4j version="10.0.6" transformSequenceNumber="10">
+<install4j version="10.0.7" transformSequenceNumber="10">
   <directoryPresets config="./icons" />
   <application name="Visual Bukkit" applicationId="9206-6364-2713-7274" shrinkRuntime="false" shortName="Visual Bukkit" publisherWeb="https://github.com/OfficialDonut/VisualBukkit" allPathsRelative="true" macVolumeId="597baac4812038fb">
     <jreBundles jdkProviderId="Liberica" release="21/latest">
@@ -578,8 +578,8 @@ return console.askYesNo(message, true);
     <unixInstaller name="Unix Installer" id="77" installDir="VisualBukkit">
       <jreBundle usePack200="false" />
     </unixInstaller>
-    <macos name="macOS Single Bundle" id="82" launcherId="34">
+    <macosFolder name="macOS Folder" id="86">
       <jreBundle usePack200="false" />
-    </macos>
+    </macosFolder>
   </mediaSets>
 </install4j>
