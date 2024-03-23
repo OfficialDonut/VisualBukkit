@@ -30,6 +30,11 @@ public class PluginMain extends JavaPlugin implements Listener {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String alias, String[] commandArgs) {
+        return null;
+    }
+
     public static void procedure(String procedure, List args) throws Exception {}
 
     public static Object function(String function, List args) throws Exception {

@@ -6,17 +6,19 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(id = "stat-function-return", name = "Function Return", description = "Returns a value (must be used in a 'Function' plugin component)")
-public class StatFunctionReturn extends StatementBlock {
+import java.util.List;
 
-    public StatFunctionReturn() {
-        addParameter("Value", new ExpressionParameter(ClassInfo.of(Object.class)));
+@BlockDefinition(id = "stat-tab-complete-return", name = "Tab Complete Return", description = "Returns a list of completions for a command argument (must be used in a 'Tab Complete Handler' plugin component)")
+public class StatTabCompleteReturn extends StatementBlock {
+
+    public StatTabCompleteReturn() {
+        addParameter("Completions", new ExpressionParameter(ClassInfo.of(List.class)));
     }
 
     @Override
     public void updateState() {
         super.updateState();
-        checkForPluginComponent(CompFunction.class);
+        checkForPluginComponent(CompTabCompleteHandler.class);
     }
 
     @Override

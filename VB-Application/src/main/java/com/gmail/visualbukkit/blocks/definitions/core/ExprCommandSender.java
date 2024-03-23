@@ -5,7 +5,7 @@ import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
-@BlockDefinition(id = "expr-command-sender", name = "Command Sender", description = "The player/console that executed the command (must be used in a 'Command' plugin component)")
+@BlockDefinition(id = "expr-command-sender", name = "Command Sender", description = "The player/console that executed the command (must be used in a 'Command' or 'Tab Complete Handler' plugin component)")
 public class ExprCommandSender extends ExpressionBlock {
 
     @Override
@@ -16,7 +16,7 @@ public class ExprCommandSender extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        checkForPluginComponent(CompCommand.class);
+        checkForPluginComponent(CompCommand.class, CompTabCompleteHandler.class);
     }
 
     @Override

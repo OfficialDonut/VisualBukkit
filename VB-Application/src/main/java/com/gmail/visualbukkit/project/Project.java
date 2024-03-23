@@ -812,6 +812,15 @@ public class Project {
         return null;
     }
 
+    public PluginComponent getPluginComponent(String name) {
+        for (PluginComponent pluginComponent : pluginComponents) {
+            if (pluginComponent.getName().equals(name)) {
+                return pluginComponent;
+            }
+        }
+        return null;
+    }
+
     public ObservableList<PluginComponent> getPluginComponents() {
         return pluginComponents;
     }

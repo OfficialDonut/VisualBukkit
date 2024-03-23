@@ -7,7 +7,7 @@ import com.gmail.visualbukkit.reflection.ClassInfo;
 
 import java.util.List;
 
-@BlockDefinition(id = "expr-command-arguments", name = "Command Arguments", description = "The list of arguments passed to a command (must be used in a 'Command' plugin component)")
+@BlockDefinition(id = "expr-command-arguments", name = "Command Arguments", description = "The list of arguments passed to a command (must be used in a 'Command' or 'Tab Complete Handler' plugin component)")
 public class ExprCommandArguments extends ExpressionBlock {
 
     @Override
@@ -18,7 +18,7 @@ public class ExprCommandArguments extends ExpressionBlock {
     @Override
     public void updateState() {
         super.updateState();
-        checkForPluginComponent(CompCommand.class);
+        checkForPluginComponent(CompCommand.class, CompTabCompleteHandler.class);
     }
 
     @Override
