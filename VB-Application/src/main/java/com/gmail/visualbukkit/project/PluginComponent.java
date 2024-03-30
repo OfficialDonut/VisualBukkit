@@ -56,9 +56,13 @@ public class PluginComponent implements Comparable<PluginComponent> {
     public PluginComponentBlock load() throws IOException, JSONException {
         if (!isLoaded()) {
             VisualBukkitApp.getLogger().info("Loading plugin component: " + getName());
-            setBlock(BlockRegistry.newPluginComponent(new JSONObject(Files.readString(blockFile))));
-            block.updateState();
+            if (Files.exists(blockFile)) {
+                setBlock(BlockRegistry.newPluginComponent(new JSONObject(Files.readString(blockFile))));
+            } else {
+                setBlock(new PluginComponentBlock.Unknown());
+            }
         }
+        block.updateState();
         return block;
     }
 

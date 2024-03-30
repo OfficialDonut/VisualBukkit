@@ -91,7 +91,7 @@ public non-sealed abstract class ExpressionBlock extends Block {
     @BlockDefinition(id = "unknown-expression", name = "Unknown Expression")
     public static class Unknown extends ExpressionBlock {
 
-        private JSONObject json;
+        private JSONObject json = new JSONObject();
 
         @Override
         public void updateState() {

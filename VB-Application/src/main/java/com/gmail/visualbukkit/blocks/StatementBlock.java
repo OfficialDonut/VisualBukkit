@@ -114,7 +114,7 @@ public non-sealed abstract class StatementBlock extends Block {
     @BlockDefinition(id = "unknown-statement", name = "Unknown Statement")
     public static class Unknown extends StatementBlock {
 
-        private JSONObject json;
+        private JSONObject json = new JSONObject();
 
         @Override
         public void updateState() {

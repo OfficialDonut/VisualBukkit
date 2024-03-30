@@ -76,7 +76,7 @@ public non-sealed abstract class PluginComponentBlock extends Block {
     @BlockDefinition(id = "unknown-plugin-component", name = "Unknown Plugin Component")
     public static class Unknown extends PluginComponentBlock {
 
-        private JSONObject json;
+        private JSONObject json = new JSONObject();
 
         @Override
         public void updateState() {

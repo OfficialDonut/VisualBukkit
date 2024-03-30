@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.reflection;
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.project.maven.MavenUtil;
 import com.google.common.reflect.ClassPath;
+import javassist.*;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
@@ -27,7 +28,7 @@ import org.json.JSONTokener;
 import org.zeroturnaround.zip.ZipUtil;
 
 import java.io.IOException;
-import java.lang.reflect.Modifier;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
@@ -53,6 +54,10 @@ public class ClassRegistry {
         classes.putIfAbsent(clazz.getCanonicalName(), new LoadedClassInfo(clazz));
     }
 
+    public static void register(CtClass clazz) {
+        classes.putIfAbsent(clazz.getName(), new CtClassInfo(clazz));
+    }
+
     public static void register(RemoteRepository repository) {
         mavenRepositories.add(repository);
     }
@@ -72,7 +77,7 @@ public class ClassRegistry {
         collectRequest.setRepositories(new ArrayList<>(mavenRepositories));
         collectRequest.getRepositories().add(new RemoteRepository.Builder("Maven Central", "default", "https://repo.maven.apache.org/maven2/").build());
 
-        DependencyResult dependencyResult = repositorySystem.resolveDependencies(session, new DependencyRequest(collectRequest, DependencyFilterUtils.classpathFilter(dependency.getScope())));
+        DependencyResult dependencyResult = repositorySystem.resolveDependencies(session, new DependencyRequest(collectRequest, DependencyFilterUtils.classpathFilter("compile")));
         List<URL> jarURLs = new ArrayList<>(dependencyResult.getArtifactResults().size());
         for (ArtifactResult artifactResult : dependencyResult.getArtifactResults()) {
             jarURLs.add(artifactResult.getArtifact().getFile().toURI().toURL());
@@ -82,18 +87,21 @@ public class ClassRegistry {
         }
     }
 
-    public static void register(URLClassLoader classLoader) throws IOException {
+    public static void register(ClassLoader classLoader) throws IOException {
+        LoaderClassPool classPool = new LoaderClassPool(classLoader);
         ClassPath classPath = ClassPath.from(classLoader);
         for (ClassPath.ClassInfo classInfo : classPath.getAllClasses()) {
             try {
                 if (!classInfo.getPackageName().startsWith("META-INF") && !classInfo.getSimpleName().equals("module-info") && !classInfo.getSimpleName().equals("package-info")) {
-                    Class<?> clazz = classInfo.load();
-                    if (!clazz.isAnonymousClass() && Modifier.isPublic(clazz.getModifiers())) {
-                        register(clazz);
+                    try (InputStream is = classInfo.asByteSource().openBufferedStream()) {
+                        CtClass clazz = classPool.makeClassIfNew(is);
+                        if (Modifier.isPublic(clazz.getModifiers())) {
+                            register(clazz);
+                        }
                     }
                 }
             } catch (Throwable e) {
-                VisualBukkitApp.getLogger().log(Level.WARNING, "Failed to register class", e);
+                VisualBukkitApp.getLogger().log(Level.WARNING, "Failed to register class: " + classInfo.getName(), e);
             }
         }
     }
@@ -113,5 +121,22 @@ public class ClassRegistry {
 
     public static Collection<ClassInfo> getClasses(Predicate<ClassInfo> filter) {
         return classes.values().stream().filter(filter).collect(Collectors.toSet());
+    }
+
+    private static class LoaderClassPool extends ClassPool {
+
+        public LoaderClassPool(ClassLoader classLoader) {
+            super(true);
+            insertClassPath(new LoaderClassPath(classLoader));
+        }
+
+        @Override
+        public CtClass get(String classname) {
+            try {
+                return super.get(classname);
+            } catch (NotFoundException e) {
+                return makeInterface(classname);
+            }
+        }
     }
 }
