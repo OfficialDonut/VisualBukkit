@@ -84,6 +84,7 @@ public class Project {
     private final ObservableList<PluginComponent> pluginComponents = FXCollections.observableArrayList();
     private final Map<PluginComponent, Tab> openPluginComponents = new HashMap<>();
     private final TextField jarOutputField = new TextField();
+    private final TextField packageField = new TextField();
     private final CheckBox debugModeCheckBox = new CheckBox(VisualBukkitApp.localizedText("label.enabled"));
 
     public Project(Path directory) {
@@ -170,7 +171,8 @@ public class Project {
                     jarOutputField.setText(dir.getAbsolutePath());
                 }
             })));
-            gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("label.resources")), new ActionButton(VisualBukkitApp.localizedText("button.open_folder"), e2 -> {
+            gridPane.addRow(1, new Label(VisualBukkitApp.localizedText("label.package")), packageField);
+            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.resources")), new ActionButton(VisualBukkitApp.localizedText("button.open_folder"), e2 -> {
                 try {
                     Files.createDirectories(resourcesDirectory);
                     VisualBukkitApp.openURI(resourcesDirectory.toUri());
@@ -179,8 +181,8 @@ public class Project {
                 }
             }));
             CheckTreeView<Object> treeView = new CheckTreeView<>(rootItem);
-            gridPane.addRow(2, new Label(VisualBukkitApp.localizedText("label.debug_mode")), new HBox(debugModeCheckBox, new IconButton(FontAwesomeRegular.QUESTION_CIRCLE, e2 -> VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Development-Assistance-Plugin#debug-mode")))));
-            gridPane.addRow(3, label, treeView);
+            gridPane.addRow(3, new Label(VisualBukkitApp.localizedText("label.debug_mode")), new HBox(debugModeCheckBox, new IconButton(FontAwesomeRegular.QUESTION_CIRCLE, e2 -> VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Development-Assistance-Plugin#debug-mode")))));
+            gridPane.addRow(4, label, treeView);
             gridPane.getStyleClass().add("build-settings-pane");
             settingsTabPane.getTabs().set(3, new Tab(VisualBukkitApp.localizedText("label.build"), gridPane));
         });
@@ -309,6 +311,7 @@ public class Project {
 
         debugModeCheckBox.setSelected(data.optBoolean("debug-mode"));
         jarOutputField.setText(data.optString("jar-output", buildDirectory.resolve("target").toString()));
+        packageField.setText(data.optString("package", getName()));
         pluginSettings.deserialize(data.optJSONObject("plugin-settings", new JSONObject()));
 
         JSONArray enabledModulesJson = data.optJSONArray("enabled-modules");
@@ -383,6 +386,7 @@ public class Project {
         data.put("plugin-settings", pluginSettings.serialize());
         data.put("debug-mode", debugModeCheckBox.isSelected());
         data.put("jar-output", jarOutputField.getText());
+        data.put("package", packageField.getText());
         for (Tab tab : tabPane.getTabs()) {
             data.append("open-plugin-components", tab.getText());
         }
@@ -653,10 +657,13 @@ public class Project {
                 if (version.isBlank()) {
                     version = "1.0";
                 }
-                String packageName = "vb.$" + name.toLowerCase();
+                String packageName = packageField.getText();
+                if (packageName.isBlank()) {
+                    packageName = getName();
+                }
 
                 Path mainDir = buildDirectory.resolve("src").resolve("main");
-                Path packageDir = mainDir.resolve("java").resolve("vb").resolve("$" + name.toLowerCase());
+                Path packageDir = mainDir.resolve("java").resolve(packageName.replace(".", File.separator));
                 Path resourcesDir = mainDir.resolve("resources");
                 if (Files.exists(buildDirectory)) {
                     MoreFiles.deleteRecursively(buildDirectory, RecursiveDeleteOption.ALLOW_INSECURE);
