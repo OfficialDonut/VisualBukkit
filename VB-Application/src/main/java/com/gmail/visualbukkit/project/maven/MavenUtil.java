@@ -62,6 +62,11 @@ public class MavenUtil {
                 "<artifactId>" + dependency.getArtifact().getArtifactId() + "</artifactId>" +
                 "<version>" + dependency.getArtifact().getVersion() + "</version>" +
                 "<scope>" + dependency.getScope() + "</scope>" +
+                "<exclusions>" +
+                        "<exclusion><groupId>io.papermc.paper</groupId><artifactId>paper-api</artifactId></exclusion>" +
+                        "<exclusion><groupId>org.spigotmc</groupId><artifactId>spigot-api</artifactId></exclusion>" +
+                        "<exclusion><groupId>org.bukkit</groupId><artifactId>bukkit</artifactId></exclusion>" +
+                "</exclusions>" +
                 "</dependency>";
     }
 
