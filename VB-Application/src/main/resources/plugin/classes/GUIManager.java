@@ -29,7 +29,8 @@ public class GUIManager implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         InventoryHolder holder = e.getView().getTopInventory().getHolder();
-        if (holder instanceof GUIIdentifier id) {
+        if (holder instanceof GUIIdentifier) {
+            GUIIdentifier id = (GUIIdentifier) holder;
             e.setCancelled(true);
             if (e.getView().getTopInventory().equals(e.getClickedInventory())) {
                 Bukkit.getPluginManager().callEvent(new GUIClickEvent(id, e));
