@@ -34,22 +34,35 @@ public class ExprNumber extends ExpressionBlock {
 
     @Override
     public ClassInfo getReturnType() {
-        return parameter.getText().contains(".") ? ClassInfo.of(double.class) : ClassInfo.of(long.class);
-    }
-
-    @Override
-    public String generateJava(BuildInfo buildInfo) {
         try {
             String number = parameter.getText();
             if (number.contains(".")) {
                 Double.parseDouble(number);
-                return "(" + number + "D)";
-            } else {
+                return ClassInfo.of(double.class);
+            }
+            try {
+                Integer.parseInt(number);
+                return ClassInfo.of(int.class);
+            } catch (NumberFormatException e) {
                 Long.parseLong(number);
-                return "(" + number + "L)";
+                return ClassInfo.of(long.class);
             }
         } catch (NumberFormatException e) {
-            return "0";
+            return ClassInfo.of(Object.class);
+        }
+    }
+
+    @Override
+    public String generateJava(BuildInfo buildInfo) {
+        ClassInfo returnType = getReturnType();
+        if (returnType.equals(ClassInfo.of(double.class))) {
+            return "(" + parameter.getText() + "D)";
+        } else if (returnType.equals(ClassInfo.of(long.class))) {
+            return "(" + parameter.getText() + "L)";
+        } else if (returnType.equals(ClassInfo.of(int.class))) {
+            return parameter.getText();
+        } else {
+            return "((Object) null)";
         }
     }
 

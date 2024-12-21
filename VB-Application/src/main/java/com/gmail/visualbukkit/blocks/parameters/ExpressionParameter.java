@@ -83,6 +83,10 @@ public class ExpressionParameter extends Region implements BlockParameter {
         getChildren().setAll(expressionSelector);
     }
 
+    public boolean isReturnValuePrimitiveNumber() {
+        return expression != null && expression.getReturnType().isPrimitiveNumber();
+    }
+
     @Override
     public void updateState() {
         if (expression != null) {

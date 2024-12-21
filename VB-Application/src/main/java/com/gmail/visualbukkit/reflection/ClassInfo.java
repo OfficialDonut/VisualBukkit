@@ -79,7 +79,7 @@ public abstract class ClassInfo implements PopOverSelectable, Comparable<ClassIn
         return new Node[]{nameLabel, packageLabel};
     }
 
-    private boolean isPrimitive() {
+    public boolean isPrimitive() {
         for (Class<?> clazz : Primitives.allPrimitiveTypes()) {
             if (clazz.getCanonicalName().equals(getName())) {
                 return true;
@@ -88,7 +88,7 @@ public abstract class ClassInfo implements PopOverSelectable, Comparable<ClassIn
         return false;
     }
 
-    private boolean isPrimitiveNumber() {
+    public boolean isPrimitiveNumber() {
         return isPrimitive() && !getName().equals("boolean") && !getName().equals("char");
     }
 
