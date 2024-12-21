@@ -63,7 +63,7 @@ import java.util.stream.Stream;
 public class Project {
 
     private static final RemoteRepository PAPER_REPOSITORY = new RemoteRepository.Builder("papermc", "default", "https://repo.papermc.io/repository/maven-public/").build();
-    private static final Dependency PAPER_DEPENDENCY = new Dependency(new DefaultArtifact("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT"), "provided");
+    private static final Dependency PAPER_DEPENDENCY = new Dependency(new DefaultArtifact("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"), "provided");
 
     private final Path directory;
     private final Path dataFile;
