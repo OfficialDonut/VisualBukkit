@@ -1,5 +1,5 @@
 before_install:
   - source "$HOME/.sdkman/bin/sdkman-init.sh"
   - sdk update
-  - sdk install java 17.0.1.fx-librca
-  - sdk use java 17.0.1.fx-librca
+  - sdk install java 21.0.6.fx-librca
+  - sdk use java 21.0.6.fx-librca
