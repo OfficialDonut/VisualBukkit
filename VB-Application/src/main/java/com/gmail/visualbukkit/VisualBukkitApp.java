@@ -5,6 +5,7 @@ import com.gmail.visualbukkit.project.CopyPasteManager;
 import com.gmail.visualbukkit.project.ProjectManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
+import com.gmail.visualbukkit.ui.JavadocsWindow;
 import com.gmail.visualbukkit.ui.LogWindow;
 import com.google.common.io.MoreFiles;
 import com.install4j.api.launcher.ApplicationLauncher;
@@ -12,11 +13,14 @@ import discord_game_sdk.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.*;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -26,6 +30,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.commons.lang3.SystemUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.action.Action;
 import org.json.JSONException;
@@ -65,6 +70,7 @@ public class VisualBukkitApp extends Application {
 
     private static final BorderPane rootPane = new BorderPane();
     private static LogWindow logWindow;
+    private static JavadocsWindow javadocsWindow;
     private static Stage primaryStage;
 
     private static final String DEFAULT_THEME = "css/dark.css";
@@ -163,12 +169,12 @@ public class VisualBukkitApp extends Application {
                 new Menu(localizedText("menu.settings"), null,
                         createThemesMenu(),
                         createFontSizeMenu(),
-                        createLanguageMenu()),
+                        createLanguageMenu()));
                 new Menu(localizedText("menu.help"), null,
                         new ActionMenuItem("Github", FontAwesomeBrands.GITHUB, e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", FontAwesomeSolid.FAUCET, e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
                         new ActionMenuItem("Discord", FontAwesomeBrands.DISCORD, e -> openURI(URI.create("https://discord.gg/ugkvGpu"))),
-                        new ActionMenuItem(localizedText("menu.check_for_update"), FontAwesomeSolid.CLOUD_DOWNLOAD_ALT, e -> checkForUpdate(true))));
+                        new ActionMenuItem(localizedText("menu.check_for_update"), FontAwesomeSolid.CLOUD_DOWNLOAD_ALT, e -> checkForUpdate(true)));
 
         if (SystemUtils.IS_OS_MAC) {
             menuBar.setUseSystemMenuBar(true);
@@ -489,6 +495,10 @@ public class VisualBukkitApp extends Application {
 
     public static LogWindow getLogWindow() {
         return logWindow;
+    }
+
+    public static JavadocsWindow getJavadocsWindow() {
+        return javadocsWindow;
     }
 
     public static Stage getPrimaryStage() {

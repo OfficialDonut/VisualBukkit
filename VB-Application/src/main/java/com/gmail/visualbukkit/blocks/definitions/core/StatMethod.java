@@ -54,4 +54,12 @@ public class StatMethod extends StatementBlock {
         builder.append(");");
         return builder.toString();
     }
+
+    public ClassParameter getClassParameter() {
+        return classParameter;
+    }
+
+    public MethodParameter getMethodParameter() {
+        return methodParameter;
+    }
 }

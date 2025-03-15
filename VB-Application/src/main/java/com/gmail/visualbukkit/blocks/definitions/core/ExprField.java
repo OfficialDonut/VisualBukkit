@@ -33,4 +33,12 @@ public class ExprField extends ExpressionBlock {
         }
         return arg(fieldInfo.isStatic() ? 0 : 2, buildInfo) + "." + fieldInfo.getName();
     }
+
+    public ClassParameter getClassParameter() {
+        return classParameter;
+    }
+
+    public FieldParameter getFieldParameter() {
+        return fieldParameter;
+    }
 }

@@ -1,9 +1,13 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.blocks.definitions.core.ExprField;
+import com.gmail.visualbukkit.blocks.definitions.core.ExprMethod;
+import com.gmail.visualbukkit.blocks.definitions.core.StatMethod;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
+import com.gmail.visualbukkit.project.JavadocsManager;
 import com.gmail.visualbukkit.project.UndoManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
@@ -34,7 +38,16 @@ public non-sealed abstract class ExpressionBlock extends Block {
                     CopyPasteManager.copyExpression(this);
                     UndoManager.current().execute(this::delete);
                 }),
-                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)));
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)),
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e -> {
+                    if (this instanceof ExprMethod) {
+                        JavadocsManager.getExprJavadocs((ExprMethod) this);
+                    } else if (this instanceof ExprField) {
+                        JavadocsManager.getExprJavadocs((ExprField) this);
+                    } else {
+                        VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.unavailable_javadocs"));
+                    }
+                }));
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {

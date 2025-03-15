@@ -58,4 +58,12 @@ public class ExprMethod extends ExpressionBlock {
         builder.append(")");
         return builder.toString();
     }
+
+    public ClassParameter getClassParameter() {
+        return classParameter;
+    }
+
+    public MethodParameter getMethodParameter() {
+        return methodParameter;
+    }
 }
