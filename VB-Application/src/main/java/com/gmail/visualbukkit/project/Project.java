@@ -155,9 +155,9 @@ public class Project {
         javadocsUrlListView.getItems().clear();
         javadocsUrlListView.getItems().add(DEFAULT_JAVADOCS_URL);
         javadocsUrlListView.getSelectionModel().select(DEFAULT_JAVADOCS_URL);
-        javadocsUrlListView.getItems().add("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/");
+        javadocsUrlListView.getItems().add("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/");
         javadocsMap.put("https://jd.papermc.io/paper/1.21.4/", new ArrayList<>(List.of("org.bukkit", "org.spigotmc", "co.aikar", "com.destroystokyo.paper", "io.papermc")));
-        javadocsMap.put("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/", new ArrayList<>(List.of("java", "jdk")));
+        javadocsMap.put("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/", new ArrayList<>(List.of("java", "jdk")));
         for (Map.Entry<String, List<String>> entry : javadocsMap.entrySet()) {
             javadocsUrlListView.getItems().add(entry.getKey());
         }
@@ -183,7 +183,7 @@ public class Project {
         ActionButton deleteUrlButton = new ActionButton(VisualBukkitApp.localizedText("button.delete_url"), e -> {
             String selectedUrl = javadocsUrlListView.getSelectionModel().getSelectedItem();
             if (selectedUrl != null) {
-                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/")) {
+                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
                     return;
                 }
                 javadocsMap.remove(selectedUrl);
@@ -194,7 +194,7 @@ public class Project {
         ActionButton editUrlButton = new ActionButton(VisualBukkitApp.localizedText("button.edit_url"), e -> {
             String selectedUrl = javadocsUrlListView.getSelectionModel().getSelectedItem();
             if (selectedUrl != null) {
-                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/")) {
+                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
                     return;
                 }
                 TextInputDialog dialog = new TextInputDialog(selectedUrl);
@@ -220,12 +220,12 @@ public class Project {
         deleteUrlButton.disableProperty().bind(
                 javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
                         .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/"))
+                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
         );
         editUrlButton.disableProperty().bind(
                 javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
                         .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/"))
+                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
         );
 
         javadocsValuesListView = new ListView<>();
@@ -286,17 +286,17 @@ public class Project {
         addValueButton.disableProperty().bind(
                 javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
                         .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/"))
+                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
         );
         deleteValueButton.disableProperty().bind(
                 javadocsValuesListView.getSelectionModel().selectedItemProperty().isNull()
                         .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/"))
+                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
         );
         editValueButton.disableProperty().bind(
                 javadocsValuesListView.getSelectionModel().selectedItemProperty().isNull()
                         .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/"))
+                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
         );
 
         ButtonVBox javadocsValuesButtons = new ButtonVBox(addValueButton, deleteValueButton, editValueButton);
@@ -321,7 +321,7 @@ public class Project {
                         super.updateItem(item, empty);
                         if (item != null && !empty) {
                             setText(item);
-                            if (item.equals("https://jd.papermc.io/paper/1.21.4/") || item.equals("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/")) {
+                            if (item.equals("https://jd.papermc.io/paper/1.21.4/") || item.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
                                 setGraphic(new FontIcon(FontAwesomeSolid.LOCK));
                             } else {
                                 setGraphic(null);
