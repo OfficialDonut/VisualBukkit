@@ -1,18 +1,12 @@
 package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.blocks.PluginComponentBlock;
-import com.gmail.visualbukkit.blocks.definitions.core.CompEventListener;
-import com.gmail.visualbukkit.blocks.definitions.core.ExprField;
-import com.gmail.visualbukkit.blocks.definitions.core.ExprMethod;
-import com.gmail.visualbukkit.blocks.definitions.core.StatMethod;
+import com.gmail.visualbukkit.blocks.definitions.core.*;
+import org.json.JSONObject;
 
-import java.awt.*;
-import java.util.HashMap;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 public class JavadocsManager {
 
@@ -67,30 +61,34 @@ public class JavadocsManager {
         }
     }
 
-
     private static void getJavadocs(String className, String methodName) {
-        for (List<String> packages : Project.getJavadocsMap().values()) {
-            for (String packageName : packages) {
-                if (className.startsWith(packageName)) {
-                    String baseUrl = getKeyByValue(Project.getJavadocsMap(), packageName);
-                    String url = baseUrl + className.replaceAll("\\.", "/") + ".html#" + methodName;
-                    try {
-                        Desktop.getDesktop().browse(java.net.URI.create(url));
-                    } catch (java.io.IOException e) {
-                        VisualBukkitApp.getLogger().warning("Please ensure you have a browser installed on your system.");
-                    }
+        JSONObject remapData = Project.getRemapData();
+        if (remapData != null) {
+            String key = className + "#" + methodName;
+            if (remapData.has(key)) {
+                String remapped = remapData.getString(key);
+                String[] parts = remapped.split("#");
+                if (parts.length == 2) {
+                    className = parts[0];
+                    methodName = parts[1];
+                } else {
+                    methodName = remapped;
                 }
             }
         }
-    }
 
-    private static String getKeyByValue(HashMap<String, List<String>> map, String value) {
-        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-            if (entry.getValue().contains(value)) {
-                return entry.getKey();
+        for (Map.Entry<String, List<String>> entry : Project.getJavadocsMap().entrySet()) {
+            String baseUrl = entry.getKey();
+            List<String> packages = entry.getValue();
+
+            for (String packageName : packages) {
+                if (className.startsWith(packageName)) {
+                    String url = baseUrl + className.replaceAll("\\.", "/") + ".html#" + methodName;
+                    VisualBukkitApp.openURI(URI.create(url));
+                    return;
+                }
             }
         }
-        return null;
     }
 
 }

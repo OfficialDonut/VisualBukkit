@@ -67,10 +67,12 @@ public class Project {
 
     private final Path directory;
     private final Path dataFile;
+    private final Path remapFile;
     private final Path pluginComponentDirectory;
     private final Path resourcesDirectory;
     private final Path buildDirectory;
     private JSONObject data = new JSONObject();
+    private static JSONObject remapData = new JSONObject();
     private boolean reloadRequired;
 
     private final BorderPane projectPane = new BorderPane();
@@ -85,6 +87,7 @@ public class Project {
 
     private final String DEFAULT_JAVADOCS_URL = "https://jd.papermc.io/paper/1.21.4/";
     private final List<String> DEFAULT_JAVADOCS_PACKAGES = new ArrayList<>((List.of("org.bukkit", "org.spigotmc", "co.aikar", "com.destroystokyo.paper", "io.papermc")));
+    private final String DEFAULT_JAVA_JAVADOCS_URL = "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/";
     private final ListSelectionView<PluginModule> moduleSelector = new ListSelectionView<>();
     private static final HashMap<String, List<String>> javadocsMap = new HashMap<>();
     private final ObservableList<PluginComponent> pluginComponents = FXCollections.observableArrayList();
@@ -96,6 +99,7 @@ public class Project {
     public Project(Path directory) {
         this.directory = directory;
         dataFile = directory.resolve("data.json");
+        remapFile = directory.resolve("remap.json");
         pluginComponentDirectory = directory.resolve("plugin_components");
         resourcesDirectory = directory.resolve("resource_files");
         buildDirectory = directory.resolve("build");
@@ -155,9 +159,9 @@ public class Project {
         javadocsUrlListView.getItems().clear();
         javadocsUrlListView.getItems().add(DEFAULT_JAVADOCS_URL);
         javadocsUrlListView.getSelectionModel().select(DEFAULT_JAVADOCS_URL);
-        javadocsUrlListView.getItems().add("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/");
-        javadocsMap.put("https://jd.papermc.io/paper/1.21.4/", new ArrayList<>(List.of("org.bukkit", "org.spigotmc", "co.aikar", "com.destroystokyo.paper", "io.papermc")));
-        javadocsMap.put("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/", new ArrayList<>(List.of("java", "jdk")));
+        javadocsUrlListView.getItems().add(DEFAULT_JAVA_JAVADOCS_URL);
+        javadocsMap.put(DEFAULT_JAVADOCS_URL, new ArrayList<>(List.of("org.bukkit", "org.spigotmc", "co.aikar", "com.destroystokyo.paper", "io.papermc")));
+        javadocsMap.put(DEFAULT_JAVA_JAVADOCS_URL, new ArrayList<>(List.of("java", "jdk")));
         for (Map.Entry<String, List<String>> entry : javadocsMap.entrySet()) {
             javadocsUrlListView.getItems().add(entry.getKey());
         }
@@ -183,7 +187,7 @@ public class Project {
         ActionButton deleteUrlButton = new ActionButton(VisualBukkitApp.localizedText("button.delete_url"), e -> {
             String selectedUrl = javadocsUrlListView.getSelectionModel().getSelectedItem();
             if (selectedUrl != null) {
-                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
+                if (selectedUrl.equals(DEFAULT_JAVADOCS_URL)) {
                     return;
                 }
                 javadocsMap.remove(selectedUrl);
@@ -194,7 +198,7 @@ public class Project {
         ActionButton editUrlButton = new ActionButton(VisualBukkitApp.localizedText("button.edit_url"), e -> {
             String selectedUrl = javadocsUrlListView.getSelectionModel().getSelectedItem();
             if (selectedUrl != null) {
-                if (selectedUrl.equals("https://jd.papermc.io/paper/1.21.4/") || selectedUrl.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
+                if (selectedUrl.equals(DEFAULT_JAVADOCS_URL) || selectedUrl.equals(DEFAULT_JAVA_JAVADOCS_URL)) {
                     return;
                 }
                 TextInputDialog dialog = new TextInputDialog(selectedUrl);
@@ -217,16 +221,7 @@ public class Project {
         ButtonVBox javadocsButtons = new ButtonVBox(addUrlButton, deleteUrlButton, editUrlButton);
         javadocsButtons.bindSizes();
 
-        deleteUrlButton.disableProperty().bind(
-                javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
-        );
-        editUrlButton.disableProperty().bind(
-                javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
-        );
+        disableDefaultButtons(deleteUrlButton, editUrlButton);
 
         javadocsValuesListView = new ListView<>();
         javadocsValuesListView.setPlaceholder(new Label(VisualBukkitApp.localizedText("label.no_values")));
@@ -283,24 +278,9 @@ public class Project {
             }
         });
 
-        addValueButton.disableProperty().bind(
-                javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
-        );
-        deleteValueButton.disableProperty().bind(
-                javadocsValuesListView.getSelectionModel().selectedItemProperty().isNull()
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
-        );
-        editValueButton.disableProperty().bind(
-                javadocsValuesListView.getSelectionModel().selectedItemProperty().isNull()
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://jd.papermc.io/paper/1.21.4/"))
-                        .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/"))
-        );
-
         ButtonVBox javadocsValuesButtons = new ButtonVBox(addValueButton, deleteValueButton, editValueButton);
         javadocsValuesButtons.bindSizes();
+        disableDefaultButtons(addValueButton, deleteValueButton, editValueButton);
 
         javadocsUrlListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null && javadocsMap.containsKey(newVal)) {
@@ -321,7 +301,7 @@ public class Project {
                         super.updateItem(item, empty);
                         if (item != null && !empty) {
                             setText(item);
-                            if (item.equals("https://jd.papermc.io/paper/1.21.4/") || item.equals("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/")) {
+                            if (item.equals(DEFAULT_JAVADOCS_URL) || item.equals(DEFAULT_JAVA_JAVADOCS_URL)) {
                                 setGraphic(new FontIcon(FontAwesomeSolid.LOCK));
                             } else {
                                 setGraphic(null);
@@ -373,22 +353,16 @@ public class Project {
         pluginSettingsWindow.setOnShowing(e -> {
             pluginSettingsWindow.setY(VisualBukkitApp.getPrimaryStage().getY() + VisualBukkitApp.getPrimaryStage().getHeight() / 2 - 300);
             if (settingsTabPane.getSelectionModel().getSelectedItem() != javadocsTab) {
-                pluginSettingsWindow.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 400);
-                pluginSettingsWindow.setWidth(800);
+                alignNormalTab(pluginSettingsWindow);
             }
             else {
-                pluginSettingsWindow.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 700);
-                pluginSettingsWindow.setWidth(1400);
-                javadocsPane.setPrefSize(1400, 600);
+                alignJavadocsTab(pluginSettingsWindow, javadocsPane);
             }
             settingsTabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
                 if (newTab == javadocsTab) {
-                    pluginSettingsWindow.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 700);
-                    pluginSettingsWindow.setWidth(1400);
-                    javadocsPane.setPrefSize(1400, 600);
+                    alignJavadocsTab(pluginSettingsWindow, javadocsPane);
                 } else {
-                    pluginSettingsWindow.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 400);
-                    pluginSettingsWindow.setWidth(800);
+                    alignNormalTab(pluginSettingsWindow);
                 }
             });
 
@@ -535,6 +509,27 @@ public class Project {
         });
     }
 
+    private void alignNormalTab(PopupWindow pluginSettingsWindow) {
+        pluginSettingsWindow.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 400);
+        pluginSettingsWindow.setWidth(800);
+    }
+
+    private void alignJavadocsTab(PopupWindow window, HBox box) {
+        window.setX(VisualBukkitApp.getPrimaryStage().getX() + VisualBukkitApp.getPrimaryStage().getWidth() / 2 - 700);
+        window.setWidth(1400);
+        box.setPrefSize(1400, 600);
+    }
+
+    private void disableDefaultButtons(ActionButton ... buttons) {
+        for (ActionButton button : buttons) {
+            button.disableProperty().bind(
+                    javadocsUrlListView.getSelectionModel().selectedItemProperty().isNull()
+                            .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo(DEFAULT_JAVADOCS_URL))
+                            .or(javadocsUrlListView.getSelectionModel().selectedItemProperty().isEqualTo(DEFAULT_JAVA_JAVADOCS_URL))
+            );
+        }
+    }
+
     protected void open() throws IOException {
         if (Files.exists(dataFile)) {
             try {
@@ -543,6 +538,8 @@ public class Project {
                 VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to load data file", e);
             }
         }
+
+        loadRemapData();
 
         for (VisualBukkitExtension extension : VisualBukkitApp.getExtensions()) {
             extension.open(this);
@@ -675,6 +672,40 @@ public class Project {
         data.put("javadocs", javadocsJson);
         Files.createDirectories(directory);
         Files.writeString(dataFile, data.toString(2));
+        loadRemapData();
+    }
+
+    private void loadRemapData() {
+        if (Files.exists(remapFile)) {
+            try {
+                remapData = new JSONObject(Files.readString(remapFile));
+                for (String key : remapData.keySet()) {
+                    String value = remapData.getString(key);
+                    if (value.equals("null")) {
+                        remapData.remove(key);
+                    } else {
+                        remapData.put(key, StringEscapeUtils.unescapeJson(value));
+                    }
+                }
+            } catch (IOException | JSONException e) {
+                VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to load remap file", e);
+            }
+        }
+        else {
+            try {
+                String INPUT = """
+                        {
+                            "org.bukkit.entity.Player#sendMessage(java.lang.String)":"org.bukkit.command.CommandSender#sendMessage(java.lang.String)",
+                        	"org.bukkit.entity.Player#attack(org.bukkit.entity.Entity)":"org.bukkit.entity.LivingEntity#attack(org.bukkit.entity.Entity)",
+                        }
+                        """;
+                remapData = new JSONObject(INPUT);
+                Files.createFile(remapFile);
+                Files.writeString(remapFile, remapData.toString(2));
+            } catch (IOException e) {
+                VisualBukkitApp.getLogger().log(Level.SEVERE, "Failed to create remap file", e);
+            }
+        }
     }
 
     public void openPluginComponent(PluginComponent pluginComponent, boolean selectTab) {
@@ -1086,6 +1117,10 @@ public class Project {
             }
         }
         return null;
+    }
+
+    public static JSONObject getRemapData() {
+        return remapData;
     }
 
     public PluginComponent getPluginComponent(String name) {
