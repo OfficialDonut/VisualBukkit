@@ -40,118 +40,8 @@ public non-sealed abstract class ExpressionBlock extends Block {
                     UndoManager.current().execute(this::delete);
                 }),
                 new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)),
-                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e -> {
-                    switch (this) {
-                        case ExprBoolean exprBoolean ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"));
-                        case ExprBooleanLogic exprBooleanLogic ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html"));
-                        case ExprColoredString exprColoredString ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/ChatColor.html"));
-                        case ExprCommandArgument exprCommandArgument ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/command/Command.html"));
-                        case ExprCommandArguments exprCommandArguments ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/command/Command.html"));
-                        case ExprCommandSender exprCommandSender ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/command/CommandSender.html"));
-                        case ExprConditionalExpression exprConditionalExpression ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html"));
-                        case ExprConsumer exprConsumer ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html"));
-                        case ExprConsumerInput exprConsumerInput ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html"));
-                        case ExprCurrentEvent exprCurrentEvent ->
-                                JavadocsManager.getCompJavaDocs(exprCurrentEvent.getPluginComponentBlock().getPluginComponent());
-                        case ExprEscapeSequence exprEscapeSequence ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/data/characters.html"));
-                        case ExprExecutionException exprExecutionException ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html"));
-                        case ExprField exprField -> JavadocsManager.getExprJavadocs(exprField);
-                        case ExprFunctionArgument exprFunctionArgument ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html"));
-                        case ExprFunctionArguments exprFunctionArguments ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html"));
-                        case ExprFunctionValue exprFunctionValue ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html"));
-                        case ExprGlobalVariable exprGlobalVariable ->
-                                VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
-                        case ExprHashMap exprHashMap ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"));
-                        case ExprHashSet exprHashSet ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html"));
-                        case ExprHexColoredString exprHexColoredString ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/ChatColor.html"));
-                        case ExprImmutableList exprImmutableList ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/List.html"));
-                        case ExprIsClass exprIsClass ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html"));
-                        case ExprIsEqual exprIsEqual ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html"));
-                        case ExprIsNull exprIsNull ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Objects.html#isNull(java.lang.Object)"));
-                        case ExprItemStack exprItemStack ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/inventory/ItemStack.html"));
-                        case ExprJavaCode exprJavaCode ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html"));
-                        case ExprList exprList ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/List.html"));
-                        case ExprLocalVariable exprLocalVariable ->
-                                VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
-                        case ExprLoopNumber exprLoopNumber ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html"));
-                        case ExprLoopValue exprLoopValue ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html"));
-                        case ExprMath exprMath ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html"));
-                        case ExprMethod exprMethod -> JavadocsManager.getExprJavadocs(exprMethod);
-                        case ExprMultilineString exprMultilineString ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/data/strings/multiline.html"));
-                        case ExprNegateBoolean exprNegateBoolean ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html"));
-                        case ExprNewObject exprNewObject ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/javaOO/objectcreation.html"));
-                        case ExprNull exprNull ->
-                                VisualBukkitApp.openURI(URI.create("https://www.upwork.com/resources/what-is-null-in-java"));
-                        case ExprNumber exprNumber ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"));
-                        case ExprNumberComparison exprNumberComparison ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html"));
-                        case ExprPersistentVariable exprPersistentVariable ->
-                                VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
-                        case ExprProcedureArgument exprProcedureArgument ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html"));
-                        case ExprProcedureArguments exprProcedureArguments ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/8/docs/api/java/util/function/Supplier.html"));
-                        case ExprRawString exprRawString ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/data/strings/index.html"));
-                        case ExprSerializedItemStack exprSerializedItemStack ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/inventory/ItemStack.html"));
-                        case ExprString exprString ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html"));
-                        case ExprStringConcatenation exprStringConcatenation ->
-                                VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html#concat(java.lang.String)"));
-                        case ExprThisPlugin exprThisPlugin ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/plugin/java/JavaPlugin.html"));
-                        case ExprGUIClickedInventory exprGUIClickedInventory ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getClickedInventory()"));
-                        case ExprGUIClickedItemStack exprGUIClickedItemStack ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getCurrentItem()"));
-                        case ExprGUIClickedSlot exprGUIClickedSlot ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getSlot()"));
-                        case ExprGUIClicker exprGUIClicker ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getWhoClicked()"));
-                        case ExprGUIClickType exprGUIClickType ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getAction()"));
-                        case ExprGUIInventory exprGUIInventory ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html#getView()"));
-                        case ExprGUIInventoryClickEvent exprGUIInventoryClickEvent ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/event/inventory/InventoryClickEvent.html"));
-                        case ExprGUIPlayer exprGUIPlayer ->
-                                VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/entity/Player.html"));
-                        default ->
-                                VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.unavailable_javadocs"));
-                    }
-                }));
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e -> openJavadocs())
+        );
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -234,6 +124,11 @@ public non-sealed abstract class ExpressionBlock extends Block {
         @Override
         public void deserialize(JSONObject json) {
             this.json = json;
+        }
+
+        @Override
+        public void openJavadocs() {
+            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.unavailable_javadocs"));
         }
     }
 }

@@ -1,11 +1,14 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
+
+import java.net.URI;
 
 @BlockDefinition(id = "stat-advanced-number-loop", name = "Advanced Number Loop", description = "Loops through a range of numbers")
 public class StatAdvancedNumberLoop extends ContainerBlock {
@@ -16,6 +19,11 @@ public class StatAdvancedNumberLoop extends ContainerBlock {
         addParameter("Update Value", new ExpressionParameter(ClassInfo.of(int.class)));
         addParameter("Update Type", new ChoiceParameter("+", "-", "*", "/", "%"));
         addParameter("Comparison", new ChoiceParameter("<", "<=", ">", ">=", "==", "!="));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html"));
     }
 
     @Override
