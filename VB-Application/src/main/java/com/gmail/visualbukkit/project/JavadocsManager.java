@@ -2,6 +2,9 @@ package com.gmail.visualbukkit.project;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.definitions.core.*;
+import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
+import com.gmail.visualbukkit.blocks.parameters.FieldParameter;
+import com.gmail.visualbukkit.blocks.parameters.MethodParameter;
 import org.json.JSONObject;
 
 import java.net.URI;
@@ -10,16 +13,16 @@ import java.util.Map;
 
 public class JavadocsManager {
 
-    public static void getStatJavadocs(StatMethod statMethod) {
-        getJavadocs(statMethod.getClassParameter().getValue().getName(), statMethod.getMethodParameter().getValue().getSignature());
+    public static void getStatJavadocs(ClassParameter classParameter, MethodParameter methodParameter) {
+        getJavadocs(classParameter.getValue().getName(), methodParameter.getValue().getSignature());
     }
 
-    public static void getExprJavadocs(ExprMethod exprMethod) {
-        getJavadocs(exprMethod.getClassParameter().getValue().getName(), exprMethod.getMethodParameter().getValue().getSignature());
+    public static void getExprJavadocs(ClassParameter classParameter, MethodParameter methodParameter) {
+        getJavadocs(classParameter.getValue().getName(), methodParameter.getValue().getSignature());
     }
 
-    public static void getExprJavadocs(ExprField exprField) {
-        getJavadocs(exprField.getClassParameter().getValue().getName(), exprField.getFieldParameter().getValue().getName());
+    public static void getExprJavadocs(ClassParameter classParameter, FieldParameter fieldParameter) {
+        getJavadocs(classParameter.getValue().getName(), fieldParameter.getValue().getName());
     }
 
     public static void getCompJavaDocs(PluginComponent pluginComponent) {
