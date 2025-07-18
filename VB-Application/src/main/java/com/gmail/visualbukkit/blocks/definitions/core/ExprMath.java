@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.SizedExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
@@ -8,6 +9,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
+import java.net.URI;
 import java.util.StringJoiner;
 
 @BlockDefinition(id = "expr-math", name = "Math", description = "Math operations (+, -, *, /, %)")
@@ -19,6 +21,11 @@ public class ExprMath extends SizedExpressionBlock {
         addParameter("Number", new ExpressionParameter(ClassInfo.of(double.class)));
         addParameter("Operation", new ChoiceParameter(operations));
         addParameter("Number", new ExpressionParameter(ClassInfo.of(double.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html"));
     }
 
     @Override

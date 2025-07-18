@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,11 @@ public class ExprNumber extends ExpressionBlock {
                 parameter.setText(oldValue);
             }
         });
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"));
     }
 
     public ExprNumber(Number num) {

@@ -1,9 +1,7 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
-import com.gmail.visualbukkit.project.BuildInfo;
-import com.gmail.visualbukkit.project.CopyPasteManager;
-import com.gmail.visualbukkit.project.UndoManager;
+import com.gmail.visualbukkit.project.*;
 import com.gmail.visualbukkit.ui.ActionMenuItem;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.SeparatorMenuItem;
@@ -36,9 +34,11 @@ public non-sealed abstract class StatementBlock extends Block {
         ActionMenuItem deleteStackItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete_stack"), e -> UndoManager.current().execute(() -> getParentStatementHolder().removeStack(this)));
         ActionMenuItem pasteBeforeItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_before"), e -> UndoManager.current().execute(() -> getParentStatementHolder().addBefore(this, CopyPasteManager.pasteStatement())));
         ActionMenuItem pasteAfterItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_after"), e -> UndoManager.current().execute(() -> getParentStatementHolder().addAfter(this, CopyPasteManager.pasteStatement())));
+        ActionMenuItem javadocsItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e ->  openJavadocs());
+
         pasteBeforeItem.disableProperty().bind(CopyPasteManager.statementCopiedProperty().not());
         pasteAfterItem.disableProperty().bind(pasteBeforeItem.disableProperty());
-        getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, new SeparatorMenuItem(), copyStackItem, cutStackItem, deleteStackItem, new SeparatorMenuItem(), pasteBeforeItem, pasteAfterItem);
+        getContextMenu().getItems().addAll(copyItem, cutItem, deleteItem, new SeparatorMenuItem(), copyStackItem, cutStackItem, deleteStackItem, new SeparatorMenuItem(), pasteBeforeItem, pasteAfterItem, new SeparatorMenuItem(), javadocsItem);
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {

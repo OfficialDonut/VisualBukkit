@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,11 @@ public class ExprEscapeSequence extends ExpressionBlock {
 
     public ExprEscapeSequence() {
         addParameter("Sequence", new ChoiceParameter(escapeSequences.keySet()));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/data/characters.html"));
     }
 
     @Override

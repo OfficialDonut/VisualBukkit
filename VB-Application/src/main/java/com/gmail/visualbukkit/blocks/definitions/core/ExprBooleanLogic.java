@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.SizedExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
@@ -8,6 +9,7 @@ import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.TreeMap;
@@ -27,6 +29,11 @@ public class ExprBooleanLogic extends SizedExpressionBlock {
         addParameter("Boolean", new ExpressionParameter(ClassInfo.of(boolean.class)));
         addParameter("Operation", new ChoiceParameter(operations.keySet()));
         addParameter("Boolean", new ExpressionParameter(ClassInfo.of(boolean.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html"));
     }
 
     @Override

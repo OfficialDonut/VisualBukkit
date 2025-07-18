@@ -1,11 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
+import java.net.URI;
 import java.util.List;
 
 @BlockDefinition(id = "expr-itemstack", name = "ItemStack", description = "An ItemStack optionally with a name and lore")
@@ -15,6 +17,11 @@ public class ExprItemStack extends ExpressionBlock {
         addParameter("Material", new ExpressionParameter(ClassInfo.of("org.bukkit.Material")));
         addParameter("Name", new ExpressionParameter(ClassInfo.of(String.class)));
         addParameter("Lore", new ExpressionParameter(ClassInfo.of(List.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/inventory/ItemStack.html"));
     }
 
     @Override

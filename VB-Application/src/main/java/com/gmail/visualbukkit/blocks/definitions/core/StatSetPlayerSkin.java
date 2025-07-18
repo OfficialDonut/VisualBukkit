@@ -1,10 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
+
+import java.net.URI;
 
 @BlockDefinition(id = "stat-set-player-skin", name = "Set Player Skin", description = "Sets the skin of a player")
 public class StatSetPlayerSkin extends StatementBlock {
@@ -13,6 +16,11 @@ public class StatSetPlayerSkin extends StatementBlock {
         addParameter("Player", new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")));
         addParameter("Skin Value", new ExpressionParameter(ClassInfo.of(String.class)));
         addParameter("Skin Signature", new ExpressionParameter(ClassInfo.of(String.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/blob/master/VB-Application/src/main/java/com/gmail/visualbukkit/blocks/definitions/core/StatSetPlayerSkin.java"));
     }
 
     @Override

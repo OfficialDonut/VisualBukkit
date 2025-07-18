@@ -173,6 +173,8 @@ public sealed abstract class Block extends VBox permits PluginComponentBlock, St
 
     public abstract void delete();
 
+    public abstract void openJavadocs();
+
     public String arg(int i, BuildInfo buildInfo) {
         return parameters.get(i).generateJava(buildInfo);
     }

@@ -5,6 +5,7 @@ import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
 import com.gmail.visualbukkit.blocks.parameters.FieldParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.project.JavadocsManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.FieldInfo;
 
@@ -17,6 +18,11 @@ public class ExprField extends ExpressionBlock {
     public ExprField() {
         addParameter("Class", classParameter = new ClassParameter(c -> !c.getFields().isEmpty()));
         addParameter("Field", fieldParameter = new FieldParameter(this, classParameter));
+    }
+
+    @Override
+    public void openJavadocs() {
+        JavadocsManager.getExprJavadocs(classParameter, fieldParameter);
     }
 
     @Override
