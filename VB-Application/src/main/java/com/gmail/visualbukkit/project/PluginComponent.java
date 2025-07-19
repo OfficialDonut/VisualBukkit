@@ -104,7 +104,9 @@ public class PluginComponent implements Comparable<PluginComponent> {
 
     public void setBlock(PluginComponentBlock block) {
         this.block = block;
-        blockType = block != null ? block.getDefinition().id() : null;
+        if (block != null) {
+            blockType = block.getDefinition().id();
+        }
         pane.setBlock(block);
     }
 
