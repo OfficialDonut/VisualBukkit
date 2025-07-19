@@ -47,6 +47,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.jar.JarFile;
 import java.util.logging.FileHandler;
@@ -75,6 +77,10 @@ public class VisualBukkitApp extends Application {
     private static final IntegerProperty fontSize = new SimpleIntegerProperty();
     private static final ObjectProperty<Locale> language = new SimpleObjectProperty<>();
     private static ResourceBundle resourceBundle;
+
+    private static final BooleanProperty discordRichPresence = new SimpleBooleanProperty();
+    private static final ScheduledExecutorService discordExecutor = Executors.newSingleThreadScheduledExecutor();
+    private static ScheduledFuture<?> discordTask;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -119,9 +125,19 @@ public class VisualBukkitApp extends Application {
             data.put("language", newValue.toLanguageTag());
         });
 
+        discordRichPresence.addListener((observable, oldValue, newValue) -> {
+            data.put("discord-rich-presence", newValue);
+            if (newValue) {
+                startDiscordRichPresence();
+            } else {
+                stopDiscordRichPresence();
+            }
+        });
+
         theme.set(data.optString("theme", DEFAULT_THEME));
         fontSize.set(data.optInt("font-size", DEFAULT_FONT_SIZE));
         language.set(Locale.forLanguageTag(data.optString("language", DEFAULT_LANGUAGE.toLanguageTag())));
+        discordRichPresence.set(data.optBoolean("discord-rich-presence", false));
 
         resourceBundle = ResourceBundle.getBundle("lang.gui");
         logWindow.setTitle(VisualBukkitApp.localizedText("window.log"));
@@ -163,7 +179,8 @@ public class VisualBukkitApp extends Application {
                 new Menu(localizedText("menu.settings"), null,
                         createThemesMenu(),
                         createFontSizeMenu(),
-                        createLanguageMenu()),
+                        createLanguageMenu(),
+                        createDiscordRichPresenceMenu()),
                 new Menu(localizedText("menu.help"), null,
                         new ActionMenuItem("Github", FontAwesomeBrands.GITHUB, e -> openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit"))),
                         new ActionMenuItem("Spigot", FontAwesomeSolid.FAUCET, e -> openURI(URI.create("https://www.spigotmc.org/resources/visual-bukkit-create-plugins.76474/"))),
@@ -266,7 +283,6 @@ public class VisualBukkitApp extends Application {
                 displayException(e);
             }
             checkForUpdate(false);
-            updateDiscordActivity();
         });
     }
 
@@ -291,6 +307,7 @@ public class VisualBukkitApp extends Application {
             logger.log(Level.SEVERE, "Failed to save data file", e);
         }
         VisualBukkitGrpcServer.getInstance().stop();
+        discordExecutor.shutdownNow();
     }
 
     private void checkForUpdate(boolean wasCheckRequested) {
@@ -445,7 +462,23 @@ public class VisualBukkitApp extends Application {
         return menu;
     }
 
-    private void updateDiscordActivity() {
+    private Menu createDiscordRichPresenceMenu() {
+        Menu menu = new Menu("Discord Rich Presence");
+        RadioMenuItem enableItem = new RadioMenuItem(localizedText("label.enabled"));
+        RadioMenuItem disableItem = new RadioMenuItem(localizedText("label.disabled"));
+        enableItem.setOnAction(e -> discordRichPresence.set(true));
+        disableItem.setOnAction(e -> discordRichPresence.set(false));
+        ToggleGroup toggleGroup = new ToggleGroup();
+        toggleGroup.getToggles().addAll(enableItem, disableItem);
+        menu.getItems().addAll(enableItem, disableItem);
+        (discordRichPresence.get() ? enableItem : disableItem).setSelected(true);
+        return menu;
+    }
+
+    private void startDiscordRichPresence() {
+        if (discordTask != null) {
+            return;
+        }
         DiscordCreateParams params = new DiscordCreateParams();
         params.client_id = 799336716027691059L;
         params.flags = 1; // don't require Discord to be running
@@ -459,11 +492,14 @@ public class VisualBukkitApp extends Application {
             activity.assets.small_image = "activity-icon".getBytes(StandardCharsets.UTF_8);
             IDiscordActivityManager activityManager = core[0].get_activity_manager.apply(core[0]);
             activityManager.update_activity.apply(activityManager, activity, null, (callback_data, result) -> {});
-            Executors.newSingleThreadScheduledExecutor(r -> {
-                Thread thread = Executors.defaultThreadFactory().newThread(r);
-                thread.setDaemon(true);
-                return thread;
-            }).scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+            discordTask = discordExecutor.scheduleAtFixedRate(() -> core[0].run_callbacks.apply(core[0]), 0, 10, TimeUnit.MILLISECONDS);
+        }
+    }
+
+    private void stopDiscordRichPresence() {
+        if (discordTask != null) {
+            discordTask.cancel(true);
+            discordTask = null;
         }
     }
 
