@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
@@ -8,6 +9,7 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -22,6 +24,11 @@ public class StatScheduleTask extends ContainerBlock {
         addParameter("Type", typeParameter);
         addParameter("Mode", modeParameter);
         addParameter("Delay", new ExpressionParameter(ClassInfo.of(long.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://jd.papermc.io/paper/1.21.4/org/bukkit/scheduler/BukkitScheduler.html#runTask(org.bukkit.plugin.java.JavaPlugin,java.lang.Runnable)"));
     }
 
     @Override

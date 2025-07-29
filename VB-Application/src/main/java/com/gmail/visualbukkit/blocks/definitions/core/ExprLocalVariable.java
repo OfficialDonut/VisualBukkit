@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
@@ -7,6 +8,7 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.google.common.hash.Hashing;
 
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -22,6 +24,11 @@ public class ExprLocalVariable extends ExpressionBlock {
         getChildren().setAll(parameter);
         parameters = Collections.singletonList(parameter);
         parameter.getStyleClass().add("local-variable-field");
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
     }
 
     public ExprLocalVariable(String var) {

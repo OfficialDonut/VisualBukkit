@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.StatementBlock;
@@ -10,6 +11,8 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import javafx.scene.layout.Region;
 
+import java.net.URI;
+
 @BlockDefinition(id = "stat-set-local-variable", name = "Set Local Variable", description = "Sets the value of a local variable")
 public class StatSetLocalVariable extends StatementBlock {
 
@@ -19,6 +22,11 @@ public class StatSetLocalVariable extends StatementBlock {
     public StatSetLocalVariable() {
         addParameter("Var", varParameter);
         addParameter("Value", valueParameter);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
     }
 
     public StatSetLocalVariable(String var, ExpressionBlock value) {

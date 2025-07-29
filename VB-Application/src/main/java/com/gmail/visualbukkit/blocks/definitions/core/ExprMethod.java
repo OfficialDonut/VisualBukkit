@@ -6,6 +6,7 @@ import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.blocks.parameters.MethodParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.project.JavadocsManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import com.gmail.visualbukkit.reflection.MethodInfo;
 
@@ -20,6 +21,11 @@ public class ExprMethod extends ExpressionBlock {
     public ExprMethod() {
         addParameter("Class", classParameter = new ClassParameter());
         addParameter("Method", methodParameter = new MethodParameter(this, classParameter, m -> m.getReturnType() != null));
+    }
+
+    @Override
+    public void openJavadocs() {
+        JavadocsManager.getExprJavadocs(classParameter, methodParameter);
     }
 
     public ExprMethod(ClassInfo clazz, MethodInfo method, ExpressionBlock... parameterExpressions) {

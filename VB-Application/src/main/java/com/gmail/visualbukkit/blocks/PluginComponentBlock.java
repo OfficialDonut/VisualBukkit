@@ -16,8 +16,9 @@ public non-sealed abstract class PluginComponentBlock extends Block {
         ActionMenuItem pasteItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.paste_after"), e -> UndoManager.current().execute(() -> childStatementHolder.addFirst(CopyPasteManager.pasteStatement())));
         ActionMenuItem collapseItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.collapse_all"), e -> childStatementHolder.setCollapsedRecursive(true));
         ActionMenuItem expandItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.expand_all"), e -> childStatementHolder.setCollapsedRecursive(false));
+        ActionMenuItem javadocItem = new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e -> JavadocsManager.getCompJavaDocs(getPluginComponent()));
         pasteItem.disableProperty().bind(CopyPasteManager.statementCopiedProperty().not());
-        getContextMenu().getItems().addAll(collapseItem, expandItem, pasteItem);
+        getContextMenu().getItems().addAll(collapseItem, expandItem, pasteItem, javadocItem);
 
         getContextMenu().setOnShowing(e -> {
             collapseItem.setDisable(childStatementHolder.isEmpty());
