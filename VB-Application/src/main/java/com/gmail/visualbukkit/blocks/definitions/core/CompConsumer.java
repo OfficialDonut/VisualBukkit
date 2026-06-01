@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
@@ -15,5 +16,10 @@ public class CompConsumer extends PluginComponentBlock {
 
     protected static String getConsumerField(String str) {
         return "$CONSUMER_" + str;
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/function/Consumer"));
     }
 }

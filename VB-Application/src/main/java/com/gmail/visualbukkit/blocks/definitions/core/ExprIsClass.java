@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ClassParameter;
@@ -15,6 +16,11 @@ public class ExprIsClass extends ExpressionBlock {
     public ExprIsClass() {
         addParameter("Class", classParameter);
         addParameter("Object", new ExpressionParameter(ClassInfo.of(Object.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/lang/Class.html"));
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
+
+import java.net.URI;
 
 @BlockDefinition(id = "expr-conditional-expression", name = "Conditional Expression", description = "Returns one of two objects depending on a condition")
 public class ExprConditionalExpression extends ExpressionBlock {
@@ -13,6 +16,11 @@ public class ExprConditionalExpression extends ExpressionBlock {
         addParameter("Condition", new ExpressionParameter(ClassInfo.of(boolean.class)));
         addParameter("If True", new ExpressionParameter(ClassInfo.of(Object.class)));
         addParameter("If False", new ExpressionParameter(ClassInfo.of(Object.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html"));
     }
 
     @Override

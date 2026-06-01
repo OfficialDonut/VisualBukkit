@@ -21,4 +21,7 @@ public class CompProcedure extends PluginComponentBlock {
                 "}" +
                 procedureMethod.getBody());
     }
+
+    @Override
+    public void openJavadocs() {}
 }

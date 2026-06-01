@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.PluginComponentParameter;
@@ -15,6 +16,11 @@ public class ExprConsumer extends ExpressionBlock {
 
     public ExprConsumer() {
         addParameter("Consumer", parameter);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/function/Consumer.html"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.SizedExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
@@ -15,6 +16,11 @@ public class ExprStringConcatenation extends SizedExpressionBlock {
     public ExprStringConcatenation() {
         addParameter("String", new ExpressionParameter(ClassInfo.of(String.class)));
         addParameter("String", new ExpressionParameter(ClassInfo.of(String.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/lang/String.html#concat(java.lang.String)"));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.gmail.visualbukkit.blocks.definitions.core;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
+import com.gmail.visualbukkit.project.JavadocsManager;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 
 @BlockDefinition(id = "expr-current-event", name = "Current Event", description = "The current event in a 'Event Listener' plugin component")
@@ -12,6 +13,11 @@ public class ExprCurrentEvent extends ExpressionBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompEventListener.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        JavadocsManager.getCompJavaDocs(getPluginComponentBlock().getPluginComponent());
     }
 
     @Override

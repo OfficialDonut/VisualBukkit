@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
@@ -15,6 +16,11 @@ public class StatWhileLoop extends ContainerBlock {
     public StatWhileLoop() {
         addParameter("Mode", modeParameter);
         addParameter("Condition", new ExpressionParameter(ClassInfo.of(boolean.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html"));
     }
 
     @Override

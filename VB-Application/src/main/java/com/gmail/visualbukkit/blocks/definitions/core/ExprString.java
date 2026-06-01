@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.StringParameter;
@@ -17,6 +18,11 @@ public class ExprString extends ExpressionBlock {
         getStyleClass().clear();
         getChildren().setAll(parameter);
         parameters = Collections.singletonList(parameter);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/lang/String.html"));
     }
 
     public ExprString(String string) {

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.gui;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
@@ -12,6 +13,11 @@ public class ExprGUIPlayer extends ExpressionBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompGUI.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/entity/Player.html"));
     }
 
     @Override

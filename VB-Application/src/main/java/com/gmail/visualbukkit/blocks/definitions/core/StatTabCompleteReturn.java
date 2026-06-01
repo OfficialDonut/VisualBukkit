@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -19,6 +20,11 @@ public class StatTabCompleteReturn extends StatementBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompTabCompleteHandler.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/command/TabCompleter.html#onTabComplete(org.bukkit.command.CommandSender,org.bukkit.command.Command,java.lang.String,java.lang.String[])"));
     }
 
     @Override

@@ -9,4 +9,7 @@ public class CompWorkspace extends PluginComponentBlock {
 
     @Override
     public void prepareBuild(BuildInfo buildInfo) {}
+
+    @Override
+    public void openJavadocs() {}
 }

@@ -43,4 +43,9 @@ public class CompTabCompleteHandler extends PluginComponentBlock {
                 "}" +
                 tabCompleteMethod.getBody());
     }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/command/TabCompleter.html#onTabComplete()"));
+    }
 }

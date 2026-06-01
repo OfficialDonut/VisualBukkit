@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.gui;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -18,6 +19,11 @@ public class StatSetGUISlot extends StatementBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompGUI.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/inventory/Inventory.html#setItem(int,org.bukkit.inventory.ItemStack)"));
     }
 
     @Override

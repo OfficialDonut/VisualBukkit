@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.gui;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import com.gmail.visualbukkit.blocks.parameters.PluginComponentParameter;
@@ -11,6 +12,11 @@ public class CompGUIClickHandler extends PluginComponentBlock {
 
     public CompGUIClickHandler() {
         addParameter("GUI", new PluginComponentParameter(CompGUI.class));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/event/inventory/InventoryClickEvent.html"));
     }
 
     @Override

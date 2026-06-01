@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -11,6 +12,11 @@ public class ExprIsNull extends ExpressionBlock {
 
     public ExprIsNull() {
         addParameter("Object", new ExpressionParameter(ClassInfo.of(Object.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/Objects.html#isNull(java.lang.Object)"));
     }
 
     @Override

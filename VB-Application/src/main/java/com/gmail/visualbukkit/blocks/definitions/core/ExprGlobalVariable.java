@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -7,11 +8,18 @@ import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.reflection.ClassInfo;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
 
+import java.net.URI;
+
 @BlockDefinition(id = "expr-global-variable", name = "Global Variable", description = "The value of a global variable")
 public class ExprGlobalVariable extends ExpressionBlock {
 
     public ExprGlobalVariable() {
         addParameter("Variable", new ExpressionParameter(ClassInfo.of(String.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(URI.create("https://github.com/OfficialDonut/VisualBukkit/wiki/Variables"));
     }
 
     @Override

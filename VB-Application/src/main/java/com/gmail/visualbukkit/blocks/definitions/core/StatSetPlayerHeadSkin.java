@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -12,6 +13,11 @@ public class StatSetPlayerHeadSkin extends StatementBlock {
     public StatSetPlayerHeadSkin() {
         addParameter("Head", new ExpressionParameter(ClassInfo.of("org.bukkit.inventory.ItemStack")));
         addParameter("URL", new ExpressionParameter(ClassInfo.of(String.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/inventory/meta/SkullMeta.html#setOwner(java.lang.String)"));
     }
 
     @Override

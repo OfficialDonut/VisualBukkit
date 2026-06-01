@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.MultilineStringParameter;
@@ -13,6 +14,11 @@ public class ExprSerializedItemStack extends ExpressionBlock {
 
     public ExprSerializedItemStack() {
         addParameter("Yaml", parameter);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/inventory/ItemStack.html"));
     }
 
     public ExprSerializedItemStack(String yaml) {

@@ -21,4 +21,7 @@ public class CompFunction extends PluginComponentBlock {
                 "}" +
                 functionMethod.getBody());
     }
+
+    @Override
+    public void openJavadocs() {}
 }

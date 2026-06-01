@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import com.gmail.visualbukkit.blocks.parameters.InputParameter;
@@ -34,6 +35,11 @@ public class CompCommand extends PluginComponentBlock {
         addParameter("Permission", perm);
         addParameter("Permission Message", permMessage);
         addParameter("Usage", usage);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/command/Command.html"));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.PluginComponentBlock;
 import com.gmail.visualbukkit.blocks.parameters.ChoiceParameter;
@@ -29,5 +30,11 @@ public class CompEventListener extends PluginComponentBlock {
 
     public ClassInfo getEvent() {
         return eventParameter.getValue() != null ? eventParameter.getValue() : ClassInfo.of("org.bukkit.event.Event");
+    }
+
+    @Override
+    public void openJavadocs() {
+        String eventPath = (getEvent().getPackage().replace('.', '/') + "/" + getEvent().toString().split("\\(")[0]).strip();
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI(eventPath + ".html"));
     }
 }

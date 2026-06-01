@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
@@ -14,6 +15,11 @@ public class ExprFunctionArguments extends ExpressionBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompFunction.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/function/Function.html"));
     }
 
     @Override

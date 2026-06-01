@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ContainerBlock;
 import com.gmail.visualbukkit.blocks.parameters.CheckBoxParameter;
@@ -22,6 +23,11 @@ public class StatScheduleTask extends ContainerBlock {
         addParameter("Type", typeParameter);
         addParameter("Mode", modeParameter);
         addParameter("Delay", new ExpressionParameter(ClassInfo.of(long.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/scheduler/BukkitScheduler.html#runTask(org.bukkit.plugin.java.JavaPlugin,java.lang.Runnable)"));
     }
 
     @Override

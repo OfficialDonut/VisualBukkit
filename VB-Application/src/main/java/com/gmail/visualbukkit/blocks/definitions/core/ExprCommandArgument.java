@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -22,6 +23,11 @@ public class ExprCommandArgument extends ExpressionBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompCommand.class, CompTabCompleteHandler.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/command/Command.html"));
     }
 
     @Override

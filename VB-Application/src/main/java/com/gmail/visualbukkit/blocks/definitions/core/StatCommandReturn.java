@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -17,6 +18,11 @@ public class StatCommandReturn extends StatementBlock {
     public void updateState() {
         super.updateState();
         checkForPluginComponent(CompCommand.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/command/CommandSender.html#sendMessage(java.lang.String)"));
     }
 
     @Override

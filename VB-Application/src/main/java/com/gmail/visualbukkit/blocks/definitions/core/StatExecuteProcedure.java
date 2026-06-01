@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -15,6 +16,11 @@ public class StatExecuteProcedure extends StatementBlock {
     public StatExecuteProcedure() {
         addParameter("Procedure", new PluginComponentParameter(CompProcedure.class));
         addParameter("Arguments", new ExpressionParameter(ClassInfo.of(List.class)));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/function/Supplier.html"));
     }
 
     @Override

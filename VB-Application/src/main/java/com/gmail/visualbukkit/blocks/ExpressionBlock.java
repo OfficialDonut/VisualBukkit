@@ -1,6 +1,8 @@
 package com.gmail.visualbukkit.blocks;
 
 import com.gmail.visualbukkit.VisualBukkitApp;
+import com.gmail.visualbukkit.blocks.definitions.core.*;
+import com.gmail.visualbukkit.blocks.definitions.gui.*;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
 import com.gmail.visualbukkit.project.BuildInfo;
 import com.gmail.visualbukkit.project.CopyPasteManager;
@@ -34,7 +36,9 @@ public non-sealed abstract class ExpressionBlock extends Block {
                     CopyPasteManager.copyExpression(this);
                     UndoManager.current().execute(this::delete);
                 }),
-                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)));
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.delete"), e -> UndoManager.current().execute(this::delete)),
+                new ActionMenuItem(VisualBukkitApp.localizedText("context_menu.javadocs"), e -> openJavadocs())
+        );
 
         setOnDragDetected(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -117,6 +121,11 @@ public non-sealed abstract class ExpressionBlock extends Block {
         @Override
         public void deserialize(JSONObject json) {
             this.json = json;
+        }
+
+        @Override
+        public void openJavadocs() {
+            VisualBukkitApp.displayError(VisualBukkitApp.localizedText("notification.unavailable_javadocs"));
         }
     }
 }

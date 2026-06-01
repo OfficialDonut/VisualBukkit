@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.gui;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.blocks.parameters.ExpressionParameter;
@@ -13,6 +14,11 @@ public class StatOpenGUI extends StatementBlock {
     public StatOpenGUI() {
         addParameter("GUI", new PluginComponentParameter(CompGUI.class));
         addParameter("Player", new ExpressionParameter(ClassInfo.of("org.bukkit.entity.Player")));
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/entity/HumanEntity.html#openInventory(org.bukkit.inventory.Inventory)"));
     }
 
     @Override

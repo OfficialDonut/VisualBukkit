@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.StatementBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
@@ -11,6 +12,11 @@ public class StatCancelScheduledTask extends StatementBlock {
     public void updateState() {
         super.updateState();
         checkForContainer(StatScheduleTask.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("org/bukkit/scheduler/BukkitScheduler.html#cancelTask(int)"));
     }
 
     @Override

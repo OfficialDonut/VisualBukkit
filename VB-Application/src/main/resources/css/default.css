@@ -175,6 +175,15 @@ HBox {
     -fx-opacity: 0.5;
 }
 
+.javadocs-settings-pane {
+    -fx-padding: 0.5em;
+    -fx-spacing: 0.5em;
+}
+
+.javadocs-settings-pane > .list-view {
+    -fx-pref-width: 35em;
+}
+
 .list-selection-view {
     -fx-pref-height: 30em;
     -fx-pref-width: 40em;

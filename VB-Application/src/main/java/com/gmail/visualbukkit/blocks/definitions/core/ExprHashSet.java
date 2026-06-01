@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.SizedExpressionBlock;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
@@ -38,5 +39,10 @@ public class ExprHashSet extends SizedExpressionBlock {
             joiner.add(parameter.generateJava(buildInfo));
         }
         return "new HashSet(Arrays.asList(" + joiner + "))";
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/util/HashSet.html"));
     }
 }

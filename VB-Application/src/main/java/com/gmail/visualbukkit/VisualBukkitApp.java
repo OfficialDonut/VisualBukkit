@@ -387,6 +387,17 @@ public class VisualBukkitApp extends Application {
         }
     }
 
+    public static URI javadocsURI(String relativePath) {
+        if (relativePath.startsWith("https://")) {
+            return URI.create(relativePath);
+        }
+        String baseUrl = ProjectManager.current().getDEFAULT_JAVADOCS_URL();
+        if (relativePath.startsWith("java/") || relativePath.startsWith("jdk/")) {
+            baseUrl = ProjectManager.current().getDEFAULT_JAVA_JAVADOCS_URL();
+        }
+        return URI.create(baseUrl).resolve(relativePath);
+    }
+
     private static boolean openURI(URI uri, String command) {
         try {
             return Runtime.getRuntime().exec(command + " " + uri).waitFor() == 0;

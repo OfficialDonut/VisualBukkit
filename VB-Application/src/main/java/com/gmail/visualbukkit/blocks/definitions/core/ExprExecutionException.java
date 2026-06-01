@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks.definitions.core;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.BlockDefinition;
 import com.gmail.visualbukkit.blocks.ExpressionBlock;
 import com.gmail.visualbukkit.project.BuildInfo;
@@ -16,5 +17,10 @@ public class ExprExecutionException extends ExpressionBlock {
     @Override
     public String generateJava(BuildInfo buildInfo) {
         return "$executionException" + getNestedContainers(StatHandleException.class);
+    }
+
+    @Override
+    public void openJavadocs() {
+        VisualBukkitApp.openURI(VisualBukkitApp.javadocsURI("java/lang/Exception.html"));
     }
 }
