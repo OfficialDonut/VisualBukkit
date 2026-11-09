@@ -120,7 +120,7 @@
         <dependency>
             <groupId>org.zeroturnaround</groupId>
             <artifactId>zt-zip</artifactId>
-            <version>1.16</version>
+            <version>1.18.1</version>
         </dependency>
 
         <dependency>
